@@ -1,0 +1,26 @@
+/* eslint-disable import/prefer-default-export */
+import styled from 'styled-components'
+
+export const Container = styled('div')`
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5em;
+
+  h1 {
+    padding: .5em 2em;
+    border-radius: 2em;
+    box-shadow:  -5px -5px 10px #5a5a5a,
+             5px 5px 10px #ffffff;
+  }
+  b {
+    color: var(--m-primary-color);
+  }
+`
+
+export const CardContainer = styled('ul')`
+  display: flex;
+  flex-wrap: wrap;
+  width: 85vw;
+`
