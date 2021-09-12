@@ -29,8 +29,8 @@ const Topics = () => {
       <Container>
         <QuoteBox>
           <QuoteBox.QuoteText>
-            <b>{`Hello ${user?.username}`}</b>
-            {'\n'}
+            Hello <b>{`${user?.username}`}</b>
+            <br />
             Explore Some Topics or Create Your Own...
           </QuoteBox.QuoteText>
 
@@ -44,6 +44,9 @@ const Topics = () => {
           }
         </CardContainer>
         <WavyBackground color="blue" />
+        <WavyBackground color="red" top="130%" />
+        <WavyBackground color="beige" top="180%" />
+
       </Container>
     </>
   )

@@ -35,7 +35,7 @@ export const FloatingQuoteBox = styled('p')`
   flex-direction: column;
   justify-content: space-between;
   max-width: 40vw;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
   transform: translatey(0px);
   animation: ${float} 5s ease-in-out infinite;
   /* mix-blend-mode: multiply; */
