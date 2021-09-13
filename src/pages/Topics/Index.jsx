@@ -43,9 +43,9 @@ const Topics = () => {
             topics.map((topic) => <TopicItem key={topic.id} topic={topic} />)
           }
         </CardContainer>
-        <WavyBackground color="blue" />
-        <WavyBackground color="red" top="130%" />
-        <WavyBackground color="beige" top="180%" />
+        <WavyBackground color="blue"top="100%" />
+        {/* <WavyBackground color="red" top="130%" />
+        <WavyBackground color="beige" top="180%" /> */}
 
       </Container>
     </>

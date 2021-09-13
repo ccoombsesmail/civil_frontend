@@ -16,7 +16,6 @@ const CreateTopicForm = () => {
   const user = useSelector((s) => s.session.currentUser)
   return (
     <Container>
-      {/* <h1>Create Topic</h1> */}
       <Formik
         initialValues={{ title: '', description: '' }}
         validate={(values) => {

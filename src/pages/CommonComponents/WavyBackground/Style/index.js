@@ -17,6 +17,6 @@ export const SvgContainerTop = styled('div')`
 export const SvgContainerBottom = styled('div')` 
   position: absolute;
   bottom: 0;
-  transform: rotate(180deg) translateY(-100%) ;
+  transform: rotate(180deg) translateY(-99%) ;
   width: 100vw;
 `

@@ -31,14 +31,15 @@ const float2 = keyframes`
 `
 
 export const FloatingQuoteBox = styled('p')`
+  transform: translate3d(0, 0, 0);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 40vw;
   /* word-wrap: break-word; */
-  transform: translatey(0px);
+  /* transform: translatey(0px); */
   animation: ${float} 5s ease-in-out infinite;
-  /* mix-blend-mode: multiply; */
+  mix-blend-mode: multiply;
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
@@ -57,7 +58,8 @@ export const FloatingQuoteBox = styled('p')`
   }
 
   :after {
-    transform: translatey(0px);
+    transform: translate3d(0, 0, 0);
+    /* transform: translatey(0px); */
     animation: ${float2} 5s ease-in-out infinite;
     content: ".";
     font-weight: bold;

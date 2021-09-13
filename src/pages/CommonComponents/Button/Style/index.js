@@ -20,7 +20,7 @@ export const Button = styled('button')`
   padding: 1.25rem 2rem;
   background: var(--m-trim-color);
   text-transform: uppercase;
-box-shadow:  5px 5px 10px #5a5a5a,
+  box-shadow:  5px 5px 10px #5a5a5a,
              -5px -5px 10px #ffffff; 
   :hover {
     filter: drop-shadow(0 2px 4px black) brightness(.8);

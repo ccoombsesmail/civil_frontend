@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     --m-primary-background-color: #ece5ce;
     --m-secondary-background-color: #83af9b;
     --m-primary-font-color: white;
+    --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
     --gutterSm: 0.4rem;
     --gutterMd: 0.8rem;
     --gutterLg: 1.6rem;

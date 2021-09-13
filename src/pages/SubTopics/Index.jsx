@@ -14,7 +14,7 @@ import QuoteBox from '../CommonComponents/QuoteBox/Index'
 import AgGrid from '../CommonComponents/AgGrid/Index'
 import ThemeButton from '../CommonComponents/Button/Index'
 import { Container, CardContainer } from './Style'
-import { subTopicDefs } from './utils/tableDefs'
+import subTopicDefs from './utils/tableDefs'
 import WavyBackground from '../CommonComponents/WavyBackground/Index'
 
 const SubTopics = () => {
@@ -27,6 +27,8 @@ const SubTopics = () => {
 
   const subtopics = useSelector((s) => s.subtopics.list) || []
   const topicTitle = useSelector((s) => s.topics.list)?.find((topic) => topic.id === topicId)?.title
+
+  const tableDefs = subTopicDefs()
 
   useEffect(() => {
     if (loggedIn) {
@@ -48,14 +50,14 @@ const SubTopics = () => {
       <CardContainer>
         <AgGrid
           rowData={subtopics}
-          columnDefs={subTopicDefs}
+          columnDefs={tableDefs}
           defaultColDef={{
             sortable: true,
             resizable: true,
           }}
         />
       </CardContainer>
-      <WavyBackground color="green" top="65%" />
+      <WavyBackground color="green" top="85%" />
     </Container>
 
   )
