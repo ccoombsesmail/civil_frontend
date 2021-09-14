@@ -2,10 +2,7 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 
 export const FormContainer = styled(Form)`
-  display: flex;
-  align-items: flex-start;
   margin-top: 1em;
-  height: 10vh;
 `
 
 export const InputWrapper = styled('div')`

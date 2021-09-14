@@ -31,7 +31,7 @@ const CreateCommentForm = ({ subTopic }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          createComment({ ...values, sentiment: 'positive', subtopicId: subTopicId, createdBy: user.username })
+          createComment({ ...values, sentiment: 'negative', subtopicId: subTopicId, createdBy: user.username })
           setSubmitting(false)
         }}
       >

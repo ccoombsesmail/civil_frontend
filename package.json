@@ -44,7 +44,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development --watch",
-    "dev": "nodemon server.js --watch"
+    "server-dev": "node server.js",
+    "dev": "npm run server-dev & npm run webpack"
   },
   "keywords": [],
   "author": "",

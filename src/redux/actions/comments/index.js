@@ -19,7 +19,7 @@ export const createComment = (commentData) => (dispatch) => CommentsApiUtil.crea
   .then((res) => dispatch(addCommentActionCreator(res.data)))
   // .then(() => dispatch(closeModal()))
 
-export const getAllComments = (topicId) => (dispatch) => CommentsApiUtil.getAllComments(topicId)
+export const getAllComments = (subTopicId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId)
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))
   // .then(() => dispatch(closeModal()))
 

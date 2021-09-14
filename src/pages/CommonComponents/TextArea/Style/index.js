@@ -34,7 +34,7 @@ export const Label = styled('label')`
   }
 
 `
-
+// var(--m-secondary-background-color)
 export const StyledTextArea = styled('textarea')`
   display: block;
   margin: 1.2em 0 0 0;
@@ -50,7 +50,7 @@ export const StyledTextArea = styled('textarea')`
   border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : 'none')};
   border-radius: 0.4rem;
   transition: box-shadow var(--transitionDuration);
-  background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : 'var(--m-secondary-background-color)')};
+  background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : 'white')};
   box-shadow: var(--m-primary-box-shadow);
 
   ::placeholder {

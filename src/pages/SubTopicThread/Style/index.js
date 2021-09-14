@@ -18,4 +18,12 @@ export const ColumnContainer = styled('section')`
   border-top: 1px solid gray;
   width: 100vw;
 
+  /* ul {
+    border-right: 1px solid black;
+
+  }
+  :last-child {
+    border: none;
+  } */
+
 `
