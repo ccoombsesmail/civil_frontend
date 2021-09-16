@@ -9,6 +9,21 @@ export const Container = styled('div')`
   align-items: center;
   margin-top: 5em;
 
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em;
+    background-color: var(--m-primary-background-color);
+    border-radius: 1em;
+    h1 {
+      max-width: 30vw;
+    }
+    b {
+     color: var(--m-primary-color)
+    }
+  }
 `
 
 

@@ -58,6 +58,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 10px;
     font-family: "Baloo 2", cursive;
+    overflow-x: hidden;
 
   }
 

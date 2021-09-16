@@ -11,6 +11,15 @@ export const FormContainer = styled(Form)`
 export const InputWrapper = styled('div')`
   display: flex;
   flex-direction: column;
+  position: relative;
+  section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
 `
 
 export const Container = styled('div')`

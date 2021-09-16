@@ -17,7 +17,7 @@ const CreateTopicForm = () => {
   return (
     <Container>
       <Formik
-        initialValues={{ title: '', description: '' }}
+        initialValues={{ title: '', description: '', tweetUrl: '' }}
         validate={(values) => {
           const errors = {}
           if (!values.title) {
@@ -46,6 +46,9 @@ const CreateTopicForm = () => {
                 </InputWrapper>
                 <InputWrapper>
                   <Field type="text" name="description" component={Input} width="40%" />
+                </InputWrapper>
+                 <InputWrapper>
+                  <Field type="text" name="tweetUrl" component={Input} width="40%" />
                 </InputWrapper>
               </Modal.Body>
               <Modal.Footer>

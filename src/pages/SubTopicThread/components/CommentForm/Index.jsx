@@ -5,8 +5,10 @@ import { useParams } from 'react-router-dom'
 
 import { Formik, Field, ErrorMessage } from 'formik'
 import TextArea from '../../../CommonComponents/TextArea/Index'
-// import Error from '../CommonComponents/ErrorMessage/Index'
+import ThreeWayToggle from '../../../CommonComponents/ThreeWayToggle/Index'
+import CheckBoxPressed from '../../../CommonComponents/CheckBoxPressed/Index'
 import Button from '../../../CommonComponents/Button/Index'
+
 import { FormContainer, InputWrapper, Container } from './Style'
 import commentActions from '../../../../redux/actions/comments'
 
@@ -20,9 +22,13 @@ const CreateCommentForm = ({ subTopic }) => {
 
   return (
     <Container>
-      <h1>Jump In the discussion about <b>{subTopic?.title}</b></h1>
       <Formik
-        initialValues={{ content: '' }}
+        initialValues={{ 
+          content: '', 
+          positive: '',
+          negative: '',
+          neutral: '',
+        }}
         validate={(values) => {
           const errors = {}
           if (!values.content) {
@@ -30,19 +36,35 @@ const CreateCommentForm = ({ subTopic }) => {
           }
           return errors
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          createComment({ ...values, sentiment: 'negative', subtopicId: subTopicId, createdBy: user.username })
+        onSubmit={(values, { setSubmitting, resetForm  }) => {
+          const { positive, negative, neutral} = values
+          let sentiment;
+          if (positive) sentiment = 'positive'
+          if (neutral) sentiment = 'neutral'
+          if (negative) sentiment = 'negative'
+          createComment({ ...values, sentiment, subtopicId: subTopicId, createdBy: user.username })
           setSubmitting(false)
+          resetForm({})
         }}
       >
         {({ isSubmitting }) => (
           <FormContainer>
             <InputWrapper>
               <Field type="text" name="content" component={TextArea} width="100%" />
+              <section>
+                <div> 
+                  <Field text="Positive" type="checkbox" name="positive" component={CheckBoxPressed} width="100%" color='var(--m-secondary-background-color)' />
+                  <Field text="Neutral" type="checkbox" name="neutral" component={CheckBoxPressed} width="100%" color='var(--m-primary-background-color)' />
+                  <Field text="Negative" type="checkbox" name="negative" component={CheckBoxPressed} width="100%" color='var(--m-primary-color)' />
+                </div>
+                <Button small={true} type="submit" disabled={isSubmitting}>
+                  Submit
+                </Button>
+              </section>
             </InputWrapper>
-            <Button type="submit" disabled={isSubmitting}>
+            {/* <Button type="submit" disabled={isSubmitting}>
               Submit
-            </Button>
+            </Button> */}
           </FormContainer>
         )}
       </Formik>

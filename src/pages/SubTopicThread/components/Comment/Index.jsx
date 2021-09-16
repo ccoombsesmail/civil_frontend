@@ -4,9 +4,9 @@ import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 import IconButton from '../../../CommonComponents/IconButton/Index'
 
 import { CommentContainer, Header, Username, Date, Body, UserIcon, ExpandButton, EvidenceSection } from './Style'
-import { getMinutesSince } from '../../../../generic/string/dateFormatter'
+import { getTimeSince } from '../../../../generic/string/dateFormatter'
 const Comment = ({ comment }) => {
-  const mins = getMinutesSince(comment.createdAt)
+  const mins = getTimeSince(comment.createdAt)
   const [isOpen, setIsOpen] = useState(false)
   const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore /> 
   return (
@@ -14,7 +14,7 @@ const Comment = ({ comment }) => {
       <Header> 
         <UserIcon />
         <Username>{comment.createdBy}</Username>
-        <Date>{`${mins}m`}</Date>
+        <Date>{`${mins}`}</Date>
       </Header>
       <Body> 
         {comment.content}

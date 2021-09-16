@@ -13,6 +13,7 @@ export const CommentContainer = styled('li')`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
   /* padding: 1em; */
   :hover {
     background-color: var(--m-primary-background-color);
@@ -69,8 +70,8 @@ export const EvidenceSection = styled('div')`
   background-color: #F0F2F5;
   width: 100%;
   word-break: break-all;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: .4em;
+  border-bottom-right-radius: .4em;
   padding-left: 1em;
   /* display: flex; */
   /* flex-wrap: wrap;

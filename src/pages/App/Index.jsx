@@ -29,6 +29,7 @@ const App = () => {
           <SubTopics />
         </Route>
         <Route path="/">
+          {/* <iframe width="900" height="1600" src="https://rss.app/embed/v1/wall/OJXzXFISzFgalNz5" frameborder="0"></iframe> */}
           <Topics />
         </Route>
       </Switch>

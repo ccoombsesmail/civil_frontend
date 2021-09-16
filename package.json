@@ -12,11 +12,13 @@
     "ag-grid-react": "^26.0.0",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
     "bootstrap": "^5.1.0",
     "express": "^4.17.1",
     "formik": "^2.2.9",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
+    "node-fetch": "^3.0.0",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",
@@ -44,7 +46,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development --watch",
-    "server-dev": "node server.js",
+    "server-dev": "node server.mjs",
     "dev": "npm run server-dev & npm run webpack"
   },
   "keywords": [],

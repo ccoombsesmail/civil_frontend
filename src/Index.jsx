@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
   const token = JSON.parse(localStorage.getItem('jwt'))
   let store
-
   if (token) {
     const preloadedState = {
       session: {

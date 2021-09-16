@@ -2,9 +2,14 @@ import styled from 'styled-components'
 
 export const Container = styled('div')`
   position: relative;
-  margin: 0 1em 0 1em;
   width: 30vw;
   height: 30vh;
+
+  button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 `
 
 export const Label = styled('label')`
@@ -37,9 +42,9 @@ export const Label = styled('label')`
 // var(--m-secondary-background-color)
 export const StyledTextArea = styled('textarea')`
   display: block;
-  margin: 1.2em 0 0 0;
+  /* margin: 1.2em 0 0 0; */
   height: 100%;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
   color: black;
   width: ${(props) => props.width || '30%'};
   font-family: inherit;
@@ -50,15 +55,16 @@ export const StyledTextArea = styled('textarea')`
   border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : 'none')};
   border-radius: 0.4rem;
   transition: box-shadow var(--transitionDuration);
-  background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : 'white')};
-  box-shadow: var(--m-primary-box-shadow);
+  /* background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : '#F0F2F5')}; */
+  background-color: #F0F2F5;
 
+  /* box-shadow: var(--m-primary-box-shadow); */
   ::placeholder {
     color: var(--m-trim-color);
   }
   :focus {
     outline: none;
-    box-shadow: 0.2rem 0.8rem 1.6rem var(--m-primary-background-color);
+    /* box-shadow: 0.2rem 0.8rem 1.6rem var(--m-primary-background-color); */
   }
 
   :not(:placeholder-shown) + ${Label},
