@@ -6,7 +6,6 @@ import IconButton from '../../../CommonComponents/IconButton/Index'
 
 export const GoToSubTopic = (params) => {
   const history = useHistory()
-  console.log(params)
   return (
     <IconButton
       onClick={() => history.push(params.data.id)}

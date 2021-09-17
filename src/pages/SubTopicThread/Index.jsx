@@ -32,7 +32,6 @@ const SubTopicThread = () => {
       getTopic(topicId)
     }
   }, [loggedIn])
-  console.log(positiveComments)
   return (
     <>
     <Container>

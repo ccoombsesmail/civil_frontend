@@ -73,6 +73,7 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 1em;
     width: 100%;
     background-color: var(--m-primary-background-color);
+    background-color: white;
 
   }
 

@@ -9,7 +9,6 @@ const TextArea = ({
 }) => {
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
-  console.log(props)
   return (
     <Container>
       <StyledTextArea

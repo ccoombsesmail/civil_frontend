@@ -3,17 +3,19 @@ import styled from 'styled-components'
 // radial-gradient(#1fe4f5, #3fbafe)
 
 export const CardItem = styled('li')` 
-  height: 400px;
-  width: 300px;
+  height: 20vw;
+  width: 20vw;
+  overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #000000;
   background-color: #14213d;
-  color: white;
+  background-color: white;
+  color: black;
   margin: 2em;
-  border-radius: 2.5em;
+  border-radius: .5em;
   cursor: pointer;
   /* box-shadow: 
     12px 12px 16px 0 rgba(0, 0, 0, 0.25),
@@ -35,9 +37,7 @@ export const CardItem = styled('li')`
   transition: all .5s;
   :hover {
     transform: scale(1.1);
-  }
-    /* background-image: linear-gradient(45deg, #3503ad, #f7308c); */
-  
+  }  
 
 `
 export const CardFrame = styled('div')`
@@ -57,6 +57,18 @@ export const CardTitle = styled('h2')`
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+`
+export const CardBody = styled('div')`
+  width: 100%;
+`
+
+export const TweetContainer = styled('div')`
+  width: 100%;
+  .twitter-tweet {
+    max-width: 15vw;
+    max-height: 15vw;
+  }
+
 `
 
 export const CardOverlay = styled('div')`
