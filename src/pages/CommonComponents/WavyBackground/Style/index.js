@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled('div')`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   top: ${(props) => (props.top ? props.top : '50%')};
   z-index: -9999;

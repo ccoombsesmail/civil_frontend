@@ -5,7 +5,8 @@ import IconButton from "../../../../CommonComponents/IconButton/Index";
 
 export const CommentContainer = styled('li')`
   width: 95%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  outline: none;
   border-radius: .4em;
   list-style: none;
   margin-top: 1em;
@@ -25,7 +26,7 @@ export const Header = styled('div')`
   display: flex;
   width: 100%;
   padding: 1em;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
   justify-content: space-between;
   align-items: center;
 `

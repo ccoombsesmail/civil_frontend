@@ -3,6 +3,7 @@ import { setAuthToken } from '../../api/util/auth'
 
 export const LOGIN = 'LOGIN'
 export const LOG_OUT = 'LOG_OUT'
+export const UPDATE = 'UPDATE'
 
 const reducer = (state = {}, action) => {
   const token = action.payload
@@ -15,6 +16,8 @@ const reducer = (state = {}, action) => {
       localStorage.setItem('jwt', null)
       setAuthToken(null)
       return { ...state, currentUser: null }
+    case UPDATE:
+      return { ...state, currentUser: action.payload }
     default:
       return state
   }

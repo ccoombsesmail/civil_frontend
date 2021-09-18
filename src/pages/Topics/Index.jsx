@@ -39,8 +39,6 @@ const Topics = () => {
             Create Topic +
           </ThemeButton>
         </QuoteBox>
-        {/* <Card /> */}
-        {/* <div id="tweet" /> */}
         <CardContainer>
           {
             topics.map((topic) => <TopicItem key={topic.id} topic={topic} user={user} />)

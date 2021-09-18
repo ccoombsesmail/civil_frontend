@@ -3,21 +3,21 @@ import { useParams } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import usePermission from '../hooks/usePermission'
 import uiActionCreators from '../../redux/actions/ui'
-import subTopicActionCreators from '../../redux/actions/subtopics'
 import topicActionCreators from '../../redux/actions/topics'
+import subTopicActionCreators from '../../redux/actions/subtopics'
 
-import { CREATE_SUB_TOPIC } from '../App/Modal/Index'
 
-import QuoteBox from '../CommonComponents/QuoteBox/Index'
-import AgGrid from '../CommonComponents/AgGrid/Index'
-import ThemeButton from '../CommonComponents/Button/Index'
-import { Container, CardContainer } from './Style'
-import subTopicDefs from './utils/tableDefs'
+import usePermission from '../hooks/usePermission'
+
+
+import { Container, Line } from './Style'
+import Header from './components/Header/Index'
+import SubTopicsRouter from './components/SubTopicsRouter/Index'
 import WavyBackground from '../CommonComponents/WavyBackground/Index'
 
 const SubTopics = () => {
+
   const { topicId } = useParams()
   const { loggedIn } = usePermission()
   const dispatch = useDispatch()
@@ -25,10 +25,9 @@ const SubTopics = () => {
     ...uiActionCreators, ...subTopicActionCreators, ...topicActionCreators,
   }, dispatch)
 
-  const subtopics = useSelector((s) => s.subtopics.list) || []
-  const topicTitle = useSelector((s) => s.topics.list)?.find((topic) => topic.id === topicId)?.title
+  const topic = useSelector((s) => s.topics.list)?.find((topic) => topic.id === topicId)
+  const user = useSelector((s) => s.session.currentUser)
 
-  const tableDefs = subTopicDefs()
 
   useEffect(() => {
     if (loggedIn) {
@@ -39,25 +38,10 @@ const SubTopics = () => {
 
   return (
     <Container>
-      <QuoteBox>
-        <QuoteBox.QuoteText>
-          Browse Some <b>Sub-Topics</b> regarding the discussion about <b>{topicTitle}</b> or Create Your Own...
-        </QuoteBox.QuoteText>
-        <ThemeButton type="button" onClick={() => openModal(CREATE_SUB_TOPIC)}>
-          Create Sub Topic +
-        </ThemeButton>
-      </QuoteBox>
-      <CardContainer>
-        <AgGrid
-          rowData={subtopics}
-          columnDefs={tableDefs}
-          defaultColDef={{
-            sortable: true,
-            resizable: true,
-          }}
-        />
-      </CardContainer>
-      <WavyBackground color="green" top="85%" />
+      <Header topic={topic} user={user} />
+      <Line />
+      <SubTopicsRouter />
+      {/* <WavyBackground color="green" top="115%" /> */}
     </Container>
 
   )

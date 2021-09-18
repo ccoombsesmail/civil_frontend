@@ -16,7 +16,7 @@ const TextArea = ({
         {...field}
         type="text"
         id={field.name}
-        placeholder={`Write Comment Here...`}
+        placeholder={`What do you think?`}
         {...props}
         showError={showError}
       />

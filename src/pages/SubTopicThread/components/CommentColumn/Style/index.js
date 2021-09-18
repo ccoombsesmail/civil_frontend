@@ -15,14 +15,17 @@ export const Container = styled('ul')`
   
 
   h1 {
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     padding: 1em;
     font-size: 1.8em;
+    border-radius: .4em;
     border-bottom: 1px solid black;
+    border: none;
+    outline: none;
     background-color: ${props => props.color}
   }
 `

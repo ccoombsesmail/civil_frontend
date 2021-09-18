@@ -22,14 +22,13 @@ const App = () => {
       <Header />
       <Modal closeModal={closeModal} />
       <Switch>
-        <Route path="/topics/:topicId/subtopics/:subTopicId">
+        {/* <Route path="/topics/:topicId/subtopics/:subTopicId">
           <SubTopicThread />
-        </Route>
+        </Route> */}
         <Route path="/topics/:topicId/subtopics/">
           <SubTopics />
         </Route>
         <Route path="/">
-          {/* <iframe width="900" height="1600" src="https://rss.app/embed/v1/wall/OJXzXFISzFgalNz5" frameborder="0"></iframe> */}
           <Topics />
         </Route>
       </Switch>

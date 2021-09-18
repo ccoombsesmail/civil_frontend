@@ -57,7 +57,7 @@ export const StyledTextArea = styled('textarea')`
   transition: box-shadow var(--transitionDuration);
   /* background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : '#F0F2F5')}; */
   background-color: #F0F2F5;
-
+  background-color: white;
   /* box-shadow: var(--m-primary-box-shadow); */
   ::placeholder {
     color: var(--m-trim-color);

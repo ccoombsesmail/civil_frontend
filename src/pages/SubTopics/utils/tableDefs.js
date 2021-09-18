@@ -11,12 +11,12 @@ const commonProps = {
 export default () => {
   const subtopics = useSelector(s => s.subtopics.list)
   return useMemo(() => [{
-      headerName: 'Created By',
-      field: 'createdBy',
+      headerName: 'Sub-Topic',
+      field: 'title',
       ...commonProps,
     }, {
-      headerName: 'Title',
-      field: 'title',
+      headerName: 'Created By',
+      field: 'createdBy',
       ...commonProps,
     }, {
       maxWidth: 70,

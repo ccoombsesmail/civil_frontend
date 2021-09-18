@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Body, Header, Thumb, Description, DownArrow } from './Style'
+import { Container, Body, Header, Thumb, Description, ArrowContainer } from './Style'
 import { FiArrowDownCircle } from 'react-icons/fi'
-const Card = ({ children, description, iconSrc, username, time, tweetRef }) => {
-  const frame = document.querySelector('iframe')?.id
+
+
+
+const Card = ({ children, description, iconSrc, username, time, tweetRef, onClick }) => {
+  // const frame = document.querySelector('iframe')?.id
   const [height, setHeight] = useState('20vw')
-  console.log(height)
+
   useEffect(() => {
     setTimeout(() => {
       const tweetFrame = tweetRef?.current?.querySelector('iframe')
-      console.log(tweetFrame)
       if (tweetFrame) {
         const compStyles = window.getComputedStyle(tweetFrame);
         const height = compStyles.getPropertyValue('height')
-        console.log(height)
-        console.log(Number(height.slice(0, height.length-2)))
-        setHeight(`${Number(height.slice(0, height.length-2)) + Math.ceil((window.innerWidth * 6.4 / 100))}px`)
+        setHeight(`${Number(height.slice(0, height.length-2)) + Math.ceil((window.innerWidth * 7.8 / 100))}px`)
       }
     }, 3000)
-  }, [tweetRef, children, frame])
+  }, [tweetRef, children])
    return (
-      <Container height={height}>
+      <Container height={height} onClick={onClick}>
            <Header>
              <Thumb src={iconSrc} />
              <div>
@@ -28,9 +28,11 @@ const Card = ({ children, description, iconSrc, username, time, tweetRef }) => {
             </div>
            </Header>
            <Description>&ldquo;{description}&rdquo;
-           <DownArrow />
            
            </Description>
+           <ArrowContainer >
+            <FiArrowDownCircle  />
+            </ArrowContainer>
            <Body>
              {children}
            </Body>

@@ -10,10 +10,11 @@ import commentActions from '../../redux/actions/comments'
 import topicActions from '../../redux/actions/topics'
 
 import usePermission from '../hooks/usePermission'
-import CreateCommentForm from './components/CommentForm/Index'
+import CreateCommentForm from '../CommentForm/Index'
 import CommentColumn from './components/CommentColumn/Index'
 import WavyBackground from '../CommonComponents/WavyBackground/Index'
 import { Container, ColumnContainer } from './Style/index'
+import { Line } from '../SubTopics/Style'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
@@ -35,18 +36,19 @@ const SubTopicThread = () => {
   return (
     <>
     <Container>
-      <header>
+      {/* <header>
         <h1> We're Talking About the topic <b>{topic?.title}</b> </h1>
         <h1>The subtopic is <b>{subTopic?.title}</b>. Jump In the discussion...</h1>
-      </header>
+      </header> */}
       <CreateCommentForm subTopic={subTopic} />
     </Container>
-     <ColumnContainer>
+    <Line />
+    <ColumnContainer>
         <CommentColumn comments={positiveComments} commentSentiment={"In Favor"} color="var(--m-secondary-background-color)"  />
         {/* <CommentColumn comments={comments}  commentSentiment={"Neutral"} color="var(--m-primary-background-color)" /> */}
         <CommentColumn comments={negativeComments}  commentSentiment={"Disagree"} color="var(--m-primary-color)" />
     </ColumnContainer>
-    <WavyBackground color="blue"top="70%"  />
+    {/* <WavyBackground color="blue"top="70%"  /> */}
     </>
   )
 

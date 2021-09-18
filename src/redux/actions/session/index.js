@@ -1,6 +1,6 @@
 // action creator is just a function that dispatches an action
 import { closeModal } from '../ui/index'
-import { LOGIN, LOG_OUT } from '../../reducers/sessionReducer'
+import { LOGIN, LOG_OUT, UPDATE } from '../../reducers/sessionReducer'
 import * as SessionApiUtil from '../../../api/v1/session/session_api_util'
 
 const logoutActionCreator = () => ({
@@ -11,6 +11,12 @@ const loginActionCreator = (userData) => ({
   type: LOGIN,
   payload: userData,
 })
+
+const updateActionCreator = (data) => ({
+  type: UPDATE,
+  payload: data,
+})
+
 
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
   .then((res) => dispatch(loginActionCreator(JSON.parse(res.data).token)))
@@ -24,10 +30,15 @@ export const logout = () => (dispatch) => {
   dispatch(logoutActionCreator())
 }
 
+export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateUserIcon(userData)
+  .then((res) => dispatch(updateActionCreator(res.data)))
+
+
 export default {
   logout,
   signUp,
   signIn,
+  updateUserIcon,
 }
 
 // create a central index.js file

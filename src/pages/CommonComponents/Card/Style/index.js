@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components'
 
-import { FiArrowDownCircle } from 'react-icons/fi'
+import { RiArrowDownFill } from 'react-icons/ri'
 
 
 
@@ -9,23 +9,29 @@ export const Header = styled('div')`
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 .5em;    
+  padding: .5em .5em;    
   background-color: white;
   height: 4vw;
+  max-height: 4vw;
+  transition: filter 1s ease-in-out;
 
   div {
     height: 100%;
-    width: 50%;
+    flex-grow: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    /* flex-direction: column; */
+    /* justify-content: flex-end; */
+    align-items: center;
     margin-left: 1em;
     background-color: white;
   }
 
   time {
+      position: absolute;
+      top: 1em;
+      right: 1em;
       color: gray;
-      margin-bottom: .2em;
+      /* margin-bottom: .2em; */
       font-size: .5em;
     }
   h3 {
@@ -43,6 +49,51 @@ export const Header = styled('div')`
 
   }
   /* transition: .2s ease-in-out; */
+`
+export const Body = styled('div')` 
+  width: 100%;
+  background-color: white;
+  transition: all 1s ease-in-out;
+  .twitter-tweet {
+    max-width: 90%;
+    /* max-height: 15vw; */
+  }
+  /* .twitter-widget-3 {
+   max-height: 23vw;
+  } */
+` 
+
+export const Description = styled('p')` 
+  width: 90%;
+  /* height: 1.5vw; */
+  padding: .5em .5em;
+  margin: 0;
+  font-size: .7em;
+  border: .5px solid gray;
+  border-style: dotted;
+  border-radius: .4em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  transition: all 1s ease-in-out;
+` 
+
+export const ArrowContainer = styled('div')`
+    background-color: white;
+    display: flex;
+    width: 100%;
+    height: 1vw;
+    padding-top: .4vw;
+    justify-content: center;
+    transition: filter 1s ease-in-out;
+    svg {
+      position: relative !important;
+    }
 `
 
 export const Container = styled('li')` 
@@ -65,40 +116,31 @@ export const Container = styled('li')`
 
   &:hover  {
     /* height: auto; */
-    height: ${props => props.height}
+    height: ${props => props.height};
+  }
+
+ &:hover ${Description} {
+    transform: scale(1.2);
+  }
+  &:hover ${Header} {
+    filter: brightness(.8);
+  }
+
+   &:hover ${ArrowContainer} {
+    filter: brightness(.8);
   }
 
 
-
+ &:hover ${Body} {
+    background-color: #CCCCCC;
+  }
 `
 
 
 
-export const Body = styled('div')` 
-  width: 100%;
-  .twitter-tweet {
-    max-width: 90%;
-    /* max-height: 15vw; */
-  }
-  /* .twitter-widget-3 {
-   max-height: 23vw;
-  } */
-` 
 
-export const Description = styled('p')` 
-  width: 100%;
-  height: 1.5vw;
-  padding: 0 .5em;
-  font-size: .7em;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  /* background-color: var(--m-primary-background-color); */
-  color: black;
-  font-weight: bold;
-` 
+
+
 
 export const Thumb = styled('img')` 
   flex-shrink: 0;
@@ -108,12 +150,5 @@ export const Thumb = styled('img')`
 `
     
 
-export const DownArrow = styled(FiArrowDownCircle)`
-  position: absolute;  
-  height: 1vw;
-  width: 1vw;
-  bottom: 0;
-  left: 50% !important;
-  transform: translate(-50%, 90%);
-`
+
 

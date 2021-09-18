@@ -30,15 +30,16 @@ export const Container = styled('div')`
 export const ColumnContainer = styled('section')`
   display: flex;
   justify-content: space-evenly;
-  border-top: 1px solid gray;
+  /* border-top: 1px solid gray; */
   width: 100vw;
 
-  /* ul {
-    border-right: 1px solid black;
-
+  ul:first-child {
+    border-right: .1px dashed rgb(48,48,50);
   }
-  :last-child {
-    border: none;
-  } */
+
+   ul:last-child {
+    /* border-left: .1px solid rgb(48,48,50); */
+  }
+
 
 `
