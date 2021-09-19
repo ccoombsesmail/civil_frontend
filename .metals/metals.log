@@ -2,3 +2,4 @@
 [0m2021.09.18 01:34:48 INFO  time: initialize in 1.44s[0m
 [0m2021.09.18 01:34:48 WARN  Build server is not auto-connectable.[0m
 [0m2021.09.18 01:34:48 WARN  no build tool detected in workspace '/home/ccoombsesmail/civil/civil_frontend'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.09.18 03:46:37 INFO  shutting down Metals[0m

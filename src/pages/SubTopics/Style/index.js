@@ -18,6 +18,9 @@ export const Container = styled('div')`
   b {
     color: var(--m-primary-color);
   }
+  .tab-content {
+   padding-bottom: 40vh;
+ }
 `
 
 export const CardContainer = styled('ul')`

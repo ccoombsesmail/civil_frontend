@@ -15,12 +15,15 @@ export const Label = styled('label')`
     padding: .3em .8em;
     border: none;
     display: inline-block;
+    vertical-align: middle;
+    text-align: center;
     color: white;
     border-radius: 5px;
-    margin: 1px .2em;
+    margin: 1px .4em;
     background: ${props => props.color || 'gray'};
     user-select: none;
-    font-size: .7em
+    font-size: .5em;
+    font-weight: bold;
   }
 
   input:checked + span {

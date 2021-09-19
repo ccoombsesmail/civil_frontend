@@ -21,7 +21,7 @@ const Card = ({ children, description, iconSrc, username, time, tweetRef, onClic
    return (
       <Container height={height} onClick={onClick}>
            <Header>
-             <Thumb src={iconSrc} />
+             <Thumb src={`/assets${iconSrc}`} />
              <div>
               <time>{time}</time>
               <h3>{`@${username} says...`}</h3>

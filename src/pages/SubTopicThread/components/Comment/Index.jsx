@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Collapse from 'react-bootstrap/Collapse'
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 import IconButton from '../../../CommonComponents/IconButton/Index'
+import CommentActions from '../../../CommonComponents/CommentActions/Index'
 
 import { CommentContainer, Header, Username, Date, Body, UserIcon, ExpandButton, EvidenceSection } from './Style'
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
@@ -31,6 +32,7 @@ const Comment = ({ comment }) => {
           Some Content          
         </EvidenceSection>
       </Collapse>
+      <CommentActions commentId={comment.id} liked={comment.liked} />
     </CommentContainer>
 
   )

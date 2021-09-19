@@ -9,7 +9,7 @@ import ThreeWayToggle from '../CommonComponents/ThreeWayToggle/Index'
 import CheckBoxPressed from '../CommonComponents/CheckBoxPressed/Index'
 import Button from '../CommonComponents/Button/Index'
 
-import { FormContainer, InputWrapper, Container } from './Style'
+import { FormContainer, InputWrapper, Container, Toolbar } from './Style'
 import commentActions from '../../redux/actions/comments'
 
 const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
@@ -52,11 +52,11 @@ const CreateCommentForm = ({ subTopic }) => {
             <InputWrapper>
               <Field type="text" name="content" component={TextArea} width="100%" />
               <section>
-                <div> 
+                <Toolbar> 
                   <Field text="Positive" type="checkbox" name="positive" component={CheckBoxPressed} width="100%" color='var(--m-secondary-background-color)' />
                   <Field text="Neutral" type="checkbox" name="neutral" component={CheckBoxPressed} width="100%" color='var(--m-primary-background-color)' />
                   <Field text="Negative" type="checkbox" name="negative" component={CheckBoxPressed} width="100%" color='var(--m-primary-color)' />
-                </div>
+                </Toolbar>
                 <Button small={true} type="submit" disabled={isSubmitting}>
                   Submit
                 </Button>

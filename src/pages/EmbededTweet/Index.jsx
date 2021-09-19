@@ -20,7 +20,7 @@ const EmbededTweet = ({ topic, user }) => {
     <Card
       onClick={() => history.push(`/topics/${topic.id}/subtopics/`)}
       username={user?.username}
-      iconSrc={`.${user?.iconSrc}`}
+      iconSrc={`${user?.iconSrc}`}
       tweetRef={tweetRef}
       description={topic.description}
       time={getTimeSince(topic.createdAt)}

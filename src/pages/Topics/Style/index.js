@@ -32,16 +32,6 @@ export const CardContainer = styled('ul')`
   width: 100vw;
   padding: 0;
   margin: 0;
-  svg:nth-child(1) {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  #wavy-2 {
-    position: relative;
-    width: 100vw;
-    transform: rotate(180deg);
-  }
+  padding-bottom: 30vh;
 
 `
