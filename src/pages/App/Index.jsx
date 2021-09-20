@@ -11,27 +11,29 @@ import Topics from '../Topics/Index'
 import SubTopics from '../SubTopics/Index'
 import SubTopicThread from '../SubTopicThread/Index'
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css'
-// import getcrap from '../../api/v1/news/index'
-
+import Sidebar from './Sidebar/Index'
+import { MainContainer, Content } from './Style'
 const App = () => {
   const dispatch = useDispatch()
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
   return (
-    <div style={{ width: '100vw' }}>
+    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <GlobalStyle />
       <Header />
       <Modal closeModal={closeModal} />
-      <Switch>
-        {/* <Route path="/topics/:topicId/subtopics/:subTopicId">
-          <SubTopicThread />
-        </Route> */}
-        <Route path="/topics/:topicId/subtopics/">
-          <SubTopics />
-        </Route>
-        <Route path="/">
-          <Topics />
-        </Route>
-      </Switch>
+      <MainContainer >
+        <Sidebar />
+        <Content >
+          <Switch>
+            <Route path="/topics/:topicId/subtopics/">
+              <SubTopics />
+            </Route>
+            <Route path="/">
+              <Topics />
+            </Route>
+          </Switch>
+        </Content>
+      </MainContainer>
     </div>
   )
 }

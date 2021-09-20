@@ -6,7 +6,7 @@ import uiActionCreators from '../../../redux/actions/ui'
 import sessionActionCreators from '../../../redux/actions/session'
 
 import Button from '../../CommonComponents/Button/Index'
-import { StyledHeader, ButtonsContainer } from './Style'
+import { StyledHeader, ButtonsContainer, ProfileIcon } from './Style'
 
 import { SIGN_UP, SIGN_IN } from '../Modal/Index'
 import usePermission from '../../hooks/usePermission'
@@ -48,6 +48,7 @@ const Header = () => {
           </Button>
         )}
       </ButtonsContainer>
+      <ProfileIcon size={45} color={"var(--m-primary-color)"} />
     </StyledHeader>
   )
 }

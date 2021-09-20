@@ -7,7 +7,7 @@ export const Container = styled('div')`
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 5em;
+  padding-top: 5em;
   
   /* justify-content: center; */
 `

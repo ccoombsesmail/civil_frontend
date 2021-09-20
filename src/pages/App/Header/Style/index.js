@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components'
+import { FaUserCircle } from 'react-icons/fa'
 
 export const StyledHeader = styled('header')`
   width: 100%;
@@ -18,3 +19,8 @@ export const ButtonsContainer = styled('div')`
   display: flex;
   width: 15vw;
 `
+
+export const ProfileIcon = styled(FaUserCircle)`
+  position: absolute;
+  right: 1em;
+` 
