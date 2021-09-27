@@ -21,7 +21,6 @@ export const CloseModalButton = styled('button')`
 export const ModalWrapper = styled('div')` 
 .modal-header {
   border-bottom: 1px solid black;
-  /* font-weight: bold; */
   }
 
 .modal-title {

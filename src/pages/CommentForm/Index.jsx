@@ -1,13 +1,16 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal'
+
 
 import { Formik, Field, ErrorMessage } from 'formik'
 import TextArea from '../CommonComponents/TextArea/Index'
 import ThreeWayToggle from '../CommonComponents/ThreeWayToggle/Index'
 import CheckBoxPressed from '../CommonComponents/CheckBoxPressed/Index'
 import Button from '../CommonComponents/Button/Index'
+import EmbededTweet from '../EmbededTweet/Index'
 
 import { FormContainer, InputWrapper, Container, Toolbar } from './Style'
 import commentActions from '../../redux/actions/comments'
@@ -16,10 +19,15 @@ const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4
 
 const CreateCommentForm = ({ subTopic }) => {
   const { subTopicId } = useParams()
+  const { pathname } = useLocation()
   const dispatch = useDispatch()
+  const topicId = pathname.match(uuidRegEx)[0]
+
   const { createComment } = bindActionCreators(commentActions, dispatch)
   const user = useSelector((s) => s.session.currentUser)
-
+  const topic = useSelector((s) => s.topics.list)?.find((topic) => topic.id === topicId)
+  console.log(topic)
+  console.log(topicId)
   return (
     <Container>
       <Formik
@@ -48,24 +56,29 @@ const CreateCommentForm = ({ subTopic }) => {
         }}
       >
         {({ isSubmitting }) => (
-          <FormContainer>
-            <InputWrapper>
-              <Field type="text" name="content" component={TextArea} width="100%" />
-              <section>
-                <Toolbar> 
-                  <Field text="Positive" type="checkbox" name="positive" component={CheckBoxPressed} width="100%" color='var(--m-secondary-background-color)' />
-                  <Field text="Neutral" type="checkbox" name="neutral" component={CheckBoxPressed} width="100%" color='var(--m-primary-background-color)' />
-                  <Field text="Negative" type="checkbox" name="negative" component={CheckBoxPressed} width="100%" color='var(--m-primary-color)' />
-                </Toolbar>
-                <Button small={true} type="submit" disabled={isSubmitting}>
-                  Submit
-                </Button>
-              </section>
-            </InputWrapper>
-            {/* <Button type="submit" disabled={isSubmitting}>
-              Submit
-            </Button> */}
-          </FormContainer>
+          <>
+          <Modal.Header closeButton>
+              {/* <Modal.Title>...</Modal.Title> */}
+          </Modal.Header>
+            <Modal.Body>
+              <FormContainer>
+                <EmbededTweet user={user} topic={topic} />
+              <InputWrapper>
+                <Field type="text" name="content" component={TextArea} width="100%" />
+                <section>
+                  <Toolbar> 
+                    <Field text="Positive" type="checkbox" name="positive" component={CheckBoxPressed} width="100%" color='var(--m-secondary-background-color)' />
+                    <Field text="Neutral" type="checkbox" name="neutral" component={CheckBoxPressed} width="100%" color='var(--m-primary-background-color)' />
+                    <Field text="Negative" type="checkbox" name="negative" component={CheckBoxPressed} width="100%" color='var(--m-primary-color)' />
+                  </Toolbar>
+                  <Button small={true} type="submit" disabled={isSubmitting}>
+                    Submit
+                  </Button>
+                </section>
+              </InputWrapper>
+             </FormContainer>
+            </Modal.Body>
+          </>
         )}
       </Formik>
     </Container>

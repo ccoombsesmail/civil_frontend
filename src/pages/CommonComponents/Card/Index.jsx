@@ -4,7 +4,7 @@ import { FiArrowDownCircle } from 'react-icons/fi'
 
 
 
-const Card = ({ children, description, iconSrc, username, time, tweetRef, onClick }) => {
+const Card = ({ children, description, iconSrc, username, time, tweetRef, onClick, listCard }) => {
   // const frame = document.querySelector('iframe')?.id
   const [height, setHeight] = useState('20vw')
 
@@ -14,12 +14,12 @@ const Card = ({ children, description, iconSrc, username, time, tweetRef, onClic
       if (tweetFrame) {
         const compStyles = window.getComputedStyle(tweetFrame);
         const height = compStyles.getPropertyValue('height')
-        setHeight(`${Number(height.slice(0, height.length-2)) + Math.ceil((window.innerWidth * 7.8 / 100))}px`)
+        setHeight(`${Number(height.slice(0, height.length-2)) + Math.ceil((window.innerWidth * 7.5 / 100))}px`)
       }
     }, 3000)
   }, [tweetRef, children])
    return (
-      <Container height={height} onClick={onClick}>
+      <Container height={height} onClick={onClick} listCard={listCard}>
            <Header>
              <Thumb src={`/assets${iconSrc}`} />
              <div>

@@ -29,7 +29,7 @@ const TopicItem = ({ topic, user }) => {
     </CardItem>
   )
   return (
-    <EmbededTweet topic={topic} user={user} />
+    <EmbededTweet topic={topic} user={user} listCard={false} />
   )
 }
 

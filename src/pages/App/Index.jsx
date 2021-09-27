@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import GlobalStyle from '../../theme/styles'
@@ -20,7 +20,6 @@ const App = () => {
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <GlobalStyle />
       <Header />
-      <Modal closeModal={closeModal} />
       <MainContainer >
         <Sidebar />
         <Content >
@@ -33,6 +32,7 @@ const App = () => {
             </Route>
           </Switch>
         </Content>
+        <Modal closeModal={closeModal} />
       </MainContainer>
     </div>
   )

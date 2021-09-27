@@ -3,19 +3,22 @@ import styled from "styled-components";
 export const SideBarContainer = styled('div')` 
   height: 100%;
   width: 12vw;
-  max-width: ${props => props.isOpen ? '12vw' : '3vw'};
-  background-color: white;
+  max-width: ${props => props.isOpen ? '12vw' : '2vw'};
+  background-color: #14213D;
   box-shadow: var(--m-primary-box-shadow);
   transition: max-width .6s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   position: static;
+  color: white;
+  font-weight: bold;
 
   .container {
     display: flex !important;
     justify-content: flex-end;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
+    padding-top: 1em;
     padding-bottom: 1em;
     border-bottom: 1px solid black;
   }

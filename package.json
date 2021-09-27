@@ -47,7 +47,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development --watch",
     "server-dev": "node server.mjs",
-    "dev": "npm run server-dev & npm run webpack"
+    "dev": "npm run server-dev & npm run webpack",
+    "build:stats": "webpack --mode=production --watch"
+
   },
   "keywords": [],
   "author": "",

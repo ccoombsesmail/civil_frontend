@@ -2,10 +2,12 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 
 export const FormContainer = styled(Form)`
-  display: flex;
-  align-items: flex-start;
+  /* display: flex;
+  align-items: flex-start; */
   margin-top: 1em;
-  height: 10vh;
+  border-radius: .5em;
+  border: 1px solid gray;
+  /* height: 10vh; */
 `
 
 export const InputWrapper = styled('div')`
@@ -29,7 +31,8 @@ export const InputWrapper = styled('div')`
    4px 4px 5px 0px #0001,
    inset 0px 0px 0px 0px #fff9,
    inset 0px 0px 0px 0px #0001,
-   inset 0px 0px 0px 0px #fff9,        inset 0px 0px 0px 0px #0001;
+   inset 0px 0px 0px 0px #fff9,
+   inset 0px 0px 0px 0px #0001;
   }
 `
 
@@ -47,6 +50,5 @@ export const Container = styled('div')`
 export const Toolbar = styled('div')`
   /* margin: .5em; */
   /* width: 100%; */
-
 
 `

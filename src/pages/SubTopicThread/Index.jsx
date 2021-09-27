@@ -45,7 +45,7 @@ const SubTopicThread = () => {
         <h1> We're Talking About the topic <b>{topic?.title}</b> </h1>
         <h1>The subtopic is <b>{subTopic?.title}</b>. Jump In the discussion...</h1>
       </header> */}
-      <CreateCommentForm subTopic={subTopic} />
+      {/* <CreateCommentForm subTopic={subTopic} /> */}
     </Container>
     <Line />
     

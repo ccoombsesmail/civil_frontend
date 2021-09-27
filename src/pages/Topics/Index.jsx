@@ -12,7 +12,7 @@ import ThemeButton from '../CommonComponents/Button/Index'
 import QuoteBox from '../CommonComponents/QuoteBox/Index'
 import WavyBackground from '../CommonComponents/WavyBackground/Index'
 import { CREATE_TOPIC } from '../App/Modal/Index'
-import { CardContainer, Container } from './Style'
+import { CardContainer, Container, BorderContainer } from './Style'
 const Topics = () => {
   const [html, setHtml] = useState(null)
   const { loggedIn } = usePermission()
@@ -28,6 +28,8 @@ const Topics = () => {
   return (
     <>
       <Container>
+        <BorderContainer>
+
         <QuoteBox>
           <QuoteBox.QuoteText>
             Hello <b>{`${user?.username}`}</b>
@@ -44,9 +46,8 @@ const Topics = () => {
             topics.map((topic) => <TopicItem key={topic.id} topic={topic} user={user} />)
           }
         </CardContainer>
-        <WavyBackground color="blue"top="100%" />
-        {/* <WavyBackground color="red" top="130%" />
-        <WavyBackground color="beige" top="180%" /> */}
+        </BorderContainer>
+        <WavyBackground color="blue" top="100%" />
       </Container>
     </>
   )

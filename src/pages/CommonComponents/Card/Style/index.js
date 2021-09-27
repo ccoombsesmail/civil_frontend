@@ -54,13 +54,11 @@ export const Body = styled('div')`
   width: 100%;
   background-color: white;
   transition: all 1s ease-in-out;
+  background-color: white;
   .twitter-tweet {
     max-width: 90%;
-    /* max-height: 15vw; */
   }
-  /* .twitter-widget-3 {
-   max-height: 23vw;
-  } */
+
 ` 
 
 export const Description = styled('p')` 
@@ -101,9 +99,9 @@ export const Container = styled('li')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 20vw;
-  width: 20vw;  
-  margin: 2em;
+  height: ${props => props.listCard ? '20vw' : props.height};
+  width: 25vw;  
+  margin: 2em 2em 0 2em;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a,
              5px 5px 10px #ffffff;

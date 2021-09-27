@@ -7,10 +7,17 @@ export const Container = styled('div')`
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding-top: 5em;
-  
-  /* justify-content: center; */
+  /* padding-top: 5em; */
 `
+
+export const BorderContainer = styled('div')`
+  width: 40vw;
+  border: 1px solid gray;
+  padding: 5em;
+    background-color: white;
+
+`
+
 export const TopicsHeader = styled('p')` 
   display: flex;
   flex-direction: column;
@@ -28,10 +35,14 @@ export const TopicsHeader = styled('p')`
 
 export const CardContainer = styled('ul')`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
-  width: 100vw;
+  /* width: 40vw; */
   padding: 0;
-  margin: 0;
+  margin: 5em 0 0 0;
   padding-bottom: 30vh;
+  background-color: #F0F2F5;
+  background-color: white;
 
 `
