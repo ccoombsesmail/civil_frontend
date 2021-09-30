@@ -20,7 +20,11 @@ export const ButtonsContainer = styled('div')`
   width: 15vw;
 `
 
-export const ProfileIcon = styled(FaUserCircle)`
+export const ProfileIcon = styled('img')`
   position: absolute;
   right: 1em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  cursor: pointer;
 ` 

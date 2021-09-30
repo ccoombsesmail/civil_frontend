@@ -9,7 +9,7 @@ import { StyledInput, Label, Container } from './Style'
 import Error from '../ErrorMessage/Index'
 
 const Input = ({
-  width, field, form, ...props
+  width, field, form, placeholder, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
@@ -21,7 +21,7 @@ const Input = ({
         {...field}
         type="text"
         id={field.name}
-        placeholder={`Enter A ${capitalize(field.name)}`}
+        placeholder={placeholder || `Enter A ${capitalize(field.name)}`}
         {...props}
         showError={showError}
       />

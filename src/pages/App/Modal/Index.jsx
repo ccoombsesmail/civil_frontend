@@ -10,12 +10,14 @@ import CreateTopicForm from '../../TopicForm/Index'
 import CreateSubTopicForm from '../../SubTopicForm/Index'
 import CommentForm from '../../CommentForm/Index'
 import { ModalWrapper } from './Style/index'
+import SelectIconForm from '../../SelectIconForm/Index'
 
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
 export const CREATE_TOPIC = 'CREATE_TOPIC'
 export const CREATE_SUB_TOPIC = 'CREATE_SUB_TOPIC'
 export const REPLY = 'REPLY'
+export const ICON_FORM = 'ICON_FORM'
 
 
 const Modal = ({ closeModal }) => {
@@ -38,6 +40,9 @@ const Modal = ({ closeModal }) => {
       break
     case REPLY:
       component = <CommentForm />
+      break
+    case ICON_FORM:
+      component = <SelectIconForm />
       break
     default:
       break

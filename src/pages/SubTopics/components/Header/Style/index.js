@@ -6,10 +6,11 @@ export const Container = styled('div')`
   flex-direction: column;
   padding: 1em;
   border: 1px solid gray;
-  border-top: none;
+  /* border-top: none; */
   padding-top: 5em;
 
   background-color: #F7F7F7;
+  background-color: white;
   h1 {
     text-align: center;
     text-decoration: underline;
@@ -19,6 +20,14 @@ export const Container = styled('div')`
 
 `
 
+export const LinksContainer = styled('div')`
+  width: 100%;
+  margin-top: 2em;
+  display: flex;
+  ul:first-child {
+    border-right: 1px solid gray;
+  }
+`
 
 export const ActionsContainer = styled('div')` 
   display: flex;

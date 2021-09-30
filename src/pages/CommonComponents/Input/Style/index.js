@@ -39,7 +39,7 @@ export const StyledInput = styled('input')`
   padding: var(--inputPaddingV) var(--inputPaddingH);
   color: black;
   width: ${(props) => props.width || '30%'};
-  height: 3em;
+  height: 2em;
   font-family: inherit;
   font-size: var(--inputFontSize);
   font-weight: bold;

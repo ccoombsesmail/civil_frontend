@@ -12,7 +12,9 @@ import SubTopics from '../SubTopics/Index'
 import SubTopicThread from '../SubTopicThread/Index'
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css'
 import Sidebar from './Sidebar/Index'
+import Dashboard from '../Dashboard/Index'
 import { MainContainer, Content } from './Style'
+
 const App = () => {
   const dispatch = useDispatch()
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
@@ -26,6 +28,9 @@ const App = () => {
           <Switch>
             <Route path="/topics/:topicId/subtopics/">
               <SubTopics />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
             <Route path="/">
               <Topics />

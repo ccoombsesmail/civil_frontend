@@ -17,19 +17,13 @@ const Header = () => {
   const { loggedIn } = usePermission()
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
-  const { logout, updateUserIcon } = bindActionCreators(sessionActionCreators, dispatch)
+  const { logout } = bindActionCreators(sessionActionCreators, dispatch)
   const user = useSelector(s => s.session.currentUser)
   return (
     <StyledHeader>
       <ButtonsContainer>
         <Button type="button" onClick={() => history.push('/topics')}>
           Home
-        </Button>
-        <Button type="button" onClick={() => updateUserIcon({
-          username: user?.username,
-          iconSrc: '/64_1.png'
-        })}>
-          Update
         </Button>
       </ButtonsContainer>
       <ButtonsContainer>
@@ -48,7 +42,7 @@ const Header = () => {
           </Button>
         )}
       </ButtonsContainer>
-      <ProfileIcon size={45} color={"var(--m-primary-color)"} />
+      <ProfileIcon src={user?.iconSrc} />
     </StyledHeader>
   )
 }

@@ -3,11 +3,13 @@ import styled from 'styled-components'
 
 export const Container = styled('div')`
   width: 100vw;
+  height: 200%;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* padding-top: 5em; */
   background-color: #F0F2F5;
+  background-color: #E8EAED;
 
   > h1 {
     padding: .5em 2em;

@@ -30,6 +30,7 @@ const SubTopics = () => {
 
 
   useEffect(() => {
+    console.log(topicId)
     if (loggedIn) {
       getTopic(topicId)
       getAllSubTopics(topicId)

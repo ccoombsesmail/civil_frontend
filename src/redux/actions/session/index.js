@@ -33,12 +33,16 @@ export const logout = () => (dispatch) => {
 export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateUserIcon(userData)
   .then((res) => dispatch(updateActionCreator(res.data)))
 
+export const uploadUserIcon = (data, username) => (dispatch) => SessionApiUtil.uploadUserIcon(data, username)
+  .then((res) => dispatch(updateActionCreator(res.data)))
+
 
 export default {
   logout,
   signUp,
   signIn,
   updateUserIcon,
+  uploadUserIcon,
 }
 
 // create a central index.js file

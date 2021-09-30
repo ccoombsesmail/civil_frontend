@@ -18,16 +18,15 @@ import commentActions from '../../redux/actions/comments'
 const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
 
 const CreateCommentForm = ({ subTopic }) => {
-  const { subTopicId } = useParams()
+  const params = useParams()
+  console.log(params)
   const { pathname } = useLocation()
   const dispatch = useDispatch()
   const topicId = pathname.match(uuidRegEx)[0]
-
+  const subTopicId = pathname.match(uuidRegEx)[1]
   const { createComment } = bindActionCreators(commentActions, dispatch)
   const user = useSelector((s) => s.session.currentUser)
   const topic = useSelector((s) => s.topics.list)?.find((topic) => topic.id === topicId)
-  console.log(topic)
-  console.log(topicId)
   return (
     <Container>
       <Formik
@@ -50,6 +49,7 @@ const CreateCommentForm = ({ subTopic }) => {
           if (positive) sentiment = 'positive'
           if (neutral) sentiment = 'neutral'
           if (negative) sentiment = 'negative'
+          console.log(subTopicId)
           createComment({ ...values, sentiment, subtopicId: subTopicId, createdBy: user.username })
           setSubmitting(false)
           resetForm({})

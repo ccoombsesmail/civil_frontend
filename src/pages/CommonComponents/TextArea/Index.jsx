@@ -5,7 +5,7 @@ import { StyledTextArea, Label, Container } from './Style'
 import Error from '../ErrorMessage/Index'
 
 const TextArea = ({
-  width, field, form, ...props
+  width, field, placeholder, form, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
@@ -16,7 +16,7 @@ const TextArea = ({
         {...field}
         type="text"
         id={field.name}
-        placeholder={`What do you think?`}
+        placeholder={ placeholder || `What's your take on this?`}
         {...props}
         showError={showError}
       />

@@ -30,7 +30,7 @@ const float2 = keyframes`
     }
 `
 
-export const FloatingQuoteBox = styled('p')`
+export const FloatingQuoteBox = styled('div')`
   transform: translate3d(0, 0, 0);
   display: flex;
   flex-direction: column;

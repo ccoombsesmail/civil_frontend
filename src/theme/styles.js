@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
     --lineHeightMd: 1.8;
     --transitionDuration: 300ms;
     --transitionTF: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+
     
     /* floated labels */
     --inputPaddingV: var(--gutterSm);
