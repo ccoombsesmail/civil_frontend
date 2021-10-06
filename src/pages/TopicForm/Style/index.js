@@ -7,6 +7,7 @@ export const FormContainer = styled(Form)`
   align-items: flex-start; */
   margin-top: 1em;
    h2 {
+    font-size: 1em;
     margin: 0 1em;
   }
   svg {
@@ -54,6 +55,10 @@ export const InputWrapper = styled('div')`
 export const Container = styled('div')`
   overflow-y: scroll;
   height: 90vh;
+  background: #ecf0f3;
+  border-radius: 1em;
+  box-shadow: 3px 3px 2px #cbced1,
+              -3px -3px 2px #ffffff;
   h1 {
     width: 100%;
     margin: 0;

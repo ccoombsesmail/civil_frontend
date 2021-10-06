@@ -49,15 +49,11 @@ export const Body = styled('div')`
   /* border-bottom: 1px solid black; */
 `
 
-export const UserIcon = styled(FiUser)`
-  background-color: white;
-  border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
+export const Thumb = styled('img')` 
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;      
+  border-radius: 50%; 
 `
 
 export const ExpandButton = styled('div')` 
@@ -74,15 +70,14 @@ export const EvidenceSection = styled('div')`
   border-bottom-left-radius: .4em;
   border-bottom-right-radius: .4em;
   padding-left: 1em;
-  /* display: flex; */
-  /* flex-wrap: wrap;
-  word-wrap: break-word;
-  white-space: nowrap; */
-  /* padding: 1em; */
+
 `
-// export const Spacer = styled('span')` 
-//   width: 1em;
-//   `
+
+
+export const Content = styled('p')` 
+  padding: 1em;
+`
+
 
 
 

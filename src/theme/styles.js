@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --m-primary-color: #B9314F;
     --m-primary-background-color: #ece5ce;
+    --m-primary-background: #14213D;
     --m-secondary-background-color: #83af9b;
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
@@ -65,11 +66,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .react-strap-modal {
-    /* position: absolute;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%); */
-    padding: 1em;
+    /* padding: 1em; */
     border: none;
     background: white;
     border-radius: 1em;
@@ -83,7 +80,7 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
     left: 50%;
     top: 50%;
-    min-width: 60vw;
+    min-width: 45vw;
     min-height: 50vh;
     transform: translate(-50%, -50%) !important;
   }
@@ -92,7 +89,6 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* overflow: hidden; */
     width: 100vw;
     padding: 0;
     margin: 0;
@@ -100,6 +96,31 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Baloo 2", cursive;
     font-size: var(--fontSizeMd);
     line-height: var(--lineHeightMd);
+  }
+  .twitter-tweet {
+    margin: 0 !important;
+  }
+   #twitter-widget-1::shadow div:last-child {
+   display: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .demo-wrapper, .demo-editor {
+    display: flex;
+    width: 100%;
+    background-color: gray;
+    height: 100%;
+  }
+
+  .ap {
+    background-image: url('/fdc520ec92ab5996740abe9f9d8eb44a.png') !important;
+  }
+
+  .text-editor .ql-container {
+    min-height: 10vw;
   }
 
 `

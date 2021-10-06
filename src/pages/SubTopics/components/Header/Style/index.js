@@ -29,10 +29,3 @@ export const LinksContainer = styled('div')`
   }
 `
 
-export const ActionsContainer = styled('div')` 
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 2em;
-  margin-top: 2em;
-
-` 

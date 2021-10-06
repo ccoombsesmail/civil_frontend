@@ -8,6 +8,7 @@ import Input from '../CommonComponents/Input/Index'
 import TextArea from '../CommonComponents/TextArea/Index'
 import { FiArrowDownCircle } from "react-icons/fi";
 
+import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
 import Button from '../CommonComponents/Button/Index'
 import { FormContainer, InputsContainer, Container, Left, Right, Line, Arrow } from './Style'
 import topicsActions from '../../redux/actions/topics'
@@ -17,22 +18,22 @@ import { Collapse } from 'react-bootstrap'
 const CreateTopicForm = () => {
   const [open, setOpen] = useState(false);
   const [rotate, setRotate] = useState(0);
+  const [content, setContent] = useState("");
 
   const dispatch = useDispatch()
   const { createTopic, closeModal } = bindActionCreators({ ...topicsActions, ...uiActions }, dispatch)
   const user = useSelector((s) => s.session.currentUser)
-  console.log(rotate)
   return (
     <Container>
       <Formik
-        initialValues={{ title: '', description: '', tweetUrl: '' }}
+        initialValues={{ title: '', description: '', tweetUrl: '', ytUrl: '', summary: '' }}
         validate={(values) => {
           const errors = {}
           if (!values.title) {
             errors.title = 'Title Is Required'
           }
-          if (!values.description) {
-            errors.description = 'Description Is Required'
+          if (!values.summary) {
+            errors.summary = 'Summary Is Required'
           }
           return errors
         }}
@@ -43,8 +44,8 @@ const CreateTopicForm = () => {
           const frLinks = Object.entries(values).map(([k, v]) => {
             return k.includes('Information') ? v : null
           }).filter(Boolean) 
-          console.log(eLinks)
-          createTopic({ ...values, createdBy: user.username, evidenceLinks: eLinks, furtherReadingLinks: frLinks })
+          console.log(content)
+          createTopic({ ...values, description: content, createdBy: user.username, evidenceLinks: eLinks, furtherReadingLinks: frLinks })
           setSubmitting(false)
         }}
       >
@@ -65,11 +66,12 @@ const CreateTopicForm = () => {
                   <Right>
                     <h2> Link to what you want to discuss here... (optional) </h2>
                     <Field type="url" name="tweetUrl" component={Input} width="100%" />
+                    <Field type="url" name="ytUrl" placeholder={"Link To A YouTube Video"} component={Input} width="100%" />
                   </Right>
-
                 </InputsContainer>
                 <Line />
-                <Field type="text" name="description" component={TextArea} width="100%" placeholder="What's your take on the topic?" />
+                  <RichTextEditor content={content} setContent={setContent} />
+                  {/* <Field type="text" name="description" component={TextArea} width="100%" placeholder="What's your take on the topic?" /> */}
                 <Line />
                 <Arrow size={35} rotate={rotate} onClick={() => { 
                   setOpen(!open)
@@ -105,8 +107,7 @@ const CreateTopicForm = () => {
             </FormContainer>
           </>
         )}
-      </Formik>
-
+      </Formik>       
     </Container>
   )
 }

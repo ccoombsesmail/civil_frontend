@@ -42,7 +42,6 @@ export const Label = styled('label')`
 // var(--m-secondary-background-color)
 export const StyledTextArea = styled('textarea')`
   display: block;
-  /* margin: 1.2em 0 0 0; */
   height: 100%;
   padding: 1em 1em 0 1em;
   color: black;
@@ -55,10 +54,9 @@ export const StyledTextArea = styled('textarea')`
   border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : 'none')};
   border-radius: 0.4rem;
   transition: box-shadow var(--transitionDuration);
-  /* background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : '#F0F2F5')}; */
   background-color: #F0F2F5;
   background-color: white;
-  box-shadow: var(--m-primary-box-shadow);
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;  
   ::placeholder {
     color: var(--m-trim-color);
   }

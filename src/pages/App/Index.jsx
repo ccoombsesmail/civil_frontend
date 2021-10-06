@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import GlobalStyle from '../../theme/styles'
@@ -14,7 +14,7 @@ import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css'
 import Sidebar from './Sidebar/Index'
 import Dashboard from '../Dashboard/Index'
 import { MainContainer, Content } from './Style'
-
+import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
 const App = () => {
   const dispatch = useDispatch()
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
@@ -32,9 +32,10 @@ const App = () => {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/">
+            <Route path="/topics">
               <Topics />
             </Route>
+            {/* <Route render={() => <Redirect to="/topics" />} /> */}
           </Switch>
         </Content>
         <Modal closeModal={closeModal} />

@@ -2,23 +2,34 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 
 export const FormContainer = styled(Form)`
-  /* display: flex;
-  align-items: flex-start; */
-  margin-top: 1em;
+  margin-top: 0;
   border-radius: .5em;
-  border: 1px solid gray;
-  /* height: 10vh; */
+  position: relative;
+
 `
+
+export const Description = styled('p')` 
+  width: 90%;
+  padding: .5em 0;
+  margin-bottom: 2em;
+  font-size: .85em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  color: black;
+` 
 
 export const InputWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
   section {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    width: 100%;
+    width: 30vw;
     position: absolute;
     bottom: 0;
       padding: .2em .5em;
@@ -37,6 +48,7 @@ export const InputWrapper = styled('div')`
 `
 
 export const Container = styled('div')`
+  position: relative;
   h1 {
     width: 100%;
     margin: 0;

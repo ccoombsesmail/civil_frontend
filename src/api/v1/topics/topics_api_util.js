@@ -5,4 +5,6 @@ export const createTopic = (topicData) => axios.post(`${BACKEND_DEV}/topics`, to
 
 export const getAllTopics = () => axios.get(`${BACKEND_DEV}/topics`)
 
-export const getTopic = (topicId) => axios.get(`${BACKEND_DEV}/topics/${topicId}`)
+export const getTopic = (topicId, userId) => axios.get(`${BACKEND_DEV}/topics/${topicId}/${userId}`)
+
+export const updateTopicLikes = (topicData) => axios.put(`${BACKEND_DEV}/topics`, topicData)

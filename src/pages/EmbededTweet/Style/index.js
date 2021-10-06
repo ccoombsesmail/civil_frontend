@@ -2,9 +2,15 @@ import styled from 'styled-components'
 
 export const TweetContainer = styled('div')`
   width: 100%;
-  .twitter-tweet {
-    max-width: 15vw;
-    max-height: 15vw;
-  }
 
+`
+
+
+export const LinksContainer = styled('div')`
+  width: 100%;
+  margin-top: 2em;
+  display: flex;
+  ul:first-child {
+    border-right: 1px solid gray;
+  }
 `

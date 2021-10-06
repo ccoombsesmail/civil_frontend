@@ -12,6 +12,7 @@ export default () => {
       positive: [],
       neutral: [],
       negative: [],
+      all: comments,
     }
     
     for (const comment of comments) {

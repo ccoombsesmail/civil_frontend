@@ -13,7 +13,7 @@ export const Label = styled('label')`
   color: var(--m-trim-color);
   font-family: inherit;
   font-size: var(--inputFontSize);
-  font-weight: inherit;
+  font-weight: bold;
   line-height: var(--inputLineHeight);
   opacity: 0;
   transform: 
@@ -36,7 +36,9 @@ export const Label = styled('label')`
 export const StyledInput = styled('input')`
   display: block;
   margin: 1.2em 0 0 0;
-  padding: var(--inputPaddingV) var(--inputPaddingH);
+  box-shadow: inset 8px 8px 8px #cbced1,
+              inset -8px -8px 8px #ffffff;
+  padding: .5em;
   color: black;
   width: ${(props) => props.width || '30%'};
   height: 2em;
@@ -45,11 +47,12 @@ export const StyledInput = styled('input')`
   font-weight: bold;
   line-height: var(--inputLineHeight);
   border: none;
+  outline:none;
+  background: none;
   border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : 'none')};
   border-radius: 0.4rem;
   transition: box-shadow var(--transitionDuration);
-  background-color: var(--m-secondary-background-color);
-  background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : 'var(--m-secondary-background-color)')};
+  /* background-color: ${(props) => (props.showError ? 'var(--m-danger-color-light)' : 'var(--m-secondary-background-color)')}; */
 
   ::placeholder {
     color: var(--m-trim-color);

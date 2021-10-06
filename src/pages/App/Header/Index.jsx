@@ -6,6 +6,7 @@ import uiActionCreators from '../../../redux/actions/ui'
 import sessionActionCreators from '../../../redux/actions/session'
 
 import Button from '../../CommonComponents/Button/Index'
+import IconButton from '../../CommonComponents/IconButton/Index'
 import { StyledHeader, ButtonsContainer, ProfileIcon } from './Style'
 
 import { SIGN_UP, SIGN_IN } from '../Modal/Index'
@@ -22,9 +23,9 @@ const Header = () => {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <Button type="button" onClick={() => history.push('/topics')}>
-          Home
-        </Button>
+        <IconButton icon={<img src="/assets/handshake.png" />} onClick={() => history.push('/topics')}>
+          Civil
+        </IconButton>
       </ButtonsContainer>
       <ButtonsContainer>
         { !loggedIn ? (

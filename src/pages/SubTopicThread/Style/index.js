@@ -34,7 +34,7 @@ export const ColumnContainer = styled('section')`
   width: 100vw;
 
   ul:first-child {
-    border-right: .1px dashed rgb(48,48,50);
+    /* border-right: .1px dashed rgb(48,48,50); */
   }
 
    ul:last-child {

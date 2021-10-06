@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { Switch, Route } from 'react-router'
+import { Switch, Route, useLocation } from 'react-router'
 import SubTopicThread from '../../../SubTopicThread/Index'
 import SubTopicsTable from '../SubTopicsTable/Index'
 
 export default () => {
+  const {pathname} = useLocation()
+  console.log(pathname)
   return (
     <Switch>
       <Route path="/topics/:topicId/subtopics/:subTopicId">

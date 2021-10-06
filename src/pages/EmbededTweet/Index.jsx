@@ -1,35 +1,63 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router'
-import { getTimeSince } from '../../generic/string/dateFormatter'
-import Card from '../CommonComponents/TweetCard/Index'
+import React, { useEffect, useRef, useCallback } from "react";
+import { bindActionCreators } from "redux";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import Card from "../CommonComponents/Card/Index";
+import ActionToolbar from "../CommonComponents/ActionToolbar/Index";
+import LinkSection from "../CommonComponents/LinkSection/Index";
+import { TweetContainer } from "./Style";
 
-import { TweetContainer } from './Style'
+import { getTimeSince } from "../../generic/string/dateFormatter";
+import uiActionCreators from "../../redux/actions/ui";
+import topicActionCreators from "../../redux/actions/topics";
+import useCalculateCardHeightEffect from "./hooks/useCalculateCardHeightEffect";
 
-const EmbededTweet = ({ topic, user, listCard }) => {
-  const tweetRef = useRef(null)
-  const history = useHistory()
+const EmbededTweet = ({ topic, user, showLinks }) => {
+  const tweetRef = useRef(null);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { openModal, updateTopicLikes } = bindActionCreators(
+    { ...uiActionCreators, ...topicActionCreators },
+    dispatch
+  );
+  const height = useCalculateCardHeightEffect(tweetRef, showLinks);
+  const updateLikes = useCallback(() => {
+    updateTopicLikes({
+      id: topic?.id,
+      userId: user?.id,
+      increment: !topic?.liked,
+    });
+  }, [topic]);
 
   useEffect(() => {
     if (topic?.tweetHtml) {
       if (tweetRef.current) {
-        tweetRef.current.innerHTML = topic?.tweetHtml?.toString() || "<span>Nothing</span>"
+        tweetRef.current.innerHTML =
+          topic?.tweetHtml?.toString() || "<span>Nothing</span>";
       }
     }
-  }, [topic])
-   return (
+  }, [topic?.tweetHtml]);
+  
+  return (
     <Card
       onClick={() => history.push(`/topics/${topic?.id}/subtopics/`)}
       username={topic?.createdBy}
       iconSrc={`${topic?.createdByIconSrc}`}
       tweetRef={tweetRef}
-      description={topic?.description}
+      summary={topic?.summary}
       time={getTimeSince(topic?.createdAt)}
-      listCard={listCard}
-    > 
-      <TweetContainer ref={tweetRef}> </TweetContainer>
+      height={height}
+    >
+      <TweetContainer height={height} ref={tweetRef}> </TweetContainer>
+      <LinkSection topic={topic} showLinks={showLinks} />
+      <ActionToolbar
+        liked={topic?.liked}
+        likes={topic?.likes}
+        onCommentClick={() => openModal(REPLY)}
+        updateLikes={updateLikes}
+      />
     </Card>
-  )
+  );
+};
 
-}
-
-export default EmbededTweet
+export default EmbededTweet;

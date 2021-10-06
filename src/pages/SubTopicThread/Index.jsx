@@ -28,13 +28,13 @@ const SubTopicThread = () => {
   const user =  useSelector(state => state.session.currentUser)
   const [key, setKey] = useState('all');
 
-  const {positive: positiveComments, neutral: neutralComments, negative: negativeComments} = useCategorizeComments()
+  const {positive: positiveComments, neutral: neutralComments, negative: negativeComments, all: allComments} = useCategorizeComments()
 
    useEffect(() => {
     if (loggedIn && user) {
       getSubTopic(subTopicId)
       getAllComments(subTopicId, user?.id)
-      getTopic(topicId)
+      getTopic(topicId, user?.id)
     }
   }, [loggedIn])
 
@@ -56,8 +56,8 @@ const SubTopicThread = () => {
     >
       <Tab eventKey="all" title='All'>
         <ColumnContainer>
-          <CommentColumn comments={positiveComments} commentSentiment={"In Favor"} color="var(--m-secondary-background-color)"  />
-          <CommentColumn comments={negativeComments}  commentSentiment={"Disagree"} color="var(--m-primary-color)" />
+          <CommentColumn comments={allComments} commentSentiment={"Comments"} color="var(--m-primary-background)"  />
+          {/* <CommentColumn comments={negativeComments}  commentSentiment={"Disagree"} color="var(--m-primary-color)" /> */}
         </ColumnContainer>
       </Tab>
       <Tab eventKey="positive" title="In Favor">

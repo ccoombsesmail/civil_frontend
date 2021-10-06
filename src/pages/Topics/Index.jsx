@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import usePermission from '../hooks/usePermission'
 import uiActionCreators from '../../redux/actions/ui'
 import topicActionCreators from '../../redux/actions/topics'
-import Card from '../CommonComponents/TweetCard/Index'
 
 import TopicItem from './components/TopicItem/Index'
 import ThemeButton from '../CommonComponents/Button/Index'
@@ -29,7 +28,7 @@ const Topics = () => {
     <>
       <Container>
         <BorderContainer>
-
+        
         <QuoteBox>
           <QuoteBox.QuoteText>
             Hello <b>{`${user?.username}`}</b>

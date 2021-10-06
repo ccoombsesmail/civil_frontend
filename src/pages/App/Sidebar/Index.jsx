@@ -6,7 +6,6 @@ import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs'
 
 import { SideBarContainer, SideBarNav } from './Style/index'
 import { useHistory } from 'react-router';
-
 const Sidebar = () => {
   const history = useHistory()
   const [open, setOpen] = useState(false);
