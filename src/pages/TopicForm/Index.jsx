@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import { Formik, Field } from 'formik'
 import Input from '../CommonComponents/Input/Index'
 import TextArea from '../CommonComponents/TextArea/Index'
+import Select from '../CommonComponents/Select/Index'
 import { FiArrowDownCircle } from "react-icons/fi";
 
 import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
@@ -13,7 +14,7 @@ import Button from '../CommonComponents/Button/Index'
 import { FormContainer, InputsContainer, Container, Left, Right, Line, Arrow } from './Style'
 import topicsActions from '../../redux/actions/topics'
 import uiActions from '../../redux/actions/ui'
-import { Collapse } from 'react-bootstrap'
+import { Collapse, Fade } from 'react-bootstrap'
 
 const CreateTopicForm = () => {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ const CreateTopicForm = () => {
   return (
     <Container>
       <Formik
-        initialValues={{ title: '', description: '', tweetUrl: '', ytUrl: '', summary: '' }}
+        initialValues={{ title: '', description: '', tweetUrl: '', ytUrl: '', summary: '', category: '' }}
         validate={(values) => {
           const errors = {}
           if (!values.title) {
@@ -44,7 +45,6 @@ const CreateTopicForm = () => {
           const frLinks = Object.entries(values).map(([k, v]) => {
             return k.includes('Information') ? v : null
           }).filter(Boolean) 
-          console.log(content)
           createTopic({ ...values, description: content, createdBy: user.username, evidenceLinks: eLinks, furtherReadingLinks: frLinks })
           setSubmitting(false)
         }}
@@ -62,6 +62,7 @@ const CreateTopicForm = () => {
                     <h2> What do you want to discuss? </h2>
                     <Field type="text" name="title" component={Input} width="100%" placeholder="Enter A Topic Title" />
                     <Field type="text" name="summary" component={Input} width="100%" placeholder="Give A Short Opinion Or Point" />
+                    <Field type="text" name="category" component={Select} width="100%" />
                   </Left>
                   <Right>
                     <h2> Link to what you want to discuss here... (optional) </h2>
@@ -70,13 +71,17 @@ const CreateTopicForm = () => {
                   </Right>
                 </InputsContainer>
                 <Line />
-                  <RichTextEditor content={content} setContent={setContent} />
-                  {/* <Field type="text" name="description" component={TextArea} width="100%" placeholder="What's your take on the topic?" /> */}
-                <Line />
+                <RichTextEditor content={content} setContent={setContent} />
                 <Arrow size={35} rotate={rotate} onClick={() => { 
                   setOpen(!open)
                   setRotate(rotate + 180)
-                }} />
+                }} 
+                />
+                <Fade in={!open}>
+                  <div>
+                    Enter Supplemental Information 
+                  </div>
+                </Fade>
                 <InputsContainer>
                   <Collapse in={open}>
                     <div style={{whiteSpace: 'nowrap', width: '100%'}}>

@@ -1,6 +1,5 @@
-import React, { useState, useRef, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, { useState, useRef } from 'react'
+import { useSelector } from 'react-redux'
 
 import Collapse from 'react-bootstrap/Collapse'
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'
@@ -9,28 +8,29 @@ import ActionToolbar from '../../../CommonComponents/ActionToolbar/Index'
 import { CommentContainer, Header, Username, Date, Body, Thumb, ExpandButton, EvidenceSection, Content } from './Style'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
-import commentActions from '../../../../redux/actions/comments'
-import { BiCommentEdit } from 'react-icons/bi'
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
+import useUpdateCommentLikes from './hooks/useUpdateCommentLikes'
+import useOpenReplyModal from './hooks/useOpenReplyModal'
+import { ParentCommentContext } from '../CommentColumn/Index'
 
-const Comment = ({ comment }) => {
+const Comment = ({ rootComment, commentData, replies }) => {
+  if (!commentData) return null
+  const rootParentCommentId = React.useContext(ParentCommentContext);
+  console.log(rootParentCommentId)
   const contentRef = useRef(null)
-  const dispatch = useDispatch()
-  const { updateCommentLikes } = bindActionCreators(commentActions, dispatch)
-  const user = useSelector(s => s.session.currentUser)
-  const updateLikes = useCallback(() => {
-    updateCommentLikes({id: comment.id, userId: user?.id, increment: !comment.liked})
-    }, [comment.liked])
-  
-  const mins = getTimeSince(comment.createdAt)
   const [isOpen, setIsOpen] = useState(false)
+  const user = useSelector(s => s.session.currentUser)
+  const updateLikes = useUpdateCommentLikes(commentData, rootComment, user)
+  const openReplyModal = useOpenReplyModal(commentData.id, rootParentCommentId)
+  useSetInnerHtml(contentRef, commentData?.content)
+  
+  const mins = getTimeSince(commentData.createdAt)
   const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore /> 
-  useSetInnerHtml(contentRef, comment?.content)
   return (
     <CommentContainer>
       <Header> 
-        <Thumb src={comment.iconSrc} />
-        <Username>{comment.createdBy}</Username>
+        <Thumb src={commentData.iconSrc} />
+        <Username>{commentData.createdBy}</Username>
         <Date>{`${mins}`}</Date>
       </Header>
       <Body> 
@@ -41,16 +41,18 @@ const Comment = ({ comment }) => {
           icon={expandIcon}
           onClick={() => setIsOpen(!isOpen)}
         > 
-        Evidence
+        Replies
       </IconButton>
       </ExpandButton>
       </Body>
+      <ActionToolbar likes={rootComment?.likes || commentData.likes} liked={rootComment?.liked || commentData.liked} updateLikes={updateLikes} onCommentClick={openReplyModal} />
       <Collapse in={isOpen}>
         <EvidenceSection> 
-          Some Content          
+          {
+           replies.map((reply, idx) => <Comment key={commentData.id + String(idx)} commentData={reply.data} replies={reply.children} />)
+          }        
         </EvidenceSection>
       </Collapse>
-      <ActionToolbar likes={comment.likes} liked={comment.liked} updateLikes={updateLikes} />
     </CommentContainer>
 
   )

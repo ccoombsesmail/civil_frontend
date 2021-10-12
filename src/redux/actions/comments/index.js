@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-// action creator is just a function that dispatches an action
 import { closeModal } from '../ui/index'
 import { ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES } from '../../reducers/commentsReducer'
 import * as CommentsApiUtil from '../../../api/v1/comments/comments_api_util'

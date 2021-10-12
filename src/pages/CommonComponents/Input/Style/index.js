@@ -12,7 +12,7 @@ export const Label = styled('label')`
   left: .8rem;
   color: var(--m-trim-color);
   font-family: inherit;
-  font-size: var(--inputFontSize);
+  font-size: .7em;
   font-weight: bold;
   line-height: var(--inputLineHeight);
   opacity: 0;
@@ -43,7 +43,7 @@ export const StyledInput = styled('input')`
   width: ${(props) => props.width || '30%'};
   height: 2em;
   font-family: inherit;
-  font-size: var(--inputFontSize);
+  font-size: .8em;
   font-weight: bold;
   line-height: var(--inputLineHeight);
   border: none;
@@ -61,7 +61,6 @@ export const StyledInput = styled('input')`
     outline: none;
     box-shadow:  5px 5px 8px #ffffff,
              -5px -5px 8px #ffffff;
-    /* box-shadow: 0.2rem 0.8rem 1.6rem #FCA311; */
   }
 
   :not(:placeholder-shown) + ${Label},

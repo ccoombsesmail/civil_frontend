@@ -6,7 +6,6 @@ import SubTopicsTable from '../SubTopicsTable/Index'
 
 export default () => {
   const {pathname} = useLocation()
-  console.log(pathname)
   return (
     <Switch>
       <Route path="/topics/:topicId/subtopics/:subTopicId">

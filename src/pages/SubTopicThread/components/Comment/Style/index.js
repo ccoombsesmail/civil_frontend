@@ -4,7 +4,7 @@ import { FiUser } from 'react-icons/fi'
 import IconButton from "../../../../CommonComponents/IconButton/Index";
 
 export const CommentContainer = styled('li')`
-  width: 95%;
+  width: 98%;
   /* border: 1px solid black; */
   outline: none;
   border-radius: .4em;
@@ -63,14 +63,15 @@ export const ExpandButton = styled('div')`
   transform: translate(-50%);
 `
 
-export const EvidenceSection = styled('div')` 
+export const EvidenceSection = styled('ul')` 
   background-color: #F0F2F5;
   width: 100%;
   word-break: break-all;
   border-bottom-left-radius: .4em;
   border-bottom-right-radius: .4em;
-  padding-left: 1em;
-
+  padding: 0 0 1em 1em;
+  display: flex;
+  flex-direction: column;
 `
 
 

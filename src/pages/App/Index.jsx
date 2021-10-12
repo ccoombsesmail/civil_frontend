@@ -9,15 +9,16 @@ import Header from './Header/Index'
 import Modal from './Modal/Index'
 import Topics from '../Topics/Index'
 import SubTopics from '../SubTopics/Index'
-import SubTopicThread from '../SubTopicThread/Index'
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css'
 import Sidebar from './Sidebar/Index'
 import Dashboard from '../Dashboard/Index'
 import { MainContainer, Content } from './Style'
-import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
+import useFetchAppData from './hooks/useFetchAppData'
+
 const App = () => {
   const dispatch = useDispatch()
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
+  useFetchAppData()
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <GlobalStyle />
@@ -35,7 +36,7 @@ const App = () => {
             <Route path="/topics">
               <Topics />
             </Route>
-            {/* <Route render={() => <Redirect to="/topics" />} /> */}
+            <Route render={() => <Redirect to="/topics" />} />
           </Switch>
         </Content>
         <Modal closeModal={closeModal} />

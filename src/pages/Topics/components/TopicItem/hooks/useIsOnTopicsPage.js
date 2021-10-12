@@ -4,7 +4,6 @@ import { uuidRegEx } from "../../../../../generic/regex/uuid"
 
 export default () => {
   const { pathname } = useLocation()
-  console.log(pathname)
   return useMemo(() => {
     return !pathname.match(uuidRegEx)
   }, [pathname])

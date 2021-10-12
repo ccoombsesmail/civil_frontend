@@ -4,6 +4,7 @@ import quillEmoji from 'quill-emoji';
 import 'react-quill/dist/quill.snow.css';
 import "quill-emoji/dist/quill-emoji.css";
 
+import { Container } from './Style';
 const { EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji } = quillEmoji;
 
 
@@ -18,8 +19,7 @@ Quill.register({
 
 
 const RichTextEditor = ({ content, setContent }) => {
-  // const [convertedText, setConvertedText] = useState("Some default content");
-  // console.log(convertedText)
+
   const modules = {
     toolbar: [
       [{ 'font': [] }, { 'header': [] }],
@@ -39,7 +39,7 @@ const RichTextEditor = ({ content, setContent }) => {
 
   const formats = ['font', 'header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block', 'color', 'background', 'list', 'indent', 'align', 'link', 'image', 'clean', 'emoji']
     return (
-      <div className="text-editor">
+      <Container className="text-editor">
         <ReactQuill
           // theme="snow"
           value={content}
@@ -47,7 +47,7 @@ const RichTextEditor = ({ content, setContent }) => {
           modules={modules}
           formats={formats}
         />
-      </div>
+      </Container>
     )
 
 }

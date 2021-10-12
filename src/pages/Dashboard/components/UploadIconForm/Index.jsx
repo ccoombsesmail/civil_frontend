@@ -41,7 +41,6 @@ const UploadIconForm = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
             const formData = new FormData();
-            console.log(user)
             formData.append("image", values.file);
             uploadUserIcon(formData, user?.username)
             setSubmitting(false)

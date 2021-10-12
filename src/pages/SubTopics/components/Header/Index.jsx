@@ -9,11 +9,12 @@ import topicActionCreators from '../../../../redux/actions/topics'
 
 import { Container } from './Style/index'
 import EmbededYouTube from '../../../EmbededYouTube/Index'
+import VideoShowPage from '../../../VideoShowPage/Index'
 
 const Header = ({ topic, user }) => {
   let content = null
   if (topic?.tweetHtml) content = <EmbededTweet topic={topic} user={user} showLinks={true} />
-  if (topic?.ytUrl) content = <EmbededYouTube topic={topic} user={user} showLinks={true} src={topic.ytUrl.replace('watch?v=', 'embed/')} />
+  if (topic?.ytUrl) content = <VideoShowPage topic={topic} user={user} showLinks={true} src={topic.ytUrl.replace('watch?v=', 'embed/')} />
 
   return (
     <Container>

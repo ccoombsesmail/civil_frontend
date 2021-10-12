@@ -11,12 +11,15 @@ import { getTimeSince } from "../../generic/string/dateFormatter";
 import uiActionCreators from "../../redux/actions/ui";
 import topicActionCreators from "../../redux/actions/topics";
 import useCalculateCardHeightEffect from "./hooks/useCalculateCardHeightEffect";
+import useOpenModal from "../hooks/useOpenModal";
+import { REPLY } from '../App/Modal/Index'
 
 const EmbededTweet = ({ topic, user, showLinks }) => {
   const tweetRef = useRef(null);
   const history = useHistory();
   const dispatch = useDispatch();
-  const { openModal, updateTopicLikes } = bindActionCreators(
+  const openModal = useOpenModal(REPLY)
+  const { updateTopicLikes } = bindActionCreators(
     { ...uiActionCreators, ...topicActionCreators },
     dispatch
   );
@@ -53,7 +56,7 @@ const EmbededTweet = ({ topic, user, showLinks }) => {
       <ActionToolbar
         liked={topic?.liked}
         likes={topic?.likes}
-        onCommentClick={() => openModal(REPLY)}
+        onCommentClick={openModal}
         updateLikes={updateLikes}
       />
     </Card>

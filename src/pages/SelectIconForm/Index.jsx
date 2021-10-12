@@ -36,7 +36,6 @@ const SelectIconForm = () => {
           for (const [k,v] of Object.entries(values)) {
             if (v) profileImg = k
           }
-          console.log(profileImg)
           updateUserIcon({username: user?.username, iconSrc: profileImg})
           setSubmitting(false)
         }}
