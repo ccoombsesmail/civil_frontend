@@ -1,9 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const Container = styled("ul")`
+export const Container = styled('ul')`
   display: flex;
   flex-direction: column;
-  width: 50%;
   align-items: center;
   padding: 0;
   h2 {
@@ -13,12 +12,12 @@ export const Container = styled("ul")`
     font-weight: bold;
     text-align: center;
   }
-`;
+`
 
-export const Link = styled("a")`
+export const Link = styled('a')`
   display: block;
   text-decoration: none;
-  color: var(--m-primary-color);
+  color: black;
   font-weight: bold;
   margin: .3em 0;
-`;
+`

@@ -1,8 +1,7 @@
-import styled from "styled-components";
-
+import styled from 'styled-components'
 
 export const Label = styled('label')` 
-  background-image: url('/64_1.png');
+  background-image: url(${(props) => props.userIcon});
   background-size: cover;
   height: 4em;
   width: 4em;

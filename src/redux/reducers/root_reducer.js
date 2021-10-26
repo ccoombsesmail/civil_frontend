@@ -5,7 +5,9 @@ import sessionReducer from './sessionReducer'
 import uiReducer from './ui_reducer'
 import topicsReducer from './topicsReducer'
 import subtopicsReducer from './subTopicsReducer'
-import commentsReducer from './commentsReducer'
+import commentsReducer from './comments/commentsReducer'
+import usersReducer from './users/usersReducer'
+
 import enumsReducer from './enumsReducer'
 
 const reducers = combineReducers({
@@ -15,5 +17,6 @@ const reducers = combineReducers({
   subtopics: subtopicsReducer,
   comments: commentsReducer,
   enums: enumsReducer,
+  users: usersReducer,
 })
 export default reducers

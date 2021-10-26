@@ -18,7 +18,7 @@ export const Description = styled('p')`
   justify-content: flex-start;
   background-color: white;
   color: black;
-` 
+`
 
 export const InputWrapper = styled('div')`
   display: flex;
@@ -57,7 +57,6 @@ export const Container = styled('div')`
     border-bottom: 1px solid black;
   }
  `
-
 
 export const Toolbar = styled('div')`
   /* margin: .5em; */

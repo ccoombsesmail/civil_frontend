@@ -1,10 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import { FiUser } from 'react-icons/fi'
 
-
-
 export const Label = styled('label')` 
-  background-image: url('/64_1.png');
+  background-image: url('https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/64_1.png');
   background-size: cover;
   height: 4em;
   width: 4em;

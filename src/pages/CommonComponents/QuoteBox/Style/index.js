@@ -36,8 +36,6 @@ export const FloatingQuoteBox = styled('div')`
   flex-direction: column;
   justify-content: space-between;
   max-width: 40vw;
-  /* word-wrap: break-word; */
-  /* transform: translatey(0px); */
   animation: ${float} 5s ease-in-out infinite;
   mix-blend-mode: multiply;
   text-align: center;
@@ -45,40 +43,38 @@ export const FloatingQuoteBox = styled('div')`
   font-weight: bold;
   letter-spacing: 3px;
   font-size: 1em;
-  color: #774f38;
-  background-color: #ece5ce;
+  color: white;
+  background-color: var(--m-primary-background-1-color);
   padding: 2em;
   border-radius: 11px;
   position: relative;
-  box-shadow: 20px 20px #83af9b;
+  box-shadow: 20px 20px #4D271A;
   font-family: "Baloo 2", cursive;
   margin-bottom: 4em;
   b {
-    color: var(--m-primary-color)
+    color: #4D271A;
+    text-decoration: italic;
   }
 
   :after {
     transform: translate3d(0, 0, 0);
-    /* transform: translatey(0px); */
     animation: ${float2} 5s ease-in-out infinite;
     content: ".";
     font-weight: bold;
-    // -webkit-text-stroke: 0.5px $color-green;
-    -webkit-text-fill-color: #ece5ce;
-    // border: 1px solid $color-green;
-    text-shadow: 22px 22px #83af9b;
+    -webkit-text-fill-color: var(--m-primary-background-1-color);
+    text-shadow: 22px 22px var(--m-secondary-background-2-color);
     text-align: left;
     font-size: 55px;
     width: 55px;
     height: 11px;
     line-height: 30px;
     border-radius: 11px;
-    background-color: #ece5ce;
+    background-color: var(--m-primary-background-1-color);
     position: absolute;
     display: block;
     bottom: -30px;
     left: 0;
-    box-shadow: 22px 22px #83af9b;
+    box-shadow: 22px 22px var(--m-secondary-background-2-color);
     z-index: -2;
 }
 `

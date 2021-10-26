@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const Container = styled('div')` 
   display: flex;
   flex-direction: column;
@@ -9,7 +8,7 @@ export const Container = styled('div')`
   border: 1px solid gray;
   /* border-top: none; */
   padding-top: 5em;
-
+  z-index: 99;
   background-color: #F7F7F7;
   background-color: white;
   h1 {
@@ -29,4 +28,3 @@ export const LinksContainer = styled('div')`
     border-right: 1px solid gray;
   }
 `
-

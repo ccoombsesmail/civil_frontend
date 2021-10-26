@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const SideBarContainer = styled('div')` 
   height: 100%;
   width: 12vw;
-  max-width: ${props => props.isOpen ? '12vw' : '2vw'};
-  background-color: #14213D;
+  max-width: ${(props) => (props.isOpen ? '12vw' : '2vw')};
+  background-color: var(--m-menu-bg-color);
   box-shadow: var(--m-primary-box-shadow);
   transition: max-width .6s ease-in-out;
   display: flex;
@@ -13,6 +13,7 @@ export const SideBarContainer = styled('div')`
   position: static;
   color: white;
   font-weight: bold;
+  flex: 0 0 12vw;
 
   .container {
     display: flex !important;
@@ -25,15 +26,14 @@ export const SideBarContainer = styled('div')`
   svg {
     cursor: pointer;
     border-radius: .3em;
-    padding: .2em;
+    margin: .2em;
   }
 
-  svg:first-child:hover {
+  /* svg:first-child:hover {
     background-color: gray;
-  }
+  } */
 
 `
-
 
 export const SideBarNav = styled('nav')` 
   display: flex;
@@ -41,12 +41,20 @@ export const SideBarNav = styled('nav')`
   margin: 0;
   padding: 0;
   width: 100%;
+  align-items: center;
+  z-index: 9999999;
   li {
-    width: 100%;
+    width: 90%;
     margin: 0;
-    padding: 0 .75rem;
+    border-radius: var(--border-radius);
+    padding: 5%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    cursor: pointer;
+  }
+
+  li:hover {
+    background-color: var(--bg-accent);
   }
 `

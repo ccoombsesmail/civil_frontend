@@ -1,60 +1,75 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { bindActionCreators } from "redux";
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import Card from "../CommonComponents/Card/Index";
-import ActionToolbar from "../CommonComponents/ActionToolbar/Index";
-import LinkSection from "../CommonComponents/LinkSection/Index";
-import { VideoPlayer, Description } from "./Style";
+import React, { useState, useRef } from 'react'
+import { Collapse } from 'react-bootstrap'
+import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 
-import { getTimeSince } from "../../generic/string/dateFormatter";
-import uiActionCreators from "../../redux/actions/ui";
-import topicActionCreators from "../../redux/actions/topics";
-import { REPLY } from '../App/Modal/Index'
-import useSetInnerHtml from "../hooks/useSetInnerHtml";
+import Card from '../CommonComponents/Card/Index'
+import ActionToolbar from '../CommonComponents/ActionToolbar/Index'
+import LinkSection from '../CommonComponents/LinkSection/Index'
+import IconButton from '../CommonComponents/IconButton/Index'
 
-const VideoShowPage = ({ topic, user, src, showLinks }) => {
+import topicActionCreators from '../../redux/actions/topics'
+
+import useSetInnerHtml from '../hooks/useSetInnerHtml'
+import useOpenModal from '../hooks/useOpenModalWithLocation'
+import useBindDispatch from '../hooks/useBindDispatch'
+import useUpdateLikes from './hooks/useUpdateLikes'
+import useGoToSubTopic from '../hooks/useGoToSubTopics'
+import { getTimeSince } from '../../generic/string/dateFormatter'
+
+import { VideoPlayer, Description, ExpandButton } from './Style'
+
+const VideoShowPage = ({
+  topic, user, src, showLinks,
+}) => {
   const descRef = useRef(null)
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { openModal, updateTopicLikes } = bindActionCreators(
-    { ...uiActionCreators, ...topicActionCreators },
-    dispatch
-  );
-  const updateLikes = useCallback(() => {
-    updateTopicLikes({
-      id: topic?.id,
-      userId: user?.id,
-      increment: !topic?.liked,
-    });
-  }, [topic]);
+  const [isOpen, setIsOpen] = useState(false)
 
+  const openModal = useOpenModal()
+  const goToSubTopic = useGoToSubTopic(topic.id)
+  const { updateTopicLikes } = useBindDispatch(topicActionCreators)
+  const updateLikes = useUpdateLikes(updateTopicLikes, topic, user)
   useSetInnerHtml(descRef, topic?.description)
 
+  const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore />
 
   return (
     <>
-    <VideoPlayer src={src}/> 
-    <Card
-      onClick={() => history.push(`/topics/${topic?.id}/subtopics/`)}
-      username={topic?.createdBy}
-      iconSrc={`${topic?.createdByIconSrc}`}
-      summary={topic?.summary}
-      time={getTimeSince(topic?.createdAt)}
-    >
-      <Description>
-        <span ref={descRef} />
-      </Description>
-      <LinkSection topic={topic} showLinks={showLinks} />
-      <ActionToolbar
-        liked={topic?.liked}
-        likes={topic?.likes}
-        onCommentClick={() => openModal(REPLY)}
-        updateLikes={updateLikes}
-      />
-    </Card>
+      <Card
+        onClick={goToSubTopic}
+        username={topic?.createdBy}
+        iconSrc={`${topic?.createdByIconSrc}`}
+        summary={topic?.summary}
+        time={getTimeSince(topic?.createdAt)}
+      >
+        <Description>
+          <span ref={descRef} />
+        </Description>
+        {topic?.evidenceLinks.length !== 0
+        && (
+        <ExpandButton>
+          <IconButton
+            icon={expandIcon}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            Show Additional Info
+          </IconButton>
+        </ExpandButton>
+        )}
+        <Collapse in={isOpen}>
+          <div>
+            <LinkSection topic={topic} showLinks={showLinks} />
+          </div>
+        </Collapse>
+        <ActionToolbar
+          liked={topic?.liked}
+          likes={topic?.likes}
+          onCommentClick={openModal}
+          updateLikes={updateLikes}
+        />
+      </Card>
+      <VideoPlayer src={src} />
     </>
-  );
-};
+  )
+}
 
-export default VideoShowPage;
+export default VideoShowPage

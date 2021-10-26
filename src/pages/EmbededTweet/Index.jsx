@@ -1,49 +1,43 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { bindActionCreators } from "redux";
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import Card from "../CommonComponents/Card/Index";
-import ActionToolbar from "../CommonComponents/ActionToolbar/Index";
-import LinkSection from "../CommonComponents/LinkSection/Index";
-import { TweetContainer } from "./Style";
+import React, {
+  useEffect, useRef, useState,
+} from 'react'
+import { MdExpandMore, MdExpandLess } from 'react-icons/md'
+import { Collapse } from 'react-bootstrap'
 
-import { getTimeSince } from "../../generic/string/dateFormatter";
-import uiActionCreators from "../../redux/actions/ui";
-import topicActionCreators from "../../redux/actions/topics";
-import useCalculateCardHeightEffect from "./hooks/useCalculateCardHeightEffect";
-import useOpenModal from "../hooks/useOpenModal";
-import { REPLY } from '../App/Modal/Index'
+import Card from '../CommonComponents/Card/Index'
+import LinkSection from '../CommonComponents/LinkSection/Index'
+import IconButton from '../CommonComponents/IconButton/Index'
+
+import useCalculateCardHeightEffect from './hooks/useCalculateCardHeightEffect'
+import useUpdateLikes from '../hooks/useUpdateLikes'
+import useGoToSubTopics from '../hooks/useGoToSubTopics'
+import useOpenModalWithLocation from '../hooks/useOpenModalWithLocation'
+
+import { getTimeSince } from '../../generic/string/dateFormatter'
+import { TweetContainer, ExpandButton, StyledActionToolbar } from './Style'
 
 const EmbededTweet = ({ topic, user, showLinks }) => {
-  const tweetRef = useRef(null);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const openModal = useOpenModal(REPLY)
-  const { updateTopicLikes } = bindActionCreators(
-    { ...uiActionCreators, ...topicActionCreators },
-    dispatch
-  );
-  const height = useCalculateCardHeightEffect(tweetRef, showLinks);
-  const updateLikes = useCallback(() => {
-    updateTopicLikes({
-      id: topic?.id,
-      userId: user?.id,
-      increment: !topic?.liked,
-    });
-  }, [topic]);
+  const [isOpen, setIsOpen] = useState(false)
+  const tweetRef = useRef(null)
+  const openModal = useOpenModalWithLocation('TOPIC_REPLY')
+
+  const updateLikes = useUpdateLikes(topic, user)
+  const goToSubTopic = useGoToSubTopics(topic?.id)
+  const height = useCalculateCardHeightEffect(tweetRef, showLinks, isOpen)
 
   useEffect(() => {
     if (topic?.tweetHtml) {
       if (tweetRef.current) {
-        tweetRef.current.innerHTML =
-          topic?.tweetHtml?.toString() || "<span>Nothing</span>";
+        tweetRef.current.innerHTML = topic?.tweetHtml?.toString() || '<span>Nothing</span>'
       }
     }
-  }, [topic?.tweetHtml]);
-  
+  }, [topic?.tweetHtml])
+
+  const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore />
+
   return (
     <Card
-      onClick={() => history.push(`/topics/${topic?.id}/subtopics/`)}
+      onClick={goToSubTopic}
       username={topic?.createdBy}
       iconSrc={`${topic?.createdByIconSrc}`}
       tweetRef={tweetRef}
@@ -52,15 +46,30 @@ const EmbededTweet = ({ topic, user, showLinks }) => {
       height={height}
     >
       <TweetContainer height={height} ref={tweetRef}> </TweetContainer>
-      <LinkSection topic={topic} showLinks={showLinks} />
-      <ActionToolbar
+      {showLinks
+        && (
+        <ExpandButton>
+          <IconButton
+            icon={expandIcon}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            Show Additional Info
+          </IconButton>
+        </ExpandButton>
+        )}
+      <Collapse in={isOpen}>
+        <div>
+          <LinkSection topic={topic} showLinks={showLinks} />
+        </div>
+      </Collapse>
+      <StyledActionToolbar
         liked={topic?.liked}
         likes={topic?.likes}
         onCommentClick={openModal}
         updateLikes={updateLikes}
       />
     </Card>
-  );
-};
+  )
+}
 
-export default EmbededTweet;
+export default EmbededTweet

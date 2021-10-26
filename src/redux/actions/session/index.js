@@ -17,7 +17,6 @@ const updateActionCreator = (data) => ({
   payload: data,
 })
 
-
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
   .then((res) => dispatch(loginActionCreator(JSON.parse(res.data).token)))
   .then(() => dispatch(closeModal()))
@@ -33,9 +32,8 @@ export const logout = () => (dispatch) => {
 export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateUserIcon(userData)
   .then((res) => dispatch(updateActionCreator(res.data)))
 
-export const uploadUserIcon = (data, username) => (dispatch) => SessionApiUtil.uploadUserIcon(data, username)
+const uploadUserIcon = (dta, username) => (dispatch) => SessionApiUtil.uploadUserIcon(dta, username)
   .then((res) => dispatch(updateActionCreator(res.data)))
-
 
 export default {
   logout,

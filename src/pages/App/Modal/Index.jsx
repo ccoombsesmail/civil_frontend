@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import StrapModal from 'react-bootstrap/Modal'
-import { useParams } from 'react-router'
 import { withRouter } from 'react-router'
 import { useSelector } from 'react-redux'
 import SignUpForm from '../../SessionForms/SignUp/Index'
@@ -10,7 +9,7 @@ import CreateTopicForm from '../../TopicForm/Index'
 import CreateSubTopicForm from '../../SubTopicForm/Index'
 import CommentForm from '../../CommentForm/Index'
 import { ModalWrapper } from './Style/index'
-import SelectIconForm from '../../SelectIconForm/Index'
+import UploadIconForm from '../../Dashboard/components/UploadIconForm/Index'
 
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
@@ -18,7 +17,6 @@ export const CREATE_TOPIC = 'CREATE_TOPIC'
 export const CREATE_SUB_TOPIC = 'CREATE_SUB_TOPIC'
 export const REPLY = 'REPLY'
 export const ICON_FORM = 'ICON_FORM'
-
 
 const Modal = ({ closeModal }) => {
   const modalType = useSelector((s) => s.ui.modalType)
@@ -42,7 +40,7 @@ const Modal = ({ closeModal }) => {
       component = <CommentForm />
       break
     case ICON_FORM:
-      component = <SelectIconForm />
+      component = <UploadIconForm />
       break
     default:
       break

@@ -4,23 +4,23 @@
 
 import React, { useState } from 'react'
 import { ErrorMessage } from 'formik'
-import capitalize from '../../../generic/string/capitalize'
-import { StyledSelect, Label, Container } from './Style'
-import Error from '../ErrorMessage/Index'
 import { useSelector } from 'react-redux'
 import { Fade } from 'react-bootstrap'
+import { StyledSelect, Label, Container } from './Style'
+import Error from '../ErrorMessage/Index'
 
 const Select = ({
   width, field, form, placeholder, ...props
 }) => {
   const [open, isOpen] = useState(false)
+  const [value, setValue] = useState('')
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
-  const enums = useSelector(state => state.enums.topicCategories)
+  const enums = useSelector((state) => state.enums.topicCategories)
   return (
     <Container>
-      
-      <Fade in={open}> 
+
+      <Fade in={open}>
         <div>
           <Label htmlFor={field.name}>Select A Category</Label>
         </div>
@@ -32,13 +32,14 @@ const Select = ({
         id={field.name}
         {...props}
         showError={showError}
-        defaultValue=""
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         onFocus={() => isOpen(true)}
-        onBlur={() => isOpen(false)} 
+        onBlur={() => isOpen(false)}
       >
-      <option value="">Select A Category</option>
-      {
-        enums?.map(val => <option value={val}>{val}</option>)
+        <option value="">Select A Category</option>
+        {
+        enums?.map((val) => <option key={val} value={val}>{val}</option>)
       }
       </StyledSelect>
       <ErrorMessage width={width} name={field.name} component={Error} />

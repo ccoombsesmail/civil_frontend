@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector } from 'react-redux'
 import usePermission from '../hooks/usePermission'
+import useBindDispatch from '../hooks/useBindDispatch'
 import uiActionCreators from '../../redux/actions/ui'
 import topicActionCreators from '../../redux/actions/topics'
 
@@ -12,11 +12,10 @@ import QuoteBox from '../CommonComponents/QuoteBox/Index'
 import WavyBackground from '../CommonComponents/WavyBackground/Index'
 import { CREATE_TOPIC } from '../App/Modal/Index'
 import { CardContainer, Container, BorderContainer } from './Style'
+
 const Topics = () => {
-  const [html, setHtml] = useState(null)
   const { loggedIn } = usePermission()
-  const dispatch = useDispatch()
-  const { openModal, getAllTopics } = bindActionCreators({ ...uiActionCreators, ...topicActionCreators }, dispatch)
+  const { openModal, getAllTopics } = useBindDispatch(uiActionCreators, topicActionCreators)
   const topics = useSelector((s) => s.topics.list) || []
   const user = useSelector((s) => s.session.currentUser)
   useEffect(() => {
@@ -28,25 +27,27 @@ const Topics = () => {
     <>
       <Container>
         <BorderContainer>
-        
-        <QuoteBox>
-          <QuoteBox.QuoteText>
-            Hello <b>{`${user?.username}`}</b>
-            <br />
-            Explore Some Topics or Create Your Own...
-          </QuoteBox.QuoteText>
 
-          <ThemeButton type="button" onClick={() => openModal(CREATE_TOPIC)}>
-            Create Topic +
-          </ThemeButton>
-        </QuoteBox>
-        <CardContainer>
-          {
+          <QuoteBox>
+            <QuoteBox.QuoteText>
+              Hello
+              {' '}
+              <b>{`${user?.username}`}</b>
+              <br />
+              Explore Some Topics or Create Your Own...
+            </QuoteBox.QuoteText>
+
+            <ThemeButton type="button" onClick={() => openModal(CREATE_TOPIC)}>
+              Create Topic +
+            </ThemeButton>
+          </QuoteBox>
+          <CardContainer>
+            {
             topics.map((topic) => <TopicItem key={topic.id} topic={topic} user={user} />)
-          }
-        </CardContainer>
+            }
+          </CardContainer>
         </BorderContainer>
-        <WavyBackground color="blue" top="100%" />
+        <WavyBackground color="#EF5D45" top="100%" />
       </Container>
     </>
   )

@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, { useCallback } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,18 +13,16 @@ import VideoShowPage from '../../../VideoShowPage/Index'
 
 const Header = ({ topic, user }) => {
   let content = null
-  if (topic?.tweetHtml) content = <EmbededTweet topic={topic} user={user} showLinks={true} />
-  if (topic?.ytUrl) content = <VideoShowPage topic={topic} user={user} showLinks={true} src={topic.ytUrl.replace('watch?v=', 'embed/')} />
+  if (topic?.tweetHtml) content = <EmbededTweet topic={topic} user={user} showLinks />
+  if (topic?.ytUrl) content = <VideoShowPage topic={topic} user={user} showLinks src={topic.ytUrl.replace('watch?v=', 'embed/')} />
 
   return (
     <Container>
-      <h1> We're Talking About...</h1> 
+      <h1> We're Talking About...</h1>
       {content}
     </Container>
 
   )
-
 }
-
 
 export default Header

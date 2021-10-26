@@ -1,19 +1,17 @@
-import styled from "styled-components";
-
+/* eslint-disable import/prefer-default-export */
+import styled from 'styled-components'
 
 export const Container = styled('ul')`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 2em;
-  /* flex-grow: 1; */
-  /* width: 33%; */
-  /* background-color: ${props => props.color}; */
   margin: 0;
   padding: 0;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-
+  /* border-left: 1px solid black;
+  border-right: 1px solid black; */
+  z-index: 99;
+  opacity: .99;
   width: 50vw;
   
 
@@ -29,9 +27,6 @@ export const Container = styled('ul')`
     color: white;
     border: none;
     outline: none;
-    background-color: ${props => props.color}
+    background-color: ${(props) => props.color}
   }
 `
-
-
-

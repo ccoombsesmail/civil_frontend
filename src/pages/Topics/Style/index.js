@@ -6,7 +6,7 @@ export const Container = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  z-index: 9999;
   /* padding-top: 5em; */
 `
 
@@ -14,7 +14,8 @@ export const BorderContainer = styled('div')`
   width: 40vw;
   border: 1px solid gray;
   padding: 5em;
-    background-color: white;
+  z-index: 9999;
+  background-color: white;
 
 `
 
@@ -38,7 +39,7 @@ export const CardContainer = styled('ul')`
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  /* width: 40vw; */
+  z-index: 9999;
   padding: 0;
   margin: 5em 0 0 0;
   padding-bottom: 30vh;

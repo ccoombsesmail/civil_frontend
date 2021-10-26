@@ -1,8 +1,4 @@
-import styled, {css} from 'styled-components'
-
-import { RiArrowDownFill } from 'react-icons/ri'
-
-
+import styled from 'styled-components'
 
 export const Header = styled('div')` 
   position: relative;
@@ -52,11 +48,12 @@ export const Body = styled('div')`
   background-color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
   .twitter-tweet {
     max-width: 90%;
   }
 
-` 
+`
 
 export const Description = styled('p')` 
   width: 90%;
@@ -75,7 +72,7 @@ export const Description = styled('p')`
   background-color: white;
   color: black;
   font-weight: bold;
-` 
+`
 
 export const ArrowContainer = styled('div')`
     background-color: white;
@@ -95,9 +92,9 @@ export const Container = styled('li')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: ${props => props.listCard ? '20vw' : props.height};
+  height: ${(props) => (props.listCard ? '20vw' : props.height)};
   width: 25vw;  
-  margin: 2em 2em 0 2em;
+  margin: 2em 2em 2em 2em;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a,
              5px 5px 10px #ffffff;
@@ -105,18 +102,11 @@ export const Container = styled('li')`
   cursor: pointer;
   overflow: hidden;
   text-decoration: none;
-  border: 1px solid black;
   transition: all 1s ease-in-out;
 
  
 
 `
-
-
-
-
-
-
 
 export const Thumb = styled('img')` 
   flex-shrink: 0;
@@ -124,7 +114,3 @@ export const Thumb = styled('img')`
   height: 50px;      
   border-radius: 50%; 
 `
-    
-
-
-

@@ -23,7 +23,7 @@ export const getAllSubTopics = (topicId) => (dispatch) => SubTopicsApiUtil.getAl
   .then((res) => dispatch(getAllTopicsActionCreator(res.data)))
   .then(() => dispatch(closeModal()))
 
-  export const getSubTopic = (subTopicId) => (dispatch) => SubTopicsApiUtil.getSubTopic(subTopicId)
+export const getSubTopic = (subTopicId) => (dispatch) => SubTopicsApiUtil.getSubTopic(subTopicId)
   .then((res) => dispatch(addTopicActionCreator(res.data)))
 
 export default {

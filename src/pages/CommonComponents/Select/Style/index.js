@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled('div')`
   position: relative;
-  margin: 0 1em;
+  margin: 0 1.3em;
 `
 
 export const Label = styled('label')`
@@ -17,7 +17,7 @@ export const Label = styled('label')`
 
 export const StyledSelect = styled('select')`
   display: block;
-  margin: 0 0 0 0;
+  margin: 0;
   box-shadow: inset 8px 8px 8px #cbced1,
               inset -8px -8px 8px #ffffff;
   padding: .5em;
@@ -60,7 +60,7 @@ export const StyledSelect = styled('select')`
   option {
     color: var(--m-trim-color);
     font-size: .8em;
-
+    cursor: pointer;
   }
 }
 `

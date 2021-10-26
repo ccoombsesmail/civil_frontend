@@ -8,4 +8,6 @@ export const getAllComments = (subtopicId, userId) => axios.get(`${BACKEND_DEV}/
 
 export const updateCommentLikes = (commentData) => axios.put(`${BACKEND_DEV}/comments`, commentData)
 
+export const updateCommentCivility = (commentData) => axios.put(`${BACKEND_DEV}/comments/civility`, commentData)
+
 // export const getSubTopic = (subTopicId) => axios.get(`${BACKEND_DEV}/subtopics/${subTopicId}`)

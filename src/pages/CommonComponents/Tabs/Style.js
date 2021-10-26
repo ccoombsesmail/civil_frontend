@@ -3,6 +3,8 @@ import { Tabs, Tab } from 'react-bootstrap'
 
 
 export const ThemeTab = styled(Tabs)`
+  z-index: 9999;
+
   li {
     border-radius: .5em;
     background-color: white;

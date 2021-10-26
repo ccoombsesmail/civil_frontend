@@ -9,7 +9,7 @@ const reducer = (state = { list: [] }, action) => {
       return { ...state, list: [...state.list, action.payload] }
     case GET_ALL_TOPICS:
       return { ...state, list: action.payload }
-     case UPDATE_TOPIC_LIKES:
+    case UPDATE_TOPIC_LIKES:
       const newList = state.list.map((topic) => {
         if (topic.id === action.payload.id) return { ...topic, likes: action.payload.likes, liked: action.payload.liked }
         return topic

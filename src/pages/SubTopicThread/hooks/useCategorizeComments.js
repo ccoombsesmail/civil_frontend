@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux'
 const sentiments = new Set(['positive', 'neutral', 'negative'])
 
 export default () => {
-  const comments = useSelector(state => state.comments.list)
-
+  const comments = useSelector((state) => state.comments.list)
   return useMemo(() => {
     const categorizedComments = {
       positive: [],

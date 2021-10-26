@@ -1,58 +1,65 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { bindActionCreators } from "redux";
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import Card from "../CommonComponents/Card/Index";
-import ActionToolbar from "../CommonComponents/ActionToolbar/Index";
-import LinkSection from "../CommonComponents/LinkSection/Index";
-import { VideoPlayer, Description } from "./Style";
+import React, { useRef, useState } from 'react'
+import { Collapse } from 'react-bootstrap'
+import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 
-import { getTimeSince } from "../../generic/string/dateFormatter";
-import uiActionCreators from "../../redux/actions/ui";
-import topicActionCreators from "../../redux/actions/topics";
-import { REPLY } from '../App/Modal/Index'
-import useSetInnerHtml from "../hooks/useSetInnerHtml";
+import IconButton from '../CommonComponents/IconButton/Index'
+import Card from '../CommonComponents/Card/Index'
+import ActionToolbar from '../CommonComponents/ActionToolbar/Index'
+import LinkSection from '../CommonComponents/LinkSection/Index'
 
-const EmbededYouTube= ({ topic, user, src, showLinks }) => {
+import useSetInnerHtml from '../hooks/useSetInnerHtml'
+import useGoToSubTopic from '../hooks/useGoToSubTopics'
+import useUpdateLikes from '../hooks/useUpdateLikes'
+
+import { getTimeSince } from '../../generic/string/dateFormatter'
+import { VideoPlayer, Description } from './Style'
+
+const EmbededYouTube = ({
+  topic, user, src, showLinks,
+}) => {
   const descRef = useRef(null)
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { openModal, updateTopicLikes } = bindActionCreators(
-    { ...uiActionCreators, ...topicActionCreators },
-    dispatch
-  );
-  const updateLikes = useCallback(() => {
-    updateTopicLikes({
-      id: topic?.id,
-      userId: user?.id,
-      increment: !topic?.liked,
-    });
-  }, [topic]);
+  const [isOpen, setIsOpen] = useState(false)
+
+  const goToSubTopic = useGoToSubTopic(topic?.id)
+  const updateLikes = useUpdateLikes(topic, user)
 
   useSetInnerHtml(descRef, topic?.description)
-
+  const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore />
 
   return (
     <Card
-      onClick={() => history.push(`/topics/${topic?.id}/subtopics/`)}
+      onClick={goToSubTopic}
       username={topic?.createdBy}
       iconSrc={`${topic?.createdByIconSrc}`}
       summary={topic?.summary}
       time={getTimeSince(topic?.createdAt)}
     >
-      <VideoPlayer src={src}/> 
+      <VideoPlayer src={src} />
       <Description>
         <span ref={descRef} />
       </Description>
-      <LinkSection topic={topic} showLinks={showLinks} />
+      {showLinks
+        && (
+          <IconButton
+            icon={expandIcon}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            Show Additional Info
+          </IconButton>
+        )}
+      <Collapse in={isOpen}>
+        <div>
+          <LinkSection topic={topic} showLinks={showLinks} />
+        </div>
+      </Collapse>
       <ActionToolbar
         liked={topic?.liked}
         likes={topic?.likes}
-        onCommentClick={() => openModal(REPLY)}
+        hideReplyIcon
         updateLikes={updateLikes}
       />
     </Card>
-  );
-};
+  )
+}
 
-export default EmbededYouTube;
+export default EmbededYouTube

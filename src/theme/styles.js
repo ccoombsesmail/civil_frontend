@@ -1,10 +1,50 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+/*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
+
+/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
+/* *:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+    all: unset;
+    display: revert;
+} */
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/*
+    Remove list styles (bullets/numbers)
+    in case you use it combine with normalize.css
+*/
+ol, ul {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+    white-space: revert;
+}
+
+
   :root {
-    --m-primary-color: #B9314F;
-    --m-primary-background-color: #ece5ce;
-    --m-primary-background: #14213D;
+    --m-primary-color:  black;
+    /* --m-primary-color:  #14213D; */
+    --m-primary-background-color:  #14213D;
+    --m-primary-background-1-color: #37B381;
     --m-secondary-background-color: #83af9b;
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
@@ -27,8 +67,11 @@ const GlobalStyle = createGlobalStyle`
     --transitionDuration: 300ms;
     --transitionTF: cubic-bezier(0.645, 0.045, 0.355, 1);
 
+    /* color options 2  */
 
-    
+    --m-primary-background-2-color: #37B381;
+    --m-secondary-background-2-color:  #242526;
+    --m-menu-bg-color: #242526;
     /* floated labels */
     --inputPaddingV: var(--gutterSm);
     --inputPaddingH: var(--gutterLg);
@@ -47,8 +90,17 @@ const GlobalStyle = createGlobalStyle`
     /* --m-secondary-background-color: #FCA311; */
     --m-input-color: rgb(232,232,232);
     --m-danger-color: #E85D04;
-    --m-trim-color: #B9314F;
+    --m-trim-color:  #14213D;
     --m-danger-color-light: #E89660;
+
+    /*      DROPDOWN       */
+    --bg:  #242526;
+    --bg-accent: #484a4d;
+    --text-color: #dadce1;
+    --nav-size: 7vh;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: .5s; 
 
   };
 
@@ -64,6 +116,9 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
 
   }
+  .fade.modal.show {
+    z-index: 999999;
+  }
 
   .react-strap-modal {
     /* padding: 1em; */
@@ -73,6 +128,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background-color: var(--m-primary-background-color);
     background-color: white;
+    z-index: 99999;
 
   }
 
@@ -80,6 +136,7 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
     left: 50%;
     top: 50%;
+    z-index: 99999;
     min-width: 45vw;
     min-height: 50vh;
     transform: translate(-50%, -50%) !important;
@@ -121,6 +178,24 @@ const GlobalStyle = createGlobalStyle`
 
   .text-editor .ql-container {
     min-height: 10vw;
+  }
+
+
+  .menu-primary-enter {
+    position: absolute;
+    max-height: 0;
+  }
+  .menu-primary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease;
+    max-height: 200px !important;
+  }
+  .menu-primary-exit {
+    position: absolute;
+  }
+  .menu-primary-exit-active {
+    transform: translateX(-110%);
+    transition: all var(--speed) ease;
   }
 
 `

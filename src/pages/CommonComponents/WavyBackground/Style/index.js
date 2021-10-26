@@ -4,7 +4,7 @@ export const Container = styled('div')`
   position: fixed;
   width: 100vw;
   top: ${(props) => (props.top ? props.top : '50%')};
-  z-index: -9999;
+  z-index: 1;
 `
 
 export const SvgContainerTop = styled('div')` 

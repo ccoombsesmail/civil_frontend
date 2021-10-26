@@ -7,11 +7,11 @@ import sessionActionCreators from '../../../redux/actions/session'
 
 import Button from '../../CommonComponents/Button/Index'
 import IconButton from '../../CommonComponents/IconButton/Index'
+import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
 import { StyledHeader, ButtonsContainer, ProfileIcon } from './Style'
 
 import { SIGN_UP, SIGN_IN } from '../Modal/Index'
 import usePermission from '../../hooks/usePermission'
-
 
 const Header = () => {
   const history = useHistory()
@@ -19,16 +19,16 @@ const Header = () => {
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
   const { logout } = bindActionCreators(sessionActionCreators, dispatch)
-  const user = useSelector(s => s.session.currentUser)
+  const user = useSelector((s) => s.session.currentUser)
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton icon={<img src="/assets/handshake.png" />} onClick={() => history.push('/topics')}>
+        <IconButton icon={<img alt="" src="/assets/handshake.png" />} onClick={() => history.push('/topics')}>
           Civil
         </IconButton>
       </ButtonsContainer>
       <ButtonsContainer>
-        { !loggedIn ? (
+        { !loggedIn && (
           <>
             <Button type="button" onClick={() => openModal(SIGN_UP)}>
               Sign Up
@@ -37,13 +37,12 @@ const Header = () => {
               Log In
             </Button>
           </>
-        ) : (
-          <Button type="button" onClick={logout}>
-            Log Out
-          </Button>
         )}
       </ButtonsContainer>
-      <ProfileIcon src={user?.iconSrc} />
+      <NavDropdownToggle icon={<ProfileIcon src={user?.iconSrc} />}>
+        <DropdownMenu logout={logout} />
+      </NavDropdownToggle>
+      {/* <ProfileIcon src={user?.iconSrc} /> */}
     </StyledHeader>
   )
 }

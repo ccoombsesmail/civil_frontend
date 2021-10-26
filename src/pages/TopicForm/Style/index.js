@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Form } from 'formik'
-import { FiArrowDownCircle } from "react-icons/fi";
+import { FiArrowDownCircle } from 'react-icons/fi'
 
 export const FormContainer = styled(Form)`
   /* display: flex;
@@ -17,14 +17,13 @@ export const FormContainer = styled(Form)`
 
 export const Arrow = styled(FiArrowDownCircle)`
   transition: transform .5s ease-in-out;
-  transform: ${props => `rotate(${props.rotate}deg)`};
+  transform: ${(props) => `rotate(${props.rotate}deg)`};
   cursor: pointer;
 `
 
 export const InputsContainer = styled('div')`
   display: flex;
   width: 100%;
- 
 `
 
 export const Left = styled('div')`
@@ -33,14 +32,12 @@ export const Left = styled('div')`
   flex-direction: column;
   width: 50%;
   border-right: 1px solid black;
-  /* align-items: center; */
 `
 export const Right = styled('div')`
   display: flex;
   display: inline-block;
   flex-direction: column;
   width: 50%;
-  /* align-items: center; */
 `
 
 export const SupplementalInformation = styled('section')`
@@ -67,7 +64,6 @@ export const Container = styled('div')`
     border-bottom: 1px solid black;
   }
  `
-
 
 export const Line = styled('hr')` 
   width: 100%;

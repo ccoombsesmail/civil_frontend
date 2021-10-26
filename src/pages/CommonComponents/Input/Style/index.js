@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled('div')`
   position: relative;
-  margin: 0 1em;
+  margin: 1.3em;
 `
 
 export const Label = styled('label')`

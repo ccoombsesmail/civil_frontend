@@ -1,11 +1,8 @@
 import styled from 'styled-components'
 import { Form } from 'formik'
 
-
 export const FormContainer = styled(Form)`
-  /* display: flex;
-  align-items: flex-start; */
-  height: 10vw;
+  /* height: 10vw; */
   margin-top: 1em;
   border-radius: .5em;
 
@@ -16,6 +13,16 @@ export const FormContainer = styled(Form)`
   }
 `
 
+export const FlexDiv = styled('div')` 
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  padding-bottom: 1vw;
+  margin-bottom: 1vw;
+  span {
+    margin-left: 1vw;
+  }
+`
 
 export const Container = styled('div')`
   h1 {
@@ -27,7 +34,7 @@ export const Container = styled('div')`
   }
  `
 
-
 export const ButtonContainer = styled('div')`
   display: flex;
+  align-items: center;
 `

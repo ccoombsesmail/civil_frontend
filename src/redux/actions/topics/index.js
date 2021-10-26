@@ -14,7 +14,6 @@ const addTopicActionCreator = (topicData) => ({
   payload: topicData,
 })
 
-
 const updateTopicLikesActionCreator = (data) => ({
   type: UPDATE_TOPIC_LIKES,
   payload: data,
@@ -31,7 +30,7 @@ export const getAllTopics = () => (dispatch) => TopicsApiUtil.getAllTopics()
 export const getTopic = (topicId, userId) => (dispatch) => TopicsApiUtil.getTopic(topicId, userId)
   .then((res) => dispatch(addTopicActionCreator(res.data)))
 
-  export const updateTopicLikes = (data) => (dispatch) => TopicsApiUtil.updateTopicLikes(data)
+export const updateTopicLikes = (data) => (dispatch) => TopicsApiUtil.updateTopicLikes(data)
   .then((res) => dispatch(updateTopicLikesActionCreator(res.data)))
 
 export default {
