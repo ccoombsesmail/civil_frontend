@@ -6,7 +6,7 @@ import topicActionCreators from '../../redux/actions/topics'
 import subTopicActionCreators from '../../redux/actions/subtopics'
 import usePermission from '../hooks/usePermission'
 
-import useBindDispatch from '../hooks/useBindDispatch'
+import useBindDispatch from '../hooks/redux/useBindDispatch'
 import { Container, Line } from './Style'
 import Header from './components/Header/Index'
 import SubTopicsRouter from './components/SubTopicsRouter/Index'

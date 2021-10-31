@@ -3,6 +3,14 @@ import ActionToolbar from '../../CommonComponents/ActionToolbar/Index'
 
 export const TweetContainer = styled('div')`
   width: 100%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+
+  .twitter-tweet-rendered {
+    margin: auto !important;
+    /* width: 30vw; */
+  }
 
 `
 

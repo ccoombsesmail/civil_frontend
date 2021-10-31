@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Switch, Route } from 'react-router'
 import SubTopicThread from '../../../SubTopicThread/Index'
-import SubTopicsTable from '../SubTopicsTable/Index'
+import SubTopicsTable from '../SubTopicsList/Index'
 import WavyBackground from '../../../CommonComponents/WavyBackground/Index'
 
 export default () => (

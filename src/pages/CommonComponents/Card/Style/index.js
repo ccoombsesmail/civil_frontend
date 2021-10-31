@@ -93,7 +93,7 @@ export const Container = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (props.listCard ? '20vw' : props.height)};
-  width: 25vw;  
+  width: 40vw;  
   margin: 2em 2em 2em 2em;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a,

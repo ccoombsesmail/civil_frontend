@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
+
+/* --------------------------------
+
+
+#EF5D73
+----------------------------------*/
 const GlobalStyle = createGlobalStyle`
 /*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
 
@@ -42,7 +48,6 @@ textarea {
 
   :root {
     --m-primary-color:  black;
-    /* --m-primary-color:  #14213D; */
     --m-primary-background-color:  #14213D;
     --m-primary-background-1-color: #37B381;
     --m-secondary-background-color: #83af9b;
@@ -53,9 +58,6 @@ textarea {
     --gutterLg: 1.6rem;
     --gutterXl: 2.4rem;
     --gutterXx: 7.2rem;
-    --colorPrimary400: #7e57c2;
-    --colorPrimary600: #5e35b1;
-    --colorPrimary800: #4527a0;
     --fontFamily: "Baloo 2", cursive;
     --fontSizeSm: 1.2rem;
     --fontSizeMd: 1.6rem;
@@ -87,7 +89,6 @@ textarea {
     --inputTransitionDuration: var(--transitionDuration);
     --inputTransitionTF: var(--transitionTF);
 
-    /* --m-secondary-background-color: #FCA311; */
     --m-input-color: rgb(232,232,232);
     --m-danger-color: #E85D04;
     --m-trim-color:  #14213D;
@@ -95,7 +96,7 @@ textarea {
 
     /*      DROPDOWN       */
     --bg:  #242526;
-    --bg-accent: #484a4d;
+    --bg-accent: #484a4f;
     --text-color: #dadce1;
     --nav-size: 7vh;
     --border: 1px solid #474a4d;
@@ -137,7 +138,7 @@ textarea {
     left: 50%;
     top: 50%;
     z-index: 99999;
-    min-width: 45vw;
+    min-width: 55vw;
     min-height: 50vh;
     transform: translate(-50%, -50%) !important;
   }
@@ -177,7 +178,8 @@ textarea {
   }
 
   .text-editor .ql-container {
-    min-height: 10vw;
+    /* min-height: 10vw; */
+    min-height: 5vh;
   }
 
 

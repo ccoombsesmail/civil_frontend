@@ -52,7 +52,8 @@ export const InputWrapper = styled('div')`
 export const Container = styled('div')`
   overflow-y: scroll;
   height: 90vh;
-  background: #ecf0f3;
+  background: white;
+  
   border-radius: 1em;
   box-shadow: 3px 3px 2px #cbced1,
               -3px -3px 2px #ffffff;
@@ -71,4 +72,12 @@ export const Line = styled('hr')`
   background-color: rgb(48,48,50);
   height: .5px;
   border: none;
+`
+
+
+export const UploadMediaContainer = styled('div')` 
+  margin-left: 1.3em;
+  display: flex;
+
+
 `

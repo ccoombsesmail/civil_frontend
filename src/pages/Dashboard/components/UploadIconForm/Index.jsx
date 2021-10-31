@@ -8,7 +8,7 @@ import UploadIconInput from '../UploadIconInput/Index'
 import Button from '../../../CommonComponents/Button/Index'
 
 import sessionActions from '../../../../redux/actions/session/index'
-import useBindDispatch from '../../../hooks/useBindDispatch'
+import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
 import {
   FormContainer, Container, FlexDiv,
@@ -17,7 +17,6 @@ import {
 const UploadIconForm = () => {
   const [file, setFile] = useState(null)
   const [selectedIconIdx, setSelectedIconIdx] = useState(null)
-  console.log('?')
   const onChange = useCallback((e, setFieldValue) => {
     setFieldValue('file', e.currentTarget.files[0])
     const reader = new FileReader()
@@ -49,13 +48,11 @@ const UploadIconForm = () => {
         initialValues={{
           file: '',
         }}
-        validate={(values) => {
+        validate={() => {
           const errors = {}
-          console.log(values)
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values)
           if (values.file instanceof File) {
             const formData = new FormData()
             formData.append('image', values.file)

@@ -6,7 +6,7 @@ import { Tab } from 'react-bootstrap'
 
 import useCategorizeComments from './hooks/useCategorizeComments'
 import usePermission from '../hooks/usePermission'
-import useBindDispatch from '../hooks/useBindDispatch'
+import useBindDispatch from '../hooks/redux/useBindDispatch'
 
 import subTopicActions from '../../redux/actions/subtopics'
 import commentActions from '../../redux/actions/comments'
@@ -45,7 +45,6 @@ const SubTopicThread = () => {
     <>
       <Line />
       <ThemeTab
-        id="controlled-tab-example"
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >

@@ -1,30 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
 import Modal from 'react-bootstrap/Modal'
 import { Formik, Field } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
-
-import useBindDispatch from '../hooks/useBindDispatch'
+import { BsCameraVideoFill } from 'react-icons/bs'
+import useBindDispatch from '../hooks/redux/useBindDispatch'
 import topicsActions from '../../redux/actions/topics'
 import uiActions from '../../redux/actions/ui'
 
 import Input from '../CommonComponents/Input/Index'
+import UploadImageInput from './components/UploadImageInput/Index'
 import Select from '../CommonComponents/Select/Index'
 import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
 import Button from '../CommonComponents/Button/Index'
 
 import {
-  FormContainer, InputsContainer, Container, Left, Right, Line, Arrow,
+  FormContainer, InputsContainer, Container, Left, Right, Line, Arrow, UploadMediaContainer
 } from './Style'
 import checkLinkType from './hooks/checkLinkType'
 
 const CreateTopicForm = () => {
   const [open, setOpen] = useState(false)
+  const [file, setFile] = useState(null)
+
+  const onChange = useCallback((e, setFieldValue) => {
+    setFieldValue('file', e.currentTarget.files[0])
+    const reader = new FileReader()
+    const currFile = e.target.files[0]
+    reader.onloadend = () => {
+      setFile(reader.result)
+    }
+    reader.readAsDataURL(currFile)
+  }, [])
+
   const [rotate, setRotate] = useState(0)
   const [content, setContent] = useState('')
-
-  const { createTopic, closeModal } = useBindDispatch(topicsActions, uiActions)
+  const { createTopic, closeModal, uploadTopicImage } = useBindDispatch(topicsActions, uiActions)
   const user = useSelector((s) => s.session.currentUser)
   return (
     <Container>
@@ -45,15 +57,24 @@ const CreateTopicForm = () => {
         onSubmit={(values, { setSubmitting }) => {
           const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
           const linkType = checkLinkType(values.contentUrl)
-          console.log(linkType, values.contentUrl)
-          createTopic({
-            // eslint-disable-next-line max-len
-            ...values, description: content, createdBy: user.username, evidenceLinks: eLinks, [linkType]: values.contentUrl,
-          })
+          const data = {
+            ...values,
+            description: content,
+            createdBy: user.username,
+            evidenceLinks: eLinks,
+            [linkType]: values.contentUrl,
+          }
+          if (values.file instanceof File) {
+            const formData = new FormData()
+            formData.append('image', values.file)
+            uploadTopicImage(formData).then((res) => createTopic({ ...data, ...res.data }))
+          } else {
+            createTopic(data)
+          }
           setSubmitting(false)
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <>
             <Modal.Header closeButton>
               <Modal.Title>Create Topic</Modal.Title>
@@ -71,6 +92,10 @@ const CreateTopicForm = () => {
                   <Right>
                     <h2> Link to what you want to discuss here... </h2>
                     <Field type="url" name="contentUrl" placeholder="Link To Content" component={Input} width="100%" />
+                    <UploadMediaContainer>
+                      <Field type="file" name="fileName" file={file} component={UploadImageInput} onChange={(e) => onChange(e, setFieldValue)} />
+                      <BsCameraVideoFill />
+                    </UploadMediaContainer>
                   </Right>
                 </InputsContainer>
                 <Line />

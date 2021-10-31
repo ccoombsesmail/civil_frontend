@@ -1,45 +1,42 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { useSelector } from 'react-redux'
 
-import { RiArrowDropRightFill } from 'react-icons/ri'
-import QuoteBox from '../../../CommonComponents/QuoteBox/Index'
-import ThemeButton from '../../../CommonComponents/Button/Index'
+import SubTopicsItem from './SubTopicsItem/Index'
 
-import { CREATE_SUB_TOPIC } from '../../../App/Modal/Index'
-import useGoToSubTopic from '../../hooks/useGoToSubTopic'
-import uiActionCreators from '../../../../redux/actions/ui'
+import { Line } from '../../Style/index'
+import {
+  Container, TableHeader, Table, ColHeader, ColItem,
+} from './Style'
 
-const SubTopicsTable = () => {
-  const subtopics = useSelector((s) => s.subtopics.list)
-  const dispatch = useDispatch()
-  const { openModal } = bindActionCreators(uiActionCreators, dispatch)
-  const genSubTopic = subtopics?.find(({ title }) => title === 'General')
-  const goToSubTopic = useGoToSubTopic(genSubTopic?.id)
+const SubTopicsList = () => {
+  const user = useSelector((state) => state.session.currentUser)
+  const subtopics = useSelector((state) => state.subtopics.list)
 
   return (
     <>
-      <QuoteBox>
-        <QuoteBox.QuoteText>
-          Browse Some
-          {' '}
-          <b>Sub-Topics</b>
-          {' '}
-          or Create Your Own...
-        </QuoteBox.QuoteText>
-        <div style={{ display: 'flex' }}>
-          <ThemeButton type="button" onClick={() => openModal(CREATE_SUB_TOPIC)}>
-            Create Sub Topic +
-          </ThemeButton>
-          <ThemeButton type="button" onClick={goToSubTopic}>
-            General Discussion
-            {' '}
-            <RiArrowDropRightFill size={50} />
-          </ThemeButton>
-        </div>
-      </QuoteBox>
+      <Line />
+      <Container>
+        <TableHeader>
+          <h1>
+            <span>Covid</span>
+            <span>Sub Topics</span>
+          </h1>
+        </TableHeader>
+        <Table>
+          <ColHeader>
+            <ColItem> Created By </ColItem>
+            <ColItem> Title </ColItem>
+            <ColItem> Description </ColItem>
+            <ColItem> Comments </ColItem>
+          </ColHeader>
+          {
+            subtopics.map((subtopic) => <SubTopicsItem {...subtopic} />)
+          }
+        </Table>
+      </Container>
     </>
   )
 }
 
-export default SubTopicsTable
+export default SubTopicsList

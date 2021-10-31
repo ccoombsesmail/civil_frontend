@@ -10,9 +10,11 @@ export const SideBarContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  position: static;
   color: white;
   font-weight: bold;
+  position: absolute;
+  z-index: 99999;
+  left: 0;
   flex: 0 0 12vw;
 
   .container {

@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
-import { closeModal } from '../ui/index'
-import { ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_COMMENT_CIVILITY } from '../../reducers/comments/commentsReducer'
+import { closeModal, showLoadingSpinnerAction, hideLoadingSpinnerAction } from '../ui/index'
+import {
+  ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_COMMENT_CIVILITY,
+} from '../../reducers/comments/commentsReducer'
 import * as CommentsApiUtil from '../../../api/v1/comments/comments_api_util'
 
 const getAllCommentsActionCreator = (subtopics) => ({
@@ -24,9 +26,13 @@ const updateCommentCivilityActionCreator = (data) => ({
   payload: data,
 })
 
-export const createComment = (commentData) => (dispatch) => CommentsApiUtil.createComment(commentData)
-  .then((res) => dispatch(addCommentActionCreator(res.data)))
-  .then(() => dispatch(closeModal()))
+export const createComment = (commentData) => (dispatch) => {
+  dispatch(showLoadingSpinnerAction)
+  CommentsApiUtil.createComment(commentData)
+    .then((res) => dispatch(addCommentActionCreator(res.data)))
+    .then(() => dispatch(closeModal()))
+    .finally(hideLoadingSpinnerAction(dispatch))
+}
 
 export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId, userId)
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))

@@ -4,6 +4,7 @@ import fetch from 'node-fetch'
 import AWS from 'aws-sdk'
 import busboy from 'connect-busboy'
 import dotenv from 'dotenv'
+import { v4 as uuidv4 } from 'uuid';
 
 const BACKEND_DEV = 'http://localhost:8092/api/v1'
 dotenv.config()
@@ -23,10 +24,10 @@ app.set('json escape', true)
 app.listen(port, () => console.log(`Listening on port ${port}`))
 app.use('/', express.static(path.join(__dirname, 'public')))
 
-const uploadFile = (file, fileName) => {
+const uploadFile = (file, key) => {
   const params = {
     Bucket: 'civil-dev',
-    Key: `profile_images/${fileName}`,
+    Key: key,
     Body: file,
   }
   return s3.upload(params, (err, data) => {
@@ -41,7 +42,7 @@ app.post('/api/v1/users/uploadIcon', (req, res) => {
   const { username } = req.query
   req.pipe(req.busboy)
   req.busboy.on('file', (fieldname, file) => {
-    uploadFile(file, username).promise().then((data) => {
+    uploadFile(file, `profile_images/${username}`).promise().then((data) => {
       const body = { username, iconSrc: data.Location }
       fetch(`${BACKEND_DEV}/users/upload`, {
         method: 'post',
@@ -49,6 +50,15 @@ app.post('/api/v1/users/uploadIcon', (req, res) => {
         headers: { 'Content-Type': 'application/json' },
       }).then((resp) => resp.json())
         .then((userData) => res.send(userData))
+    })
+  })
+})
+
+app.post('/api/v1/topics', (req, res) => {
+  req.pipe(req.busboy)
+  req.busboy.on('file', (fieldname, file) => {
+    uploadFile(file, `topic_images/${uuidv4()}.png`).promise().then((data) => {
+      res.send({ imageUrl: data.Location })
     })
   })
 })

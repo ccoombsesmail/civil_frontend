@@ -11,7 +11,7 @@ import topicActionCreators from '../../redux/actions/topics'
 
 import useSetInnerHtml from '../hooks/useSetInnerHtml'
 import useOpenModal from '../hooks/useOpenModalWithLocation'
-import useBindDispatch from '../hooks/useBindDispatch'
+import useBindDispatch from '../hooks/redux/useBindDispatch'
 import useUpdateLikes from './hooks/useUpdateLikes'
 import useGoToSubTopic from '../hooks/useGoToSubTopics'
 import { getTimeSince } from '../../generic/string/dateFormatter'

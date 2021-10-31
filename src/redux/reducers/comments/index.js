@@ -2,10 +2,10 @@ import { findComment, findParentComment } from './utils'
 
 export const addComment = (action, state) => {
   const rootComment = state.list.find((c) => c.data.id === action.payload?.rootId)
-  if (state.list.find((c) => c.data.id === action.payload.id)
-  && action.payload.parentId == null) return state
-
-  if (action.payload.parentId == null) return { ...state, list: [...state.list, action.payload] }
+  // if (rootComment && action.payload.parentId === null) return state
+  if (action.payload.parentId === null) {
+    return { ...state, list: [{ data: action.payload, children: [] }, ...state.list] }
+  }
   findParentComment(rootComment, action.payload, rootComment)
   return JSON.parse(JSON.stringify(state))
 }

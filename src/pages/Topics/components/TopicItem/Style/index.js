@@ -1,10 +1,8 @@
 import styled from 'styled-components'
 
-// radial-gradient(#1fe4f5, #3fbafe)
-
 export const CardItem = styled('li')` 
   height: 20vw;
-  width: 20vw;
+  width: 40vw;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -17,12 +15,7 @@ export const CardItem = styled('li')`
   margin: 2em;
   border-radius: .5em;
   cursor: pointer;
-  /* box-shadow: 
-    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.3); */
-    
-    box-shadow:  -5px -5px 10px #5a5a5a,
-             5px 5px 10px #ffffff;
+  box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
   &::before {
     content: "";
     position: absolute;
@@ -31,7 +24,6 @@ export const CardItem = styled('li')`
     z-index: 20;
     width: 50%;
     height: 100%;
-    /* background-color: rgba(#ffffff, 0.1); */
     pointer-events: none;
   }
   transition: all .5s;
@@ -82,7 +74,6 @@ export const CardOverlay = styled('div')`
   height: 52px;
   background: rgb(252,163,17);
   background: #B9314F;
-  /* background: radial-gradient(circle, rgba(252,163,17,1) 18%, rgba(255,255,255,1) 100%);  */
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(#000000, 0.2);
   transition: 0.5s;
@@ -106,25 +97,12 @@ export const CardOverlay = styled('div')`
     width: 101%;
     height: 101%;
     box-shadow: none;
-    border-radius: 0;
-    /* opacity: 0.9; */
-    
+    border-radius: 0;    
     &::before {
       content: none;
     }
   }
-/*   
-  ${CardItem}:nth-child(1) & {
-    background-image: linear-gradient(45deg, #3503ad, #f7308c);
-  }
-  
-  ${CardItem}:nth-child(2) & {
-    background-image: linear-gradient(45deg, #ccff00, #09afff);
-  }
-  
-  ${CardItem}:nth-child(3) & {
-    background-image: linear-gradient(45deg, #e91e63, #ffeb3b);
-  } */
+
 `
 
 export const CardContent = styled('div')`
@@ -148,4 +126,3 @@ export const CardContent = styled('div')`
     margin-bottom: 16px;
   }
 `
-

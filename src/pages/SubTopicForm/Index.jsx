@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { Formik, Field } from 'formik'
 
-import useBindDispatch from '../hooks/useBindDispatch'
+import useBindDispatch from '../hooks/redux/useBindDispatch'
 
 import Input from '../CommonComponents/Input/Index'
 import Button from '../CommonComponents/Button/Index'

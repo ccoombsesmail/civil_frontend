@@ -12,8 +12,8 @@ const CommentColumn = ({ comments, commentSentiment, color }) => (
     {
           comments?.map((comment) => (
             <ParentCommentContext.Provider
-              key={comment.data.id + commentSentiment}
-              value={comment.data.id}
+              key={comment.data?.id + commentSentiment}
+              value={comment.data?.id}
             >
               <Comment
                 commentData={comment.data}

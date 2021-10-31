@@ -18,20 +18,17 @@ export const Label = styled('label')`
 export const StyledSelect = styled('select')`
   display: block;
   margin: 0;
-  box-shadow: inset 8px 8px 8px #cbced1,
-              inset -8px -8px 8px #ffffff;
   padding: .5em;
   color: black;
   width: ${(props) => props.width || '30%'};
-  height: 2.5em;
+  height: 3.5em;
   font-family: inherit;
   font-size: .8em;
   font-weight: bold;
   line-height: var(--inputLineHeight);
-  border: none;
   outline:none;
   background: none;
-  border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : 'none')};
+  border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : '1px solid var(--bg)')};
   border-radius: 0.4rem;
   transition: box-shadow var(--transitionDuration);
 

@@ -15,6 +15,7 @@ import Sidebar from './Sidebar/Index'
 import Dashboard from '../Dashboard/Index'
 import { MainContainer, Content } from './Style'
 import useFetchAppData from './hooks/useFetchAppData'
+import LoadingSpinner from './LoadingSpinner/Index'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <GlobalStyle />
+      <LoadingSpinner />
       <Header />
       <MainContainer>
         <Sidebar />

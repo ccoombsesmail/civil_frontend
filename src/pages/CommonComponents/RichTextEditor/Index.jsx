@@ -1,55 +1,57 @@
-import React, { useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
-import quillEmoji from 'quill-emoji';
-import 'react-quill/dist/quill.snow.css';
-import "quill-emoji/dist/quill-emoji.css";
+import React, { useCallback } from 'react'
+import ReactQuill, { Quill } from 'react-quill'
+import quillEmoji from 'quill-emoji'
+import 'react-quill/dist/quill.snow.css'
+import 'quill-emoji/dist/quill-emoji.css'
 
-import { Container } from './Style';
-const { EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji } = quillEmoji;
+import { Container } from './Style'
 
-
+const {
+  EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji,
+} = quillEmoji
 
 Quill.register({
   'formats/emoji': EmojiBlot,
   'modules/emoji-shortname': ShortNameEmoji,
   'modules/emoji-toolbar': ToolbarEmoji,
-  'modules/emoji-textarea': TextAreaEmoji
-}, true);
+  'modules/emoji-textarea': TextAreaEmoji,
+}, true)
 
-
-
-const RichTextEditor = ({ content, setContent }) => {
-
+const RichTextEditor = ({ content, setContent, setRawText }) => {
   const modules = {
     toolbar: [
-      [{ 'font': [] }, { 'header': [] }],
+      [{ font: [] }, { header: [] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-      [{ 'align': [] }],
+      [{ color: [] }, { background: [] }],
+      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      [{ align: [] }],
       ['emoji'],
       ['link', 'image'],
-      ['clean']
+      ['clean'],
     ],
     'emoji-toolbar': true,
-    "emoji-textarea": true,
-    "emoji-shortname": true,
-    
+    'emoji-textarea': true,
+    'emoji-shortname': true,
+
   }
 
-  const formats = ['font', 'header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block', 'color', 'background', 'list', 'indent', 'align', 'link', 'image', 'clean', 'emoji']
-    return (
-      <Container className="text-editor">
-        <ReactQuill
-          // theme="snow"
-          value={content}
-          onChange={setContent}
-          modules={modules}
-          formats={formats}
-        />
-      </Container>
-    )
+  const handleOnChange = useCallback((currContent, delta, source, editor) => {
+    setContent(currContent)
+    if (setRawText) setRawText(editor.getText())
+  }, [])
 
+  const formats = ['font', 'header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block', 'color', 'background', 'list', 'indent', 'align', 'link', 'image', 'clean', 'emoji']
+  return (
+    <Container className="text-editor">
+      <ReactQuill
+          // theme="snow"
+        value={content}
+        onChange={handleOnChange}
+        modules={modules}
+        formats={formats}
+      />
+    </Container>
+  )
 }
 
 export default RichTextEditor

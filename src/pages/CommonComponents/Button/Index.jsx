@@ -4,8 +4,10 @@
 import React from 'react'
 import { Button } from './Style'
 
-const ThemeButton = ({ children, small, onClick }) => (
-  <Button onClick={onClick} small={small}>
+const ThemeButton = ({
+  children, small, onClick, width,
+}) => (
+  <Button onClick={onClick} small={small} width={width}>
     {children}
   </Button>
 )

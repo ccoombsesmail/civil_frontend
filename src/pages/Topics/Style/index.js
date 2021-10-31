@@ -11,9 +11,8 @@ export const Container = styled('div')`
 `
 
 export const BorderContainer = styled('div')`
-  width: 40vw;
+  width: 50vw;
   border: 1px solid gray;
-  padding: 5em;
   z-index: 9999;
   background-color: white;
 

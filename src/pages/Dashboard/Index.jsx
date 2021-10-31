@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Container } from './Style'
 import userActions from '../../redux/actions/users/index'
 
-import useBindDispatch from '../hooks/useBindDispatch'
+import useBindDispatch from '../hooks/redux/useBindDispatch'
 import Header from './components/Header/Index'
 
 const Dashboard = () => {

@@ -6,6 +6,7 @@ const sentiments = new Set(['positive', 'neutral', 'negative'])
 
 export default () => {
   const comments = useSelector((state) => state.comments.list)
+  console.log(comments)
   return useMemo(() => {
     const categorizedComments = {
       positive: [],

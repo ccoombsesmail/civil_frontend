@@ -19,7 +19,7 @@ export default (topicId, subtopicId, locationState) => {
   const user = useSelector((s) => s.session.currentUser)
   const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
   const comment = useSelector((s) => s.comments.list)?.find(
-    (c) => c.data.id === locationState?.rootParentCommentId,
+    (c) => c.data?.id === locationState?.rootParentCommentId,
   )
   return useMemo(() => {
     const commentContent = locationState?.type !== 'TOPIC_REPLY'

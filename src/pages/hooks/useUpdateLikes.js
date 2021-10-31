@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import useBindDispatch from './useBindDispatch'
+import useBindDispatch from './redux/useBindDispatch'
 import topicActionCreators from '../../redux/actions/topics'
 
 export default (topic, user) => {
