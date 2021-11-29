@@ -1,5 +1,7 @@
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'Index.jsx'),
@@ -66,7 +68,11 @@ module.exports = {
   },
   plugins: [
     new BundleAnalyzerPlugin(),
+    new CompressionPlugin(),
   ],
-  devtool: 'source-map',
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
+  // devtool: 'source-map',
 
 }

@@ -1,9 +1,7 @@
-import { useCallback } from "react";
-import { useHistory } from "react-router";
-
-
+import { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default (id) => {
-  const history = useHistory()
-  return useCallback(() => history.push(id), [id])
- } 
+  const navigate = useNavigate()
+  return useCallback(() => navigate(id), [id])
+}

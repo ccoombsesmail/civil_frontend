@@ -14,13 +14,11 @@ const SupplementalLinks = ({ links, type }) => {
 
   return (
     <Container>
-      {/* <h2>{headerText}</h2> */}
       {links?.map((link, idx) => {
         const linkText = link.match(domainExtractor)
         return (
           <div key={String(idx)}>
             <Link key={String(idx)} href={link} target="_blank" id={`${type}-${link.slice(0, 5)}-${idx}`}>
-              {/* {`@${headerText}_${idx + 1}`} */}
               {linkText[1]}
             </Link>
             <Tooltip autohide={false} placement="left" isOpen={tooltipsState[idx]} target={`${type}-${link.slice(0, 5)}-${idx}`} toggle={() => toggle(idx)}>

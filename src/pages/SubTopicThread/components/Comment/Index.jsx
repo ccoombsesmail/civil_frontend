@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import React, {
-  useState, useRef, memo, useMemo,
+  useState, useRef, memo,
 } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -67,7 +67,6 @@ const Comment = ({ commentData, replies }) => {
       <Collapse in={isOpen}>
         <EvidenceSection>
           {
-          //  useMemo(() =>
            replies.map((reply, idx) => (
              <Comment
                key={commentData.id + String(idx)}
@@ -75,7 +74,6 @@ const Comment = ({ commentData, replies }) => {
                replies={reply.children}
              />
            ))
-          //  )), [commentData, replies])
           }
         </EvidenceSection>
       </Collapse>

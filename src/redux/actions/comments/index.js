@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
-import { closeModal, showLoadingSpinnerAction, hideLoadingSpinnerAction } from '../ui/index'
+import { toast } from 'react-toastify'
+
+import { closeModal } from '../ui/index'
 import {
   ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_COMMENT_CIVILITY,
 } from '../../reducers/comments/commentsReducer'
@@ -27,11 +29,17 @@ const updateCommentCivilityActionCreator = (data) => ({
 })
 
 export const createComment = (commentData) => (dispatch) => {
-  dispatch(showLoadingSpinnerAction)
+  // dispatch(showLoadingSpinnerAction)
+  // const t = toast.loading('Saving Comment')
   CommentsApiUtil.createComment(commentData)
     .then((res) => dispatch(addCommentActionCreator(res.data)))
-    .then(() => dispatch(closeModal()))
-    .finally(hideLoadingSpinnerAction(dispatch))
+    // .then(() => dispatch(closeModal()))
+    // .finally(hideLoadingSpinnerAction(dispatch))
+    .then(() => {
+      toast.success('Saved Comment')
+    })
+    .catch((err) => toast.error(`Problem Saving Comment \n ${err}`, { autoClose: 2500 }))
+    .finally(() => dispatch(closeModal()))
 }
 
 export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId, userId)

@@ -58,8 +58,20 @@ export const Container = styled('div')`
   }
  `
 
-export const Toolbar = styled('div')`
-  /* margin: .5em; */
-  /* width: 100%; */
+export const ToxicityControls = styled('div')`
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  > div {
+    margin-left: 1vw;
+  }
+
+  p {
+    margin: 0 1em;
+    color: #979cb0;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: .1vw;  
+  }
 
 `

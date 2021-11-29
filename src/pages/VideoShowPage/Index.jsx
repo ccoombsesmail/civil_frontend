@@ -24,7 +24,7 @@ const VideoShowPage = ({
   const descRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
 
-  const openModal = useOpenModal()
+  const openModal = useOpenModal('TOPIC_REPLY')
   const goToSubTopic = useGoToSubTopic(topic.id)
   const { updateTopicLikes } = useBindDispatch(topicActionCreators)
   const updateLikes = useUpdateLikes(updateTopicLikes, topic, user)
@@ -34,6 +34,7 @@ const VideoShowPage = ({
 
   return (
     <>
+      <VideoPlayer src={src} />
       <Card
         onClick={goToSubTopic}
         username={topic?.createdBy}
@@ -67,7 +68,6 @@ const VideoShowPage = ({
           updateLikes={updateLikes}
         />
       </Card>
-      <VideoPlayer src={src} />
     </>
   )
 }

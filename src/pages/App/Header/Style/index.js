@@ -10,7 +10,7 @@ export const StyledHeader = styled('header')`
   align-items: center;
   justify-content: space-between;
   flex-flow: row nowrap;
-  background-color: white;
+  background-color: transparent;
   box-shadow: 5px 5px 15px 5px #000000;
 `
 

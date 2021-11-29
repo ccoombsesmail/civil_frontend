@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory, useLocation } from 'react-router'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
 import uiActionCreators from '../../../../../redux/actions/ui/index'
@@ -11,11 +11,11 @@ import { REPLY } from '../../../../App/Modal/Index'
 export default (commentId, rootParentCommentId) => {
   const { pathname } = useLocation()
   const subtopicId = pathname.match(uuidRegEx)[1]
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
   return useCallback(() => {
-    history.push(subtopicId, { type: 'COMMENT_REPLY', commentId, rootParentCommentId })
+    navigate(subtopicId, { type: 'COMMENT_REPLY', commentId, rootParentCommentId })
     openModal(REPLY)
   }, [])
 }

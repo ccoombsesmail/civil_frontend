@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Modal } from 'react-bootstrap'
 
 import { Formik, Field } from 'formik'
-import Input from '../../CommonComponents/Input/Index'
+import Input from '../../CommonComponents/Form/Input/Index'
 import Button from '../../CommonComponents/Button/Index'
 import { FormContainer, InputWrapper, Container } from './Style'
 import sessionActions from '../../../redux/actions/session'

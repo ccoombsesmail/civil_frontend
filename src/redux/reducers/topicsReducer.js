@@ -6,7 +6,7 @@ const reducer = (state = { list: [] }, action) => {
   switch (action.type) {
     case ADD_TOPIC:
       if (state.list.find((t) => t.id === action.payload.id)) return state
-      return { ...state, list: [...state.list, action.payload] }
+      return { ...state, list: [action.payload, ...state.list] }
     case GET_ALL_TOPICS:
       return { ...state, list: action.payload }
     case UPDATE_TOPIC_LIKES:

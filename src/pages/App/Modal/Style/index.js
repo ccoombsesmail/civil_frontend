@@ -30,6 +30,7 @@ export const ModalWrapper = styled('div')`
 
 .modal-footer {
   border-top: 1px solid black;
+  width: 100%;
   padding-top: 1.5em;
   margin-top: 1.5em;
 }

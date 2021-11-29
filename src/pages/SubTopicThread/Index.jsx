@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 
 import { Tab } from 'react-bootstrap'
 
@@ -33,6 +33,7 @@ const SubTopicThread = () => {
     all: allComments,
   } = useCategorizeComments()
 
+  console.log(useCategorizeComments())
   useEffect(() => {
     if (loggedIn && user) {
       getSubTopic(subTopicId)
@@ -50,22 +51,22 @@ const SubTopicThread = () => {
       >
         <Tab eventKey="all" title="All">
           <ColumnContainer>
-            <CommentColumn comments={allComments} commentSentiment="Comments" color="var(--m-primary-background-color)" />
+            <CommentColumn comments={allComments} commentSentiment="Comments" color="var(--m-primary-background-2-color)" />
           </ColumnContainer>
         </Tab>
-        <Tab eventKey="positive" title="In Favor">
+        <Tab eventKey="positive" title="Generally Positive">
           <ColumnContainer>
-            <CommentColumn comments={positiveComments} commentSentiment="In Favor" color="var(--m-secondary-background-color)" />
+            <CommentColumn comments={positiveComments} commentSentiment="Generally Positive" color="#6A6E70" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="neutral" title="Neutral">
           <ColumnContainer>
-            <CommentColumn comments={neutralComments} commentSentiment="Neutral" color="var(--m-primary-background-color)" />
+            <CommentColumn comments={neutralComments} commentSentiment="Neutral" color="#474A4F" />
           </ColumnContainer>
         </Tab>
-        <Tab eventKey="negative" title="Negative">
+        <Tab eventKey="negative" title="Generally Negative">
           <ColumnContainer>
-            <CommentColumn comments={negativeComments} commentSentiment="Disagree" color="var(--m-primary-color)" />
+            <CommentColumn comments={negativeComments} commentSentiment="Generally Negative" color="var(--m-primary-color)" />
           </ColumnContainer>
         </Tab>
       </ThemeTab>

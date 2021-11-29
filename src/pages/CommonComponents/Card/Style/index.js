@@ -59,11 +59,7 @@ export const Description = styled('p')`
   width: 90%;
   padding: .5em 0;
   margin: 1em 0;
-  font-size: .85em;
-  border: .5px solid gray;
-  border-left: none;
-  border-right: none;
-  border-style: solid;
+  font-size: 1.2vw;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -92,12 +88,11 @@ export const Container = styled('li')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: ${(props) => (props.listCard ? '20vw' : props.height)};
+  height: ${(props) => (`${props.height}px`)};
   width: 40vw;  
   margin: 2em 2em 2em 2em;
   border-radius: .5em;
-  box-shadow:  -5px -5px 10px #5a5a5a,
-             5px 5px 10px #ffffff;
+  box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
   border: none;
   cursor: pointer;
   overflow: hidden;

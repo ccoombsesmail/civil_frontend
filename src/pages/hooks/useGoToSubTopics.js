@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 export default (topicId) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   return useCallback(() => {
-    history.push(`/topics/${topicId}/subtopics/`)
+    navigate(`/topics/${topicId}/subtopics/`)
   }, [topicId])
 }

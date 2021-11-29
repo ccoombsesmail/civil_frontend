@@ -2,6 +2,13 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 import { FiArrowDownCircle } from 'react-icons/fi'
 
+export const FlexDiv = styled('div')` 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`
+
 export const FormContainer = styled(Form)`
   /* display: flex;
   align-items: flex-start; */
@@ -10,9 +17,7 @@ export const FormContainer = styled(Form)`
     font-size: 1em;
     margin: 0 1em;
   }
-  svg {
-    margin-bottom: 1em;
-  }
+ 
 `
 
 export const Arrow = styled(FiArrowDownCircle)`
@@ -55,8 +60,9 @@ export const Container = styled('div')`
   background: white;
   
   border-radius: 1em;
-  box-shadow: 3px 3px 2px #cbced1,
-              -3px -3px 2px #ffffff;
+  /* box-shadow: var(--m-primary-box-shadow); */
+  box-shadow:  5px 5px 5px -3px #000000;
+
   h1 {
     width: 100%;
     margin: 0;
@@ -67,17 +73,21 @@ export const Container = styled('div')`
  `
 
 export const Line = styled('hr')` 
-  width: 100%;
-  margin: 2em 0;
+  width: 90%;
+  margin: 2em 1.3em;
   background-color: rgb(48,48,50);
   height: .5px;
   border: none;
 `
 
-
 export const UploadMediaContainer = styled('div')` 
   margin-left: 1.3em;
+  padding: .5em;
+  border-radius: .5em;
   display: flex;
+  box-shadow:  5px 5px 5px -3px #AAAAAA;
+  background: #E5E5E5;
 
+;
 
 `

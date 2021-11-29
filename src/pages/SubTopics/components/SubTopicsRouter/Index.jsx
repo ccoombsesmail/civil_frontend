@@ -1,18 +1,22 @@
 import React from 'react'
 
-import { Switch, Route } from 'react-router'
+import { Route, Routes } from 'react-router-dom'
 import SubTopicThread from '../../../SubTopicThread/Index'
 import SubTopicsTable from '../SubTopicsList/Index'
 import WavyBackground from '../../../CommonComponents/WavyBackground/Index'
 
 export default () => (
-  <Switch>
-    <Route path="/topics/:topicId/subtopics/:subTopicId">
-      <WavyBackground color="green" top="115%" />
-      <SubTopicThread />
-    </Route>
-    <Route path="/topics/:topicId/subtopics/">
-      <SubTopicsTable />
-    </Route>
-  </Switch>
+  <Routes>
+    <Route
+      exact
+      path="/topics/:topicId/subtopics/:subTopicId"
+      element={(
+        <>
+          <WavyBackground color="green" top="115%" />
+          <SubTopicThread />
+        </>
+      )}
+    />
+    <Route exact path="/topics/:topicId/subtopics/" element={<SubTopicsTable />} />
+  </Routes>
 )

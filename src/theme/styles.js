@@ -1,10 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
-
 /* --------------------------------
 
-
-#EF5D73
 ----------------------------------*/
 const GlobalStyle = createGlobalStyle`
 /*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
@@ -27,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
     in case you use it combine with normalize.css
 */
 ol, ul {
-    list-style: none;
+    /* list-style: none; */
 }
 
 /* For images to not be able to exceed their container */
@@ -49,7 +46,9 @@ textarea {
   :root {
     --m-primary-color:  black;
     --m-primary-background-color:  #14213D;
-    --m-primary-background-1-color: #37B381;
+    /* --m-primary-background-1-color: #37B381; */
+    --m-primary-background-1-color: #87C232;
+
     --m-secondary-background-color: #83af9b;
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
@@ -71,7 +70,9 @@ textarea {
 
     /* color options 2  */
 
-    --m-primary-background-2-color: #37B381;
+    /* --m-primary-background-2-color: #37B381; */
+    --m-primary-background-2-color: #87C232;
+
     --m-secondary-background-2-color:  #242526;
     --m-menu-bg-color: #242526;
     /* floated labels */
@@ -84,7 +85,7 @@ textarea {
     --labelTransformedPosY: calc(
       (var(--labelDefaultPosY)) - 
       (var(--inputPaddingV) * var(--labelScaleFactor)) - 
-      (var(--inputFontSize) * var(--inputLineHeight)) + .2em
+      (var(--inputFontSize) * var(--inputLineHeight)) + .15em
     );
     --inputTransitionDuration: var(--transitionDuration);
     --inputTransitionTF: var(--transitionTF);
@@ -121,13 +122,16 @@ textarea {
     z-index: 999999;
   }
 
+  .toasty {
+    z-index: 99999999999;
+    /* transform: scale(1.6); */
+  }
+
   .react-strap-modal {
     /* padding: 1em; */
     border: none;
-    background: white;
     border-radius: 1em;
     width: 100%;
-    background-color: var(--m-primary-background-color);
     background-color: white;
     z-index: 99999;
 
@@ -141,6 +145,12 @@ textarea {
     min-width: 55vw;
     min-height: 50vh;
     transform: translate(-50%, -50%) !important;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   body {
@@ -174,14 +184,21 @@ textarea {
   }
 
   .ap {
-    background-image: url('/fdc520ec92ab5996740abe9f9d8eb44a.png') !important;
+    background-image: url('/emoji-sprite.png') !important;
   }
 
   .text-editor .ql-container {
     /* min-height: 10vw; */
-    min-height: 5vh;
+    min-height: 7vh;
   }
 
+  #emoji-palette .ap, .ql-emojiblot .ap {
+  /* background-image: none;
+  text-indent: 0; */
+  /* It's also possible to adjust spacing. To make selecting emojis easier */
+  /* width: 25px; */
+  /* height: 25px; */
+}
 
   .menu-primary-enter {
     position: absolute;
@@ -200,6 +217,14 @@ textarea {
     transition: all var(--speed) ease;
   }
 
+
+  .theme-tooltip {
+    z-index: 999999999;
+  }
+
+  .popover {
+    z-index: 999999999;
+  }
 `
 
 export default GlobalStyle

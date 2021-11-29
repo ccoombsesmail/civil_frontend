@@ -22,4 +22,5 @@ module.exports = {
     semi: [2, 'never'],
     // maxLen: ['error', { code: 130 }],
   },
+  
 }

@@ -9,4 +9,6 @@ export const getTopic = (topicId, userId) => axios.get(`${BACKEND_DEV}/topics/${
 
 export const updateTopicLikes = (topicData) => axios.put(`${BACKEND_DEV}/topics`, topicData)
 
-export const uploadTopicImage = (data) => axios.post(`${UPLOAD_SERVICE}/topics`, data)
+export const uploadTopicMedia = (data, fileType, fileFormat) => axios.post(`${UPLOAD_SERVICE}/topics/upload-media?fileType=${fileType}&fileFormat=${fileFormat}`, data)
+
+export const getLinkMetaData = (url) => axios.get(`${UPLOAD_SERVICE}/topics/link-meta-data?url=${url}`)

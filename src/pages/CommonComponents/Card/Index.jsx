@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import UserInfoHeader from '../UserInfoHeader/Index'
 
 import {
@@ -16,18 +16,31 @@ const Card = ({
   onClick,
   listCard,
   height,
-}) => (
-  <Container height={height} onClick={onClick} listCard={listCard}>
-    <UserInfoHeader iconSrc={iconSrc} time={time} username={username} />
-    <Description>
-      &ldquo;
-      {summary}
-      &rdquo;
-    </Description>
-    <Body>
-      {children}
-    </Body>
-  </Container>
-)
+}) => {
+  const ref = useRef(null)
+  const [totalHeight, setTotalHeight] = useState('unset')
+  useEffect(() => {
+    const totalCompHeight = [...ref?.current?.children].reduce((acc, child) => {
+      const compStyles = window.getComputedStyle(child)
+      const heightComp = compStyles.getPropertyValue('height')
+      return acc + Number(heightComp.slice(0, heightComp.length - 2))
+    }, 0)
+    if (height) setTotalHeight(totalCompHeight + height)
+  }, [ref])
+
+  return (
+    <Container ref={ref} height={totalHeight} onClick={onClick} listCard={listCard}>
+      <UserInfoHeader iconSrc={iconSrc} time={time} username={username} />
+      <Description>
+        &ldquo;
+        {summary}
+        &rdquo;
+      </Description>
+      <Body>
+        {children}
+      </Body>
+    </Container>
+  )
+}
 
 export default Card

@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
 import { Transition } from 'react-transition-group'
-import { AiOutlineLogout } from 'react-icons/ai'
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+  RedirectToSignIn,
+} from '@clerk/clerk-react'
+import { AiOutlineLogout, AiOutlineLogin } from 'react-icons/ai'
 import { RiUser3Fill } from 'react-icons/ri'
+import { useLocation } from 'react-router-dom'
 import useGoToDashboard from '../hooks/useGoToDashboard'
 
 import {
@@ -22,11 +31,12 @@ export const NavDropdownToggle = ({ icon, children }) => {
 
 export const DropdownMenu = ({ open, logout }) => {
   const goToDashboard = useGoToDashboard()
+  const { pathname } = useLocation()
 
   const DropdownItem = ({
-    children, leftIcon, rightIcon, onClick, to,
+    children, leftIcon, rightIcon, onClick, to, state,
   }) => (
-    <MenuItem to={to} onClick={onClick}>
+    <MenuItem to={to} onClick={onClick} state={state}>
       <span className="icon-button">{leftIcon}</span>
       {children}
       <span className="icon-right">{rightIcon}</span>
@@ -42,7 +52,8 @@ export const DropdownMenu = ({ open, logout }) => {
       {(state) => (
         <DropdownMenuContainer state={state}>
           <Menu>
-            <DropdownItem
+            <UserButton />
+            {/* <DropdownItem
               leftIcon={<RiUser3Fill />}
               to="/dashboard"
               onClick={goToDashboard}
@@ -54,7 +65,16 @@ export const DropdownMenu = ({ open, logout }) => {
               leftIcon={<AiOutlineLogout />}
             >
               Logout
-            </DropdownItem>
+            </DropdownItem> */}
+            <SignedOut>
+              <DropdownItem
+                leftIcon={<AiOutlineLogin />}
+                to="/signin"
+                state={{ redirectPath: pathname }}
+              >
+                Sign In
+              </DropdownItem>
+            </SignedOut>
 
           </Menu>
         </DropdownMenuContainer>

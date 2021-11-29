@@ -17,7 +17,9 @@ Quill.register({
   'modules/emoji-textarea': TextAreaEmoji,
 }, true)
 
-const RichTextEditor = ({ content, setContent, setRawText }) => {
+const RichTextEditor = ({
+  content, setContent, setRawText, setToxicityScore,
+}) => {
   const modules = {
     toolbar: [
       [{ font: [] }, { header: [] }],
@@ -38,6 +40,7 @@ const RichTextEditor = ({ content, setContent, setRawText }) => {
   const handleOnChange = useCallback((currContent, delta, source, editor) => {
     setContent(currContent)
     if (setRawText) setRawText(editor.getText())
+    if (setToxicityScore) setToxicityScore(null)
   }, [])
 
   const formats = ['font', 'header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block', 'color', 'background', 'list', 'indent', 'align', 'link', 'image', 'clean', 'emoji']
@@ -49,6 +52,7 @@ const RichTextEditor = ({ content, setContent, setRawText }) => {
         onChange={handleOnChange}
         modules={modules}
         formats={formats}
+        placeholder="Say something..."
       />
     </Container>
   )

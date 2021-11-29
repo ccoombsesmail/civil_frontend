@@ -1,6 +1,6 @@
 import React from 'react'
 import { GiDiscussion } from 'react-icons/gi'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 import IconButton from '../../../CommonComponents/IconButton/Index'
 import useGoToSubTopic from '../../hooks/useGoToSubTopic'

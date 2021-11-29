@@ -1,7 +1,7 @@
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
 export default (ref, html) => {
-   useEffect(() => {
+  useEffect(() => {
     if (ref?.current) ref.current.innerHTML = html
   }, [ref, html])
 }

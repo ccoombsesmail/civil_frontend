@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Label } from './Style'
 
-const CheckBoxPressed =({
+const CheckBoxPressed = ({
   width, field, color, text, form, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
@@ -14,6 +14,5 @@ const CheckBoxPressed =({
     </Label>
   )
 }
-
 
 export default CheckBoxPressed

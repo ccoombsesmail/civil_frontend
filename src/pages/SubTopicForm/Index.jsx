@@ -6,7 +6,7 @@ import { Formik, Field } from 'formik'
 
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 
-import Input from '../CommonComponents/Input/Index'
+import Input from '../CommonComponents/Form/Input/Index'
 import Button from '../CommonComponents/Button/Index'
 
 import subTopicActions from '../../redux/actions/subtopics'

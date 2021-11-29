@@ -45,7 +45,7 @@ export const SideBarNav = styled('nav')`
   width: 100%;
   align-items: center;
   z-index: 9999999;
-  li {
+  button {
     width: 90%;
     margin: 0;
     border-radius: var(--border-radius);
@@ -54,9 +54,13 @@ export const SideBarNav = styled('nav')`
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
+    outline: none;
+    background: none;
+    border: none;
+    color: white;
   }
 
-  li:hover {
+  button:hover {
     background-color: var(--bg-accent);
   }
 `

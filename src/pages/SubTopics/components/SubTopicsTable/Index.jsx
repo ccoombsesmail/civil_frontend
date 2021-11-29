@@ -2,6 +2,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
+import { useParams } from 'react-router-dom'
 import SubTopicsItem from './SubTopicsItem/Index'
 
 import { Line } from '../../Style/index'
@@ -10,9 +11,9 @@ import {
 } from './Style'
 
 const SubTopicsList = () => {
-  const user = useSelector((state) => state.session.currentUser)
+  // const user = useSelector((state) => state.session.currentUser)
   const subtopics = useSelector((state) => state.subtopics.list)
-
+  const { topicId } = useParams()
   return (
     <>
       <Line />
@@ -31,7 +32,7 @@ const SubTopicsList = () => {
             <ColItem> Comments </ColItem>
           </ColHeader>
           {
-            subtopics.map((subtopic) => <SubTopicsItem {...subtopic} />)
+            subtopics.map((subtopic) => <SubTopicsItem {...subtopic} topicId={topicId} />)
           }
         </Table>
       </Container>

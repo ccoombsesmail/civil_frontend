@@ -24,7 +24,7 @@ export const createTopic = (topicData) => (dispatch) => {
   TopicsApiUtil.createTopic(topicData)
     .then((res) => dispatch(addTopicActionCreator(res.data)))
     .then(() => dispatch(closeModal()))
-    .finally(dispatch(hideLoadingSpinnerAction()))
+    .finally(hideLoadingSpinnerAction(dispatch))
 }
 
 export const getAllTopics = () => (dispatch) => TopicsApiUtil.getAllTopics()
@@ -37,7 +37,8 @@ export const getTopic = (topicId, userId) => (dispatch) => TopicsApiUtil.getTopi
 export const updateTopicLikes = (data) => (dispatch) => TopicsApiUtil.updateTopicLikes(data)
   .then((res) => dispatch(updateTopicLikesActionCreator(res.data)))
 
-const uploadTopicImage = (data) => (dispatch) => TopicsApiUtil.uploadTopicImage(data)
+const uploadTopicMedia = (data, fileType, fileFormat) => (dispatch) => TopicsApiUtil
+  .uploadTopicMedia(data, fileType, fileFormat)
   .then((res) => dispatch(addTopicActionCreator(res.data)))
   .then(() => dispatch(closeModal()))
 
@@ -46,5 +47,5 @@ export default {
   getAllTopics,
   getTopic,
   updateTopicLikes,
-  uploadTopicImage,
+  uploadTopicMedia,
 }

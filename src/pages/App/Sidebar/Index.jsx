@@ -5,11 +5,14 @@ import {
 import { RiUser3Fill, RiNotification2Fill } from 'react-icons/ri'
 import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs'
 
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { SideBarContainer, SideBarNav } from './Style/index'
 
+// const { RiUser3Fill, RiNotification2Fill } = React.lazy(() => import('react-icons/ri'))
+// const { BsArrowBarLeft, BsArrowBarRight } = React.lazy(() => import('react-icons/bs'))
+
 const Sidebar = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
 
   return (
@@ -30,14 +33,14 @@ const Sidebar = () => {
       </OverlayTrigger>
 
       <SideBarNav>
-        <li onClick={() => history.push('/dashboard')}>
+        <button type="button" onClick={() => navigate('/dashboard')} >
           <RiUser3Fill size={20} />
           {open && 'Profile'}
-        </li>
-        <li>
+        </button>
+        <button type="button">
           <RiNotification2Fill size={20} />
           {open && 'Notifications'}
-        </li>
+        </button>
       </SideBarNav>
     </SideBarContainer>
   )

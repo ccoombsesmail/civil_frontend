@@ -1,15 +1,13 @@
 import styled from 'styled-components'
 
 export const CardItem = styled('li')` 
-  height: 20vw;
+  /* height: 20vw; */
   width: 40vw;
   overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
-  background-color: #14213d;
   background-color: white;
   color: black;
   margin: 2em;

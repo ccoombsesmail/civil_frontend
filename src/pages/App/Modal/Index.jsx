@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import StrapModal from 'react-bootstrap/Modal'
-import { withRouter } from 'react-router'
 import { useSelector } from 'react-redux'
+import { SignIn } from '@clerk/clerk-react'
+
 import SignUpForm from '../../SessionForms/SignUp/Index'
-import SignInForm from '../../SessionForms/SignIn/Index'
 import CreateTopicForm from '../../TopicForm/Index'
 import CreateSubTopicForm from '../../SubTopicForm/Index'
 import CommentForm from '../../CommentForm/Index'
@@ -21,14 +21,13 @@ export const ICON_FORM = 'ICON_FORM'
 const Modal = ({ closeModal }) => {
   const modalType = useSelector((s) => s.ui.modalType)
   const isOpen = useSelector((s) => s.ui.modalOpen)
-
   let component
   switch (modalType) {
     case SIGN_UP:
       component = <SignUpForm />
       break
     case SIGN_IN:
-      component = <SignInForm />
+      component = <SignIn />
       break
     case CREATE_TOPIC:
       component = <CreateTopicForm />
@@ -47,7 +46,7 @@ const Modal = ({ closeModal }) => {
   }
 
   return (
-    <StrapModal contentClassName="react-strap-modal" show={isOpen} onHide={closeModal}>
+    <StrapModal contentClassName="react-strap-modal" show={isOpen} onHide={closeModal} container={document.getElementById('main-container')}>
       <ModalWrapper>
         {component}
       </ModalWrapper>
@@ -55,4 +54,4 @@ const Modal = ({ closeModal }) => {
   )
 }
 
-export default withRouter(Modal)
+export default Modal

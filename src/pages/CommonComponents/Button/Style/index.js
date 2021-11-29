@@ -9,8 +9,8 @@ export const Button = styled('button')`
   font-family: inherit;
   display: block;
   border-radius: 0.5rem;;
-  margin: ${(props) => (props.small ? '0' : '0em 1em')};
-  &:hover, &:focus, &:active {
+  margin: 0em 1em;
+  &:hover {
      letter-spacing: ${(props) => (props.small ? 'normal' : '0.125rem')};
     }
   height: ${(props) => (props.small ? '2em' : '2.5em')};
