@@ -8,8 +8,7 @@ import WavyBackground from '../../../CommonComponents/WavyBackground/Index'
 export default () => (
   <Routes>
     <Route
-      exact
-      path="/topics/:topicId/subtopics/:subTopicId"
+      path=":subTopicId"
       element={(
         <>
           <WavyBackground color="green" top="115%" />
@@ -17,6 +16,6 @@ export default () => (
         </>
       )}
     />
-    <Route exact path="/topics/:topicId/subtopics/" element={<SubTopicsTable />} />
+    <Route path="/" element={<SubTopicsTable />} />
   </Routes>
 )

@@ -17,7 +17,7 @@ const CommentActions = ({ commentId, liked }) => {
   const thisComment = comments.find(({ id }) => id === commentId)
 
   const updateLikes = useCallback(() => {
-    updateCommentLikes({ id: commentId, userId: user?.id, increment: !liked })
+    updateCommentLikes({ id: commentId, userId: user?.clerkId, increment: !liked })
   }, [commentId, liked])
 
   return (

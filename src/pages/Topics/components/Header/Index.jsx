@@ -6,14 +6,15 @@ import { HeaderContainer, UserIcon, FlexDiv } from './Style/index'
 
 const Header = ({ user, openModal }) => {
   console.log('')
+  console.log(user)
   return (
     <HeaderContainer>
-      <UserIcon src={user.iconSrc} />
+      <UserIcon src={user?.iconSrc} />
       <FlexDiv>
         <p>
           Hey
           {' '}
-          <b>{user.username}</b>
+          <b>{user?.username}</b>
           {'. '}
           Have Something You Would Like To Discuss?
         </p>

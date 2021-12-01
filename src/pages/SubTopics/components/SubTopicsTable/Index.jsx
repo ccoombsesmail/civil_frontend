@@ -25,14 +25,18 @@ const SubTopicsList = () => {
           </h1>
         </TableHeader>
         <Table>
-          <ColHeader>
-            <ColItem> Created By </ColItem>
-            <ColItem> Title </ColItem>
-            <ColItem> Description </ColItem>
-            <ColItem> Comments </ColItem>
-          </ColHeader>
+          <thead>
+            <ColHeader>
+              <ColItem> Created By </ColItem>
+              <ColItem> Title </ColItem>
+              <ColItem> Description </ColItem>
+              <ColItem> Comments </ColItem>
+            </ColHeader>
+          </thead>
           {
-            subtopics.map((subtopic) => <SubTopicsItem {...subtopic} topicId={topicId} />)
+            subtopics.map((subtopic) => (
+              <SubTopicsItem key={topicId} {...subtopic} topicId={topicId} />
+            ))
           }
         </Table>
       </Container>

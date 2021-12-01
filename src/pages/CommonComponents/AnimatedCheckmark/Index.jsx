@@ -7,12 +7,12 @@ const AnimatedCheckmark = ({ toxicityScore }) => {
   let color
   let text
   if (toxicityScore < 0.5) { color = 'green'; text = 'Great!' }
-  if (toxicityScore > 0.7 && toxicityScore < 0.9) { color = 'var(--m-danger-color)'; text = 'You are OK but getting close' }
+  if (toxicityScore >= 0.6 && toxicityScore <= 0.9) { color = 'var(--m-danger-color)'; text = 'You are OK but getting close' }
   if (toxicityScore > 0.9) { color = 'red'; text = 'You are being toxic' }
   return (
     <>
       <Container color={color}>
-        <Input readOnly disabled checked={toxicityScore} type="checkbox" />
+        <Input readOnly disabled checked={Boolean(toxicityScore)} type="checkbox" />
         <label />
         <svg width="15" height="14" viewBox="0 0 15 14" fill="none">
           <path d="M2 8.36364L6.23077 12L13 2" />

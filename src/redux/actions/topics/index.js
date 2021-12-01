@@ -29,7 +29,7 @@ export const createTopic = (topicData) => (dispatch) => {
 
 export const getAllTopics = () => (dispatch) => TopicsApiUtil.getAllTopics()
   .then((res) => dispatch(getAllTopicsActionCreator(res.data)))
-  .then(() => dispatch(closeModal()))
+  // .then(() => dispatch(closeModal()))
 
 export const getTopic = (topicId, userId) => (dispatch) => TopicsApiUtil.getTopic(topicId, userId)
   .then((res) => dispatch(addTopicActionCreator(res.data)))

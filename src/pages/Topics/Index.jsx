@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-
 import { useSelector } from 'react-redux'
-import usePermission from '../hooks/usePermission'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import uiActionCreators from '../../redux/actions/ui'
 import topicActionCreators from '../../redux/actions/topics'
@@ -12,15 +10,13 @@ import WavyBackground from '../CommonComponents/WavyBackground/Index'
 import { CardContainer, Container, BorderContainer } from './Style'
 
 const Topics = () => {
-  const { loggedIn } = usePermission()
   const { openModal, getAllTopics } = useBindDispatch(uiActionCreators, topicActionCreators)
   const topics = useSelector((s) => s.topics.list) || []
   const user = useSelector((s) => s.session.currentUser)
   useEffect(() => {
-    if (loggedIn) getAllTopics()
-  }, [loggedIn])
+    getAllTopics()
+  }, [])
 
-  if (!loggedIn) return null
   return (
     <>
       <Container>

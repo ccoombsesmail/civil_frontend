@@ -1,14 +1,15 @@
 // action creator is just a function that dispatches an action
 import { closeModal } from '../ui/index'
-import { LOGIN, LOG_OUT, UPDATE } from '../../reducers/sessionReducer'
+import { ADD_SESSION, LOG_OUT, UPDATE } from '../../reducers/sessionReducer'
 import * as SessionApiUtil from '../../../api/v1/session/session_api_util'
+import * as UsersApiUtl from '../../../api/v1/users/users_api_util'
 
 const logoutActionCreator = () => ({
   type: LOG_OUT,
 })
 
-const loginActionCreator = (userData) => ({
-  type: LOGIN,
+const addUserActionCreator = (userData) => ({
+  type: ADD_SESSION,
   payload: userData,
 })
 
@@ -18,12 +19,11 @@ const updateActionCreator = (data) => ({
 })
 
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
-  .then((res) => dispatch(loginActionCreator(JSON.parse(res.data).token)))
+  .then((res) => dispatch(addUserActionCreator(JSON.parse(res.data).token)))
   .then(() => dispatch(closeModal()))
 
-export const signUp = (userData) => (dispatch) => SessionApiUtil.signUp(userData)
-  .then((res) => dispatch(loginActionCreator(res.data)))
-  .then(() => dispatch(closeModal()))
+export const getCurrentUser = (userId) => (dispatch) => UsersApiUtl.getUser(userId)
+  .then((res) => dispatch(addUserActionCreator(res.data)))
 
 export const logout = () => (dispatch) => {
   dispatch(logoutActionCreator())
@@ -37,7 +37,7 @@ const uploadUserIcon = (dta, username) => (dispatch) => SessionApiUtil.uploadUse
 
 export default {
   logout,
-  signUp,
+  getCurrentUser,
   signIn,
   updateUserIcon,
   uploadUserIcon,

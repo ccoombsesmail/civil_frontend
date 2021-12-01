@@ -11,7 +11,7 @@ const Dashboard = () => {
   const user = useSelector((s) => s.session.currentUser)
   const userData = useSelector((s) => s.users.list).find((u) => u.id === user.id)
   useEffect(() => {
-    if (user) getUser(user.id)
+    if (user) getUser(user?.clerkId)
   }, [user])
 
   return (

@@ -8,11 +8,14 @@ const SubTopicsItem = ({
 }) => {
   const goToCommentThread = useGoToCommentThread(topicId, id)
   return (
-    <Row onClick={goToCommentThread}>
-      <RowItem>{createdBy}</RowItem>
-      <RowItem>{title}</RowItem>
-      <RowItem>{createdAt}</RowItem>
-    </Row>
+    <tbody>
+      <Row onClick={goToCommentThread}>
+        <RowItem>{createdBy}</RowItem>
+        <RowItem>{title}</RowItem>
+        <RowItem>{createdAt}</RowItem>
+      </Row>
+    </tbody>
+
   )
 }
 

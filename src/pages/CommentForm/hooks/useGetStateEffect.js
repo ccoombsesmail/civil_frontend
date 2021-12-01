@@ -21,6 +21,7 @@ export default (topicId, subtopicId, locationState) => {
   const comment = useSelector((s) => s.comments.list)?.find(
     (c) => c.data?.id === locationState?.rootParentCommentId,
   )
+  console.log(locationState)
   return useMemo(() => {
     const commentContent = locationState?.type !== 'TOPIC_REPLY'
       ? findCommentContent(comment, locationState?.commentId) : topic?.description
