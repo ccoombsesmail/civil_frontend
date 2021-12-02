@@ -225,6 +225,12 @@ textarea {
   .popover {
     z-index: 999999999;
   }
+
+  .cl-component.cl-user-button {
+    width: 4rem !important;
+    height: 4rem !important;
+    margin-right: 1rem;
+  }
 `
 
 export default GlobalStyle

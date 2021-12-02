@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
+import { UserButton } from '@clerk/clerk-react'
 
 import sessionActionCreators from '../../../redux/actions/session'
 
@@ -11,9 +12,9 @@ import { StyledHeader, ButtonsContainer, ProfileIcon } from './Style'
 
 const Header = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { logout } = bindActionCreators(sessionActionCreators, dispatch)
-  const user = useSelector((s) => s.session.currentUser)
+  // const dispatch = useDispatch()
+  // const { logout } = bindActionCreators(sessionActionCreators, dispatch)
+  // const user = useSelector((s) => s.session.currentUser)
   return (
     <StyledHeader>
       <ButtonsContainer>
@@ -21,9 +22,10 @@ const Header = () => {
           Civil
         </IconButton>
       </ButtonsContainer>
-      <NavDropdownToggle icon={<ProfileIcon src={user?.iconSrc} />}>
+      <UserButton userProfileUrl="/dashboard" />
+      {/* <NavDropdownToggle icon={<ProfileIcon src={user?.iconSrc} />}>
         <DropdownMenu logout={logout} />
-      </NavDropdownToggle>
+      </NavDropdownToggle> */}
       {/* <ProfileIcon src={user?.iconSrc} /> */}
     </StyledHeader>
   )

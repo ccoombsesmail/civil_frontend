@@ -6,7 +6,7 @@ import { Container, Input } from './Style/index'
 const AnimatedCheckmark = ({ toxicityScore }) => {
   let color
   let text
-  if (toxicityScore < 0.5) { color = 'green'; text = 'Great!' }
+  if (toxicityScore < 0.6) { color = 'green'; text = 'Great!' }
   if (toxicityScore >= 0.6 && toxicityScore <= 0.9) { color = 'var(--m-danger-color)'; text = 'You are OK but getting close' }
   if (toxicityScore > 0.9) { color = 'red'; text = 'You are being toxic' }
   return (

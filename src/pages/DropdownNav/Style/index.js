@@ -33,6 +33,7 @@ export const DropdownMenuContainer = styled('div')`
   transition: all var(--speed) ease;
   z-index: 99999;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  display: ${({ state }) => (state === 'entered' ? 'block' : 'none')};
   a {
     color: var(--text-color);
     text-decoration: none;;

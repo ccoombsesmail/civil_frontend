@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+/* eslint-disable no-restricted-syntax */
+import React, { useState, useEffect } from 'react'
 import { Transition } from 'react-transition-group'
 import {
-  ClerkProvider,
-  SignedIn,
   SignedOut,
   UserButton,
-  useUser,
-  RedirectToSignIn,
 } from '@clerk/clerk-react'
 import { AiOutlineLogout, AiOutlineLogin } from 'react-icons/ai'
 import { RiUser3Fill } from 'react-icons/ri'
@@ -19,19 +16,27 @@ import {
 
 export const NavDropdownToggle = ({ icon, children }) => {
   const [open, setOpen] = useState(false)
+
   return (
     <NavItem>
       <IconNavButton onClick={() => setOpen(!open)}>
         {icon}
       </IconNavButton>
-      {React.cloneElement(children, { open })}
+      {React.cloneElement(children, { open, setOpen })}
     </NavItem>
   )
 }
 
-export const DropdownMenu = ({ open, logout }) => {
+export const DropdownMenu = ({ open, setOpen }) => {
   const goToDashboard = useGoToDashboard()
   const { pathname } = useLocation()
+
+  const onUserBtnClick = () => {
+    const btns = document.getElementsByClassName('cl-accounts-manager-button')
+    for (const btn of btns) {
+      btn.addEventListener('click', () => setOpen(false))
+    }
+  }
 
   const DropdownItem = ({
     children, leftIcon, rightIcon, onClick, to, state,
@@ -52,15 +57,21 @@ export const DropdownMenu = ({ open, logout }) => {
       {(state) => (
         <DropdownMenuContainer state={state}>
           <Menu>
-            <UserButton />
+            <DropdownItem
+              onClick={onUserBtnClick}
+              leftIcon={<UserButton userProfileUrl="/dashboard" />}
+              to={pathname}
+            >
+              User Management
+            </DropdownItem>
             {/* <DropdownItem
               leftIcon={<RiUser3Fill />}
               to="/dashboard"
               onClick={goToDashboard}
             >
               My Profile
-            </DropdownItem>
-            <DropdownItem
+            </DropdownItem> */}
+            {/* <DropdownItem
               onClick={logout}
               leftIcon={<AiOutlineLogout />}
             >

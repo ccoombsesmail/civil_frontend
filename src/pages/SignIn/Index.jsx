@@ -9,7 +9,6 @@ import { SignInContainer } from './Style/index'
 
 export const SignInComponent = () => {
   const { state } = useLocation()
-  console.log(state)
   return (
     <SignInContainer>
       <SignIn signUpUrl="/signup" afterSignInUrl={state?.redirectPath} />
