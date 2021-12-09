@@ -20,7 +20,8 @@ module.exports = {
   rules: {
     'react/prop-types': 0,
     semi: [2, 'never'],
+    'import/prefer-default-export': 'off',
     // maxLen: ['error', { code: 130 }],
   },
-  
+
 }

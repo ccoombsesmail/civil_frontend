@@ -7,12 +7,15 @@ import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 import { google } from 'googleapis'
 import ogs from 'open-graph-scraper'
+import cors from 'cors'
+
+import expressStaticGzip from 'express-static-gzip'
 
 const BACKEND_DEV = 'http://localhost:8092/api/v1'
 dotenv.config()
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = path.resolve(path.dirname(''))
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5050
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -20,12 +23,20 @@ const s3 = new AWS.S3({
 })
 
 const app = express()
+app.use(cors())
 app.use(express.json({ extended: true, limit: 52428800 }))
 app.use(busboy())
 app.set('json escape', true)
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 app.use('/', express.static(path.join(__dirname, 'public')))
+
+// app.use('/', expressStaticGzip(path.join(__dirname, 'public'), {
+//   customCompressions: [{
+//     encodingName: 'gzip',
+//     fileExtension: 'gz',
+//   }],
+// }))
 
 const uploadFile = (file, key) => {
   const params = {

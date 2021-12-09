@@ -12,12 +12,28 @@ export const StyledHeader = styled('header')`
   flex-flow: row nowrap;
   background-color: transparent;
   box-shadow: 5px 5px 15px 5px #000000;
+  border-bottom: 1px solid lightgrey;
+
+  
+`
+export const CivilIcon = styled('img')`
+    width: 3vw;
+    height: 3vw;
+  @media only screen and (max-width: 600px) {
+    width: 8vw;
+    height: 8vw;  
+  }
+  
 `
 
 export const ButtonsContainer = styled('div')`
   margin-left: 2vw;
   display: flex;
-  width: 15vw;
+  width: 25vw;
+  font-size: 1.2vw;
+  @media only screen and (max-width: 600px) {
+    font-size: 3.5vw;
+  }
 `
 
 export const ProfileIcon = styled('img')`

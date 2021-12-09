@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Tooltip } from 'reactstrap'
+import { Tooltip } from 'react-bootstrap'
 
 import { Container, Link } from './Style'
 

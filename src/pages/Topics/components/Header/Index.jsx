@@ -6,16 +6,15 @@ import { HeaderContainer, UserIcon, FlexDiv } from './Style/index'
 
 const Header = ({ user, openModal }) => {
   console.log('')
-  console.log(user)
   return (
     <HeaderContainer>
-      <UserIcon src={user?.iconSrc} />
+      <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
       <FlexDiv>
-        <p>
+        <p className="text-focus-in">
           Hey
           {' '}
-          <b>{user?.username}</b>
-          {'. '}
+          <b>{user?.username || 'Friend'}</b>
+          {'! '}
           Have Something You Would Like To Discuss?
         </p>
         <ThemeButton type="button" onClick={() => openModal(CREATE_TOPIC)} width="100%">

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { RiArrowDropRightFill } from 'react-icons/ri'
-
+// import { RiArrowDropRightFill } from 'react-icons/ri'
+import { RightTriangleArrowFillSvg } from '../../../../svgs/svgs'
 import useGoToSubTopic from '../../hooks/useGoToSubTopic'
 
 import ThemeButton from '../../../CommonComponents/Button/Index'
@@ -37,7 +37,7 @@ const SubTopicsList = () => {
         <ThemeButton type="button" onClick={goToSubTopic}>
           General Discussion
           {' '}
-          <RiArrowDropRightFill size={50} />
+          <RightTriangleArrowFillSvg size={50} />
         </ThemeButton>
       </div>
       <SubTopicsTable />

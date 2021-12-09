@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Collapse } from 'react-bootstrap'
-import { MdExpandMore, MdExpandLess } from 'react-icons/md'
+// import { MdExpandMore, MdExpandLess } from 'react-icons/md'
+import { UpArrowSvg, DownArrowSvg } from '../../svgs/svgs'
 
 import Card from '../CommonComponents/Card/Index'
 import ActionToolbar from '../CommonComponents/ActionToolbar/Index'
@@ -30,7 +31,7 @@ const VideoShowPage = ({
   const updateLikes = useUpdateLikes(updateTopicLikes, topic, user)
   useSetInnerHtml(descRef, topic?.description)
 
-  const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore />
+  const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
 
   return (
     <>

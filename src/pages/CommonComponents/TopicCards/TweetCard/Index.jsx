@@ -26,6 +26,7 @@ const EmbededTweet = ({ topic, user, showLinks }) => {
   useEffect(() => {
     if (topic?.tweetHtml) {
       if (tweetRef.current) {
+        console.log(tweetRef.current.dangerouslySetInnerHTML)
         tweetRef.current.innerHTML = topic?.tweetHtml?.toString() || '<span>Nothing</span>'
       }
     }

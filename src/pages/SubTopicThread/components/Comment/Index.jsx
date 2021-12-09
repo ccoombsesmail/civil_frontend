@@ -5,7 +5,10 @@ import React, {
 import { useSelector } from 'react-redux'
 
 import Collapse from 'react-bootstrap/Collapse'
-import { MdExpandMore, MdExpandLess } from 'react-icons/md'
+// import { MdExpandMore, MdExpandLess } from 'react-icons/md'
+
+import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
+
 import IconButton from '../../../CommonComponents/IconButton/Index'
 import ActionToolbar from '../../../CommonComponents/ActionToolbar/Index'
 import {
@@ -33,7 +36,7 @@ const Comment = ({ commentData, replies }) => {
   useSetInnerHtml(contentRef, commentData?.content)
 
   const mins = getTimeSince(commentData.createdAt)
-  const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore />
+  const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
   return (
     <CommentContainer>
       <Header>

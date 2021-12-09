@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Form } from 'formik'
-import { FiArrowDownCircle } from 'react-icons/fi'
+// import { FiArrowDownCircle } from 'react-icons/fi'
 
 export const FlexDiv = styled('div')` 
   display: flex;
@@ -20,10 +20,10 @@ export const FormContainer = styled(Form)`
  
 `
 
-export const Arrow = styled(FiArrowDownCircle)`
-  transition: transform .5s ease-in-out;
-  transform: ${(props) => `rotate(${props.rotate}deg)`};
-  cursor: pointer;
+export const Arrow = styled('span')`
+    transition: transform .5s ease-in-out;
+    transform: ${(props) => `rotate(${props.rotate}deg)`};
+    cursor: pointer;
 `
 
 export const InputsContainer = styled('div')`

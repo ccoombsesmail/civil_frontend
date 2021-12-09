@@ -28,7 +28,7 @@ const EmbededYouTube = ({
       summary={topic?.summary}
       time={getTimeSince(topic?.createdAt)}
     >
-      <VideoPlayer src={src} />
+      <VideoPlayer src={src} loading="lazy" />
       <CardDetails topic={topic} user={user} updateLikes={updateLikes} showLinks={showLinks} />
 
     </Card>

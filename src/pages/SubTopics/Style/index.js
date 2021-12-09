@@ -11,7 +11,6 @@ export const Container = styled('div')`
 
   .tab-content {
    padding-bottom: 40vh;
-   background-color: #E8EAED;
  }
 `
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FiUser } from 'react-icons/fi'
+// import { FiUser } from 'react-icons/fi'
 
 export const Label = styled('label')` 
   background-image: url('https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/64_1.png');
@@ -15,11 +15,11 @@ export const UploadInput = styled('input')`
   left: -99999rem;
 `
 
-export const UploadIcon = styled(FiUser)` 
-  background-color: gray;
-  border-radius: 50%;
-  cursor: pointer;
-`
+// export const UploadIcon = styled(FiUser)`
+//   background-color: gray;
+//   border-radius: 50%;
+//   cursor: pointer;
+// `
 
 export const Container = styled('div')` 
   display: flex;

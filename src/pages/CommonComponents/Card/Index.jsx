@@ -31,7 +31,7 @@ const Card = ({
   return (
     <Container ref={ref} height={totalHeight} onClick={onClick} listCard={listCard}>
       <UserInfoHeader iconSrc={iconSrc} time={time} username={username} />
-      <Description>
+      <Description className="text-pop-up-top">
         &ldquo;
         {summary}
         &rdquo;

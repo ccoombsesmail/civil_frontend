@@ -7,8 +7,8 @@ export const Header = styled('div')`
   width: 100%;
   padding: .5em .5em;    
   background-color: white;
-  height: 4vw;
-  max-height: 4vw;
+  /* height: 4vw;
+  max-height: 4vw; */
   transition: filter 1s ease-in-out;
 
   div {
@@ -68,6 +68,11 @@ export const Description = styled('p')`
   background-color: white;
   color: black;
   font-weight: bold;
+  @media only screen and (max-width: 600px) {
+    font-size: 5vw;
+
+  }
+  
 `
 
 export const ArrowContainer = styled('div')`
@@ -99,8 +104,11 @@ export const Container = styled('li')`
   text-decoration: none;
   transition: all 1s ease-in-out;
 
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    border-radius: 0;
+  }
  
-
 `
 
 export const Thumb = styled('img')` 

@@ -31,9 +31,9 @@ export const SideBarContainer = styled('div')`
     margin: .2em;
   }
 
-  /* svg:first-child:hover {
-    background-color: gray;
-  } */
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 
 `
 
@@ -63,4 +63,7 @@ export const SideBarNav = styled('nav')`
   button:hover {
     background-color: var(--bg-accent);
   }
+
+  
+
 `

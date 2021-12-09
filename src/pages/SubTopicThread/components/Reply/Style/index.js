@@ -1,7 +1,4 @@
-import styled from "styled-components";
-
-import { FiUser } from 'react-icons/fi'
-import IconButton from "../../../../CommonComponents/IconButton/Index";
+import styled from 'styled-components'
 
 export const CommentContainer = styled('li')`
   width: 95%;
@@ -34,7 +31,6 @@ export const Header = styled('div')`
 export const Username = styled('b')` 
   color: black;
 `
-
 
 export const Date = styled('time')` 
   color: gray;
@@ -73,11 +69,6 @@ export const EvidenceSection = styled('div')`
 
 `
 
-
 export const Content = styled('p')` 
   padding: 1em;
 `
-
-
-
-

@@ -29,14 +29,10 @@ const updateCommentCivilityActionCreator = (data) => ({
 })
 
 export const createComment = (commentData) => (dispatch) => {
-  // dispatch(showLoadingSpinnerAction)
-  // const t = toast.loading('Saving Comment')
   CommentsApiUtil.createComment(commentData)
     .then((res) => dispatch(addCommentActionCreator(res.data)))
-    // .then(() => dispatch(closeModal()))
-    // .finally(hideLoadingSpinnerAction(dispatch))
     .then(() => {
-      toast.success('Saved Comment')
+      toast.success('Saved Comment', { delay: 1000 })
     })
     .catch((err) => toast.error(`Problem Saving Comment \n ${err}`, { autoClose: 2500 }))
     .finally(() => dispatch(closeModal()))

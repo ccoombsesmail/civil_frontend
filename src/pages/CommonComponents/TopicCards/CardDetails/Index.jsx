@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { Collapse } from 'react-bootstrap'
-import { MdExpandMore, MdExpandLess } from 'react-icons/md'
+// import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 
+import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
 import IconButton from '../../IconButton/Index'
 import LinkSection from '../../LinkSection/Index'
 import ActionToolbar from '../../ActionToolbar/Index'
@@ -19,7 +20,7 @@ const CardDetails = ({
 
   const descRef = useRef(null)
   useSetInnerHtml(descRef, topic?.description)
-  const expandIcon = isOpen ? <MdExpandLess /> : <MdExpandMore />
+  const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
 
   return (
     <>

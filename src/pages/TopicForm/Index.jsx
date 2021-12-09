@@ -3,29 +3,30 @@ import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { Formik, Field } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
-import { BsCameraVideoFill, BsImageFill } from 'react-icons/bs'
+// import { BsCameraVideoFill, BsImageFill } from 'react-icons/bs'
 
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import useHandleSubmit from './hooks/useHandleSubmit'
 import useConfigFormErrors from '../util/form_helpers/hooks/useConfigFormErrors'
 import uiActions from '../../redux/actions/ui'
 
+import { DownArrowCircleSvg } from '../../svgs/svgs'
 import Input from '../CommonComponents/Form/Input/Index'
-import UploadFileInput from './components/UploadImageInput/Index'
 import Select from '../CommonComponents/Form/Select/Index'
 import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
 import Button from '../CommonComponents/Button/Index'
+import UploadMediaContainer from './components/UploadMedia/Index'
+
 import ThemeTooltip from '../CommonComponents/Tooltip/Index'
 
 import {
   FormContainer, InputsContainer, Container, Left, Right,
-  Line, Arrow, UploadMediaContainer, FlexDiv,
+  Line, Arrow, FlexDiv,
 } from './Style'
 
 import { INIT_TOPIC_FORM_VALUES } from '../util/form_helpers/init_form_values'
-import useOnFileChangeHandler from './hooks/useOnFileChangeHandler'
 import useGetLinkMetaDataOnBlur from './hooks/useGetLinkMetaDataOnBlur'
-import LinkMetaData from './components/LinkMetaData/Index'
+import DisplayMedia from './components/DisplayMedia/Index'
 
 const ERRORS = {
   title: { REQUIRED: true },
@@ -43,7 +44,6 @@ const CreateTopicForm = () => {
   const [content, setContent] = useState('')
 
   const validator = useConfigFormErrors(ERRORS)
-  const onFileChange = useOnFileChangeHandler()
   const handleSubmit = useHandleSubmit(content)
   const { metaData, getLinkMetaDataOnBlur } = useGetLinkMetaDataOnBlur()
 
@@ -96,51 +96,32 @@ const CreateTopicForm = () => {
                         tooltipText="This could be an image, graphic, or video pertaining to the topic you would like to discuss"
                       />
                     </FlexDiv>
-                    <UploadMediaContainer>
-                      <Field
-                        fileType="file"
-                        name="topicImage"
-                        disabled={Boolean(videoFile)}
-                        file={imgFile}
-                        component={UploadFileInput}
-                        onChange={(e) => onFileChange(e, setFieldValue, setImgFile)}
-                        icon={<BsImageFill />}
-                      />
-                      <Field
-                        fileType="file"
-                        name="topicVideo"
-                        disabled={Boolean(imgFile)}
-                        file={videoFile}
-                        component={UploadFileInput}
-                        onChange={(e) => onFileChange(e, setFieldValue, setVideoFile)}
-                        icon={<BsCameraVideoFill />}
-                      />
-                    </UploadMediaContainer>
+                    <UploadMediaContainer
+                      setFieldValue={setFieldValue}
+                      imgFile={imgFile}
+                      videoFile={videoFile}
+                      setImgFile={setImgFile}
+                      setVideoFile={setVideoFile}
+                    />
                   </Right>
                 </InputsContainer>
                 <Line />
-                { metaData && <LinkMetaData metaData={metaData} /> }
-                { imgFile && <img src={imgFile} alt="" />}
-                { videoFile && (
-                <video controls>
-                  <track
-                    default
-                    kind="captions"
-                    srcLang="en"
-                  />
-                  <source src={videoFile} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                )}
+                <DisplayMedia
+                  imgFile={imgFile}
+                  videoFile={videoFile}
+                  metaData={metaData}
+                />
                 <RichTextEditor content={content} setContent={setContent} />
                 <Arrow
-                  size={35}
                   rotate={rotate}
+                  // icon={<DownArrowCircleSvg />}
                   onClick={() => {
                     setOpen(!open)
                     setRotate(rotate + (open ? -180 : 180))
                   }}
-                />
+                >
+                  <DownArrowCircleSvg />
+                </Arrow>
                 <Fade in={!open}>
                   <div>
                     Enter Supplemental Information

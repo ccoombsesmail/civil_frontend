@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { Tab } from 'react-bootstrap'
 
 import useCategorizeComments from './hooks/useCategorizeComments'
-import usePermission from '../hooks/usePermission'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 
 import subTopicActions from '../../redux/actions/subtopics'
@@ -19,27 +18,26 @@ import { ThemeTab } from '../CommonComponents/Tabs/Style'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
-  const { loggedIn } = usePermission()
   const { getSubTopic, getAllComments, getTopic } = useBindDispatch(
     subTopicActions, commentActions, topicActions,
   )
   const user = useSelector((state) => state.session.currentUser)
-  const [key, setKey] = useState('all')
+  const [key, setKey] = useState('neutral')
 
   const {
-    positive: positiveComments,
-    neutral: neutralComments,
-    negative: negativeComments,
+    POSITIVE: positiveComments,
+    NEUTRAL: neutralComments,
+    NEGATIVE: negativeComments,
     all: allComments,
   } = useCategorizeComments()
 
   useEffect(() => {
-    if (loggedIn && user) {
+    if (user) {
       getSubTopic(subTopicId)
-      getAllComments(subTopicId, user?.clerkId)
-      getTopic(topicId, user?.clerkId)
+      getAllComments(subTopicId, user?.id)
+      getTopic(topicId, user?.id)
     }
-  }, [loggedIn])
+  }, [user])
 
   return (
     <>
@@ -50,7 +48,7 @@ const SubTopicThread = () => {
       >
         <Tab eventKey="all" title="All">
           <ColumnContainer>
-            <CommentColumn comments={allComments} commentSentiment="Comments" color="var(--m-primary-background-2-color)" />
+            <CommentColumn comments={allComments} commentSentiment="" color="var(--m-primary-background-2-color)" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="positive" title="Generally Positive">

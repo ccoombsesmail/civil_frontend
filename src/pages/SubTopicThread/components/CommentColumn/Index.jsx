@@ -8,7 +8,13 @@ export const ParentCommentContext = React.createContext(null)
 
 const CommentColumn = ({ comments, commentSentiment, color }) => (
   <Container color={color}>
-    <h1>{commentSentiment}</h1>
+    <h1>
+      {comments.length}
+      {' '}
+      {commentSentiment}
+      {' '}
+      Comments
+    </h1>
     {
           comments?.map((comment) => (
             <ParentCommentContext.Provider

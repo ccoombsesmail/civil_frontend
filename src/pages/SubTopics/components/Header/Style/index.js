@@ -4,8 +4,9 @@ export const Container = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   padding: 1em;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   /* border-top: none; */
   padding-top: 5em;
   z-index: 99;
@@ -16,6 +17,10 @@ export const Container = styled('div')`
     text-decoration: underline;
     letter-spacing: .2em;
     font-weight: bold;
+  }
+
+   @media only screen and (max-width: 600px) {
+    padding: 1em 0;
   }
 
 `

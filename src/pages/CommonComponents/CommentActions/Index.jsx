@@ -2,8 +2,10 @@ import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { BiComment } from 'react-icons/bi'
-import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
+// import { BiComment } from 'react-icons/bi'
+// import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
+
+import { CommentSvg, LikeSvg, LikeClickedSvg } from '../../../svgs/svgs'
 
 import IconButton from '../IconButton/Index'
 import { Container } from './Style/index'
@@ -17,14 +19,14 @@ const CommentActions = ({ commentId, liked }) => {
   const thisComment = comments.find(({ id }) => id === commentId)
 
   const updateLikes = useCallback(() => {
-    updateCommentLikes({ id: commentId, userId: user?.clerkId, increment: !liked })
+    updateCommentLikes({ id: commentId, userId: user?.id, increment: !liked })
   }, [commentId, liked])
 
   return (
     <Container>
       <div>
-        <IconButton icon={liked ? <AiFillLike color="#F44336" /> : <AiOutlineLike />} onClick={updateLikes} />
-        <IconButton icon={<BiComment />} />
+        <IconButton icon={liked ? <LikeClickedSvg color="#F44336" /> : <LikeSvg />} onClick={updateLikes} />
+        <IconButton icon={<CommentSvg />} />
       </div>
       <div>
         <span>

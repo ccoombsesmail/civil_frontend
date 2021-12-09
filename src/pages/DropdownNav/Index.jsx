@@ -1,26 +1,28 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Transition } from 'react-transition-group'
 import {
   SignedOut,
+  SignedIn,
   UserButton,
 } from '@clerk/clerk-react'
-import { AiOutlineLogout, AiOutlineLogin } from 'react-icons/ai'
-import { RiUser3Fill } from 'react-icons/ri'
+// import { AiOutlineLogin } from 'react-icons/ai'
+// import { FaUserCircle } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
-import useGoToDashboard from '../hooks/useGoToDashboard'
+import { UserIconSvg, LoginSvg } from '../../svgs/svgs'
+// import useGoToDashboard from '../hooks/useGoToDashboard'
 
 import {
   NavItem, IconNavButton, DropdownMenuContainer, Menu, MenuItem,
 } from './Style/index'
 
-export const NavDropdownToggle = ({ icon, children }) => {
+export const NavDropdownToggle = ({ children }) => {
   const [open, setOpen] = useState(false)
 
   return (
     <NavItem>
       <IconNavButton onClick={() => setOpen(!open)}>
-        {icon}
+        <UserIconSvg />
       </IconNavButton>
       {React.cloneElement(children, { open, setOpen })}
     </NavItem>
@@ -28,7 +30,7 @@ export const NavDropdownToggle = ({ icon, children }) => {
 }
 
 export const DropdownMenu = ({ open, setOpen }) => {
-  const goToDashboard = useGoToDashboard()
+  // const goToDashboard = useGoToDashboard()
   const { pathname } = useLocation()
 
   const onUserBtnClick = () => {
@@ -57,13 +59,15 @@ export const DropdownMenu = ({ open, setOpen }) => {
       {(state) => (
         <DropdownMenuContainer state={state}>
           <Menu>
-            <DropdownItem
-              onClick={onUserBtnClick}
-              leftIcon={<UserButton userProfileUrl="/dashboard" />}
-              to={pathname}
-            >
-              User Management
-            </DropdownItem>
+            <SignedIn>
+              <DropdownItem
+                onClick={onUserBtnClick}
+                leftIcon={<UserButton userProfileUrl="/dashboard" />}
+                to={pathname}
+              >
+                User Management
+              </DropdownItem>
+            </SignedIn>
             {/* <DropdownItem
               leftIcon={<RiUser3Fill />}
               to="/dashboard"
@@ -79,9 +83,10 @@ export const DropdownMenu = ({ open, setOpen }) => {
             </DropdownItem> */}
             <SignedOut>
               <DropdownItem
-                leftIcon={<AiOutlineLogin />}
+                leftIcon={<LoginSvg />}
                 to="/signin"
                 state={{ redirectPath: pathname }}
+                onClick={() => setOpen(false)}
               >
                 Sign In
               </DropdownItem>

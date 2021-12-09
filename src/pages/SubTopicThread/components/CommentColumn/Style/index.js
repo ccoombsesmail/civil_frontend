@@ -12,21 +12,38 @@ export const Container = styled('ul')`
   border-right: 1px solid black; */
   z-index: 99;
   opacity: .99;
-  width: 50vw;
-  
+  width: 70vw;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
 
   h1 {
     display: flex;
     width: 100%;
-    justify-content: center;
     align-items: center;
     font-weight: bold;
     padding: 1em;
-    font-size: 1.8em;
+    font-size: 1vw;
     border-bottom: 1px solid black;
     color: white;
     border: none;
     outline: none;
-    background-color: ${(props) => props.color}
+    background-color: ${(props) => props.color};
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+     @media only screen and (max-width: 600px) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      font-size: 5vw;
+
+    }
+  }
+
+  
+   @media only screen and (max-width: 600px) {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 `

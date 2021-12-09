@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Tabs, Tab } from 'react-bootstrap'
-
+import { Tabs } from 'react-bootstrap'
 
 export const ThemeTab = styled(Tabs)`
   z-index: 9999;
@@ -9,6 +8,9 @@ export const ThemeTab = styled(Tabs)`
     border-radius: .5em;
     background-color: white;
     margin: .5em;
+    @media only screen and (max-width: 600px) {
+      /* margin: 0; */
+    }
   }
 
   .active {
@@ -19,6 +21,11 @@ export const ThemeTab = styled(Tabs)`
  .nav-link {
    color: black;
    font-weight: bold;
+    @media only screen and (max-width: 600px) {
+      font-size: 3vw;
+      padding: .5rem .9rem;
+      
+    }
  }
 
 `

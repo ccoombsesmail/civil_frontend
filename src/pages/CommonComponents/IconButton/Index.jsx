@@ -1,16 +1,18 @@
-import React, {useCallback} from 'react'
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useCallback } from 'react'
 
 import { StyledButton } from './Style'
 
-const IconButton = ({ icon, children, onClick, disabled }) => {
-  
+const IconButton = ({
+  icon, children, onClick, disabled, rest,
+}) => {
   const onClickHandler = useCallback((e) => {
     e.stopPropagation()
     onClick()
   }, [onClick])
 
   return (
-    <StyledButton onClick={onClickHandler} disabled={disabled}>
+    <StyledButton {...rest} onClick={onClickHandler} disabled={disabled}>
       {icon}
       {children}
     </StyledButton>

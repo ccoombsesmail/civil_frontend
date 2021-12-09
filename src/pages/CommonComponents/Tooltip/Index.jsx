@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
-import { BiInfoCircle } from 'react-icons/bi'
+// import { BiInfoCircle } from 'react-icons/bi'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
-
+import { InfoIconSvg } from '../../../svgs/svgs'
 import { LightButton, TooltipContent } from './Style/index'
 
 const ThemeTooltip = ({ tooltipText, tooltipHeader }) => {
@@ -24,7 +24,7 @@ const ThemeTooltip = ({ tooltipText, tooltipHeader }) => {
       overlay={popover}
     >
       <LightButton variant="light">
-        <BiInfoCircle size={22} />
+        <InfoIconSvg size={22} />
       </LightButton>
     </OverlayTrigger>
   )

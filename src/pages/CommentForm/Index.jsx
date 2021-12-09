@@ -22,18 +22,18 @@ import {
 
 const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
 
-const CreateCommentForm = () => {
+const CreateCommentForm = ({ modalProps }) => {
   const descRef = useRef(null)
   const [content, setContent] = useState('')
   const [rawText, setRawText] = useState('')
   const [toxicityScore, setToxicityScore] = useState(null)
 
-  const { pathname, state: locationState } = useLocation()
+  const { pathname } = useLocation()
   const topicId = pathname.match(uuidRegEx)[0]
   const subtopicId = pathname.match(uuidRegEx)[1]
 
-  const compState = useGetStateEffect(topicId, subtopicId, locationState)
-  const handleSubmit = useHandleSubmit(compState, content, rawText, locationState, subtopicId)
+  const compState = useGetStateEffect(topicId, subtopicId, modalProps)
+  const handleSubmit = useHandleSubmit(compState, content, rawText, modalProps, subtopicId)
   useSetInnerHtml(descRef, compState.htmlContent)
 
   return (

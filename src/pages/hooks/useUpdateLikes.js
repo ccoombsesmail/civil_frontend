@@ -4,7 +4,6 @@ import topicActionCreators from '../../redux/actions/topics'
 
 export default (topic, user) => {
   const { updateTopicLikes } = useBindDispatch(topicActionCreators)
-
   return useCallback(() => {
     updateTopicLikes({
       id: topic?.id,
@@ -12,5 +11,4 @@ export default (topic, user) => {
       increment: !topic?.liked,
     })
   }, [topic])
-
 }

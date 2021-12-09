@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const CommentContainer = styled('li')`
-  width: 98%;
+  width: 100%;
   outline: none;
   border-radius: .4em;
   list-style: none;
@@ -16,6 +16,11 @@ export const CommentContainer = styled('li')`
     /* filter: brightness(.9); */
     /* background-color: #ef5d4566; */
     background-color: #D8FFF1;
+  }
+
+   @media only screen and (max-width: 600px) {
+    width: 100%;
+    border-radius: 0;
   }
 `
 
@@ -62,7 +67,7 @@ export const EvidenceSection = styled('ul')`
   background-color: #F0F2F5;
   width: 100%;
   word-break: break-all;
-  padding: 0 0 1em 1em;
+  padding: 0 .5em .5em .5em;
   display: flex;
   flex-direction: column;
 `

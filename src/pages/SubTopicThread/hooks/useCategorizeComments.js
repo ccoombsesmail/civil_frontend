@@ -12,9 +12,9 @@ export default () => {
       NEGATIVE: [],
       all: comments,
     }
-    comments.forEach(({ data: comment }) => {
-      if (sentiments.has(comment?.sentiment)) {
-        categorizedComments[comment.sentiment].push(comment)
+    comments.forEach((comment) => {
+      if (sentiments.has(comment.data?.sentiment)) {
+        categorizedComments[comment.data?.sentiment].push(comment)
       }
     })
     return categorizedComments

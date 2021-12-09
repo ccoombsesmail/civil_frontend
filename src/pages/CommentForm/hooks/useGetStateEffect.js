@@ -15,16 +15,15 @@ const findCommentContent = (comment, id) => {
   return ''
 }
 
-export default (topicId, subtopicId, locationState) => {
+export default (topicId, subtopicId, modalProps) => {
   const user = useSelector((s) => s.session.currentUser)
   const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
   const comment = useSelector((s) => s.comments.list)?.find(
-    (c) => c.data?.id === locationState?.rootParentCommentId,
+    (c) => c.data?.id === modalProps?.rootParentCommentId,
   )
-  console.log(locationState)
   return useMemo(() => {
-    const commentContent = locationState?.type !== 'TOPIC_REPLY'
-      ? findCommentContent(comment, locationState?.commentId) : topic?.description
+    const commentContent = modalProps?.replyType !== 'TOPIC_REPLY'
+      ? findCommentContent(comment, modalProps?.commentId) : topic?.description
     return {
       subtopicId,
       createdByIconSrc: comment?.iconSrc || topic?.createdByIconSrc,
@@ -32,8 +31,8 @@ export default (topicId, subtopicId, locationState) => {
       createdBy: comment?.createdBy || topic?.createdBy,
       time: comment?.createdAt || topic?.createdAt,
       htmlContent: commentContent,
-      rootParentCommentId: locationState?.rootParentCommentId || null,
-      type: locationState?.type,
+      rootParentCommentId: modalProps?.rootParentCommentId || null,
+      type: modalProps?.replyType,
     }
-  }, [topic, user, comment, subtopicId, locationState])
+  }, [topic, user, comment, subtopicId, modalProps])
 }

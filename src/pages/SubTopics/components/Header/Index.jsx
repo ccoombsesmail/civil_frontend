@@ -14,7 +14,7 @@ const Header = ({ topic, user }) => {
 
   return (
     <Container>
-      <h1>
+      <h1 className="text-focus-in">
         {' '}
         {'We\'re Talking About...'}
       </h1>

@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-
-
 export const Header = styled('div')` 
   position: relative;
   display: flex;
@@ -9,8 +7,8 @@ export const Header = styled('div')`
   width: 100%;
   padding: .5em .5em;    
   background-color: white;
-  height: 4vw;
-  max-height: 4vw;
+  /* height: 4vw;
+  max-height: 4vw; */
   transition: filter 1s ease-in-out;
 
   div {
@@ -42,14 +40,14 @@ export const Header = styled('div')`
   }
 `
 
-
 export const Thumb = styled('img')` 
   flex-shrink: 0;
-  width: 50px;
-  height: 50px;      
+  width: 3vw;
+  height: 3vw;      
   border-radius: 50%; 
+
+  @media only screen and (max-width: 600px) {
+     width: 6vw;
+     height: 6vw;  
+  }
 `
-    
-
-
-

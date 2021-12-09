@@ -7,6 +7,6 @@ export default (comment, user) => {
   const dispatch = useDispatch()
   const { updateCommentLikes } = bindActionCreators(commentActions, dispatch)
   return useCallback(() => {
-    updateCommentLikes({ id: comment.id, userId: user?.clerkId, increment: !comment.liked })
+    updateCommentLikes({ id: comment.id, userId: user?.id, increment: !comment.liked })
   }, [comment.liked])
 }

@@ -27,7 +27,7 @@ const CreateSubTopicForm = () => {
   const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
 
   useEffect(() => {
-    getTopic(topicId, user?.clerkId)
+    getTopic(topicId, user?.id)
   }, [])
 
   return (

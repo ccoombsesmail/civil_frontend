@@ -1,0 +1,11 @@
+import styled from 'styled-components'
+
+export const Container = styled('div')` 
+  margin-left: 1.3em;
+  padding: .5em;
+  border-radius: .5em;
+  display: flex;
+  box-shadow:  5px 5px 5px -3px #AAAAAA;
+  background: #E5E5E5;
+
+`

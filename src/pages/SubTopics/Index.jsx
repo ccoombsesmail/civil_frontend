@@ -16,7 +16,7 @@ const SubTopics = () => {
   const user = useSelector((s) => s.session.currentUser)
 
   useEffect(() => {
-    getTopic(topicId, user?.clerkId)
+    getTopic(topicId, user?.id)
     getAllSubTopics(topicId)
   }, [])
 

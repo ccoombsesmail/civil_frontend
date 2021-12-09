@@ -1,6 +1,8 @@
 // action creator is just a function that dispatches an action
 import { closeModal } from '../ui/index'
-import { ADD_SESSION, LOG_OUT, UPDATE } from '../../reducers/sessionReducer'
+import {
+  ADD_SESSION_DATA_CLERK, ADD_SESSION_DATA_BACKEND, LOG_OUT, UPDATE,
+} from '../../reducers/sessionReducer'
 import * as SessionApiUtil from '../../../api/v1/session/session_api_util'
 import * as UsersApiUtl from '../../../api/v1/users/users_api_util'
 
@@ -8,8 +10,13 @@ const logoutActionCreator = () => ({
   type: LOG_OUT,
 })
 
-const addUserActionCreator = (userData) => ({
-  type: ADD_SESSION,
+export const addUserActionCreatorClerk = (userData) => ({
+  type: ADD_SESSION_DATA_CLERK,
+  payload: userData,
+})
+
+const addUserActionCreatorBackend = (userData) => ({
+  type: ADD_SESSION_DATA_BACKEND,
   payload: userData,
 })
 
@@ -19,11 +26,11 @@ const updateActionCreator = (data) => ({
 })
 
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
-  .then((res) => dispatch(addUserActionCreator(JSON.parse(res.data).token)))
+  .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
   .then(() => dispatch(closeModal()))
 
 export const getCurrentUser = (userId) => (dispatch) => UsersApiUtl.getUser(userId)
-  .then((res) => dispatch(addUserActionCreator(res.data)))
+  .then((res) => dispatch(addUserActionCreatorBackend(res.data)))
 
 export const logout = () => (dispatch) => {
   dispatch(logoutActionCreator())
