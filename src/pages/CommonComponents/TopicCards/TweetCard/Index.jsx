@@ -7,7 +7,7 @@ import CardDetails from '../CardDetails/Index'
 
 import useCalculateCardHeightEffect from './hooks/useCalculateCardHeightEffect'
 import useUpdateLikes from '../../../hooks/useUpdateLikes'
-import useGoToSubTopics from '../../../hooks/useGoToSubTopics'
+import useGoToSubTopics from '../../../hooks/routing/useGoToSubTopics'
 import useOpenModalWithLocation from '../../../hooks/useOpenModalWithLocation'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
@@ -26,7 +26,6 @@ const EmbededTweet = ({ topic, user, showLinks }) => {
   useEffect(() => {
     if (topic?.tweetHtml) {
       if (tweetRef.current) {
-        console.log(tweetRef.current.dangerouslySetInnerHTML)
         tweetRef.current.innerHTML = topic?.tweetHtml?.toString() || '<span>Nothing</span>'
       }
     }

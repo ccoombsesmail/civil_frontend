@@ -56,9 +56,9 @@ export const Body = styled('div')`
 `
 
 export const Description = styled('p')` 
-  width: 90%;
+  width: 100%;
   padding: .5em 0;
-  margin: 1em 0;
+  /* margin: 1em 0; */
   font-size: 1.2vw;
   position: relative;
   display: flex;
@@ -102,7 +102,15 @@ export const Container = styled('li')`
   cursor: pointer;
   overflow: hidden;
   text-decoration: none;
-  transition: all 1s ease-in-out;
+  /* transition: all 1s ease-in-out; */
+
+  :hover > div:first-child {
+    filter: brightness(.95);
+  }
+
+  :hover p {
+    filter: brightness(.95);
+  }
 
   @media only screen and (max-width: 600px) {
     width: 100%;

@@ -3,7 +3,7 @@ import React from 'react'
 import { Field } from 'formik'
 
 import UploadFileInput from '../UploadImageInput/Index'
-import { DownArrowCircleSvg } from '../../../../svgs/svgs'
+import { VideoSvg, ImageSvg } from '../../../../svgs/svgs'
 
 import useOnFileChangeHandler from '../../hooks/useOnFileChangeHandler'
 
@@ -22,7 +22,7 @@ const UploadMediaContainer = ({
         file={imgFile}
         component={UploadFileInput}
         onChange={(e) => onFileChange(e, setFieldValue, setImgFile)}
-        icon={<DownArrowCircleSvg />}
+        icon={<ImageSvg />}
       />
       <Field
         fileType="file"
@@ -31,7 +31,7 @@ const UploadMediaContainer = ({
         file={videoFile}
         component={UploadFileInput}
         onChange={(e) => onFileChange(e, setFieldValue, setVideoFile)}
-        icon={<DownArrowCircleSvg />}
+        icon={<VideoSvg />}
       />
     </Container>
   )

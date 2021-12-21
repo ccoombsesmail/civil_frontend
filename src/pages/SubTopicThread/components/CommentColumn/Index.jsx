@@ -6,10 +6,12 @@ import { Container } from './Style'
 
 export const ParentCommentContext = React.createContext(null)
 
-const CommentColumn = ({ comments, commentSentiment, color }) => (
+const CommentColumn = ({
+  numComments, comments, commentSentiment, color,
+}) => (
   <Container color={color}>
     <h1>
-      {comments.length}
+      {numComments}
       {' '}
       {commentSentiment}
       {' '}

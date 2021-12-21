@@ -6,6 +6,7 @@ import {
   SignedIn,
   UserButton,
 } from '@clerk/clerk-react'
+
 // import { AiOutlineLogin } from 'react-icons/ai'
 // import { FaUserCircle } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
@@ -90,8 +91,8 @@ export const DropdownMenu = ({ open, setOpen }) => {
               >
                 Sign In
               </DropdownItem>
+              {/* </DropdownItem> */}
             </SignedOut>
-
           </Menu>
         </DropdownMenuContainer>
       )}

@@ -37,10 +37,13 @@ export const getTopic = (topicId, userId) => (dispatch) => TopicsApiUtil.getTopi
 export const updateTopicLikes = (data) => (dispatch) => TopicsApiUtil.updateTopicLikes(data)
   .then((res) => dispatch(updateTopicLikesActionCreator(res.data)))
 
-const uploadTopicMedia = (data, fileType, fileFormat) => (dispatch) => TopicsApiUtil
+const uploadTopicMedia = (data, fileType, fileFormat, topicData) => (dispatch) => TopicsApiUtil
   .uploadTopicMedia(data, fileType, fileFormat)
-  .then((res) => dispatch(addTopicActionCreator(res.data)))
-  .then(() => dispatch(closeModal()))
+  .then((res) => {
+    createTopic({ ...topicData, ...res.data })(dispatch)
+    })
+  // .then((res) => dispatch(addTopicActionCreator(res)))
+  // .then(() => dispatch(closeModal()))
 
 export default {
   createTopic,

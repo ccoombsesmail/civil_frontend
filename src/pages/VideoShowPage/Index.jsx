@@ -14,7 +14,7 @@ import useSetInnerHtml from '../hooks/useSetInnerHtml'
 import useOpenModal from '../hooks/useOpenModalWithLocation'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import useUpdateLikes from './hooks/useUpdateLikes'
-import useGoToSubTopic from '../hooks/useGoToSubTopics'
+import useGoToSubTopic from '../hooks/routing/useGoToSubTopics'
 import { getTimeSince } from '../../generic/string/dateFormatter'
 
 import { VideoPlayer, Description, ExpandButton } from './Style'

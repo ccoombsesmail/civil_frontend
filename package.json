@@ -5,7 +5,7 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
-    "@clerk/clerk-react": "^2.2.1",
+    "@clerk/clerk-react": "^2.4.0",
     "@restart/ui": "^0.2.3",
     "aws-sdk": "^2.996.0",
     "axios": "^0.21.1",

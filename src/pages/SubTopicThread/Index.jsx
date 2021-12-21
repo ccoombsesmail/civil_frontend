@@ -22,6 +22,8 @@ const SubTopicThread = () => {
     subTopicActions, commentActions, topicActions,
   )
   const user = useSelector((state) => state.session.currentUser)
+  const subtopic = useSelector((state) => state.subtopics.list)?.find((s) => s.id === subTopicId)
+
   const [key, setKey] = useState('neutral')
 
   const {
@@ -32,13 +34,11 @@ const SubTopicThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
-    if (user) {
-      getSubTopic(subTopicId)
-      getAllComments(subTopicId, user?.id)
-      getTopic(topicId, user?.id)
-    }
-  }, [user])
-
+    getSubTopic(subTopicId)
+    getAllComments(subTopicId, user?.id)
+    getTopic(topicId, user?.id)
+  }, [])
+  console.log(subtopic)
   return (
     <>
       <Line />
@@ -48,22 +48,22 @@ const SubTopicThread = () => {
       >
         <Tab eventKey="all" title="All">
           <ColumnContainer>
-            <CommentColumn comments={allComments} commentSentiment="" color="var(--m-primary-background-2-color)" />
+            <CommentColumn numComments={subtopic?.allComments} comments={allComments} commentSentiment="" color="var(--m-primary-background-2-color)" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="positive" title="Generally Positive">
           <ColumnContainer>
-            <CommentColumn comments={positiveComments} commentSentiment="Generally Positive" color="#6A6E70" />
+            <CommentColumn numComments={subtopic?.positiveComments} comments={positiveComments} commentSentiment="Generally Positive" color="#6A6E70" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="neutral" title="Neutral">
           <ColumnContainer>
-            <CommentColumn comments={neutralComments} commentSentiment="Neutral" color="#474A4F" />
+            <CommentColumn numComments={subtopic?.neutralComments} comments={neutralComments} commentSentiment="Neutral" color="#474A4F" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="negative" title="Generally Negative">
           <ColumnContainer>
-            <CommentColumn comments={negativeComments} commentSentiment="Generally Negative" color="var(--m-primary-color)" />
+            <CommentColumn numComments={subtopic?.negativeComments} comments={negativeComments} commentSentiment="Generally Negative" color="var(--m-primary-color)" />
           </ColumnContainer>
         </Tab>
       </ThemeTab>

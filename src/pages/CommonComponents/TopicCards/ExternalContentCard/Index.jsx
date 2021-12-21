@@ -5,7 +5,7 @@ import Card from '../../Card/Index'
 import CardDetails from '../CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
-import useGoToSubTopic from '../../../hooks/useGoToSubTopics'
+import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 import useUpdateLikes from '../../../hooks/useUpdateLikes'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'

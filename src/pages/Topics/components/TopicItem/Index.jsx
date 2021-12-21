@@ -1,31 +1,52 @@
-import React, { Suspense } from 'react'
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import EmbededTweet from '../../../CommonComponents/TopicCards/TweetCard/Index'
+import EmbededTweet from '../../../CommonComponents/TopicCards/TweetCard/Index'
 
 import EmbededYouTube from '../../../CommonComponents/TopicCards/YouTubeCard/Index'
 import ExternalContentCard from '../../../CommonComponents/TopicCards/ExternalContentCard/Index'
 import {
   CardItem, CardFrame, CardTitle, CardOverlay, CardContent, CardBody,
 } from './Style'
-
-const EmbededTweet = React.lazy(() => import(/* webpackChunkName: "dashboard" */
-/* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ '../../../CommonComponents/TopicCards/TweetCard/Index'
-))
+import UserProvidedMediaCard from '../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
+// import useGoToSubTopics from '../../../hooks/routing/useGoToSubTopics'
 
 const TopicItem = ({ topic, user }) => {
   const navigate = useNavigate()
-  console.log(topic.tweetHtml)
-  if (topic.ytUrl) return <EmbededYouTube topic={topic} user={user} showLinks={false} src={topic.ytUrl.replace('watch?v=', 'embed/')} />
-  if (topic.tweetHtml) {
+  const commonProps = useMemo(() => ({
+    topic, user, showLinks: false, hideReplyIcon: true,
+  }), [topic, user])
+
+  // const goToSubTopic = useGoToSubTopics(topic?.id)
+  if (topic.ytUrl) {
     return (
-      <Suspense fallback={<div> Loading...</div>}>
-        <EmbededTweet topic={topic} user={user} showLinks={false} />
-      </Suspense>
+      <EmbededYouTube
+        {...commonProps}
+        src={topic.ytUrl.replace('watch?v=', 'embed/')}
+      />
     )
   }
-  if (topic.contentUrl) return <ExternalContentCard topic={topic} user={user} showLinks={false} />
+  if (topic.tweetHtml) {
+    return (
+      <EmbededTweet
+        {...commonProps}
+      />
+    )
+  }
+  if (topic.contentUrl) {
+    return (
+      <ExternalContentCard
+        {...commonProps}
+      />
+    )
+  }
+  if (topic.vodUrl || topic.imageUrl) {
+    return (
+      <UserProvidedMediaCard
+        {...commonProps}
+      />
+    )
+  }
 
   return (
     <CardItem

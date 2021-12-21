@@ -1,10 +1,11 @@
 import React from 'react'
+import UserIcon from '../UserIcon/Index'
 
-import { Header, Thumb } from './Style'
+import { Header } from './Style'
 
-const UserInfoHeader = ({ iconSrc, time, username }) => (
+const UserInfoHeader = ({ time, username, iconSrc }) => (
   <Header>
-    <Thumb src={iconSrc} />
+    <UserIcon width="3vw" username={username} iconSrc={iconSrc} />
     <div>
       <time>{time}</time>
       <h3>{`@${username} says...`}</h3>

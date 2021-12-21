@@ -9,7 +9,7 @@ export const Header = styled('div')`
   background-color: white;
   /* height: 4vw;
   max-height: 4vw; */
-  transition: filter 1s ease-in-out;
+  /* transition: filter 1s ease-in-out; */
 
   div {
     height: 100%;

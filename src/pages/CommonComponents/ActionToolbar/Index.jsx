@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { useParams } from 'react-router-dom'
 
 // import { BiComment } from 'react-icons/bi'
 // import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
@@ -8,17 +9,17 @@ import { Container } from './Style/index'
 import { CommentSvg, LikeSvg, LikeClickedSvg } from '../../../svgs/svgs'
 
 const ActionToolbar = ({
-  hideReplyIcon, likes, liked, updateLikes, onCommentClick, updateCivility, civil,
+  likes, liked, updateLikes, onCommentClick, updateCivility, civil,
 }) => {
   const positiveCivility = (civil == null) ? 1 : -1
   const negativeCivility = (civil == null) ? -1 : 1
   const removeCivility = civil || (civil === false)
-
+  const params = useParams()
   return (
     <Container>
       <div>
         <IconButton icon={liked ? <LikeClickedSvg color="#F44336" /> : <LikeSvg />} onClick={updateLikes} />
-        { !hideReplyIcon && <IconButton icon={<CommentSvg />} onClick={onCommentClick} /> }
+        { params['*'] && <IconButton icon={<CommentSvg />} onClick={onCommentClick} /> }
         <IconButton
           disabled={civil === false}
           icon={civil ? <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" /> : <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />}

@@ -1,34 +1,36 @@
-import React, { useState } from 'react'
-import { Tooltip } from 'react-bootstrap'
+/* eslint-disable no-useless-escape */
+import React from 'react'
+import { Tooltip, OverlayTrigger } from 'react-bootstrap'
 
 import { Container, Link } from './Style'
 
 const domainExtractor = new RegExp(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im)
 
-const SupplementalLinks = ({ links, type }) => {
-  const [tooltipsState, setTooltipsState] = useState([false, false, false])
-  const toggle = (idx) => setTooltipsState(tooltipsState.map((state, i) => {
-    if (idx === i) return !state
-    return state
-  }))
+const TooltipComponent = ({ idx, linkText, link }) => (
+  <OverlayTrigger
+    placement="right"
+    overlay={(
+      <Tooltip>
+        <strong>{link}</strong>
+      </Tooltip>
+      )}
+  >
+    <Link key={String(idx)} href={link} target="_blank">
+      {linkText[1]}
+    </Link>
+  </OverlayTrigger>
+)
 
-  return (
-    <Container>
-      {links?.map((link, idx) => {
-        const linkText = link.match(domainExtractor)
-        return (
-          <div key={String(idx)}>
-            <Link key={String(idx)} href={link} target="_blank" id={`${type}-${link.slice(0, 5)}-${idx}`}>
-              {linkText[1]}
-            </Link>
-            <Tooltip autohide={false} placement="left" isOpen={tooltipsState[idx]} target={`${type}-${link.slice(0, 5)}-${idx}`} toggle={() => toggle(idx)}>
-              {link}
-            </Tooltip>
-          </div>
-        )
-      })}
-    </Container>
-  )
-}
+const SupplementalLinks = ({ links }) => (
+  <Container>
+    {links?.map((link, idx) => {
+      const linkText = link.match(domainExtractor)
+      return (
+        <TooltipComponent key={String(idx)} linkText={linkText} idx={idx} link={link} />
+
+      )
+    })}
+  </Container>
+)
 
 export default SupplementalLinks

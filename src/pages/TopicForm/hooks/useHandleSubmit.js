@@ -17,6 +17,7 @@ export default () => {
       ...values,
       description: content,
       createdBy: user.username,
+      clerkId: user.id,
       evidenceLinks: eLinks,
       [linkType]: values.contentUrl,
     }
@@ -24,8 +25,7 @@ export default () => {
       const [fileType, fileFormat] = values.file.type.split('/')
       const formData = new FormData()
       formData.append('image', values.file)
-      uploadTopicMedia(formData, fileType, fileFormat)
-        .then((res) => createTopic({ ...data, ...res.data }))
+      uploadTopicMedia(formData, fileType, fileFormat, data)
     } else {
       createTopic(data)
     }

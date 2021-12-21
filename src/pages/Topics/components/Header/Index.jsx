@@ -1,14 +1,14 @@
 import React from 'react'
 import ThemeButton from '../../../CommonComponents/Button/Index'
-
+import UserIcon from '../../../CommonComponents/UserIcon/Index'
 import { CREATE_TOPIC } from '../../../App/Modal/Index'
-import { HeaderContainer, UserIcon, FlexDiv } from './Style/index'
+import { HeaderContainer, FlexDiv } from './Style/index'
 
 const Header = ({ user, openModal }) => {
   console.log('')
   return (
     <HeaderContainer>
-      <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
+      <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} />
       <FlexDiv>
         <p className="text-focus-in">
           Hey

@@ -13,11 +13,13 @@ const SubTopics = () => {
   const { topicId } = useParams()
   const { getAllSubTopics, getTopic } = useBindDispatch(subTopicActionCreators, topicActionCreators)
   const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
+  const subtopicsEmpty = useSelector((s) => s.subtopics.list).length === 0
   const user = useSelector((s) => s.session.currentUser)
 
   useEffect(() => {
+    console.log(subtopicsEmpty)
     getTopic(topicId, user?.id)
-    getAllSubTopics(topicId)
+    if (subtopicsEmpty) getAllSubTopics(topicId)
   }, [])
 
   return (

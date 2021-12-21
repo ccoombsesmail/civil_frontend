@@ -71,10 +71,11 @@ app.post('/api/v1/users/uploadIcon', (req, res) => {
 app.post('/api/v1/topics/upload-media', (req, res) => {
   const { fileType, fileFormat } = req.query
   const bucketFolder = fileType === 'image' ? 'topic_images' : 'topic_video'
+  const returnKey = fileType === 'image' ? 'imageUrl' : 'vodUrl'
   req.pipe(req.busboy)
   req.busboy.on('file', (fieldname, file) => {
     uploadFile(file, `${bucketFolder}/${uuidv4()}.${fileFormat}`).promise().then((data) => {
-      res.send({ mediaUrl: data.Location })
+      res.send({ [returnKey]: data.Location })
     })
   })
 })

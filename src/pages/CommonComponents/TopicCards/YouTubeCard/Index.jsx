@@ -4,7 +4,7 @@ import Card from '../../Card/Index'
 import CardDetails from '../CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
-import useGoToSubTopic from '../../../hooks/useGoToSubTopics'
+import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 import useUpdateLikes from '../../../hooks/useUpdateLikes'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
@@ -29,7 +29,12 @@ const EmbededYouTube = ({
       time={getTimeSince(topic?.createdAt)}
     >
       <VideoPlayer src={src} loading="lazy" />
-      <CardDetails topic={topic} user={user} updateLikes={updateLikes} showLinks={showLinks} />
+      <CardDetails
+        topic={topic}
+        user={user}
+        updateLikes={updateLikes}
+        showLinks={showLinks}
+      />
 
     </Card>
   )

@@ -21,6 +21,7 @@ import SubTopics from '../SubTopics/Index'
 import Sidebar from './Sidebar/Index'
 import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content } from './Style'
+import UserProfile from '../UserProfile/Index'
 // import Dashboard from '../Dashboard/Index'
 const Dashboard = React.lazy(() => import(/* webpackChunkName: "dashboard" */
 /* webpackMode: "lazy" */
@@ -82,10 +83,11 @@ const App = () => {
                     <Suspense fallback={<div>Loading...</div>}>
                       <Dashboard />
                     </Suspense>
-)}
+                  )}
                 />
                 <Route path="/signin" element={<SignInComponent />} />
                 <Route path="/signup" element={<SignUpComponent />} />
+                <Route path="/user/:userId" element={<UserProfile />} />
                 <Route path="/topics/*" element={<Topics />} />
                 <Route path="/" element={<Navigate replace to="/topics" />} />
               </Routes>
