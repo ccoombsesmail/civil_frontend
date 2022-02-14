@@ -7,7 +7,7 @@ export const LightButton = styled(Button)`
   justify-content: center;
   align-items: center;
   border-radius: .2vw;
-  background: none;
+  background: transparent !important;
   border: none;
 `
 

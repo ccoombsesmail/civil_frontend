@@ -16,6 +16,7 @@ const Card = ({
   onClick,
   listCard,
   height,
+  userId,
 }) => {
   const ref = useRef(null)
   const [totalHeight, setTotalHeight] = useState('unset')
@@ -30,7 +31,7 @@ const Card = ({
 
   return (
     <Container ref={ref} height={totalHeight} onClick={onClick} listCard={listCard}>
-      <UserInfoHeader iconSrc={iconSrc} time={time} username={username} />
+      <UserInfoHeader iconSrc={iconSrc} time={time} username={username} userId={userId} />
       <Description className="text-pop-up-top">
         &ldquo;
         {summary}

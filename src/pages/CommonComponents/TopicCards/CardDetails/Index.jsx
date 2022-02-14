@@ -15,6 +15,7 @@ const CardDetails = ({
   topic,
   onCommentClick,
   updateLikes,
+  topicCard = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -46,6 +47,7 @@ const CardDetails = ({
         likes={topic?.likes}
         onCommentClick={onCommentClick}
         updateLikes={updateLikes}
+        topicCard={topicCard}
       />
     </>
   )

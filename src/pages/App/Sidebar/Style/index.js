@@ -29,6 +29,7 @@ export const SideBarContainer = styled('div')`
     cursor: pointer;
     border-radius: .3em;
     margin: .2em;
+    width: 15px;
   }
 
   @media only screen and (max-width: 600px) {

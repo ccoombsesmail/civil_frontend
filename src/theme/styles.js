@@ -25,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
 */
 ol, ul {
     /* list-style: none; */
+  margin: 0;
+  padding: 0;
 }
 
 /* For images to not be able to exceed their container */
@@ -222,10 +224,19 @@ textarea {
   /* ******************************** CLERK RELATED STUFF ******************************** */
   .cl-component.cl-user-button {
     width: 4rem !important;
-    height: 4rem !important;
+    height: unset !important;
+    /* height: 4rem !important; */
     margin-right: 1rem;
   } 
 
+  .cl-component .cl-user-button-trigger>.cl-user-button-avatar {
+    /* height: calc(.7* var(--nav-size)) !important;
+    width: calc(.7* var(--nav-size)) !important; */
+
+    width: 3vw !important;
+    aspect-ratio: 32 / 32 !important;
+
+  }
 
   /*********************************  Toastify related stuff  ******************************** */
 

@@ -8,6 +8,7 @@ import sessionActions from '../../redux/actions/session/index'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import Header from './components/Header/Index'
 import { Line } from '../CommonComponents/Line'
+import BioForm from './components/BioForm/Index'
 
 const Dashboard = () => {
   const { getCurrentUser } = useBindDispatch(sessionActions)
@@ -22,6 +23,7 @@ const Dashboard = () => {
         <Header user={user} />
         <Line />
         <UserProfile />
+        <BioForm />
       </Container>
     </Suspense>
   )

@@ -57,8 +57,8 @@ export const Body = styled('div')`
 
 export const Description = styled('p')` 
   width: 100%;
-  padding: .5em 0;
-  /* margin: 1em 0; */
+  padding: 2vw 0;
+  margin-bottom: 0;
   font-size: 1.2vw;
   position: relative;
   display: flex;

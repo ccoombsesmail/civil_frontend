@@ -56,6 +56,10 @@ export const Thumb = styled('img')`
   border-radius: 50%; 
 `
 
+export const UserInfoContainer = styled('div')`
+  display: flex;
+`
+
 export const ExpandButton = styled('div')` 
   position: absolute;
   bottom: 0;

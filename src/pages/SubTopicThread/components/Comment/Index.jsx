@@ -12,7 +12,8 @@ import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
 import IconButton from '../../../CommonComponents/IconButton/Index'
 import ActionToolbar from '../../../CommonComponents/ActionToolbar/Index'
 import {
-  CommentContainer, Header, Username, Date, Body, Thumb, ExpandButton, EvidenceSection, Content,
+  CommentContainer, Header, Username, Date, Body,
+  Thumb, ExpandButton, EvidenceSection, Content, UserInfoContainer,
 } from './Style'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
@@ -22,6 +23,7 @@ import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
 
 import useOpenReplyModal from './hooks/useOpenReplyModal'
 import { ParentCommentContext } from '../CommentColumn/Index'
+import ThemeTooltip from '../../../CommonComponents/Tooltip/Index'
 
 const Comment = ({ commentData, replies }) => {
   if (!commentData) return null
@@ -40,7 +42,13 @@ const Comment = ({ commentData, replies }) => {
   return (
     <CommentContainer>
       <Header>
-        <Thumb src={commentData.createdByIconSrc} />
+        <UserInfoContainer>
+          <Thumb src={commentData.createdByIconSrc} />
+          <ThemeTooltip
+            tooltipHeader="Experience"
+            tooltipText={commentData.createdByExperience}
+          />
+        </UserInfoContainer>
         <Username>{commentData.createdBy}</Username>
         <Date>{`${mins}`}</Date>
       </Header>

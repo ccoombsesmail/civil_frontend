@@ -19,11 +19,11 @@ const EmbededYouTube = ({
   const updateLikes = useUpdateLikes(topic, user)
 
   useSetInnerHtml(descRef, topic?.description)
-
   return (
     <Card
       onClick={goToSubTopic}
       username={topic?.createdBy}
+      userId={topic?.clerkId}
       iconSrc={`${topic?.createdByIconSrc}`}
       summary={topic?.summary}
       time={getTimeSince(topic?.createdAt)}

@@ -8,7 +8,7 @@ const Header = ({ user, openModal }) => {
   console.log('')
   return (
     <HeaderContainer>
-      <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} />
+      <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} userId={user?.id} />
       <FlexDiv>
         <p className="text-focus-in">
           Hey

@@ -67,6 +67,7 @@ const VideoShowPage = ({
           likes={topic?.likes}
           onCommentClick={openModal}
           updateLikes={updateLikes}
+          topicCard
         />
       </Card>
     </>

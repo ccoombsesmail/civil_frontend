@@ -7,7 +7,7 @@ import topicsReducer from './topicsReducer'
 import subtopicsReducer from './subTopicsReducer'
 import commentsReducer from './comments/commentsReducer'
 import usersReducer from './users/usersReducer'
-
+import followsReducer from './follows/followsReducer'
 import enumsReducer from './enumsReducer'
 
 const reducers = combineReducers({
@@ -18,5 +18,6 @@ const reducers = combineReducers({
   comments: commentsReducer,
   enums: enumsReducer,
   users: usersReducer,
+  follows: followsReducer,
 })
 export default reducers

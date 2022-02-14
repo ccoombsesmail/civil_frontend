@@ -17,7 +17,6 @@ const SubTopics = () => {
   const user = useSelector((s) => s.session.currentUser)
 
   useEffect(() => {
-    console.log(subtopicsEmpty)
     getTopic(topicId, user?.id)
     if (subtopicsEmpty) getAllSubTopics(topicId)
   }, [])

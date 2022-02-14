@@ -2,8 +2,8 @@ import React from 'react'
 import useGoToUserProfile from '../../hooks/routing/useGoToUserProfile'
 import { Thumb } from './Style/Index'
 
-const UserIcon = ({ width, iconSrc, username }) => {
-  const goToUserProfile = useGoToUserProfile(username)
+const UserIcon = ({ width, iconSrc, userId }) => {
+  const goToUserProfile = useGoToUserProfile(userId)
   return (
     <Thumb
       width={width}
