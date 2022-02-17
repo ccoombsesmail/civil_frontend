@@ -9,7 +9,7 @@ import { google } from 'googleapis'
 import ogs from 'open-graph-scraper'
 import cors from 'cors'
 
-import expressStaticGzip from 'express-static-gzip'
+// import expressStaticGzip from 'express-static-gzip'
 
 const BACKEND_DEV = 'http://localhost:8092/api/v1'
 dotenv.config()

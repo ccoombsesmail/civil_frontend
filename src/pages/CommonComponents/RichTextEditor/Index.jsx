@@ -1,21 +1,21 @@
 import React, { useCallback } from 'react'
 import ReactQuill, { Quill } from 'react-quill'
-// import quillEmoji from 'quill-emoji'
-// import 'react-quill/dist/quill.snow.css'
-// import 'quill-emoji/dist/quill-emoji.css'
+import quillEmoji from 'quill-emoji'
+import 'react-quill/dist/quill.snow.css'
+import 'quill-emoji/dist/quill-emoji.css'
 
 import { Container } from './Style'
 
-// const {
-//   EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji,
-// } = quillEmoji
+const {
+  EmojiBlot, ShortNameEmoji, ToolbarEmoji, TextAreaEmoji,
+} = quillEmoji
 
-// Quill.register({
-//   'formats/emoji': EmojiBlot,
-//   'modules/emoji-shortname': ShortNameEmoji,
-//   'modules/emoji-toolbar': ToolbarEmoji,
-//   'modules/emoji-textarea': TextAreaEmoji,
-// }, true)
+Quill.register({
+  'formats/emoji': EmojiBlot,
+  'modules/emoji-shortname': ShortNameEmoji,
+  'modules/emoji-toolbar': ToolbarEmoji,
+  'modules/emoji-textarea': TextAreaEmoji,
+}, true)
 
 const RichTextEditor = ({
   content, setContent, setRawText, setToxicityScore,
@@ -27,13 +27,13 @@ const RichTextEditor = ({
       [{ color: [] }, { background: [] }],
       [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
       [{ align: [] }],
-      // ['emoji'],
+      ['emoji'],
       ['link', 'image'],
       ['clean'],
     ],
-    // 'emoji-toolbar': true,
-    // 'emoji-textarea': true,
-    // 'emoji-shortname': true,
+    'emoji-toolbar': true,
+    'emoji-textarea': true,
+    'emoji-shortname': true,
 
   }
 
@@ -47,7 +47,7 @@ const RichTextEditor = ({
   return (
     <Container className="text-editor">
       <ReactQuill
-          // theme="snow"
+        theme="snow"
         value={content}
         onChange={handleOnChange}
         modules={modules}
