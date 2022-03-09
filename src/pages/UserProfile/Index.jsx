@@ -9,7 +9,7 @@ import followActions from '../../redux/actions/follows/index'
 
 import {
   Banner, Container, HeaderContainer, Content, StyledNav, UserIcon, TabsIconContainer, Bio,
-  Left, Middle, Right, Experience, ExperienceContainer
+  Left, Middle, Right, Experience, ExperienceContainer,
 } from './Style/index'
 import { AddFriendSvg, RemoveFriendSvg } from '../../svgs/svgs'
 import useFollowClickHandler from './hooks/useFollowClickHandler'
@@ -81,7 +81,7 @@ const UserProfile = () => {
               </Tab.Pane>
             </Tab.Content>
           </Middle>
-          <Right></Right>
+          <Right />
         </Content>
       </Tab.Container>
     </Container>

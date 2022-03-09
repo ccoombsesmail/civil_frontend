@@ -6,7 +6,7 @@ import useBindDispatch from '../../hooks/redux/useBindDispatch'
 
 import checkLinkType from './checkLinkType'
 
-export default () => {
+export default (metaData) => {
   const { createTopic, uploadTopicMedia } = useBindDispatch(topicActions)
   const user = useSelector((s) => s.session.currentUser)
 
@@ -20,6 +20,7 @@ export default () => {
       clerkId: user.id,
       evidenceLinks: eLinks,
       [linkType]: values.contentUrl,
+      thumbImgUrl: metaData.ogImage?.url,
     }
     if (values.file instanceof File) {
       const [fileType, fileFormat] = values.file.type.split('/')
@@ -31,5 +32,5 @@ export default () => {
     }
     setSubmitting(false)
     resetForm({})
-  }, [])
+  }, [metaData])
 }

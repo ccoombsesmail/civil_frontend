@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Route, Routes } from 'react-router-dom'
-import SubTopicThread from '../../../SubTopicThread/Index'
-import SubTopicsTable from '../SubTopicsList/Index'
+import SubTopicThread from '../SubTopicThread/Index'
+import SubTopicsList from '../SubTopicsList/Index'
 import WavyBackground from '../../../CommonComponents/WavyBackground/Index'
 
 export default () => (
@@ -16,6 +16,6 @@ export default () => (
         </>
       )}
     />
-    <Route path="/" element={<SubTopicsTable />} />
+    <Route path="/" element={<SubTopicsList />} />
   </Routes>
 )

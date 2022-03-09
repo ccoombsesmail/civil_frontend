@@ -22,6 +22,7 @@ import Sidebar from './Sidebar/Index'
 import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content } from './Style'
 import UserProfile from '../UserProfile/Index'
+
 // import Dashboard from '../Dashboard/Index'
 const Dashboard = React.lazy(() => import(/* webpackChunkName: "dashboard" */
 /* webpackMode: "lazy" */
@@ -91,8 +92,8 @@ const App = () => {
                 <Route path="/topics/*" element={<Topics />} />
                 <Route path="/" element={<Navigate replace to="/topics" />} />
               </Routes>
+              <Modal closeModal={closeModal} />
             </Content>
-            <Modal closeModal={closeModal} />
             <ToastContainer autoClose={2000} className="toasty" transition={elitpicIn} />
           </MainContainer>
         </div>

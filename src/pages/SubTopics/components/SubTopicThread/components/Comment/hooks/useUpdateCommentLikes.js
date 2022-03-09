@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import commentActions from '../../../../../redux/actions/comments'
+import commentActions from '../../../../../../../redux/actions/comments'
 
 export default (comment, user) => {
   const increment = !comment.liked

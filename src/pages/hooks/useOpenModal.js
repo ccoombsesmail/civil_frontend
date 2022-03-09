@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux'
 
 import uiActionCreators from '../../redux/actions/ui/index'
 
-export default (modalType) => {
+export default (modalType, modalProps) => {
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
   return useCallback(() => {
-    openModal(modalType)
-  }, [])
+    openModal(modalType, modalProps)
+  }, [modalType, modalProps])
 }

@@ -12,9 +12,6 @@ module.exports = {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
 
   module: {
     rules: [
@@ -81,6 +78,19 @@ module.exports = {
     minimizer: [new UglifyJsPlugin()],
   },
   devtool: 'source-map',
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    // fallback: {
+    //   os: require.resolve('os'),
+    //   https: require.resolve('https'),
+    //   http: require.resolve('http'),
+    //   // https: require.resolve('https-browserify'),
+    //   // http: false,
+    //   // https: false,
+    //   // http: require.resolve('stream-http'),
+    //   crypto: require.resolve('crypto'),
+    // },
+  },
 
 }
 

@@ -5,25 +5,24 @@ import React, {
 import { useSelector } from 'react-redux'
 
 import Collapse from 'react-bootstrap/Collapse'
-// import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 
-import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
+import { UpArrowSvg, DownArrowSvg } from '../../../../../../svgs/svgs'
 
-import IconButton from '../../../CommonComponents/IconButton/Index'
-import ActionToolbar from '../../../CommonComponents/ActionToolbar/Index'
+import IconButton from '../../../../../CommonComponents/IconButton/Index'
+import ActionToolbar from '../../../../../CommonComponents/ActionToolbar/Index'
 import {
   CommentContainer, Header, Username, Date, Body,
   Thumb, ExpandButton, EvidenceSection, Content, UserInfoContainer,
 } from './Style'
 
-import { getTimeSince } from '../../../../generic/string/dateFormatter'
-import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
+import { getTimeSince } from '../../../../../../generic/string/dateFormatter'
+import useSetInnerHtml from '../../../../../hooks/useSetInnerHtml'
 import useUpdateCommentLikes from './hooks/useUpdateCommentLikes'
 import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
 
 import useOpenReplyModal from './hooks/useOpenReplyModal'
 import { ParentCommentContext } from '../CommentColumn/Index'
-import ThemeTooltip from '../../../CommonComponents/Tooltip/Index'
+import ThemeTooltip from '../../../../../CommonComponents/Tooltip/Index'
 
 const Comment = ({ commentData, replies }) => {
   if (!commentData) return null
@@ -61,7 +60,6 @@ const Comment = ({ commentData, replies }) => {
             icon={expandIcon}
             onClick={() => setIsOpen(!isOpen)}
           >
-            {/* {commentData.id} */}
             Replies
           </IconButton>
         </ExpandButton>

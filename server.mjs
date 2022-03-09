@@ -8,6 +8,22 @@ import { v4 as uuidv4 } from 'uuid'
 import { google } from 'googleapis'
 import ogs from 'open-graph-scraper'
 import cors from 'cors'
+// import Web3 from 'web3'
+
+// const web3 = new Web3('https://api-testnet.trinity-tech.cn/eid')
+// const contract = new web3.eth.Contract([
+//   { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
+//   {
+//     inputs: [{ internalType: 'string', name: 'data', type: 'string' }],
+//     name: 'publishDidTransaction',
+//     outputs: [],
+//     stateMutability: 'nonpayable',
+//     type: 'function',
+//   },
+// ])
+// contract.options.address = '0xF654c3cBBB60D7F4ac7cDA325d51E62f47ACD436'
+
+// const acc = web3.eth.accounts.decrypt(keystore, password)
 
 // import expressStaticGzip from 'express-static-gzip'
 
@@ -30,7 +46,6 @@ app.set('json escape', true)
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
 app.use('/', express.static(path.join(__dirname, 'public')))
-
 // app.use('/', expressStaticGzip(path.join(__dirname, 'public'), {
 //   customCompressions: [{
 //     encodingName: 'gzip',

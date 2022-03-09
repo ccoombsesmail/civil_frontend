@@ -35,7 +35,7 @@ export const Label = styled('label')`
 
 export const StyledInput = styled('input')`
   display: block;
-  margin: 1.2em 0 0 0;
+  /* margin: 1.2em 0 0 0; */
   padding: .5em;
   color: black;
   width: ${(props) => props.width || '30%'};

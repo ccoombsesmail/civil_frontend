@@ -41,7 +41,7 @@ const uploadTopicMedia = (data, fileType, fileFormat, topicData) => (dispatch) =
   .uploadTopicMedia(data, fileType, fileFormat)
   .then((res) => {
     createTopic({ ...topicData, ...res.data })(dispatch)
-    })
+  })
   // .then((res) => dispatch(addTopicActionCreator(res)))
   // .then(() => dispatch(closeModal()))
 

@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import { LongDownArrow } from '../../../../../svgs/svgs'
 
 export const Container = styled('div')` 
   display: flex;
+  flex: 60%;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -14,9 +16,13 @@ export const Container = styled('div')`
   background-color: white;
   h1 {
     text-align: center;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     letter-spacing: .2em;
+    /* font-weight: bold; */
+  }
+  span {
     font-weight: bold;
+    cursor: pointer;
   }
 
    @media only screen and (max-width: 600px) {
@@ -32,4 +38,30 @@ export const LinksContainer = styled('div')`
   ul:first-child {
     border-right: 1px solid gray;
   }
+`
+
+export const Description = styled('p')`
+  width: 100%;
+  font-size: .7vw;
+  word-wrap: break-word;
+  padding: 1em;
+`
+
+export const TopicSummaryContainer = styled('div')`  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* height: ${(props) => (`${props.height}px`)}; */
+  /* width: 40vw;   */
+  margin: 2em;
+  border-radius: .5em;
+  box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+`
+
+export const StyledLongDownArrow = styled(LongDownArrow)` 
+  margin-bottom: 2vw;
 `

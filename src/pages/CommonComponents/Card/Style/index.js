@@ -116,7 +116,7 @@ export const Container = styled('li')`
     width: 100%;
     border-radius: 0;
   }
- 
+
 `
 
 export const Thumb = styled('img')` 
@@ -124,4 +124,35 @@ export const Thumb = styled('img')`
   width: 50px;
   height: 50px;      
   border-radius: 50%; 
+`
+
+export const VideoDescriptionContainer = styled('li')` 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: ${(props) => (`${props.height}px`)};
+  width: 45vw;  
+  margin: 0 2em;
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
+  box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  /* transition: all 1s ease-in-out; */
+
+  :hover > div:first-child {
+    filter: brightness(.95);
+  }
+
+  :hover p {
+    filter: brightness(.95);
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    border-radius: 0;
+  }
 `

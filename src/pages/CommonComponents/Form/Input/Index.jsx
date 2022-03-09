@@ -9,12 +9,11 @@ import { StyledInput, Label, Container } from './Style'
 import Error from '../ErrorMessage/Index'
 
 const Input = ({
-  width, field, form, placeholder, onBlur, ...props
+  width, field, form, placeholder, onBlur, label, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
   const handleOnBlur = typeof onBlur === 'function' ? onBlur : () => undefined
-
   return (
     <Container>
       <StyledInput
@@ -27,7 +26,7 @@ const Input = ({
         showError={showError}
         onBlur={handleOnBlur}
       />
-      <Label htmlFor={field.name}>{capitalize(field.name)}</Label>
+      <Label htmlFor={field.name}>{label || capitalize(field.name)}</Label>
       <ErrorMessage width={width} name={field.name} component={Error} />
     </Container>
   )

@@ -13,16 +13,15 @@ import { CREATE_SUB_TOPIC } from '../../../App/Modal/Index'
 import { Container } from './Style/index'
 
 const SubTopicsList = () => {
-  const subtopics = useSelector((s) => s.subtopics.list)
+  const subtopics = useSelector((s) => s.subtopics)
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
-  const genSubTopic = subtopics?.find(({ title }) => title === 'General')
+  const genSubTopic = Object.values(subtopics)?.find(({ title }) => title === 'General')
   const goToSubTopic = useGoToSubTopic(genSubTopic?.id)
 
   return (
     <Container>
       <h1>
-
         Browse Some
         {' '}
         <b>Sub-Topics</b>

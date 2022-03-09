@@ -3,7 +3,7 @@ import { Collapse } from 'react-bootstrap'
 // import { MdExpandMore, MdExpandLess } from 'react-icons/md'
 import { UpArrowSvg, DownArrowSvg } from '../../svgs/svgs'
 
-import Card from '../CommonComponents/Card/Index'
+import { VideoDescriptionCard } from '../CommonComponents/Card/Index'
 import ActionToolbar from '../CommonComponents/ActionToolbar/Index'
 import LinkSection from '../CommonComponents/LinkSection/Index'
 import IconButton from '../CommonComponents/IconButton/Index'
@@ -36,7 +36,7 @@ const VideoShowPage = ({
   return (
     <>
       <VideoPlayer src={src} />
-      <Card
+      <VideoDescriptionCard
         onClick={goToSubTopic}
         username={topic?.createdBy}
         iconSrc={`${topic?.createdByIconSrc}`}
@@ -69,7 +69,7 @@ const VideoShowPage = ({
           updateLikes={updateLikes}
           topicCard
         />
-      </Card>
+      </VideoDescriptionCard>
     </>
   )
 }

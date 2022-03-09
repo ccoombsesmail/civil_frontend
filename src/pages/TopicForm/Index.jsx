@@ -44,9 +44,8 @@ const CreateTopicForm = () => {
   const [content, setContent] = useState('')
 
   const validator = useConfigFormErrors(ERRORS)
-  const handleSubmit = useHandleSubmit(content)
   const { metaData, getLinkMetaDataOnBlur } = useGetLinkMetaDataOnBlur()
-
+  const handleSubmit = useHandleSubmit(metaData)
   const { closeModal } = useBindDispatch(uiActions)
 
   return (

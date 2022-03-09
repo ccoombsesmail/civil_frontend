@@ -1,12 +1,13 @@
 import React, { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
-// import { BiComment } from 'react-icons/bi'
-// import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
-
 import IconButton from '../IconButton/Index'
 import { Container } from './Style/index'
-import { CommentSvg, LikeSvg, LikeClickedSvg } from '../../../svgs/svgs'
+import {
+  CommentSvg, LikeSvg, LikeClickedSvg, OpposingViewsSvg,
+} from '../../../svgs/svgs'
+import { OPPOSING_REC_FORM } from '../../App/Modal/Index'
+import useOpenModal from '../../hooks/useOpenModal'
 
 const ActionToolbar = ({
   likes, liked, updateLikes, onCommentClick, updateCivility, civil, topicCard,
@@ -14,7 +15,9 @@ const ActionToolbar = ({
   const positiveCivility = (civil == null) ? 1 : -1
   const negativeCivility = (civil == null) ? -1 : 1
   const removeCivility = civil || (civil === false)
-  const params = useParams()
+  const { topicId, subTopicId, ...params } = useParams()
+  const openModal = useOpenModal(OPPOSING_REC_FORM, { topicId, subTopicId })
+
   return (
     <Container>
       <div>
@@ -36,6 +39,7 @@ const ActionToolbar = ({
         )}
       </div>
       <div>
+        <OpposingViewsSvg onClick={openModal} />
         <span>
           {likes || 0}
           {' '}

@@ -10,9 +10,9 @@ import {
   Container, TableHeader, Table, ColHeader, ColItem,
 } from './Style'
 
-const SubTopicsList = () => {
+const SubTopicsTable = () => {
   // const user = useSelector((state) => state.session.currentUser)
-  const subtopics = useSelector((state) => state.subtopics.list)
+  const subtopics = Object.values(useSelector((state) => state.subtopics))
   const { topicId } = useParams()
   return (
     <>
@@ -35,7 +35,7 @@ const SubTopicsList = () => {
           </thead>
           {
             subtopics.map((subtopic) => (
-              <SubTopicsItem key={topicId} {...subtopic} topicId={topicId} />
+              <SubTopicsItem key={subtopic.id} {...subtopic} topicId={topicId} />
             ))
           }
         </Table>
@@ -44,4 +44,4 @@ const SubTopicsList = () => {
   )
 }
 
-export default SubTopicsList
+export default SubTopicsTable

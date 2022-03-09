@@ -5,25 +5,24 @@ import { useParams } from 'react-router-dom'
 import { Tab } from 'react-bootstrap'
 
 import useCategorizeComments from './hooks/useCategorizeComments'
-import useBindDispatch from '../hooks/redux/useBindDispatch'
+import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
-import subTopicActions from '../../redux/actions/subtopics'
-import commentActions from '../../redux/actions/comments'
-import topicActions from '../../redux/actions/topics'
+import subTopicActions from '../../../../redux/actions/subtopics'
+import commentActions from '../../../../redux/actions/comments'
+import topicActions from '../../../../redux/actions/topics'
 
 import CommentColumn from './components/CommentColumn/Index'
 import { ColumnContainer } from './Style/index'
-import { Line } from '../SubTopics/Style'
-import { ThemeTab } from '../CommonComponents/Tabs/Style'
+import { ThemeTab } from '../../../CommonComponents/Tabs/Style'
+import { Line } from '../../Style'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
-  const { getSubTopic, getAllComments, getTopic } = useBindDispatch(
+  const { getAllComments, getTopic } = useBindDispatch(
     subTopicActions, commentActions, topicActions,
   )
   const user = useSelector((state) => state.session.currentUser)
-  const subtopic = useSelector((state) => state.subtopics.list)?.find((s) => s.id === subTopicId)
-
+  const subtopic = useSelector((state) => state.subtopics)[subTopicId]
   const [key, setKey] = useState('neutral')
 
   const {
@@ -34,11 +33,9 @@ const SubTopicThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
-    getSubTopic(subTopicId)
     getAllComments(subTopicId, user?.id)
     getTopic(topicId, user?.id)
-  }, [])
-  console.log(subtopic)
+  }, [user])
   return (
     <>
       <Line />

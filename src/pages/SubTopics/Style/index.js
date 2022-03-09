@@ -27,3 +27,25 @@ export const Line = styled('hr')`
   height: .5px;
   border: none;
 `
+
+export const HeaderContainer = styled('section')`
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  width: 100%;
+
+`
+
+export const Left = styled('div')` 
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+`
+
+export const Right = styled('div')` 
+  flex: 25%;
+  display: flex;
+  /* a: center; */
+  flex-direction: column;
+  background: white;
+`

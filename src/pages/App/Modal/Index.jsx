@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 import React, { Suspense } from 'react'
 import StrapModal from 'react-bootstrap/Modal'
@@ -11,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { ModalWrapper } from './Style/index'
 
 import UploadIconForm from '../../Dashboard/components/UploadIconForm/Index'
+import OpposingRecForm from '../../OpposingRecForm/Index'
 
 const CreateTopicForm = React.lazy(() => import(
   /* webpackChunkName: "topic-form" */
@@ -38,6 +40,7 @@ export const CREATE_TOPIC = 'CREATE_TOPIC'
 export const CREATE_SUB_TOPIC = 'CREATE_SUB_TOPIC'
 export const REPLY = 'REPLY'
 export const ICON_FORM = 'ICON_FORM'
+export const OPPOSING_REC_FORM = 'OPPOSING_REC_FORM'
 
 const Modal = ({ closeModal }) => {
   const { modalType, modalProps } = useSelector((s) => s.ui)
@@ -45,12 +48,6 @@ const Modal = ({ closeModal }) => {
   const isOpen = useSelector((s) => s.ui.modalOpen)
   let component
   switch (modalType) {
-    // case SIGN_UP:
-    //   component = <SignUpForm />
-    //   break
-    // case SIGN_IN:
-    //   component = <SignIn />
-    //   break
     case CREATE_TOPIC:
       component = <CreateTopicForm />
       break
@@ -62,6 +59,9 @@ const Modal = ({ closeModal }) => {
       break
     case ICON_FORM:
       component = <UploadIconForm />
+      break
+    case OPPOSING_REC_FORM:
+      component = <OpposingRecForm {...modalProps} />
       break
     default:
       break
