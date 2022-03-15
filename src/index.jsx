@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const store = configureStore(preloadedState)
 
+  // In the connectivity SDK
+  // class EssentialsConnector.DIDAdapter {
+  //     createdIdTransaction(payload) {
+  //         let web3provider = new WalletConnectWeb3Provider();
+  //         let web3 = new Web3(web3provider);
+  //         web3.methods.publishDID(payload);
+  //     }
+  // }
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
