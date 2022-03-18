@@ -1,5 +1,9 @@
 ./node_modules
 
+.metals
+.vscode
+./.metals
+./.vscode
 
 /public/bundles
 

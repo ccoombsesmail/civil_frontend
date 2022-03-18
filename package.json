@@ -59,7 +59,7 @@
     "webpack": "webpack --mode=development --watch",
     "webpack-prod": "webpack --mode=production",
     "server-dev": "node server.mjs",
-    "dev": "npm run server-dev & npm run webpack",
+    "dev": "npm run webpack -- --mode development --watch",
     "prod": "NODE_ENV=production npm run server-dev & npm run webpack-prod",
     "build:stats": "webpack --mode=production --watch",
     "bundle-report": "webpack-bundle-analyzer --port 4200 compilation-stats.json"
@@ -94,6 +94,5 @@
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "3.11.3"
-  },
-  "proxy": "http://localhost:5050"
+  }
 }

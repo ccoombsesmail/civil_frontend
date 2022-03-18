@@ -5,7 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'Index.jsx'),
+  entry: './src/index.jsx',
   output: {
     path: path.join(__dirname, 'public'),
     // filename: 'bundle.js',
@@ -93,7 +93,3 @@ module.exports = {
   },
 
 }
-
-// const neutrino = require('neutrino')
-
-// module.exports = neutrino().webpack()
