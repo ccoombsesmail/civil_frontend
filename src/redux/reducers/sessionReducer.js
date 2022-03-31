@@ -2,6 +2,7 @@ import { setAuthToken } from '../../api/util/auth'
 
 export const ADD_SESSION_DATA_BACKEND = 'ADD_SESSION_DATA_BACKEND'
 export const ADD_SESSION_DATA_CLERK = 'ADD_SESSION_DATA_CLERK'
+export const ADD_SESSION_DATA_DID = 'ADD_SESSION_DATA_DID'
 
 export const LOG_OUT = 'LOG_OUT'
 export const UPDATE = 'UPDATE'
@@ -12,6 +13,11 @@ const reducer = (state = {}, action) => {
       return { ...state, currentUser: { ...state.currentUser, civility: action.payload.civility } }
     case ADD_SESSION_DATA_CLERK:
       return { ...state, currentUser: { ...state.currentUser, ...action.payload } }
+    case ADD_SESSION_DATA_DID:
+      return {
+        ...state,
+        currentUser: { username: action.payload.did.repr || action.payload.did.methodSpecificId },
+      }
     case LOG_OUT:
       localStorage.setItem('jwt', null)
       setAuthToken(null)

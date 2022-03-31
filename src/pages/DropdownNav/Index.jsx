@@ -3,26 +3,28 @@ import React, { useState } from 'react'
 import { Transition } from 'react-transition-group'
 import {
   SignedOut,
-  SignedIn,
-  UserButton,
 } from '@clerk/clerk-react'
 
-// import { AiOutlineLogin } from 'react-icons/ai'
-// import { FaUserCircle } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
-import { UserIconSvg, LoginSvg } from '../../svgs/svgs'
-// import useGoToDashboard from '../hooks/useGoToDashboard'
+import { UserIconSvg, LoginSvg, AuthenticationSvg } from '../../svgs/svgs'
 
 import {
-  NavItem, IconNavButton, DropdownMenuContainer, Menu, MenuItem,
+  NavItem, IconNavButton, DropdownMenuContainer, Menu,
+  MenuItem, UserInfoSection, Greeting, DID, ButtonsContainer,
 } from './Style/index'
+import useSessionType from '../hooks/permissions/useSessionType'
+import UserIcon from '../CommonComponents/UserIcon/Index'
+import useOpenOnClick from './hooks/useOpenOnClick'
+import useLogout from './hooks/useLogout'
+import useGoToDash from './hooks/useGoToDash'
+import { useSelector } from 'react-redux';
 
 export const NavDropdownToggle = ({ children }) => {
   const [open, setOpen] = useState(false)
-
+  const openOnClick = useOpenOnClick(setOpen)
   return (
     <NavItem>
-      <IconNavButton onClick={() => setOpen(!open)}>
+      <IconNavButton onClick={openOnClick}>
         <UserIconSvg />
       </IconNavButton>
       {React.cloneElement(children, { open, setOpen })}
@@ -31,15 +33,13 @@ export const NavDropdownToggle = ({ children }) => {
 }
 
 export const DropdownMenu = ({ open, setOpen }) => {
-  // const goToDashboard = useGoToDashboard()
-  const { pathname } = useLocation()
+  const { signedInViaDID } = useSessionType()
+  console.log(signedInViaDID)
+  const user = useSelector((s) => s.session.currentUser)
 
-  const onUserBtnClick = () => {
-    const btns = document.getElementsByClassName('cl-accounts-manager-button')
-    for (const btn of btns) {
-      btn.addEventListener('click', () => setOpen(false))
-    }
-  }
+  const deleteStore = useLogout(setOpen)
+  const goToDashboard = useGoToDash(setOpen)
+  const { pathname } = useLocation()
 
   const DropdownItem = ({
     children, leftIcon, rightIcon, onClick, to, state,
@@ -59,39 +59,37 @@ export const DropdownMenu = ({ open, setOpen }) => {
     >
       {(state) => (
         <DropdownMenuContainer state={state}>
+          { signedInViaDID && (
+          <UserInfoSection>
+            <UserIcon width="50px" />
+            <Greeting>Hello, Friend</Greeting>
+            <DID>
+              {user?.username}
+              {' '}
+              <AuthenticationSvg />
+            </DID>
+            <ButtonsContainer>
+              <button type="button" onClick={goToDashboard}>
+                Manage Identity
+              </button>
+              <button type="button" onClick={deleteStore}>
+                Logout
+              </button>
+            </ButtonsContainer>
+          </UserInfoSection>
+          )}
           <Menu>
-            <SignedIn>
-              <DropdownItem
-                onClick={onUserBtnClick}
-                leftIcon={<UserButton userProfileUrl="/dashboard" />}
-                to={pathname}
-              >
-                User Management
-              </DropdownItem>
-            </SignedIn>
-            {/* <DropdownItem
-              leftIcon={<RiUser3Fill />}
-              to="/dashboard"
-              onClick={goToDashboard}
-            >
-              My Profile
-            </DropdownItem> */}
-            {/* <DropdownItem
-              onClick={logout}
-              leftIcon={<AiOutlineLogout />}
-            >
-              Logout
-            </DropdownItem> */}
             <SignedOut>
-              <DropdownItem
-                leftIcon={<LoginSvg />}
-                to="/signin"
-                state={{ redirectPath: pathname }}
-                onClick={() => setOpen(false)}
-              >
-                Sign In
-              </DropdownItem>
-              {/* </DropdownItem> */}
+              {!signedInViaDID && (
+                <DropdownItem
+                  leftIcon={<LoginSvg />}
+                  to="/authenticate"
+                  state={{ redirectPath: pathname }}
+                  onClick={() => setOpen(false)}
+                >
+                  Sign In
+                </DropdownItem>
+              )}
             </SignedOut>
           </Menu>
         </DropdownMenuContainer>

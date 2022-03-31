@@ -1,8 +1,10 @@
 const path = require('path')
+const webpack = require('webpack')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const CompressionPlugin = require('compression-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UnusedWebpackPlugin = require('unused-webpack-plugin');
 
 module.exports = {
   entry: './src/index.jsx',
@@ -25,6 +27,11 @@ module.exports = {
           },
         },
 
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /.(png|jp(e)g|svg|gif)$/g,
@@ -67,19 +74,16 @@ module.exports = {
     ],
   },
   plugins: [
-    // new BundleAnalyzerPlugin(),
-    // new CompressionPlugin(),
-    // new HtmlWebpackPlugin({
-    //   title: 'Custom template',
-    //   template: 'index.html',
-    // }),
+    new webpack.DefinePlugin({
+      process: undefined
+    })
   ],
   optimization: {
     minimizer: [new UglifyJsPlugin()],
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
     // fallback: {
     //   os: require.resolve('os'),
     //   https: require.resolve('https'),

@@ -1,13 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserButton, SignedOut } from '@clerk/clerk-react'
+import { UserButton, SignedOut, SignedIn, useClerk } from '@clerk/clerk-react'
 
 import IconButton from '../../CommonComponents/IconButton/Index'
 import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
 import { StyledHeader, ButtonsContainer, CivilIcon } from './Style'
+import useIsLoggedInViaDID from '../../DID/hooks/useIsLoggedInViaDID'
 
 const Header = () => {
   const navigate = useNavigate()
+  const loggedInViaDID = useIsLoggedInViaDID()
+  const clerk = useClerk()
   return (
     <StyledHeader>
       <ButtonsContainer>
@@ -15,7 +18,9 @@ const Header = () => {
           Civil
         </IconButton>
       </ButtonsContainer>
-      <UserButton userProfileUrl="/dashboard" />
+      <SignedIn>
+        <UserButton userProfileUrl="/dashboard" />
+      </SignedIn>
       <SignedOut>
         <NavDropdownToggle>
           <DropdownMenu />

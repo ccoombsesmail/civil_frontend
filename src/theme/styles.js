@@ -98,13 +98,37 @@ textarea {
     --m-danger-color-light: #E89660;
 
     /*      DROPDOWN       */
-    --bg:  #242526;
+    /* --bg:  #242526; */
+    --bg:  white;
     --bg-accent: #484a4f;
     --text-color: #dadce1;
     --nav-size: 7vh;
     --border: 1px solid #474a4d;
     --border-radius: 8px;
     --speed: .5s; 
+
+    /* CLERK*/
+    --clerk-primary: #87C232;
+    --clerk-primary-rgb: 135,194,50;
+    --clerk-primary-d1: hsl(85,59%,43%);
+    --clerk-primary-d2: hsl(85,59%,41%);
+    --clerk-primary-l1: hsl(85,59%,92%);
+    --clerk-primary-l2: hsl(85,59%,95%);
+    --clerk-primary-a1: hsla(85,59%,48%,0.5);
+    --clerk-primary-a2: hsla(85,59%,48%,0.25);
+    --clerk-font-family: "Source Sans Pro", sans-serif;
+    --clerk-font-color: #151515;
+    --clerk-font-color-rgb: 21,21,21;
+    --clerk-font-color-l1: hsl(0,0%,50%);
+    --clerk-label-font-weight: 600;
+    --clerk-button-font-family: "Source Sans Pro", sans-serif;
+    --clerk-button-font-color: #ffffff;
+    --clerk-button-font-weight: 600;
+    --clerk-padding-mod: 1;
+    --clerk-border-radius: 0.5em;
+    --clerk-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --clerk-background-color: #ffffff;
+    --clerk-accounts-background-color: #ffffff;
 
   };
 

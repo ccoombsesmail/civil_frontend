@@ -11,7 +11,18 @@ export const HeaderContainer = styled('div')`
   p {
     margin: 0 1vw;
     font-size: 1.1vw;
-    color: gray
+    color: gray;
+    display: flex;
+    align-items: center;
+  }
+
+  b {
+    display: inline-block;
+    max-width: 12vw;
+    margin-left: .5vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 

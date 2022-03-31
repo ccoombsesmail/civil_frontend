@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ToastContainer, cssTransition } from 'react-toastify'
 import {
+  ClerkLoaded,
   ClerkProvider, useUser,
 } from '@clerk/clerk-react'
 
@@ -13,7 +14,7 @@ import useFetchAppData from './hooks/useFetchAppData'
 import GlobalStyle from '../../theme/styles'
 import uiActionCreators from '../../redux/actions/ui'
 
-import { SignInComponent, SignUpComponent } from '../SignIn/Index'
+import AuthFlow from '../AuthFlow/Index'
 import Header from './Header/Index'
 import Modal from './Modal/Index'
 import Topics from '../Topics/Index'
@@ -30,6 +31,7 @@ const Dashboard = React.lazy(() => import(/* webpackChunkName: "dashboard" */
   /* webpackPreload: true */ '../Dashboard/Index'
 ))
 
+// const frontendApi = 'clerk.legible.tortoise-0.lcl.dev'
 const frontendApi = 'clerk.bjuk3.m71w1.lcl.dev'
 
 const LoadDataComponent = () => {
@@ -42,6 +44,7 @@ const LoadDataComponent = () => {
 
 const LoadingBridge = ({ children }) => {
   const { user, isLoading } = useUser({ withAssertions: true })
+  console.log(user)
   return (
     <>
       {
@@ -72,7 +75,9 @@ const App = () => {
       <LoadingBridge>
         <div id="main-container" style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
           <LoadingSpinner />
-          <Header />
+          <ClerkLoaded>
+            <Header />
+          </ClerkLoaded>
           <MainContainer>
             <Sidebar />
             <Content>
@@ -86,8 +91,7 @@ const App = () => {
                     </Suspense>
                   )}
                 />
-                <Route path="/signin" element={<SignInComponent />} />
-                <Route path="/signup" element={<SignUpComponent />} />
+                <Route path="/authenticate/*" element={<AuthFlow />} />
                 <Route path="/user/:userId" element={<UserProfile />} />
                 <Route path="/topics/*" element={<Topics />} />
                 <Route path="/" element={<Navigate replace to="/topics" />} />

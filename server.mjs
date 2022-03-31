@@ -18,9 +18,7 @@ server.keepAliveTimeout = 65000
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get('/*', (req, res) => {
-  console.log("RUNNING")
   res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
-      console.log("NOT WORCKING")
     if (err) res.status(500).send(err)
   })
 })
