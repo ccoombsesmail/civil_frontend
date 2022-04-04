@@ -14,7 +14,7 @@ export const Container = styled('div')`
 
 export const TableHeader = styled('header')` 
     height: 10vh;
-    background-image: linear-gradient(to right, var( --m-primary-background-1-color), #83af9b);
+    background-image: linear-gradient(to right, var(--m-primary-background-color), #83af9b);
     color: #fff;
     position: relative;
     /* border-radius: 12px 12px 0 0; */

@@ -17,32 +17,27 @@ const Sidebar = () => {
 
   return (
     <SideBarContainer isOpen={open}>
-      <OverlayTrigger
+      {/* <OverlayTrigger
         placement="right"
         overlay={(
           <Tooltip>
             <strong>{open ? 'Collapse' : 'Expand'}</strong>
           </Tooltip>
         )}
-      >
-        <Container>
-          {/* {open
-            ? <BsArrowBarLeft size={25} onClick={() => setOpen(!open)} />
-            : <BsArrowBarRight size={25} onClick={() => setOpen(!open)} />} */}
-          {open
-            ? <ArrowLeftSvg onClick={() => setOpen(!open)} />
-            : <ArrowRightSvg onClick={() => setOpen(!open)} />}
-        </Container>
-      </OverlayTrigger>
+      > */}
+      <Container>
+        {open
+          ? <ArrowLeftSvg onClick={() => setOpen((prev) => !prev)} />
+          : <ArrowRightSvg onClick={() => setOpen((prev) => !prev)} />}
+      </Container>
+      {/* </OverlayTrigger> */}
 
-      <SideBarNav>
+      <SideBarNav isOpen={open}>
         <button type="button" onClick={() => navigate('/dashboard')}>
-          {/* <RiUser3Fill size={20} /> */}
           <UserIconSvg />
           {open && 'Profile'}
         </button>
         <button type="button">
-          {/* <RiNotification2Fill size={20} /> */}
           <NotificationSvg />
           {open && 'Notifications'}
         </button>

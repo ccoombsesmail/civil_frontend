@@ -19,6 +19,6 @@ export const WordInput = styled('input')`
   margin: .5vw;
   border-radius: .5em;
   border: none;
-  background-color: #8530F1;
+  background-color: var(--bg-accent);
 
 `

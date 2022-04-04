@@ -5,14 +5,17 @@ import { WordList, Word } from './Style'
 const CreateMnemonic = () => {
   const [words, setWords] = useState([])
   const generateAndStoreMnemonic = useGenerateAndStoreMnemonic()
-  useEffect(async () => {
-    const mnemonicWordsString = await generateAndStoreMnemonic()
-    setWords(mnemonicWordsString.split(' '))
+  useEffect(() => {
+    const genAndSetMnemonic = async () => {
+      const mnemonicWordsString = await generateAndStoreMnemonic()
+      setWords(mnemonicWordsString.split(' '))
+    }
+    genAndSetMnemonic()
   }, [])
   return (
     <div>
       <WordList>
-        { words.map((word) => <Word>{word}</Word>) }
+        { words.map((word, i) => <Word key={String(i)}>{word}</Word>) }
       </WordList>
     </div>
   )

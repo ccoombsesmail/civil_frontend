@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 
 export const SideBarContainer = styled('div')` 
-  height: 100%;
+  height: calc(100vh - var(--nav-size));
   width: 12vw;
   max-width: ${(props) => (props.isOpen ? '12vw' : '2vw')};
   background-color: var(--m-menu-bg-color);
-  box-shadow: var(--m-primary-box-shadow);
+  background-color: var(--m-primary-btn-color);
+  background-color: white;
+  /* box-shadow: var(--m-primary-box-shadow); */
+  border-right: 1px solid var(--m-secondary-background-color);
   transition: max-width .6s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -13,7 +16,7 @@ export const SideBarContainer = styled('div')`
   color: white;
   font-weight: bold;
   position: absolute;
-  z-index: 99999;
+  z-index: 99998;
   left: 0;
   flex: 0 0 12vw;
 
@@ -52,17 +55,18 @@ export const SideBarNav = styled('nav')`
     border-radius: var(--border-radius);
     padding: 5%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: ${(props) => (props.isOpen ? 'flex-start' : 'center')};
     align-items: center;
     cursor: pointer;
     outline: none;
     background: none;
     border: none;
-    color: white;
+    color: black;
+    font-weight: bold;
   }
 
   button:hover {
-    background-color: var(--bg-accent);
+    background-color: var(--m-btn-hover-color);
   }
 
   

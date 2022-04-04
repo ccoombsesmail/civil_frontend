@@ -28,16 +28,18 @@ export const DropdownMenuContainer = styled('div')`
   font-family: var(--clerk-font-family);
   transform: translateX(-45%);
   background-color: var(--bg);
-  /* border: var(--border); */
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius: var(--border-radius);
   padding: 3rem 0;
   transition: all var(--speed) ease;
   z-index: 99999;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  display: ${({ state }) => (state === 'entered' ? 'block' : 'none')};
+  /* opacity: ${({ state }) => (state === 'entered' ? 1 : 0)}; */
+  display: ${({ open }) => (open ? 'block' : 'none')};
+  opacity: ${({ open }) => (open ? 1 : 0)};
+
   a {
-    color: var(--text-color);
+    padding-left: 1vw;
+    color: black;
     text-decoration: none;;
   }
 
@@ -48,8 +50,9 @@ export const Menu = styled('div')`
   display: flex;
   flex-direction: column;
   z-index: 99999;
+  color: black;
   a:hover { 
-    background-color: #525357;
+    background-color: var(--m-menu-item-hover);
 
   }
 `
@@ -61,10 +64,11 @@ export const MenuItem = styled(Link)`
   align-items: center;
   border-radius: var(--border-radius);
   transition: background var(--speed);
+  color: black;
   padding: 0.5rem;
   cursor: pointer;
   .icon-button {
-    margin-right: 0.5rem;
+    margin-right: 1vw;
   }
 
   .icon-button:hover {

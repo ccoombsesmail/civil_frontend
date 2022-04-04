@@ -29,7 +29,6 @@ export const closeModal = () => ({
 })
 
 export const openModal = (modalType, modalProps) => (dispatch) => {
-  console.log(modalType)
   dispatch({
     type: OPEN_MODAL,
     payload: { modalType, modalProps },

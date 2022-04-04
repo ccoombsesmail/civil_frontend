@@ -9,25 +9,16 @@ import TopicItem from './components/TopicItem/Index'
 import Header from './components/Header/Index'
 import WavyBackground from '../CommonComponents/WavyBackground/Index'
 import { CardContainer, Container, BorderContainer } from './Style'
-import { createDIDBasedJWT } from '../../api/util/createDidBasedJwt'
-import useGetDefaultDID from '../DID/hooks/useGetDefaultDID'
 
 const Topics = () => {
   const { openModal, getAllTopics } = useBindDispatch(uiActionCreators, topicActionCreators)
   const topics = useSelector((s) => s.topics.list) || []
   const user = useSelector((s) => s.session.currentUser)
-  const defaultDID = useGetDefaultDID()
   useEffect(() => {
-    getAllTopics()
+    setTimeout(() => {
+      getAllTopics()
+    }, 0)
   }, [])
-
-  useEffect(async () => {
-    console.log(defaultDID)
-    // const doc = await defaultDID
-    // console.log(doc)
-    // createDIDBasedJWT()
-    // deleteStore()
-  }, [user])
 
   return (
     <>

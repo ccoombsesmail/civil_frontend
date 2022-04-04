@@ -2,6 +2,6 @@
 
 export const addUser = (action, state) => {
   const newState = { ...state }
-  newState[action.payload.clerkId] = action.payload
+  newState[action.payload.userId] = action.payload
   return newState
 }

@@ -16,7 +16,7 @@ const reducer = (state = {}, action) => {
     case ADD_SESSION_DATA_DID:
       return {
         ...state,
-        currentUser: { username: action.payload.did.repr || action.payload.did.methodSpecificId },
+        currentUser: { ...action.payload, username: action.payload.did.repr || action.payload.did.methodSpecificId },
       }
     case LOG_OUT:
       localStorage.setItem('jwt', null)

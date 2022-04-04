@@ -46,14 +46,23 @@ textarea {
 
 
   :root {
-    --m-primary-color:  black;
-    --m-primary-background-color:  #14213D;
-    /* --m-primary-background-1-color: #37B381; */
-    --m-primary-background-1-color: #87C232;
+    --m-primary-background-color: #339C7D;
+    --m-secondary-background-color: #E6EEF2;
+    --m-primary-btn-color: #3DC393;
+    --m-primary-peripherals-color: #474a4d;
+    --m-highlight-color: #F8CA41;
+    --m-btn-hover-color: #F5F8FF;
+    --m-menu-item-hover: #D9DFDF;
 
-    --m-secondary-background-color: #83af9b;
+
+    /* --m-primary-background-1-color: #37B381; */
+ 
+
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
+
+
+
     --gutterSm: 0.4rem;
     --gutterMd: 0.8rem;
     --gutterLg: 1.6rem;
@@ -71,11 +80,7 @@ textarea {
     --transitionTF: cubic-bezier(0.645, 0.045, 0.355, 1);
 
     /* color options 2  */
-
-    /* --m-primary-background-2-color: #37B381; */
-    --m-primary-background-2-color: #87C232;
-
-    --m-secondary-background-2-color:  #242526;
+  
     --m-menu-bg-color: #242526;
     /* floated labels */
     --inputPaddingV: var(--gutterSm);
@@ -141,6 +146,7 @@ textarea {
   html {
     font-size: 10px;
     font-family: "Baloo 2", cursive;
+    font-family: "Source Sans Pro", sans-serif ;
     overflow-x: hidden;
 
   }
@@ -148,14 +154,26 @@ textarea {
     z-index: 999999;
   }
 
+  .fade {
+    transition: all .4s;
+  }
+
 
   .react-strap-modal {
-    /* padding: 1em; */
     border: none;
     border-radius: 1em;
     width: 100%;
     background-color: white;
     z-index: 99999;
+
+  }
+
+  .modal-backdrop {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 99999 !important;
 
   }
 
@@ -192,48 +210,16 @@ textarea {
     margin: 0 !important;
   }
 
-   /* #twitter-widget-1::shadow div:last-child {
-   display: none;
-  } */
 
   ::-webkit-scrollbar {
     display: none;
   }
 
-  /* .demo-wrapper, .demo-editor {
-    display: flex;
-    width: 100%;
-    background-color: gray;
-    height: 100%;
-  } */
-
-  /* .ap {
-    background-image: url('/emoji-sprite.png') !important;
-  } */
 
   .text-editor .ql-container {
     /* min-height: 10vw; */
     min-height: 7vh;
   }
-
-
-/* 
-  .menu-primary-enter {
-    position: absolute;
-    max-height: 0;
-  }
-  .menu-primary-enter-active {
-    transform: translateX(0%);
-    transition: all var(--speed) ease;
-    max-height: 200px !important;
-  }
-  .menu-primary-exit {
-    position: absolute;
-  }
-  .menu-primary-exit-active {
-    transform: translateX(-110%);
-    transition: all var(--speed) ease;
-  } */
 
 
   .theme-tooltip {
@@ -242,6 +228,11 @@ textarea {
 
   .popover {
     z-index: 999999999;
+  }
+
+  .feather {
+    stroke: black;
+    color: black;
   }
 
 

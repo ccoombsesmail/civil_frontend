@@ -10,5 +10,6 @@ export default (setOpen) => {
     await deleteStore()
     logout()
     setOpen((prev) => !prev)
+    document.getElementById('dropdown-menu-overlay').remove()
   }, [])
 }

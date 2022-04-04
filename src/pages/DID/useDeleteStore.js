@@ -9,10 +9,8 @@ export default () => useCallback(async () => {
   const rootPath = 'root/store'
   const store = await DIDStore.open(rootPath)
   const storeIds = await store.listRootIdentities()
-  console.log(storeIds)
   store.deleteRootIdentity(storeIds[0].id)
-  const storeIdsNew = await store.listRootIdentities()
-  console.log(storeIdsNew)
+  await store.listRootIdentities()
   localStorage.clear()
   store.close()
 }, [])

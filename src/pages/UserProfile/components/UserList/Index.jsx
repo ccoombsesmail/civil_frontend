@@ -8,7 +8,7 @@ const UserList = ({ users }) => (
   <List>
     {
         users.map((user) => (
-          <ListItem key={user.clerkId}>
+          <ListItem key={user.userId}>
             <UserIcon src={user.iconSrc} />
             <FlexDiv>
               <UsernameContainer>

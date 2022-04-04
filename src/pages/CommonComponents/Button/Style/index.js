@@ -22,7 +22,8 @@ export const Button = styled('button')`
   font-weight: 900;
   color: white;
   padding: ${(props) => (props.small ? '.3em .8em' : '.5em 1em')};
-  background: var(--m-primary-background-2-color);
+  /* background: var(--m-primary-background-2-color); */
+  background-color: var(--m-primary-btn-color);
   text-transform: uppercase;
   width: ${(props) => (props.width || 'unset')};;
   :hover {

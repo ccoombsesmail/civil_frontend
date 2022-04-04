@@ -11,8 +11,10 @@ export const StyledHeader = styled('header')`
   justify-content: space-between;
   flex-flow: row nowrap;
   background-color: transparent;
-  box-shadow: 5px 5px 15px 5px #000000;
+  /* box-shadow: 5px 5px 15px 5px #000000; */
+
   border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid black;
 
   
 `

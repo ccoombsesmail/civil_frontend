@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { Formik, Field } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
-// import { BsCameraVideoFill, BsImageFill } from 'react-icons/bs'
 
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import useHandleSubmit from './hooks/useHandleSubmit'
@@ -28,9 +27,8 @@ import { INIT_TOPIC_FORM_VALUES } from '../util/form_helpers/init_form_values'
 import useGetLinkMetaDataOnBlur from './hooks/useGetLinkMetaDataOnBlur'
 import DisplayMedia from './components/DisplayMedia/Index'
 
-const ERRORS = {
+const VALIDATIONS = {
   title: { REQUIRED: true },
-  // description: { REQUIRED: true, MIN_LENGTH: 10 },
   summary: { REQUIRED: true, MIN_LENGTH: 10 },
   category: { REQUIRED: true },
 }
@@ -43,7 +41,7 @@ const CreateTopicForm = () => {
   const [rotate, setRotate] = useState(0)
   const [content, setContent] = useState('')
 
-  const validator = useConfigFormErrors(ERRORS)
+  const validator = useConfigFormErrors(VALIDATIONS)
   const { metaData, getLinkMetaDataOnBlur } = useGetLinkMetaDataOnBlur()
   const handleSubmit = useHandleSubmit(metaData)
   const { closeModal } = useBindDispatch(uiActions)

@@ -22,7 +22,7 @@ const UserProfile = () => {
 
   const currentUser = useSelector((s) => s.session.currentUser)
   const isFollowing = user?.isFollowing
-  const hideFollowButton = user?.clerkId === currentUser?.id
+  const hideFollowButton = user?.userId === currentUser?.id
 
   const { getUser, getAllFollowed, getAllFollowers } = useBindDispatch(userActions, followActions)
   const followClickHandler = useFollowClickHandler(userId, isFollowing)

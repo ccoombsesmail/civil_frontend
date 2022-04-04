@@ -17,7 +17,7 @@ export default (metaData) => {
       ...values,
       description: content,
       createdBy: user.username,
-      clerkId: user.id,
+      userId: user.id,
       evidenceLinks: eLinks,
       [linkType]: values.contentUrl,
       thumbImgUrl: metaData.ogImage?.url,

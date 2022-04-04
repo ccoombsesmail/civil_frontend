@@ -92,7 +92,7 @@ const Header = ({ topic, user }) => {
             iconSrc={topic?.createdByIconSrc}
             time={getTimeSince(topic?.createdAt)}
             username={topic?.createdBy}
-            userId={topic?.clerkId}
+            userId={topic?.userId}
           />
           <img src={topic?.thumbImgUrl} alt="Nothing To Show" />
           <Description>

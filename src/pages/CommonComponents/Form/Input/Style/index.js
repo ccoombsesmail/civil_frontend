@@ -20,11 +20,11 @@ export const Label = styled('label')`
     translate3d(0, var(--labelDefaultPosY), 0)
     scale(1);
   transform-origin: 0 0;
-  transition:
+  /* transition:
     opacity var(--inputTransitionDuration) var(--inputTransitionTF),
     transform var(--inputTransitionDuration) var(--inputTransitionTF),
     visibility 0ms var(--inputTransitionDuration) var(--inputTransitionTF),
-    z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
+    z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF); */
 
   :placeholder-shown + .Input-label {
     visibility: hidden;
@@ -48,7 +48,7 @@ export const StyledInput = styled('input')`
   background: #E5E5E5;
   border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : '1px solid var(--bg)')};
   border-radius: 0.4rem;
-  transition: box-shadow var(--transitionDuration);
+  /* transition: box-shadow var(--transitionDuration); */
   ::placeholder {
     color: var(--m-trim-color);
   }
@@ -65,9 +65,9 @@ export const StyledInput = styled('input')`
     transform:
       translate3d(0, var(--labelTransformedPosY), 0)
       scale(var(--labelScaleFactor));
-    transition:
+    /* transition:
       transform var(--inputTransitionDuration),
       visibility 0ms,
-      z-index 0ms;
+      z-index 0ms; */
 }
 `

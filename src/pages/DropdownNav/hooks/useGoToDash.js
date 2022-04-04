@@ -6,5 +6,6 @@ export default (setOpen) => {
   return useCallback(async () => {
     goToDashboard()
     setOpen((prev) => !prev)
+    document.getElementById('dropdown-menu-overlay').remove()
   }, [])
 }

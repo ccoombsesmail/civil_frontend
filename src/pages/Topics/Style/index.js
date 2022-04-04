@@ -7,12 +7,14 @@ export const Container = styled('div')`
   flex-direction: column;
   align-items: center;
   z-index: 9999;
+  height: 100%;
   /* padding-top: 5em; */
 `
 
 export const BorderContainer = styled('div')`
   width: 50vw;
   border: 1px solid gray;
+  border-top: none;
   z-index: 9999;
   background-color: white;
 

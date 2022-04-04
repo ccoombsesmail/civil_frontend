@@ -6,8 +6,7 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ToastContainer, cssTransition } from 'react-toastify'
 import {
-  ClerkLoaded,
-  ClerkProvider, useUser,
+  ClerkLoaded, ClerkProvider,
 } from '@clerk/clerk-react'
 
 import useFetchAppData from './hooks/useFetchAppData'
@@ -34,27 +33,11 @@ const Dashboard = React.lazy(() => import(/* webpackChunkName: "dashboard" */
 // const frontendApi = 'clerk.legible.tortoise-0.lcl.dev'
 const frontendApi = 'clerk.bjuk3.m71w1.lcl.dev'
 
-const LoadDataComponent = () => {
+const LoadingBridge = ({ children }) => {
   useFetchAppData()
   return (
     <>
-    </>
-  )
-}
-
-const LoadingBridge = ({ children }) => {
-  const { user, isLoading } = useUser({ withAssertions: true })
-  console.log(user)
-  return (
-    <>
-      {
-      isLoading(user) ? null : (
-        <>
-          <LoadDataComponent />
-          {children}
-        </>
-      )
-      }
+      {children}
     </>
   )
 }
@@ -68,6 +51,7 @@ const App = () => {
   const navigate = useNavigate()
   const memoNavigate = useCallback((to) => navigate(to))
   const dispatch = useDispatch()
+
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
   return (
     <ClerkProvider frontendApi={frontendApi} navigate={memoNavigate}>

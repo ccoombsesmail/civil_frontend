@@ -14,6 +14,10 @@ export const updateUserActionCreator = (data) => ({
 const getUser = (userId, requesterId) => (dispatch) => UsersApiUtil.getUser(userId, requesterId)
   .then((res) => dispatch(addUserActionCreator(res.data)))
 
+const upsertDidUser = (didUserData) => (dispatch) => UsersApiUtil.upsertDidUser(didUserData)
+  .then((res) => dispatch(addUserActionCreator(res.data)))
+
 export default {
   getUser,
+  upsertDidUser,
 }

@@ -1,23 +1,73 @@
 import React, { useState } from 'react'
+import { Formik } from 'formik'
+
+import useHandleNewDidSubmit from './hooks/useHandleNewDidSubmit'
+import useBackButtonOnClick from './hooks/useBackButtonOnClick'
+import useConfigFormErrors from '../../../util/form_helpers/hooks/useConfigFormErrors'
+
 import CreateMnemonic from './components/CreateMnemonic/Index'
 import ValidateMnemonic from './components/ValidateMnemonic/Index'
-import useBackButtonOnClick from './hooks/useBackButtonOnClick'
-import useNextButtonOnClick from './hooks/useNextButtonOnClick'
+import BasicInformation from '../BasicInformation/Index'
+import Button from '../../../CommonComponents/Button/Index'
+
 import { OuterContainer, ButtonContainer } from './Style'
+import { INIT_DID_FORM_VALUES } from '../../../util/form_helpers/init_form_values'
+import { useValidateMnemonic } from '../../../DID/hooks/useMnemonicHelpers'
+import WithFade from '../../../../hocs/WithFade'
+
+const SUBMIT_STEP = 2
+const VALIDATIONS = {
+  title: { REQUIRED: true },
+  // description: { REQUIRED: true, MIN_LENGTH: 10 },
+  summary: { REQUIRED: true, MIN_LENGTH: 10 },
+  category: { REQUIRED: true },
+}
 
 const NewDidFlow = () => {
   const [formStep, setFormStep] = useState(0)
-  const [validatedMnemonic, setValidatedMnemonic] = useState(false)
   const backButtonOnClick = useBackButtonOnClick(formStep, setFormStep)
-  const nextButtonOnClick = useNextButtonOnClick(formStep, setFormStep)
+  const validator = useConfigFormErrors(VALIDATIONS)
+  const validateMnemonic = useValidateMnemonic()
+  const handleNewDidSubmit = useHandleNewDidSubmit()
   return (
     <OuterContainer>
-      {formStep === 0 && <CreateMnemonic />}
-      {formStep === 1 && <ValidateMnemonic setValidatedMnemonic={setValidatedMnemonic} />}
-      <ButtonContainer>
-        <button type="button" onClick={backButtonOnClick}>Back</button>
-        <button disabled={formStep === 1 && !validatedMnemonic} type="button" onClick={nextButtonOnClick}>{ formStep !== 1 ? 'Next' : 'Create'}</button>
-      </ButtonContainer>
+      <Formik
+        initialValues={INIT_DID_FORM_VALUES}
+        validate={validator}
+        onSubmit={(values, params) => handleNewDidSubmit(values, params)}
+      >
+        {({ isSubmitting, values }) => (
+          <>
+            {formStep === 0 && <WithFade Component={BasicInformation} />}
+            {formStep === 1 && <WithFade Component={CreateMnemonic} />}
+            {formStep === 2 && <WithFade Component={ValidateMnemonic} />}
+            <ButtonContainer>
+              <Button type="button" onClick={backButtonOnClick}>
+                Back
+              </Button>
+              {formStep !== SUBMIT_STEP && (
+                <Button
+                  type="button"
+                  onClick={() => setFormStep((prev) => prev + 1)}
+                >
+                  Next
+                </Button>
+              )}
+              {formStep === SUBMIT_STEP && (
+                <Button
+                  type="submit"
+                  disabled={
+                    isSubmitting || !validateMnemonic(values.words.join(' '))
+                  }
+                  onClick={() => handleNewDidSubmit(values)}
+                >
+                  Create Decentralized Idenity
+                </Button>
+              )}
+            </ButtonContainer>
+          </>
+        )}
+      </Formik>
     </OuterContainer>
   )
 }

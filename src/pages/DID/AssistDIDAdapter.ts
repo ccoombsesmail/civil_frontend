@@ -27,10 +27,10 @@ import { Entity } from "./Entity";
 
 const log = new Logger("AssistDIDAdapter");
 export class AssistDIDAdapter extends DefaultDIDAdapter {
-  private static MAINNET_RPC_ENDPOINT = "https://assist-restapi.tuum.tech/v2";
+  public static MAINNET_RPC_ENDPOINT = "https://assist-restapi.tuum.tech/v2";
   private static TESTNET_RPC_ENDPOINT = "https://assist-restapi-testnet.tuum.tech/v2";
 
-  private static API_KEY = "IdSFtQosmCwCB9NOLltkZrFy5VqtQn8QbxBKQoHPw7zp3w0hDOyOYjgL53DO3MDH";
+  public static API_KEY = "IdSFtQosmCwCB9NOLltkZrFy5VqtQn8QbxBKQoHPw7zp3w0hDOyOYjgL53DO3MDH";
 
   private assistRpcEndpoint: string;
 
@@ -85,18 +85,17 @@ export class AssistDIDAdapter extends DefaultDIDAdapter {
   }
 
   public async createIdTransaction(payload: string, memo: string) {
-    // console.log(typeof payload)
-    // const r = DIDRequest.newWithOperation(IDChainRequest.Operation.DECLARE)
-    // r.setPayload(payload)
+
+    let headers = new Object();
+    headers["Authorization"] = AssistDIDAdapter.API_KEY;
+
     // let declareVC = new URL(this.assistRpcEndpoint + "/didtx/create");
-    // let is = await this.postHttp(createDid, request.toString(), headers);
-    // console.log(r)
+    // let is = await this.postHttp(declareVC, payload.toString(), headers);
+    // console.log(is)
    
     if (payload == null || payload == "")
       throw new Exceptions.IllegalArgumentException("Invalid payload parameter");
 
-    let headers = new Object();
-    headers["Authorization"] = AssistDIDAdapter.API_KEY;
 
     let request: AssistDIDAdapter.AssistDIDRequest = null;
     try {
@@ -308,3 +307,5 @@ export namespace AssistDIDAdapter {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+

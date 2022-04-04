@@ -1,26 +1,22 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useCallback } from 'react'
+import { useSelector } from 'react-redux'
 
 import {
   DIDStore,
 } from '@elastosfoundation/did-js-sdk'
 
 export default () => {
-  const [isLoggedInViaDID, setIsLoggedInViaDID] = useState(false)
   const user = useSelector((s) => s.session.currentUser)
 
-  useEffect(async () => {
+  return useCallback(async () => {
     try {
       const rootPath = 'root/store'
       const store = await DIDStore.open(rootPath)
       const storeIds = await store.listRootIdentities()
       store.close()
-      setIsLoggedInViaDID(storeIds.length > 0)
-      return
+      return (storeIds.length > 0)
     } catch {
-      console.log("Noope")
-      setIsLoggedInViaDID(false)
+      return false
     }
   }, [user])
-  return isLoggedInViaDID
 }

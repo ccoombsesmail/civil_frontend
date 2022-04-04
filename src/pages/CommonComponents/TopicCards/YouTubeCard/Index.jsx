@@ -23,7 +23,7 @@ const EmbededYouTube = ({
     <Card
       onClick={goToSubTopic}
       username={topic?.createdBy}
-      userId={topic?.clerkId}
+      userId={topic?.userId}
       iconSrc={`${topic?.createdByIconSrc}`}
       summary={topic?.summary}
       time={getTimeSince(topic?.createdAt)}

@@ -1,5 +1,5 @@
 import { DIDBackend, DIDStore, Logger, Mnemonic, RootIdentity } from "@elastosfoundation/did-js-sdk";
-import { AssistDIDAdapter } from "./assistadapter"
+import { AssistDIDAdapter } from "./AssistDIDAdapter"
 
 const log = new Logger("RootIdentitySample");
 export class RootIdentitySample {
