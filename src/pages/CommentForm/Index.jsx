@@ -24,8 +24,11 @@ const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4
 
 const CreateCommentForm = ({ modalProps }) => {
   const descRef = useRef(null)
-  const [content, setContent] = useState('')
-  const [rawText, setRawText] = useState('')
+  const [richTextEditorData, setRichTextEditorData] = useState({
+    rawHTML: '',
+    content: '',
+    rawText: '',
+  })
   const [toxicityScore, setToxicityScore] = useState(null)
 
   const { pathname } = useLocation()
@@ -33,7 +36,7 @@ const CreateCommentForm = ({ modalProps }) => {
   const subtopicId = pathname.match(uuidRegEx)[1]
 
   const compState = useGetStateEffect(topicId, subtopicId, modalProps)
-  const handleSubmit = useHandleSubmit(compState, content, rawText, modalProps, subtopicId)
+  const handleSubmit = useHandleSubmit(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId)
   useSetInnerHtml(descRef, compState.htmlContent)
 
   return (
@@ -47,7 +50,7 @@ const CreateCommentForm = ({ modalProps }) => {
         }}
         validate={() => {
           const errors = {}
-          if (content.length === 0) {
+          if (richTextEditorData.content.length === 0) {
             errors.content = 'Write Something'
           }
           return errors
@@ -70,7 +73,11 @@ const CreateCommentForm = ({ modalProps }) => {
                   <span ref={descRef} />
                 </Description>
                 <InputWrapper>
-                  <RichTextEditor content={content} setContent={setContent} setRawText={setRawText} setToxicityScore={setToxicityScore} />
+                  <RichTextEditor
+                    content={richTextEditorData.content}
+                    setContent={setRichTextEditorData}
+                    setToxicityScore={setToxicityScore}
+                  />
                 </InputWrapper>
               </Modal.Body>
               <Modal.Footer>
@@ -79,7 +86,7 @@ const CreateCommentForm = ({ modalProps }) => {
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Button
                         type="button"
-                        onClick={() => checkToxicity({ content: rawText }).then((res) => {
+                        onClick={() => checkToxicity({ content: richTextEditorData.rawText }).then((res) => {
                           setToxicityScore(res.data.SEVERE_TOXICITY.toFixed(2))
                         })}
                       >

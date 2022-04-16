@@ -4,7 +4,7 @@ import { Collapse } from 'react-bootstrap'
 import { UpArrowSvg, DownArrowSvg } from '../../svgs/svgs'
 
 import { VideoDescriptionCard } from '../CommonComponents/Card/Index'
-import ActionToolbar from '../CommonComponents/ActionToolbar/Index'
+import ActionToolbar from '../CommonComponents/ActionToolbars/TopicToolbar/Index'
 import LinkSection from '../CommonComponents/LinkSection/Index'
 import IconButton from '../CommonComponents/IconButton/Index'
 

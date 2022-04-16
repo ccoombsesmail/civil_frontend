@@ -40,13 +40,15 @@ export const createComment = (commentData) => (dispatch) => {
 
 export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId, userId)
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))
-  // .then(() => dispatch(closeModal()))
+  .catch((error) => toast.error(error))
 
 export const updateCommentLikes = (data) => (dispatch) => CommentsApiUtil.updateCommentLikes(data)
   .then((res) => dispatch(updateCommentActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 export const updateCommentCivility = (data) => (dispatch) => CommentsApiUtil.updateCommentCivility(data)
   .then((res) => dispatch(updateCommentCivilityActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 export default {
   createComment,

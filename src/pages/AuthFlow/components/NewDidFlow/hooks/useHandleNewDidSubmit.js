@@ -11,7 +11,9 @@ export default () => {
     const vcProps = { ...values }
     delete vcProps.words
     const mnemonic = localStorage.getItem('mnemonic')
-    await createRootIdentity(mnemonic, vcProps)
-    navigate('/')
+    if (mnemonic === values.words.join(' ')) {
+      await createRootIdentity(mnemonic, vcProps)
+      navigate('/')
+    }
   }, [])
 }

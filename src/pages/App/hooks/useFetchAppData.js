@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { DIDBackend, DefaultDIDAdapter } from '@elastosfoundation/did-js-sdk'
 import enumActions from '../../../redux/actions/enums'
+import userActions from '../../../redux/actions/users/index'
 import sessionActions, { addUserActionCreatorClerk } from '../../../redux/actions/session'
 import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
@@ -22,11 +23,12 @@ export default () => {
     getCurrentUser,
     addDIDSession,
     logout,
-  } = useBindDispatch(enumActions, sessionActions)
+    upsertDidUser,
+  } = useBindDispatch(enumActions, sessionActions, userActions)
 
   useEffect(() => {
     getAllEnums()
-  }, [getDefaultDID])
+  }, [])
 
   useEffect(() => {
     const setupInitUser = async () => {
@@ -38,9 +40,16 @@ export default () => {
       } else if (defaultDID) {
         const docExistsButNotValid = currentUser?.doc && !currentUser.doc.isValid()
         if (!currentUser?.doc || docExistsButNotValid) {
-          console.log('***************FETCH APP DATA**************')
           const doc = await defaultDID.resolve()
-          addDIDSession({ did: defaultDID, doc })
+          const { value: username } = doc.getCredential('username')?.getSubject().getProperties()
+          const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties()
+          const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties()
+
+          upsertDidUser({
+            userId: doc.getSubject().getMethodSpecificId(),
+            username: username || doc.getSubject().getMethodSpecificId(),
+          })
+          addDIDSession({ did: defaultDID, doc, username })
         }
       } else {
         logout()

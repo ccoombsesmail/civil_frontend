@@ -8,13 +8,12 @@ import uiActionCreators from '../../redux/actions/ui/index'
 import { REPLY } from '../App/Modal/Index'
 import { uuidRegEx } from '../../generic/regex/uuid'
 
-export default (replyType) => {
+export default (modalType, modalProps) => {
   const { pathname } = useLocation()
   const subtopicId = pathname.match(uuidRegEx)?.[1]
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
   return useCallback(() => {
-    // navigate(loc.pathname, { state: { type: modalType } })
-    openModal(REPLY, { replyType, subtopicId })
+    openModal(REPLY, modalProps)
   }, [])
 }

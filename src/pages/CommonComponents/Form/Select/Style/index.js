@@ -2,8 +2,12 @@ import styled from 'styled-components'
 
 export const Container = styled('div')`
   position: relative;
-  margin: 0 1.3em;
+  margin: auto;
   font-family: 'Ubuntu', sans-serif;
+  .fade {
+    margin: auto;
+    width: 85%;
+  }
 `
 
 export const Label = styled('label')`
@@ -17,7 +21,7 @@ export const Label = styled('label')`
 
 export const StyledSelect = styled('select')`
   display: block;
-  margin: 0;
+  margin: auto;
   padding: .5em;
   color: black;
   width: ${(props) => props.width || '30%'};

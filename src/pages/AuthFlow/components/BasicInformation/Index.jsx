@@ -1,6 +1,6 @@
 import { Field } from 'formik'
 import React from 'react'
-import Input from '../../../CommonComponents/Form/Input/Index'
+import Input3 from '../../../CommonComponents/Form/Input3/Index'
 import { FieldContainer, NamesContainer } from './Style/Index'
 
 const BasicInformation = () => {
@@ -8,10 +8,34 @@ const BasicInformation = () => {
   return (
     <FieldContainer>
       <NamesContainer>
-        <Field type="text" name="firstName" component={Input} width="100%" placeholder="First Name" />
-        <Field type="text" name="lastName" component={Input} width="100%" placeholder="Last Name" />
+        <Field
+          type="text"
+          name="firstName"
+          label="First Name"
+          component={Input3}
+          width="40%"
+          isDIDForm
+        />
+        <Field
+          type="text"
+          name="lastName"
+          component={Input3}
+          width="40%"
+          placeholder="Last Name"
+          label="Last Name"
+          isDIDForm
+        />
       </NamesContainer>
-      <Field type="text" name="username" component={Input} width="100%" placeholder="Username" />
+      <NamesContainer>
+        <Field
+          type="text"
+          name="username"
+          component={Input3}
+          width="100%"
+          label="Username"
+          isDIDForm
+        />
+      </NamesContainer>
 
     </FieldContainer>
 

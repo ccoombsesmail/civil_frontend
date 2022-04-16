@@ -102,6 +102,7 @@ export const Greeting = styled('h2')`
 export const DID = styled('h3')`
   color: var(--clerk-font-color-l1);
   font-size: .6vw;
+  margin-left: .3vw;
 
 `
 

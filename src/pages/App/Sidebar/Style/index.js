@@ -8,7 +8,7 @@ export const SideBarContainer = styled('div')`
   background-color: var(--m-primary-btn-color);
   background-color: white;
   /* box-shadow: var(--m-primary-box-shadow); */
-  border-right: 1px solid var(--m-secondary-background-color);
+  border-right: 1px solid black;
   transition: max-width .6s ease-in-out;
   display: flex;
   flex-direction: column;

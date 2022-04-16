@@ -7,6 +7,7 @@ const Input = ({ field }) => <WordInput type="text" {...field} id={field.id} />
 
 const ValidateMnemonic = ({ values }) => {
   console.log(values)
+  // const words = localStorage.getItem('mnemonic')
   return (
     <div>
       <WordList>
@@ -19,6 +20,13 @@ const ValidateMnemonic = ({ values }) => {
           />
         ))}
       </WordList>
+      {/* <WordSelectionList>
+        {words?.split(' ').map((word) => (
+          <div>
+            {word}
+          </div>
+        ))}
+      </WordSelectionList> */}
     </div>
   )
 }

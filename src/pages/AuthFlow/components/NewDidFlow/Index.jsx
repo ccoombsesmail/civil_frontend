@@ -42,12 +42,21 @@ const NewDidFlow = () => {
             {formStep === 1 && <WithFade Component={CreateMnemonic} />}
             {formStep === 2 && <WithFade Component={ValidateMnemonic} />}
             <ButtonContainer>
-              <Button type="button" onClick={backButtonOnClick}>
+              <Button
+                width="40%"
+                height="2.5vw"
+                type="button"
+                backgroundColor="var(--m-elastos-theme)"
+                onClick={backButtonOnClick}
+              >
                 Back
               </Button>
               {formStep !== SUBMIT_STEP && (
                 <Button
+                  width="40%"
+                  height="2.5vw"
                   type="button"
+                  backgroundColor="var(--m-elastos-theme)"
                   onClick={() => setFormStep((prev) => prev + 1)}
                 >
                   Next
@@ -55,7 +64,10 @@ const NewDidFlow = () => {
               )}
               {formStep === SUBMIT_STEP && (
                 <Button
+                  width="40%"
+                  height="2.5vw"
                   type="submit"
+                  backgroundColor="var(--m-elastos-theme)"
                   disabled={
                     isSubmitting || !validateMnemonic(values.words.join(' '))
                   }

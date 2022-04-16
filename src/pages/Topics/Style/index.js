@@ -8,6 +8,7 @@ export const Container = styled('div')`
   align-items: center;
   z-index: 9999;
   height: 100%;
+
   /* padding-top: 5em; */
 `
 
@@ -17,6 +18,7 @@ export const BorderContainer = styled('div')`
   border-top: none;
   z-index: 9999;
   background-color: white;
+  min-height: calc(100vh - var(--nav-size));
 
 `
 

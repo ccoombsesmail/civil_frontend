@@ -7,6 +7,12 @@ export const WordList = styled('ul')`
 
 `
 
+export const WordSelectionList = styled('ul')` 
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`
+
 export const WordInput = styled('input')`
   display: flex;
   justify-content: center;

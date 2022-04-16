@@ -1,6 +1,6 @@
 import React from 'react'
 import { Line } from '../../../CommonComponents/Line'
-import useGetLinkMetaDataEffect from '../../../CommonComponents/TopicCards/ExternalContentCard/hooks/useGetLinkMetaDataEffect'
+import useGetLinkMetaDataEffect from '../../../TopicForm/components/LinkMetaData/hooks/useGetLinkMetaDataEffect'
 import useNavigateToPage from './hooks/useNavigateToPage'
 
 import {
@@ -10,6 +10,7 @@ import {
 const RecItem = ({ rec }) => {
   let content = null
   const { topic, subTopic } = rec
+
   const metaData = useGetLinkMetaDataEffect({ contentUrl: rec.externalRecommendedContent })
   const navigateToPage = useNavigateToPage(rec)
   if (topic) {

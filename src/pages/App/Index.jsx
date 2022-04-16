@@ -61,29 +61,30 @@ const App = () => {
           <LoadingSpinner />
           <ClerkLoaded>
             <Header />
-          </ClerkLoaded>
-          <MainContainer>
-            <Sidebar />
-            <Content>
-              <Routes>
-                <Route path="/topics/:topicId/subtopics/*" element={<SubTopics />} />
-                <Route
-                  path="/dashboard"
-                  element={(
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <Dashboard />
-                    </Suspense>
+            <MainContainer>
+              <Sidebar />
+              <Content>
+                <Routes>
+                  <Route path="/topics/:topicId/subtopics/*" element={<SubTopics />} />
+                  <Route
+                    path="/dashboard"
+                    element={(
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <Dashboard />
+                      </Suspense>
                   )}
-                />
-                <Route path="/authenticate/*" element={<AuthFlow />} />
-                <Route path="/user/:userId" element={<UserProfile />} />
-                <Route path="/topics/*" element={<Topics />} />
-                <Route path="/" element={<Navigate replace to="/topics" />} />
-              </Routes>
-              <Modal closeModal={closeModal} />
-            </Content>
-            <ToastContainer autoClose={2000} className="toasty" transition={elitpicIn} />
-          </MainContainer>
+                  />
+                  <Route path="/authenticate/*" element={<AuthFlow />} />
+                  <Route path="/user/:userId" element={<UserProfile />} />
+                  <Route path="/topics/*" element={<Topics />} />
+                  <Route path="/" element={<Navigate replace to="/topics" />} />
+                </Routes>
+                <Modal closeModal={closeModal} />
+              </Content>
+              <ToastContainer autoClose={2000} className="toasty" transition={elitpicIn} />
+            </MainContainer>
+          </ClerkLoaded>
+
         </div>
       </LoadingBridge>
     </ClerkProvider>

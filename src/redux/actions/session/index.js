@@ -1,4 +1,5 @@
 // action creator is just a function that dispatches an action
+import { toast } from 'react-toastify'
 import { closeModal } from '../ui/index'
 import {
   ADD_SESSION_DATA_CLERK, ADD_SESSION_DATA_BACKEND, LOG_OUT, UPDATE, ADD_SESSION_DATA_DID,
@@ -33,9 +34,11 @@ const updateActionCreator = (data) => ({
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
   .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
   .then(() => dispatch(closeModal()))
+  .catch((error) => toast.error(error))
 
 export const getCurrentUser = (userId) => (dispatch) => UsersApiUtl.getUser(userId)
   .then((res) => dispatch(addUserActionCreatorBackend(res.data)))
+  .catch((error) => toast.error(error))
 
 export const logout = () => (dispatch) => {
   dispatch(logoutActionCreator())
@@ -47,9 +50,11 @@ export const addDIDSession = (didData) => (dispatch) => {
 
 export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateUserIcon(userData)
   .then((res) => dispatch(updateActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 const uploadUserIcon = (dta, username) => (dispatch) => SessionApiUtil.uploadUserIcon(dta, username)
   .then((res) => dispatch(updateActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 export default {
   logout,

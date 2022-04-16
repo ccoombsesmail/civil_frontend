@@ -27,11 +27,20 @@ export const Header = styled('div')`
       color: gray;
       font-size: .5em;
     }
+
+  h2 {
+    padding: .1em;
+    line-height: unset;
+    margin: 0 .2em;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    font-weight: bold;
+  }
   h3 {
 
     padding: .1em;
     font-size: .9em;
-    margin: 0;
+    margin: 0 1em;
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;

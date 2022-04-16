@@ -22,7 +22,8 @@ export default (topicId, subtopicId, modalProps) => {
     (c) => c.data?.id === modalProps?.rootParentCommentId,
   )
   return useMemo(() => {
-    const commentContent = modalProps?.replyType !== 'TOPIC_REPLY'
+    console.log(comment)
+    const commentContent = modalProps?.replyType !== 'REPLY_FROM_TOPIC'
       ? findCommentContent(comment, modalProps?.commentId) : topic?.description
     return {
       subtopicId,

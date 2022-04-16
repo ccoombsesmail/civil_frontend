@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Logger } from '../logger';
 
@@ -8,9 +7,6 @@ type QueuedIntent = {
   parentIntentId?: number; // If this intent is sent from inside a parent inside, that parent intent id is saved here.
 }
 
-@Injectable({
-  providedIn: 'root'
-})
 export class GlobalIntentService {
   public static instance: GlobalIntentService;
 

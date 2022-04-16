@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import useBindDispatch from './redux/useBindDispatch'
-import topicActionCreators from '../../redux/actions/topics'
+import useBindDispatch from '../../../../../../hooks/redux/useBindDispatch'
+import topicActionCreators from '../../../../../../../redux/actions/topics'
 
 export default (topic, user) => {
   const { updateTopicLikes } = useBindDispatch(topicActionCreators)

@@ -40,7 +40,7 @@ const UserProfile = () => {
       <Tab.Container defaultActiveKey="0" onSelect={(key) => setActiveKey(key)}>
         <HeaderContainer>
           <TabsIconContainer>
-            <UserIcon src={user?.iconSrc} />
+            <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
             <Bio>{user?.bio}</Bio>
             <StyledNav activeKey={Number(activeKey)}>
               <div className="line" />

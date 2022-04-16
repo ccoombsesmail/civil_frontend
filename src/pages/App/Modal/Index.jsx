@@ -13,6 +13,7 @@ import { ModalWrapper } from './Style/index'
 
 import UploadIconForm from '../../Dashboard/components/UploadIconForm/Index'
 import OpposingRecForm from '../../OpposingRecForm/Index'
+import { ReportForm } from '../../ReportForm/Index'
 
 const CreateTopicForm = React.lazy(() => import(
   /* webpackChunkName: "topic-form" */
@@ -41,6 +42,9 @@ export const CREATE_SUB_TOPIC = 'CREATE_SUB_TOPIC'
 export const REPLY = 'REPLY'
 export const ICON_FORM = 'ICON_FORM'
 export const OPPOSING_REC_FORM = 'OPPOSING_REC_FORM'
+export const REPORT_FORM = 'REPORT_FORM'
+
+export const REPLY_FROM_TOPIC = 'REPLY_FROM_TOPIC' // when replying directly to a topic
 
 const Modal = ({ closeModal }) => {
   const { modalType, modalProps } = useSelector((s) => s.ui)
@@ -62,6 +66,9 @@ const Modal = ({ closeModal }) => {
       break
     case OPPOSING_REC_FORM:
       component = <OpposingRecForm {...modalProps} />
+      break
+    case REPORT_FORM:
+      component = <ReportForm {...modalProps} />
       break
     default:
       break

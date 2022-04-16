@@ -1,10 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-// const CompressionPlugin = require('compression-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UnusedWebpackPlugin = require('unused-webpack-plugin');
+const UnusedWebpackPlugin = require('unused-webpack-plugin')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   entry: './src/index.jsx',
@@ -75,25 +77,30 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      process: undefined
-    })
+      process: undefined,
+    }),
+    new BundleAnalyzerPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new DuplicatePackageCheckerPlugin(),
+    // new CompressionPlugin({
+    //   deleteOriginalAssets: true,
+    //   // filename: '[name].[path].gz[query]',
+    //   // algorithm: 'gzip',
+    //   // test: /\.js$|\.css$|\.html$/,
+    //   // threshold: 10240,
+    //   // minRatio: 0.8,
+    // }),
   ],
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimize: true,
+    minimizer: [
+      // new UglifyJsPlugin(),
+      // new TerserPlugin(),
+    ],
   },
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
-    // fallback: {
-    //   os: require.resolve('os'),
-    //   https: require.resolve('https'),
-    //   http: require.resolve('http'),
-    //   // https: require.resolve('https-browserify'),
-    //   // http: false,
-    //   // https: false,
-    //   // http: require.resolve('stream-http'),
-    //   crypto: require.resolve('crypto'),
-    // },
   },
 
 }

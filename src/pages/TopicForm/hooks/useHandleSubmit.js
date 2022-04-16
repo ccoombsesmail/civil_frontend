@@ -1,10 +1,14 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import delay from '../../../generic/delay'
 
 import topicActions from '../../../redux/actions/topics/index'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 
 import checkLinkType from './checkLinkType'
+
+// const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (metaData) => {
   const { createTopic, uploadTopicMedia } = useBindDispatch(topicActions)
@@ -28,7 +32,20 @@ export default (metaData) => {
       formData.append('image', values.file)
       uploadTopicMedia(formData, fileType, fileFormat, data)
     } else {
-      createTopic(data)
+      toast.promise(
+        createTopic(data),
+        {
+          pending: 'Creating Topic...',
+          success: 'Topic Successfully Created!',
+          error: {
+            render({ data: errorData }) {
+              const { response } = errorData
+              const { data: responseData } = response
+              return `${responseData.msg} 🤯 `
+            },
+          },
+        },
+      )
     }
     setSubmitting(false)
     resetForm({})

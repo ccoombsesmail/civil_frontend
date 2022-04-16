@@ -65,12 +65,19 @@ export const DropdownMenu = ({ open, setOpen }) => {
       { loggedInViaDID && (
       <UserInfoSection>
         <UserIcon width="50px" />
-        <Greeting>Hello, Friend</Greeting>
+        {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}> */}
+        <Greeting>
+          Hello,
+          {' '}
+          {user?.username || 'Friend'}
+          {' '}
+        </Greeting>
         <DID>
-          {user?.username}
+          {user?.userId}
           {' '}
           <AuthenticationSvg />
         </DID>
+        {/* </div> */}
         <ButtonsContainer>
           <button type="button" onClick={goToDashboard}>
             Manage Identity

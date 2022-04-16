@@ -1,0 +1,73 @@
+/*! ../../../../../api/v1/users/users_api_util */
+
+/*! ../../../App/Modal/Index */
+
+/*! ../../../CommonComponents/ProgressBar/Index */
+
+/*! ../../../hooks/useOpenModal */
+
+/*! ../../redux/actions/session/index */
+
+/*! ../CommonComponents/Line */
+
+/*! ../hooks/redux/useBindDispatch */
+
+/*! ./Style */
+
+/*! ./Style/Index */
+
+/*! ./Style/index */
+
+/*! ./components/BioForm/Index */
+
+/*! ./components/Header/Index */
+
+/*! ./hooks/useOnSubmit */
+
+/*! @babel/runtime/helpers/slicedToArray */
+
+/*! @babel/runtime/helpers/taggedTemplateLiteral */
+
+/*! @clerk/clerk-react */
+
+/*! react */
+
+/*! react-redux */
+
+/*! styled-components */
+
+/*!***************************************!*\
+  !*** ./src/pages/Dashboard/Index.jsx ***!
+  \***************************************/
+
+/*!********************************************!*\
+  !*** ./src/pages/Dashboard/Style/index.js ***!
+  \********************************************/
+
+/*!*********************************************************!*\
+  !*** ./src/pages/Dashboard/components/Header/Index.jsx ***!
+  \*********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./src/pages/CommonComponents/ProgressBar/Index.jsx ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./src/pages/Dashboard/components/BioForm/Index.jsx ***!
+  \**********************************************************/
+
+/*!**************************************************************!*\
+  !*** ./src/pages/Dashboard/components/Header/Style/index.js ***!
+  \**************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./src/pages/CommonComponents/ProgressBar/Style/index.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./src/pages/Dashboard/components/BioForm/Style/Index.js ***!
+  \***************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./src/pages/Dashboard/components/BioForm/hooks/useOnSubmit.js ***!
+  \*********************************************************************/

@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { ADD_USER, UPDATE_USER } from '../../reducers/users/usersReducer'
 import * as UsersApiUtil from '../../../api/v1/users/users_api_util'
 
@@ -13,9 +14,11 @@ export const updateUserActionCreator = (data) => ({
 
 const getUser = (userId, requesterId) => (dispatch) => UsersApiUtil.getUser(userId, requesterId)
   .then((res) => dispatch(addUserActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 const upsertDidUser = (didUserData) => (dispatch) => UsersApiUtil.upsertDidUser(didUserData)
   .then((res) => dispatch(addUserActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 export default {
   getUser,

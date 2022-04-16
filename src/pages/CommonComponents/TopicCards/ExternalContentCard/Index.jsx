@@ -1,4 +1,4 @@
-import React, { useRef, Suspense } from 'react'
+import React, { useRef } from 'react'
 
 import Card from '../../Card/Index'
 // import LinkMetaData from '../../../TopicForm/components/LinkMetaData/Index'
@@ -6,26 +6,18 @@ import CardDetails from '../CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
-import useUpdateLikes from '../../../hooks/useUpdateLikes'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
-import useGetLinkMetaDataEffect from './hooks/useGetLinkMetaDataEffect'
 import useOpenModal from '../../../hooks/useOpenModalWithLocation'
 
-const LinkMetaData = React.lazy(() => import(/* webpackChunkName: "dashboard" */
-/* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ '../../../TopicForm/components/LinkMetaData/Index'
-))
+import LinkMetaData from '../../../TopicForm/components/LinkMetaData/Index'
 
 const ExternalContentCard = ({
   topic, user, showLinks,
 }) => {
   const descRef = useRef(null)
 
-  const metaData = useGetLinkMetaDataEffect(topic)
   const goToSubTopic = useGoToSubTopic(topic?.id)
-  const updateLikes = useUpdateLikes(topic, user)
   const openModal = useOpenModal('TOPIC_REPLY')
   useSetInnerHtml(descRef, topic?.description)
 
@@ -37,20 +29,12 @@ const ExternalContentCard = ({
       summary={topic?.summary}
       time={getTimeSince(topic?.createdAt)}
     >
-      { metaData
-      && (
-      <Suspense fallback={<div>Loading...</div>}>
-
-        <LinkMetaData metaData={metaData} />
-        <CardDetails
-          showLinks={showLinks}
-          topic={topic}
-          user={user}
-          onCommentClick={openModal}
-          updateLikes={updateLikes}
-        />
-      </Suspense>
-      )}
+      <LinkMetaData topic={topic} />
+      <CardDetails
+        showLinks={showLinks}
+        topic={topic}
+        user={user}
+      />
     </Card>
   )
 }

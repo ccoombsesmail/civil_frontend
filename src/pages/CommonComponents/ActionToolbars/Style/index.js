@@ -9,8 +9,8 @@ export const Container = styled.div`
   padding: 0 .5em;
 
   span {
-    color: gray;
-    font-size: .5em;
+    color: black;
+    font-size: .8em;
   }
 
   img {
@@ -20,11 +20,22 @@ export const Container = styled.div`
     margin: .3em .5em;
   }
   svg {
-    width: 1.5em !important;
-    height: 1.5em  !important;
+    width: 1.5em;
+    height: 1.5em ;
     margin: .3em .5em;
 
   }
+`
+
+export const Left = styled('div')`
+  display: flex;
+  align-items: center;
+
+`
+
+export const Right = styled('div')`
+  display: flex;
+  align-items: center;
 `
 
 export const Likes = styled('span')``

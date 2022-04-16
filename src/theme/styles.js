@@ -44,23 +44,41 @@ textarea {
     white-space: revert;
 }
 
+blockquote {
+  border-left: 4px solid lightgray;
+  padding-left: 5px;
+}
+
 
   :root {
     --m-primary-background-color: #339C7D;
     --m-secondary-background-color: #E6EEF2;
     --m-primary-btn-color: #3DC393;
+    --m-primary-btn-color:  #87C232;
     --m-primary-peripherals-color: #474a4d;
     --m-highlight-color: #F8CA41;
     --m-btn-hover-color: #F5F8FF;
     --m-menu-item-hover: #D9DFDF;
 
-
+    --m-elastos-theme: #8530F1;
     /* --m-primary-background-1-color: #37B381; */
  
 
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
 
+    /* EMOJI */
+    unicode-emoji-picker {
+  
+      font-size: 24px;
+      z-index: 9999;
+      background-color: white;
+    --min-width: 20.8em; /* 6 emojis wide */
+    --min-height: 11.5em; /* 4 emojis tall */
+    --max-width: 20.8em; /* 11 emojis wide */
+    --max-height: 11.5em; /* 10 emojis tall */
+    }
+    /* EMOJI */
 
 
     --gutterSm: 0.4rem;
@@ -154,7 +172,7 @@ textarea {
     z-index: 999999;
   }
 
-  .fade {
+  .fade.modal {
     transition: all .4s;
   }
 
@@ -228,6 +246,11 @@ textarea {
 
   .popover {
     z-index: 999999999;
+  }
+
+  .sticky-popover {
+    outline: none;
+    border: none;
   }
 
   .feather {

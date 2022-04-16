@@ -13,7 +13,7 @@ export const Button = styled('button')`
   &:hover {
      letter-spacing: ${(props) => (props.small ? 'normal' : '0.125rem')};
     }
-  height: ${(props) => (props.small ? '2em' : '2.5em')};
+  height: ${(props) => (props.height || 'unset')};;
   font-size: ${(props) => (props.small ? '.7em' : '.9em')};
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@ export const Button = styled('button')`
   color: white;
   padding: ${(props) => (props.small ? '.3em .8em' : '.5em 1em')};
   /* background: var(--m-primary-background-2-color); */
-  background-color: var(--m-primary-btn-color);
+  background-color: ${(props) => (props.backgroundColor || 'var(--m-primary-btn-color)')};
   text-transform: uppercase;
   width: ${(props) => (props.width || 'unset')};;
   :hover {

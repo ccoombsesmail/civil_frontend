@@ -1,5 +1,3 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import Queue from "queue";
 
 type JSONRPCResponse = {
@@ -8,10 +6,6 @@ type JSONRPCResponse = {
     jsonrpc: string;
     result: string;
 };
-
-@Injectable({
-    providedIn: 'root'
-})
 export class GlobalJsonRPCService {
     public static instance: GlobalJsonRPCService = null;
 
@@ -20,7 +14,7 @@ export class GlobalJsonRPCService {
     private postQueue = new Queue({ autostart: true, concurrency: 1 });
     private getQueue = new Queue({ autostart: true, concurrency: 1 });
 
-    constructor(private http: HttpClient) {
+    constructor() {
         GlobalJsonRPCService.instance = this;
     }
 
@@ -124,19 +118,19 @@ export class GlobalJsonRPCService {
         });
     }
 
-    httpGet(url): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.getQueue.push(() => {
-                return new Promise((resolveQueue, rejectQueue) => {
-                    this.http.get<any>(url).subscribe((res) => {
-                        resolve(res);  // Unblock the calling method
-                        resolveQueue(res); // Unblock the concurrency queue
-                    }, (err) => {
-                        reject(err);
-                        rejectQueue(err);
-                    });
-                });
-            });
-        });
-    }
+    // httpGet(url): Promise<any> {
+    //     return new Promise((resolve, reject) => {
+    //         this.getQueue.push(() => {
+    //             return new Promise((resolveQueue, rejectQueue) => {
+    //                 this.http.get<any>(url).subscribe((res) => {
+    //                     resolve(res);  // Unblock the calling method
+    //                     resolveQueue(res); // Unblock the concurrency queue
+    //                 }, (err) => {
+    //                     reject(err);
+    //                     rejectQueue(err);
+    //                 });
+    //             });
+    //         });
+    //     });
+    // }
 }

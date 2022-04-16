@@ -1,9 +1,16 @@
 import React from 'react'
 import LinkMetaData from '../LinkMetaData/Index'
 
-const DisplayMedia = ({ imgFile, videoFile, metaData }) => (
+const DisplayMedia = ({
+  imgFile, videoFile, setMetaData, contentUrl,
+}) => (
   <>
-    { metaData && <LinkMetaData metaData={metaData} /> }
+    { contentUrl && (
+    <LinkMetaData
+      setMetaData={setMetaData}
+      contentUrl={contentUrl}
+    />
+    ) }
     { imgFile && <img src={imgFile} alt="" />}
     { videoFile && (
     <video controls>

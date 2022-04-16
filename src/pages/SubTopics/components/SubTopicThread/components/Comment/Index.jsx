@@ -9,7 +9,7 @@ import Collapse from 'react-bootstrap/Collapse'
 import { UpArrowSvg, DownArrowSvg } from '../../../../../../svgs/svgs'
 
 import IconButton from '../../../../../CommonComponents/IconButton/Index'
-import ActionToolbar from '../../../../../CommonComponents/ActionToolbar/Index'
+import ActionToolbar from '../../../../../CommonComponents/ActionToolbars/CommentToolbar/Index'
 import {
   CommentContainer, Header, Username, Date, Body,
   Thumb, ExpandButton, EvidenceSection, Content, UserInfoContainer,
@@ -18,7 +18,6 @@ import {
 import { getTimeSince } from '../../../../../../generic/string/dateFormatter'
 import useSetInnerHtml from '../../../../../hooks/useSetInnerHtml'
 import useUpdateCommentLikes from './hooks/useUpdateCommentLikes'
-import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
 
 import useOpenReplyModal from './hooks/useOpenReplyModal'
 import { ParentCommentContext } from '../CommentColumn/Index'
@@ -32,7 +31,6 @@ const Comment = ({ commentData, replies }) => {
   const user = useSelector((s) => s.session.currentUser)
   const updateLikes = useUpdateCommentLikes(commentData, user)
   const openReplyModal = useOpenReplyModal(commentData.id, rootParentCommentId)
-  const updateCivility = useUpdateCommentCivility(commentData, user)
 
   useSetInnerHtml(contentRef, commentData?.content)
 
@@ -66,12 +64,9 @@ const Comment = ({ commentData, replies }) => {
         )}
       </Body>
       <ActionToolbar
-        likes={commentData.likes}
-        liked={commentData.liked}
-        updateLikes={updateLikes}
-        onCommentClick={openReplyModal}
-        updateCivility={updateCivility}
-        civil={commentData.civil}
+        likes={commentData?.likes}
+        comment={commentData}
+        user={user}
       />
       <Collapse in={isOpen}>
         <EvidenceSection>

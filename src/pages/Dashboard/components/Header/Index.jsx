@@ -11,12 +11,11 @@ const Header = ({ user }) => {
     <Container>
       <h1>{user?.username}</h1>
       <FlexDiv>
-        <UserIcon src={user?.iconSrc} onClick={openModal} />
+        <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} onClick={openModal} alt="" />
         <ProgressBar value={user?.civility} maxValue={20} />
       </FlexDiv>
     </Container>
   )
-
 }
 
 export default Header

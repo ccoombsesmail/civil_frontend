@@ -5,7 +5,7 @@ import { Collapse } from 'react-bootstrap'
 import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
 import IconButton from '../../IconButton/Index'
 import LinkSection from '../../LinkSection/Index'
-import ActionToolbar from '../../ActionToolbar/Index'
+import ActionToolbar from '../../ActionToolbars/TopicToolbar/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import { Description } from './Style'
@@ -13,6 +13,7 @@ import { Description } from './Style'
 const CardDetails = ({
   showLinks,
   topic,
+  user,
   onCommentClick,
   updateLikes,
   topicCard = true,
@@ -43,11 +44,9 @@ const CardDetails = ({
         </div>
       </Collapse>
       <ActionToolbar
-        liked={topic?.liked}
         likes={topic?.likes}
-        onCommentClick={onCommentClick}
-        updateLikes={updateLikes}
-        topicCard={topicCard}
+        topic={topic}
+        user={user}
       />
     </>
   )

@@ -18,6 +18,7 @@ export const createOpposingRec = (opposingRec) => (dispatch) => OpposingRecsApiU
 
 export const getAllOpposingRecs = (targetContentId) => (dispatch) => OpposingRecsApiUtil.getAllOpposingRecs(targetContentId)
   .then((res) => dispatch(getAllOpposingRecsActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 export default {
   createOpposingRec,

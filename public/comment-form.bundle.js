@@ -1,4 +1,3 @@
-"use strict";
 (self["webpackChunkcivil"] = self["webpackChunkcivil"] || []).push([["comment-form"],{
 
 /***/ "./src/generic/delay.js":
@@ -7,6 +6,7 @@
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -26,6 +26,7 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -69,20 +70,19 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
   var modalProps = _ref.modalProps;
   var descRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    rawHTML: '',
+    content: '',
+    rawText: ''
+  }),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      content = _useState2[0],
-      setContent = _useState2[1];
+      richTextEditorData = _useState2[0],
+      setRichTextEditorData = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
       _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-      rawText = _useState4[0],
-      setRawText = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-      _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-      toxicityScore = _useState6[0],
-      setToxicityScore = _useState6[1];
+      toxicityScore = _useState4[0],
+      setToxicityScore = _useState4[1];
 
   var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_13__.useLocation)(),
       pathname = _useLocation.pathname;
@@ -90,7 +90,7 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
   var topicId = pathname.match(uuidRegEx)[0];
   var subtopicId = pathname.match(uuidRegEx)[1];
   var compState = (0,_hooks_useGetStateEffect__WEBPACK_IMPORTED_MODULE_8__["default"])(topicId, subtopicId, modalProps);
-  var handleSubmit = (0,_hooks_useHandleSubmit__WEBPACK_IMPORTED_MODULE_9__["default"])(compState, content, rawText, modalProps, subtopicId);
+  var handleSubmit = (0,_hooks_useHandleSubmit__WEBPACK_IMPORTED_MODULE_9__["default"])(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId);
   (0,_hooks_useSetInnerHtml__WEBPACK_IMPORTED_MODULE_7__["default"])(descRef, compState.htmlContent);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_12__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(formik__WEBPACK_IMPORTED_MODULE_2__.Formik, {
     initialValues: {
@@ -102,7 +102,7 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
     validate: function validate() {
       var errors = {};
 
-      if (content.length === 0) {
+      if (richTextEditorData.content.length === 0) {
         errors.content = 'Write Something';
       }
 
@@ -120,9 +120,8 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_12__.Description, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
       ref: descRef
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_12__.InputWrapper, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_CommonComponents_RichTextEditor_Index__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      content: content,
-      setContent: setContent,
-      setRawText: setRawText,
+      content: richTextEditorData.content,
+      setContent: setRichTextEditorData,
       setToxicityScore: setToxicityScore
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_14__["default"].Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_12__.ToxicityControls, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       style: {
@@ -133,7 +132,7 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
       type: "button",
       onClick: function onClick() {
         return (0,_api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_11__.checkToxicity)({
-          content: rawText
+          content: richTextEditorData.rawText
         }).then(function (res) {
           setToxicityScore(res.data.SEVERE_TOXICITY.toFixed(2));
         });
@@ -157,6 +156,7 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
@@ -188,6 +188,7 @@ var ToxicityControls = (0,styled_components__WEBPACK_IMPORTED_MODULE_2__["defaul
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -255,6 +256,7 @@ var findCommentContent = function findCommentContent(comment, id) {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -321,6 +323,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -404,6 +407,7 @@ var AnimatedCheckmark = function AnimatedCheckmark(_ref) {
   \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Container": () => (/* binding */ Container),
@@ -430,6 +434,16 @@ var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('d
   return props.color;
 });
 var Input = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('input')(_templateObject3 || (_templateObject3 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    -webkit-tap-highlight-color: transparent;\n    cursor: pointer;\n    margin: 0;\n    &:focus {\n      outline: 0;\n    }\n"])));
+
+/***/ }),
+
+/***/ "./src/pages/CommonComponents/RichTextEditor/Index.jsx":
+/*!*************************************************************!*\
+  !*** ./src/pages/CommonComponents/RichTextEditor/Index.jsx ***!
+  \*************************************************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/charlescoombs/deployments/civil_frontend/src/pages/CommonComponents/RichTextEditor/Index.jsx: Unexpected token, expected \"}\" (82:68)\n\n\u001b[0m \u001b[90m 80 |\u001b[39m \u001b[36mconst\u001b[39m \u001b[33mCustomButton\u001b[39m \u001b[33m=\u001b[39m ({ isHidden\u001b[33m,\u001b[39m pickerRef\u001b[33m,\u001b[39m setIsHidden }) \u001b[33m=>\u001b[39m (\u001b[0m\n\u001b[0m \u001b[90m 81 |\u001b[39m   \u001b[33m<\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 82 |\u001b[39m     \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m role\u001b[33m=\u001b[39m\u001b[32m\"button\"\u001b[39m onClick\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m setIsHidden((prev) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39mprev) onClick\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m setIsHidden((prev) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39mprev)}\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 83 |\u001b[39m       🙂\u001b[0m\n\u001b[0m \u001b[90m 84 |\u001b[39m     \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 85 |\u001b[39m     \u001b[33m<\u001b[39m\u001b[33mEmojiContainer\u001b[39m hidden\u001b[33m=\u001b[39m{isHidden}\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:476:17)\n    at Object.raiseWithData (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:469:17)\n    at Object.raise (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:430:17)\n    at Object.unexpected (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:3789:16)\n    at Object.expect (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:3773:28)\n    at Object.jsxParseExpressionContainer (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7647:10)\n    at Object.jsxParseAttributeValue (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7604:21)\n    at Object.jsxParseAttribute (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7665:38)\n    at Object.jsxParseOpeningElementAfterName (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7685:28)\n    at Object.jsxParseOpeningElementAt (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7678:17)\n    at Object.jsxParseElementAt (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7710:33)\n    at Object.jsxParseElementAt (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7726:32)\n    at Object.jsxParseElement (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7793:17)\n    at Object.parseExprAtom (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7807:19)\n    at Object.parseExprSubscripts (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12149:23)\n    at Object.parseUpdate (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12129:21)\n    at Object.parseMaybeUnary (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12104:23)\n    at Object.parseMaybeUnaryOrPrivate (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11901:61)\n    at Object.parseExprOps (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11908:23)\n    at Object.parseMaybeConditional (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11878:23)\n    at Object.parseMaybeAssign (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11833:21)\n    at /Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11791:39\n    at Object.allowInAnd (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:13823:12)\n    at Object.parseMaybeAssignAllowIn (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11791:17)\n    at Object.parseParenAndDistinguishExpression (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12901:28)\n    at Object.parseExprAtom (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12476:23)\n    at Object.parseExprAtom (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:7812:20)\n    at Object.parseExprSubscripts (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12149:23)\n    at Object.parseUpdate (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12129:21)\n    at Object.parseMaybeUnary (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:12104:23)\n    at Object.parseMaybeUnaryOrPrivate (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11901:61)\n    at Object.parseExprOps (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11908:23)\n    at Object.parseMaybeConditional (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11878:23)\n    at Object.parseMaybeAssign (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:11833:21)\n    at Object.parseFunctionBody (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:13433:24)\n    at Object.parseArrowExpression (/Users/charlescoombs/deployments/civil_frontend/node_modules/@babel/parser/lib/index.js:13412:10)");
 
 /***/ })
 

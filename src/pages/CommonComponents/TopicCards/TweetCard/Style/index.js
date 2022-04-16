@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ActionToolbar from '../../../ActionToolbar/Index'
+import ActionToolbar from '../../../ActionToolbars/TopicToolbar/Index'
 
 export const TweetContainer = styled('div')`
   width: 100%;

@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { Logger } from '../logger';
 import { GlobalStorageService } from './global.storage.service';
 import { GlobalServiceManager } from './global.service.manager';
@@ -33,10 +32,6 @@ export type SignInOptions = {
   /** Suggested session langauge code to use? */
   sessionLanguage?: string;
 }
-
-@Injectable({
-  providedIn: 'root'
-})
 export class GlobalDIDSessionsService {
   private identities: IdentityEntry[] = null;
   private signedInIdentity: IdentityEntry | null = null;

@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export class Logger {
     private static originalConsole = null;
     private static originalDebugLog: (...args)=>void;
@@ -26,25 +24,25 @@ export class Logger {
     // }
 
     public static log(module: string, ...args: any) {
-        console.log("%c"+moment(new Date().getTime()).format('HH:mm:ss.SSS')+" "+module.toUpperCase()+"*", 'background: #008730; color: #FFF; font-weight:bold; padding:5px;',
+        console.log("%c"+ new Date().getTime() +" "+module.toUpperCase()+"*", 'background: #008730; color: #FFF; font-weight:bold; padding:5px;',
             ...args);
     }
 
     public static warn(module: string, ...args: any) {
         this.originalDebugWarn.apply(this.originalConsole, [
-            "%c"+moment(new Date().getTime()).format('HH:mm:ss.SSS')+" "+module.toUpperCase()+"* WARNING", 'background: #d59100; color: #FFF; font-weight:bold; padding:5px;',
+            "%c" + new Date().getTime() + " "+module.toUpperCase()+"* WARNING", 'background: #d59100; color: #FFF; font-weight:bold; padding:5px;',
             ...args]);
     }
 
     public static error(module: string, ...args: any) {
         this.originalDebugErr.apply(this.originalConsole, [
-            "%c"+moment(new Date().getTime()).format('HH:mm:ss.SSS')+" "+module.toUpperCase()+"* ERROR", 'background: #b30202; color: #FFF; font-weight:bold; padding:5px;',
+            "%c"+ new Date().getTime()  +" "+module.toUpperCase()+"* ERROR", 'background: #b30202; color: #FFF; font-weight:bold; padding:5px;',
             ...args]);
     }
 
     public static test(module: string, ...args: any) {
       this.originalDebugLog.apply(this.originalConsole, [
-            "%c"+moment(new Date().getTime()).format('HH:mm:ss.SSS')+" "+module.toUpperCase()+"* TEST", 'background: #7B68EE; color: #FFF; font-weight:bold; padding:5px;',
+            "%c"+ new Date().getTime() +" "+module.toUpperCase()+"* TEST", 'background: #7B68EE; color: #FFF; font-weight:bold; padding:5px;',
             ...args]);
     }
 }

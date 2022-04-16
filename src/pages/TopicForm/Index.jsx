@@ -10,11 +10,13 @@ import useConfigFormErrors from '../util/form_helpers/hooks/useConfigFormErrors'
 import uiActions from '../../redux/actions/ui'
 
 import { DownArrowCircleSvg } from '../../svgs/svgs'
-import Input from '../CommonComponents/Form/Input/Index'
+import Input from '../CommonComponents/Form/Input3/Index'
 import Select from '../CommonComponents/Form/Select/Index'
 import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
 import Button from '../CommonComponents/Button/Index'
 import UploadMediaContainer from './components/UploadMedia/Index'
+import DisplayMedia from './components/DisplayMedia/Index'
+import LinkTypeIcon from './components/LinkTypeIcon/Index'
 
 import ThemeTooltip from '../CommonComponents/Tooltip/Index'
 
@@ -25,11 +27,10 @@ import {
 
 import { INIT_TOPIC_FORM_VALUES } from '../util/form_helpers/init_form_values'
 import useGetLinkMetaDataOnBlur from './hooks/useGetLinkMetaDataOnBlur'
-import DisplayMedia from './components/DisplayMedia/Index'
 
 const VALIDATIONS = {
   title: { REQUIRED: true },
-  summary: { REQUIRED: true, MIN_LENGTH: 10 },
+  summary: { REQUIRED: true, MIN_LENGTH: 5 },
   category: { REQUIRED: true },
 }
 
@@ -37,12 +38,16 @@ const CreateTopicForm = () => {
   const [open, setOpen] = useState(false)
   const [imgFile, setImgFile] = useState(null)
   const [videoFile, setVideoFile] = useState(null)
+  const [metaData, setMetaData] = useState(null)
 
   const [rotate, setRotate] = useState(0)
-  const [content, setContent] = useState('')
+  const [richTextEditorContent, setRichTextEditorContent] = useState({
+    rawHTML: '',
+    content: '',
+  })
 
   const validator = useConfigFormErrors(VALIDATIONS)
-  const { metaData, getLinkMetaDataOnBlur } = useGetLinkMetaDataOnBlur()
+  const { contentUrl, getContentUrlOnBlur } = useGetLinkMetaDataOnBlur()
   const handleSubmit = useHandleSubmit(metaData)
   const { closeModal } = useBindDispatch(uiActions)
 
@@ -51,7 +56,7 @@ const CreateTopicForm = () => {
       <Formik
         initialValues={INIT_TOPIC_FORM_VALUES}
         validate={validator}
-        onSubmit={((values, params) => handleSubmit(values, params, content))}
+        onSubmit={((values, params) => handleSubmit(values, params, richTextEditorContent.rawHTML))}
       >
         {({ isSubmitting, setFieldValue, setFieldTouched }) => (
           <>
@@ -70,9 +75,9 @@ const CreateTopicForm = () => {
                         tooltipText="Provide information about the topic you would like to discuss"
                       />
                     </FlexDiv>
-                    <Field type="text" name="title" component={Input} width="100%" placeholder="Enter A Topic Title" />
-                    <Field type="text" name="summary" component={Input} width="100%" placeholder="Give A Short Opinion Or Point" />
-                    <Field type="text" name="category" component={Select} setFieldValue={setFieldValue} setFieldTouched={setFieldTouched} width="100%" />
+                    <Field type="text" name="title" label="Title" component={Input} width="85%" placeholder="Enter A Topic Title" />
+                    <Field type="text" name="summary" label="Summary" component={Input} width="85%" placeholder="Give A Short Opinion Or Point" />
+                    <Field type="text" name="category" label="Category" component={Select} setFieldValue={setFieldValue} setFieldTouched={setFieldTouched} width="85%" />
                   </Left>
                   <Right>
                     <FlexDiv>
@@ -83,8 +88,19 @@ const CreateTopicForm = () => {
                         e.g a YouTube video, Tweet, publication, or anything else)"
                       />
                     </FlexDiv>
+                    <FlexDiv>
+                      <Field
+                        type="url"
+                        name="contentUrl"
+                        placeholder="Link To Content"
+                        label="Link To Content"
+                        component={Input}
+                        width="85%"
+                        onBlur={getContentUrlOnBlur}
+                      />
+                      { contentUrl && <LinkTypeIcon metaData={metaData} contentUrl={contentUrl} /> }
+                    </FlexDiv>
 
-                    <Field type="url" name="contentUrl" placeholder="Link To Content" component={Input} width="100%" onBlur={getLinkMetaDataOnBlur} />
                     <Line />
                     <FlexDiv>
                       <h2> Add your own media content </h2>
@@ -106,9 +122,13 @@ const CreateTopicForm = () => {
                 <DisplayMedia
                   imgFile={imgFile}
                   videoFile={videoFile}
-                  metaData={metaData}
+                  contentUrl={contentUrl}
+                  setMetaData={setMetaData}
                 />
-                <RichTextEditor content={content} setContent={setContent} />
+                <RichTextEditor
+                  content={richTextEditorContent.content}
+                  setContent={setRichTextEditorContent}
+                />
                 <Arrow
                   rotate={rotate}
                   // icon={<DownArrowCircleSvg />}
@@ -134,9 +154,9 @@ const CreateTopicForm = () => {
                           tooltipHeader="Supplemental Information"
                         />
                       </FlexDiv>
-                      <Field type="url" name="Evidence Link 1" component={Input} width="100%" />
-                      <Field type="url" name="Evidence Link 2" component={Input} width="100%" />
-                      <Field type="url" name="Evidence Link 3" component={Input} width="100%" />
+                      <Field type="url" name="Evidence Link 1" component={Input} width="70%" label="Link To Evidence" />
+                      <Field type="url" name="Evidence Link 2" component={Input} width="70%" label="Link To Evidence" />
+                      <Field type="url" name="Evidence Link 3" component={Input} width="70%" label="Link To Evidence" />
                     </div>
                   </Collapse>
                 </InputsContainer>

@@ -18,7 +18,6 @@ export default () => {
     // Set all request headers with token
     axios.interceptors.request.use(
       async (req) => {
-        console.log(req.url)
         if (req.url.includes('eid')) return req
         if (req.url.includes(AssistDIDAdapter.MAINNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
@@ -48,31 +47,31 @@ export default () => {
     )
 
     // If request fails and response gives 401 error, set header with new token in case it's expired
-    axios.interceptors.response.use(
-      (res) => res,
-      async (error) => {
-        const { config } = error
-        const defaultDID = await getDefaultDID()
-
-        if (error.response && error.response.status === 401) {
-          try {
-            let token = null
-            if (user) {
-              token = await getToken()
-            } else if (defaultDID) {
-              console.log('***************RESPONSE**************')
-              const doc = await defaultDID.resolve()
-              const didToken = await createDIDBasedJWT(doc)
-              token = didToken
-            }
-            config.headers.Authorization = `Bearer ${token}`
-            return axios(config)
-          } catch {
-            return Promise.reject(error)
-          }
-        }
-        return Promise.reject(error)
-      },
-    )
+    // axios.interceptors.response.use(
+    //   (res) => res,
+    //   async (error) => {
+    //     const { config } = error
+    //     const defaultDID = await getDefaultDID()
+    //     console.log(error)
+    //     if (error.response && error.response.status === 401) {
+    //       try {
+    //         let token = null
+    //         if (user) {
+    //           token = await getToken()
+    //         } else if (defaultDID) {
+    //           console.log('***************RESPONSE**************')
+    //           const doc = await defaultDID.resolve()
+    //           const didToken = await createDIDBasedJWT(doc)
+    //           token = didToken
+    //         }
+    //         config.headers.Authorization = `Bearer ${token}`
+    //         return axios(config)
+    //       } catch {
+    //         return Promise.reject(error)
+    //       }
+    //     }
+    //     return Promise.reject(error)
+    //   },
+    // )
   }, [currentUser])
 }

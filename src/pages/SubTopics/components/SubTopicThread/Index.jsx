@@ -33,8 +33,8 @@ const SubTopicThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
-    getAllComments(subTopicId, user?.id)
-    getTopic(topicId, user?.id)
+    getAllComments(subTopicId, user?.userId)
+    getTopic(topicId, user?.userId)
   }, [user])
   return (
     <>

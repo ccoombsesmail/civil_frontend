@@ -1,7 +1,13 @@
 import styled from 'styled-components'
 
+
+export const Container = styled('div')`
+  min-width: 70%;
+`
+
 export const LinkWrapper = styled('a')`
   text-decoration: none;
+
 `
 
 export const FlexDiv = styled('div')` 
@@ -26,6 +32,10 @@ export const OGImage = styled('img')`
 export const OGUrl = styled('span')` 
   color: gray;
   font-size: 1vw;
+  white-space: pre-wrap;  
+  word-wrap: break-word;
+  hyphens: auto;
+  max-width: 90%;
 `
 
 export const OGTitle = styled('h3')`

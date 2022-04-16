@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { setAuthToken } from '../../api/util/auth'
 
 export const ADD_SESSION_DATA_BACKEND = 'ADD_SESSION_DATA_BACKEND'
@@ -16,7 +17,11 @@ const reducer = (state = {}, action) => {
     case ADD_SESSION_DATA_DID:
       return {
         ...state,
-        currentUser: { ...action.payload, username: action.payload.did.repr || action.payload.did.methodSpecificId },
+        currentUser: {
+          ...action.payload,
+          username: action.payload.username,
+          userId: action.payload.did.methodSpecificId,
+        },
       }
     case LOG_OUT:
       localStorage.setItem('jwt', null)

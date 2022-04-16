@@ -5,7 +5,7 @@ import CardDetails from '../CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
-import useUpdateLikes from '../../../hooks/useUpdateLikes'
+import useUpdateLikes from '../../ActionToolbars/TopicToolbar/components/LikeButton/hooks/useUpdateLikes'
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import { VideoPlayer } from './Style'
