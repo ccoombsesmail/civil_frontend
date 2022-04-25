@@ -16,7 +16,7 @@ const TopicItem = ({ topic, user }) => {
   const commonProps = useMemo(() => ({
     topic, user, showLinks: false, hideReplyIcon: true,
   }), [topic, user])
-
+  console.log(topic)
   // const goToSubTopic = useGoToSubTopics(topic?.id)
   if (topic.ytUrl) {
     return (

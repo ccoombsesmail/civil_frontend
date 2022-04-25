@@ -1,7 +1,6 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import delay from '../../../generic/delay'
 
 import topicActions from '../../../redux/actions/topics/index'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'

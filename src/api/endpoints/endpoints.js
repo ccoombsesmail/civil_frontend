@@ -4,3 +4,4 @@
 
 export const BACKEND_DEV = `http://${window.location.hostname}:8090/api/v1`
 export const UPLOAD_SERVICE = `http://${window.location.hostname}:8091/api/v1`
+export const NOTIFICATIONS_SERVICE = `http://${window.location.hostname}:8093/api/v1`

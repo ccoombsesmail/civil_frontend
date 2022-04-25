@@ -43,6 +43,7 @@
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "rxjs": "^7.5.5",
+    "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.0",
     "unicode-emoji-picker": "^1.2.1",
     "unused-webpack-plugin": "^2.4.0",

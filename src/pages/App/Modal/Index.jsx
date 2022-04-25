@@ -13,6 +13,8 @@ import { ModalWrapper } from './Style/index'
 
 import UploadIconForm from '../../Dashboard/components/UploadIconForm/Index'
 import OpposingRecForm from '../../OpposingRecForm/Index'
+import VoteForm from '../../VoteForm/Index'
+
 import { ReportForm } from '../../ReportForm/Index'
 
 const CreateTopicForm = React.lazy(() => import(
@@ -43,6 +45,7 @@ export const REPLY = 'REPLY'
 export const ICON_FORM = 'ICON_FORM'
 export const OPPOSING_REC_FORM = 'OPPOSING_REC_FORM'
 export const REPORT_FORM = 'REPORT_FORM'
+export const TOPIC_VOTE_FORM = 'TOPIC_VOTE_FORM'
 
 export const REPLY_FROM_TOPIC = 'REPLY_FROM_TOPIC' // when replying directly to a topic
 
@@ -69,6 +72,9 @@ const Modal = ({ closeModal }) => {
       break
     case REPORT_FORM:
       component = <ReportForm {...modalProps} />
+      break
+    case TOPIC_VOTE_FORM:
+      component = <VoteForm {...modalProps} />
       break
     default:
       break

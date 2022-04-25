@@ -1740,10 +1740,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
-/* harmony import */ var _generic_delay__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../generic/delay */ "./src/generic/delay.js");
-/* harmony import */ var _redux_actions_topics_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../redux/actions/topics/index */ "./src/redux/actions/topics/index.js");
-/* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
-/* harmony import */ var _checkLinkType__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./checkLinkType */ "./src/pages/TopicForm/hooks/checkLinkType.js");
+/* harmony import */ var _redux_actions_topics_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../redux/actions/topics/index */ "./src/redux/actions/topics/index.js");
+/* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
+/* harmony import */ var _checkLinkType__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./checkLinkType */ "./src/pages/TopicForm/hooks/checkLinkType.js");
 
 
 
@@ -1756,11 +1755,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-
  // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (metaData) {
-  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_7__["default"])(_redux_actions_topics_index__WEBPACK_IMPORTED_MODULE_6__["default"]),
+  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__["default"])(_redux_actions_topics_index__WEBPACK_IMPORTED_MODULE_5__["default"]),
       createTopic = _useBindDispatch.createTopic,
       uploadTopicMedia = _useBindDispatch.uploadTopicMedia;
 
@@ -1779,7 +1777,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
       return k.includes('Evidence') ? v : null;
     }).filter(Boolean);
-    var linkType = (0,_checkLinkType__WEBPACK_IMPORTED_MODULE_8__["default"])(values.contentUrl);
+    var linkType = (0,_checkLinkType__WEBPACK_IMPORTED_MODULE_7__["default"])(values.contentUrl);
 
     var data = _objectSpread(_objectSpread({}, values), {}, (_objectSpread2 = {
       description: content,

@@ -22,6 +22,8 @@ import Sidebar from './Sidebar/Index'
 import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content } from './Style'
 import UserProfile from '../UserProfile/Index'
+import Tribunal from '../Tribunal/Index'
+import Notifications from '../Notifications/Index'
 
 // import Dashboard from '../Dashboard/Index'
 const Dashboard = React.lazy(() => import(/* webpackChunkName: "dashboard" */
@@ -76,6 +78,8 @@ const App = () => {
                   />
                   <Route path="/authenticate/*" element={<AuthFlow />} />
                   <Route path="/user/:userId" element={<UserProfile />} />
+                  <Route path="/tribunal/topics/:topicId" element={<Tribunal />} />
+                  <Route path="/notifications" element={<Notifications />} />
                   <Route path="/topics/*" element={<Topics />} />
                   <Route path="/" element={<Navigate replace to="/topics" />} />
                 </Routes>

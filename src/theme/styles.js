@@ -28,7 +28,9 @@ ol, ul {
   margin: 0;
   padding: 0;
 }
-
+li {
+  list-style: none;
+}
 /* For images to not be able to exceed their container */
 img {
     max-width: 100%;

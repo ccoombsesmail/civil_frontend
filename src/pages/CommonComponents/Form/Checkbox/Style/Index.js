@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 //  https://codepen.io/avstorm/pen/vYYBxRM
 
@@ -83,9 +83,12 @@ export const Input = styled('input')`
     background: var(--m-primary-btn-color);
     animation: ${check} 0.6s ease;
   }
-  :checked + ${Label} span:first-child svg {
-    stroke-dashoffset: 0;
-  }
+  ${(props) => props.showCheckmark && css`
+    :checked + ${Label} span:first-child svg {
+      stroke-dashoffset: 0;
+  } 
+  `};
+
   :checked + ${Label} span:first-child:before {
     transform: scale(2.2);
     opacity: 0;

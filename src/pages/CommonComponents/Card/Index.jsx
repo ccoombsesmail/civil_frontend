@@ -1,11 +1,20 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, {
+  useRef, useEffect, useState, useMemo,
+} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UNDER_REVIEW } from '../../../enums/report_status'
+import { WarningSvg, ScalesSvg } from '../../../svgs/svgs'
 import UserInfoHeader from '../UserInfoHeader/Index'
+import ThemeButton from '../Button/Index'
 
 import {
   Container,
   Body,
   Description,
   VideoDescriptionContainer,
+  Message,
+  Warning,
+  MessageContainer,
 } from './Style'
 
 const Card = ({
@@ -18,9 +27,12 @@ const Card = ({
   listCard,
   height,
   userId,
+  topicId,
+  reportStatus,
 }) => {
   const ref = useRef(null)
   const [totalHeight, setTotalHeight] = useState('unset')
+  const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   useEffect(() => {
     const totalCompHeight = [...ref?.current?.children].reduce((acc, child) => {
       const compStyles = window.getComputedStyle(child)
@@ -30,17 +42,49 @@ const Card = ({
     if (height) setTotalHeight(totalCompHeight + height)
   }, [ref])
 
+  const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
+  const navigate = useNavigate()
   return (
-    <Container ref={ref} height={totalHeight} onClick={onClick} listCard={listCard}>
+    <Container
+      ref={ref}
+      height={totalHeight}
+      onClick={onContainerClick}
+      listCard={listCard}
+      shouldBlur={shouldBlur}
+    >
       <UserInfoHeader iconSrc={iconSrc} time={time} username={username} userId={userId} />
-      <Description className="text-pop-up-top">
+      { shouldBlur && (
+      <>
+        <MessageContainer onClick={() => setShouldBlur((prev) => !prev)}>
+          <Message>
+            This Topic Has Been Reported And May Contain Explicit Visuals Or Offensive Language
+          </Message>
+          <Warning>
+            <div>
+              <WarningSvg />
+              Click To See Content At Your Own Risk!
+            </div>
+            <div>
+              <ThemeButton onClick={() => navigate(`/tribunal/topics/${topicId}`)}>
+                <ScalesSvg />
+                Ongoing Review Process
+              </ThemeButton>
+            </div>
+          </Warning>
+
+        </MessageContainer>
+      </>
+      )}
+      {/* <BlurOverlay shouldBlur={reportStatus === UNDER_REVIEW}> */}
+      <Description className="text-pop-up-top" shouldBlur={shouldBlur}>
         &ldquo;
         {summary}
         &rdquo;
       </Description>
-      <Body>
+      <Body shouldBlur={shouldBlur}>
         {children}
       </Body>
+      {/* </BlurOverlay> */}
     </Container>
   )
 }

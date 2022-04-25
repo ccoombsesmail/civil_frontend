@@ -8,8 +8,6 @@ export const Container = styled('div')`
   align-items: center;
   z-index: 9999;
   height: 100%;
-
-  /* padding-top: 5em; */
 `
 
 export const BorderContainer = styled('div')`

@@ -1,5 +1,6 @@
 import { useUser } from '@clerk/clerk-react'
 import { useEffect } from 'react'
+import { io } from 'socket.io-client'
 import { useDispatch, useSelector } from 'react-redux'
 import { DIDBackend, DefaultDIDAdapter } from '@elastosfoundation/did-js-sdk'
 import enumActions from '../../../redux/actions/enums'
@@ -8,8 +9,11 @@ import sessionActions, { addUserActionCreatorClerk } from '../../../redux/action
 import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import useSetupInterceptorsEffect from '../../hooks/auth/useSetupInterceptorsEffect'
+import useInitSocketEffect from './useInitSocketEffect'
 
 export default () => {
+  const URL = 'http://localhost:8093'
+  const socket = io(URL, { autoConnect: false })
   DIDBackend.initialize(new DefaultDIDAdapter('mainnet'))
   const dispatch = useDispatch()
   const currentUser = useSelector((s) => s.session.currentUser)
@@ -25,6 +29,8 @@ export default () => {
     logout,
     upsertDidUser,
   } = useBindDispatch(enumActions, sessionActions, userActions)
+
+  useInitSocketEffect(socket)
 
   useEffect(() => {
     getAllEnums()

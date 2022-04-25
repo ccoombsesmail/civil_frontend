@@ -37,19 +37,19 @@ export const ReportForm = ({ topicId }, ...props) => {
               <Modal.Body>
                 <ItemList>
                   <Item>
-                    <Field name="toxic" component={Checkbox} />
+                    <Field name="toxic" showCheckmark component={Checkbox} />
                     <ItemDescription>
                       Extremely toxic or racist language
                     </ItemDescription>
                   </Item>
                   <Item>
-                    <Field name="personalAttack" component={Checkbox} />
+                    <Field name="personalAttack" showCheckmark component={Checkbox} />
                     <ItemDescription>
                       Targeting a specific user (i.e doxing, personal threats)
                     </ItemDescription>
                   </Item>
                   <Item>
-                    <Field name="spam" component={Checkbox} />
+                    <Field name="spam" showCheckmark component={Checkbox} />
                     <ItemDescription>
                       Spam (excessively promoting content, non-sensical posts )
                     </ItemDescription>

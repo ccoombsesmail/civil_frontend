@@ -1,12 +1,10 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import RangeSlider from '../../../../Form/RangeSlider/Index'
 import PopoverStickOnHover from '../../../../PopoverStickOnHover/Index'
 import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
-import { useMemo } from 'react';
 
 const CivilityButton = ({ comment }) => {
   const updateCommentCivility = useUpdateCommentCivility(comment)
-  console.log(comment)
   const Icon = useMemo(() => {
     if (!comment || comment.civility === 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />
     if (comment.civility > 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />

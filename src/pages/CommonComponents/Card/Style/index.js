@@ -41,7 +41,9 @@ export const Header = styled('div')`
 
   }
 `
-export const Body = styled('div')` 
+export const Body = styled('div')`
+  filter: ${(props) => (props.shouldBlur ? 'blur(25px)' : 'unset')};
+  pointer-events: ${(props) => (props.shouldBlur ? 'none' : 'initial')};
   width: 100%;
   background-color: white;
   transition: all 1s ease-in-out;
@@ -56,6 +58,7 @@ export const Body = styled('div')`
 `
 
 export const Description = styled('p')` 
+  filter: ${(props) => (props.shouldBlur ? 'blur(25px)' : 'unset')};
   width: 100%;
   padding: 2vw 0;
   margin-bottom: 0;
@@ -94,7 +97,8 @@ export const Container = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
-  width: 40vw;  
+  min-width: 40vw;  
+  flex: 33%;
   margin: 2em 2em 2em 2em;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
@@ -109,7 +113,7 @@ export const Container = styled('li')`
   }
 
   :hover p {
-    filter: brightness(.95);
+    filter: ${(props) => (props.shouldBlur ? 'blur(15px)' : 'brightness(.95)')};
   }
 
   @media only screen and (max-width: 600px) {
@@ -148,11 +152,56 @@ export const VideoDescriptionContainer = styled('li')`
   }
 
   :hover p {
-    filter: brightness(.95);
+    filter: ${(props) => (props.shouldBlur ? 'blur(15px)' : 'brightness(.95)')};
   }
 
   @media only screen and (max-width: 600px) {
     width: 100%;
     border-radius: 0;
   }
+`
+
+export const BlurOverlay = styled('div')`
+  width: 100% ;
+  height: 100%;
+  filter: ${(props) => (props.shouldBlue ? 'blur(15px)' : 'unset')};
+`
+
+export const Warning = styled('span')`
+  display: flex;
+  flex-direction: column;
+  svg {
+    margin-right: .5vw;
+  }
+
+`
+
+export const MessageContainer = styled('div')` 
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--m-menu-item-hover);
+  width: 90%;
+  border-radius: .5em;
+  padding: 20px;
+  cursor: pointer;
+  height: 200px;
+
+`
+
+export const Message = styled('h3')`
+ 
+
+  font-weight: bold;
+
+  :hover {
+    filter: brightness(.95)
+  }
+ 
 `

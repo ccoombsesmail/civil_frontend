@@ -1,18 +1,20 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { Input, Label } from './Style/Index'
 
 export const Checkbox = ({
-  width, field, form, ...props
+  width, field, form, showCheckmark, type, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
   return (
     <>
       <Input
-        type="checkbox"
         id={field.name}
+        showCheckmark={showCheckmark}
         {...field}
         {...props}
+        type={type || 'checkbox'}
         showError={showError}
       />
       <Label className="cbx" htmlFor={field.name}>

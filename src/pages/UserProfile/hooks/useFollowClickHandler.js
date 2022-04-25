@@ -8,6 +8,8 @@ export default (userId, isFollowing) => {
   const { addNewFollow, removeFollow } = useBindDispatch(followActions)
   const currentUser = useSelector((s) => s.session.currentUser)
   return useCallback(() => {
-    isFollowing ? removeFollow(currentUser.id, userId) : addNewFollow(currentUser.id, userId)
+    isFollowing
+      ? removeFollow(currentUser.id || currentUser.userId, userId)
+      : addNewFollow(currentUser.id || currentUser.userId, userId)
   }, [currentUser, userId, isFollowing])
 }

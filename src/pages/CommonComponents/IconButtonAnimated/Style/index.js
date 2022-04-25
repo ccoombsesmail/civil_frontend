@@ -26,7 +26,7 @@ export const StyledButton = styled('button')`
   border: none;
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-  background: var(--m-primary-background-2-color);
+  background: var(--m-primary-btn-color);
   -webkit-touch-callout: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
