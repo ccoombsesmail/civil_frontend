@@ -8,8 +8,8 @@ export const Container = styled('div')`
 
 export const Menu = styled('ul')` 
   display: flex;
-  border: .5px solid lightgray;
-  border-color: rgba(200,200,200,0.25) ;
+  border: 1px solid lightgray;
+  border-color: rgba(200,200,200,0.25);
   flex-direction: column;
   justify-content: center;
   position: absolute;

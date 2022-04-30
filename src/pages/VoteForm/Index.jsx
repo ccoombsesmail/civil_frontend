@@ -24,7 +24,6 @@ const VoteForm = ({ topicId }) => {
     setVoteAgainstSelected((prev) => !prev)
     setVoteForSelected(false)
   }, [])
-  console.log(voteAgainstSelected, voteForSelected)
 
   return (
     <Container>

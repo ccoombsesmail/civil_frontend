@@ -11,7 +11,6 @@ const NotificationItem = ({ notification }) => {
   const navigate = useNavigate()
   let ItemComponent
   let onClick
-  console.log(notification.eventType)
   switch (notification.eventType) {
     case NewFollower:
       onClick = () => navigate(`/user/${notification.followerUserId}`)

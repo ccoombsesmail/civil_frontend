@@ -13,7 +13,6 @@ const LinkTypeIcon = ({
   }, [contentUrl])
 
   useEffect(() => {
-    console.log(metaData)
     if (metaData) setIsLoading(false)
   }, [metaData])
 

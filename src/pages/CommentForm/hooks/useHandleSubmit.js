@@ -1,19 +1,23 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
+import { useLocation } from 'react-router-dom'
 
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import commentActions from '../../../redux/actions/comments'
+import tribunalCommentActions from '../../../redux/actions/tribunal_comments'
+
 import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
 import delay from '../../../generic/delay'
 
-export default (compState, content, rawText, modalProps, subtopicId) => {
-  const { createComment } = useBindDispatch(commentActions)
+export default (compState, content, rawText, modalProps, contentId) => {
+  const { pathname } = useLocation()
+  const isTribunalComment = pathname.includes('tribunal')
+  const {
+    createComment,
+    createTribunalComment,
+  } = useBindDispatch(commentActions, tribunalCommentActions)
+
   return useCallback((values, { setSubmitting, resetForm }) => {
-    // const { positive, negative, neutral } = values
-    // let sentiment
-    // if (positive) sentiment = 'positive'
-    // if (neutral) sentiment = 'neutral'
-    // if (negative) sentiment = 'negative'
     toast.promise(
       Promise.all([delay(1500), checkToxicity({ content: rawText })]),
       {
@@ -22,19 +26,21 @@ export default (compState, content, rawText, modalProps, subtopicId) => {
         error: 'Promise rejected 🤯',
       },
     ).then(() => {
-      createComment({
+      const comment = {
         ...values,
         content,
         memeFlag: false,
         parentId: modalProps?.commentId || null,
-        subtopicId,
+        contentId,
+        subtopicId: contentId,
         createdBy: compState.username,
         rootId: compState.rootParentCommentId,
         rawText,
-      })
+      }
+      return isTribunalComment ? createTribunalComment(comment) : createComment(comment)
     })
 
     setSubmitting(false)
     resetForm({})
-  }, [compState, content, rawText, modalProps, subtopicId])
+  }, [compState, content, rawText, modalProps, contentId])
 }

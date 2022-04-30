@@ -6,10 +6,8 @@ import uiActionCreators from '../../../redux/actions/ui/index'
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (topicId) => {
-  console.log(topicId)
   const { closeModal } = useBindDispatch(uiActionCreators)
   return useCallback((values, { setSubmitting, resetForm }) => {
-    console.log(values)
     const data = {
       topicId,
       toxic: values.toxic || null,

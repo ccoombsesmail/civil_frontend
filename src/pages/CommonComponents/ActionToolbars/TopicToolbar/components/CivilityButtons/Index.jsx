@@ -6,7 +6,6 @@ import IconButton from '../../../../IconButton/Index'
 import { LightButton } from '../../../../Tooltip/Style/index'
 
 const CivilityButton = () => {
-  console.log('hehe')
   const popover = (
     <Popover id="popover">
       <Popover.Body>

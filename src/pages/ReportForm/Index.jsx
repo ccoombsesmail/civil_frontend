@@ -12,7 +12,6 @@ import {
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 
 export const ReportForm = ({ topicId }, ...props) => {
-  console.log(props)
   const handleOnSubmit = useHandleOnSubmit(topicId)
   return (
     <Container>

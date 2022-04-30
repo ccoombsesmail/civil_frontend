@@ -16,9 +16,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const notifications = useSelector((s) => s.notifications.list)
-  console.log(notifications)
   const numUnreadNotifications = notifications.filter((n) => n.isRead === false).length
-  console.log(numUnreadNotifications)
   return (
     <SideBarContainer isOpen={open}>
       <Container>

@@ -6,6 +6,7 @@ export const OuterContainer = styled('div')`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-bottom: 60vh;
 `
 
 export const Header = styled('header')` 

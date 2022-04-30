@@ -32,11 +32,11 @@ const CreateCommentForm = ({ modalProps }) => {
   const [toxicityScore, setToxicityScore] = useState(null)
 
   const { pathname } = useLocation()
-  const topicId = pathname.match(uuidRegEx)[0]
+  const contentId = pathname.match(uuidRegEx)[0]
   const subtopicId = pathname.match(uuidRegEx)[1]
 
-  const compState = useGetStateEffect(topicId, subtopicId, modalProps)
-  const handleSubmit = useHandleSubmit(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId)
+  const compState = useGetStateEffect(contentId, subtopicId, modalProps)
+  const handleSubmit = useHandleSubmit(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId || contentId)
   useSetInnerHtml(descRef, compState.htmlContent)
 
   return (

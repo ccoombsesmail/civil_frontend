@@ -6,6 +6,7 @@ import {
   ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_COMMENT_CIVILITY,
 } from '../../reducers/comments/commentsReducer'
 import * as CommentsApiUtil from '../../../api/v1/comments/comments_api_util'
+import { errorFormatter } from '../../utils/errorFormatter'
 
 const getAllCommentsActionCreator = (subtopics) => ({
   type: GET_ALL_COMMENTS,
@@ -34,21 +35,21 @@ export const createComment = (commentData) => (dispatch) => {
     .then(() => {
       toast.success('Saved Comment', { delay: 1000 })
     })
-    .catch((err) => toast.error(`Problem Saving Comment \n ${err}`, { autoClose: 2500 }))
+    .catch((error) => toast.error(errorFormatter(error)))
     .finally(() => dispatch(closeModal()))
 }
 
 export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId, userId)
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 export const updateCommentLikes = (data) => (dispatch) => CommentsApiUtil.updateCommentLikes(data)
   .then((res) => dispatch(updateCommentActionCreator(res.data)))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 export const updateCommentCivility = (data) => (dispatch) => CommentsApiUtil.updateCommentCivility(data)
   .then((res) => dispatch(updateCommentCivilityActionCreator(res.data)))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
   createComment,

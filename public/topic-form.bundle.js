@@ -102,10 +102,10 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
   var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_13__.useLocation)(),
       pathname = _useLocation.pathname;
 
-  var topicId = pathname.match(uuidRegEx)[0];
+  var contentId = pathname.match(uuidRegEx)[0];
   var subtopicId = pathname.match(uuidRegEx)[1];
-  var compState = (0,_hooks_useGetStateEffect__WEBPACK_IMPORTED_MODULE_8__["default"])(topicId, subtopicId, modalProps);
-  var handleSubmit = (0,_hooks_useHandleSubmit__WEBPACK_IMPORTED_MODULE_9__["default"])(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId);
+  var compState = (0,_hooks_useGetStateEffect__WEBPACK_IMPORTED_MODULE_8__["default"])(contentId, subtopicId, modalProps);
+  var handleSubmit = (0,_hooks_useHandleSubmit__WEBPACK_IMPORTED_MODULE_9__["default"])(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId || contentId);
   (0,_hooks_useSetInnerHtml__WEBPACK_IMPORTED_MODULE_7__["default"])(descRef, compState.htmlContent);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_12__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(formik__WEBPACK_IMPORTED_MODULE_2__.Formik, {
     initialValues: {
@@ -229,7 +229,7 @@ var findCommentContent = function findCommentContent(comment, id) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (topicId, subtopicId, modalProps) {
-  var _useSelector, _useSelector2;
+  var _useSelector, _useSelector2, _useSelector3;
 
   var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (s) {
     return s.session.currentUser;
@@ -246,9 +246,15 @@ var findCommentContent = function findCommentContent(comment, id) {
 
     return ((_c$data = c.data) === null || _c$data === void 0 ? void 0 : _c$data.id) === (modalProps === null || modalProps === void 0 ? void 0 : modalProps.rootParentCommentId);
   });
+  var tribunalComment = (_useSelector3 = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (s) {
+    return s.tribunalComments.list;
+  })) === null || _useSelector3 === void 0 ? void 0 : _useSelector3.find(function (c) {
+    var _c$data2;
+
+    return ((_c$data2 = c.data) === null || _c$data2 === void 0 ? void 0 : _c$data2.id) === (modalProps === null || modalProps === void 0 ? void 0 : modalProps.rootParentCommentId);
+  });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    console.log(comment);
-    var commentContent = (modalProps === null || modalProps === void 0 ? void 0 : modalProps.replyType) !== 'REPLY_FROM_TOPIC' ? findCommentContent(comment, modalProps === null || modalProps === void 0 ? void 0 : modalProps.commentId) : topic === null || topic === void 0 ? void 0 : topic.description;
+    var commentContent = (modalProps === null || modalProps === void 0 ? void 0 : modalProps.replyType) !== 'REPLY_FROM_TOPIC' ? findCommentContent(comment || tribunalComment, modalProps === null || modalProps === void 0 ? void 0 : modalProps.commentId) : topic === null || topic === void 0 ? void 0 : topic.description;
     return {
       subtopicId: subtopicId,
       createdByIconSrc: (comment === null || comment === void 0 ? void 0 : comment.iconSrc) || (topic === null || topic === void 0 ? void 0 : topic.createdByIconSrc),
@@ -278,10 +284,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/node_modules/react-router/index.js");
 /* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
 /* harmony import */ var _redux_actions_comments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../redux/actions/comments */ "./src/redux/actions/comments/index.js");
-/* harmony import */ var _api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../api/v1/comments/comments_api_util */ "./src/api/v1/comments/comments_api_util.js");
-/* harmony import */ var _generic_delay__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../generic/delay */ "./src/generic/delay.js");
+/* harmony import */ var _redux_actions_tribunal_comments__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../redux/actions/tribunal_comments */ "./src/redux/actions/tribunal_comments/index.js");
+/* harmony import */ var _api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../api/v1/comments/comments_api_util */ "./src/api/v1/comments/comments_api_util.js");
+/* harmony import */ var _generic_delay__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../generic/delay */ "./src/generic/delay.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -294,38 +302,44 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (compState, content, rawText, modalProps, subtopicId) {
-  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__["default"])(_redux_actions_comments__WEBPACK_IMPORTED_MODULE_4__["default"]),
-      createComment = _useBindDispatch.createComment;
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (compState, content, rawText, modalProps, contentId) {
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)(),
+      pathname = _useLocation.pathname;
+
+  var isTribunalComment = pathname.includes('tribunal');
+
+  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__["default"])(_redux_actions_comments__WEBPACK_IMPORTED_MODULE_4__["default"], _redux_actions_tribunal_comments__WEBPACK_IMPORTED_MODULE_5__["default"]),
+      createComment = _useBindDispatch.createComment,
+      createTribunalComment = _useBindDispatch.createTribunalComment;
 
   return (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(function (values, _ref) {
     var setSubmitting = _ref.setSubmitting,
         resetForm = _ref.resetForm;
-    // const { positive, negative, neutral } = values
-    // let sentiment
-    // if (positive) sentiment = 'positive'
-    // if (neutral) sentiment = 'neutral'
-    // if (negative) sentiment = 'negative'
-    react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.promise(Promise.all([(0,_generic_delay__WEBPACK_IMPORTED_MODULE_6__["default"])(1500), (0,_api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_5__.checkToxicity)({
+    react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.promise(Promise.all([(0,_generic_delay__WEBPACK_IMPORTED_MODULE_7__["default"])(1500), (0,_api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_6__.checkToxicity)({
       content: rawText
     })]), {
       pending: 'Analyzing Comment...',
       success: 'Thanks For Being Civil!',
       error: 'Promise rejected 🤯'
     }).then(function () {
-      createComment(_objectSpread(_objectSpread({}, values), {}, {
+      var comment = _objectSpread(_objectSpread({}, values), {}, {
         content: content,
         memeFlag: false,
         parentId: (modalProps === null || modalProps === void 0 ? void 0 : modalProps.commentId) || null,
-        subtopicId: subtopicId,
+        contentId: contentId,
+        subtopicId: contentId,
         createdBy: compState.username,
         rootId: compState.rootParentCommentId,
         rawText: rawText
-      }));
+      });
+
+      return isTribunalComment ? createTribunalComment(comment) : createComment(comment);
     });
     setSubmitting(false);
     resetForm({});
-  }, [compState, content, rawText, modalProps, subtopicId]);
+  }, [compState, content, rawText, modalProps, contentId]);
 });
 
 /***/ }),
@@ -1496,7 +1510,6 @@ var LinkTypeIcon = function LinkTypeIcon(_ref) {
     setIsLoading(true);
   }, [contentUrl]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(metaData);
     if (metaData) setIsLoading(false);
   }, [metaData]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Style_index__WEBPACK_IMPORTED_MODULE_1__.OGFavicon, {

@@ -6,6 +6,7 @@ import {
 } from '../../reducers/sessionReducer'
 import * as SessionApiUtil from '../../../api/v1/session/session_api_util'
 import * as UsersApiUtl from '../../../api/v1/users/users_api_util'
+import { errorFormatter } from '../../utils/errorFormatter'
 
 const logoutActionCreator = () => ({
   type: LOG_OUT,
@@ -34,11 +35,11 @@ const updateActionCreator = (data) => ({
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
   .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
   .then(() => dispatch(closeModal()))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 export const getCurrentUser = (userId) => (dispatch) => UsersApiUtl.getUser(userId)
   .then((res) => dispatch(addUserActionCreatorBackend(res.data)))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 export const logout = () => (dispatch) => {
   dispatch(logoutActionCreator())
@@ -50,11 +51,11 @@ export const addDIDSession = (didData) => (dispatch) => {
 
 export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateUserIcon(userData)
   .then((res) => dispatch(updateActionCreator(res.data)))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 const uploadUserIcon = (dta, username) => (dispatch) => SessionApiUtil.uploadUserIcon(dta, username)
   .then((res) => dispatch(updateActionCreator(res.data)))
-  .catch((error) => toast.error(error))
+  .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
   logout,

@@ -147,7 +147,6 @@ namespace AssistPublishing {
         "requestFrom": "Charles",
         "didRequest": payloadObject
       };
-      console.log(requestBody)
       Logger.log("publicationservice", "Assist API request body:", requestBody, JSON.stringify(requestBody));
 
       let h: Object = Object.assign({},

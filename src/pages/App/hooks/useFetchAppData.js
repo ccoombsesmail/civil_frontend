@@ -50,9 +50,8 @@ export default () => {
           const { value: username } = doc.getCredential('username')?.getSubject().getProperties()
           const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties()
           const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties()
-
           upsertDidUser({
-            userId: doc.getSubject().getMethodSpecificId(),
+            userId: doc.getSubject().repr,
             username: username || doc.getSubject().getMethodSpecificId(),
           })
           addDIDSession({ did: defaultDID, doc, username })

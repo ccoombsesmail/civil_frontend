@@ -36,7 +36,7 @@ export default () => {
       .setIssuedAt(iat)
       .setExpiration(exp)
       // .setNotBefore(nbf)
-      .put('userId', doc.getSubject().getMethodSpecificId())
+      .put('userId', doc.getSubject().repr)
       .put('username', user?.username || doc.getSubject().getMethodSpecificId())
 
     doc.getMetadata().attachStore(store)

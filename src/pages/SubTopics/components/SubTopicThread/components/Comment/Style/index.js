@@ -11,6 +11,8 @@ export const CommentContainer = styled('li')`
   flex-direction: column;
   align-items: center;
   background-color: white;
+  border-bottom: 1px solid lightgray;
+  border-color: rgba(200,200,200,0.25);
   :hover {
     /* opacity: .9; */
     /* filter: brightness(.9); */

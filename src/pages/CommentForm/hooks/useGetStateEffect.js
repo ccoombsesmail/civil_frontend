@@ -21,10 +21,12 @@ export default (topicId, subtopicId, modalProps) => {
   const comment = useSelector((s) => s.comments.list)?.find(
     (c) => c.data?.id === modalProps?.rootParentCommentId,
   )
+  const tribunalComment = useSelector((s) => s.tribunalComments.list)?.find(
+    (c) => c.data?.id === modalProps?.rootParentCommentId,
+  )
   return useMemo(() => {
-    console.log(comment)
     const commentContent = modalProps?.replyType !== 'REPLY_FROM_TOPIC'
-      ? findCommentContent(comment, modalProps?.commentId) : topic?.description
+      ? findCommentContent(comment || tribunalComment, modalProps?.commentId) : topic?.description
     return {
       subtopicId,
       createdByIconSrc: comment?.iconSrc || topic?.createdByIconSrc,

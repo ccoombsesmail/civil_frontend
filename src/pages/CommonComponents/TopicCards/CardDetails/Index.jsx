@@ -14,9 +14,6 @@ const CardDetails = ({
   showLinks,
   topic,
   user,
-  onCommentClick,
-  updateLikes,
-  topicCard = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 

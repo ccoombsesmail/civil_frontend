@@ -12,6 +12,7 @@ import enumsReducer from './enumsReducer'
 import recsReducer from './recs/recsReducer'
 import topicReportsReducer from './topic_reports/topicReportsReducer'
 import notificationsReducer from './notifications/notificationsReducer'
+import tribunalCommentsReducer from './tribunal_comments/tribunalCommentsReducer'
 
 const reducers = combineReducers({
   session: sessionReducer,
@@ -25,5 +26,6 @@ const reducers = combineReducers({
   recommendations: recsReducer,
   topicReports: topicReportsReducer,
   notifications: notificationsReducer,
+  tribunalComments: tribunalCommentsReducer,
 })
 export default reducers

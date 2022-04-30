@@ -19,7 +19,6 @@ const EmbededYouTube = ({
   const updateLikes = useUpdateLikes(topic, user)
 
   useSetInnerHtml(descRef, topic?.description)
-  console.log(topic?.id, topic?.reportStatus)
   return (
     <Card
       onClick={goToSubTopic}

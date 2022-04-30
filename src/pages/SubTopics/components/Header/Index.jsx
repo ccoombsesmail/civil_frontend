@@ -36,7 +36,6 @@ const Header = ({ topic, user }) => {
   let subtopicContent = null
   const { '*': subtopicId } = useParams()
   const subtopic = useSelector((s) => s.subtopics)[subtopicId]
-  console.log(subtopic)
   const showSubTopic = subtopic && subtopic?.title !== 'General'
 
   const commonProps = useMemo(() => ({

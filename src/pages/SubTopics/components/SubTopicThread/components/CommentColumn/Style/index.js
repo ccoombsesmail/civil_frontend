@@ -15,7 +15,8 @@ export const Container = styled('ul')`
   width: 70vw;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-
+  border: 1px solid lightgray;
+  border-color: rgba(200,200,200,0.25);
 
   h1 {
     display: flex;

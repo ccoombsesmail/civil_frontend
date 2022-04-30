@@ -1,7 +1,7 @@
 import React, {
   useRef, useEffect, useState, useMemo,
 } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { UNDER_REVIEW } from '../../../enums/report_status'
 import { WarningSvg, ScalesSvg } from '../../../svgs/svgs'
 import UserInfoHeader from '../UserInfoHeader/Index'
@@ -31,6 +31,7 @@ const Card = ({
   reportStatus,
 }) => {
   const ref = useRef(null)
+  const { pathname } = useLocation()
   const [totalHeight, setTotalHeight] = useState('unset')
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   useEffect(() => {
@@ -65,7 +66,7 @@ const Card = ({
               Click To See Content At Your Own Risk!
             </div>
             <div>
-              <ThemeButton onClick={() => navigate(`/tribunal/topics/${topicId}`)}>
+              <ThemeButton onClick={() => navigate(`/tribunal/topics/${topicId}`)} hidden={pathname.includes('tribunal')}>
                 <ScalesSvg />
                 Ongoing Review Process
               </ThemeButton>

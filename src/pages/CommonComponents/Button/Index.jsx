@@ -5,9 +5,10 @@ import React from 'react'
 import { Button } from './Style'
 
 const ThemeButton = ({
-  children, small, onClick, width, type, disabled, height, backgroundColor,
+  children, small, onClick, width, type, disabled, height, backgroundColor, hidden,
 }) => (
   <Button
+    hidden={hidden}
     onClick={onClick}
     small={small}
     width={width}

@@ -29,7 +29,7 @@ export default () => {
       const { value: username } = doc.getCredential('username')?.getSubject().getProperties()
 
       upsertDidUser({
-        userId: dids[0].getMethodSpecificId(),
+        userId: dids[0].repr,
         username: dids[0].getMethodSpecificId(),
       })
 

@@ -24,7 +24,6 @@ export default () => {
     const methodSpecificId = doc.getSubject().getMethodSpecificId()
 
     const didReq = await DIDRequest.create(doc, doc.getDefaultPublicKeyId(), storePass)
-    console.log(didReq)
     const pubService = new GlobalPublicationService()
     await pubService.publishDIDFromRequest(methodSpecificId, didReq, 'nothin', false)
 

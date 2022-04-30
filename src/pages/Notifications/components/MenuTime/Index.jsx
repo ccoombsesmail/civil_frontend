@@ -9,7 +9,6 @@ import {
 } from './Style/index'
 
 export const MenuTime = ({ time, id, eventType }) => {
-  console.log('hey')
   const [isOpen, setIsOpen] = useState(false)
   const {
     updateNotificationToRead,

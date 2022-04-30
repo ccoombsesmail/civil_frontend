@@ -43,9 +43,8 @@ export default () => {
     const docWithVC = await db.seal(STORE_PASS)
     await docWithVC.publish(STORE_PASS)
     const { value: username } = docWithVC.getCredential('username')?.getSubject().getProperties()
-
     upsertDidUser({
-      userId: docWithVC.getSubject().getMethodSpecificId(),
+      userId: docWithVC.getSubject().repr,
       username: username || docWithVC.getSubject().getMethodSpecificId(),
     })
 

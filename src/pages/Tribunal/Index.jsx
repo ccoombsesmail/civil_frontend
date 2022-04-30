@@ -3,6 +3,8 @@ import React, {
 } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Tab } from 'react-bootstrap'
+
 import {
   OuterContainer, InnerContainer,
   Header, StyledScalesSvg, ReportStatsContainer, ReportStatItem, VotingContainer,
@@ -13,11 +15,14 @@ import useBindDispatch from '../hooks/redux/useBindDispatch'
 
 import topicActions from '../../redux/actions/topics/index'
 import topicReportActions from '../../redux/actions/topic_reports/index'
+import tribunalCommentsActions from '../../redux/actions/tribunal_comments/index'
+
 import { PillarSvg, CastBallotSvg } from '../../svgs/svgs'
 import ThemeButton from '../CommonComponents/Button/Index'
 import useOpenModal from '../hooks/useOpenModal'
 import { TOPIC_VOTE_FORM } from '../App/Modal/Index'
 import { calculateTimeLeft } from '../../generic/time/calculateTimeLeft'
+import TribunalComments from './components/TribunalComments/Index';
 
 const Tribunal = () => {
   const { topicId } = useParams()
@@ -25,14 +30,19 @@ const Tribunal = () => {
   const openModal = useOpenModal(TOPIC_VOTE_FORM, { topicId })
   const user = useSelector((s) => s.session.currentUser)
   const topics = useSelector((s) => s.topics.list)
+  const comments = useSelector((s) => s.tribunalComments)
   const reportStats = useSelector((s) => s.topicReports)[topicId]
   const [timeLeft, setTimeLeft] = useState({})
 
-  const { getTopic, getTopicReport } = useBindDispatch(topicActions, topicReportActions)
+  const {
+    getTopic,
+    getTopicReport,
+    getAllTribunalCommentsBatch,
+  } = useBindDispatch(topicActions, topicReportActions, tribunalCommentsActions)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft(reportStats.reportPeriodEnd))
+      if (reportStats) setTimeLeft(calculateTimeLeft(reportStats.reportPeriodEnd))
     }, 1000)
     return () => clearTimeout(timer)
   })
@@ -41,18 +51,23 @@ const Tribunal = () => {
     if (topicId && user) {
       getTopic(topicId, user.userId)
       getTopicReport(topicId)
+      getAllTribunalCommentsBatch(topicId)
+      // getAllTribunalComments(topicId, 'Reporter')
+      // getAllTribunalComments(topicId, 'Defendant')
+      // getAllTribunalComments(topicId, 'Jury')
+      // getAllTribunalComments(topicId, 'General')
     }
   }, [topicId, user])
 
   const timerComponents = []
 
-  Object.keys(timeLeft).forEach((interval) => {
+  Object.keys(timeLeft).forEach((interval, idx) => {
     if (!timeLeft[interval]) {
       return
     }
 
     timerComponents.push(
-      <span>
+      <span key={String(idx)}>
         {timeLeft[interval]}
         {' '}
         {interval}
@@ -63,7 +78,7 @@ const Tribunal = () => {
 
   const Content = useMemo(() => {
     const topic = topics?.find((t) => t.id === topicId)
-    if (topic) return <TopicItem topic={topic} user={user} />
+    if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />
     return null
   }, [topics, topicId])
   return (
@@ -75,8 +90,8 @@ const Tribunal = () => {
         </h1>
         <StyledScalesSvg />
       </Header>
-      <div>
-        {timerComponents.length ? timerComponents : <span>Time is up!</span>}
+      <div style={{ fontSize: '1.3vw', color: 'gray' }}>
+        {timerComponents.length ? timerComponents : <span></span>}
       </div>
       <InnerContainer>
         <PillarSvg />
@@ -117,6 +132,7 @@ const Tribunal = () => {
           {reportStats && (reportStats.numSpamReports || 0)}
         </ReportStatItem>
       </ReportStatsContainer>
+      <TribunalComments comments={comments} />
     </OuterContainer>
   )
 }

@@ -11,19 +11,20 @@ const CommentColumn = ({
 }) => (
   <Container color={color}>
     <h1>
-      {numComments}
+      {numComments || ''}
       {' '}
-      {commentSentiment}
+      {commentSentiment || ''}
       {' '}
       Comments
     </h1>
     {
-          comments?.map((comment) => (
+          comments?.map((comment, idx) => (
             <ParentCommentContext.Provider
-              key={comment.data?.id + commentSentiment}
+              key={comment.data?.id + String(idx)}
               value={comment.data?.id}
             >
               <Comment
+                key={comment.data?.id + String(idx)}
                 commentData={comment.data}
                 replies={comment.children}
               />

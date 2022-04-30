@@ -5,7 +5,9 @@ import useOpenModal from '../../../../../hooks/useOpenModal'
 import { REPLY } from '../../../../../App/Modal/Index'
 
 const CommentButton = ({ comment }) => {
-  const openCommentModal = useOpenModal(REPLY, { replyType: 'COMMENT_REPLY', commentId: comment.id, rootParentCommentId: comment.rootId || comment.id })
+  const openCommentModal = useOpenModal(REPLY, {
+    replyType: comment.commentType ? 'TRIBUNAL_COMMENT_REPLY' : 'COMMENT_REPLY', commentId: comment.id, rootParentCommentId: comment.rootId || comment.id, commentType: comment.commentType,
+  })
 
   return (
     <IconButton icon={<CommentSvg />} onClick={openCommentModal} />
