@@ -11,6 +11,8 @@ export const NotificationSvg = () => (
     y="0px"
     viewBox="0 0 32 32"
     xmlSpace="preserve"
+    width="24px"
+    heigh="24px"
   >
     <g>
       <path

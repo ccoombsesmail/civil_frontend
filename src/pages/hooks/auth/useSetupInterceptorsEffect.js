@@ -13,7 +13,7 @@ export default () => {
 
   const createDIDBasedJWT = useCreateDidBasedJwt()
   const getDefaultDID = useGetDefaultDID()
-  const { user } = useUser({ withAssertions: true })
+  // const { user } = useUser({ withAssertions: true })
   useEffect(() => {
     // Set all request headers with token
     axios.interceptors.request.use(

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const SideBarContainer = styled('div')` 
   height: calc(100vh - var(--nav-size));
   width: 12vw;
-  max-width: ${(props) => (props.isOpen ? '12vw' : '2vw')};
+  max-width: ${(props) => (props.isOpen ? '12vw' : '4vw')};
   background-color: var(--m-menu-bg-color);
   background-color: var(--m-primary-btn-color);
   background-color: white;
@@ -32,7 +32,7 @@ export const SideBarContainer = styled('div')`
     cursor: pointer;
     border-radius: .3em;
     margin: .2em;
-    width: 15px;
+    width: 24px;
   }
 
   @media only screen and (max-width: 600px) {

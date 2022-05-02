@@ -21,7 +21,7 @@ export default (topic, user) => {
     }
     updateTopicLikes({
       id: topic?.id,
-      userId: user?.userId,
+      userId: user?.userId || user?.id,
       value,
     })
   }, [topic])

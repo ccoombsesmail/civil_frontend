@@ -9,6 +9,7 @@ const UserIcon = ({ width, iconSrc, userId }) => {
       width={width}
       src={iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'}
       onClick={goToUserProfile}
+      alt=""
     />
   )
 }

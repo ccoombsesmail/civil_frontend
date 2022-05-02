@@ -41,15 +41,18 @@ const Tribunal = () => {
   } = useBindDispatch(topicActions, topicReportActions, tribunalCommentsActions)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (reportStats) setTimeLeft(calculateTimeLeft(reportStats.reportPeriodEnd))
-    }, 1000)
+    let timer
+    if (reportStats) {
+      timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft(reportStats.reportPeriodEnd))
+      }, 1000)
+    }
     return () => clearTimeout(timer)
-  })
+  }, [reportStats])
 
   useEffect(() => {
     if (topicId && user) {
-      getTopic(topicId, user.userId)
+      getTopic(topicId, user.userId || user.id)
       getTopicReport(topicId)
       getAllTribunalCommentsBatch(topicId)
       // getAllTribunalComments(topicId, 'Reporter')
@@ -75,7 +78,7 @@ const Tribunal = () => {
       </span>,
     )
   })
-
+  console.log(timeLeft)
   const Content = useMemo(() => {
     const topic = topics?.find((t) => t.id === topicId)
     if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />

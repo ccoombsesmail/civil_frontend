@@ -11,6 +11,7 @@ import { SideBarContainer, SideBarNav } from './Style/index'
 import {
   NotificationSvg, UserIconSvg, ArrowRightSvg, ArrowLeftSvg,
 } from '../../../svgs/svgs'
+import SidebarItem from './components/SidebarItem/Index'
 
 const Sidebar = () => {
   const navigate = useNavigate()
@@ -25,17 +26,17 @@ const Sidebar = () => {
           : <ArrowRightSvg onClick={() => setOpen((prev) => !prev)} />}
       </Container>
       <SideBarNav isOpen={open}>
-        <button type="button" onClick={() => navigate('/dashboard')}>
-          <UserIconSvg />
-          {open && 'Profile'}
-        </button>
-        <button type="button" onClick={() => navigate('/notifications')}>
-          <NotificationSvg />
-          {open && 'Notifications'}
-          <span style={{ color: 'red' }}>
-            {numUnreadNotifications}
-          </span>
-        </button>
+        <SidebarItem
+          Icon={UserIconSvg}
+          text="Profile"
+          onClick={() => navigate('/dashboard')}
+        />
+        <SidebarItem
+          numUnreadNotifications={numUnreadNotifications} 
+          Icon={NotificationSvg}
+          text ="Notifications"
+          onClick={() => navigate('/notifications')}
+        />
       </SideBarNav>
     </SideBarContainer>
   )

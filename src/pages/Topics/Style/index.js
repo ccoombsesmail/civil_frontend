@@ -16,7 +16,7 @@ export const BorderContainer = styled('div')`
   border-top: none;
   z-index: 9999;
   background-color: white;
-  min-height: calc(100vh - var(--nav-size));
+  /* min-height: calc(100vh - var(--nav-size)); */
 
 `
 
@@ -42,9 +42,11 @@ export const CardContainer = styled('ul')`
   flex-wrap: wrap;
   z-index: 9999;
   padding: 0;
-  margin: 5em 0 0 0;
+  /* margin: 5em 0 0 0; */
+  margin: 5em auto 0 auto;
   padding-bottom: 30vh;
   background-color: #F0F2F5;
   background-color: white;
+  width: 44vw;
 
 `
