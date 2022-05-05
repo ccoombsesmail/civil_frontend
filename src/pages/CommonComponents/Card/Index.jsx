@@ -1,20 +1,15 @@
 import React, {
   useRef, useEffect, useState, useMemo,
 } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
 import { UNDER_REVIEW } from '../../../enums/report_status'
-import { WarningSvg, ScalesSvg } from '../../../svgs/svgs'
 import UserInfoHeader from '../UserInfoHeader/Index'
-import ThemeButton from '../Button/Index'
+import CensorOverlay from '../CensorOverlay/Index'
 
 import {
   Container,
   Body,
   Description,
   VideoDescriptionContainer,
-  Message,
-  Warning,
-  MessageContainer,
 } from './Style'
 
 const Card = ({
@@ -31,7 +26,6 @@ const Card = ({
   reportStatus,
 }) => {
   const ref = useRef(null)
-  const { pathname } = useLocation()
   const [totalHeight, setTotalHeight] = useState('unset')
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   useEffect(() => {
@@ -44,7 +38,6 @@ const Card = ({
   }, [ref])
 
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
-  const navigate = useNavigate()
   return (
     <Container
       ref={ref}
@@ -54,29 +47,8 @@ const Card = ({
       shouldBlur={shouldBlur}
     >
       <UserInfoHeader iconSrc={iconSrc} time={time} username={username} userId={userId} />
-      { shouldBlur && (
-      <>
-        <MessageContainer onClick={() => setShouldBlur((prev) => !prev)}>
-          <Message>
-            This Topic Has Been Reported And May Contain Explicit Visuals Or Offensive Language
-          </Message>
-          <Warning>
-            <div>
-              <WarningSvg />
-              Click To See Content At Your Own Risk!
-            </div>
-            <div>
-              <ThemeButton onClick={() => navigate(`/tribunal/topics/${topicId}`)} hidden={pathname.includes('tribunal')}>
-                <ScalesSvg />
-                Ongoing Review Process
-              </ThemeButton>
-            </div>
-          </Warning>
+      { shouldBlur && <CensorOverlay setShouldBlur={setShouldBlur} contentId={topicId} />}
 
-        </MessageContainer>
-      </>
-      )}
-      {/* <BlurOverlay shouldBlur={reportStatus === UNDER_REVIEW}> */}
       <Description className="text-pop-up-top" shouldBlur={shouldBlur}>
         &ldquo;
         {summary}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styled, { keyframes } from 'styled-components'
 
 const tada = keyframes`
@@ -63,15 +64,15 @@ export const NotificationMark = styled('mark')`
   color: white;
   border: 2px solid white;
   border-radius: 50%;
-  height: 15px;
-  width: 15px;
+  height: 18px;
+  width: 18px;
   background: red;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
   margin: 0;
-  font-size: .7vw;
+  font-size: .67vw;
   transform-origin: center bottom;
   animation-duration: 1s;
   animation-fill-mode: both;   
@@ -81,4 +82,10 @@ export const NotificationMark = styled('mark')`
 export const IconContainer = styled('div')` 
   display: flex;
   position: relative;
+`
+
+export const InnerContainer = styled('div')`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `

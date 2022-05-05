@@ -56,6 +56,7 @@ export const SideBarNav = styled('nav')`
     padding: 5%;
     display: flex;
     justify-content: ${(props) => (props.isOpen ? 'flex-start' : 'center')};
+    /* margin: ${(props) => (props.isOpen ? '0 auto 0 0' : 'auto')};     */
     align-items: center;
     cursor: pointer;
     outline: none;
@@ -67,6 +68,11 @@ export const SideBarNav = styled('nav')`
 
   button:hover {
     background-color: var(--m-btn-hover-color);
+  }
+
+  span {
+    font-size: ${(props) => (props.isOpen ? '1vw' : '0vw')};
+    transition: font-size .6s ease-in-out;
   }
 
   

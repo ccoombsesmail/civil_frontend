@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { closeModal } from '../ui/index'
 import {
-  ADD_TRIBUNAL_COMMENT, GET_ALL_TRIBUNAL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_TRIBUNAL_COMMENT_CIVILITY, GET_ALL_TRIBUNAL_COMMENTS_BATCH,
+  ADD_TRIBUNAL_COMMENT, GET_ALL_TRIBUNAL_COMMENTS, UPDATE_TRIBUNAL_COMMENT_LIKES, UPDATE_TRIBUNAL_COMMENT_CIVILITY, GET_ALL_TRIBUNAL_COMMENTS_BATCH,
 } from '../../reducers/tribunal_comments/tribunalCommentsReducer'
 import * as TribunalCommentsApiUtil from '../../../api/v1/tribunal_comments/tribunal_comments_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
@@ -24,7 +24,7 @@ const addCommentActionCreator = (subTopicData) => ({
 })
 
 const updateCommentActionCreator = (data) => ({
-  type: UPDATE_COMMENT_LIKES,
+  type: UPDATE_TRIBUNAL_COMMENT_LIKES,
   payload: data,
 })
 
@@ -51,9 +51,9 @@ export const getAllTribunalCommentsBatch = (contentId) => (dispatch) => Tribunal
   .then((res) => dispatch(getAllCommentsBatchActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
-// export const updateCommentLikes = (data) => (dispatch) => TribunalCommentsApiUtil.updateCommentLikes(data)
-//   .then((res) => dispatch(updateCommentActionCreator(res.data)))
-//   .catch((error) => toast.error(error))
+export const updateTribunalCommentLikes = (data) => (dispatch) => TribunalCommentsApiUtil.updateTribunalCommentLikes(data)
+  .then((res) => dispatch(updateCommentActionCreator(res.data)))
+  .catch((error) => toast.error(error))
 
 export const updateTribunalCommentCivility = (data) => (dispatch) => TribunalCommentsApiUtil.updateTribunalCommentCivility(data)
   .then((res) => dispatch(updateCommentCivilityActionCreator(res.data)))
@@ -65,6 +65,6 @@ export default {
   getAllTribunalCommentsBatch,
   updateTribunalCommentCivility,
   // getAllComments,
-  // updateCommentLikes,
+  updateTribunalCommentLikes,
   // updateCommentCivility,
 }

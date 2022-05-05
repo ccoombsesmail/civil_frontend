@@ -8,11 +8,6 @@ export const getAllTribunalComments = (contentId, commentType) => axios.get(`${B
 
 export const getAllTribunalCommentsBatch = (contentId) => axios.get(`${BACKEND_DEV}/tribunal-comments-batch?contentId=${contentId}`)
 
-
-// export const updateCommentLikes = (commentData) => axios.put(`${BACKEND_DEV}/comments`, commentData)
+export const updateTribunalCommentLikes = (commentData) => axios.put(`${BACKEND_DEV}/comments/likes-tribunal`, commentData)
 
 export const updateTribunalCommentCivility = (commentData) => axios.put(`${BACKEND_DEV}/comments/civility-tribunal`, commentData)
-
-// export const checkToxicity = (commentTextData) => axios.post(`${UPLOAD_SERVICE}/comments/toxicity`, commentTextData)
-
-// export const getSubTopic = (subTopicId) => axios.get(`${BACKEND_DEV}/subtopics/${subTopicId}`)

@@ -10,7 +10,7 @@ import recsActionCreators from '../../redux/actions/recs'
 
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import {
-  Container, Line, Left, Right, HeaderContainer,
+  Container, Line, Left, MainContent, HeaderContainer, TabContainer,
 } from './Style'
 import Header from './components/Header/Index'
 import SubTopicsRouter from './components/SubTopicsRouter/Index'
@@ -47,25 +47,28 @@ const SubTopics = () => {
 
   return (
     <Container>
-      <HeaderContainer>
-        <Left> . </Left>
-        <Header topic={topic} user={user} />
-        <Right>
-          <ThemeTab
-            activeKey={key}
-            onSelect={(k) => setKey(k)}
-          >
-            <Tab eventKey="recs" title="Recommended Content">
-              <RecommendationsList recs={recs} />
-            </Tab>
-            <Tab eventKey="opposingRecs" title="Opposing Views">
-              <RecommendationsList recs={opposingRecs} />
-            </Tab>
-          </ThemeTab>
-        </Right>
-      </HeaderContainer>
-      <Line />
-      <SubTopicsRouter />
+      <MainContent>
+        <HeaderContainer>
+          {/* <Left> . </Left> */}
+          <Header topic={topic} user={user} />
+        </HeaderContainer>
+        <Line />
+        <SubTopicsRouter />
+      </MainContent>
+      <TabContainer>
+        <ThemeTab
+          activeKey={key}
+          onSelect={(k) => setKey(k)}
+        >
+          <Tab eventKey="recs" title="Recommended Content">
+            <RecommendationsList recs={recs} />
+          </Tab>
+          <Tab eventKey="opposingRecs" title="Opposing Views">
+            <RecommendationsList recs={opposingRecs} />
+          </Tab>
+        </ThemeTab>
+
+      </TabContainer>
     </Container>
 
   )

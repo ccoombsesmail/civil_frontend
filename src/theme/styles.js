@@ -65,7 +65,7 @@ blockquote {
     --m-elastos-theme: #8530F1;
     /* --m-primary-background-1-color: #37B381; */
  
-
+    --sidebar-width: 4vw;
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
 

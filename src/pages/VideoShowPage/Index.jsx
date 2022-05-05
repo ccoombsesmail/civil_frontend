@@ -63,11 +63,9 @@ const VideoShowPage = ({
           </div>
         </Collapse>
         <ActionToolbar
-          liked={topic?.liked}
           likes={topic?.likes}
-          onCommentClick={openModal}
-          updateLikes={updateLikes}
-          topicCard
+          topic={topic}
+          user={user}
         />
       </VideoDescriptionCard>
     </>

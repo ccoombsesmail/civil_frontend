@@ -3,7 +3,6 @@ import React, {
 } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Tab } from 'react-bootstrap'
 
 import {
   OuterContainer, InnerContainer,
@@ -25,13 +24,13 @@ import { calculateTimeLeft } from '../../generic/time/calculateTimeLeft'
 import TribunalComments from './components/TribunalComments/Index';
 
 const Tribunal = () => {
-  const { topicId } = useParams()
+  const { contentId } = useParams()
 
-  const openModal = useOpenModal(TOPIC_VOTE_FORM, { topicId })
+  const openModal = useOpenModal(TOPIC_VOTE_FORM, { topicId: contentId })
   const user = useSelector((s) => s.session.currentUser)
   const topics = useSelector((s) => s.topics.list)
   const comments = useSelector((s) => s.tribunalComments)
-  const reportStats = useSelector((s) => s.topicReports)[topicId]
+  const reportStats = useSelector((s) => s.topicReports)[contentId]
   const [timeLeft, setTimeLeft] = useState({})
 
   const {
@@ -51,16 +50,12 @@ const Tribunal = () => {
   }, [reportStats])
 
   useEffect(() => {
-    if (topicId && user) {
-      getTopic(topicId, user.userId || user.id)
-      getTopicReport(topicId)
-      getAllTribunalCommentsBatch(topicId)
-      // getAllTribunalComments(topicId, 'Reporter')
-      // getAllTribunalComments(topicId, 'Defendant')
-      // getAllTribunalComments(topicId, 'Jury')
-      // getAllTribunalComments(topicId, 'General')
+    if (contentId && user) {
+      getTopic(contentId, user.userId || user.id)
+      getTopicReport(contentId)
+      getAllTribunalCommentsBatch(contentId)
     }
-  }, [topicId, user])
+  }, [contentId, user])
 
   const timerComponents = []
 
@@ -78,12 +73,11 @@ const Tribunal = () => {
       </span>,
     )
   })
-  console.log(timeLeft)
   const Content = useMemo(() => {
-    const topic = topics?.find((t) => t.id === topicId)
+    const topic = topics?.find((t) => t.id === contentId)
     if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />
     return null
-  }, [topics, topicId])
+  }, [topics, contentId])
   return (
     <OuterContainer>
       <Header>
@@ -94,7 +88,7 @@ const Tribunal = () => {
         <StyledScalesSvg />
       </Header>
       <div style={{ fontSize: '1.3vw', color: 'gray' }}>
-        {timerComponents.length ? timerComponents : <span></span>}
+        {timerComponents.length ? timerComponents : <span> </span>}
       </div>
       <InnerContainer>
         <PillarSvg />

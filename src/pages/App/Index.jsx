@@ -22,14 +22,20 @@ import Sidebar from './Sidebar/Index'
 import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content } from './Style'
 import UserProfile from '../UserProfile/Index'
-import Tribunal from '../Tribunal/Index'
 import Notifications from '../Notifications/Index'
 
-// import Dashboard from '../Dashboard/Index'
-const Dashboard = React.lazy(() => import(/* webpackChunkName: "dashboard" */
-/* webpackMode: "lazy" */
+const Dashboard = React.lazy(() => import(
+  /* webpackChunkName: "dashboard" */
+  /* webpackMode: "lazy" */
   /* webpackPrefetch: true */
   /* webpackPreload: true */ '../Dashboard/Index'
+))
+
+const Tribunal = React.lazy(() => import(
+  /* webpackChunkName: "tribunal" */
+  /* webpackMode: "lazy" */
+  /* webpackPrefetch: true */
+  /* webpackPreload: true */ '../Tribunal/Index'
 ))
 
 // const frontendApi = 'clerk.legible.tortoise-0.lcl.dev'
@@ -78,7 +84,14 @@ const App = () => {
                   />
                   <Route path="/authenticate/*" element={<AuthFlow />} />
                   <Route path="/user/:userId" element={<UserProfile />} />
-                  <Route path="/tribunal/topics/:topicId" element={<Tribunal />} />
+                  <Route
+                    path="/tribunal/:contentId"
+                    element={(
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <Tribunal />
+                      </Suspense>
+                  )}
+                  />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/topics/*" element={<Topics />} />
                   <Route path="/" element={<Navigate replace to="/topics" />} />

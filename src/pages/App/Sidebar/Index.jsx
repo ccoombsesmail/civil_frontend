@@ -28,13 +28,13 @@ const Sidebar = () => {
       <SideBarNav isOpen={open}>
         <SidebarItem
           Icon={UserIconSvg}
-          text="Profile"
+          text='Profile'
           onClick={() => navigate('/dashboard')}
         />
         <SidebarItem
-          numUnreadNotifications={numUnreadNotifications} 
+          numUnreadNotifications={numUnreadNotifications}
           Icon={NotificationSvg}
-          text ="Notifications"
+          text='Notifications'
           onClick={() => navigate('/notifications')}
         />
       </SideBarNav>

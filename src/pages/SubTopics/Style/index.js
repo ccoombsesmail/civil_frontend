@@ -2,18 +2,21 @@
 import styled from 'styled-components'
 
 export const Container = styled('div')`
-  width: 100vw;
-  height: 100%;
+  width: calc(100vw - 4vw);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   /* padding-top: 5em; */
+  margin-left: var(--sidebar-width);
 
   .tab-content {
    padding-bottom: 40vh;
  }
 `
+export const MainContent = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+`
 export const CardContainer = styled('ul')`
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +35,11 @@ export const HeaderContainer = styled('section')`
   display: flex;
   flex-direction: row;
   /* flex-wrap: wrap; */
-  width: 100%;
+  width: 80%;
+
+  li {
+    margin: 0;
+  }
 
 `
 
@@ -42,10 +49,12 @@ export const Left = styled('div')`
   justify-content: center;
 `
 
-export const Right = styled('div')` 
+export const TabContainer = styled('div')` 
   flex: 25%;
   display: flex;
   /* a: center; */
   flex-direction: column;
   background: white;
+  border-left:1px solid #dee2e6;
+
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const VideoPlayer = styled('iframe')`
   width: 100%;
   /* height: 45vw; */
-  width: 45vw;  
+  /* width: 45vw;   */
   height: 25.31vw;
 
 `

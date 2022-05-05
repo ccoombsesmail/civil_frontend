@@ -17,7 +17,9 @@ const Notifications = () => {
           </p>
         </Header>
         <NotificationList>
-          {notifications.map((notification) => <NotificationItem notification={notification} />)}
+          {notifications.map((notification) => (
+            <NotificationItem key={notification.id} notification={notification} />
+          ))}
         </NotificationList>
       </BorderContainer>
     </Container>

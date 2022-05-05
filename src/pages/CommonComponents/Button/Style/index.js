@@ -30,3 +30,36 @@ export const Button = styled('button')`
     filter: brightness(.8);
   }
 `
+export const Button2 = styled('button')` 
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-family: inherit;
+  display: block;
+  border-radius: 0.5rem;;
+  margin: 0em 1em;
+  padding: .5em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .75s ease-in-out;
+  font-weight: 900;
+  color: var(--m-primary-btn-color);
+  background-color: white;
+  text-transform: uppercase;
+  border: 1px solid var(--m-primary-btn-color);
+
+  &:hover {
+    background-color: var(--m-primary-btn-color);
+    color: white;
+    filter: brightness(.8);
+    /* border: 1px solid var(--m-primary-btn-color); */
+
+  }
+
+  svg {
+    margin: .4em;
+  }
+
+`
