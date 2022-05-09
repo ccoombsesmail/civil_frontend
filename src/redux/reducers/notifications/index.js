@@ -2,8 +2,10 @@
 
 export const addNewNotification = (action, state) => {
   const newState = { ...state }
-  newState.list.unshift(action.payload.data)
-  newState.list = [...newState.list]
+  const newList = newState.list.filter((n) => n.id !== action.payload.data.id)
+
+  newList.unshift(action.payload.data)
+  newState.list = [...newList]
   return newState
 }
 

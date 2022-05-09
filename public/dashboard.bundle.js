@@ -59,6 +59,158 @@ var ProgressValue = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"]
 
 /***/ }),
 
+/***/ "./src/pages/DID/hooks/useAddVcCred.js":
+/*!*********************************************!*\
+  !*** ./src/pages/DID/hooks/useAddVcCred.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @elastosfoundation/did-js-sdk */ "./node_modules/@elastosfoundation/did-js-sdk/dist/es/did.browser.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _AssistDIDAdapter_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../AssistDIDAdapter.ts */ "./src/pages/DID/AssistDIDAdapter.ts");
+/* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
+/* harmony import */ var _redux_actions_session__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../redux/actions/session */ "./src/redux/actions/session/index.js");
+/* harmony import */ var _redux_actions_users_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../redux/actions/users/index */ "./src/redux/actions/users/index.js");
+
+
+
+/* eslint-disable max-len */
+
+
+
+
+
+
+
+var STORE_PASS = 'pwd'; // const password = 'password'
+
+var addVCToDoc = /*#__PURE__*/function () {
+  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(db, issuer, doc, id, value) {
+    var cb, vc;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            cb = issuer.issueFor(doc.getSubject());
+
+            if (value) {
+              _context.next = 3;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 3:
+            _context.next = 5;
+            return cb.id("#".concat(id)).type('SelfProclaimedCredential').properties({
+              value: value
+            }).seal(STORE_PASS);
+
+          case 5:
+            vc = _context.sent;
+            vc.getMetadata().attachStore(doc.getStore());
+            db.addCredential(vc);
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function addVCToDoc(_x, _x2, _x3, _x4, _x5) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
+  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__["default"])(_redux_actions_session__WEBPACK_IMPORTED_MODULE_7__["default"], _redux_actions_users_index__WEBPACK_IMPORTED_MODULE_8__["default"]),
+      addDIDSession = _useBindDispatch.addDIDSession,
+      upsertDidUser = _useBindDispatch.upsertDidUser;
+
+  var currentUser = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useSelector)(function (s) {
+    return s.session.currentUser;
+  });
+  return (0,react__WEBPACK_IMPORTED_MODULE_2__.useCallback)( /*#__PURE__*/function () {
+    var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(props) {
+      var _doc$getCredential, _docWithVC$getCredent2;
+
+      var rootPath, store, doc, issuer, db, _ref3, username, docWithVC, _docWithVC$getCredent, avatar;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              console.log(props);
+              _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.DIDBackend.initialize(new _AssistDIDAdapter_ts__WEBPACK_IMPORTED_MODULE_5__.AssistDIDAdapter('mainnet'));
+              rootPath = 'root/store';
+              _context2.next = 5;
+              return _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.DIDStore.open(rootPath);
+
+            case 5:
+              store = _context2.sent;
+              doc = currentUser.doc;
+              issuer = new _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.Issuer(doc);
+              db = _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.DIDDocument.Builder.newFromDocument(doc).edit();
+              _ref3 = ((_doc$getCredential = doc.getCredential('username')) === null || _doc$getCredential === void 0 ? void 0 : _doc$getCredential.getSubject().getProperties()) || {}, username = _ref3.value; // const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties() || {}
+              // const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties() || {}
+              // await addVCToDoc(db, issuer, doc, 'firstName', firstName)
+              // await addVCToDoc(db, issuer, doc, 'lastName', lastName)
+              // await addVCToDoc(db, issuer, doc, 'username', username)
+
+              _context2.next = 12;
+              return addVCToDoc(db, issuer, doc, 'avatar', props.file);
+
+            case 12:
+              _context2.next = 14;
+              return db.seal(STORE_PASS);
+
+            case 14:
+              docWithVC = _context2.sent;
+              _context2.next = 17;
+              return docWithVC.publish(STORE_PASS);
+
+            case 17:
+              // const { value: usernameAfter } = docWithVC.getCredential('username')?.getSubject().getProperties()
+              _docWithVC$getCredent = (_docWithVC$getCredent2 = docWithVC.getCredential('avatar')) === null || _docWithVC$getCredent2 === void 0 ? void 0 : _docWithVC$getCredent2.getSubject().getProperties(), avatar = _docWithVC$getCredent.value;
+              upsertDidUser({
+                userId: docWithVC.getSubject().repr,
+                username: username || docWithVC.getSubject().getMethodSpecificId(),
+                iconSrc: avatar
+              });
+              addDIDSession({
+                did: docWithVC.getSubject(),
+                doc: docWithVC,
+                username: username
+              });
+              store.close();
+
+            case 21:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x6) {
+      return _ref2.apply(this, arguments);
+    };
+  }(), []);
+});
+
+/***/ }),
+
 /***/ "./src/pages/Dashboard/Index.jsx":
 /*!***************************************!*\
   !*** ./src/pages/Dashboard/Index.jsx ***!
@@ -71,15 +223,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @clerk/clerk-react */ "./node_modules/@clerk/clerk-react/dist/index.js");
-/* harmony import */ var _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_clerk_clerk_react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Style__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Style */ "./src/pages/Dashboard/Style/index.js");
-/* harmony import */ var _redux_actions_session_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../redux/actions/session/index */ "./src/redux/actions/session/index.js");
-/* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
-/* harmony import */ var _components_Header_Index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Header/Index */ "./src/pages/Dashboard/components/Header/Index.jsx");
-/* harmony import */ var _CommonComponents_Line__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../CommonComponents/Line */ "./src/pages/CommonComponents/Line/index.js");
-/* harmony import */ var _components_BioForm_Index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/BioForm/Index */ "./src/pages/Dashboard/components/BioForm/Index.jsx");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @clerk/clerk-react */ "./node_modules/@clerk/clerk-react/dist/index.js");
+/* harmony import */ var _clerk_clerk_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_clerk_clerk_react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Style__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Style */ "./src/pages/Dashboard/Style/index.js");
+/* harmony import */ var _redux_actions_session_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../redux/actions/session/index */ "./src/redux/actions/session/index.js");
+/* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
+/* harmony import */ var _components_Header_Index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Header/Index */ "./src/pages/Dashboard/components/Header/Index.jsx");
+/* harmony import */ var _CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../CommonComponents/Line */ "./src/pages/CommonComponents/Line/index.js");
+/* harmony import */ var _CommonComponents_Button_Index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../CommonComponents/Button/Index */ "./src/pages/CommonComponents/Button/Index.jsx");
+/* harmony import */ var _components_BioForm_Index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/BioForm/Index */ "./src/pages/Dashboard/components/BioForm/Index.jsx");
+/* harmony import */ var _AuthFlow_components_BasicInformation_Index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../AuthFlow/components/BasicInformation/Index */ "./src/pages/AuthFlow/components/BasicInformation/Index.jsx");
+/* harmony import */ var _util_form_helpers_init_form_values__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../util/form_helpers/init_form_values */ "./src/pages/util/form_helpers/init_form_values.js");
+/* harmony import */ var _DID_hooks_useAddVcCred__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DID/hooks/useAddVcCred */ "./src/pages/DID/hooks/useAddVcCred.js");
+
+
+
+
+
 
 
 
@@ -91,20 +253,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Dashboard = function Dashboard() {
-  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_5__["default"])(_redux_actions_session_index__WEBPACK_IMPORTED_MODULE_4__["default"]),
+  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__["default"])(_redux_actions_session_index__WEBPACK_IMPORTED_MODULE_5__["default"]),
       getCurrentUser = _useBindDispatch.getCurrentUser;
 
-  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (s) {
+  var user = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (s) {
     return s.session.currentUser;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (user) getCurrentUser(user === null || user === void 0 ? void 0 : user.id);
   }, []);
+  var addVcCred = (0,_DID_hooks_useAddVcCred__WEBPACK_IMPORTED_MODULE_13__["default"])();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Loading...")
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_3__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Header_Index__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_4__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Header_Index__WEBPACK_IMPORTED_MODULE_7__["default"], {
     user: user
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_7__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_clerk_clerk_react__WEBPACK_IMPORTED_MODULE_2__.UserProfile, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_BioForm_Index__WEBPACK_IMPORTED_MODULE_8__["default"], null)));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_clerk_clerk_react__WEBPACK_IMPORTED_MODULE_3__.UserProfile, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(formik__WEBPACK_IMPORTED_MODULE_1__.Formik, {
+    initialValues: _util_form_helpers_init_form_values__WEBPACK_IMPORTED_MODULE_12__.INIT_DID_FORM_VALUES,
+    onSubmit: function onSubmit(values, params) {
+      return addVcCred(values, params);
+    }
+  }, function (_ref) {
+    var isSubmitting = _ref.isSubmitting,
+        values = _ref.values,
+        setFieldValue = _ref.setFieldValue;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_4__.FormContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AuthFlow_components_BasicInformation_Index__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      setFieldValue: setFieldValue
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Button_Index__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      width: "40%",
+      height: "2.5vw",
+      type: "submit",
+      backgroundColor: "var(--m-elastos-theme)",
+      disabled: isSubmitting,
+      onClick: function onClick() {
+        return addVcCred(values);
+      }
+    }, "Update Decentralized Identity"));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_BioForm_Index__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dashboard);
@@ -119,6 +303,7 @@ var Dashboard = function Dashboard() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
 /* harmony export */   "Label": () => (/* binding */ Label),
 /* harmony export */   "UploadInput": () => (/* binding */ UploadInput),
 /* harmony export */   "Container": () => (/* binding */ Container)
@@ -127,18 +312,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 
  // import { FiUser } from 'react-icons/fi'
 
-var Label = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('label')(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  background-image: url('https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/64_1.png');\n  background-size: cover;\n  height: 4em;\n  width: 4em;\n  border-radius: 50%;\n  cursor: pointer;\n"])));
-var UploadInput = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('input')(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  position: absolute; \n  left: -99999rem;\n"]))); // export const UploadIcon = styled(FiUser)`
+var FormContainer = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  width: 70%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 3vw auto;\n\n"])));
+var Label = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('label')(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  background-image: url('https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/64_1.png');\n  background-size: cover;\n  height: 4em;\n  width: 4em;\n  border-radius: 50%;\n  cursor: pointer;\n"])));
+var UploadInput = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('input')(_templateObject3 || (_templateObject3 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  position: absolute; \n  left: -99999rem;\n"]))); // export const UploadIcon = styled(FiUser)`
 //   background-color: gray;
 //   border-radius: 50%;
 //   cursor: pointer;
 // `
 
-var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject3 || (_templateObject3 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  margin: 1em;\n"])));
+var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject4 || (_templateObject4 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  margin: 4vw;\n\n  .cl-component.cl-user-profile .cl-main {\n    margin: 3em 0 0 1em;\n}\n"])));
 
 /***/ }),
 
@@ -221,7 +407,7 @@ var _templateObject, _templateObject2, _templateObject3, _templateObject4, _temp
 
 
 var OuterContainer = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  width: 100%;\n  display: flex;\n  justify-content: center;\n\n"])));
-var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  padding: 3em 2em;\n  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);\n  font-family: \"Source Sans Pro\", sans-serif;;\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #151515;\n  text-align: left;\n  margin-left: 300px;\n  border-radius: 0.5em;\n  width: 840px;\n"])));
+var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  padding: 3em 2em;\n  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);\n  font-family: \"Source Sans Pro\", sans-serif;;\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #151515;\n  text-align: left;\n  margin-left: 1em;\n  border-radius: 0.5em;\n  width: 840px;\n"])));
 var HeaderContainer = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject3 || (_templateObject3 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  margin-bottom: 1.25em;\n\n"])));
 var Header = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('h1')(_templateObject4 || (_templateObject4 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  display: flex;\n  align-items: center;\n  font-size: 2rem;\n  font-weight: 600;\n  margin: 0;\n  line-height: 1.2;\n\n"])));
 var SubHeader = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('p')(_templateObject5 || (_templateObject5 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  color: #808080;\n  font-size: 1.25rem;\n  font-style: normal;\n  font-weight: 400;\n  line-height: 1.5em;\n  margin: 0 0 1rem 0;\n"])));

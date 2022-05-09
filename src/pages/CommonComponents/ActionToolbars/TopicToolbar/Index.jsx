@@ -6,7 +6,7 @@ import DownVoteButton from '../components/DownVoteButton/Index'
 
 import CommentButton from './components/CommentButton/Index'
 import OpposingViewsButton from './components/OpposingViewsButton/Index'
-import TribunalButton from './components/TribunalButton/Index'
+import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
 import { TOPIC } from '../../../../enums/content_type'
@@ -27,7 +27,7 @@ const TopicActionToolbar = ({
       </Left>
       <Right>
         <OpposingViewsButton topicId={topicId} subTopicId={subTopicId} />
-        <TribunalButton topicId={topic?.id} />
+        <TribunalButton contentId={topic?.id} />
       </Right>
     </Container>
   )

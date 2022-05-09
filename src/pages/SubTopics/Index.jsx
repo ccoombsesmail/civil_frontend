@@ -10,7 +10,7 @@ import recsActionCreators from '../../redux/actions/recs'
 
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import {
-  Container, Line, Left, MainContent, HeaderContainer, TabContainer,
+  Container, Line, MainContent, HeaderContainer, TabContainer,
 } from './Style'
 import Header from './components/Header/Index'
 import SubTopicsRouter from './components/SubTopicsRouter/Index'
@@ -49,7 +49,6 @@ const SubTopics = () => {
     <Container>
       <MainContent>
         <HeaderContainer>
-          {/* <Left> . </Left> */}
           <Header topic={topic} user={user} />
         </HeaderContainer>
         <Line />

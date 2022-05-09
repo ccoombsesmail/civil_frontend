@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled('li')`
-  width: 100%;
+  width: 95%;
   height: 17vh;
   display: flex;
   margin: 10px;
@@ -14,6 +14,7 @@ export const Thumb = styled('div')`
   flex: 40%;
   background: white;
   margin-right: 8px;
+  aspect-ratio: 12 / 9;
   img {
     height: 100%;
   }
@@ -41,11 +42,6 @@ export const SubTitle = styled('h3')`
   width: 100%;
   color: gray;
   font-size: .6vw;
-`
-
-export const VideoPlayer = styled('iframe')`
-  height: 100%;
-  aspect-ratio: 16:9;
 `
 
 export const OGImage = styled('img')` 

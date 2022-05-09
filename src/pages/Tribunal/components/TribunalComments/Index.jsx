@@ -3,7 +3,7 @@ import { Tab } from 'react-bootstrap'
 
 import { Line } from '../../../CommonComponents/Line'
 import { ThemeTab } from '../../../CommonComponents/Tabs/Style'
-import CommentColumn from '../../../SubTopics/components/SubTopicThread/components/CommentColumn/Index'
+import CommentColumn from '../../../SubTopics/components/CommentColumn/Index'
 import { ColumnContainer } from '../../../SubTopics/components/SubTopicThread/Style'
 import useCategorizeComments from './hooks/useCategorizeComments'
 

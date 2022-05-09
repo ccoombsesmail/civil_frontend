@@ -1,14 +1,18 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable max-len */
-import { addComment, updateLikesOrCivility, getAllComments } from './index'
+import {
+  addComment, updateLikesOrCivility, getAllComments, addReportedComment,
+} from './index'
 
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const ADD_REPORTED_COMMENT = 'ADD_REPORTED_COMMENT'
 export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS'
 export const UPDATE_COMMENT_LIKES = 'UPDATE_COMMENT_LIKES'
 export const UPDATE_COMMENT_CIVILITY = 'UPDATE_COMMENT_CIVILITY'
 
 const reducerActionMap = new Map([
   [ADD_COMMENT, addComment],
+  [ADD_REPORTED_COMMENT, addReportedComment],
   [GET_ALL_COMMENTS, getAllComments],
   [UPDATE_COMMENT_LIKES, updateLikesOrCivility],
   [UPDATE_COMMENT_CIVILITY, updateLikesOrCivility],

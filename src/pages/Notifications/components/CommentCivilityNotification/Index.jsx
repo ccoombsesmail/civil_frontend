@@ -13,7 +13,7 @@ const CommentCivilityNotifcation = ({ notification }) => {
       <ProfileIcon src={notification.iconSrc} />
       <MiddleContainer>
         {
-          notification.value < 0 ? (
+          notification.new < 0 ? (
             <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
           ) : (
             <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
@@ -23,7 +23,7 @@ const CommentCivilityNotifcation = ({ notification }) => {
           <b style={{ marginRight: '8px' }}>
             {notification.username}
           </b>
-          {`gave you ${notification.value} civility`}
+          {`updated civility given for comment ${`${notification.commentId.slice(0, 4)}...`} from ${notification.old.toFixed(2)} to ${notification.new.toFixed(2)} civility`}
         </h3>
       </MiddleContainer>
       <MenuTime

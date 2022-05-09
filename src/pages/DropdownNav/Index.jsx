@@ -23,6 +23,7 @@ import useCloseOnClick from './hooks/useCloseOnClick'
 export const NavDropdownToggle = ({ children }) => {
   const [open, setOpen] = useState(false)
   const openOnClick = useOpenOnClick(setOpen)
+
   return (
     <NavItem>
       <IconNavButton onClick={openOnClick}>
@@ -64,8 +65,7 @@ export const DropdownMenu = ({ open, setOpen }) => {
     <DropdownMenuContainer open={open}>
       { loggedInViaDID && (
       <UserInfoSection>
-        <UserIcon width="50px" />
-        {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}> */}
+        <UserIcon width="50px" userId={user?.id} />
         <Greeting>
           Hello,
           {' '}
@@ -73,11 +73,10 @@ export const DropdownMenu = ({ open, setOpen }) => {
           {' '}
         </Greeting>
         <DID>
-          {user?.userId}
+          {user?.id}
           {' '}
           <AuthenticationSvg />
         </DID>
-        {/* </div> */}
         <ButtonsContainer>
           <button type="button" onClick={goToDashboard}>
             Manage Identity

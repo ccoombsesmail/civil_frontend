@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { Tab, Nav } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import AnimatedIconButton from '../CommonComponents/IconButtonAnimated/Index'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import userActions from '../../redux/actions/users/index'
 import followActions from '../../redux/actions/follows/index'
@@ -11,9 +10,8 @@ import {
   Banner, Container, HeaderContainer, Content, StyledNav, UserIcon, TabsIconContainer, Bio,
   Left, Middle, Right, Experience, ExperienceContainer,
 } from './Style/index'
-import { AddFriendSvg, RemoveFriendSvg } from '../../svgs/svgs'
-import useFollowClickHandler from './hooks/useFollowClickHandler'
 import UserList from './components/UserList/Index'
+import FollowButton from './components/FollowButton/Index'
 
 const UserProfile = () => {
   const { userId } = useParams()
@@ -21,11 +19,10 @@ const UserProfile = () => {
   const { followed, followers } = useSelector((s) => s.follows)
 
   const currentUser = useSelector((s) => s.session.currentUser)
-  const isFollowing = user?.isFollowing
-  const hideFollowButton = user?.userId === currentUser?.id
 
+  const showFollowButton = userId !== currentUser?.id
+  const isFollowing = user?.isFollowing
   const { getUser, getAllFollowed, getAllFollowers } = useBindDispatch(userActions, followActions)
-  const followClickHandler = useFollowClickHandler(userId, isFollowing)
 
   useEffect(() => {
     if (currentUser) {
@@ -52,10 +49,7 @@ const UserProfile = () => {
               </Nav.Item>
             </StyledNav>
           </TabsIconContainer>
-          {
-            isFollowing ? <AnimatedIconButton hidden={hideFollowButton} Icon={RemoveFriendSvg} buttonText="Unfollow" onClick={followClickHandler} />
-              : <AnimatedIconButton hidden={hideFollowButton} Icon={AddFriendSvg} buttonText="Follow" onClick={followClickHandler} />
-          }
+          { showFollowButton && <FollowButton isFollowing={isFollowing} userId={userId} /> }
 
         </HeaderContainer>
         <Content>
@@ -88,4 +82,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default memo(UserProfile)

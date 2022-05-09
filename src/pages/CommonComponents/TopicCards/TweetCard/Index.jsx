@@ -8,7 +8,6 @@ import CardDetails from '../CardDetails/Index'
 import useCalculateCardHeightEffect from './hooks/useCalculateCardHeightEffect'
 import useGoToSubTopics from '../../../hooks/routing/useGoToSubTopics'
 
-import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import { TweetContainer } from './Style'
 
 const EmbededTweet = ({ topic, user, showLinks }) => {
@@ -29,11 +28,8 @@ const EmbededTweet = ({ topic, user, showLinks }) => {
   return (
     <Card
       onClick={goToSubTopic}
-      username={topic?.createdBy}
-      iconSrc={`${topic?.createdByIconSrc}`}
+      topic={topic}
       tweetRef={tweetRef}
-      summary={topic?.summary}
-      time={getTimeSince(topic?.createdAt)}
       height={height}
     >
       <TweetContainer height={height} ref={tweetRef}> </TweetContainer>

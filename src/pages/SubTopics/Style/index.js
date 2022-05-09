@@ -52,9 +52,10 @@ export const Left = styled('div')`
 export const TabContainer = styled('div')` 
   flex: 25%;
   display: flex;
+  z-index: 99;
   /* a: center; */
   flex-direction: column;
   background: white;
-  border-left:1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
 
 `

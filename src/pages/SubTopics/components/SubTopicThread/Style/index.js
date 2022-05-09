@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+export const ThreadContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+
+`
 export const Container = styled('div')`
   width: 100vw;
   height: 50vh;

@@ -13,31 +13,35 @@ import TopicItem from '../Topics/components/TopicItem/Index'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 
 import topicActions from '../../redux/actions/topics/index'
-import topicReportActions from '../../redux/actions/topic_reports/index'
+import reportActions from '../../redux/actions/reports/index'
 import tribunalCommentsActions from '../../redux/actions/tribunal_comments/index'
+import commentActions from '../../redux/actions/comments/index'
 
 import { PillarSvg, CastBallotSvg } from '../../svgs/svgs'
 import ThemeButton from '../CommonComponents/Button/Index'
 import useOpenModal from '../hooks/useOpenModal'
 import { TOPIC_VOTE_FORM } from '../App/Modal/Index'
 import { calculateTimeLeft } from '../../generic/time/calculateTimeLeft'
-import TribunalComments from './components/TribunalComments/Index';
+import TribunalComments from './components/TribunalComments/Index'
+import Comment from '../SubTopics/components/Comment/Index'
 
 const Tribunal = () => {
   const { contentId } = useParams()
 
-  const openModal = useOpenModal(TOPIC_VOTE_FORM, { topicId: contentId })
+  const openModal = useOpenModal(TOPIC_VOTE_FORM, { contentId })
   const user = useSelector((s) => s.session.currentUser)
   const topics = useSelector((s) => s.topics.list)
-  const comments = useSelector((s) => s.tribunalComments)
-  const reportStats = useSelector((s) => s.topicReports)[contentId]
+  const comments = useSelector((s) => s.comments.list)
+  const tribunalComments = useSelector((s) => s.tribunalComments)
+  const reportStats = useSelector((s) => s.reports)[contentId]
   const [timeLeft, setTimeLeft] = useState({})
 
   const {
     getTopic,
-    getTopicReport,
+    getReport,
     getAllTribunalCommentsBatch,
-  } = useBindDispatch(topicActions, topicReportActions, tribunalCommentsActions)
+    getComment,
+  } = useBindDispatch(topicActions, reportActions, tribunalCommentsActions, commentActions)
 
   useEffect(() => {
     let timer
@@ -51,8 +55,9 @@ const Tribunal = () => {
 
   useEffect(() => {
     if (contentId && user) {
-      getTopic(contentId, user.userId || user.id)
-      getTopicReport(contentId)
+      getComment(contentId)
+      getTopic(contentId, user.id)
+      getReport(contentId)
       getAllTribunalCommentsBatch(contentId)
     }
   }, [contentId, user])
@@ -75,9 +80,12 @@ const Tribunal = () => {
   })
   const Content = useMemo(() => {
     const topic = topics?.find((t) => t.id === contentId)
+    const comment = comments?.find((c) => c.data.id === contentId)
+
     if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />
+    if (comment) return <Comment commentData={comment.data} replies={comment.children} />
     return null
-  }, [topics, contentId])
+  }, [topics, comments, contentId])
   return (
     <OuterContainer>
       <Header>
@@ -129,7 +137,7 @@ const Tribunal = () => {
           {reportStats && (reportStats.numSpamReports || 0)}
         </ReportStatItem>
       </ReportStatsContainer>
-      <TribunalComments comments={comments} />
+      <TribunalComments comments={tribunalComments} />
     </OuterContainer>
   )
 }

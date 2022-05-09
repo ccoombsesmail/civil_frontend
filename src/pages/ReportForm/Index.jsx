@@ -11,8 +11,8 @@ import {
 } from './Style/Index'
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 
-export const ReportForm = ({ topicId }, ...props) => {
-  const handleOnSubmit = useHandleOnSubmit(topicId)
+export const ReportForm = ({ contentId }) => {
+  const handleOnSubmit = useHandleOnSubmit(contentId)
   return (
     <Container>
       <Formik

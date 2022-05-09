@@ -20,7 +20,7 @@ const reducer = (state = {}, action) => {
         currentUser: {
           ...action.payload,
           username: action.payload.username,
-          userId: action.payload.did.repr,
+          id: action.payload.did.repr,
         },
       }
     case LOG_OUT:

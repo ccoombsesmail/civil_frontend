@@ -77,15 +77,31 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../../../../../redux/actions/comments */
 
+/*! ../../../../../../../redux/actions/topics */
+
+/*! ../../../../../../../redux/actions/tribunal_comments/index */
+
 /*! ../../../../../../../redux/actions/ui/index */
 
 /*! ../../../../../../App/Modal/Index */
 
+/*! ../../../../../../enums/content_type */
+
 /*! ../../../../../../generic/string/dateFormatter */
+
+/*! ../../../../../../hooks/redux/useBindDispatch */
+
+/*! ../../../../../../redux/actions/comments/index */
+
+/*! ../../../../../../redux/actions/topics/index */
+
+/*! ../../../../../../redux/actions/tribunal_comments/index */
 
 /*! ../../../../../../svgs/svgs */
 
-/*! ../../../../../CommonComponents/ActionToolbar/Index */
+/*! ../../../../../App/Modal/Index */
+
+/*! ../../../../../CommonComponents/ActionToolbars/CommentToolbar/Index */
 
 /*! ../../../../../CommonComponents/IconButton/Index */
 
@@ -95,6 +111,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../../../api/v1/topics/topics_api_util */
 
+/*! ../../../../../hooks/redux/useBindDispatch */
+
+/*! ../../../../../hooks/useOpenModal */
+
 /*! ../../../../../hooks/useSetInnerHtml */
 
 /*! ../../../../../svgs/svgs */
@@ -102,6 +122,16 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ../../../../DID/hooks/useCreateRootIdentity */
 
 /*! ../../../../DID/hooks/useRecoverFromMnemonic */
+
+/*! ../../../../Form/RangeSlider/Index */
+
+/*! ../../../../IconButton/Index */
+
+/*! ../../../../PopoverStickOnHover/Index */
+
+/*! ../../../../enums/content_type */
+
+/*! ../../../../enums/notification_types */
 
 /*! ../../../../generic/string/capitalize */
 
@@ -115,6 +145,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../../redux/actions/comments */
 
+/*! ../../../../redux/actions/notifications/index */
+
 /*! ../../../../redux/actions/session/index */
 
 /*! ../../../../redux/actions/subtopics */
@@ -125,13 +157,15 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../../svgs/svgs */
 
-/*! ../../../ActionToolbar/Index */
+/*! ../../../ActionToolbars/TopicToolbar/Index */
 
 /*! ../../../App/Modal/Index */
 
 /*! ../../../CommonComponents/Button/Index */
 
 /*! ../../../CommonComponents/Form/Input3/Index */
+
+/*! ../../../CommonComponents/IconButtonAnimated/Index */
 
 /*! ../../../CommonComponents/Line */
 
@@ -155,6 +189,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../DID/hooks/useMnemonicHelpers */
 
+/*! ../../../IconButton/Index */
+
 /*! ../../../TopicForm/components/DisplayMedia/Index */
 
 /*! ../../../TopicForm/components/LinkMetaData/Index */
@@ -169,6 +205,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../api/v1/follows/follows_api_util */
 
+/*! ../../../api/v1/notifications/notifications_api_util */
+
 /*! ../../../api/v1/opposing_recs/opposing_recs_api_util */
 
 /*! ../../../api/v1/recs/recs_api_util */
@@ -177,27 +215,37 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../api/v1/subtopics/subtopics_api_util */
 
+/*! ../../../api/v1/topic_reports/topic_reports_api_util */
+
+/*! ../../../api/v1/topic_tribunal_votes/topic_tribunal_votes_api_util */
+
 /*! ../../../api/v1/topics/topics_api_util */
 
+/*! ../../../api/v1/tribunal_comments/tribunal_comments_api_util */
+
 /*! ../../../api/v1/users/users_api_util */
+
+/*! ../../../enums/report_status */
 
 /*! ../../../hooks/redux/useBindDispatch */
 
 /*! ../../../hooks/routing/useGoToSubTopics */
 
-/*! ../../../hooks/useOpenModalWithLocation */
-
 /*! ../../../hooks/useSetInnerHtml */
-
-/*! ../../../hooks/useUpdateLikes */
 
 /*! ../../../redux/actions/enums */
 
 /*! ../../../redux/actions/follows/index */
 
+/*! ../../../redux/actions/notifications */
+
 /*! ../../../redux/actions/session */
 
 /*! ../../../redux/actions/session/index */
+
+/*! ../../../redux/actions/topic_tribunal_votes/index */
+
+/*! ../../../redux/actions/ui/index */
 
 /*! ../../../redux/actions/users/index */
 
@@ -207,9 +255,9 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../../util/form_helpers/init_form_values */
 
-/*! ../../ActionToolbar/Index */
+/*! ../../ActionToolbars/TopicToolbar/Index */
 
-/*! ../../App/Modal/Index */
+/*! ../../ActionToolbars/TopicToolbar/components/LikeButton/hooks/useUpdateLikes */
 
 /*! ../../Card/Index */
 
@@ -235,6 +283,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../OpposingRecForm/Index */
 
+/*! ../../ReportForm/Index */
+
 /*! ../../Style */
 
 /*! ../../Style/index */
@@ -242,6 +292,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ../../SubTopicForm/Index */
 
 /*! ../../TopicForm/Index */
+
+/*! ../../VoteForm/Index */
 
 /*! ../../api/util/auth */
 
@@ -257,15 +309,17 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../hooks/auth/useSetupInterceptorsEffect */
 
+/*! ../../hooks/permissions/useSessionType */
+
 /*! ../../hooks/redux/useBindDispatch */
 
 /*! ../../hooks/routing/useGoToUserProfile */
 
+/*! ../../hooks/useFollowClickHandler */
+
 /*! ../../hooks/useGoToDashboard */
 
 /*! ../../hooks/useGoToSubTopic */
-
-/*! ../../hooks/useOpenModal */
 
 /*! ../../reducers/comments/commentsReducer */
 
@@ -273,13 +327,19 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../reducers/follows/followsReducer */
 
+/*! ../../reducers/notifications/notificationsReducer */
+
 /*! ../../reducers/recs/recsReducer */
 
 /*! ../../reducers/sessionReducer */
 
 /*! ../../reducers/subtopics/subTopicsReducer */
 
+/*! ../../reducers/topic_reports/topicReportsReducer */
+
 /*! ../../reducers/topicsReducer */
+
+/*! ../../reducers/tribunal_comments/tribunalCommentsReducer */
 
 /*! ../../reducers/ui_reducer */
 
@@ -305,6 +365,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../../theme/styles */
 
+/*! ../../utils/errorFormatter */
+
 /*! ../App/Modal/Index */
 
 /*! ../AssistDIDAdapter.ts */
@@ -313,23 +375,29 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../BasicInformation/Index */
 
+/*! ../Button/Index */
+
 /*! ../CardDetails/Index */
+
+/*! ../CensorOverlay/Index */
 
 /*! ../Comment/Index */
 
+/*! ../CommentCivilityNotification/Index */
+
 /*! ../CommentColumn/Index */
 
-/*! ../CommonComponents/ActionToolbar/Index */
+/*! ../CommonComponents/ActionToolbars/TopicToolbar/Index */
 
 /*! ../CommonComponents/Button/Index */
 
 /*! ../CommonComponents/Card/Index */
 
+/*! ../CommonComponents/Form/Checkbox/Index */
+
 /*! ../CommonComponents/Form/Input/Index */
 
 /*! ../CommonComponents/IconButton/Index */
-
-/*! ../CommonComponents/IconButtonAnimated/Index */
 
 /*! ../CommonComponents/LinkSection/Index */
 
@@ -345,13 +413,19 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../ErrorMessage/Index */
 
-/*! ../IconButton/Index */
+/*! ../FollowNotification/Index */
 
 /*! ../ImageCheckbox/Index */
 
 /*! ../LinkMetaData/Index */
 
+/*! ../MenuTime/Index */
+
+/*! ../Notifications/Index */
+
 /*! ../RecommendationsList/Index */
+
+/*! ../Style */
 
 /*! ../Style/index */
 
@@ -365,7 +439,11 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../SupplementalLinks/Index */
 
+/*! ../Tooltip/Index */
+
 /*! ../Topics/Index */
+
+/*! ../Tribunal/Index */
 
 /*! ../UploadIconInput/Index */
 
@@ -377,7 +455,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../cancel/isCancel */
 
+/*! ../comments/index */
+
 /*! ../components/Context */
+
+/*! ../components/DownVoteButton/Index */
+
+/*! ../components/UpVoteButton/Index */
 
 /*! ../components/connectAdvanced */
 
@@ -425,6 +509,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../errors */
 
+/*! ../globalThis.js */
+
 /*! ../helpers/buildURL */
 
 /*! ../helpers/combineURLs */
@@ -451,9 +537,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ../svgs/spinners/CircleLoading */
 
+/*! ../transport.js */
+
 /*! ../ui/index */
 
 /*! ../users */
+
+/*! ../util.js */
 
 /*! ../utils */
 
@@ -841,6 +931,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./batch */
 
+/*! ./binary.js */
+
 /*! ./canUseDOM */
 
 /*! ./cancel/Cancel */
@@ -865,9 +957,15 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./comments/commentsReducer */
 
+/*! ./commons.js */
+
 /*! ./components */
 
+/*! ./components/CivilityButton/Index */
+
 /*! ./components/ClerkComponents/Index */
+
+/*! ./components/CommentButton/Index */
 
 /*! ./components/CommentColumn/Index */
 
@@ -875,9 +973,15 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./components/CreateMnemonic/Index */
 
+/*! ./components/FollowButton/Index */
+
 /*! ./components/Header/Index */
 
 /*! ./components/NewDidFlow/Index */
+
+/*! ./components/NotificationItem/Index */
+
+/*! ./components/OpposingViewsButton/Index */
 
 /*! ./components/Provider */
 
@@ -885,9 +989,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./components/RestoreDid/Index */
 
+/*! ./components/SidebarItem/Index */
+
 /*! ./components/SubTopicsRouter/Index */
 
 /*! ./components/TopicItem/Index */
+
+/*! ./components/TribunalButton/Index */
 
 /*! ./components/UserList/Index */
 
@@ -921,6 +1029,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./css */
 
+/*! ./decodePacket.js */
+
 /*! ./defaults */
 
 /*! ./defineProperty.js */
@@ -942,6 +1052,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ./dom-utils/instanceOf.js */
 
 /*! ./dom-utils/listScrollParents.js */
+
+/*! ./encodePacket.js */
 
 /*! ./enhanceError */
 
@@ -1005,6 +1117,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./getWindowScrollBarX.js */
 
+/*! ./globalThis.js */
+
 /*! ./hasClass */
 
 /*! ./helpers */
@@ -1033,19 +1147,21 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./hooks/useFetchAppData */
 
-/*! ./hooks/useFollowClickHandler */
-
 /*! ./hooks/useGetLinkMetaDataEffect */
 
 /*! ./hooks/useGoToDash */
 
 /*! ./hooks/useHandleNewDidSubmit */
 
+/*! ./hooks/useHandleOnSubmit */
+
 /*! ./hooks/useLogout */
 
 /*! ./hooks/useMagicLink */
 
 /*! ./hooks/useNavigateToPage */
+
+/*! ./hooks/useOnRangeChange */
 
 /*! ./hooks/useOpenOnClick */
 
@@ -1072,6 +1188,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ./index */
 
 /*! ./instanceOf.js */
+
+/*! ./is-binary.js */
 
 /*! ./isArguments.js */
 
@@ -1125,6 +1243,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./listen */
 
+/*! ./manager.js */
+
 /*! ./mapDispatchToProps */
 
 /*! ./mapStateToProps */
@@ -1145,13 +1265,21 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./nonIterableSpread.js */
 
+/*! ./notifications/notificationsReducer */
+
 /*! ./objectWithoutPropertiesLoose.js */
+
+/*! ./on.js */
 
 /*! ./ownerDocument */
 
 /*! ./ownerWindow */
 
 /*! ./pages/App/Index */
+
+/*! ./polling-xhr.js */
+
+/*! ./polling.js */
 
 /*! ./popper */
 
@@ -1162,8 +1290,6 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ./reducers/root_reducer */
 
 /*! ./redux/store */
-
-/*! ./redux/useBindDispatch */
 
 /*! ./removeEventListener */
 
@@ -1177,6 +1303,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./setPrototypeOf.js */
 
+/*! ./socket.js */
+
 /*! ./ssr */
 
 /*! ./stubArray.js */
@@ -1189,11 +1317,19 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./toString.js */
 
+/*! ./topic_reports/topicReportsReducer */
+
 /*! ./topicsReducer */
 
 /*! ./transformData */
 
 /*! ./transitionEndListener */
+
+/*! ./transport.js */
+
+/*! ./transports/index.js */
+
+/*! ./tribunal_comments/tribunalCommentsReducer */
 
 /*! ./triggerBrowserReflow */
 
@@ -1205,7 +1341,11 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./uncontrollable */
 
+/*! ./unicode-emoji.js */
+
 /*! ./unsupportedIterableToArray.js */
+
+/*! ./url.js */
 
 /*! ./useAuth */
 
@@ -1226,6 +1366,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ./useGlobalListener */
 
 /*! ./useImage */
+
+/*! ./useInitSocketEffect */
 
 /*! ./useInterval */
 
@@ -1279,6 +1421,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./users/usersReducer */
 
+/*! ./util.js */
+
 /*! ./utils */
 
 /*! ./utils/PropTypes */
@@ -1309,6 +1453,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./warning */
 
+/*! ./websocket-constructor.js */
+
+/*! ./websocket.js */
+
 /*! ./withClerk */
 
 /*! ./withSession */
@@ -1316,6 +1464,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ./withUser */
 
 /*! ./wrapMapToProps */
+
+/*! ./xmlhttprequest.js */
 
 /*! @babel/runtime/helpers/asyncToGenerator */
 
@@ -1417,7 +1567,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! @restart/ui/Tabs */
 
+/*! @socket.io/base64-arraybuffer */
+
+/*! @socket.io/component-emitter */
+
 /*! axios */
+
+/*! backo2 */
 
 /*! base64-js */
 
@@ -1461,7 +1617,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! dom-helpers/transitionEnd */
 
+/*! engine.io-client */
+
+/*! engine.io-parser */
+
 /*! formik */
+
+/*! has-cors */
 
 /*! history */
 
@@ -1479,6 +1641,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! import() | topic-form */
 
+/*! import() | tribunal */
+
 /*! invariant */
 
 /*! isarray */
@@ -1492,6 +1656,10 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! lodash-es/toPath */
 
 /*! object-assign */
+
+/*! parseqs */
+
+/*! parseuri */
 
 /*! prop-types */
 
@@ -1541,7 +1709,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! scheduler */
 
+/*! scrollable-component */
+
 /*! shallowequal */
+
+/*! socket.io-client */
+
+/*! socket.io-parser */
 
 /*! styled-components */
 
@@ -1551,7 +1725,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! uncontrollable */
 
+/*! unicode-emoji */
+
+/*! unicode-emoji-picker */
+
 /*! warning */
+
+/*! yeast */
 
 /*!***********************!*\
   !*** ./src/index.jsx ***!
@@ -1594,12 +1774,20 @@ PERFORMANCE OF THIS SOFTWARE.
   \*********************************/
 
 /*!***********************************!*\
+  !*** ./src/enums/content_type.js ***!
+  \***********************************/
+
+/*!***********************************!*\
   !*** ./src/generic/regex/uuid.js ***!
   \***********************************/
 
 /*!***********************************!*\
   !*** ./src/hocs/IsLoadingHOC.jsx ***!
   \***********************************/
+
+/*!************************************!*\
+  !*** ./src/enums/report_status.js ***!
+  \************************************/
 
 /*!************************************!*\
   !*** ./src/pages/Topics/Index.jsx ***!
@@ -1614,8 +1802,16 @@ PERFORMANCE OF THIS SOFTWARE.
   \*************************************/
 
 /*!*************************************!*\
+  !*** ./node_modules/yeast/index.js ***!
+  \*************************************/
+
+/*!*************************************!*\
   !*** ./src/pages/DID/DIDRequest.ts ***!
   \*************************************/
+
+/*!**************************************!*\
+  !*** ./node_modules/backo2/index.js ***!
+  \**************************************/
 
 /*!**************************************!*\
   !*** ./node_modules/buffer/index.js ***!
@@ -1633,12 +1829,20 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./src/pages/AuthFlow/Index.jsx ***!
   \**************************************/
 
+/*!**************************************!*\
+  !*** ./src/pages/VoteForm/Index.jsx ***!
+  \**************************************/
+
 /*!***************************************!*\
   !*** ./node_modules/ieee754/index.js ***!
   \***************************************/
 
 /*!***************************************!*\
   !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/parseqs/index.js ***!
   \***************************************/
 
 /*!***************************************!*\
@@ -1654,6 +1858,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \***************************************/
 
 /*!****************************************!*\
+  !*** ./node_modules/has-cors/index.js ***!
+  \****************************************/
+
+/*!****************************************!*\
   !*** ./node_modules/lodash-es/_Map.js ***!
   \****************************************/
 
@@ -1663,6 +1871,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!****************************************!*\
   !*** ./node_modules/lodash-es/keys.js ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/parseuri/index.js ***!
   \****************************************/
 
 /*!****************************************!*\
@@ -1679,6 +1891,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!****************************************!*\
   !*** ./src/pages/App/Header/Index.jsx ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** ./src/pages/ReportForm/Index.jsx ***!
   \****************************************/
 
 /*!*****************************************!*\
@@ -1731,6 +1947,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*****************************************!*\
   !*** ./node_modules/warning/warning.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./src/enums/notification_types.js ***!
   \*****************************************/
 
 /*!*****************************************!*\
@@ -1850,11 +2070,15 @@ PERFORMANCE OF THIS SOFTWARE.
   \*******************************************/
 
 /*!*******************************************!*\
+  !*** ./src/pages/Notifications/Index.jsx ***!
+  \*******************************************/
+
+/*!*******************************************!*\
   !*** ./src/pages/VideoShowPage/Index.jsx ***!
   \*******************************************/
 
 /*!*******************************************!*\
-  !*** ./src/pages/hooks/useUpdateLikes.js ***!
+  !*** ./src/pages/VoteForm/Style/Index.js ***!
   \*******************************************/
 
 /*!*******************************************!*\
@@ -1863,6 +2087,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*******************************************!*\
   !*** ./src/redux/reducers/users/index.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
+  !*** ./src/redux/utils/errorFormatter.js ***!
   \*******************************************/
 
 /*!********************************************!*\
@@ -2030,6 +2258,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*********************************************/
 
 /*!*********************************************!*\
+  !*** ./node_modules/unicode-emoji/index.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
   !*** ./src/generic/string/dateFormatter.js ***!
   \*********************************************/
 
@@ -2039,6 +2271,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*********************************************!*\
   !*** ./src/pages/OpposingRecForm/Index.jsx ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/pages/ReportForm/Style/Index.js ***!
   \*********************************************/
 
 /*!*********************************************!*\
@@ -2326,6 +2562,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \************************************************/
 
 /*!************************************************!*\
+  !*** ./src/pages/Notifications/Style/index.js ***!
+  \************************************************/
+
+/*!************************************************!*\
   !*** ./src/pages/VideoShowPage/Style/index.js ***!
   \************************************************/
 
@@ -2498,6 +2738,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \**************************************************/
 
 /*!**************************************************!*\
+  !*** ./src/redux/actions/notifications/index.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
   !*** ./src/redux/actions/opposing_recs/index.js ***!
   \**************************************************/
 
@@ -2565,6 +2809,14 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./src/pages/DID/hooks/useMnemonicHelpers.js ***!
   \***************************************************/
 
+/*!***************************************************!*\
+  !*** ./src/redux/reducers/notifications/index.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./src/redux/reducers/topic_reports/index.js ***!
+  \***************************************************/
+
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
   \****************************************************/
@@ -2606,7 +2858,19 @@ PERFORMANCE OF THIS SOFTWARE.
   \****************************************************/
 
 /*!****************************************************!*\
+  !*** ./node_modules/scrollable-component/index.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/unicode-emoji-picker/index.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
   !*** ./src/api/v1/subtopics/subtopics_api_util.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./src/pages/App/hooks/useInitSocketEffect.js ***!
   \****************************************************/
 
 /*!****************************************************!*\
@@ -2694,6 +2958,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*****************************************************/
 
 /*!*****************************************************!*\
+  !*** ./node_modules/unicode-emoji/unicode-emoji.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
   !*** ./src/pages/App/LoadingSpinner/Style/index.js ***!
   \*****************************************************/
 
@@ -2770,6 +3038,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \******************************************************/
 
 /*!******************************************************!*\
+  !*** ./src/redux/actions/tribunal_comments/index.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
   !*** ./src/redux/reducers/follows/followsReducer.js ***!
   \******************************************************/
 
@@ -2822,6 +3094,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*******************************************************/
 
 /*!*******************************************************!*\
+  !*** ./node_modules/socket.io-client/build/esm/on.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
   !*** ./src/pages/CommonComponents/UserIcon/Index.jsx ***!
   \*******************************************************/
 
@@ -2834,6 +3110,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*******************************************************/
 
 /*!*******************************************************!*\
+  !*** ./src/pages/VoteForm/hooks/useHandleOnSubmit.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
   !*** ./src/pages/hooks/permissions/useSessionType.js ***!
   \*******************************************************/
 
@@ -2843,6 +3123,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*******************************************************!*\
   !*** ./src/pages/util/form_helpers/error_messages.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./src/redux/reducers/tribunal_comments/index.js ***!
   \*******************************************************/
 
 /*!********************************************************!*\
@@ -2890,6 +3174,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \********************************************************/
 
 /*!********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/esm/url.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
   !*** ./src/pages/CommonComponents/Card/Style/index.js ***!
   \********************************************************/
 
@@ -2922,6 +3210,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*********************************************************/
 
 /*!*********************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/util.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/CloseButton.js ***!
   \*********************************************************/
 
@@ -2950,6 +3242,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*********************************************************/
 
 /*!*********************************************************!*\
+  !*** ./src/pages/ReportForm/hooks/useHandleOnSubmit.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
   !*** ./src/pages/SubTopics/components/Header/Index.jsx ***!
   \*********************************************************/
 
@@ -2967,6 +3263,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*********************************************************!*\
   !*** ./src/pages/util/form_helpers/init_form_values.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./src/redux/actions/topic_tribunal_votes/index.js ***!
   \*********************************************************/
 
 /*!**********************************************************!*\
@@ -2998,6 +3298,14 @@ PERFORMANCE OF THIS SOFTWARE.
   \**********************************************************/
 
 /*!**********************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/index.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/esm/index.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/ModalContext.js ***!
   \**********************************************************/
 
@@ -3011,6 +3319,14 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!**********************************************************!*\
   !*** ./node_modules/react-redux/es/hooks/useSelector.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/esm/index.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/socket.io-parser/build/esm/index.js ***!
   \**********************************************************/
 
 /*!**********************************************************!*\
@@ -3070,6 +3386,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \***********************************************************/
 
 /*!***********************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/socket.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/NavbarContext.js ***!
   \***********************************************************/
 
@@ -3106,7 +3426,19 @@ PERFORMANCE OF THIS SOFTWARE.
   \***********************************************************/
 
 /*!***********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/esm/socket.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/socket.io-parser/build/esm/binary.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
   !*** ./src/pages/CommonComponents/Tooltip/Style/index.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./src/pages/Notifications/components/Style/index.js ***!
   \***********************************************************/
 
 /*!***********************************************************!*\
@@ -3126,7 +3458,15 @@ PERFORMANCE OF THIS SOFTWARE.
   \************************************************************/
 
 /*!************************************************************!*\
+  !*** ./node_modules/@socket.io/component-emitter/index.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/sourceMaps.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/esm/commons.js ***!
   \************************************************************/
 
 /*!************************************************************!*\
@@ -3146,11 +3486,23 @@ PERFORMANCE OF THIS SOFTWARE.
   \************************************************************/
 
 /*!************************************************************!*\
+  !*** ./node_modules/socket.io-client/build/esm/manager.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
   !*** ./node_modules/tiny-warning/dist/tiny-warning.esm.js ***!
   \************************************************************/
 
 /*!************************************************************!*\
+  !*** ./src/api/v1/notifications/notifications_api_util.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
   !*** ./src/api/v1/opposing_recs/opposing_recs_api_util.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./src/api/v1/topic_reports/topic_reports_api_util.js ***!
   \************************************************************/
 
 /*!************************************************************!*\
@@ -3162,7 +3514,11 @@ PERFORMANCE OF THIS SOFTWARE.
   \************************************************************/
 
 /*!************************************************************!*\
-  !*** ./src/pages/CommonComponents/ActionToolbar/Index.jsx ***!
+  !*** ./src/pages/CommonComponents/CensorOverlay/Index.jsx ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./src/pages/CommonComponents/Form/Checkbox/Index.jsx ***!
   \************************************************************/
 
 /*!************************************************************!*\
@@ -3250,6 +3606,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \**************************************************************/
 
 /*!**************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transport.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/divWithClassName.js ***!
   \**************************************************************/
 
@@ -3259,6 +3619,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!**************************************************************!*\
   !*** ./node_modules/react-redux/es/hooks/useReduxContext.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/socket.io-parser/build/esm/is-binary.js ***!
   \**************************************************************/
 
 /*!**************************************************************!*\
@@ -3330,7 +3694,15 @@ PERFORMANCE OF THIS SOFTWARE.
   \***************************************************************/
 
 /*!***************************************************************!*\
+  !*** ./src/pages/CommonComponents/Form/RangeSlider/Index.jsx ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
   !*** ./src/pages/CommonComponents/LinkSection/Style/index.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./src/pages/Notifications/components/MenuTime/Index.jsx ***!
   \***************************************************************/
 
 /*!***************************************************************!*\
@@ -3379,6 +3751,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!****************************************************************!*\
   !*** ./node_modules/react-toastify/dist/react-toastify.esm.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./src/pages/App/Sidebar/components/SidebarItem/Index.jsx ***!
   \****************************************************************/
 
 /*!****************************************************************!*\
@@ -3458,7 +3834,11 @@ PERFORMANCE OF THIS SOFTWARE.
   \*****************************************************************/
 
 /*!*****************************************************************!*\
-  !*** ./src/pages/CommonComponents/ActionToolbar/Style/index.js ***!
+  !*** ./src/pages/CommonComponents/CensorOverlay/Style/index.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./src/pages/CommonComponents/Form/Checkbox/Style/Index.js ***!
   \*****************************************************************/
 
 /*!*****************************************************************!*\
@@ -3475,6 +3855,14 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*****************************************************************!*\
   !*** ./src/pages/SubTopics/components/SubTopicsTable/Index.jsx ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./src/pages/UserProfile/components/FollowButton/Index.jsx ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./src/redux/reducers/topic_reports/topicReportsReducer.js ***!
   \*****************************************************************/
 
 /*!******************************************************************!*\
@@ -3518,6 +3906,14 @@ PERFORMANCE OF THIS SOFTWARE.
   \******************************************************************/
 
 /*!******************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/Style/index.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./src/pages/CommonComponents/PopoverStickOnHover/Index.jsx ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
   !*** ./src/pages/CommonComponents/UserInfoHeader/Style/index.js ***!
   \******************************************************************/
 
@@ -3539,6 +3935,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!******************************************************************!*\
   !*** ./src/pages/util/form_helpers/hooks/useConfigFormErrors.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./src/redux/reducers/notifications/notificationsReducer.js ***!
   \******************************************************************/
 
 /*!*******************************************************************!*\
@@ -3650,6 +4050,18 @@ PERFORMANCE OF THIS SOFTWARE.
   \********************************************************************/
 
 /*!********************************************************************!*\
+  !*** ./src/api/v1/tribunal_comments/tribunal_comments_api_util.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./src/pages/CommonComponents/Form/RangeSlider/Style/index.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./src/pages/Notifications/components/MenuTime/Style/index.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
   !*** ./src/pages/RecommendationsList/components/RecItem/Index.jsx ***!
   \********************************************************************/
 
@@ -3702,11 +4114,19 @@ PERFORMANCE OF THIS SOFTWARE.
   \*********************************************************************/
 
 /*!*********************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transports/index.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
   !*** ./node_modules/react-router-dom/node_modules/history/index.js ***!
   \*********************************************************************/
 
 /*!*********************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./src/pages/App/Sidebar/components/SidebarItem/Style/index.js ***!
   \*********************************************************************/
 
 /*!*********************************************************************!*\
@@ -3813,6 +4233,10 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./src/pages/SubTopics/components/SubTopicsTable/Style/index.js ***!
   \**********************************************************************/
 
+/*!**********************************************************************!*\
+  !*** ./src/pages/UserProfile/components/FollowButton/Style/index.js ***!
+  \**********************************************************************/
+
 /*!***********************************************************************!*\
   !*** ./node_modules/@popperjs/core/lib/dom-utils/getCompositeRect.js ***!
   \***********************************************************************/
@@ -3830,6 +4254,14 @@ PERFORMANCE OF THIS SOFTWARE.
   \***********************************************************************/
 
 /*!***********************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/globalThis.browser.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transports/polling.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
   !*** ./node_modules/react-bootstrap/esm/getTabTransitionComponent.js ***!
   \***********************************************************************/
 
@@ -3839,6 +4271,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!***********************************************************************!*\
   !*** ./src/pages/Dashboard/components/UploadIconInput/Style/index.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./src/pages/Notifications/components/NotificationItem/Index.jsx ***!
   \***********************************************************************/
 
 /*!************************************************************************!*\
@@ -3898,7 +4334,27 @@ PERFORMANCE OF THIS SOFTWARE.
   \*************************************************************************/
 
 /*!*************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transports/websocket.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/esm/decodePacket.browser.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/engine.io-parser/build/esm/encodePacket.browser.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./src/pages/Notifications/components/FollowNotification/Index.jsx ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
   !*** ./src/pages/RecommendationsList/components/RecItem/Style/index.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./src/redux/reducers/tribunal_comments/tribunalCommentsReducer.js ***!
   \*************************************************************************/
 
 /*!**************************************************************************!*\
@@ -3926,6 +4382,14 @@ PERFORMANCE OF THIS SOFTWARE.
   \**************************************************************************/
 
 /*!**************************************************************************!*\
+  !*** ./src/api/v1/topic_tribunal_votes/topic_tribunal_votes_api_util.js ***!
+  \**************************************************************************/
+
+/*!**************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/TopicToolbar/Index.jsx ***!
+  \**************************************************************************/
+
+/*!**************************************************************************!*\
   !*** ./src/pages/CommonComponents/TopicCards/CardDetails/Style/index.js ***!
   \**************************************************************************/
 
@@ -3947,6 +4411,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!***************************************************************************!*\
   !*** ./node_modules/@popperjs/core/lib/utils/getMainAxisFromPlacement.js ***!
+  \***************************************************************************/
+
+/*!***************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transports/polling-xhr.js ***!
   \***************************************************************************/
 
 /*!***************************************************************************!*\
@@ -3975,6 +4443,14 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \****************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/CommentToolbar/Index.jsx ***!
+  \****************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./src/pages/Notifications/components/NotificationItem/Style/index.js ***!
   \****************************************************************************/
 
 /*!*****************************************************************************!*\
@@ -4017,6 +4493,10 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./src/pages/AuthFlow/components/RestoreDid/hooks/useSetWordsOnKeyUp.js ***!
   \******************************************************************************/
 
+/*!******************************************************************************!*\
+  !*** ./src/pages/Notifications/components/FollowNotification/Style/index.js ***!
+  \******************************************************************************/
+
 /*!*******************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
   \*******************************************************************************/
@@ -4035,6 +4515,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*******************************************************************************!*\
   !*** ./node_modules/react-bootstrap/node_modules/@restart/ui/esm/TabPanel.js ***!
+  \*******************************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./src/pages/CommonComponents/Form/RangeSlider/hooks/useOnRangeChange.js ***!
   \*******************************************************************************/
 
 /*!*******************************************************************************!*\
@@ -4089,8 +4573,16 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
   \**********************************************************************************/
 
+/*!**********************************************************************************!*\
+  !*** ./src/pages/Notifications/components/CommentCivilityNotification/Index.jsx ***!
+  \**********************************************************************************/
+
 /*!***********************************************************************************!*\
   !*** ./node_modules/@clerk/clerk-react/dist/utils/useMaxAllowedInstancesGuard.js ***!
+  \***********************************************************************************/
+
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@socket.io/base64-arraybuffer/dist/base64-arraybuffer.es5.js ***!
   \***********************************************************************************/
 
 /*!***********************************************************************************!*\
@@ -4118,8 +4610,16 @@ PERFORMANCE OF THIS SOFTWARE.
   \*************************************************************************************/
 
 /*!*************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/components/UpVoteButton/Index.jsx ***!
+  \*************************************************************************************/
+
+/*!*************************************************************************************!*\
   !*** ./src/pages/RecommendationsList/components/RecItem/hooks/useNavigateToPage.js ***!
   \*************************************************************************************/
+
+/*!**************************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transports/xmlhttprequest.browser.js ***!
+  \**************************************************************************************/
 
 /*!**************************************************************************************!*\
   !*** ./node_modules/react-bootstrap/node_modules/@restart/ui/esm/useClickOutside.js ***!
@@ -4135,6 +4635,14 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!***************************************************************************************!*\
   !*** ./node_modules/react-bootstrap/node_modules/@restart/ui/esm/useWaitForDOMRef.js ***!
+  \***************************************************************************************/
+
+/*!***************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/components/DownVoteButton/Index.jsx ***!
+  \***************************************************************************************/
+
+/*!***************************************************************************************!*\
+  !*** ./src/pages/Notifications/components/CommentCivilityNotification/Style/index.js ***!
   \***************************************************************************************/
 
 /*!***************************************************************************************!*\
@@ -4166,6 +4674,10 @@ PERFORMANCE OF THIS SOFTWARE.
   \*******************************************************************************************/
 
 /*!*********************************************************************************************!*\
+  !*** ./node_modules/engine.io-client/build/esm/transports/websocket-constructor.browser.js ***!
+  \*********************************************************************************************/
+
+/*!*********************************************************************************************!*\
   !*** ./src/pages/AuthFlow/components/NewDidFlow/components/ValidateMnemonic/Style/index.js ***!
   \*********************************************************************************************/
 
@@ -4181,6 +4693,26 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./node_modules/react-bootstrap/node_modules/@restart/ui/esm/mergeOptionsWithPopperConfig.js ***!
   \***************************************************************************************************/
 
+/*!***************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/TopicToolbar/components/CommentButton/Index.jsx ***!
+  \***************************************************************************************************/
+
+/*!***************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/components/UpVoteButton/hooks/useUpdateLikes.js ***!
+  \***************************************************************************************************/
+
+/*!****************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/TopicToolbar/components/TribunalButton/Index.jsx ***!
+  \****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/CommentToolbar/components/CommentButton/Index.jsx ***!
+  \*****************************************************************************************************/
+
+/*!*****************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/components/DownVoteButton/hooks/useUpdateLikes.js ***!
+  \*****************************************************************************************************/
+
 /*!*****************************************************************************************************!*\
   !*** ./src/pages/SubTopics/components/SubTopicThread/components/Comment/hooks/useOpenReplyModal.js ***!
   \*****************************************************************************************************/
@@ -4188,6 +4720,22 @@ PERFORMANCE OF THIS SOFTWARE.
 /*!******************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.min.css ***!
   \******************************************************************************************************/
+
+/*!******************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/CommentToolbar/components/CivilityButton/Index.jsx ***!
+  \******************************************************************************************************/
+
+/*!******************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/CommentToolbar/components/TribunalButton/Index.jsx ***!
+  \******************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/TopicToolbar/components/OpposingViewsButton/Index.jsx ***!
+  \*********************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/TopicToolbar/components/TribunalButton/Style/index.js ***!
+  \*********************************************************************************************************/
 
 /*!*********************************************************************************************************!*\
   !*** ./src/pages/SubTopics/components/SubTopicThread/components/Comment/hooks/useUpdateCommentLikes.js ***!
@@ -4197,9 +4745,13 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./node_modules/react-bootstrap/node_modules/@restart/ui/node_modules/@react-aria/ssr/dist/module.js ***!
   \***********************************************************************************************************/
 
-/*!************************************************************************************************************!*\
-  !*** ./src/pages/SubTopics/components/SubTopicThread/components/Comment/hooks/useUpdateCommentCivility.js ***!
-  \************************************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/TopicToolbar/components/LikeButton/hooks/useUpdateLikes.js ***!
+  \**************************************************************************************************************/
+
+/*!******************************************************************************************************************************!*\
+  !*** ./src/pages/CommonComponents/ActionToolbars/CommentToolbar/components/CivilityButton/hooks/useUpdateCommentCivility.js ***!
+  \******************************************************************************************************************************/
 
 /**
  * @license React

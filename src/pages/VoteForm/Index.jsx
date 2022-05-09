@@ -11,10 +11,10 @@ import {
 } from './Style/Index'
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 
-const VoteForm = ({ topicId }) => {
+const VoteForm = ({ contentId }) => {
   const [voteForSelected, setVoteForSelected] = useState(false)
   const [voteAgainstSelected, setVoteAgainstSelected] = useState(false)
-  const handleOnSubmit = useHandleOnSubmit(topicId, voteForSelected, voteAgainstSelected)
+  const handleOnSubmit = useHandleOnSubmit(contentId, voteForSelected, voteAgainstSelected)
   const onClickVoteFor = useCallback(() => {
     setVoteForSelected((prev) => !prev)
     setVoteAgainstSelected(false)
@@ -48,13 +48,13 @@ const VoteForm = ({ topicId }) => {
                 <ItemList>
                   <Item>
                     <ItemDescription>
-                      Vote To Indicate Topic Has Violated Community Guidlines And Should Be Removed
+                      Vote To Indicate This Content Has Violated Community Guidlines And Should Be Removed
                     </ItemDescription>
                     <Field name="voteAgainst" checked={voteAgainstSelected} onClick={onClickVoteAgainst} showCheckmark={false} component={Checkbox} />
                   </Item>
                   <Item>
                     <ItemDescription>
-                      Vote To Indicate Topic Has Not Violated Community Guidlines
+                      Vote To Indicate This Content Has Not Violated Community Guidlines
                     </ItemDescription>
                     <Field name="voteFor" checked={voteForSelected} onClick={onClickVoteFor} showCheckmark={false} component={Checkbox} />
                   </Item>

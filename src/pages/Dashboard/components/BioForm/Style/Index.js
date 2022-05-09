@@ -16,7 +16,7 @@ export const Container = styled('div')`
   line-height: 1.5;
   color: #151515;
   text-align: left;
-  margin-left: 300px;
+  margin-left: 1em;
   border-radius: 0.5em;
   width: 840px;
 `

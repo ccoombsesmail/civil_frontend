@@ -10,7 +10,7 @@ import usersReducer from './users/usersReducer'
 import followsReducer from './follows/followsReducer'
 import enumsReducer from './enumsReducer'
 import recsReducer from './recs/recsReducer'
-import topicReportsReducer from './topic_reports/topicReportsReducer'
+import reportsReducer from './reports/reportsReducer'
 import notificationsReducer from './notifications/notificationsReducer'
 import tribunalCommentsReducer from './tribunal_comments/tribunalCommentsReducer'
 
@@ -24,7 +24,7 @@ const reducers = combineReducers({
   users: usersReducer,
   follows: followsReducer,
   recommendations: recsReducer,
-  topicReports: topicReportsReducer,
+  reports: reportsReducer,
   notifications: notificationsReducer,
   tribunalComments: tribunalCommentsReducer,
 })

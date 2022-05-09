@@ -32,7 +32,7 @@ export default (content, user, contentType) => {
     const likeData = {
       id: content?.id,
       commentId: content?.id,
-      userId: user?.userId || user?.id,
+      userId: user?.id,
       value,
     }
     switch (contentType) {

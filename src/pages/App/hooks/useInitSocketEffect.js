@@ -12,12 +12,12 @@ export default (socket) => {
 
   useEffect(() => {
     if (user) {
-      getAllNotifications(user.id || user.userId)
+      getAllNotifications(user.id)
       if (socket.disconnected) {
         socket.connect()
         socket.on('connect', () => {
           console.log(user)
-          socket.emit('addUser', { userId: user.userId || user.id, socketId: socket.id })
+          socket.emit('addUser', { userId: user.id, socketId: socket.id })
           socket.on('notification', (event) => addNotificationActionCreator(event))
         })
       }

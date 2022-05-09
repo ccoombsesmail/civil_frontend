@@ -31,6 +31,7 @@ export const StyledScalesSvg = styled(ScalesSvg)`
 `
 
 export const InnerContainer = styled('div')`
+  position:  relative;
   display: flex;
   justify-content: space-between ;
   /* align-items: center; */

@@ -7,13 +7,12 @@ import CardDetails from '../CardDetails/Index'
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 
-import { getTimeSince } from '../../../../generic/string/dateFormatter'
-
 import LinkMetaData from '../../../TopicForm/components/LinkMetaData/Index'
 
 const ExternalContentCard = ({
   topic, user, showLinks,
 }) => {
+  if (!topic) return null
   const descRef = useRef(null)
 
   const goToSubTopic = useGoToSubTopic(topic?.id)
@@ -22,12 +21,7 @@ const ExternalContentCard = ({
   return (
     <Card
       onClick={goToSubTopic}
-      username={topic?.createdBy}
-      iconSrc={`${topic?.createdByIconSrc}`}
-      topicId={topic?.id}
-      summary={topic?.summary}
-      time={getTimeSince(topic?.createdAt)}
-      reportStatus={topic?.reportStatus}
+      topic={topic}
     >
       <LinkMetaData topic={topic} />
       <CardDetails

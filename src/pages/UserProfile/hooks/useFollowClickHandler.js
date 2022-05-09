@@ -9,7 +9,7 @@ export default (userId, isFollowing) => {
   const currentUser = useSelector((s) => s.session.currentUser)
   return useCallback(() => {
     isFollowing
-      ? removeFollow(currentUser.id || currentUser.userId, userId)
-      : addNewFollow(currentUser.id || currentUser.userId, userId)
+      ? removeFollow(userId)
+      : addNewFollow(userId)
   }, [currentUser, userId, isFollowing])
 }

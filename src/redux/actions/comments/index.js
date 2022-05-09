@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { closeModal } from '../ui/index'
 import {
-  ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_COMMENT_CIVILITY,
+  ADD_COMMENT, GET_ALL_COMMENTS, UPDATE_COMMENT_LIKES, UPDATE_COMMENT_CIVILITY, ADD_REPORTED_COMMENT,
 } from '../../reducers/comments/commentsReducer'
 import * as CommentsApiUtil from '../../../api/v1/comments/comments_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
@@ -16,6 +16,11 @@ const getAllCommentsActionCreator = (subtopics) => ({
 
 const addCommentActionCreator = (subTopicData) => ({
   type: ADD_COMMENT,
+  payload: subTopicData,
+})
+
+const addReportedCommentActionCreator = (subTopicData) => ({
+  type: ADD_REPORTED_COMMENT,
   payload: subTopicData,
 })
 
@@ -43,6 +48,10 @@ export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiU
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
+export const getComment = (commentId) => (dispatch) => CommentsApiUtil.getComment(commentId)
+  .then((res) => dispatch(addReportedCommentActionCreator(res.data)))
+  .catch((error) => toast.error(errorFormatter(error)))
+
 export const updateCommentLikes = (data) => (dispatch) => CommentsApiUtil.updateCommentLikes(data)
   .then((res) => dispatch(updateCommentActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
@@ -54,6 +63,7 @@ export const updateCommentCivility = (data) => (dispatch) => CommentsApiUtil.upd
 export default {
   createComment,
   getAllComments,
+  getComment,
   updateCommentLikes,
   updateCommentCivility,
 }

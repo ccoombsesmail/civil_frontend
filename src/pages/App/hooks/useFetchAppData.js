@@ -47,14 +47,19 @@ export default () => {
         const docExistsButNotValid = currentUser?.doc && !currentUser.doc.isValid()
         if (!currentUser?.doc || docExistsButNotValid) {
           const doc = await defaultDID.resolve()
-          const { value: username } = doc.getCredential('username')?.getSubject().getProperties()
-          const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties()
-          const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties()
+          const { value: username } = doc.getCredential('username')?.getSubject().getProperties() || {}
+          const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties() || {}
+          const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties() || {}
+          const { value: avatar } = doc.getCredential('avatar')?.getSubject().getProperties() || {}
+          console.log(avatar)
           upsertDidUser({
             userId: doc.getSubject().repr,
             username: username || doc.getSubject().getMethodSpecificId(),
+            iconSrc: avatar || '',
           })
-          addDIDSession({ did: defaultDID, doc, username })
+          addDIDSession({
+            did: defaultDID, doc, username, iconSrc: avatar,
+          })
         }
       } else {
         logout()

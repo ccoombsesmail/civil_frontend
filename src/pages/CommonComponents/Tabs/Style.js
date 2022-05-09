@@ -21,6 +21,8 @@ export const ThemeTab = styled(Tabs)`
  .nav-link {
    color: black;
    font-weight: bold;
+   font-size: 1vw;
+
     @media only screen and (max-width: 600px) {
       font-size: 3vw;
       padding: .5rem .9rem;

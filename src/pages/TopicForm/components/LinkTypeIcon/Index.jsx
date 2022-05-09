@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 
 import {
-  OGFavicon
+  OGFavicon,
 } from './Style/index'
 import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'
 
 const LinkTypeIcon = ({
-  contentUrl, metaData, setIsLoading
+  contentUrl, metaData, setIsLoading,
 }) => {
   useEffect(() => {
     setIsLoading(true)
@@ -17,7 +17,7 @@ const LinkTypeIcon = ({
   }, [metaData])
 
   return (
-    <OGFavicon src={metaData?.favicon} alt="" /> 
+    <OGFavicon src={metaData?.favicon} alt="" />
   )
 }
 export default IsLoadingHOC(LinkTypeIcon, '30px', true)

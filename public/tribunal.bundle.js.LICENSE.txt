@@ -1,0 +1,83 @@
+/*! ../../../CommonComponents/Line */
+
+/*! ../../../CommonComponents/Tabs/Style */
+
+/*! ../../../SubTopics/components/SubTopicThread/Style */
+
+/*! ../../../SubTopics/components/SubTopicThread/components/CommentColumn/Index */
+
+/*! ../../../api/v1/topic_reports/topic_reports_api_util */
+
+/*! ../../../svgs/svgs */
+
+/*! ../../generic/time/calculateTimeLeft */
+
+/*! ../../reducers/topic_reports/topicReportsReducer */
+
+/*! ../../redux/actions/topic_reports/index */
+
+/*! ../../redux/actions/topics/index */
+
+/*! ../../redux/actions/tribunal_comments/index */
+
+/*! ../../svgs/svgs */
+
+/*! ../../utils/errorFormatter */
+
+/*! ../App/Modal/Index */
+
+/*! ../CommonComponents/Button/Index */
+
+/*! ../Topics/components/TopicItem/Index */
+
+/*! ../hooks/redux/useBindDispatch */
+
+/*! ../hooks/useOpenModal */
+
+/*! ../ui/index */
+
+/*! ./Style/index */
+
+/*! ./components/TribunalComments/Index */
+
+/*! ./hooks/useCategorizeComments */
+
+/*! @babel/runtime/helpers/slicedToArray */
+
+/*! @babel/runtime/helpers/taggedTemplateLiteral */
+
+/*! react */
+
+/*! react-bootstrap */
+
+/*! react-redux */
+
+/*! react-router-dom */
+
+/*! react-toastify */
+
+/*! styled-components */
+
+/*!**************************************!*\
+  !*** ./src/pages/Tribunal/Index.jsx ***!
+  \**************************************/
+
+/*!*******************************************!*\
+  !*** ./src/pages/Tribunal/Style/index.js ***!
+  \*******************************************/
+
+/*!***********************************************!*\
+  !*** ./src/generic/time/calculateTimeLeft.js ***!
+  \***********************************************/
+
+/*!**************************************************!*\
+  !*** ./src/redux/actions/topic_reports/index.js ***!
+  \**************************************************/
+
+/*!******************************************************************!*\
+  !*** ./src/pages/Tribunal/components/TribunalComments/Index.jsx ***!
+  \******************************************************************/
+
+/*!***************************************************************************************!*\
+  !*** ./src/pages/Tribunal/components/TribunalComments/hooks/useCategorizeComments.js ***!
+  \***************************************************************************************/

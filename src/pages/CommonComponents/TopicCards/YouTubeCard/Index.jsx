@@ -7,7 +7,6 @@ import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 import useUpdateLikes from '../../ActionToolbars/TopicToolbar/components/LikeButton/hooks/useUpdateLikes'
 
-import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import { VideoPlayer } from './Style'
 
 const EmbededYouTube = ({
@@ -22,13 +21,7 @@ const EmbededYouTube = ({
   return (
     <Card
       onClick={goToSubTopic}
-      username={topic?.createdBy}
-      userId={topic?.userId}
-      topicId={topic?.id}
-      iconSrc={`${topic?.createdByIconSrc}`}
-      summary={topic?.summary}
-      time={getTimeSince(topic?.createdAt)}
-      reportStatus={topic?.reportStatus}
+      topic={topic}
     >
       <VideoPlayer src={src} loading="lazy" />
       <CardDetails

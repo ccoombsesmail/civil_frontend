@@ -35,7 +35,7 @@ const VideoShowPage = ({
 
   return (
     <>
-      <VideoPlayer src={src} />
+      <VideoPlayer src={src} loading="lazy" />
       <VideoDescriptionCard
         onClick={goToSubTopic}
         username={topic?.createdBy}

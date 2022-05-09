@@ -1,27 +1,27 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { createTopicReport } from '../../../api/v1/topic_reports/topic_reports_api_util'
+import { createReport } from '../../../api/v1/reports/reports_api_util'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import uiActionCreators from '../../../redux/actions/ui/index'
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
-export default (topicId) => {
+export default (contentId) => {
   const { closeModal } = useBindDispatch(uiActionCreators)
   return useCallback((values, { setSubmitting, resetForm }) => {
     const data = {
-      topicId,
+      contentId,
       toxic: values.toxic || null,
       personalAttack: values.personalAttack || null,
       spam: values.spam || null,
     }
     toast.promise(
-      createTopicReport(data),
+      createReport(data),
       {
-        pending: 'Submitting Topic Report...',
+        pending: 'Submitting Report...',
         success: {
           render() {
             closeModal()
-            return 'Topic Report Successfully Submitted!'
+            return 'Report Successfully Submitted!'
           },
         },
         error: {
@@ -35,5 +35,5 @@ export default (topicId) => {
     )
     setSubmitting(false)
     resetForm({})
-  }, [topicId])
+  }, [contentId])
 }

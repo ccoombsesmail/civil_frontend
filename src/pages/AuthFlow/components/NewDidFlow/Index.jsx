@@ -36,9 +36,11 @@ const NewDidFlow = () => {
         validate={validator}
         onSubmit={(values, params) => handleNewDidSubmit(values, params)}
       >
-        {({ isSubmitting, values }) => (
+        {({ isSubmitting, values, setFieldValue }) => (
           <>
-            {formStep === 0 && <WithFade Component={BasicInformation} />}
+            {formStep === 0 && (
+            <WithFade Component={BasicInformation} setFieldValue={setFieldValue} />
+            )}
             {formStep === 1 && <WithFade Component={CreateMnemonic} />}
             {formStep === 2 && <WithFade Component={ValidateMnemonic} />}
             <ButtonContainer>
@@ -73,7 +75,7 @@ const NewDidFlow = () => {
                   }
                   onClick={() => handleNewDidSubmit(values)}
                 >
-                  Create Decentralized Idenity
+                  Create Decentralized Identity
                 </Button>
               )}
             </ButtonContainer>

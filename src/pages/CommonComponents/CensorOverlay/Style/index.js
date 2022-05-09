@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { COMMENT } from '../../../../enums/content_type'
 
 export const Warning = styled('span')`
   display: flex;
@@ -16,6 +17,7 @@ export const MessageContainer = styled('div')`
   align-items: center;
   justify-content: space-between;
   position: absolute;
+  margin-top: ${(props) => (props.contentType === COMMENT ? '50px' : '0')};
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -24,7 +26,9 @@ export const MessageContainer = styled('div')`
   border-radius: .5em;
   padding: 20px 10px 10px 10px;
   cursor: pointer;
-  height: 200px;
+  height: clamp(150px, 60%, 200px);
+  width: clamp(300px, 70%, 800px);
+
 
 `
 

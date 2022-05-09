@@ -15,11 +15,11 @@ const addAllFollowedActionCreator = (followed) => ({
   payload: followed,
 })
 
-export const addNewFollow = (userId, followerId) => (dispatch) => FollowsApiUtil.addNewFollow(userId, followerId)
+export const addNewFollow = (followerId) => (dispatch) => FollowsApiUtil.addNewFollow(followerId)
   .then((res) => dispatch(updateUserActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const removeFollow = (userId, followerId) => (dispatch) => FollowsApiUtil.removeFollow(userId, followerId)
+export const removeFollow = (followerId) => (dispatch) => FollowsApiUtil.removeFollow(followerId)
   .then((res) => dispatch(updateUserActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 

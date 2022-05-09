@@ -4,6 +4,7 @@ import React, {
 import { UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
 import CensorOverlay from '../CensorOverlay/Index'
+import { getTimeSince } from '../../../generic/string/dateFormatter'
 
 import {
   Container,
@@ -14,20 +15,14 @@ import {
 
 const Card = ({
   children,
-  summary,
-  iconSrc,
-  username,
-  time,
   onClick,
   listCard,
   height,
-  userId,
-  topicId,
-  reportStatus,
+  topic,
 }) => {
   const ref = useRef(null)
   const [totalHeight, setTotalHeight] = useState('unset')
-  const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
+  const [shouldBlur, setShouldBlur] = useState(topic?.reportStatus === UNDER_REVIEW)
   useEffect(() => {
     const totalCompHeight = [...ref?.current?.children].reduce((acc, child) => {
       const compStyles = window.getComputedStyle(child)
@@ -36,7 +31,7 @@ const Card = ({
     }, 0)
     if (height) setTotalHeight(totalCompHeight + height)
   }, [ref])
-
+  console.log(topic)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
   return (
     <Container
@@ -46,12 +41,18 @@ const Card = ({
       listCard={listCard}
       shouldBlur={shouldBlur}
     >
-      <UserInfoHeader iconSrc={iconSrc} time={time} username={username} userId={userId} />
-      { shouldBlur && <CensorOverlay setShouldBlur={setShouldBlur} contentId={topicId} />}
+      <UserInfoHeader
+        iconSrc={topic?.iconSrc}
+        time={getTimeSince(topic?.createdAt)}
+        username={topic?.createdBy}
+        userId={topic?.userId}
+        topicCreatorIsDidUser={topic?.topicCreatorIsDidUser}
+      />
+      { shouldBlur && <CensorOverlay setShouldBlur={setShouldBlur} contentId={topic?.id} />}
 
       <Description className="text-pop-up-top" shouldBlur={shouldBlur}>
         &ldquo;
-        {summary}
+        {topic?.summary}
         &rdquo;
       </Description>
       <Body shouldBlur={shouldBlur}>

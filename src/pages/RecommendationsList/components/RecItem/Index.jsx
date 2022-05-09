@@ -1,16 +1,15 @@
-import React from 'react'
-import { Line } from '../../../CommonComponents/Line'
+import React, { memo } from 'react'
 import useGetLinkMetaDataEffect from '../../../TopicForm/components/LinkMetaData/hooks/useGetLinkMetaDataEffect'
 import useNavigateToPage from './hooks/useNavigateToPage'
 
 import {
-  Container, Thumb, DescriptionContainer, Title, SubTitle, OGImage, OGTitle, OGDescription, OGUrl
+  Container, Thumb, DescriptionContainer, Title, SubTitle, OGImage,
 } from './Style/index'
 
 const RecItem = ({ rec }) => {
+  console.log(rec)
   let content = null
   const { topic, subTopic } = rec
-
   const metaData = useGetLinkMetaDataEffect({ contentUrl: rec.externalRecommendedContent })
   const navigateToPage = useNavigateToPage(rec)
   if (topic) {
@@ -48,4 +47,4 @@ const RecItem = ({ rec }) => {
   )
 }
 
-export default RecItem
+export default memo(RecItem)

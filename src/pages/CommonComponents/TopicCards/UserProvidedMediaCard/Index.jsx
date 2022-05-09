@@ -6,7 +6,6 @@ import CardDetails from '../CardDetails/Index'
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 
-import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import DisplayMedia from '../../../TopicForm/components/DisplayMedia/Index'
 
 const UserProvidedMediaCard = ({
@@ -21,10 +20,7 @@ const UserProvidedMediaCard = ({
   return (
     <Card
       onClick={goToSubTopic}
-      username={topic?.createdBy}
-      iconSrc={`${topic?.createdByIconSrc}`}
-      summary={topic?.summary}
-      time={getTimeSince(topic?.createdAt)}
+      topic={topic}
     >
       <DisplayMedia
         videoFile={topic.vodUrl}

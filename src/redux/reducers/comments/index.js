@@ -10,6 +10,10 @@ export const addComment = (action, state) => {
   return JSON.parse(JSON.stringify(state))
 }
 
+export const addReportedComment = (action, state) => (
+  { ...state, list: [{ data: action.payload, children: [] }] }
+)
+
 export const updateLikesOrCivility = (action, state) => {
   const rootComment = state.list.find((c) => c.data.id === action.payload?.rootId)
   if (action.payload.rootId) {

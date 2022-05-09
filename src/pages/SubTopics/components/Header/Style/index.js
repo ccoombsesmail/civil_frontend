@@ -4,11 +4,12 @@ import { LongDownArrow } from '../../../../../svgs/svgs'
 export const Container = styled('div')` 
   display: flex;
   flex: 60%;
+  border: 1px solid rgba(200,200,200,0.25);
+  border-bottom: none ;
   flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 1em;
-  /* border: 1px solid gray; */
   /* border-top: none; */
   padding-top: 5em;
   z-index: 99;
