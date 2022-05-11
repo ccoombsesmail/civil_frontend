@@ -13,7 +13,13 @@ const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   return (
-    <MessageContainer onClick={() => setShouldBlur((prev) => !prev)} contentType={contentType}>
+    <MessageContainer
+      onClick={(e) => {
+        e.stopPropagation()
+        setShouldBlur((prev) => !prev)
+      }}
+      contentType={contentType}
+    >
       <Message>
         This Topic Has Been Reported And May Contain Explicit Visuals Or Offensive Language
       </Message>

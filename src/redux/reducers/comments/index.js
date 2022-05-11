@@ -30,3 +30,9 @@ export const updateLikesOrCivility = (action, state) => {
 }
 
 export const getAllComments = (action, state) => ({ ...state, list: action.payload })
+
+export const getAllCommentReplies = (action, state) => ({
+  ...state,
+  targetComment: action.payload.comment,
+  list: action.payload.replies,
+})

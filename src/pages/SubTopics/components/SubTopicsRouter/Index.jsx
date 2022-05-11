@@ -10,7 +10,7 @@ import WavyBackground from '../../../CommonComponents/WavyBackground/Index'
 export default () => (
   <Routes>
     <Route
-      path=":subTopicId/comment/:commentId"
+      path=":subTopicId/comments/:commentId"
       element={(
         <>
           <WavyBackground color="green" top="115%" />

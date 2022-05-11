@@ -35,6 +35,9 @@ li {
 img {
     max-width: 100%;
 }
+hr {
+  z-index: 99;
+}
 
 /* removes spacing between cells in tables */
 table {

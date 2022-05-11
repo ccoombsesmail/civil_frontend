@@ -46,22 +46,22 @@ const SubTopicThread = () => {
       >
         <Tab eventKey="all" title="All">
           <ColumnContainer>
-            <CommentColumn numComments={subtopic?.allComments} comments={allComments} commentSentiment="" color="#6A6E70" />
+            <CommentColumn topicId={topicId} numComments={subtopic?.allComments} comments={allComments} commentSentiment="" color="#6A6E70" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="positive" title="Generally Positive">
           <ColumnContainer>
-            <CommentColumn numComments={subtopic?.positiveComments} comments={positiveComments} commentSentiment="Generally Positive" color="#6A6E70" />
+            <CommentColumn topicId={topicId} numComments={subtopic?.positiveComments} comments={positiveComments} commentSentiment="Generally Positive" color="#6A6E70" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="neutral" title="Neutral">
           <ColumnContainer>
-            <CommentColumn numComments={subtopic?.neutralComments} comments={neutralComments} commentSentiment="Neutral" color="#474A4F" />
+            <CommentColumn topicId={topicId} numComments={subtopic?.neutralComments} comments={neutralComments} commentSentiment="Neutral" color="#474A4F" />
           </ColumnContainer>
         </Tab>
         <Tab eventKey="negative" title="Generally Negative">
           <ColumnContainer>
-            <CommentColumn numComments={subtopic?.negativeComments} comments={negativeComments} commentSentiment="Generally Negative" color="#6A6E70" />
+            <CommentColumn topicId={topicId} numComments={subtopic?.negativeComments} comments={negativeComments} commentSentiment="Generally Negative" color="#6A6E70" />
           </ColumnContainer>
         </Tab>
       </ThemeTab>

@@ -18,7 +18,7 @@ import { Line } from '../../Style'
 
 const CommentThread = () => {
   const { commentId, topicId } = useParams()
-  const { getAllCommentsReplies, getTopic } = useBindDispatch(
+  const { getAllCommentReplies, getTopic } = useBindDispatch(
     subTopicActions, commentActions, topicActions,
   )
   const user = useSelector((state) => state.session.currentUser)
@@ -33,9 +33,9 @@ const CommentThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
-    getAllCommentsReplies(commentId, user?.id)
+    getAllCommentReplies(commentId)
     getTopic(topicId, user?.id)
-  }, [user])
+  }, [user, commentId])
   return (
 
     <ThreadContainer>

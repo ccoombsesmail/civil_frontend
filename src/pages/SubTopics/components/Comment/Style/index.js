@@ -4,6 +4,7 @@ export const OuterContainer = styled('div')`
   position: relative;
   width: 100%;
   height: fit-content;
+  z-index: 99;
 
 `
 export const CommentContainer = styled('li')`

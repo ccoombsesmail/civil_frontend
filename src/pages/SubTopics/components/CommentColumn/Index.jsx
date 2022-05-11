@@ -7,7 +7,7 @@ import { Container } from './Style'
 export const ParentCommentContext = React.createContext(null)
 
 const CommentColumn = ({
-  numComments, comments, commentSentiment, color,
+  numComments, comments, commentSentiment, color, topicId,
 }) => (
   <Container color={color}>
     <h1>
@@ -21,7 +21,10 @@ const CommentColumn = ({
           comments?.map((comment, idx) => (
             <ParentCommentContext.Provider
               key={comment.data?.id + String(idx)}
-              value={comment.data?.id}
+              value={{
+                commentId: comment.data?.id,
+                topicId,
+              }}
             >
               <Comment
                 key={comment.data?.id + String(idx)}

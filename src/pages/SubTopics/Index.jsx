@@ -13,14 +13,18 @@ import {
   Container, Line, MainContent, HeaderContainer, TabContainer,
 } from './Style'
 import Header from './components/Header/Index'
+import ParentComment from './components/ParentComment/Index'
+
 import SubTopicsRouter from './components/SubTopicsRouter/Index'
 import RecommendationsList from '../RecommendationsList/Index'
 import { ThemeTab } from '../CommonComponents/Tabs/Style'
+import { uuidRegEx } from '../../generic/regex/uuid'
 
 const SubTopics = () => {
-  const { topicId, '*': subTopicId } = useParams()
+  const { topicId, '*': url } = useParams()
   const [key, setKey] = useState('recs')
-
+  const [subtopicId, commentId] = url.match(uuidRegEx)
+  console.log(commentId)
   const {
     getAllSubTopics, getAllRecs,
     getTopic, getAllOpposingRecs,
@@ -43,7 +47,7 @@ const SubTopics = () => {
     getAllOpposingRecs(topicId)
     getAllRecs(topicId)
     if (subtopicsEmpty) getAllSubTopics(topicId)
-  }, [topicId, subTopicId])
+  }, [topicId, subtopicId])
 
   return (
     <Container>
@@ -52,6 +56,7 @@ const SubTopics = () => {
           <Header topic={topic} user={user} />
         </HeaderContainer>
         <Line />
+        { commentId && <ParentComment topicId={topicId} /> }
         <SubTopicsRouter />
       </MainContent>
       <TabContainer>

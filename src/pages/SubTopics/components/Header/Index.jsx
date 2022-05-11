@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import { Tooltip, OverlayTrigger } from 'react-bootstrap'
 
 import EmbededTweet from '../../../CommonComponents/TopicCards/TweetCard/Index'
@@ -17,6 +17,7 @@ import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import {
   Container, Description, TopicSummaryContainer, StyledLongDownArrow,
 } from './Style/index'
+import { uuidRegEx } from '../../../../generic/regex/uuid'
 
 const TooltipComponent = ({ text, title, reference }) => (
   <OverlayTrigger
@@ -34,7 +35,9 @@ const TooltipComponent = ({ text, title, reference }) => (
 const Header = ({ topic, user }) => {
   let content = null
   let subtopicContent = null
-  const { '*': subtopicId } = useParams()
+  const { '*': url } = useParams()
+  const [subtopicId, commentId] = url.match(uuidRegEx)
+
   const subtopic = useSelector((s) => s.subtopics)[subtopicId]
   const showSubTopic = subtopic && subtopic?.title !== 'General'
 
@@ -51,6 +54,7 @@ const Header = ({ topic, user }) => {
   const commonPropsSubTopic = useMemo(() => ({
     topic: subtopic, user, showLinks: true,
   }), [subtopic, user])
+
   if (topic?.tweetHtml) content = <EmbededTweet {...commonProps} />
   else if (topic?.ytUrl) content = <VideoShowPage {...commonProps} src={topic.ytUrl.replace('watch?v=', 'embed/')} />
   else if (topic?.vodUrl || topic?.imageUrl) content = <UserProvidedMediaCard {...commonProps} />
