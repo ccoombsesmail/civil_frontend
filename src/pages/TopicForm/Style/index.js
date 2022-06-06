@@ -15,7 +15,6 @@ export const FormContainer = styled(Form)`
   margin-top: 1em;
    h2 {
     font-size: 1em;
-    margin: 0 1em;
   }
  
 `
@@ -29,6 +28,9 @@ export const Arrow = styled('span')`
 export const InputsContainer = styled('div')`
   display: flex;
   width: 100%;
+  @media only screen and (max-width: 800px) {
+     flex-direction: column;
+  }
 `
 
 export const Left = styled('div')`
@@ -37,12 +39,19 @@ export const Left = styled('div')`
   flex-direction: column;
   width: 50%;
   border-right: 1px solid black;
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+    border-right: none;
+  }
 `
 export const Right = styled('div')`
   display: flex;
   display: inline-block;
   flex-direction: column;
   width: 50%;
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `
 
 export const SupplementalInformation = styled('section')`
@@ -57,6 +66,8 @@ export const InputWrapper = styled('div')`
 export const Container = styled('div')`
   overflow-y: scroll;
   height: 90vh;
+  width: 100vw;
+  max-width: 1000px;
   background: white;
   
   border-radius: 1em;
@@ -70,6 +81,18 @@ export const Container = styled('div')`
     padding-bottom: .5em;
     border-bottom: 1px solid black;
   }
+  
+  /* @media only screen and (max-width: 1600px) {
+     width: 80vw;
+  }
+
+  @media only screen and (max-width: 800px) {
+     width: 90vw;
+  }
+
+  @media only screen and (max-width: 600px) {
+     width: 100vw;
+  } */
  `
 
 export const Line = styled('hr')` 
@@ -90,4 +113,25 @@ export const UploadMediaContainer = styled('div')`
 
 ;
 
+`
+
+export const SectionDescription = styled('h2')`
+  text-decoration: underline;
+  @media only screen and (max-width: 600px) {
+    /* display: none; */
+  }
+
+`
+
+export const MobileOnlyLine = styled('hr')` 
+  width: 90%;
+  margin: 2em 1.3em;
+  background-color: rgb(48,48,50);
+  height: .5px;
+  border: none;
+  display: none;
+
+  @media only screen and (max-width: 800px) {
+    display: block;
+  }
 `

@@ -21,7 +21,7 @@ import LinkTypeIcon from './components/LinkTypeIcon/Index'
 import ThemeTooltip from '../CommonComponents/Tooltip/Index'
 
 import {
-  FormContainer, InputsContainer, Container, Left, Right,
+  FormContainer, InputsContainer, Container, Left, Right, SectionDescription, MobileOnlyLine,
   Line, Arrow, FlexDiv,
 } from './Style'
 
@@ -69,7 +69,7 @@ const CreateTopicForm = () => {
                 <InputsContainer>
                   <Left>
                     <FlexDiv>
-                      <h2> Topic Description </h2>
+                      <SectionDescription> Topic Description </SectionDescription>
                       <ThemeTooltip
                         tooltipHeader="Topic Description"
                         tooltipText="Provide information about the topic you would like to discuss"
@@ -79,9 +79,12 @@ const CreateTopicForm = () => {
                     <Field type="text" name="summary" label="Summary" component={Input} width="85%" placeholder="Give A Short Opinion Or Point" />
                     <Field type="text" name="category" label="Category" component={Select} setFieldValue={setFieldValue} setFieldTouched={setFieldTouched} width="85%" />
                   </Left>
+                  <MobileOnlyLine />
                   <Right>
                     <FlexDiv>
-                      <h2> Link to what you want to discuss here... </h2>
+                      <SectionDescription>
+                        Link to what you want to discuss here...
+                      </SectionDescription>
                       <ThemeTooltip
                         tooltipHeader="Discussed Content"
                         tooltipText="Add a link to the external content you would like to discuss (
@@ -103,7 +106,7 @@ const CreateTopicForm = () => {
 
                     <Line />
                     <FlexDiv>
-                      <h2> Add your own media content </h2>
+                      <SectionDescription> Add your own media content </SectionDescription>
                       <ThemeTooltip
                         tooltipHeader="User Provided Content"
                         tooltipText="This could be an image, graphic, or video pertaining to the topic you would like to discuss"

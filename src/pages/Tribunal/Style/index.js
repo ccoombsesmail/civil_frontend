@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ScalesSvg } from '../../../svgs/svgs'
+import { ScalesSvg, PillarSvg } from '../../../svgs/svgs'
 
 export const OuterContainer = styled('div')`
   display: flex;
@@ -9,33 +9,44 @@ export const OuterContainer = styled('div')`
   padding-bottom: 60vh;
 `
 
-export const Header = styled('header')` 
+export const Header = styled('header')`
   display: flex;
   align-items: center;
+  margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
   h1 {
     font-weight: bold;
     font-size: 2vw;
+    @media only screen and (max-width: 600px) {
+      font-size: 5.7vw;
+    }
   }
-  svg { 
+  svg {
     width: 4vw !important;
     height: 4vw !important;
+    @media only screen and (max-width: 600px) {
+      width: 12vw !important;
+      height: 12vw !important;
+    }
     margin: 0 3vw;
   }
-  
 `
-export const StyledScalesSvg = styled(ScalesSvg)` 
-    width: 4vw !important;
-    height: 4vw !important;
-    margin: 0 1vw;
+export const StyledScalesSvg = styled(ScalesSvg)`
+  width: 4vw !important;
+  height: 4vw !important;
+  margin: 0 1vw;
+`
 
+export const StyledPillarSvg = styled(PillarSvg)`
+  display: block;
 `
 
 export const InnerContainer = styled('div')`
-  position:  relative;
+  position: relative;
   display: flex;
-  justify-content: space-between ;
+  justify-content: space-between;
   /* align-items: center; */
   width: 100%;
+
 `
 
 export const VotingContainer = styled('section')`
@@ -47,11 +58,29 @@ export const VotingContainer = styled('section')`
   align-items: center;
   justify-content: space-evenly;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
-  border-radius: .5em;
+  border-radius: 0.5em;
   background-color: white;
-  border: .5px solid lightgray;
-  border-color: rgba(200,200,200,0.25) ;
+  border: 0.5px solid lightgray;
+  border-color: rgba(200, 200, 200, 0.25);
+  margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
 
+  @media only screen and (max-width: 800px) {
+    width: 90%;
+    height: 30vw;
+  }
+
+  svg {
+    @media only screen and (max-width: 800px) {
+      width: 9vw;
+      height: 9vw;
+    }
+  }
+
+  span {
+    @media only screen and (max-width: 800px) {
+      font-size: 4vw;
+    }
+  }
 `
 
 export const ReportStatsContainer = styled('ul')`
@@ -61,18 +90,20 @@ export const ReportStatsContainer = styled('ul')`
 export const ReportStatItem = styled('li')`
   background-color: var(--m-menu-item-hover);
 
-
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
-  border-radius: .5em;
+  border-radius: 0.5em;
   background-color: var(--m-secondary-background-color);
   font-size: 1vw;
-  padding: 2vw;
-  margin: 1vw 0;
   padding: 2vw 4vw;
   margin: 2vw 4vw;
+  @media only screen and (max-width: 800px) {
+      font-size: 4vw;
+      margin: 2vw 2vw;
+
+    }
 `
 export const VotesAgainst = styled('div')`
   display: flex;
@@ -83,10 +114,13 @@ export const VotesAgainst = styled('div')`
   transform: translate(0, -50%);
   font-size: 2vw;
   align-items: center;
-
+  @media only screen and (max-width: 800px) {
+    font-size: 4vw;
+  }
+  
 `
 
-export const VotesFor = styled('div')` 
+export const VotesFor = styled('div')`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -95,4 +129,23 @@ export const VotesFor = styled('div')`
   transform: translate(0, -50%);
   font-size: 2vw;
   align-items: center;
+
+  @media only screen and (max-width: 800px) {
+    font-size: 4vw;
+  }
+`
+export const Timer = styled('div')`
+  font-size: 1.3vw; 
+  color: gray;
+  margin: 0 0 clamp(30px, 1vw, 100px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (max-width: 800px) {
+    font-size: 4vw;
+  }
+
+  h4 {
+    color: black;
+  }
 `

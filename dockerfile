@@ -2,7 +2,7 @@ FROM node:16.14.0
 
 ENV NODE_ENV=production
 
-EXPOSE 5000
+EXPOSE 8080
 
 WORKDIR /
 

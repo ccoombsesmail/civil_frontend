@@ -9,6 +9,9 @@ export const Container = styled('div')`
   width: 90%;
   box-shadow: 0 0 40px -10px rgba(0, 0, 0, .4);
 
+  @media only screen and (max-width: 600px) {
+    width: 100vw;
+  }
 
 `
 
@@ -39,6 +42,9 @@ export const TableHeader = styled('header')`
         font-size: 1.5vw;
         font-weight: 700;
         letter-spacing: 6.5px;
+        @media only screen and (max-width: 600px) {
+          font-size: 3.5vw;
+        }
       }
       
       span:last-child {
@@ -47,6 +53,9 @@ export const TableHeader = styled('header')`
         letter-spacing: 3.55px;
         opacity: .85;
         transform: translateY(-2px);
+        @media only screen and (max-width: 600px) {
+          font-size: 3.3vw;
+        }
       }
     }
     
@@ -71,7 +80,7 @@ export const Table = styled('table')`
 
 export const ColHeader = styled('tr')`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   padding: 10px 30px 10px 10px;
   background-color: var(--bg-accent);
@@ -83,14 +92,16 @@ export const ColItem = styled('th')`
   color: white;
   font-weight: bold;
   letter-spacing: .1vw;
-  font-size: 20px;
-
+  font-size: 1vw;
+  @media only screen and (max-width: 600px) {
+    font-size: 2vw;
+  }
 
 `
 
 export const Row = styled('tr')` 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     padding: 10px 30px 10px 10px;
     overflow: hidden;
@@ -106,12 +117,6 @@ export const Row = styled('tr')`
       box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
     }
   
-  /* &__picture {
-    max-width: 100%;
-    width: 60px;
-    border-radius: 50%;
-    box-shadow: 0 0 0 10px #ebeef3, 0 0 0 22px #f3f4f6;
-  } */
   
 `
 
@@ -120,7 +125,20 @@ export const RowItem = styled('td')`
   font-weight: 600;
   color: #979cb0;
   font-weight: 600;
-  font-size: 20px;
+  
   letter-spacing: .1vw;    
 
+  font-size: 1vw;
+  @media only screen and (max-width: 600px) {
+    font-size: 2vw;
+  }
+
+  img {
+    width: 2vw;
+    height: 2vw;
+    @media only screen and (max-width: 600px) {
+      width: 4vw;
+      height: 4vw;
+    }
+  }
 `

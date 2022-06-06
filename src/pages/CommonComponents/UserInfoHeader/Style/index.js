@@ -29,23 +29,25 @@ export const Header = styled('div')`
     }
 
   h2 {
-    padding: .1em;
     line-height: unset;
-    margin: 0 .2em;
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;
+    font-size: 1vw;
+    @media only screen and (max-width: 800px) {
+      font-size: 3.4vw;
+    }
   }
   h3 {
 
-    padding: .1em;
-    font-size: .9em;
-    margin: 0 1em;
+    font-size: .8vw;
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;
     color: gray;
-
+    @media only screen and (max-width: 800px) {
+      font-size: 3vw;
+    }
   }
 `
 
@@ -55,8 +57,15 @@ export const Thumb = styled('img')`
   height: 3vw;      
   border-radius: 50%; 
 
-  @media only screen and (max-width: 600px) {
-     width: 6vw;
-     height: 6vw;  
+  @media only screen and (max-width: 800px) {
+     width: 9vw;
+     height: 9vw;  
   }
+`
+
+export const UsernameContainer = styled('section')`
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+
 `

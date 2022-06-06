@@ -14,7 +14,7 @@ export const Thumb = styled('div')`
   flex: 40%;
   background: white;
   margin-right: 8px;
-  aspect-ratio: 12 / 9;
+  aspect-ratio: 12 / 12;
   img {
     height: 100%;
   }
@@ -35,6 +35,10 @@ export const Title = styled('h2')`
   font-size: 1vw;
   font-weight: bold;
 
+  @media only screen and (max-width: 600px) {
+    font-size: 3.5vw;
+  }
+
 
 `
 
@@ -42,6 +46,9 @@ export const SubTitle = styled('h3')`
   width: 100%;
   color: gray;
   font-size: .6vw;
+  @media only screen and (max-width: 600px) {
+    font-size: 3vw;
+  }
 `
 
 export const OGImage = styled('img')` 

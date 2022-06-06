@@ -3,6 +3,9 @@ import styled from 'styled-components'
 export const VideoPlayer = styled('iframe')`
   height: 20vw;
   width: 100%;
+  @media only screen and (max-width: 600px) {
+    height: 40vw;
+  }
 `
 
 export const Description = styled('p')`

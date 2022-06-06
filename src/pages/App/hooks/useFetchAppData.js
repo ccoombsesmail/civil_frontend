@@ -12,7 +12,7 @@ import useSetupInterceptorsEffect from '../../hooks/auth/useSetupInterceptorsEff
 import useInitSocketEffect from './useInitSocketEffect'
 
 export default () => {
-  const URL = 'http://localhost:8093'
+  const URL = `http://${window.location.hostname}:8093`
   const socket = io(URL, { autoConnect: false })
   DIDBackend.initialize(new DefaultDIDAdapter('mainnet'))
   const dispatch = useDispatch()

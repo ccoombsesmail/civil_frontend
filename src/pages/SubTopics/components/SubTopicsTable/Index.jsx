@@ -29,13 +29,12 @@ const SubTopicsTable = () => {
             <ColHeader>
               <ColItem> Created By </ColItem>
               <ColItem> Title </ColItem>
-              <ColItem> Description </ColItem>
               <ColItem> Comments </ColItem>
             </ColHeader>
           </thead>
           {
             subtopics.map((subtopic) => (
-              <SubTopicsItem key={subtopic.id} {...subtopic} topicId={topicId} />
+              <SubTopicsItem key={subtopic.id} {...subtopic} subtopic={subtopic} topicId={topicId} />
             ))
           }
         </Table>

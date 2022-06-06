@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   span {
     color: black;
-    font-size: .8em;
   }
 
   img {

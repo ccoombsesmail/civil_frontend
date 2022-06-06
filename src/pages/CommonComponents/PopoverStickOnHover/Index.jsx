@@ -1,12 +1,11 @@
 import React, {
-  useState, useEffect, useRef, memo,
+  useEffect, useRef, memo,
 } from 'react'
 import { Overlay, Popover } from 'react-bootstrap'
 
 const PopoverStickOnHover = ({
-  delay, onMouseEnter, children, component, placement,
+  delay, onMouseEnter, children, component, placement, showPopover, setShowPopover,
 }) => {
-  const [showPopover, setShowPopover] = useState(false)
   const childNode = useRef(null)
   let setTimeoutConst = null
 
@@ -48,6 +47,7 @@ const PopoverStickOnHover = ({
         placement={placement}
         target={childNode}
         shouldUpdatePosition
+        trigger={['hover', 'click']}
       >
         <Popover
           onMouseEnter={() => {
@@ -56,6 +56,7 @@ const PopoverStickOnHover = ({
           onMouseLeave={handleMouseLeave}
           id="popover"
           className="sticky-popover"
+          trigger={['hover', 'click']}
         >
           {component}
         </Popover>

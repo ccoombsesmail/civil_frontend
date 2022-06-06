@@ -35,6 +35,9 @@ export const OGUrl = styled('span')`
   word-wrap: break-word;
   hyphens: auto;
   max-width: 90%;
+  @media only screen and (max-width: 600px) {
+    font-size: 3vw;
+  }
 `
 
 export const OGTitle = styled('h3')`
@@ -42,6 +45,9 @@ export const OGTitle = styled('h3')`
  margin: .6vw 0 .1vw 0;
  color: gray;
  font-weight: bold;
+ @media only screen and (max-width: 600px) {
+    font-size: 3vw;
+  }
 `
 
 export const OGDescription = styled('p')` 
@@ -49,5 +55,8 @@ export const OGDescription = styled('p')`
   font-size: .8vw;
   max-height: 35vh;
   overflow-y: scroll;
+  @media only screen and (max-width: 600px) {
+    font-size: 3vw;
+  }
  
 `

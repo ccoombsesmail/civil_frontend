@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import {
-  FlexDiv, OGUrl, OGTitle, OGDescription, OGImage, LinkWrapper, Container
+  FlexDiv, OGUrl, OGTitle, OGDescription, OGImage, LinkWrapper, Container,
 } from './Style/index'
 import { Line } from '../../../CommonComponents/Line/index'
 import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'

@@ -45,7 +45,9 @@ const Comment = ({ commentData, replies, commentRef }) => {
   const mins = getTimeSince(commentData.createdAt)
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
   return (
-    <OuterContainer ref={commentRef} onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
+    <OuterContainer ref={commentRef} 
+    // onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}
+    >
       <CommentContainer>
         <Header onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
           <UserInfoContainer>

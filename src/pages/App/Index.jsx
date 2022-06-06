@@ -85,7 +85,7 @@ const App = () => {
                   <Route path="/authenticate/*" element={<AuthFlow />} />
                   <Route path="/user/:userId" element={<UserProfile />} />
                   <Route
-                    path="/tribunal/:contentId"
+                    path="/tribunal/:contentType/:contentId"
                     element={(
                       <Suspense fallback={<div>Loading...</div>}>
                         <Tribunal />

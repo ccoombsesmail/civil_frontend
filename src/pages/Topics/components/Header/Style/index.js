@@ -14,6 +14,9 @@ export const HeaderContainer = styled('div')`
     color: gray;
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 600px) {
+      font-size: 3vw;
+    }
   }
 
   b {
@@ -30,7 +33,12 @@ export const UserIcon = styled('img')`
   flex-shrink: 0;
   width: 3vw;
   height: 3vw;      
-  border-radius: 50%; 
+  border-radius: 50%;
+  @media only screen and (max-width: 600px) {
+    width: 9vw;
+    height: 9vw;
+  }
+   
 `
 
 export const FlexDiv = styled('div')`  

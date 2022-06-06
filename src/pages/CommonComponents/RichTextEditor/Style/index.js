@@ -4,7 +4,7 @@ export const Container = styled.div`
   background-color: white;
   border-radius: .5em;
   margin-bottom: 1em;
-  min-width: 80%;
+  min-width: 92%;
   position: relative;
   .ql-snow.ql-toolbar:after {
     display: none;

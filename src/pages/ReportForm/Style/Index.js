@@ -28,6 +28,10 @@ export const Item = styled('li')`
   font-size: 1vw;
   padding: 2vw;
   margin: 1vw 0;
+  @media only screen and (max-width: 600px) {
+      font-size: 3.7vw;
+      width: 90%;
+    }
 `
 
 export const Container = styled('div')`

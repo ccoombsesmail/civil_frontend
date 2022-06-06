@@ -36,7 +36,7 @@ const Header = ({ topic, user }) => {
   let content = null
   let subtopicContent = null
   const { '*': url } = useParams()
-  const [subtopicId, commentId] = url.match(uuidRegEx)
+  const [subtopicId, commentId] = url ? url.match(uuidRegEx) : []
 
   const subtopic = useSelector((s) => s.subtopics)[subtopicId]
   const showSubTopic = subtopic && subtopic?.title !== 'General'
@@ -88,7 +88,7 @@ const Header = ({ topic, user }) => {
         }
       </h1>
 
-      <div ref={topicRef}>
+      <div ref={topicRef} style={{ width: '90%' }}>
         {!showSubTopic && content }
         <TopicSummaryContainer hidden={!showSubTopic}>
           <UserInfoHeader

@@ -18,4 +18,8 @@ export const Container = styled('section')`
   b {
     color: var(--m-primary-color);
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 100vw
+  }
 `

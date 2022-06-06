@@ -39,7 +39,7 @@ export const ButtonsContainer = styled('div')`
 `
 
 export const ProfileIcon = styled('img')`
-  --button-size: calc(var(--nav-size) * 0.5);
+  --button-size: calc(var(--nav-size) * 1);
   width: var(--button-size);
   height: var(--button-size);
   border-radius: 50%;

@@ -23,8 +23,7 @@ import { uuidRegEx } from '../../generic/regex/uuid'
 const SubTopics = () => {
   const { topicId, '*': url } = useParams()
   const [key, setKey] = useState('recs')
-  const [subtopicId, commentId] = url.match(uuidRegEx)
-  console.log(commentId)
+  const [subtopicId, commentId] = url ? url.match(uuidRegEx) : []
   const {
     getAllSubTopics, getAllRecs,
     getTopic, getAllOpposingRecs,

@@ -8,4 +8,10 @@ export const Thumb = styled('img')`
   :hover {
     filter: brightness(.8);
   }
+
+  @media only screen and (max-width: 600px) {
+    width: 9vw;
+    height: 9vw;
+  }
+  
 `

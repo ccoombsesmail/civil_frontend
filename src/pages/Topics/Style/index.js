@@ -16,7 +16,14 @@ export const BorderContainer = styled('div')`
   border-top: none;
   z-index: 9999;
   background-color: white;
-  /* min-height: calc(100vh - var(--nav-size)); */
+
+  @media only screen and (max-width: 800px) {
+     width: 80vw;
+  }
+
+  @media only screen and (max-width: 600px) {
+     width: 100vw;
+  }
 
 `
 
@@ -48,5 +55,9 @@ export const CardContainer = styled('ul')`
   background-color: #F0F2F5;
   background-color: white;
   width: 44vw;
+
+  @media only screen and (max-width: 800px) {
+     width: 100%;
+  }
 
 `

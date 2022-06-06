@@ -14,4 +14,8 @@ export const LightButton = styled(Button)`
 export const TooltipContent = styled('div')`
   font-size: .6vw;
 
+  @media only screen and (max-width: 600px) {
+    font-size: 3vw;
+  }
+  
 `

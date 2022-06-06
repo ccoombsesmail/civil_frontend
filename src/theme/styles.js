@@ -19,12 +19,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
 }
 
-/*
-    Remove list styles (bullets/numbers)
-    in case you use it combine with normalize.css
-*/
-ol, ul {
-    /* list-style: none; */
+
+ol, ul, h1, h2, h3 {
   margin: 0;
   padding: 0;
 }
@@ -53,6 +49,7 @@ blockquote {
   border-left: 4px solid lightgray;
   padding-left: 5px;
 }
+
 
 
   :root {
@@ -205,8 +202,10 @@ blockquote {
     left: 50%;
     top: 50%;
     z-index: 99999;
-    min-width: 55vw;
     min-height: 50vh;
+    width: 100vw;
+    max-width: 1000px;
+    margin: 0;
     transform: translate(-50%, -50%) !important;
   }
 
@@ -270,6 +269,11 @@ blockquote {
     height: unset !important;
     /* height: 4rem !important; */
     margin-right: 1rem;
+    min-width: calc(var(--nav-size) * .9);
+  @media only screen and (max-width: 800px) {
+
+     height: calc(var(--nav-size) * .9) !important;  
+    }
   } 
 
   .cl-component .cl-user-button-trigger>.cl-user-button-avatar {
@@ -278,6 +282,9 @@ blockquote {
 
     width: 3vw !important;
     aspect-ratio: 32 / 32 !important;
+    width:  calc(var(--nav-size) * .9) !important;
+    height:  calc(var(--nav-size) * .9) !important;  
+
 
   }
 

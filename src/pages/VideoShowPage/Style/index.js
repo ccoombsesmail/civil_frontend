@@ -6,6 +6,10 @@ export const VideoPlayer = styled('iframe')`
   /* width: 45vw;   */
   height: 25.31vw;
 
+  @media only screen and (max-width: 600px) {
+    height: 50vw
+  }
+
 `
 
 export const Description = styled('p')`

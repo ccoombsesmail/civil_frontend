@@ -1,11 +1,8 @@
 import styled from 'styled-components'
+import { ThemeTab } from '../../../../CommonComponents/Tabs/Style'
 
-// export const CommentsContainer = styled('section')`
-//   border: 1px solid lightgray;
-//   border-color: rgba(200,200,200,0.25);
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   /* border-top: 1px solid gray; */
-//   width: 100vw;
-// `
+export const StyledThemeTab = styled(ThemeTab)`
+  .nav-item {
+    margin: 0.3em;
+  }
+`

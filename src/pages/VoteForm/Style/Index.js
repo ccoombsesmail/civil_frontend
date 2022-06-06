@@ -23,7 +23,7 @@ export const Item = styled('li')`
   align-items: center;
   position: relative;
   width: 40%;
-  min-height: 15vw;
+  min-height: clamp(200px, 15vw, 450px);
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius: .5em;
   background-color: var(--m-secondary-background-color);
@@ -49,5 +49,8 @@ export const ItemDescription = styled('p')`
   justify-content: flex-start;
   flex: 80%;
   margin: unset !important;
+  @media only screen and (max-width: 800px) {
+    font-size: 3vw;
+  }
   
 `

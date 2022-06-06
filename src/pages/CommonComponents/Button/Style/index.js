@@ -14,7 +14,7 @@ export const Button = styled('button')`
      letter-spacing: ${(props) => (props.small ? 'normal' : '0.125rem')};
     }
   height: ${(props) => (props.height || 'unset')};;
-  font-size: ${(props) => (props.small ? '.7em' : '.9em')};
+  font-size: ${(props) => (props.small ? '.7vw' : '.9vw')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,6 +29,11 @@ export const Button = styled('button')`
   :hover {
     filter: brightness(.8);
   }
+
+  @media only screen and (max-width: 600px) {
+     font-size: 2.4vw;
+  }
+  
 `
 export const Button2 = styled('button')` 
   position: relative;

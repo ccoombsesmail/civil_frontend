@@ -41,14 +41,15 @@ const VoteForm = ({ contentId }) => {
         {({ isSubmitting }) => (
           <>
             <Modal.Header closeButton>
-              <Modal.Title>Why Are You Reporting This Content?</Modal.Title>
+              <Modal.Title>Cast Your Vote</Modal.Title>
             </Modal.Header>
             <FormContainer>
               <Modal.Body>
                 <ItemList>
                   <Item>
                     <ItemDescription>
-                      Vote To Indicate This Content Has Violated Community Guidlines And Should Be Removed
+                      Vote To Indicate This Content Has Violated
+                      Community Guidlines And Should Be Removed
                     </ItemDescription>
                     <Field name="voteAgainst" checked={voteAgainstSelected} onClick={onClickVoteAgainst} showCheckmark={false} component={Checkbox} />
                   </Item>

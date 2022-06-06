@@ -116,9 +116,14 @@ export const Container = styled('li')`
     filter: ${(props) => (props.shouldBlur ? 'blur(15px)' : 'brightness(.95)')};
   }
 
+  @media only screen and (max-width: 800px) {
+    width: 70vw;
+    border-radius: 0;
+  }
   @media only screen and (max-width: 600px) {
     width: 100%;
     border-radius: 0;
+    margin: 4vw auto;
   }
 
 `

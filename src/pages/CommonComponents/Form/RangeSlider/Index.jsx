@@ -9,7 +9,7 @@ const RangeSlider = ({ civility, updateCommentCivility }) => {
     <Container onClick={(e) => e.stopPropagation()}>
       <Range sliderValue={sliderValue}>
         <div className="range-value" id="rangeV" />
-        <input type="range" min={-3} max={3} step={0.1} defaultValue={civility} onChange={onSliderChange} onMouseUp={updateCommentCivility} />
+        <input type="range" min={-3} max={3} step={0.1} defaultValue={civility} onChange={onSliderChange} onMouseUp={updateCommentCivility} onTouchEnd={updateCommentCivility} />
       </Range>
       <Message>
         {sliderValue < 0 && `Removing ${sliderValue} Civility`}

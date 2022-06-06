@@ -12,6 +12,7 @@ import {
 const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  console.log(contentId)
   return (
     <MessageContainer
       onClick={(e) => {
@@ -30,9 +31,9 @@ const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
         </div>
       </Warning>
       { !pathname.includes('tribunal') ? (
-        <ThemeButton2 onClick={() => navigate(`/tribunal/${contentId}`)}>
+        <ThemeButton2 onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}>
           <ScalesSvg />
-          Ongoing Review Process
+          See Ongoing Review Process
           <ScalesSvg />
         </ThemeButton2>
       ) : <span />}

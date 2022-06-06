@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import {
   OuterContainer, InnerContainer,
   Header, StyledScalesSvg, ReportStatsContainer, ReportStatItem, VotingContainer,
-  VotesAgainst, VotesFor,
+  VotesAgainst, VotesFor, StyledPillarSvg, Timer,
 } from './Style/index'
 import TopicItem from '../Topics/components/TopicItem/Index'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
@@ -17,17 +17,17 @@ import reportActions from '../../redux/actions/reports/index'
 import tribunalCommentsActions from '../../redux/actions/tribunal_comments/index'
 import commentActions from '../../redux/actions/comments/index'
 
-import { PillarSvg, CastBallotSvg } from '../../svgs/svgs'
+import { CastBallotSvg } from '../../svgs/svgs'
 import ThemeButton from '../CommonComponents/Button/Index'
 import useOpenModal from '../hooks/useOpenModal'
 import { TOPIC_VOTE_FORM } from '../App/Modal/Index'
 import { calculateTimeLeft } from '../../generic/time/calculateTimeLeft'
 import TribunalComments from './components/TribunalComments/Index'
 import Comment from '../SubTopics/components/Comment/Index'
+import { COMMENT, TOPIC } from '../../enums/content_type'
 
 const Tribunal = () => {
-  const { contentId } = useParams()
-
+  const { contentId, contentType } = useParams()
   const openModal = useOpenModal(TOPIC_VOTE_FORM, { contentId })
   const user = useSelector((s) => s.session.currentUser)
   const topics = useSelector((s) => s.topics.list)
@@ -54,9 +54,10 @@ const Tribunal = () => {
   }, [reportStats])
 
   useEffect(() => {
+    console.log(contentId)
     if (contentId && user) {
-      getComment(contentId)
-      getTopic(contentId, user.id)
+      if (contentType === COMMENT) getComment(contentId)
+      if (contentType === TOPIC) getTopic(contentId, user.id)
       getReport(contentId)
       getAllTribunalCommentsBatch(contentId)
     }
@@ -81,7 +82,7 @@ const Tribunal = () => {
   const Content = useMemo(() => {
     const topic = topics?.find((t) => t.id === contentId)
     const comment = comments?.find((c) => c.data.id === contentId)
-
+    console.log(topic)
     if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />
     if (comment) return <Comment commentData={comment.data} replies={comment.children} />
     return null
@@ -95,13 +96,19 @@ const Tribunal = () => {
         </h1>
         <StyledScalesSvg />
       </Header>
-      <div style={{ fontSize: '1.3vw', color: 'gray' }}>
-        {timerComponents.length ? timerComponents : <span> </span>}
-      </div>
+      <Timer>
+        <h4>
+          Voting Period Timing Remaining
+        </h4>
+        {'\n'}
+        <div>
+          {timerComponents.length ? timerComponents : <span>Time Is Up!</span>}
+        </div>
+      </Timer>
       <InnerContainer>
-        <PillarSvg />
+        <StyledPillarSvg />
         {Content}
-        <PillarSvg />
+        <StyledPillarSvg />
       </InnerContainer>
       <VotingContainer>
         <VotesAgainst>

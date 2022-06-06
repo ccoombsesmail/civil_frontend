@@ -26,8 +26,8 @@ export const MessageContainer = styled('div')`
   border-radius: .5em;
   padding: 20px 10px 10px 10px;
   cursor: pointer;
-  height: clamp(150px, 60%, 200px);
-  width: clamp(300px, 70%, 800px);
+  height: clamp(250px, 60%, 200px);
+  width: clamp(330px, 70%, 800px);
 
 
 `
@@ -37,6 +37,10 @@ export const Message = styled('h3')`
   text-align: center;
   font-weight: bold;
   font-size: .85vw;
+
+  @media only screen and (max-width: 800px) {
+    font-size: 3.7vw;
+  }
 
   :hover {
     filter: brightness(.95)

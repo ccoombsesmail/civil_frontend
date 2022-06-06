@@ -1,11 +1,11 @@
 import express from 'express'
 import path from 'path'
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 import cors from 'cors'
 
 import expressStaticGzip from 'express-static-gzip'
 
-dotenv.config()
+// dotenv.config()
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = path.resolve(path.dirname(''))
 const port = 8080

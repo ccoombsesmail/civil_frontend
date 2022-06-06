@@ -11,7 +11,7 @@ export const Container = styled('div')`
   --m-input-height-DID-form-mobile: 8vw;
 
   --m-input-height-form: 2vw;
-  --m-input-height-form-mobile: 4vw;
+  --m-input-height-form-mobile: 8vw;
 
   
   display: flex;
@@ -46,7 +46,7 @@ export const Container = styled('div')`
       padding-left: 5px;
       
     }
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 800px) {
       height: ${(props) => (props.isDIDForm ? 'var(--m-input-height-DID-form-mobile)' : 'var(--m-input-height-form-mobile)')};
     }
   }
@@ -61,7 +61,7 @@ export const Container = styled('div')`
     letter-spacing: 0.05em;
     font-size: ${(props) => (props.isDIDForm ? 'var(--m-label-font-size-DID-form)' : 'var(--m-label-font-size-form)')};
     color: #ccc;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 800px) {
       font-size: ${(props) => (props.isDIDForm ? 'var(--m-label-font-size-DID-form-mobile)' : 'var(--m-label-font-size-form-mobile)')};
     }
   }

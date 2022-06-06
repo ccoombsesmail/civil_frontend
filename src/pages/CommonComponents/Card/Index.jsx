@@ -12,6 +12,7 @@ import {
   Description,
   VideoDescriptionContainer,
 } from './Style'
+import { TOPIC } from '../../../enums/content_type'
 
 const Card = ({
   children,
@@ -31,7 +32,6 @@ const Card = ({
     }, 0)
     if (height) setTotalHeight(totalCompHeight + height)
   }, [ref])
-  console.log(topic)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
   return (
     <Container
@@ -48,7 +48,13 @@ const Card = ({
         userId={topic?.userId}
         topicCreatorIsDidUser={topic?.topicCreatorIsDidUser}
       />
-      { shouldBlur && <CensorOverlay setShouldBlur={setShouldBlur} contentId={topic?.id} />}
+      { shouldBlur && (
+      <CensorOverlay
+        setShouldBlur={setShouldBlur}
+        contentId={topic?.id}
+        contentType={TOPIC}
+      />
+      )}
 
       <Description className="text-pop-up-top" shouldBlur={shouldBlur}>
         &ldquo;

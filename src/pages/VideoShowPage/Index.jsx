@@ -34,7 +34,7 @@ const VideoShowPage = ({
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
 
   return (
-    <>
+    <div style={{ width: '100%' }}>
       <VideoPlayer src={src} loading="lazy" />
       <VideoDescriptionCard
         onClick={goToSubTopic}
@@ -68,7 +68,7 @@ const VideoShowPage = ({
           user={user}
         />
       </VideoDescriptionCard>
-    </>
+    </div>
   )
 }
 

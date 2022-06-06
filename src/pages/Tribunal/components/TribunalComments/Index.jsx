@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Tab } from 'react-bootstrap'
 
 import { Line } from '../../../CommonComponents/Line'
-import { ThemeTab } from '../../../CommonComponents/Tabs/Style'
 import CommentColumn from '../../../SubTopics/components/CommentColumn/Index'
 import { ColumnContainer } from '../../../SubTopics/components/SubTopicThread/Style'
 import useCategorizeComments from './hooks/useCategorizeComments'
+import { StyledThemeTab } from './Style/index'
 
 const TribunalComments = () => {
   const [key, setKey] = useState('all')
@@ -13,7 +13,7 @@ const TribunalComments = () => {
   return (
     <>
       <Line />
-      <ThemeTab
+      <StyledThemeTab
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >
@@ -42,7 +42,7 @@ const TribunalComments = () => {
             <CommentColumn comments={comments.General} commentSentiment="General Public" color="var(--m-primary-background-color)" />
           </ColumnContainer>
         </Tab>
-      </ThemeTab>
+      </StyledThemeTab>
     </>
   )
 }
