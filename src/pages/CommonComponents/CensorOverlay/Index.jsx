@@ -12,7 +12,6 @@ import {
 const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  console.log(contentId)
   return (
     <MessageContainer
       onClick={(e) => {

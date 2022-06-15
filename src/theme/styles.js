@@ -165,11 +165,12 @@ blockquote {
 
   html {
     font-size: 10px;
-    font-family: "Baloo 2", cursive;
+    /* font-family: "Baloo 2", cursive; */
     font-family: "Source Sans Pro", sans-serif ;
     overflow-x: hidden;
 
   }
+
   .fade.modal.show {
     z-index: 999999;
   }
@@ -223,7 +224,8 @@ blockquote {
     padding: 0;
     margin: 0;
     font-family: var(--fontFamily);
-    font-family: "Baloo 2", cursive;
+    /* font-family: "Baloo 2", cursive; */
+    font-family: var(--clerk-font-family);
     font-size: var(--fontSizeMd);
     line-height: var(--lineHeightMd);
   }
@@ -288,6 +290,18 @@ blockquote {
 
   }
 
+  .cl-component.cl-sign-in {
+    width: 100% !important;
+  }
+
+  .cl-auth-form-body {
+    form {
+      max-width: unset !important;
+    }
+    .cl-oauth-button, .cl-web3-button, .cl-label, .cl-sign-in-button {
+      font-size: .8vw !important;
+    }
+  }
   /*********************************  Toastify related stuff  ******************************** */
 
   .toasty {

@@ -78,3 +78,10 @@ export const SideBarNav = styled('nav')`
   
 
 `
+
+export const ArrowContainer = styled('div')`
+  width: 100%;
+  padding: 1vw;
+  border-bottom: 1px solid gray;
+
+`

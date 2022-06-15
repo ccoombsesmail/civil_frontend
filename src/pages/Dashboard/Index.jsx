@@ -30,7 +30,7 @@ const Dashboard = () => {
         <Header user={user} />
         <Line />
         <UserProfile />
-        <Formik
+        {/* <Formik
           initialValues={INIT_DID_FORM_VALUES}
           onSubmit={(values, params) => addVcCred(values, params)}
         >
@@ -49,7 +49,7 @@ const Dashboard = () => {
               </Button>
             </FormContainer>
           )}
-        </Formik>
+        </Formik> */}
         <Line />
         <BioForm />
       </Container>

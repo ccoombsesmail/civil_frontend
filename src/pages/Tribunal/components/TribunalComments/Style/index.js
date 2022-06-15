@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { ThemeTab } from '../../../../CommonComponents/Tabs/Style'
+import { ThemeTabNew } from '../../../../CommonComponents/Tabs/Style'
 
-export const StyledThemeTab = styled(ThemeTab)`
+export const StyledThemeTab = styled(ThemeTabNew)`
   .nav-item {
-    margin: 0.3em;
+    margin: 0 0.3em 0 0;
   }
 `

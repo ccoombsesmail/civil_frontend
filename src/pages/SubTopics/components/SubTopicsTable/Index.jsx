@@ -34,7 +34,12 @@ const SubTopicsTable = () => {
           </thead>
           {
             subtopics.map((subtopic) => (
-              <SubTopicsItem key={subtopic.id} {...subtopic} subtopic={subtopic} topicId={topicId} />
+              <SubTopicsItem
+                key={subtopic.id}
+                {...subtopic}
+                subtopic={subtopic}
+                topicId={topicId}
+              />
             ))
           }
         </Table>

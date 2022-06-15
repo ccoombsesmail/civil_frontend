@@ -16,7 +16,6 @@ export default (socket) => {
       if (socket.disconnected) {
         socket.connect()
         socket.on('connect', () => {
-          console.log(user)
           socket.emit('addUser', { userId: user.id, socketId: socket.id })
           socket.on('notification', (event) => addNotificationActionCreator(event))
         })

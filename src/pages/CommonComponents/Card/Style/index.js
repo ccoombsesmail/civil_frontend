@@ -97,9 +97,10 @@ export const Container = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
-  min-width: 40vw;  
+  min-width: 40vw;
+  width: 100%;
   flex: 33%;
-  margin: 2em 2em 2em 2em;
+  margin: 2em 0;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
   border: none;
@@ -141,7 +142,7 @@ export const VideoDescriptionContainer = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
-  width: 45vw;  
+  /* width: 45vw;   */
   margin: 0 2em;
   border-bottom-left-radius: .5em;
   border-bottom-right-radius: .5em;

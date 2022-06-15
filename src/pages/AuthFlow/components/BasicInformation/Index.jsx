@@ -12,13 +12,11 @@ const BasicInformation = ({ setFieldValue }) => {
     const reader = new FileReader()
     const currFile = e.target.files[0]
     reader.onloadend = () => {
-      console.log(reader)
       setFile(reader.result)
       setFieldValue('file', reader.result)
     }
     reader.readAsDataURL(currFile)
   }, [])
-  console.log()
   return (
     <FieldContainer>
       <div>

@@ -5,13 +5,15 @@ import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { InfoIconSvg } from '../../../svgs/svgs'
 import { LightButton, TooltipContent } from './Style/index'
 
-const ThemeTooltip = ({ tooltipText, tooltipHeader, Icon }) => {
+const ThemeTooltip = ({
+  tooltipText, tooltipHeader, Icon, onClick,
+}) => {
   const popover = (
     <Popover id="popover">
       <Popover.Header as="h3">{tooltipHeader}</Popover.Header>
       <Popover.Body>
         <TooltipContent>
-          {tooltipText}
+          <span role="link" onClick={onClick}>{tooltipText}</span>
         </TooltipContent>
       </Popover.Body>
     </Popover>
@@ -25,7 +27,7 @@ const ThemeTooltip = ({ tooltipText, tooltipHeader, Icon }) => {
     >
       <LightButton variant="light">
         {
-          Icon ? <Icon /> : <InfoIconSvg size={22} />
+          Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
         }
       </LightButton>
     </OverlayTrigger>

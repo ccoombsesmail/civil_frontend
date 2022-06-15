@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { useCallback } from 'react'
+import { toast } from 'react-toastify'
 import {
   RootIdentity, DIDStore, Issuer, DIDDocument, DIDBackend,
 } from '@elastosfoundation/did-js-sdk'
@@ -35,14 +36,28 @@ export default () => {
     // const methodSpecificId = doc.getSubject().getMethodSpecificId()
     const issuer = new Issuer(doc)
     const db = DIDDocument.Builder.newFromDocument(doc).edit()
-    console.log(props)
     await addVCToDoc(db, issuer, doc, 'firstName', props.firstName)
     await addVCToDoc(db, issuer, doc, 'lastName', props.lastName)
     await addVCToDoc(db, issuer, doc, 'username', props.username)
     await addVCToDoc(db, issuer, doc, 'avatar', props.file)
 
     const docWithVC = await db.seal(STORE_PASS)
-    await docWithVC.publish(STORE_PASS)
+
+    await toast.promise(
+      docWithVC.publish(STORE_PASS),
+      {
+        pending: 'Creating Your Self Soverign Identity...',
+        success: 'DID Successfully Published To The Blockchain!',
+        error: {
+          render({ data: errorData }) {
+            const { response } = errorData
+            const { data: responseData } = response
+            return `${responseData.msg} 🤯 `
+          },
+        },
+      },
+    )
+
     const { value: username } = docWithVC.getCredential('username')?.getSubject().getProperties()
     upsertDidUser({
       userId: docWithVC.getSubject().repr,

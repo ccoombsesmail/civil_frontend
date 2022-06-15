@@ -126,8 +126,8 @@ export const LikeClickedSvg = () => (
   </svg>
 )
 
-export const InfoIconSvg = () => (
-  <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+export const InfoIconSvg = ({ onClick }) => (
+  <svg onClick={onClick} width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <title>info</title>
     <desc>Created with Sketch.</desc>
     <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -383,8 +383,8 @@ export const AuthenticationSvg = () => (
   </svg>
 )
 
-export const VerifiedSvg = () => (
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 122.88 122.88" enableBackground="new 0 0 122.88 122.88" xmlSpace="preserve">
+export const VerifiedSvg = ({ onClick }) => (
+  <svg onClick={onClick} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 122.88 122.88" enableBackground="new 0 0 122.88 122.88" xmlSpace="preserve">
     <g>
       <path
         style={{ fill: 'var(--m-primary-btn-color)' }}
@@ -790,4 +790,26 @@ export const GeneralPublicSvg = () => (
     <path d="M41 6H32.816C32.6099 5.41709 32.2288 4.91209 31.7247 4.55409C31.2206 4.19608 30.6183 4.00256 30 4H18C17.3817 4.00256 16.7794 4.19608 16.2753 4.55409C15.7712 4.91209 15.3901 5.41709 15.184 6H7C6.20435 6 5.44129 6.31607 4.87868 6.87868C4.31607 7.44129 4 8.20435 4 9V15C4 15.7956 4.31607 16.5587 4.87868 17.1213C5.44129 17.6839 6.20435 18 7 18H9.586L10.586 19C10.9621 19.3753 11.4717 19.5861 12.003 19.5861C12.5343 19.5861 13.0439 19.3753 13.42 19L14.42 18H17C17.6183 17.9974 18.2206 17.8039 18.7247 17.4459C19.2288 17.0879 19.6099 16.5829 19.816 16H21.586L22.586 17C22.9611 17.3749 23.4697 17.5856 24 17.5856C24.5303 17.5856 25.0389 17.3749 25.414 17L26.414 16H28.184C28.3901 16.5829 28.7712 17.0879 29.2753 17.4459C29.7794 17.8039 30.3817 17.9974 31 18H33.586L34.586 19C34.9621 19.3753 35.4717 19.5861 36.003 19.5861C36.5343 19.5861 37.0439 19.3753 37.42 19L38.42 18H41C41.7956 18 42.5587 17.6839 43.1213 17.1213C43.6839 16.5587 44 15.7956 44 15V9C44 8.20435 43.6839 7.44129 43.1213 6.87868C42.5587 6.31607 41.7956 6 41 6ZM14 16C13.7348 16.0001 13.4805 16.1054 13.293 16.293L12 17.583L10.71 16.293C10.6168 16.1998 10.5061 16.1259 10.3843 16.0756C10.2624 16.0253 10.1318 15.9996 10 16H7C6.73478 16 6.48043 15.8946 6.29289 15.7071C6.10536 15.5196 6 15.2652 6 15V9C6 8.73478 6.10536 8.48043 6.29289 8.29289C6.48043 8.10536 6.73478 8 7 8H15V13C15.0008 13.6837 15.2352 14.3465 15.6642 14.8788C16.0932 15.4111 16.6911 15.7809 17.359 15.927C17.245 15.9737 17.1232 15.9985 17 16H14ZM26 14C25.7348 14.0001 25.4805 14.1055 25.293 14.293L24 15.586L22.707 14.293C22.5195 14.1055 22.2652 14.0001 22 14H18C17.7348 14 17.4804 13.8946 17.2929 13.7071C17.1054 13.5196 17 13.2652 17 13V7C17 6.73478 17.1054 6.48043 17.2929 6.29289C17.4804 6.10536 17.7348 6 18 6H30C30.2652 6 30.5196 6.10536 30.7071 6.29289C30.8946 6.48043 31 6.73478 31 7V13C31 13.2652 30.8946 13.5196 30.7071 13.7071C30.5196 13.8946 30.2652 14 30 14H26ZM42 15C42 15.2652 41.8946 15.5196 41.7071 15.7071C41.5196 15.8946 41.2652 16 41 16H38C37.7348 16.0001 37.4805 16.1054 37.293 16.293L36 17.583L34.71 16.293C34.6168 16.1998 34.5061 16.1259 34.3843 16.0756C34.2624 16.0253 34.1318 15.9996 34 16H31C30.8768 15.9985 30.755 15.9737 30.641 15.927C31.3089 15.7809 31.9068 15.4111 32.3358 14.8788C32.7648 14.3465 32.9992 13.6837 33 13V8H41C41.2652 8 41.5196 8.10536 41.7071 8.29289C41.8946 8.48043 42 8.73478 42 9V15Z" fill="black" />
   </svg>
 
+)
+
+export const Blockchain = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" viewBox="0 0 64 64">
+    <title>blockchain</title>
+    <g strokeLinecap="square" strokeWidth="2" fill="none" stroke="#212121" strokeLinejoin="miter" className="nc-icon-wrapper" strokeMiterlimit="10">
+      <polyline points="48 45.091 51 47 62 40 62 28 51 20.977 40 28 40 31" stroke="#212121" />
+      <line x1="32" y1="46.614" x2="32" y2="58.887" data-cap="butt" strokeLinecap="butt" />
+      <polyline points="21 40 32 46.999 43 40" data-cap="butt" strokeLinecap="butt" />
+      <line x1="32" y1="46.999" x2="32" y2="59" data-cap="butt" strokeLinecap="butt" />
+      <polyline points="21 15.88 32 22.879 43 15.88" data-cap="butt" strokeLinecap="butt" />
+      <line x1="32" y1="22.879" x2="32" y2="28" data-cap="butt" strokeLinecap="butt" />
+      <polyline points="24 28 13 34.999 2 28" data-cap="butt" strokeLinecap="butt" stroke="#212121" />
+      <line x1="13" y1="34.999" x2="13" y2="47" data-cap="butt" strokeLinecap="butt" stroke="#212121" />
+      <polyline points="40 28 51 34.999 62 28" data-cap="butt" strokeLinecap="butt" stroke="#212121" />
+      <line x1="51" y1="34.999" x2="51" y2="47" data-cap="butt" strokeLinecap="butt" stroke="#212121" />
+      <polyline points="43 20 43 15.88 32 8.856 21 15.88 21 20" />
+      <polyline points="23.999 32 24 28 13 20.977 2 28 2 40 13 47 16 45.091" stroke="#212121" />
+      <polygon points="43 40 32 32.976 21 40 21 52 32 59 43 52 43 40" data-cap="butt" strokeLinecap="butt" />
+    </g>
+
+  </svg>
 )

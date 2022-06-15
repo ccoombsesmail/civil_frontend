@@ -19,6 +19,7 @@ export const Container = styled('div')`
     text-align: center;
     /* text-decoration: underline; */
     letter-spacing: .2em;
+    margin-bottom: 3vw;
     /* font-weight: bold; */
   }
   span {

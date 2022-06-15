@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { toast } from 'react-toastify'
 import {
   RootIdentity, DIDStore, DIDBackend, DIDDocument,
 } from '@elastosfoundation/did-js-sdk'
@@ -21,19 +22,36 @@ export default () => {
     const identity = RootIdentity.createFromMnemonic(mnemonic, 'password', store, STORE_PASS, true)
     // 'debris lend tell project position easily sponsor cabin brave wide alarm witness'
 
-    await identity.synchronize()
+    await toast.promise(
+      identity.synchronize(),
+      {
+        pending: 'Restoring Your Identity...',
+        success: 'DID Successfully Synced From The Blockchain!',
+        error: {
+          render({ data: errorData }) {
+            const { response } = errorData
+            const { data: responseData } = response
+            return `${responseData.msg} 🤯 `
+          },
+        },
+      },
+    )
+
     const dids = await store.listDids()
 
     if (dids.length > 0) {
-      const doc = DIDDocument(dids[0])
-      const { value: username } = doc.getCredential('username')?.getSubject().getProperties()
+      const doc = new DIDDocument(dids[0])
+      let username = dids[0].getMethodSpecificId()
+      if (doc.credentials) username = doc.getCredential('username')?.getSubject()?.getProperties()?.value
+
+      // const { value: username } = doc.getCredential('username')?.getSubject().getProperties()
 
       upsertDidUser({
         userId: dids[0].repr,
-        username: dids[0].getMethodSpecificId(),
+        username,
       })
 
-      addDIDSession({ did: dids[0], doc, username: username || dids[0].getMethodSpecificId() })
+      addDIDSession({ did: dids[0], doc, username })
       Logger.log('Restore Mnemonic', dids)
     } else {
       Logger.log('No dids restored.')

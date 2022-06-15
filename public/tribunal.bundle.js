@@ -129,8 +129,6 @@ var Tribunal = function Tribunal() {
     };
   }, [reportStats]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    console.log(contentId);
-
     if (contentId && user) {
       if (contentType === _enums_content_type__WEBPACK_IMPORTED_MODULE_17__.COMMENT) getComment(contentId);
       if (contentType === _enums_content_type__WEBPACK_IMPORTED_MODULE_17__.TOPIC) getTopic(contentId, user.id);
@@ -155,7 +153,6 @@ var Tribunal = function Tribunal() {
     var comment = comments === null || comments === void 0 ? void 0 : comments.find(function (c) {
       return c.data.id === contentId;
     });
-    console.log(topic);
     if (topic) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Topics_components_TopicItem_Index__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: topic.id,
       topic: topic,
@@ -324,7 +321,7 @@ var _templateObject;
 
 
 
-var StyledThemeTab = (0,styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(_CommonComponents_Tabs_Style__WEBPACK_IMPORTED_MODULE_1__.ThemeTab)(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  .nav-item {\n    margin: 0.3em;\n  }\n"])));
+var StyledThemeTab = (0,styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(_CommonComponents_Tabs_Style__WEBPACK_IMPORTED_MODULE_1__.ThemeTabNew)(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  .nav-item {\n    margin: 0 0.3em 0 0;\n  }\n"])));
 
 /***/ }),
 

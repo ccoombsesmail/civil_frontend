@@ -7,7 +7,6 @@ import {
 } from './Style/index'
 
 const RecItem = ({ rec }) => {
-  console.log(rec)
   let content = null
   const { topic, subTopic } = rec
   const metaData = useGetLinkMetaDataEffect({ contentUrl: rec.externalRecommendedContent })

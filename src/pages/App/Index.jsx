@@ -39,7 +39,8 @@ const Tribunal = React.lazy(() => import(
 ))
 
 // const frontendApi = 'clerk.legible.tortoise-0.lcl.dev'
-const frontendApi = 'clerk.bjuk3.m71w1.lcl.dev'
+const frontendApi = 'clerk.genuine.leech-38.lcl.dev'
+// const frontendApi = process.env.REACT_APP_CLERK_FRONTEND_API
 
 const LoadingBridge = ({ children }) => {
   useFetchAppData()

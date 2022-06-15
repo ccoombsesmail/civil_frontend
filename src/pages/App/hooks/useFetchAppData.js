@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useUser } from '@clerk/clerk-react'
 import { useEffect } from 'react'
 import { io } from 'socket.io-client'
@@ -48,10 +49,10 @@ export default () => {
         if (!currentUser?.doc || docExistsButNotValid) {
           const doc = await defaultDID.resolve()
           const { value: username } = doc.getCredential('username')?.getSubject().getProperties() || {}
-          const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties() || {}
-          const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties() || {}
+          console.log(doc.getCredential('username'))
+          // const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties() || {}
+          // const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties() || {}
           const { value: avatar } = doc.getCredential('avatar')?.getSubject().getProperties() || {}
-          console.log(avatar)
           upsertDidUser({
             userId: doc.getSubject().repr,
             username: username || doc.getSubject().getMethodSpecificId(),

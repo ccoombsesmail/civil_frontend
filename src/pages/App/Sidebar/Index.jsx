@@ -7,7 +7,7 @@ import {
 import { useSelector } from 'react-redux'
 
 import { useNavigate } from 'react-router-dom'
-import { SideBarContainer, SideBarNav } from './Style/index'
+import { SideBarContainer, SideBarNav, ArrowContainer } from './Style/index'
 import {
   NotificationSvg, UserIconSvg, ArrowRightSvg, ArrowLeftSvg,
 } from '../../../svgs/svgs'
@@ -20,21 +20,21 @@ const Sidebar = () => {
   const numUnreadNotifications = notifications.filter((n) => n.isRead === false).length
   return (
     <SideBarContainer isOpen={open}>
-      <Container>
+      <ArrowContainer>
         {open
           ? <ArrowLeftSvg onClick={() => setOpen((prev) => !prev)} />
           : <ArrowRightSvg onClick={() => setOpen((prev) => !prev)} />}
-      </Container>
+      </ArrowContainer>
       <SideBarNav isOpen={open}>
         <SidebarItem
           Icon={UserIconSvg}
-          text='Profile'
+          text="Profile"
           onClick={() => navigate('/dashboard')}
         />
         <SidebarItem
           numUnreadNotifications={numUnreadNotifications}
           Icon={NotificationSvg}
-          text='Notifications'
+          text="Notifications"
           onClick={() => navigate('/notifications')}
         />
       </SideBarNav>

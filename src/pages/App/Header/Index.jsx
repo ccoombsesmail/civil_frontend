@@ -16,7 +16,7 @@ const Header = () => {
         </IconButton>
       </ButtonsContainer>
       <SignedIn>
-        <UserButton userProfileUrl="/dashboard" />
+        <UserButton userProfileUrl="/dashboard" afterSignOutUrl="/" />
       </SignedIn>
       <SignedOut>
         <NavDropdownToggle>

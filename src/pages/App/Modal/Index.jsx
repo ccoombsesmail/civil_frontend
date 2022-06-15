@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 // import CommentForm from '../../CommentForm/Index'
 import { ModalWrapper } from './Style/index'
 
-import UploadIconForm from '../../Dashboard/components/UploadIconForm/Index'
+import CreateTagForm from '../../CreateTagForm/Index'
 import OpposingRecForm from '../../OpposingRecForm/Index'
 import VoteForm from '../../VoteForm/Index'
 
@@ -49,6 +49,8 @@ export const TOPIC_VOTE_FORM = 'TOPIC_VOTE_FORM'
 
 export const REPLY_FROM_TOPIC = 'REPLY_FROM_TOPIC' // when replying directly to a topic
 
+export const CREATE_TAG_FORM = 'CREATE_TAG_FORM' // when replying directly to a topic
+
 const Modal = ({ closeModal }) => {
   const { modalType, modalProps } = useSelector((s) => s.ui)
 
@@ -64,9 +66,9 @@ const Modal = ({ closeModal }) => {
     case REPLY:
       component = <CommentForm modalProps={modalProps} />
       break
-    case ICON_FORM:
-      component = <UploadIconForm />
-      break
+    // case ICON_FORM:
+    //   component = <UploadIconForm />
+    //   break
     case OPPOSING_REC_FORM:
       component = <OpposingRecForm {...modalProps} />
       break
@@ -75,6 +77,9 @@ const Modal = ({ closeModal }) => {
       break
     case TOPIC_VOTE_FORM:
       component = <VoteForm {...modalProps} />
+      break
+    case CREATE_TAG_FORM:
+      component = <CreateTagForm {...modalProps} />
       break
     default:
       break

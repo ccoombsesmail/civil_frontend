@@ -54,7 +54,6 @@ const Tribunal = () => {
   }, [reportStats])
 
   useEffect(() => {
-    console.log(contentId)
     if (contentId && user) {
       if (contentType === COMMENT) getComment(contentId)
       if (contentType === TOPIC) getTopic(contentId, user.id)
@@ -82,7 +81,6 @@ const Tribunal = () => {
   const Content = useMemo(() => {
     const topic = topics?.find((t) => t.id === contentId)
     const comment = comments?.find((c) => c.data.id === contentId)
-    console.log(topic)
     if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />
     if (comment) return <Comment commentData={comment.data} replies={comment.children} />
     return null

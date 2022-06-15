@@ -8,6 +8,19 @@ export const SignInContainer = styled('div')`
   button {
     /* font-size: 1vw !important; */
   }
+  width: 50vw;
+
+  @media only screen and (max-width: 600px) {
+      width: 95vw;
+  }
+
+  @media only screen and (max-width: 800px) {
+      width: 75vw;
+    }
+
+  @media only screen and (max-width: 1200px) {
+    width: 65vw;
+  }
 `
 
 export const IconNavButton = styled('a')`
@@ -44,20 +57,29 @@ export const CreateDidButton = styled('button')`
   background-color: var(--m-elastos-theme);
   height: 4vh;
   margin-bottom: 2vh !important;
-  /* font-size: 1vw; */
+  font-size: .8vw !important;
   outline: none;
   border: none;
   font-weight: bold;
   border-radius: 0.5em;
+  
+`
+
+export const IconLink = styled('a')`
+  margin-left: 2vw;
+  position: absolute;
+  right: 0;
+  transform: translate(140%);
 `
 
 export const ElastosIcon = styled('img')` 
   width: 3vw;
   height: 3vw;
-  margin-left: 2vw;
-  position: absolute;
-  right: 0;
-  transform: translate(140%);
+
+  @media only screen and (max-width: 800px) {
+    width: 7vw;
+    height: 7vw;
+  }
 
 `
 

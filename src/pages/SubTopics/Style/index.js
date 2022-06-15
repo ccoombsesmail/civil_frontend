@@ -21,6 +21,7 @@ export const MainContent = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 66%;
   @media only screen and (max-width: 600px) {
     width: 100vw;
   }
