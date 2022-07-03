@@ -11,19 +11,24 @@ import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 import {
   FormContainer, Container, InputContainer,
 } from './Style/Index'
+import useCheckIfTagExistsOnKeyPress from './hooks/useCheckIfTagExistsOnKeyPress'
 
 const CreateTagForm = ({ userId }) => {
   const handleOnSubmit = useHandleOnSubmit(userId)
-
+  const { isValid, checkIfTagExistsOnKeyPress } = useCheckIfTagExistsOnKeyPress()
   return (
     <Container>
       <Formik
         initialValues={{
           tag: '',
         }}
-        validate={() => {
-          const errors = {}
-          return errors
+        validate={(vals) => {
+          console.log(isValid)
+          if (isValid === false) {
+            console.log("hehe")
+            return { tag: 'Tag Already Exists' }
+          }
+          return {}
         }}
         onSubmit={handleOnSubmit}
       >
@@ -35,8 +40,12 @@ const CreateTagForm = ({ userId }) => {
             <FormContainer>
               <Modal.Body>
                 <InputContainer>
-                  Create A Unique Tag.
-                  <Field name="tag" component={Input3} />
+                  <p>
+                    Create a unique tag. This is required to make posts, comment, like, etc.
+                    The tag you create is unique accross the Civil platform,
+                    and can be used to "mention" you via "@"
+                  </p>
+                  <Field name="tag" label="Enter Tag" component={Input3} onKeyUp={checkIfTagExistsOnKeyPress} validInput={isValid} />
                 </InputContainer>
               </Modal.Body>
               <Modal.Footer>

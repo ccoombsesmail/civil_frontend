@@ -1,5 +1,8 @@
 import React from 'react'
 
+import UserItem from './components/UserItem/Index'
+import { getTimeSince } from '../../../../generic/string/dateFormatter';
+
 import {
   UsernameContainer, ListItem, List, UserBio, FlexDiv, UserIcon,
 } from './Style'
@@ -9,14 +12,7 @@ const UserList = ({ users }) => (
     {
         users.map((user) => (
           <ListItem key={user.userId}>
-            <UserIcon src={user.iconSrc} />
-            <FlexDiv>
-              <UsernameContainer>
-                <span>{user.username}</span>
-                <span>{user.email}</span>
-              </UsernameContainer>
-              <UserBio>{user.bio}</UserBio>
-            </FlexDiv>
+            <UserItem {...user} time={getTimeSince(user.createdAt)} />
           </ListItem>
         ))
       }

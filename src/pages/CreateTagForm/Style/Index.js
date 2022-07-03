@@ -11,8 +11,12 @@ export const FormContainer = styled(Form)`
 export const InputContainer = styled('div')` 
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   align-items: center;
+
+  p {
+    text-align: center;
+  }
 
 `
 

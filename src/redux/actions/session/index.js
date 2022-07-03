@@ -1,14 +1,13 @@
-// action creator is just a function that dispatches an action
 import { toast } from 'react-toastify'
-import { closeModal, openModal } from '../ui/index'
 import {
-  ADD_SESSION_DATA_CLERK, ADD_SESSION_DATA_BACKEND, LOG_OUT, UPDATE, ADD_SESSION_DATA_DID,
+  ADD_SESSION_DATA_CLERK, ADD_SESSION_DATA_BACKEND, LOG_OUT, UPDATE_SESSION, ADD_SESSION_DATA_DID,
 } from '../../reducers/sessionReducer'
 import * as SessionApiUtil from '../../../api/v1/session/session_api_util'
-import * as UsersApiUtl from '../../../api/v1/users/users_api_util'
+import * as UsersApiUtil from '../../../api/v1/users/users_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
-import { CREATE_TAG_FORM } from '../../../pages/App/Modal/Index'
 import { OPEN_MODAL } from '../../reducers/ui_reducer'
+
+export const CREATE_TAG_FORM = 'CREATE_TAG_FORM'
 
 const logoutActionCreator = () => ({
   type: LOG_OUT,
@@ -29,17 +28,16 @@ const addSessionDataDID = (didData) => ({
   payload: didData,
 })
 
-const updateActionCreator = (data) => ({
-  type: UPDATE,
+export const updateSessionActionCreator = (data) => ({
+  type: UPDATE_SESSION,
   payload: data,
 })
 
 export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
   .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
-  .then(() => dispatch(closeModal()))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getCurrentUser = (userId) => (dispatch) => UsersApiUtl.getUser(userId)
+export const getCurrentUser = (userId) => (dispatch) => UsersApiUtil.getUser(userId)
   .then((res) => {
     if (!res.data.tag) {
       dispatch({
@@ -60,11 +58,11 @@ export const addDIDSession = (didData) => (dispatch) => {
 }
 
 export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateUserIcon(userData)
-  .then((res) => dispatch(updateActionCreator(res.data)))
+  .then((res) => dispatch(updateSessionActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
 const uploadUserIcon = (dta, username) => (dispatch) => SessionApiUtil.uploadUserIcon(dta, username)
-  .then((res) => dispatch(updateActionCreator(res.data)))
+  .then((res) => dispatch(updateSessionActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
@@ -75,7 +73,3 @@ export default {
   uploadUserIcon,
   addDIDSession,
 }
-
-// create a central index.js file
-
-// bind provides the dispatch function to the action creators (it's a shortcut!)

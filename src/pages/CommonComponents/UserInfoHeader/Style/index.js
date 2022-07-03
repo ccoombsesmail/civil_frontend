@@ -39,7 +39,7 @@ export const Header = styled('div')`
     }
   }
   h3 {
-
+    text-decoration: underline;
     font-size: .8vw;
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
@@ -47,6 +47,9 @@ export const Header = styled('div')`
     color: gray;
     @media only screen and (max-width: 800px) {
       font-size: 3vw;
+    }
+    :hover {
+      color: var(--m-primary-btn-color);
     }
   }
 `

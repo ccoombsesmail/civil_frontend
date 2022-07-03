@@ -6,7 +6,7 @@ export const ADD_SESSION_DATA_CLERK = 'ADD_SESSION_DATA_CLERK'
 export const ADD_SESSION_DATA_DID = 'ADD_SESSION_DATA_DID'
 
 export const LOG_OUT = 'LOG_OUT'
-export const UPDATE = 'UPDATE'
+export const UPDATE_SESSION = 'UPDATE_SESSION'
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ const reducer = (state = {}, action) => {
       localStorage.setItem('jwt', null)
       setAuthToken(null)
       return { ...state, currentUser: null }
-    case UPDATE:
+    case UPDATE_SESSION:
       return { ...state, currentUser: action.payload }
     default:
       return state

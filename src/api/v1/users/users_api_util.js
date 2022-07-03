@@ -7,3 +7,7 @@ export const getUser = (userId, requesterId) => axios.get(`${BACKEND_DEV}/users?
 export const upsertDidUser = (didUserData) => axios.post(`${BACKEND_DEV}/users/did-user`, didUserData)
 
 export const updateUserBioInformation = (userId, bio, experience) => axios.patch(`${BACKEND_DEV}/users?userId=${userId}`, { bio, experience })
+
+export const createUserTag = (tagData) => axios.patch(`${BACKEND_DEV}/users/tag`, tagData)
+
+export const checkIfTagExists = (tag) => axios.get(`${BACKEND_DEV}/users/tag-exists?tag=${tag}`)

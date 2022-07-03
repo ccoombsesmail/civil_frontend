@@ -71,7 +71,7 @@ export const Content = styled('section')`
   /* display: flex;
   justify-content: center;
   width: 100%; */
-  height: 50vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

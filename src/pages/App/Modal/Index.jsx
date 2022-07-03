@@ -4,7 +4,6 @@ import React, { Suspense } from 'react'
 import StrapModal from 'react-bootstrap/Modal'
 import { useSelector } from 'react-redux'
 // import { SignIn } from '@clerk/clerk-react'
-
 // import SignUpForm from '../../SessionForms/SignUp/Index'
 // import CreateTopicForm from '../../TopicForm/Index'
 // import CreateSubTopicForm from '../../SubTopicForm/Index'
@@ -14,7 +13,7 @@ import { ModalWrapper } from './Style/index'
 import CreateTagForm from '../../CreateTagForm/Index'
 import OpposingRecForm from '../../OpposingRecForm/Index'
 import VoteForm from '../../VoteForm/Index'
-
+import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
 import { ReportForm } from '../../ReportForm/Index'
 
 const CreateTopicForm = React.lazy(() => import(
@@ -33,6 +32,8 @@ const CommentForm = React.lazy(() => import(
 
 const CreateSubTopicForm = React.lazy(() => import(
   /* webpackChunkName: "subtopic-form" */
+
+
   /* webpackMode: "lazy" */
   /* webpackPrefetch: true */
   /* webpackPreload: true */ '../../SubTopicForm/Index'
@@ -48,8 +49,6 @@ export const REPORT_FORM = 'REPORT_FORM'
 export const TOPIC_VOTE_FORM = 'TOPIC_VOTE_FORM'
 
 export const REPLY_FROM_TOPIC = 'REPLY_FROM_TOPIC' // when replying directly to a topic
-
-export const CREATE_TAG_FORM = 'CREATE_TAG_FORM' // when replying directly to a topic
 
 const Modal = ({ closeModal }) => {
   const { modalType, modalProps } = useSelector((s) => s.ui)

@@ -18,6 +18,7 @@ export default () => {
     // Set all request headers with token
     axios.interceptors.request.use(
       async (req) => {
+        req.headers['Access-Control-Max-Age'] = 6000
         if (req.url.includes('eid')) return req
         if (req.url.includes(AssistDIDAdapter.MAINNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY

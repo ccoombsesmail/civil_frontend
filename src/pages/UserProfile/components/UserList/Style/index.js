@@ -6,6 +6,9 @@ export const List = styled('ul')`
   flex-direction: column;
   list-style: none;
   margin-top: 3vw;
+  border-color: rgba(200,200,200,0.25);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   span:first-child {
     font-weight: 900;
   }

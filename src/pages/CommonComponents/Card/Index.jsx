@@ -46,6 +46,7 @@ const Card = ({
         time={getTimeSince(topic?.createdAt)}
         username={topic?.createdBy}
         userId={topic?.userId}
+        userTag={topic?.createByTag}
         topicCreatorIsDidUser={topic?.topicCreatorIsDidUser}
       />
       { shouldBlur && (

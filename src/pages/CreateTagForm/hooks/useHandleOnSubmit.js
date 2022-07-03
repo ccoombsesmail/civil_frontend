@@ -1,22 +1,22 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
-import uiActionCreators from '../../../redux/actions/ui/index'
-import topicTribunalVotesActionCreactors from '../../../redux/actions/tribunal_votes/index'
+import uiActionCreators, { closeModal } from '../../../redux/actions/ui/index'
+import userActionCreators from '../../../redux/actions/users/index'
+import { useDispatch } from 'react-redux';
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (userId) => {
+  const dispatch = useDispatch()
   const {
-    createTribunalVote,
-  } = useBindDispatch(uiActionCreators, topicTribunalVotesActionCreactors)
-  return useCallback((values, { setSubmitting, resetForm }) => {
-    const data = {
-    }
-    toast.promise(
-      createTribunalVote(data),
+    createUserTag,
+  } = useBindDispatch(uiActionCreators, userActionCreators)
+  return useCallback(async (values, { setSubmitting, resetForm }) => {
+    await toast.promise(
+      createUserTag(values),
       {
-        pending: 'Submitting Your Vote...',
-        success: 'Vote Successfully Cast!',
+        pending: 'Creating Tag...',
+        success: 'Unique Tag Succefully Created!',
         error: {
           render({ data: errorData }) {
             const { response } = errorData
@@ -26,6 +26,7 @@ export default (userId) => {
         },
       },
     )
+    dispatch(closeModal())
     setSubmitting(false)
     resetForm({})
   }, [userId])

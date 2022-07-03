@@ -13,6 +13,10 @@ export const Container = styled('div')`
   --m-input-height-form: 2vw;
   --m-input-height-form-mobile: 8vw;
 
+  span {
+    color: red;
+  }
+
   
   display: flex;
   flex-flow: column-reverse;
@@ -28,11 +32,14 @@ export const Container = styled('div')`
   input {
     font-size: ${(props) => (props.isDIDForm ? '1.5em' : '1em')};
     border: 0;
-    border-bottom: 1px solid #ccc;
     font-family: inherit;
     -webkit-appearance: none;
     border-radius: .5em;
-    border: 1px solid gray ;
+    border: ${({ validInput }) => {
+    if (validInput === null) return '1px solid gray'
+    if (validInput === true) return '2px solid var(--m-primary-btn-color)'
+    return '2px solid var(--m-danger-color)'
+  }} ;
     padding: 0;
     width: 100%;
     height: ${(props) => (props.isDIDForm ? 'var(--m-input-height-DID-form)' : 'var(--m-input-height-form)')};
@@ -53,7 +60,7 @@ export const Container = styled('div')`
 
   input:focus {
     outline: 0;
-    border-bottom: 1px solid #666;
+    /* border-bottom: 1px solid #666; */
   }
 
   label {

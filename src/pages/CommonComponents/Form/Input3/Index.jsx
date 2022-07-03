@@ -9,13 +9,14 @@ import { StyledInput, Label, Container } from './Style'
 import Error from '../ErrorMessage/Index'
 
 const Input = ({
-  width, field, form, placeholder, onBlur, label, isDIDForm, ...props
+  width, field, form, placeholder, onBlur, label, isDIDForm, validInput = null, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
+  console.log(metaData)
   const showError = metaData.error && metaData.touched
   const handleOnBlur = typeof onBlur === 'function' ? onBlur : () => undefined
   return (
-    <Container width={width} isDIDForm={isDIDForm}>
+    <Container width={width} isDIDForm={isDIDForm} validInput={validInput}>
       <input
         {...field}
         type="text"
@@ -23,10 +24,10 @@ const Input = ({
         name={field.name}
         placeholder={label}
         {...props}
-        // showError={showError}
         onBlur={handleOnBlur}
       />
       <label htmlFor={field.name}>{label}</label>
+      {/* { metaData.error && <span>Tag Already Exists</span>} */}
       {/* <ErrorMessage width={width} name={field.name} component={Error} /> */}
     </Container>
   )
