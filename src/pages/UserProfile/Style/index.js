@@ -123,5 +123,14 @@ export const UserIcon = styled('img')`
 export const Bio = styled('p')` 
   color: black;
   font-size: .7vw;
+  margin: 0 0 0 1vw;
+  padding-left: 1vw;
+  border-left: 1px solid gray;
+
+`
+
+export const FlexDiv = styled('div')` 
+  display: flex;
+  margin-bottom: 1vw;
 
 `

@@ -1,6 +1,5 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useLocation } from 'react-router-dom'
 
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import commentActions from '../../../redux/actions/comments'
@@ -8,10 +7,22 @@ import tribunalCommentActions from '../../../redux/actions/tribunal_comments'
 
 import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
 import delay from '../../../generic/delay'
+import useDetectCurrentPage from '../../hooks/routing/useDetectCurrentPage'
 
 export default (compState, content, rawText, modalProps, contentId) => {
-  const { pathname } = useLocation()
-  const isTribunalComment = pathname.includes('tribunal')
+  const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()
+
+  const {
+    tribunalCommentUnderReviewId,
+    commentId,
+  } = modalProps || {}
+
+  const isParentTribunalCommentUnderReview = isTribunalComment
+  && tribunalCommentUnderReviewId === commentId
+
+  const parentId = isParentTribunalCommentUnderReview ? null : commentId || null
+  const rootId = isParentTribunalCommentUnderReview ? null : compState.rootParentCommentId
+
   const {
     createComment,
     createTribunalComment,
@@ -30,11 +41,11 @@ export default (compState, content, rawText, modalProps, contentId) => {
         ...values,
         content,
         memeFlag: false,
-        parentId: modalProps?.commentId || null,
+        parentId,
         contentId,
         subtopicId: contentId,
         createdBy: compState.username,
-        rootId: compState.rootParentCommentId,
+        rootId,
         rawText,
       }
       return isTribunalComment ? createTribunalComment(comment) : createComment(comment)
@@ -42,5 +53,12 @@ export default (compState, content, rawText, modalProps, contentId) => {
 
     setSubmitting(false)
     resetForm({})
-  }, [compState, content, rawText, modalProps, contentId])
+  }, [
+    compState,
+    content,
+    rawText,
+    modalProps.tribunalCommentUnderReviewId,
+    modalProps.commentId,
+    contentId,
+  ])
 }

@@ -32,8 +32,6 @@ const CommentForm = React.lazy(() => import(
 
 const CreateSubTopicForm = React.lazy(() => import(
   /* webpackChunkName: "subtopic-form" */
-
-
   /* webpackMode: "lazy" */
   /* webpackPrefetch: true */
   /* webpackPreload: true */ '../../SubTopicForm/Index'
@@ -54,6 +52,7 @@ const Modal = ({ closeModal }) => {
   const { modalType, modalProps } = useSelector((s) => s.ui)
 
   const isOpen = useSelector((s) => s.ui.modalOpen)
+
   let component
   switch (modalType) {
     case CREATE_TOPIC:
@@ -65,9 +64,6 @@ const Modal = ({ closeModal }) => {
     case REPLY:
       component = <CommentForm modalProps={modalProps} />
       break
-    // case ICON_FORM:
-    //   component = <UploadIconForm />
-    //   break
     case OPPOSING_REC_FORM:
       component = <OpposingRecForm {...modalProps} />
       break

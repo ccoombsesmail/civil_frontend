@@ -9,18 +9,17 @@ import { Logger } from '../logger.ts'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import sessionActions from '../../../redux/actions/session'
 import userActions from '../../../redux/actions/users/index'
+import { STORE_PATH } from '../constants'
 
 const STORE_PASS = 'pwd'
 
 export default () => {
   const { addDIDSession, upsertDidUser } = useBindDispatch(sessionActions, userActions)
   return useCallback(async (mnemonic) => {
-    DIDBackend.initialize(new AssistDIDAdapter('mainnet'))
-    // DIDBackend.initialize(new DefaultDIDAdapter('https://api.elastos.io/eid'))
-    const rootPath = 'root/store'
+    DIDBackend.initialize(new AssistDIDAdapter('testnet'))
+    const rootPath = STORE_PATH
     const store = await DIDStore.open(rootPath)
     const identity = RootIdentity.createFromMnemonic(mnemonic, 'password', store, STORE_PASS, true)
-    // 'debris lend tell project position easily sponsor cabin brave wide alarm witness'
 
     await toast.promise(
       identity.synchronize(),
@@ -38,7 +37,6 @@ export default () => {
     )
 
     const dids = await store.listDids()
-
     if (dids.length > 0) {
       const doc = new DIDDocument(dids[0])
       let username = dids[0].getMethodSpecificId()

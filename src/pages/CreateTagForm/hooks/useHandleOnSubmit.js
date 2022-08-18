@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import uiActionCreators, { closeModal } from '../../../redux/actions/ui/index'
 import userActionCreators from '../../../redux/actions/users/index'
-import { useDispatch } from 'react-redux';
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (userId) => {

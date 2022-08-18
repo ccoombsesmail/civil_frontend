@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { memo } from 'react'
 
 import Modal from 'react-bootstrap/Modal'
@@ -22,10 +23,8 @@ const CreateTagForm = ({ userId }) => {
         initialValues={{
           tag: '',
         }}
-        validate={(vals) => {
-          console.log(isValid)
+        validate={() => {
           if (isValid === false) {
-            console.log("hehe")
             return { tag: 'Tag Already Exists' }
           }
           return {}

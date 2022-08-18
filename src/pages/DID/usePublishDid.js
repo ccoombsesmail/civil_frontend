@@ -9,13 +9,14 @@ import { GlobalPublicationService } from './services/global.publication.service.
 import sessionActions from '../../redux/actions/session/index'
 import { DIDRequest } from './DIDRequest.ts'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
+import { STORE_PATH } from './constants'
 
 export default () => {
   const { addDIDSession } = useBindDispatch(sessionActions)
   return useCallback(async (docWithVCs) => {
     DIDBackend.initialize(new AssistDIDAdapter('mainnet'))
 
-    const rootPath = 'root/store'
+    const rootPath = STORE_PATH
     const store = await DIDStore.open(rootPath)
     const storePass = 'pwd'
     const rootidentity = await store.loadRootIdentity()

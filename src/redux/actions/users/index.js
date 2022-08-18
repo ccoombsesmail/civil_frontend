@@ -26,8 +26,14 @@ const createUserTag = (tag) => (dispatch) => UsersApiUtil.createUserTag(tag)
   .then((res) => dispatch(updateSessionActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
+const updateUserBioInformation = (userId, bio, experience) => (dispatch) => UsersApiUtil
+  .updateUserBioInformation(userId, bio, experience)
+  .then((res) => dispatch(addUserActionCreator(res.data)))
+  .catch((error) => toast.error(errorFormatter(error)))
+
 export default {
   getUser,
   upsertDidUser,
   createUserTag,
+  updateUserBioInformation,
 }

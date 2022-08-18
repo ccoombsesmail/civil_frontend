@@ -57,6 +57,9 @@ blockquote {
     --m-secondary-background-color: #E6EEF2;
     --m-primary-btn-color: #3DC393;
     --m-primary-btn-color:  #87C232;
+    --m-primary-btn-color: rgb(109, 174, 0);
+    /* --m-primary-btn-color: #04BECE; */
+    /* --m-primary-btn-color: #3F9BE1; */
     --m-primary-peripherals-color: #474a4d;
     --m-highlight-color: #F8CA41;
     --m-btn-hover-color: #F5F8FF;

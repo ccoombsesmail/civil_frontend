@@ -13,6 +13,8 @@ export const Container = styled('div')`
   --m-input-height-form: 2vw;
   --m-input-height-form-mobile: 8vw;
 
+  width: ${(props) => props.width || '30%'};
+
   span {
     color: red;
   }
@@ -22,7 +24,7 @@ export const Container = styled('div')`
   flex-flow: column-reverse;
   margin-bottom: 1em;
   margin:  ${(props) => (props.isDIDForm ? '0 0 1em 0' : 'auto auto 1em auto')};
-  width: ${(props) => props.width || '30%'};
+  /* width: ${(props) => props.width || '30%'}; */
 
   label, input {
     transition: all 0.2s;
@@ -34,7 +36,7 @@ export const Container = styled('div')`
     border: 0;
     font-family: inherit;
     -webkit-appearance: none;
-    border-radius: .5em;
+    border-radius: ${(props) => (props.showError ? '0.5em 0.5em 0 0' : '0.5em')};;
     border: ${({ validInput }) => {
     if (validInput === null) return '1px solid gray'
     if (validInput === true) return '2px solid var(--m-primary-btn-color)'
@@ -53,7 +55,7 @@ export const Container = styled('div')`
       padding-left: 5px;
       
     }
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 700px) {
       height: ${(props) => (props.isDIDForm ? 'var(--m-input-height-DID-form-mobile)' : 'var(--m-input-height-form-mobile)')};
     }
   }
@@ -68,7 +70,7 @@ export const Container = styled('div')`
     letter-spacing: 0.05em;
     font-size: ${(props) => (props.isDIDForm ? 'var(--m-label-font-size-DID-form)' : 'var(--m-label-font-size-form)')};
     color: #ccc;
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 700px) {
       font-size: ${(props) => (props.isDIDForm ? 'var(--m-label-font-size-DID-form-mobile)' : 'var(--m-label-font-size-form-mobile)')};
     }
   }
@@ -84,7 +86,7 @@ export const Container = styled('div')`
     ? 'translate(1vw, calc( var(--m-label-font-size-DID-form)*1.5 + var(--m-input-height-DID-form)/2)) scale(1.5)'
     : 'translate(1vw, calc( var(--m-label-font-size-form)*1.5 + var(--m-input-height-form)/2)) scale(1.5)')};
     
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 700px) {
       transform: ${(props) => (props.isDIDForm
     ? 'translate(1vw, calc( var(--m-label-font-size-DID-form-mobile)*1.5 + var(--m-input-height-DID-form-mobile)/2)) scale(1.5)'
     : 'translate(1vw, calc( var(--m-label-font-size-form-mobile)*1.5 + var(--m-input-height-form-mobile)/2)) scale(1.5)')};
@@ -104,4 +106,11 @@ export const Container = styled('div')`
     color: black;
   }
 
+`
+
+export const OuterContainer = styled('div')`
+  width: ${(props) => props.width || '30%'};
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `

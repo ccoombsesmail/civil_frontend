@@ -10,11 +10,13 @@ import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
 import { TOPIC } from '../../../../enums/content_type'
+import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
 
 const TopicActionToolbar = ({
   likes, topic, user,
 }) => {
   const { topicId, subTopicId, ...params } = useParams()
+  const { isOnTribunalPage } = useDetectCurrentPage()
   return (
     <Container>
       <Left>
@@ -26,8 +28,8 @@ const TopicActionToolbar = ({
         { params['*'] && <CommentButton />}
       </Left>
       <Right>
-        <OpposingViewsButton topicId={topicId} subTopicId={subTopicId} />
-        <TribunalButton contentId={topic?.id} />
+        {!isOnTribunalPage && <OpposingViewsButton topicId={topicId} subTopicId={subTopicId} /> }
+        {!isOnTribunalPage && <TribunalButton contentId={topic?.id} /> }
       </Right>
     </Container>
   )

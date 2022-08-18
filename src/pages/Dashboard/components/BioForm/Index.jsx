@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import useOnSubmit from './hooks/useOnSubmit'
 
 import {
@@ -7,12 +8,24 @@ import {
   FieldLabel, Textarea, ButtonContainer,
 } from './Style/Index'
 
-const BioForm = () => {
-  const [bio, setBio] = useState('')
-  const [experience, setExperience] = useState('')
+const BioForm = ({ user }) => {
+  const userData = useSelector((s) => s.users)[user?.id]
+  const [bio, setBio] = useState(userData?.bio)
+  const [experience, setExperience] = useState(userData?.experience)
+
+  useEffect(() => {
+    setBio(userData?.bio)
+    setExperience(userData?.experience)
+  }, [userData])
+
+  useEffect(() => {
+    const clerkWrapper = document.getElementsByClassName('cl-main')[0]
+    if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null)
+  }, [])
+
   const onSubmit = useOnSubmit(bio, experience, setBio, setExperience)
   return (
-    <OuterContainer>
+    <OuterContainer id="bio-dashboard">
       <Container>
         <HeaderContainer>
           <Header>Bio Information</Header>

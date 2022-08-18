@@ -28,8 +28,8 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "youTubeUrlValidator": () => (/* binding */ youTubeUrlValidator),
-/* harmony export */   "twitterUrlValidtor": () => (/* binding */ twitterUrlValidtor)
+/* harmony export */   "twitterUrlValidtor": () => (/* binding */ twitterUrlValidtor),
+/* harmony export */   "youTubeUrlValidator": () => (/* binding */ youTubeUrlValidator)
 /* harmony export */ });
 var youTubeUrlValidator = new RegExp(/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm);
 var twitterUrlValidtor = new RegExp(/http(?:s)?:\/\/(?:www)?twitter\.com\/([a-zA-Z0-9_]+)/gm);
@@ -173,10 +173,10 @@ var CreateCommentForm = function CreateCommentForm(_ref) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
-/* harmony export */   "Description": () => (/* binding */ Description),
-/* harmony export */   "InputWrapper": () => (/* binding */ InputWrapper),
 /* harmony export */   "Container": () => (/* binding */ Container),
+/* harmony export */   "Description": () => (/* binding */ Description),
+/* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
+/* harmony export */   "InputWrapper": () => (/* binding */ InputWrapper),
 /* harmony export */   "ToxicityControls": () => (/* binding */ ToxicityControls)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
@@ -244,7 +244,7 @@ var findCommentContent = function findCommentContent(comment, id) {
   })) === null || _useSelector2 === void 0 ? void 0 : _useSelector2.find(function (c) {
     var _c$data;
 
-    return ((_c$data = c.data) === null || _c$data === void 0 ? void 0 : _c$data.id) === (modalProps === null || modalProps === void 0 ? void 0 : modalProps.rootParentCommentId);
+    return ((_c$data = c.data) === null || _c$data === void 0 ? void 0 : _c$data.id) === (modalProps === null || modalProps === void 0 ? void 0 : modalProps.rootParentCommentId) || (modalProps === null || modalProps === void 0 ? void 0 : modalProps.commentId);
   });
   var tribunalComment = (_useSelector3 = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (s) {
     return s.tribunalComments.list;
@@ -253,14 +253,20 @@ var findCommentContent = function findCommentContent(comment, id) {
 
     return ((_c$data2 = c.data) === null || _c$data2 === void 0 ? void 0 : _c$data2.id) === (modalProps === null || modalProps === void 0 ? void 0 : modalProps.rootParentCommentId);
   });
+
+  var _ref = (comment === null || comment === void 0 ? void 0 : comment.data) || (tribunalComment === null || tribunalComment === void 0 ? void 0 : tribunalComment.data) || {},
+      createdBy = _ref.createdBy,
+      createdByIconSrc = _ref.createdByIconSrc,
+      createdAt = _ref.createdAt;
+
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
     var commentContent = (modalProps === null || modalProps === void 0 ? void 0 : modalProps.replyType) !== 'REPLY_FROM_TOPIC' ? findCommentContent(comment || tribunalComment, modalProps === null || modalProps === void 0 ? void 0 : modalProps.commentId) : topic === null || topic === void 0 ? void 0 : topic.description;
     return {
       subtopicId: subtopicId,
-      createdByIconSrc: (comment === null || comment === void 0 ? void 0 : comment.iconSrc) || (topic === null || topic === void 0 ? void 0 : topic.createdByIconSrc),
+      createdByIconSrc: createdByIconSrc || (topic === null || topic === void 0 ? void 0 : topic.createdByIconSrc),
       username: user === null || user === void 0 ? void 0 : user.username,
-      createdBy: (comment === null || comment === void 0 ? void 0 : comment.createdBy) || (topic === null || topic === void 0 ? void 0 : topic.createdBy),
-      time: (comment === null || comment === void 0 ? void 0 : comment.createdAt) || (topic === null || topic === void 0 ? void 0 : topic.createdAt),
+      createdBy: createdBy || (topic === null || topic === void 0 ? void 0 : topic.createdBy) || (tribunalComment === null || tribunalComment === void 0 ? void 0 : tribunalComment.createdBy),
+      time: createdAt || (topic === null || topic === void 0 ? void 0 : topic.createdAt),
       htmlContent: commentContent,
       rootParentCommentId: (modalProps === null || modalProps === void 0 ? void 0 : modalProps.rootParentCommentId) || null,
       type: modalProps === null || modalProps === void 0 ? void 0 : modalProps.replyType
@@ -284,12 +290,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/node_modules/react-router/index.js");
 /* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
 /* harmony import */ var _redux_actions_comments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../redux/actions/comments */ "./src/redux/actions/comments/index.js");
 /* harmony import */ var _redux_actions_tribunal_comments__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../redux/actions/tribunal_comments */ "./src/redux/actions/tribunal_comments/index.js");
 /* harmony import */ var _api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../api/v1/comments/comments_api_util */ "./src/api/v1/comments/comments_api_util.js");
 /* harmony import */ var _generic_delay__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../generic/delay */ "./src/generic/delay.js");
+/* harmony import */ var _hooks_routing_useDetectCurrentPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../hooks/routing/useDetectCurrentPage */ "./src/pages/hooks/routing/useDetectCurrentPage.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -305,18 +311,24 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (compState, content, rawText, modalProps, contentId) {
-  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)(),
-      pathname = _useLocation.pathname;
+  var _useDetectCurrentPage = (0,_hooks_routing_useDetectCurrentPage__WEBPACK_IMPORTED_MODULE_8__["default"])(),
+      isTribunalComment = _useDetectCurrentPage.isOnTribunalPage;
 
-  var isTribunalComment = pathname.includes('tribunal');
+  var _ref = modalProps || {},
+      tribunalCommentUnderReviewId = _ref.tribunalCommentUnderReviewId,
+      commentId = _ref.commentId;
+
+  var isParentTribunalCommentUnderReview = isTribunalComment && tribunalCommentUnderReviewId === commentId;
+  var parentId = isParentTribunalCommentUnderReview ? null : commentId || null;
+  var rootId = isParentTribunalCommentUnderReview ? null : compState.rootParentCommentId;
 
   var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__["default"])(_redux_actions_comments__WEBPACK_IMPORTED_MODULE_4__["default"], _redux_actions_tribunal_comments__WEBPACK_IMPORTED_MODULE_5__["default"]),
       createComment = _useBindDispatch.createComment,
       createTribunalComment = _useBindDispatch.createTribunalComment;
 
-  return (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(function (values, _ref) {
-    var setSubmitting = _ref.setSubmitting,
-        resetForm = _ref.resetForm;
+  return (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(function (values, _ref2) {
+    var setSubmitting = _ref2.setSubmitting,
+        resetForm = _ref2.resetForm;
     react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.promise(Promise.all([(0,_generic_delay__WEBPACK_IMPORTED_MODULE_7__["default"])(1500), (0,_api_v1_comments_comments_api_util__WEBPACK_IMPORTED_MODULE_6__.checkToxicity)({
       content: rawText
     })]), {
@@ -327,11 +339,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
       var comment = _objectSpread(_objectSpread({}, values), {}, {
         content: content,
         memeFlag: false,
-        parentId: (modalProps === null || modalProps === void 0 ? void 0 : modalProps.commentId) || null,
+        parentId: parentId,
         contentId: contentId,
         subtopicId: contentId,
         createdBy: compState.username,
-        rootId: compState.rootParentCommentId,
+        rootId: rootId,
         rawText: rawText
       });
 
@@ -339,7 +351,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     });
     setSubmitting(false);
     resetForm({});
-  }, [compState, content, rawText, modalProps, contentId]);
+  }, [compState, content, rawText, modalProps.tribunalCommentUnderReviewId, modalProps.commentId, contentId]);
 });
 
 /***/ }),
@@ -1033,16 +1045,16 @@ var CreateSubTopicForm = function CreateSubTopicForm() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Arrow": () => (/* binding */ Arrow),
 /* harmony export */   "Container": () => (/* binding */ Container),
 /* harmony export */   "FlexDiv": () => (/* binding */ FlexDiv),
 /* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
+/* harmony export */   "InputWrapper": () => (/* binding */ InputWrapper),
 /* harmony export */   "InputsContainer": () => (/* binding */ InputsContainer),
 /* harmony export */   "Left": () => (/* binding */ Left),
+/* harmony export */   "Line": () => (/* binding */ Line),
 /* harmony export */   "Right": () => (/* binding */ Right),
-/* harmony export */   "SupplementalInformation": () => (/* binding */ SupplementalInformation),
-/* harmony export */   "InputWrapper": () => (/* binding */ InputWrapper),
-/* harmony export */   "Arrow": () => (/* binding */ Arrow),
-/* harmony export */   "Line": () => (/* binding */ Line)
+/* harmony export */   "SupplementalInformation": () => (/* binding */ SupplementalInformation)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
@@ -1446,19 +1458,19 @@ var CreateTopicForm = function CreateTopicForm() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Arrow": () => (/* binding */ Arrow),
+/* harmony export */   "Container": () => (/* binding */ Container),
 /* harmony export */   "FlexDiv": () => (/* binding */ FlexDiv),
 /* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
-/* harmony export */   "Arrow": () => (/* binding */ Arrow),
+/* harmony export */   "InputWrapper": () => (/* binding */ InputWrapper),
 /* harmony export */   "InputsContainer": () => (/* binding */ InputsContainer),
 /* harmony export */   "Left": () => (/* binding */ Left),
-/* harmony export */   "Right": () => (/* binding */ Right),
-/* harmony export */   "SupplementalInformation": () => (/* binding */ SupplementalInformation),
-/* harmony export */   "InputWrapper": () => (/* binding */ InputWrapper),
-/* harmony export */   "Container": () => (/* binding */ Container),
 /* harmony export */   "Line": () => (/* binding */ Line),
-/* harmony export */   "UploadMediaContainer": () => (/* binding */ UploadMediaContainer),
+/* harmony export */   "MobileOnlyLine": () => (/* binding */ MobileOnlyLine),
+/* harmony export */   "Right": () => (/* binding */ Right),
 /* harmony export */   "SectionDescription": () => (/* binding */ SectionDescription),
-/* harmony export */   "MobileOnlyLine": () => (/* binding */ MobileOnlyLine)
+/* harmony export */   "SupplementalInformation": () => (/* binding */ SupplementalInformation),
+/* harmony export */   "UploadMediaContainer": () => (/* binding */ UploadMediaContainer)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");

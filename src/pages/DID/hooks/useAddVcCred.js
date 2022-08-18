@@ -8,6 +8,7 @@ import { AssistDIDAdapter } from '../AssistDIDAdapter.ts'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import sessionActions from '../../../redux/actions/session'
 import userActions from '../../../redux/actions/users/index'
+import { STORE_PATH } from '../constants'
 
 const STORE_PASS = 'pwd'
 // const password = 'password'
@@ -27,9 +28,8 @@ export default () => {
   const { addDIDSession, upsertDidUser } = useBindDispatch(sessionActions, userActions)
   const currentUser = useSelector((s) => s.session.currentUser)
   return useCallback(async (props) => {
-    console.log(props)
     DIDBackend.initialize(new AssistDIDAdapter('mainnet'))
-    const rootPath = 'root/store'
+    const rootPath = STORE_PATH
     const store = await DIDStore.open(rootPath)
     const { doc } = currentUser
     const issuer = new Issuer(doc)

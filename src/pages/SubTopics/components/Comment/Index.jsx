@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import Collapse from 'react-bootstrap/Collapse'
-
 import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
 
 import IconButton from '../../../CommonComponents/IconButton/Index'
@@ -20,38 +19,31 @@ import {
 
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
-import useUpdateCommentLikes from './hooks/useUpdateCommentLikes'
 
-import useOpenReplyModal from './hooks/useOpenReplyModal'
 import { ParentCommentContext } from '../CommentColumn/Index'
 import ThemeTooltip from '../../../CommonComponents/Tooltip/Index'
 import { UNDER_REVIEW } from '../../../../enums/report_status'
 import { COMMENT } from '../../../../enums/content_type'
-import { useEffect } from 'react';
 
 const Comment = ({ commentData, replies, commentRef }) => {
   if (!commentData) return null
-  const { commentId: rootParentCommentId, topicId } = React.useContext(ParentCommentContext)
+  const { topicId } = React.useContext(ParentCommentContext) || {}
   const contentRef = useRef(null)
   const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW)
   const user = useSelector((s) => s.session.currentUser)
-  const updateLikes = useUpdateCommentLikes(commentData, user)
-  const openReplyModal = useOpenReplyModal(commentData.id, rootParentCommentId)
 
   useSetInnerHtml(contentRef, commentData?.content)
 
   const mins = getTimeSince(commentData.createdAt)
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
   return (
-    <OuterContainer ref={commentRef} 
-    // onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}
-    >
+    <OuterContainer ref={commentRef}>
       <CommentContainer>
         <Header onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
           <UserInfoContainer>
-            <Thumb src={commentData.createdByIconSrc} />
+            <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
             <ThemeTooltip
               tooltipHeader="Experience"
               tooltipText={commentData.createdByExperience}

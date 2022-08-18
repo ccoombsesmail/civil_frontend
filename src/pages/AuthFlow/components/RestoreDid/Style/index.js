@@ -11,14 +11,19 @@ export const WordInput = styled('input')`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 20%;
-  list-style: none;
+  padding: 0;
+  width: 11vw;
+  height: 8vh;
+  font-size: 1vw;
+  display: block;
   font-weight: bold;
-  color: white;
+  color: black;
   padding: 1vw .5vw;
   margin: .5vw;
   border-radius: .5em;
   border: none;
-  background-color: #8530F1;
+  background-color: whitesmoke;
+  border: 1px solid var(--m-elastos-theme);
+
 
 `

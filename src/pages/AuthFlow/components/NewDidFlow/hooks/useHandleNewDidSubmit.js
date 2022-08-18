@@ -8,7 +8,7 @@ export default () => {
   return useCallback(async (values, params) => {
     const vcProps = { ...values }
     delete vcProps.words
-    const mnemonic = localStorage.getItem('mnemonic')
+    const mnemonic = localStorage.getItem('original')
     if (mnemonic === values.words.join(' ')) {
       await createRootIdentity(mnemonic, vcProps)
       navigate('/')

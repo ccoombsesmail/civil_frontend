@@ -15,7 +15,7 @@ import useInitSocketEffect from './useInitSocketEffect'
 export default () => {
   const URL = `http://${window.location.hostname}:8093`
   const socket = io(URL, { autoConnect: false })
-  DIDBackend.initialize(new DefaultDIDAdapter('mainnet'))
+  DIDBackend.initialize(new DefaultDIDAdapter('testnet'))
   const dispatch = useDispatch()
   const currentUser = useSelector((s) => s.session.currentUser)
   useSetupInterceptorsEffect()
@@ -25,7 +25,7 @@ export default () => {
 
   const {
     getAllEnums,
-    getCurrentUser,
+    getUser,
     addDIDSession,
     logout,
     upsertDidUser,
@@ -43,13 +43,12 @@ export default () => {
       if (user) {
         user.iconSrc = user.profileImageUrl
         dispatch(addUserActionCreatorClerk(user))
-        getCurrentUser(user?.id)
+        getUser(user?.id)
       } else if (defaultDID) {
         const docExistsButNotValid = currentUser?.doc && !currentUser.doc.isValid()
         if (!currentUser?.doc || docExistsButNotValid) {
           const doc = await defaultDID.resolve()
           const { value: username } = doc.getCredential('username')?.getSubject().getProperties() || {}
-          console.log(doc.getCredential('username'))
           // const { value: firstName } = doc.getCredential('firstName')?.getSubject().getProperties() || {}
           // const { value: lastName } = doc.getCredential('lastName')?.getSubject().getProperties() || {}
           const { value: avatar } = doc.getCredential('avatar')?.getSubject().getProperties() || {}

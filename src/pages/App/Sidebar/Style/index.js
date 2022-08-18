@@ -35,7 +35,7 @@ export const SideBarContainer = styled('div')`
     width: 24px;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 750px) {
     display: none;
   }
 

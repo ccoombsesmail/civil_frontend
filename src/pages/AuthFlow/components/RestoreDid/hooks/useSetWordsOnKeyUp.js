@@ -11,7 +11,6 @@ export default (enteredWords, setEnteredWords) => {
 
   const restoreFromMnemonic = useCallback(async () => {
     const currentMnemonicString = Object.values(enteredWords).join(' ')
-    console.log(currentMnemonicString)
     recoverMnemonic(currentMnemonicString)
   }, [enteredWords])
 

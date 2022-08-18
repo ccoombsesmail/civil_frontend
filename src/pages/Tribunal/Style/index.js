@@ -52,7 +52,7 @@ export const InnerContainer = styled('div')`
 export const VotingContainer = styled('section')`
   position: relative;
   width: 50%;
-  height: 10vw;
+  height: 14vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,4 +148,16 @@ export const Timer = styled('div')`
   h4 {
     color: black;
   }
+`
+
+export const MiddleSection = styled('div')`
+
+  span:first-child {
+    font-weight: bold;
+    color: red;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `

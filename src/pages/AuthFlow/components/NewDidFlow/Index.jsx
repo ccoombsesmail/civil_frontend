@@ -8,9 +8,9 @@ import useConfigFormErrors from '../../../util/form_helpers/hooks/useConfigFormE
 import CreateMnemonic from './components/CreateMnemonic/Index'
 import ValidateMnemonic from './components/ValidateMnemonic/Index'
 import BasicInformation from '../BasicInformation/Index'
-import Button from '../../../CommonComponents/Button/Index'
+import Button from '../../../CommonComponents/Buttons/ExpandButton/Index'
 
-import { OuterContainer, ButtonContainer } from './Style'
+import { OuterContainer, ButtonContainer } from '../Style'
 import { INIT_DID_FORM_VALUES } from '../../../util/form_helpers/init_form_values'
 import { useValidateMnemonic } from '../../../DID/hooks/useMnemonicHelpers'
 import WithFade from '../../../../hocs/WithFade'
@@ -19,7 +19,7 @@ const SUBMIT_STEP = 2
 const VALIDATIONS = {
   title: { REQUIRED: true },
   // description: { REQUIRED: true, MIN_LENGTH: 10 },
-  summary: { REQUIRED: true, MIN_LENGTH: 10 },
+  username: { REQUIRED: true, MIN_LENGTH: 2 },
   category: { REQUIRED: true },
 }
 
@@ -42,7 +42,13 @@ const NewDidFlow = () => {
             <WithFade Component={BasicInformation} setFieldValue={setFieldValue} />
             )}
             {formStep === 1 && <WithFade Component={CreateMnemonic} />}
-            {formStep === 2 && <WithFade Component={ValidateMnemonic} />}
+            {formStep === 2 && (
+            <WithFade
+              Component={ValidateMnemonic}
+              values={values}
+              setFieldValue={setFieldValue}
+            />
+            )}
             <ButtonContainer>
               <Button
                 width="40%"
@@ -75,7 +81,7 @@ const NewDidFlow = () => {
                   }
                   onClick={() => handleNewDidSubmit(values)}
                 >
-                  Create Decentralized Identity
+                  Create Identity
                 </Button>
               )}
             </ButtonContainer>

@@ -2,13 +2,12 @@ import { Field } from 'formik'
 import React, { useState, useCallback } from 'react'
 import Input3 from '../../../CommonComponents/Form/Input3/Index'
 import { FieldContainer, NamesContainer } from './Style/Index'
-import UploadIconInput from '../../../Dashboard/components/UploadIconInput/Index';
+import UploadIconInput from '../../../Dashboard/components/UploadIconInput/Index'
 
 const BasicInformation = ({ setFieldValue }) => {
   const [file, setFile] = useState(null)
 
   const onChange = useCallback((e) => {
-    // setFieldValue('file', e.currentTarget.files[0])
     const reader = new FileReader()
     const currFile = e.target.files[0]
     reader.onloadend = () => {
@@ -31,14 +30,14 @@ const BasicInformation = ({ setFieldValue }) => {
           name="firstName"
           label="First Name"
           component={Input3}
-          width="40%"
+          width="85%"
           isDIDForm
         />
         <Field
           type="text"
           name="lastName"
           component={Input3}
-          width="40%"
+          width="85%"
           placeholder="Last Name"
           label="Last Name"
           isDIDForm
@@ -50,7 +49,7 @@ const BasicInformation = ({ setFieldValue }) => {
           name="username"
           component={Input3}
           width="100%"
-          label="Username"
+          label="Username*"
           isDIDForm
         />
       </NamesContainer>

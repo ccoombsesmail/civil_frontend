@@ -40,6 +40,7 @@ const Tribunal = React.lazy(() => import(
 
 // const frontendApi = 'clerk.legible.tortoise-0.lcl.dev'
 const frontendApi = 'clerk.genuine.leech-38.lcl.dev'
+// const frontendApi = 'clerk.bjuk3.m71w1.lcl.dev'
 // const frontendApi = process.env.REACT_APP_CLERK_FRONTEND_API
 
 const LoadingBridge = ({ children }) => {
@@ -74,7 +75,14 @@ const App = () => {
               <Sidebar />
               <Content>
                 <Routes>
-                  <Route path="/topics/:topicId/subtopics/*" element={<SubTopics />} />
+                  <Route
+                    path="/topics/:topicId/subtopics/*"
+                    element={(
+                      <>
+                        <SubTopics />
+                      </>
+                      )}
+                  />
                   <Route
                     path="/dashboard"
                     element={(
@@ -84,7 +92,14 @@ const App = () => {
                   )}
                   />
                   <Route path="/authenticate/*" element={<AuthFlow />} />
-                  <Route path="/user/:userId" element={<UserProfile />} />
+                  <Route
+                    path="/user/:userId"
+                    element={(
+                      <>
+                        <UserProfile />
+                      </>
+                      )}
+                  />
                   <Route
                     path="/tribunal/:contentType/:contentId"
                     element={(
@@ -97,8 +112,9 @@ const App = () => {
                   <Route path="/topics/*" element={<Topics />} />
                   <Route path="/" element={<Navigate replace to="/topics" />} />
                 </Routes>
-                <Modal closeModal={closeModal} />
               </Content>
+              <Modal closeModal={closeModal} />
+
               <ToastContainer autoClose={2000} className="toasty" transition={elitpicIn} />
             </MainContainer>
           </ClerkLoaded>

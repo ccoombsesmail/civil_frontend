@@ -80,10 +80,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
 /* harmony import */ var _redux_actions_session__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../redux/actions/session */ "./src/redux/actions/session/index.js");
 /* harmony import */ var _redux_actions_users_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../redux/actions/users/index */ "./src/redux/actions/users/index.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../constants */ "./src/pages/DID/constants.js");
 
 
 
 /* eslint-disable max-len */
+
 
 
 
@@ -151,13 +153,12 @@ var addVCToDoc = /*#__PURE__*/function () {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              console.log(props);
               _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.DIDBackend.initialize(new _AssistDIDAdapter_ts__WEBPACK_IMPORTED_MODULE_5__.AssistDIDAdapter('mainnet'));
-              rootPath = 'root/store';
-              _context2.next = 5;
+              rootPath = _constants__WEBPACK_IMPORTED_MODULE_9__.STORE_PATH;
+              _context2.next = 4;
               return _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.DIDStore.open(rootPath);
 
-            case 5:
+            case 4:
               store = _context2.sent;
               doc = currentUser.doc;
               issuer = new _elastosfoundation_did_js_sdk__WEBPACK_IMPORTED_MODULE_3__.Issuer(doc);
@@ -168,19 +169,19 @@ var addVCToDoc = /*#__PURE__*/function () {
               // await addVCToDoc(db, issuer, doc, 'lastName', lastName)
               // await addVCToDoc(db, issuer, doc, 'username', username)
 
-              _context2.next = 12;
+              _context2.next = 11;
               return addVCToDoc(db, issuer, doc, 'avatar', props.file);
 
-            case 12:
-              _context2.next = 14;
+            case 11:
+              _context2.next = 13;
               return db.seal(STORE_PASS);
 
-            case 14:
+            case 13:
               docWithVC = _context2.sent;
-              _context2.next = 17;
+              _context2.next = 16;
               return docWithVC.publish(STORE_PASS);
 
-            case 17:
+            case 16:
               // const { value: usernameAfter } = docWithVC.getCredential('username')?.getSubject().getProperties()
               _docWithVC$getCredent = (_docWithVC$getCredent2 = docWithVC.getCredential('avatar')) === null || _docWithVC$getCredent2 === void 0 ? void 0 : _docWithVC$getCredent2.getSubject().getProperties(), avatar = _docWithVC$getCredent.value;
               upsertDidUser({
@@ -195,7 +196,7 @@ var addVCToDoc = /*#__PURE__*/function () {
               });
               store.close();
 
-            case 21:
+            case 20:
             case "end":
               return _context2.stop();
           }
@@ -260,6 +261,9 @@ var Dashboard = function Dashboard() {
     return s.session.currentUser;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var clerkWrapper = document.getElementsByClassName('cl-main')[0];
+    console.log(clerkWrapper);
+    if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null);
     if (user) getCurrentUser(user === null || user === void 0 ? void 0 : user.id);
   }, []);
   var addVcCred = (0,_DID_hooks_useAddVcCred__WEBPACK_IMPORTED_MODULE_13__["default"])();
@@ -267,7 +271,9 @@ var Dashboard = function Dashboard() {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Loading...")
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Style__WEBPACK_IMPORTED_MODULE_4__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Header_Index__WEBPACK_IMPORTED_MODULE_7__["default"], {
     user: user
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_clerk_clerk_react__WEBPACK_IMPORTED_MODULE_3__.UserProfile, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_BioForm_Index__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_clerk_clerk_react__WEBPACK_IMPORTED_MODULE_3__.UserProfile, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CommonComponents_Line__WEBPACK_IMPORTED_MODULE_8__.Line, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_BioForm_Index__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    user: user
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dashboard);
@@ -282,10 +288,10 @@ var Dashboard = function Dashboard() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Container": () => (/* binding */ Container),
 /* harmony export */   "FormContainer": () => (/* binding */ FormContainer),
 /* harmony export */   "Label": () => (/* binding */ Label),
-/* harmony export */   "UploadInput": () => (/* binding */ UploadInput),
-/* harmony export */   "Container": () => (/* binding */ Container)
+/* harmony export */   "UploadInput": () => (/* binding */ UploadInput)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
@@ -320,38 +326,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _hooks_useOnSubmit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hooks/useOnSubmit */ "./src/pages/Dashboard/components/BioForm/hooks/useOnSubmit.js");
-/* harmony import */ var _Style_Index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Style/Index */ "./src/pages/Dashboard/components/BioForm/Style/Index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _hooks_useOnSubmit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hooks/useOnSubmit */ "./src/pages/Dashboard/components/BioForm/hooks/useOnSubmit.js");
+/* harmony import */ var _Style_Index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Style/Index */ "./src/pages/Dashboard/components/BioForm/Style/Index.js");
 
 
 
 
 
-var BioForm = function BioForm() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+
+var BioForm = function BioForm(_ref) {
+  var user = _ref.user;
+  var userData = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (s) {
+    return s.users;
+  })[user === null || user === void 0 ? void 0 : user.id];
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(userData === null || userData === void 0 ? void 0 : userData.bio),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       bio = _useState2[0],
       setBio = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(userData === null || userData === void 0 ? void 0 : userData.experience),
       _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
       experience = _useState4[0],
       setExperience = _useState4[1];
 
-  var onSubmit = (0,_hooks_useOnSubmit__WEBPACK_IMPORTED_MODULE_2__["default"])(bio, experience, setBio, setExperience);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.OuterContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.HeaderContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.Header, null, "Bio Information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.SubHeader, null, "Manage Bio and Experience Information")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("form", {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    setBio(userData === null || userData === void 0 ? void 0 : userData.bio);
+    setExperience(userData === null || userData === void 0 ? void 0 : userData.experience);
+  }, [userData]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var clerkWrapper = document.getElementsByClassName('cl-main')[0];
+    if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null);
+  }, []);
+  var onSubmit = (0,_hooks_useOnSubmit__WEBPACK_IMPORTED_MODULE_3__["default"])(bio, experience, setBio, setExperience);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.OuterContainer, {
+    id: "bio-dashboard"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.HeaderContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.Header, null, "Bio Information"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.SubHeader, null, "Manage Bio and Experience Information")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("form", {
     onSubmit: onSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.FieldContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.FieldLabel, null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.Textarea, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.FieldContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.FieldLabel, null, "Bio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.Textarea, {
     value: bio,
     onChange: function onChange(e) {
       return setBio(e.target.value);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.FieldContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.FieldLabel, null, "Experience"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.Textarea, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.FieldContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.FieldLabel, null, "Experience"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.Textarea, {
     value: experience,
     onChange: function onChange(e) {
       return setExperience(e.target.value);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_3__.ButtonContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Style_Index__WEBPACK_IMPORTED_MODULE_4__.ButtonContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     type: "submit"
   }, "Save Bio Information")))));
 };
@@ -368,15 +391,15 @@ var BioForm = function BioForm() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "OuterContainer": () => (/* binding */ OuterContainer),
+/* harmony export */   "ButtonContainer": () => (/* binding */ ButtonContainer),
 /* harmony export */   "Container": () => (/* binding */ Container),
-/* harmony export */   "HeaderContainer": () => (/* binding */ HeaderContainer),
-/* harmony export */   "Header": () => (/* binding */ Header),
-/* harmony export */   "SubHeader": () => (/* binding */ SubHeader),
 /* harmony export */   "FieldContainer": () => (/* binding */ FieldContainer),
 /* harmony export */   "FieldLabel": () => (/* binding */ FieldLabel),
-/* harmony export */   "Textarea": () => (/* binding */ Textarea),
-/* harmony export */   "ButtonContainer": () => (/* binding */ ButtonContainer)
+/* harmony export */   "Header": () => (/* binding */ Header),
+/* harmony export */   "HeaderContainer": () => (/* binding */ HeaderContainer),
+/* harmony export */   "OuterContainer": () => (/* binding */ OuterContainer),
+/* harmony export */   "SubHeader": () => (/* binding */ SubHeader),
+/* harmony export */   "Textarea": () => (/* binding */ Textarea)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
@@ -386,7 +409,7 @@ var _templateObject, _templateObject2, _templateObject3, _templateObject4, _temp
 
 
 var OuterContainer = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject || (_templateObject = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([" \n  width: 100%;\n  display: flex;\n  justify-content: center;\n\n"])));
-var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  padding: 3em 2em;\n  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);\n  font-family: \"Source Sans Pro\", sans-serif;;\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #151515;\n  text-align: left;\n  margin-left: 1em;\n  border-radius: 0.5em;\n  width: 840px;\n"])));
+var Container = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject2 || (_templateObject2 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  padding: 3em 2em;\n  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);\n  font-family: \"Source Sans Pro\", sans-serif;;\n  font-size: 1rem;\n  font-weight: 400;\n  line-height: 1.5;\n  color: #151515;\n  text-align: left;\n  border-radius: 0.5em;\n  width: 840px;\n"])));
 var HeaderContainer = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(_templateObject3 || (_templateObject3 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  margin-bottom: 1.25em;\n\n"])));
 var Header = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('h1')(_templateObject4 || (_templateObject4 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  display: flex;\n  align-items: center;\n  font-size: 2rem;\n  font-weight: 600;\n  margin: 0;\n  line-height: 1.2;\n\n"])));
 var SubHeader = (0,styled_components__WEBPACK_IMPORTED_MODULE_1__["default"])('p')(_templateObject5 || (_templateObject5 = (0,_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  color: #808080;\n  font-size: 1.25rem;\n  font-style: normal;\n  font-weight: 400;\n  line-height: 1.5em;\n  margin: 0 0 1rem 0;\n"])));
@@ -410,19 +433,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _api_v1_users_users_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../api/v1/users/users_api_util */ "./src/api/v1/users/users_api_util.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
+/* harmony import */ var _hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../hooks/redux/useBindDispatch */ "./src/pages/hooks/redux/useBindDispatch.js");
+/* harmony import */ var _redux_actions_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../redux/actions/users */ "./src/redux/actions/users/index.js");
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (bio, experience, setBio, setExperience) {
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (bio, experience) {
   var currentUser = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (s) {
     return s.session.currentUser;
   });
+
+  var _useBindDispatch = (0,_hooks_redux_useBindDispatch__WEBPACK_IMPORTED_MODULE_3__["default"])(_redux_actions_users__WEBPACK_IMPORTED_MODULE_4__["default"]),
+      updateUserBioInformation = _useBindDispatch.updateUserBioInformation;
+
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (e) {
     e.preventDefault();
-    (0,_api_v1_users_users_api_util__WEBPACK_IMPORTED_MODULE_2__.updateUserBioInformation)(currentUser === null || currentUser === void 0 ? void 0 : currentUser.id, bio, experience);
-    setBio('');
-    setExperience('');
+    react_toastify__WEBPACK_IMPORTED_MODULE_2__.toast.promise(updateUserBioInformation(currentUser === null || currentUser === void 0 ? void 0 : currentUser.id, bio || null, experience || null), {
+      pending: 'Saving Bio Infromation...',
+      success: 'Bio Info Succefully Saved!',
+      error: {
+        render: function render(_ref) {
+          var errorData = _ref.data;
+          var response = errorData.response;
+          var responseData = response.data;
+          return "".concat(responseData.msg, " \uD83E\uDD2F ");
+        }
+      }
+    });
   }, [currentUser, bio, experience]);
 });
 

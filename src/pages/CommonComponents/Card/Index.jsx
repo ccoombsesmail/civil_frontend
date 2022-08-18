@@ -42,7 +42,7 @@ const Card = ({
       shouldBlur={shouldBlur}
     >
       <UserInfoHeader
-        iconSrc={topic?.iconSrc}
+        iconSrc={topic?.createdByIconSrc}
         time={getTimeSince(topic?.createdAt)}
         username={topic?.createdBy}
         userId={topic?.userId}

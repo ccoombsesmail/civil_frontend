@@ -8,39 +8,39 @@ import { AssistDIDAdapter } from '../AssistDIDAdapter.ts'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import sessionActions from '../../../redux/actions/session'
 import userActions from '../../../redux/actions/users/index'
+import { STORE_PATH } from '../constants'
 
 const STORE_PASS = 'pwd'
 const password = 'password'
 
 const addVCToDoc = async (db, issuer, doc, id, value) => {
   const cb = issuer.issueFor(doc.getSubject())
-  if (!value) return
+  if (!value) return {}
   const vc = await cb.id(`#${id}`)
     .type('SelfProclaimedCredential')
     .properties({ value })
     .seal(STORE_PASS)
   vc.getMetadata().attachStore(doc.getStore())
-  db.addCredential(vc)
+  return db.addCredential(vc)
 }
 
 export default () => {
   const { addDIDSession, upsertDidUser } = useBindDispatch(sessionActions, userActions)
 
   return useCallback(async (mnemonic, props) => {
-    DIDBackend.initialize(new AssistDIDAdapter('mainnet'))
-    const rootPath = 'root/store'
+    DIDBackend.initialize(new AssistDIDAdapter('testnet'))
+    const rootPath = STORE_PATH
+
     const store = await DIDStore.open(rootPath)
     const rootidentity = RootIdentity.createFromMnemonic(mnemonic, password, store, STORE_PASS, true)
-    const doc = await rootidentity.newDid(STORE_PASS)
+    const doc = await rootidentity.newDid(STORE_PASS, 0, true)
 
-    // const methodSpecificId = doc.getSubject().getMethodSpecificId()
     const issuer = new Issuer(doc)
-    const db = DIDDocument.Builder.newFromDocument(doc).edit()
-    await addVCToDoc(db, issuer, doc, 'firstName', props.firstName)
-    await addVCToDoc(db, issuer, doc, 'lastName', props.lastName)
-    await addVCToDoc(db, issuer, doc, 'username', props.username)
-    await addVCToDoc(db, issuer, doc, 'avatar', props.file)
+    let db = DIDDocument.Builder.newFromDocument(doc).edit()
 
+    db = await addVCToDoc(db, issuer, doc, 'username', props.username)
+
+    // db = db.removeProof(db.getSubject())
     const docWithVC = await db.seal(STORE_PASS)
 
     await toast.promise(
@@ -68,3 +68,6 @@ export default () => {
     store.close()
   }, [])
 }
+
+// if (props.firstName) await addVCToDoc(db, issuer, doc, 'firstName', props.firstName)
+// if (props.lastName) await addVCToDoc(db, issuer, doc, 'lastName', props.lastName)

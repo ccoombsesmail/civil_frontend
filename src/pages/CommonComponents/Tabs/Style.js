@@ -63,11 +63,9 @@ export const ThemeTabNew = styled(Tabs)`
 
   li:nth-child(2) {
     .nav-link.active {
-      background-color: var(--m-elastos-theme) !important;
       opacity: 1;
     }
     .nav-link {
-      background-color: var(--m-elastos-theme);
       opacity: .5;
       color: white;
     }

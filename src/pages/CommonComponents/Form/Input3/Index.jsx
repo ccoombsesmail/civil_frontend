@@ -5,31 +5,40 @@
 import React from 'react'
 import { ErrorMessage } from 'formik'
 import capitalize from '../../../../generic/string/capitalize'
-import { StyledInput, Label, Container } from './Style'
+import {
+  StyledInput, Label, Container, OuterContainer,
+} from './Style'
 import Error from '../ErrorMessage/Index'
 
 const Input = ({
   width, field, form, placeholder, onBlur, label, isDIDForm, validInput = null, ...props
 }) => {
   const metaData = form.getFieldMeta(field.name)
-  console.log(metaData)
-  const showError = metaData.error && metaData.touched
-  const handleOnBlur = typeof onBlur === 'function' ? onBlur : () => undefined
+  const showError = metaData.error
+  const handleOnBlur = typeof onBlur === 'function' ? (e) => {
+    onBlur(e)
+    form.setFieldTouched(field.name, true, true)
+  } : () => {
+    form.setFieldTouched(field.name, true, true)
+  }
   return (
-    <Container width={width} isDIDForm={isDIDForm} validInput={validInput}>
-      <input
-        {...field}
-        type="text"
-        id={field.name}
-        name={field.name}
-        placeholder={label}
-        {...props}
-        onBlur={handleOnBlur}
-      />
-      <label htmlFor={field.name}>{label}</label>
-      {/* { metaData.error && <span>Tag Already Exists</span>} */}
-      {/* <ErrorMessage width={width} name={field.name} component={Error} /> */}
-    </Container>
+    <OuterContainer width={width}>
+      <Container isDIDForm={isDIDForm} validInput={validInput} showError={showError} width={width}>
+        <input
+          {...field}
+          type="text"
+          id={field.name}
+          name={field.name}
+          placeholder={label}
+          {...props}
+          onBlur={handleOnBlur}
+        />
+        <label htmlFor={field.name}>{label}</label>
+        {/* { showError && <span>{metaData.error}</span>} */}
+      </Container>
+      {showError && <ErrorMessage width={width} name={field.name} component={Error} /> }
+    </OuterContainer>
+
   )
 }
 

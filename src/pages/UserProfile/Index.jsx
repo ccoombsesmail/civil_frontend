@@ -8,10 +8,11 @@ import followActions from '../../redux/actions/follows/index'
 
 import {
   Banner, Container, HeaderContainer, Content, StyledNav, UserIcon, TabsIconContainer, Bio,
-  Left, Middle, Right, Experience, ExperienceContainer,
+  Left, Middle, Right, Experience, ExperienceContainer, FlexDiv,
 } from './Style/index'
 import UserList from './components/UserList/Index'
 import FollowButton from './components/FollowButton/Index'
+import UsernameAndTag from '../CommonComponents/UsernameAndTag/Index'
 
 const UserProfile = () => {
   const { userId } = useParams()
@@ -38,7 +39,14 @@ const UserProfile = () => {
         <HeaderContainer>
           <TabsIconContainer>
             <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
-            <Bio>{user?.bio}</Bio>
+            <FlexDiv>
+              <UsernameAndTag
+                usernameDisplay={user?.username}
+                userId={userId}
+                userTag={user?.tag}
+              />
+              <Bio>{user?.bio}</Bio>
+            </FlexDiv>
             <StyledNav activeKey={Number(activeKey)}>
               <div className="line" />
               <Nav.Item>

@@ -3,13 +3,14 @@ import {
 } from '@elastosfoundation/did-js-sdk'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import { STORE_PATH } from '../../DID/constants'
 
 export default () => {
   const user = useSelector((s) => s.session.currentUser)
   return useCallback(async (doc) => {
     // create jwt header
     DIDBackend.initialize(new DefaultDIDAdapter('mainnet'))
-    const rootPath = 'root/store'
+    const rootPath = STORE_PATH
     const store = await DIDStore.open(rootPath)
 
     const h = JWTBuilder.createHeader()

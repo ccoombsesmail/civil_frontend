@@ -26,7 +26,7 @@ export const MessageContainer = styled('div')`
   border-radius: .5em;
   padding: 20px 10px 10px 10px;
   cursor: pointer;
-  height: clamp(250px, 60%, 200px);
+  height: ${(props) => (props.contentType === COMMENT ? 'clamp(0px, 60%, 200px)' : 'clamp(250px, 60%, 400px)')};
   width: clamp(330px, 70%, 800px);
 
 

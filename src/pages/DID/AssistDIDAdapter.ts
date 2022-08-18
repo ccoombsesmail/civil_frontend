@@ -27,8 +27,8 @@ import { Entity } from "./Entity";
 
 const log = new Logger("AssistDIDAdapter");
 export class AssistDIDAdapter extends DefaultDIDAdapter {
-  public static MAINNET_RPC_ENDPOINT = "https://assist-restapi.tuum.tech/v2";
-  private static TESTNET_RPC_ENDPOINT = "https://assist-restapi-testnet.tuum.tech/v2";
+  public static MAINNET_RPC_ENDPOINT = "https://assist.trinity-tech.io/v2";
+  private static TESTNET_RPC_ENDPOINT = "https://assist-testnet.trinity-tech.io/v2";
 
   public static API_KEY = "IdSFtQosmCwCB9NOLltkZrFy5VqtQn8QbxBKQoHPw7zp3w0hDOyOYjgL53DO3MDH";
 
@@ -88,10 +88,6 @@ export class AssistDIDAdapter extends DefaultDIDAdapter {
 
     let headers = new Object();
     headers["Authorization"] = AssistDIDAdapter.API_KEY;
-
-    // let declareVC = new URL(this.assistRpcEndpoint + "/didtx/create");
-    // let is = await this.postHttp(declareVC, payload.toString(), headers);
-    // console.log(is)
    
     if (payload == null || payload == "")
       throw new Exceptions.IllegalArgumentException("Invalid payload parameter");

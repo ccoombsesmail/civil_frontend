@@ -19,20 +19,22 @@ export default (topicId, subtopicId, modalProps) => {
   const user = useSelector((s) => s.session.currentUser)
   const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
   const comment = useSelector((s) => s.comments.list)?.find(
-    (c) => c.data?.id === modalProps?.rootParentCommentId,
+    (c) => c.data?.id === modalProps?.rootParentCommentId || modalProps?.commentId,
   )
   const tribunalComment = useSelector((s) => s.tribunalComments.list)?.find(
     (c) => c.data?.id === modalProps?.rootParentCommentId,
   )
+
+  const { createdBy, createdByIconSrc, createdAt } = comment?.data || tribunalComment?.data || {}
   return useMemo(() => {
     const commentContent = modalProps?.replyType !== 'REPLY_FROM_TOPIC'
       ? findCommentContent(comment || tribunalComment, modalProps?.commentId) : topic?.description
     return {
       subtopicId,
-      createdByIconSrc: comment?.iconSrc || topic?.createdByIconSrc,
+      createdByIconSrc: createdByIconSrc || topic?.createdByIconSrc,
       username: user?.username,
-      createdBy: comment?.createdBy || topic?.createdBy,
-      time: comment?.createdAt || topic?.createdAt,
+      createdBy: createdBy || topic?.createdBy || tribunalComment?.createdBy,
+      time: createdAt || topic?.createdAt,
       htmlContent: commentContent,
       rootParentCommentId: modalProps?.rootParentCommentId || null,
       type: modalProps?.replyType,

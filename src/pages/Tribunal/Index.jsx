@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom'
 
 import {
   OuterContainer, InnerContainer,
-  Header, StyledScalesSvg, ReportStatsContainer, ReportStatItem, VotingContainer,
-  VotesAgainst, VotesFor, StyledPillarSvg, Timer,
+  Header, StyledScalesSvg, ReportStatsContainer, ReportStatItem,
+  StyledPillarSvg, Timer,
 } from './Style/index'
 import TopicItem from '../Topics/components/TopicItem/Index'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
@@ -17,18 +17,15 @@ import reportActions from '../../redux/actions/reports/index'
 import tribunalCommentsActions from '../../redux/actions/tribunal_comments/index'
 import commentActions from '../../redux/actions/comments/index'
 
-import { CastBallotSvg } from '../../svgs/svgs'
-import ThemeButton from '../CommonComponents/Button/Index'
-import useOpenModal from '../hooks/useOpenModal'
-import { TOPIC_VOTE_FORM } from '../App/Modal/Index'
 import { calculateTimeLeft } from '../../generic/time/calculateTimeLeft'
 import TribunalComments from './components/TribunalComments/Index'
+import VotingBox from './components/VotingBox/Index'
+
 import Comment from '../SubTopics/components/Comment/Index'
 import { COMMENT, TOPIC } from '../../enums/content_type'
 
 const Tribunal = () => {
   const { contentId, contentType } = useParams()
-  const openModal = useOpenModal(TOPIC_VOTE_FORM, { contentId })
   const user = useSelector((s) => s.session.currentUser)
   const topics = useSelector((s) => s.topics.list)
   const comments = useSelector((s) => s.comments.list)
@@ -70,7 +67,7 @@ const Tribunal = () => {
     }
 
     timerComponents.push(
-      <span key={String(idx)}>
+      <span key={String(`${idx}0`)}>
         {timeLeft[interval]}
         {' '}
         {interval}
@@ -78,6 +75,9 @@ const Tribunal = () => {
       </span>,
     )
   })
+
+  const votingTimeUp = timerComponents.length === 0
+
   const Content = useMemo(() => {
     const topic = topics?.find((t) => t.id === contentId)
     const comment = comments?.find((c) => c.data.id === contentId)
@@ -86,7 +86,7 @@ const Tribunal = () => {
     return null
   }, [topics, comments, contentId])
   return (
-    <OuterContainer>
+    <OuterContainer id="tribunal-container">
       <Header>
         <StyledScalesSvg />
         <h1>
@@ -100,7 +100,7 @@ const Tribunal = () => {
         </h4>
         {'\n'}
         <div>
-          {timerComponents.length ? timerComponents : <span>Time Is Up!</span>}
+          {(!Object.keys(timeLeft) && reportStats) ? <span>Time Is Up!</span> : timerComponents}
         </div>
       </Timer>
       <InnerContainer>
@@ -108,26 +108,13 @@ const Tribunal = () => {
         {Content}
         <StyledPillarSvg />
       </InnerContainer>
-      <VotingContainer>
-        <VotesAgainst>
-          Votes Against
-          <span>
-            ?
-          </span>
-        </VotesAgainst>
-        <VotesFor>
-          Votes For
-          <span>
-            ?
-          </span>
-        </VotesFor>
-        <CastBallotSvg />
-        <ThemeButton onClick={openModal}>
-          Cast Your Vote
-        </ThemeButton>
-        { (reportStats?.voteAgainst || reportStats?.voteFor)
-        && <span>You Have Already Voted</span>}
-      </VotingContainer>
+      {reportStats && (
+      <VotingBox
+        contentId={contentId}
+        reportStats={reportStats}
+        votingTimeUp={votingTimeUp}
+      />
+      )}
       <ReportStatsContainer>
         <ReportStatItem>
           <h2>Toxic Reports</h2>

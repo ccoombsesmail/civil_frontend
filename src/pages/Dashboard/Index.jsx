@@ -20,6 +20,9 @@ const Dashboard = () => {
   const { getCurrentUser } = useBindDispatch(sessionActions)
   const user = useSelector((s) => s.session.currentUser)
   useEffect(() => {
+    const clerkWrapper = document.getElementsByClassName('cl-main')[0]
+    console.log(clerkWrapper)
+    if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null)
     if (user) getCurrentUser(user?.id)
   }, [])
   const addVcCred = useAddVcCred()
@@ -51,7 +54,7 @@ const Dashboard = () => {
           )}
         </Formik> */}
         <Line />
-        <BioForm />
+        <BioForm user={user} />
       </Container>
     </Suspense>
   )

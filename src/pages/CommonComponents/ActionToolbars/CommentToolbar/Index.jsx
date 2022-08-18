@@ -35,7 +35,6 @@ const CommentActionToolbar = ({
         <CivilityButton comment={comment} />
       </Left>
       <Right>
-        {/* <OpposingViewsButton topicId={topicId} subTopicId={subTopicId} /> */}
         <TribunalButton contentId={comment?.id} />
         <span>
           {likes || 0}
