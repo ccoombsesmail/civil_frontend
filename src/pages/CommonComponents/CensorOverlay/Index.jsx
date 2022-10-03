@@ -9,7 +9,7 @@ import {
   MessageContainer,
 } from './Style'
 
-const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
+const CensorOverlay = ({ setShouldBlur, contentId, contentType, showNavigationToTribunal }) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   return (
@@ -21,7 +21,8 @@ const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
       contentType={contentType}
     >
       <Message>
-        This Topic Has Been Reported And May Contain Explicit Visuals Or Offensive Language
+        This Topic Has Been Reported or Flagged By
+        AI And May Contain Explicit Visuals Or Offensive Language
       </Message>
       <Warning>
         <div>
@@ -29,7 +30,7 @@ const CensorOverlay = ({ setShouldBlur, contentId, contentType }) => {
           Click To See Content At Your Own Risk!
         </div>
       </Warning>
-      { !pathname.includes('tribunal') ? (
+      { showNavigationToTribunal ? (
         <ThemeButton2 onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}>
           <ScalesSvg />
           See Ongoing Review Process

@@ -1,6 +1,7 @@
 import React, {
   useRef, useEffect, useState, useMemo,
 } from 'react'
+import { useLocation } from 'react-router-dom'
 import { UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
 import CensorOverlay from '../CensorOverlay/Index'
@@ -22,6 +23,7 @@ const Card = ({
   topic,
 }) => {
   const ref = useRef(null)
+  const { pathname } = useLocation()
   const [totalHeight, setTotalHeight] = useState('unset')
   const [shouldBlur, setShouldBlur] = useState(topic?.reportStatus === UNDER_REVIEW)
   useEffect(() => {
@@ -54,6 +56,7 @@ const Card = ({
         setShouldBlur={setShouldBlur}
         contentId={topic?.id}
         contentType={TOPIC}
+        showNavigationToTribunal={topic?.reportStatus === UNDER_REVIEW && !pathname.includes('tribunal')}
       />
       )}
 

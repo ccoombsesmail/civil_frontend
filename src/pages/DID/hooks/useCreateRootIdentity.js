@@ -5,6 +5,8 @@ import {
   RootIdentity, DIDStore, Issuer, DIDDocument, DIDBackend,
 } from '@elastosfoundation/did-js-sdk'
 import { AssistDIDAdapter } from '../AssistDIDAdapter.ts'
+// import { DefaultDIDAdapter } from '../EssentialsDIDAdapter.ts'
+
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import sessionActions from '../../../redux/actions/session'
 import userActions from '../../../redux/actions/users/index'
@@ -68,6 +70,3 @@ export default () => {
     store.close()
   }, [])
 }
-
-// if (props.firstName) await addVCToDoc(db, issuer, doc, 'firstName', props.firstName)
-// if (props.lastName) await addVCToDoc(db, issuer, doc, 'lastName', props.lastName)

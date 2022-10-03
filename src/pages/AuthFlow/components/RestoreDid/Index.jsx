@@ -8,7 +8,7 @@ import Button from '../../../CommonComponents/Buttons/ExpandButton/Index'
 const RestoreDid = () => {
   const [enteredWords, setEnteredWords] = useState({})
   const [setWordsOnKeyUp, restoreFromMnemonic] = useSetWordsOnKeyUp(enteredWords, setEnteredWords)
-
+  console.log(enteredWords)
   return (
     <OuterContainer>
       <WordList>

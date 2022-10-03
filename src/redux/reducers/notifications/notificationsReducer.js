@@ -17,7 +17,7 @@ const reducerActionMap = new Map([
   [DELETE_NOTIFICATION, deleteNotification],
 ])
 
-const reducer = (state = { list: [] }, action) => {
+const reducer = (state = { userNotificationsList: [], tribunalNotificationsList: [] }, action) => {
   if (!reducerActionMap.has(action.type)) return state
   return reducerActionMap.get(action.type)(action, state)
 }

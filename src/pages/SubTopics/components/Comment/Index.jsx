@@ -3,7 +3,7 @@ import React, {
   useState, useRef, memo,
 } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import Collapse from 'react-bootstrap/Collapse'
 import { UpArrowSvg, DownArrowSvg } from '../../../../svgs/svgs'
@@ -30,8 +30,9 @@ const Comment = ({ commentData, replies, commentRef }) => {
   const { topicId } = React.useContext(ParentCommentContext) || {}
   const contentRef = useRef(null)
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState(false)
-  const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW)
+  const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW || commentData?.toxicityStatus === 'TOXIC')
   const user = useSelector((s) => s.session.currentUser)
 
   useSetInnerHtml(contentRef, commentData?.content)
@@ -93,6 +94,7 @@ const Comment = ({ commentData, replies, commentRef }) => {
         setShouldBlur={setShouldBlur}
         contentId={commentData?.id}
         contentType={COMMENT}
+        showNavigationToTribunal={commentData?.reportStatus === UNDER_REVIEW && !pathname.includes('tribunal')}
       />
       )}
     </OuterContainer>

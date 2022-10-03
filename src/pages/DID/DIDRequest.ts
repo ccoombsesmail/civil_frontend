@@ -1,9 +1,5 @@
 import { Buffer } from "buffer";
-import { Exceptions } from "@elastosfoundation/did-js-sdk";
-import type { DIDURL, TransferTicket } from "@elastosfoundation/did-js-sdk";
-import { BASE64, DID, DIDDocument } from "@elastosfoundation/did-js-sdk";
-import { JSONObject } from "@elastosfoundation/did-js-sdk";
-import { IDChainRequest } from "@elastosfoundation/did-js-sdk";
+import { BASE64, DID, DIDDocument, JSONObject, IDChainRequest, DIDURL, TransferTicket, Exceptions } from "@elastosfoundation/did-js-sdk";
 
 /**
  * The DID request class.

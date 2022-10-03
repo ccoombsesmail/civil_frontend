@@ -35,7 +35,6 @@ const CommentColumn = ({
           ))
         }
   </Container>
-
 )
 
 export default CommentColumn

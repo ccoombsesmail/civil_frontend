@@ -6,7 +6,7 @@ import {
 } from './Style'
 
 const Notifications = () => {
-  const notifications = useSelector((s) => s.notifications.list)
+  const notifications = useSelector((s) => s.notifications.userNotificationsList)
   return (
     <Container id="notifications-container">
 

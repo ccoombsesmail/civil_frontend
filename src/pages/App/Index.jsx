@@ -23,6 +23,7 @@ import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content } from './Style'
 import UserProfile from '../UserProfile/Index'
 import Notifications from '../Notifications/Index'
+import TribunalSelectionNotification from '../TribunalNotifications/Index'
 
 const Dashboard = React.lazy(() => import(
   /* webpackChunkName: "dashboard" */
@@ -109,6 +110,7 @@ const App = () => {
                   )}
                   />
                   <Route path="/notifications" element={<Notifications />} />
+                  <Route path="/notifications-tribunal" element={<TribunalSelectionNotification />} />
                   <Route path="/topics/*" element={<Topics />} />
                   <Route path="/" element={<Navigate replace to="/topics" />} />
                 </Routes>

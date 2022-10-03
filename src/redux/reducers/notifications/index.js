@@ -1,18 +1,35 @@
+/* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
+
+import { TribunalSelection } from '../../../enums/notification_types'
 
 export const addNewNotification = (action, state) => {
   const newState = { ...state }
-  const newList = newState.list.filter((n) => n.id !== action.payload.data.id)
+  switch (action.payload.data.eventType) {
+    case TribunalSelection: {
+      const newTribunalNotificationsList = newState.tribunalNotificationsList.filter((n) => n.id !== action.payload.data.id)
+      newTribunalNotificationsList.unshift(action.payload.data)
+      newState.tribunalNotificationsList = [...newTribunalNotificationsList]
+      break
+    }
+    default: {
+      const newNotificationsList = newState.userNotificationsList.filter((n) => n.id !== action.payload.data.id)
+      newNotificationsList.unshift(action.payload.data)
+      newState.userNotificationsList = [...newNotificationsList]
+      break
+    }
+  }
 
-  newList.unshift(action.payload.data)
-  newState.list = [...newList]
   return newState
 }
 
 export const deleteNotification = (action, state) => {
   const newState = { ...state }
-  const newList = newState.list.filter((n) => n.id !== action.payload.id)
-  newState.list = newList
+  const newNotificationsList = newState.userNotificationsList.filter((n) => n.id !== action.payload.id)
+  const newTribunalNotificationsList = newState.tribunalNotificationsList.filter((n) => n.id !== action.payload.id)
+  newState.userNotificationsList = newNotificationsList
+  newState.tribunalNotificationsList = newTribunalNotificationsList
+
   return newState
 }
 
@@ -29,5 +46,6 @@ export const updateNotification = (action, state) => {
 }
 
 export const addAllNotifications = (action) => ({
-  list: action.payload,
+  userNotificationsList: action.payload.userNotifications,
+  tribunalNotificationsList: action.payload.tribunalNotifications,
 })

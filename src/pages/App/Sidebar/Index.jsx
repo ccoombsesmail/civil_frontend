@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import {
-  Container,
-} from 'react-bootstrap'
 // import { RiNotification2Fill } from 'react-icons/ri'
 // import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
@@ -9,15 +6,18 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { SideBarContainer, SideBarNav, ArrowContainer } from './Style/index'
 import {
-  NotificationSvg, UserIconSvg, ArrowRightSvg, ArrowLeftSvg,
+  NotificationSvg, UserIconSvg, ArrowRightSvg, ArrowLeftSvg, Gavel2,
 } from '../../../svgs/svgs'
 import SidebarItem from './components/SidebarItem/Index'
 
 const Sidebar = () => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
-  const notifications = useSelector((s) => s.notifications.list)
-  const numUnreadNotifications = notifications.filter((n) => n.isRead === false).length
+  const { userNotificationsList, tribunalNotificationsList } = useSelector((s) => s.notifications)
+  const [numUnreadUserNotifications, numUnreadTribunalNotifications] = [
+    userNotificationsList?.filter((n) => n.isRead === false).length,
+    tribunalNotificationsList?.filter((n) => n.isRead === false).length,
+  ]
   return (
     <SideBarContainer isOpen={open}>
       <ArrowContainer>
@@ -32,10 +32,16 @@ const Sidebar = () => {
           onClick={() => navigate('/dashboard')}
         />
         <SidebarItem
-          numUnreadNotifications={numUnreadNotifications}
+          numUnreadNotifications={numUnreadUserNotifications}
           Icon={NotificationSvg}
           text="Notifications"
           onClick={() => navigate('/notifications')}
+        />
+        <SidebarItem
+          numUnreadNotifications={numUnreadTribunalNotifications}
+          Icon={Gavel2}
+          text="Tribunal"
+          onClick={() => navigate('/notifications-tribunal')}
         />
       </SideBarNav>
     </SideBarContainer>

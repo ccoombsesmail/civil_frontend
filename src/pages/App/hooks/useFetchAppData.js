@@ -29,6 +29,7 @@ export default () => {
     addDIDSession,
     logout,
     upsertDidUser,
+    getCurrentUser,
   } = useBindDispatch(enumActions, sessionActions, userActions)
 
   useInitSocketEffect(socket)
@@ -43,7 +44,7 @@ export default () => {
       if (user) {
         user.iconSrc = user.profileImageUrl
         dispatch(addUserActionCreatorClerk(user))
-        getUser(user?.id)
+        getCurrentUser(user?.id)
       } else if (defaultDID) {
         const docExistsButNotValid = currentUser?.doc && !currentUser.doc.isValid()
         if (!currentUser?.doc || docExistsButNotValid) {

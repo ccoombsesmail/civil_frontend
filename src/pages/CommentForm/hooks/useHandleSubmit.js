@@ -33,10 +33,23 @@ export default (compState, content, rawText, modalProps, contentId) => {
       Promise.all([delay(1500), checkToxicity({ content: rawText })]),
       {
         pending: 'Analyzing Comment...',
-        success: 'Thanks For Being Civil!',
+        success: {
+          render({ data }) {
+            const toxicityScore = data[1].data.SEVERE_TOXICITY
+            if (toxicityScore < 0.6) return 'Thanks For Being Civil!'
+            if (toxicityScore >= 0.6 && toxicityScore <= 0.9) return 'Thanks for being semi-civil. Maybe say things a bit nicer'
+            return 'You are being toxic :( \n Your comment will be flagged'
+          },
+          // other options
+          icon: '🟢',
+        },
         error: 'Promise rejected 🤯',
       },
-    ).then(() => {
+    ).then((data) => {
+      const toxicityScore = data[1].data.SEVERE_TOXICITY
+      let toxicityStatus
+      if (toxicityScore < 0.6) toxicityStatus = 'NOT_TOXIC'
+      if (toxicityScore > 0.9) toxicityStatus = 'TOXIC'
       const comment = {
         ...values,
         content,
@@ -47,6 +60,7 @@ export default (compState, content, rawText, modalProps, contentId) => {
         createdBy: compState.username,
         rootId,
         rawText,
+        toxicityStatus,
       }
       return isTribunalComment ? createTribunalComment(comment) : createComment(comment)
     })

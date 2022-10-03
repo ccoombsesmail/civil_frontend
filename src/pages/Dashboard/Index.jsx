@@ -21,7 +21,6 @@ const Dashboard = () => {
   const user = useSelector((s) => s.session.currentUser)
   useEffect(() => {
     const clerkWrapper = document.getElementsByClassName('cl-main')[0]
-    console.log(clerkWrapper)
     if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null)
     if (user) getCurrentUser(user?.id)
   }, [])
