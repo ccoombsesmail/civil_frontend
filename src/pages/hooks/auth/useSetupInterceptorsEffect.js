@@ -20,7 +20,7 @@ export default () => {
       async (req) => {
         req.headers['Access-Control-Max-Age'] = 6000
         if (req.url.includes('eid')) return req
-        if (req.url.includes(AssistDIDAdapter.MAINNET_RPC_ENDPOINT)) {
+        if (req.url.includes(AssistDIDAdapter.TESTNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
           return req
         }

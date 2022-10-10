@@ -4,9 +4,8 @@
 
 import React from 'react'
 import { ErrorMessage } from 'formik'
-import capitalize from '../../../../generic/string/capitalize'
 import {
-  StyledInput, Label, Container, OuterContainer,
+  Container, OuterContainer,
 } from './Style'
 import Error from '../ErrorMessage/Index'
 
@@ -34,7 +33,6 @@ const Input = ({
           onBlur={handleOnBlur}
         />
         <label htmlFor={field.name}>{label}</label>
-        {/* { showError && <span>{metaData.error}</span>} */}
       </Container>
       {showError && <ErrorMessage width={width} name={field.name} component={Error} /> }
     </OuterContainer>

@@ -1,15 +1,22 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 
-import { TribunalSelection } from '../../../enums/notification_types'
+import { CommentCivilityGiven, TribunalSelection, UserContentReported } from '../../../enums/notification_types'
 
 export const addNewNotification = (action, state) => {
   const newState = { ...state }
   switch (action.payload.data.eventType) {
-    case TribunalSelection: {
+    case TribunalSelection:
+    case UserContentReported: {
       const newTribunalNotificationsList = newState.tribunalNotificationsList.filter((n) => n.id !== action.payload.data.id)
       newTribunalNotificationsList.unshift(action.payload.data)
       newState.tribunalNotificationsList = [...newTribunalNotificationsList]
+      break
+    }
+    case CommentCivilityGiven: {
+      const newNotificationsList = [...newState.userNotificationsList]
+      newNotificationsList.unshift(action.payload.data)
+      newState.userNotificationsList = newNotificationsList
       break
     }
     default: {
@@ -35,13 +42,29 @@ export const deleteNotification = (action, state) => {
 
 export const updateNotification = (action, state) => {
   const newState = { ...state }
-  const newList = newState.list.map((n) => {
-    if (n.id === action.payload.id) {
-      return { ...action.payload }
+  switch (action.payload.eventType) {
+    case TribunalSelection:
+    case UserContentReported: {
+      const newTribunalNotificationsList = newState.tribunalNotificationsList.map((n) => {
+        if (n.id === action.payload.data.id) {
+          return { ...action.payload.data }
+        }
+        return n
+      })
+      newState.tribunalNotificationsList = newTribunalNotificationsList
+      break
     }
-    return action.payload
-  })
-  newState.list = newList
+    default: {
+      const newNotificationsList = newState.userNotificationsList.map((n) => {
+        if (n.id === action.payload.data.id) {
+          return { ...action.payload.data }
+        }
+        return n
+      })
+      newState.userNotificationsList = newNotificationsList
+      break
+    }
+  }
   return newState
 }
 

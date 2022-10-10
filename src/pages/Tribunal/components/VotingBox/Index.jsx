@@ -20,18 +20,18 @@ const VotingBox = ({ contentId, reportStats, votingTimeUp }) => {
 
   return (
     <VotingContainer>
-      <VotesAgainst>
-        Votes Against
-        <span>
-          {reportStats && (reportStats.numVotesAgainst ?? '?')}
-        </span>
-      </VotesAgainst>
       <VotesFor>
-        Votes For
+        Violation Votes
         <span>
           {reportStats && (reportStats.numVotesFor ?? '?')}
         </span>
       </VotesFor>
+      <VotesAgainst>
+        No Violation Votes
+        <span>
+          {reportStats && (reportStats.numVotesAgainst ?? '?')}
+        </span>
+      </VotesAgainst>
       <MiddleSection verdict={verdict}>
         { votingTimeUp && (
         <span>

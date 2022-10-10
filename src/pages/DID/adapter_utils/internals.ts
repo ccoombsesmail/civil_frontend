@@ -106,7 +106,7 @@ export * from "./backend/didresolveresponse";
 export * from "./backend/didrequest";
 export * from "./backend/credentialbiography";
 export * from "./didbackend";
-export * from "./defaultdidadapter";
+// export * from "./defaultdidadapter";
 export * from "./backend/simulatedidchainadapter";
 export * from "./didadapter";
 export * from "./utils";

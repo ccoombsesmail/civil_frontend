@@ -34,6 +34,7 @@ export default (content, user, contentType) => {
       commentId: content?.id,
       userId: user?.id,
       value,
+      createdById: content.createdById || content.userId,
     }
     switch (contentType) {
       case TOPIC:

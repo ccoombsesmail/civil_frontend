@@ -1,7 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TribunalSelection } from '../../../../enums/notification_types'
+import { TribunalSelection, UserContentReported } from '../../../../enums/notification_types'
 import TribunalSelectionNotification from '../TribunalSelectionNotification/Index'
+import UserContentReportedNotification from '../UserContentReportedNotification/Index'
 import {
   Item,
 } from './Style'
@@ -14,6 +15,10 @@ const NotificationItem = ({ notification }) => {
     case TribunalSelection:
       onClick = () => navigate(`/tribunal/${notification.contentType}/${notification.reportedContentId}`)
       ItemComponent = TribunalSelectionNotification
+      break
+    case UserContentReported:
+      onClick = () => navigate(`/tribunal/${notification.contentType}/${notification.reportedContentId}`)
+      ItemComponent = UserContentReportedNotification
       break
     default:
       break

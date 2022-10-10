@@ -1,11 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { NewFollower, CommentCivilityGiven } from '../../../../enums/notification_types'
+import { NewFollower, CommentCivilityGiven, CommentLike } from '../../../../enums/notification_types'
 import FollowNotifcation from '../FollowNotification/Index'
 import CommentCivilityNotifcation from '../CommentCivilityNotification/Index'
 import {
   Item,
 } from './Style'
+import CommentLikeNotification from '../LikeNotification/Index'
 
 const NotificationItem = ({ notification }) => {
   const navigate = useNavigate()
@@ -17,8 +18,12 @@ const NotificationItem = ({ notification }) => {
       ItemComponent = FollowNotifcation
       break
     case CommentCivilityGiven:
-      onClick = () => navigate(`/user/${notification.givingUserId}`)
+      // onClick = () => navigate(`/user/${notification.givingUserId}`)
       ItemComponent = CommentCivilityNotifcation
+      break
+    case CommentLike:
+      onClick = () => navigate(`/user/${notification.givingUserId}`)
+      ItemComponent = CommentLikeNotification
       break
     default:
       break

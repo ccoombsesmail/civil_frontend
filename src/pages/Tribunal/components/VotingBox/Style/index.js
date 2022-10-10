@@ -38,11 +38,12 @@ export const VotesAgainst = styled('div')`
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 10%;
+  right: 10%;
   top: 50%;
   transform: translate(0, -50%);
   font-size: 1.3vw;
   align-items: center;
+
   @media only screen and (max-width: 800px) {
     font-size: 4vw;
   }
@@ -53,15 +54,15 @@ export const VotesFor = styled('div')`
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: 10%;
+  left: 10%;
   top: 50%;
   transform: translate(0, -50%);
   font-size: 1.3vw;
   align-items: center;
-
   @media only screen and (max-width: 800px) {
     font-size: 4vw;
   }
+
 `
 
 export const MiddleSection = styled('div')`

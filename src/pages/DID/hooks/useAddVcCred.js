@@ -28,7 +28,7 @@ export default () => {
   const { addDIDSession, upsertDidUser } = useBindDispatch(sessionActions, userActions)
   const currentUser = useSelector((s) => s.session.currentUser)
   return useCallback(async (props) => {
-    DIDBackend.initialize(new AssistDIDAdapter('mainnet'))
+    DIDBackend.initialize(new AssistDIDAdapter('testnet'))
     const rootPath = STORE_PATH
     const store = await DIDStore.open(rootPath)
     const { doc } = currentUser

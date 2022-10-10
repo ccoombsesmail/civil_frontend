@@ -1,7 +1,6 @@
 import React from 'react'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
-import { ProfileIcon } from './Style'
 import { MiddleContainer, LeftContainer } from '../Style'
 
 import { TribunalSelection } from '../../../../enums/notification_types'
@@ -27,9 +26,6 @@ const TribunalSelectionNotification = ({ notification }) => {
       <MiddleContainer>
         <Gavel2 size="5vh" />
         <h3>
-          {/* <b style={{ marginRight: '8px' }}>
-            {notification.username}
-          </b> */}
           You have been selected for Jury Duty!
         </h3>
 

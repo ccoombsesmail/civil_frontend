@@ -9,7 +9,7 @@ export default () => {
   const user = useSelector((s) => s.session.currentUser)
   return useCallback(async (doc) => {
     // create jwt header
-    DIDBackend.initialize(new DefaultDIDAdapter('mainnet'))
+    DIDBackend.initialize(new DefaultDIDAdapter('testnet'))
     const rootPath = STORE_PATH
     const store = await DIDStore.open(rootPath)
 
@@ -39,6 +39,7 @@ export default () => {
       // .setNotBefore(nbf)
       .put('userId', doc.getSubject().repr)
       .put('username', user?.username || doc.getSubject().getMethodSpecificId())
+      .put('username', user?.tag || doc.getSubject().getMethodSpecificId())
 
     doc.getMetadata().attachStore(store)
 

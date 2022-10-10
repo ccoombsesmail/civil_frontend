@@ -44,7 +44,7 @@ const CreateTagForm = ({ userId }) => {
                     The tag you create is unique accross the Civil platform,
                     and can be used to "mention" you via "@"
                   </p>
-                  <Field name="tag" label="Enter Tag" component={Input3} onKeyUp={checkIfTagExistsOnKeyPress} validInput={isValid} />
+                  <Field name="tag" label="Enter Tag" component={Input3} width="50%" onKeyUp={checkIfTagExistsOnKeyPress} validInput={isValid} />
                 </InputContainer>
               </Modal.Body>
               <Modal.Footer>

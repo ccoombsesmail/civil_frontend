@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const BorderContainer = styled('div')`
-  width: 50vw;
+  width: 60vw;
   border: 1px solid gray;
   border-top: none;
   z-index: 9999;

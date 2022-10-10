@@ -4,15 +4,20 @@ export const MenuTimeContainer = styled('div')`
   z-index: 99999;
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  padding: 5px 0;
+  width: 8%;
+  border-left: 1px solid lightgray;
+  border-color: rgba(200,200,200,0.25);
 
 `
 
 export const Time = styled('span')`
   color: gray;
   font-size: 1vw;
+  padding: 0 10px;
 `
 export const MenuIconContainer = styled('div')` 
   position: relative;
@@ -22,12 +27,11 @@ export const MenuIconContainer = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-
   color: #2cdd9b;
   background-color: #e5f7f0;
   border-color: #d8f7eb;
   transition: all 1s;
-
+  cursor: pointer;
   :hover {
     filter: brightness(0.85);
   }
@@ -45,15 +49,10 @@ export const ActionMenu = styled('ul')`
   transform: translate(-55%, 55%) ;
   display: ${(props) => (props.isOpen ? 'block' : 'none')} ;
   width: 10vw;
-  /* height: 40vh; */
   background-color: white;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius:  .5em;
   margin: 0;
-  /* svg {
-    width: 2.2em !important;
-    height: 2.2em !important;
-  } */
 
 `
 

@@ -96,7 +96,7 @@ const Tribunal = () => {
       </Header>
       <Timer>
         <h4>
-          Voting Period Timing Remaining
+          { reportStats?.reportPeriodEnd ? 'Voting Period Timing Remaining' : 'Voting Has Ended' }
         </h4>
         {'\n'}
         <div>

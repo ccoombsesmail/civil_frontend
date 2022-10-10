@@ -9,7 +9,7 @@ import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
 import delay from '../../../generic/delay'
 import useDetectCurrentPage from '../../hooks/routing/useDetectCurrentPage'
 
-export default (compState, content, rawText, modalProps, contentId) => {
+export default (compState, content, rawText, modalProps, contentId, topicId) => {
   const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()
 
   const {
@@ -57,6 +57,7 @@ export default (compState, content, rawText, modalProps, contentId) => {
         parentId,
         contentId,
         subtopicId: contentId,
+        topicId,
         createdBy: compState.username,
         rootId,
         rawText,
