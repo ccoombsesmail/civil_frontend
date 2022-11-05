@@ -76,8 +76,12 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      process: undefined,
+    // new webpack.DefinePlugin({
+    //   process: undefined,
+    // }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+      Buffer: ['buffer', 'Buffer'],
     }),
     new BundleAnalyzerPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
@@ -105,12 +109,18 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts'],
-    preferRelative: true,
+    extensions: ['.js', '.jsx', '.tsx', '.ts', '.mjs', '.json'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
-      path: require.resolve('path-browserify'),
       stream: require.resolve('stream-browserify'),
+      assert: require.resolve('assert'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      os: require.resolve('os-browserify'),
+      url: require.resolve('url'),
+      path: require.resolve('path-browserify'),
+      constants: require.resolve('constants-browserify'),
+      fs: false,
     },
   },
 

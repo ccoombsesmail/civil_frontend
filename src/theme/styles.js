@@ -233,6 +233,12 @@ blockquote {
     line-height: var(--lineHeightMd);
   }
 
+  .wallet-adapter-modal.wallet-adapter-modal-fade-in {
+    z-index: 99999999999 !important;
+
+  }
+
+
   .twitter-tweet {
     margin: 0 !important;
   }

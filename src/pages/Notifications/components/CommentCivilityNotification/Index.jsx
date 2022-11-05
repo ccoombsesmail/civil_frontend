@@ -10,7 +10,7 @@ import { CommentCivilityGiven } from '../../../../enums/notification_types'
 const CommentCivilityNotifcation = ({ notification }) => {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, topicId, subtopicId, commentId,
+    givingUserTag, topicId, subtopicId, commentId, createdAt, old, new: newVal, id,
   } = notification
   const navigate = useNavigate()
   const handleClick = (e) => {
@@ -35,19 +35,22 @@ const CommentCivilityNotifcation = ({ notification }) => {
           )
         }
         <h3>
-          <b style={{ marginRight: '5px' }}>
+          <b>
             {givingUserUsername}
           </b>
+          {' '}
           Updated Civility Given For Your
-          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`} style={{ margin: '0 5px' }}>
+          {' '}
+          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
             Comment
           </Link>
-          {`from ${notification.old.toFixed(2)} to ${notification.new.toFixed(2)} Civility ${notification.old < notification.new ? '😊' : '☹️'}`}
+          {' '}
+          {`from ${old.toFixed(2)} to ${newVal.toFixed(2)} Civility ${old < newVal ? '😊' : '☹️'}`}
         </h3>
       </MiddleContainer>
       <MenuTime
-        time={getTimeSince(notification.createdAt)}
-        id={notification.id}
+        time={getTimeSince(createdAt)}
+        id={id}
         eventType={CommentCivilityGiven}
       />
     </>

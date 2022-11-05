@@ -1,4 +1,4 @@
-import { useAuth, useUser } from '@clerk/clerk-react'
+import { useAuth } from '@clerk/clerk-react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -6,6 +6,7 @@ import axios from 'axios'
 import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
 import useCreateDidBasedJwt from './useCreateDidBasedJwt'
 import { AssistDIDAdapter } from '../../DID/AssistDIDAdapter.ts'
+import useGetCivicAuthHeader from '../../../civic/hooks/useGetCivicAuthHeader.ts'
 
 export default () => {
   const { getToken } = useAuth()
@@ -13,6 +14,7 @@ export default () => {
 
   const createDIDBasedJWT = useCreateDidBasedJwt()
   const getDefaultDID = useGetDefaultDID()
+  const getCivicAuthHeader = useGetCivicAuthHeader()
   // const { user } = useUser({ withAssertions: true })
   useEffect(() => {
     // Set all request headers with token
@@ -24,6 +26,8 @@ export default () => {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
           return req
         }
+        const civicToken = await getCivicAuthHeader()
+        console.log(civicToken)
         const defaultDID = await getDefaultDID()
         let token = null
         token = await getToken({ template: 'jwt' })
@@ -33,7 +37,7 @@ export default () => {
           req.headers.Authorization = `Bearer ${token}`
         } else if (defaultDID && currentUser) {
           const docExistsButNotValid = currentUser?.doc && !currentUser.doc.isValid()
-          let didDoc = currentUser?.doc
+          let didDoc = currentUser.doc
           if (docExistsButNotValid) {
             didDoc = await defaultDID.resolve()
           }
@@ -41,7 +45,16 @@ export default () => {
           token = didToken
           req.headers['X-JWT-TYPE'] = `DID ${didDoc.subject.repr}`
           req.headers.Authorization = `Bearer ${token}`
+        } else {
+          console.log("ASDGASDG@#$!#$!@#$!@#$!@ASDFASDFASDFASD")
+          req.headers['X-JWT-TYPE'] = `CIVIC-DID ${"id"}`
+          req.headers.Authorization = `Bearer ${civicToken}`
         }
+        // if (!token) {
+        //   console.log(req)
+        //   console.log("cancelling...")
+        //   throw new axios.Cancel('Operation canceled by the user.')
+        // }
         return req
       },
       (error) => Promise.reject(error),
@@ -74,5 +87,5 @@ export default () => {
     //     return Promise.reject(error)
     //   },
     // )
-  }, [currentUser])
+  }, [currentUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])
 }

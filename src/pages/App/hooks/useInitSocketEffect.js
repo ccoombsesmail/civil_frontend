@@ -21,5 +21,5 @@ export default (socket) => {
         })
       }
     }
-  }, [user])
+  }, [user?.id])
 }

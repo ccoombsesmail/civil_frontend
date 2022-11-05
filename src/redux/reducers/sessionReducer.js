@@ -15,12 +15,14 @@ const reducer = (state = {}, action) => {
     case ADD_SESSION_DATA_CLERK:
       return { ...state, currentUser: { ...state.currentUser, ...action.payload } }
     case ADD_SESSION_DATA_DID:
+      console.log(action.payload)
       return {
         ...state,
         currentUser: {
           ...action.payload,
+          ...state.currentUser,
           username: action.payload.username,
-          id: action.payload.did.repr,
+          id: action.payload.did?.repr || action.payload.userId,
         },
       }
     case LOG_OUT:

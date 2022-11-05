@@ -1,38 +1,32 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
-import { MiddleContainer, LeftContainer } from '../Style'
+import { MiddleContainer } from '../Style'
 
 import { TribunalSelection } from '../../../../enums/notification_types'
 import { Gavel2 } from '../../../../svgs/svgs'
-import UsernameAndTag from '../../../CommonComponents/UsernameAndTag/Index'
 
 const TribunalSelectionNotification = ({ notification }) => {
-  const { createdBy, reportedUserId, userTag } = notification
+  const {
+    createdAt, id, contentType, reportedContentId,
+  } = notification
   return (
     <>
-      <LeftContainer>
-        <h3>
-          <b>
-            Reportee
-          </b>
-        </h3>
-        <UsernameAndTag
-          usernameDisplay={createdBy}
-          userId={reportedUserId}
-          userTag={userTag}
-        />
-      </LeftContainer>
       <MiddleContainer>
         <Gavel2 size="5vh" />
         <h3>
-          You have been selected for Jury Duty!
+          You have been selected for
+          {' '}
+          <Link to={`/tribunal/${contentType}/${reportedContentId}`}>
+            Comment!
+          </Link>
         </h3>
 
       </MiddleContainer>
       <MenuTime
-        time={getTimeSince(notification.createdAt)}
-        id={notification.id}
+        time={getTimeSince(createdAt)}
+        id={id}
         eventType={TribunalSelection}
       />
     </>

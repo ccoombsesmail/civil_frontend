@@ -38,7 +38,7 @@ export const DropdownMenu = ({ open, setOpen }) => {
   const user = useSelector((s) => s.session.currentUser)
   const { pathname } = useLocation()
   const session = useSessionType()
-  const [loggedInViaDID, setLoggedInViaDID] = useState(false)
+  const [loggedInViaDIDOrCivic, setLoggedInViaDIDOrCivic] = useState(false)
   const deleteStore = useLogout(setOpen)
   const goToDashboard = useGoToDash(setOpen)
 
@@ -46,8 +46,8 @@ export const DropdownMenu = ({ open, setOpen }) => {
 
   useEffect(() => {
     (async () => {
-      const { signedInViaDID } = await session
-      setLoggedInViaDID(signedInViaDID)
+      const { signedInViaDID, signedInViaCivic } = await session
+      setLoggedInViaDIDOrCivic(signedInViaDID || signedInViaCivic)
     })()
   }, [session])
 
@@ -63,7 +63,7 @@ export const DropdownMenu = ({ open, setOpen }) => {
 
   return (
     <DropdownMenuContainer open={open}>
-      { loggedInViaDID && (
+      { loggedInViaDIDOrCivic && (
       <UserInfoSection>
         <UserIcon width="50px" userId={user?.id} />
         <Greeting>
@@ -89,7 +89,7 @@ export const DropdownMenu = ({ open, setOpen }) => {
       )}
       <Menu>
         <SignedOut>
-          {!loggedInViaDID && (
+          {!loggedInViaDIDOrCivic && (
           <DropdownItem
             leftIcon={<LoginSvg />}
             to="/authenticate"

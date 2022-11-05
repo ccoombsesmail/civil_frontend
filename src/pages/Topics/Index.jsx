@@ -16,7 +16,10 @@ const Topics = () => {
   const user = useSelector((s) => s.session.currentUser)
   useEffect(() => {
     setTimeout(() => {
-      getAllTopics()
+      if (user) {
+        console.log(user)
+        getAllTopics()
+      }
     }, 0)
   }, [])
 

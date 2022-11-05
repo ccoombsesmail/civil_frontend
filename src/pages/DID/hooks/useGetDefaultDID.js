@@ -17,5 +17,4 @@ export default () => useCallback(async () => {
     console.log('No DID')
     return ''
   }
-  // return defaultDID
 }, [])

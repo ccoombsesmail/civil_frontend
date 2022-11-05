@@ -1,4 +1,3 @@
-
 export const getTimeSince = (date) => {
   let res
   let unit = 'm'
@@ -10,7 +9,7 @@ export const getTimeSince = (date) => {
     unit = 'h'
   }
   if (res > 60) {
-    res =  Math.floor(res / 24)
+    res = Math.floor(res / 24)
     unit = 'd'
   }
   return `${res}${unit}`

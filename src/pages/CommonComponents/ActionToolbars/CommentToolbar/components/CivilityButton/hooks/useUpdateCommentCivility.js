@@ -15,6 +15,7 @@ export default (comment) => {
 
   return useCallback((e) => {
     const isTribunal = pathname.includes('tribunal')
+    console.log(comment)
     const data = {
       givingUserId: user.id,
       receivingUserId: comment.createdById,

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import UsernameAndTag from '../../../CommonComponents/UsernameAndTag/Index'
@@ -6,7 +7,6 @@ import { LeftContainer, MiddleContainer, ProfileIcon } from '../Style'
 
 import { CommentLike } from '../../../../enums/notification_types'
 import { LikeClickedSvg } from '../../../../svgs/svgs'
-import { Link, useNavigate } from 'react-router-dom'
 
 const CommentLikeNotification = ({ notification }) => {
   const {
@@ -29,13 +29,16 @@ const CommentLikeNotification = ({ notification }) => {
       </LeftContainer>
       <MiddleContainer>
         <h3>
-          <b style={{ marginRight: '8px' }}>
+          <b>
             {givingUserUsername}
           </b>
+          {' '}
           Liked Your
-          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`} style={{ margin: '0 5px' }}>
+          {' '}
+          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
             Comment!
           </Link>
+          {' '}
           😊
         </h3>
         <LikeClickedSvg />

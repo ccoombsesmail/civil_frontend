@@ -15,6 +15,7 @@ import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer } from './Style/index'
 import { ThemeTab } from '../../../CommonComponents/Tabs/Style'
 import { Line } from '../../Style'
+import useSessionType from '../../../hooks/permissions/useSessionType'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
@@ -24,6 +25,7 @@ const SubTopicThread = () => {
   const user = useSelector((state) => state.session.currentUser)
   const subtopic = useSelector((state) => state.subtopics)[subTopicId]
   const [key, setKey] = useState('all')
+  const sessionType = useSessionType()
 
   const {
     POSITIVE: positiveComments,
@@ -33,9 +35,17 @@ const SubTopicThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
-    getAllComments(subTopicId, user?.id)
-    getTopic(topicId, user?.id)
-  }, [user])
+    console.log(user)
+
+    const get = async () => {
+      const { signedInViaClerk, signedInViaDID } = await sessionType
+      if (!signedInViaClerk && !signedInViaDID) return new Promise()
+      getAllComments(subTopicId, user?.id)
+      getTopic(topicId, user?.id)
+      return new Promise()
+    }
+    get()
+  }, [user?.id])
   return (
 
     <ThreadContainer>

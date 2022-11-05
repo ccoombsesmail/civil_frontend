@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { memo, useMemo, useState } from 'react'
 import RangeSlider from '../../../../Form/RangeSlider/Index'
 import PopoverStickOnHover from '../../../../PopoverStickOnHover/Index'

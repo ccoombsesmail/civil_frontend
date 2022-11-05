@@ -1,30 +1,45 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
-import { ProfileIcon } from './Style'
-import { MiddleContainer } from '../Style'
+import { MiddleContainer, LeftContainer, ProfileIcon } from '../Style'
+import UsernameAndTag from '../../../CommonComponents/UsernameAndTag/Index'
 
 import { NewFollower } from '../../../../enums/notification_types'
 import { AddFriendSvg } from '../../../../svgs/svgs'
 
 const FollowNotifcation = ({ notification }) => {
-  console.log('')
+  const navigate = useNavigate()
+  const {
+    givingUserId, givingUserUsername, givingUserIconSrc, givingUserTag, createdAt, id,
+  } = notification
   return (
     <>
-      <ProfileIcon src={notification.iconSrc} />
+      <LeftContainer onClick={() => navigate(`/user/${givingUserId}`)}>
+        <ProfileIcon src={givingUserIconSrc} />
+        <UsernameAndTag
+          userId={givingUserId}
+          usernameDisplay={givingUserUsername}
+          userTag={givingUserTag}
+        />
+      </LeftContainer>
       <MiddleContainer>
-        <AddFriendSvg size="5vh" />
+        <AddFriendSvg size="15vh" />
         <h3>
-          <b style={{ marginRight: '8px' }}>
-            {notification.username}
-          </b>
-          followed you
+          {' '}
+          <Link to={`/user/${givingUserId}`}>
+            <b>
+              {givingUserUsername}
+            </b>
+          </Link>
+          {' '}
+          Followed You
         </h3>
 
       </MiddleContainer>
       <MenuTime
-        time={getTimeSince(notification.createdAt)}
-        id={notification.id}
+        time={getTimeSince(createdAt)}
+        id={id}
         eventType={NewFollower}
       />
     </>

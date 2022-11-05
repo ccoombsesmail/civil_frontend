@@ -39,6 +39,7 @@ export const MiddleContainer = styled('div')`
   }
   svg {
     height: 3vh;
+    min-height: 30px;
     position: absolute;
     top: 8px;
   }

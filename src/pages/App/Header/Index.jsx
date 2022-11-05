@@ -2,9 +2,10 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
 
-import IconButton from '../../CommonComponents/IconButton/Index'
-import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { StyledHeader, ButtonsContainer, CivilIcon } from './Style'
+import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
+import IconButton from '../../CommonComponents/IconButton/Index'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -19,6 +20,8 @@ const Header = () => {
         <UserButton userProfileUrl="/dashboard" afterSignOutUrl="/" />
       </SignedIn>
       <SignedOut>
+        <WalletMultiButton />
+
         <NavDropdownToggle>
           <DropdownMenu />
         </NavDropdownToggle>

@@ -28,6 +28,7 @@ export default (content, user, contentType) => {
       default:
         break
     }
+    console.log(content)
     const likeData = {
       id: content?.id,
       commentId: content?.id,

@@ -2,13 +2,14 @@ import React from 'react'
 
 export const CircleLoading = ({ size, noBackground }) => (
   <div style={{
-    width: noBackground ? 'unset' : '100%', height: '100%', backgroundColor:  noBackground ? 'none' : 'var(--m-secondary-background-color)', opacity: '0.8', minHeight: noBackground ? 'unset' : '10vh',
+    width: noBackground ? 'unset' : '100%', height: '100%', backgroundColor: noBackground ? 'none' : 'var(--m-secondary-background-color)', opacity: '0.8', 
+    minHeight: noBackground ? 'unset' : '10vh', display: 'flex', alignItems: 'center',
   }}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        margin: 'auto', background: 'none', display: 'block', shapeRendering: 'auto',
+        margin: 'unset auto', background: 'none', display: 'block', shapeRendering: 'auto',
       }}
       width={size}
       height={size}
