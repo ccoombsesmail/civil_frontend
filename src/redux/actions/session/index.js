@@ -37,7 +37,8 @@ export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData
   .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getCurrentUser = (userId, didUser = false) => (dispatch) => UsersApiUtil.getUser(userId)
+export const getCurrentUser = (userId, didUser = false) => (dispatch) => UsersApiUtil
+  .getUser(userId)
   .then((res) => {
     if (!res.data.tag) {
       dispatch({

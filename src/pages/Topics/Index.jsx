@@ -17,11 +17,10 @@ const Topics = () => {
   useEffect(() => {
     setTimeout(() => {
       if (user) {
-        console.log(user)
         getAllTopics()
       }
     }, 0)
-  }, [])
+  }, [user])
 
   return (
     <>

@@ -21,7 +21,7 @@ import { calculateTimeLeft } from '../../generic/time/calculateTimeLeft'
 import TribunalComments from './components/TribunalComments/Index'
 import VotingBox from './components/VotingBox/Index'
 
-import Comment from '../SubTopics/components/Comment/Index'
+import Comment from '../MainContent/components/SubTopicsPage/components/Comment/Index'
 import { COMMENT, TOPIC } from '../../enums/content_type'
 
 const Tribunal = () => {

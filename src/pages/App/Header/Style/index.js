@@ -45,3 +45,24 @@ export const ProfileIcon = styled('img')`
   border-radius: 50%;
   cursor: pointer; 
 `
+
+export const NavContainer = styled('nav')`
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin-right: 30px;
+  .cl-user-button {
+    width: 35px !important;
+    height: 35px !important; 
+  }
+  button {
+    margin: 0 10px;
+  }
+
+`
+
+export const Divider = styled('div')`
+  border-left: 1px solid lightgray;
+  height: 40px;
+  margin: 0 20px 0 10px;
+`

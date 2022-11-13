@@ -11,11 +11,10 @@ export const UPDATE_SESSION = 'UPDATE_SESSION'
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_SESSION_DATA_BACKEND:
-      return { ...state, currentUser: { ...state.currentUser, civility: action.payload.civility } }
+      return { ...state, currentUser: { ...state.currentUser, ...action.payload } }
     case ADD_SESSION_DATA_CLERK:
       return { ...state, currentUser: { ...state.currentUser, ...action.payload } }
     case ADD_SESSION_DATA_DID:
-      console.log(action.payload)
       return {
         ...state,
         currentUser: {

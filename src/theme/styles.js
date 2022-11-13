@@ -238,6 +238,10 @@ blockquote {
 
   }
 
+  .wallet-adapter-dropdown-list-active {
+    z-index: 999999 !important;
+}
+
 
   .twitter-tweet {
     margin: 0 !important;
@@ -276,25 +280,25 @@ blockquote {
 
   /* ******************************** CLERK RELATED STUFF ******************************** */
   .cl-component.cl-user-button {
-    width: 4rem !important;
+    /* width: 4rem !important;
     height: unset !important;
-    /* height: 4rem !important; */
+     height: 4rem !important; 
     margin-right: 1rem;
     min-width: calc(var(--nav-size) * .9);
   @media only screen and (max-width: 800px) {
 
      height: calc(var(--nav-size) * .9) !important;  
-    }
+    } */
   } 
 
   .cl-component .cl-user-button-trigger>.cl-user-button-avatar {
     /* height: calc(.7* var(--nav-size)) !important;
     width: calc(.7* var(--nav-size)) !important; */
 
-    width: 3vw !important;
+    /* width: 3vw !important;
     aspect-ratio: 32 / 32 !important;
     width:  calc(var(--nav-size) * .9) !important;
-    height:  calc(var(--nav-size) * .9) !important;  
+    height:  calc(var(--nav-size) * .9) !important;   */
 
 
   }

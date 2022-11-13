@@ -4,6 +4,6 @@ import { useNavigate } from 'react-router-dom'
 export default (topicId) => {
   const navigate = useNavigate()
   return useCallback(() => {
-    navigate(`/topics/${topicId}/subtopics/`)
+    navigate(`/home/topics/${topicId}/subtopics/`)
   }, [topicId])
 }

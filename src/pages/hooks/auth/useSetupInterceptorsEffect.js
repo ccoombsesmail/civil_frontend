@@ -27,7 +27,6 @@ export default () => {
           return req
         }
         const civicToken = await getCivicAuthHeader()
-        console.log(civicToken)
         const defaultDID = await getDefaultDID()
         let token = null
         token = await getToken({ template: 'jwt' })
@@ -43,11 +42,10 @@ export default () => {
           }
           const didToken = await createDIDBasedJWT(didDoc)
           token = didToken
-          req.headers['X-JWT-TYPE'] = `DID ${didDoc.subject.repr}`
+          req.headers['X-JWT-TYPE'] = `ELASTOS-DID ${didDoc.subject.repr}`
           req.headers.Authorization = `Bearer ${token}`
         } else {
-          console.log("ASDGASDG@#$!#$!@#$!@#$!@ASDFASDFASDFASD")
-          req.headers['X-JWT-TYPE'] = `CIVIC-DID ${"id"}`
+          req.headers['X-JWT-TYPE'] = 'CIVIC-DID'
           req.headers.Authorization = `Bearer ${civicToken}`
         }
         // if (!token) {

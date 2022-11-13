@@ -1,7 +1,7 @@
 import React from 'react'
 import { clusterApiUrl, PublicKey } from '@solana/web3.js'
 import {
-  GatewayProvider, useGateway, GatewayStatus, Badge,
+  GatewayProvider, useGateway, GatewayStatus,
 } from '@civic/solana-gateway-react'
 import { useWallet } from '@solana/wallet-adapter-react'
 

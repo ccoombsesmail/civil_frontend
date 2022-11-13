@@ -42,16 +42,16 @@ export const createCivicAuthToken = async (
   const { publicKey } = wallet
   const pubKey = publicKey?.toBase58()
   if (!pubKey) return undefined
-  const solanaConnection = new Connection(clusterApiUrl('devnet'))
-  const profile = await CivicProfile.get(pubKey, { solana: { connection: solanaConnection } })
-  console.log("createCivicAuthToken -> profile:", profile)
-  const gatewayTokens: GatewayToken[] = await profile.getPasses()
-  console.log("createCivicAuthToken -> gatewayTokens:", gatewayTokens)
+  // const solanaConnection = new Connection(clusterApiUrl('devnet'))
+  // const profile = await CivicProfile.get(pubKey, { solana: { connection: solanaConnection } })
+  // console.log("createCivicAuthToken -> profile:", profile)
+  // const gatewayTokens: GatewayToken[] = await profile.getPasses()
+  // console.log("createCivicAuthToken -> gatewayTokens:", gatewayTokens)
 
 
   const encodedMessage = new TextEncoder().encode(
     JSON.stringify({
-      gatewayTokens,
+      verifyOwnership: "Sign To Verify You Are The Wallet Owner",
       exp,
     })
   );

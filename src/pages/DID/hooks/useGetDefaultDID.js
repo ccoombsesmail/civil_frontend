@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import {
   DIDStore,
 } from '@elastosfoundation/did-js-sdk'
@@ -15,6 +15,6 @@ export default () => useCallback(async () => {
     return did
   } catch {
     console.log('No DID')
-    return ''
+    return null
   }
 }, [])

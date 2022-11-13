@@ -28,11 +28,10 @@ export default (content, user, contentType) => {
       default:
         break
     }
-    console.log(content)
     const likeData = {
       id: content?.id,
       commentId: content?.id,
-      userId: user?.id,
+      userId: user?.userId,
       value,
       createdById: content.createdById || content.userId,
     }

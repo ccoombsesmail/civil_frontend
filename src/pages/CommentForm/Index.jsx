@@ -34,7 +34,6 @@ const CreateCommentForm = ({ modalProps }) => {
   const { pathname } = useLocation()
   const contentId = pathname.match(uuidRegEx)[0]
   const subtopicId = pathname.match(uuidRegEx)[1]
-  console.log(pathname)
   const compState = useGetStateEffect(contentId, subtopicId, modalProps)
   const handleSubmit = useHandleSubmit(compState, richTextEditorData.rawHTML, richTextEditorData.rawText, modalProps, subtopicId || contentId, contentId)
   useSetInnerHtml(descRef, compState.htmlContent)

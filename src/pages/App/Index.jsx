@@ -31,18 +31,13 @@ import uiActionCreators from '../../redux/actions/ui'
 import AuthFlow from '../AuthFlow/Index'
 import Header from './Header/Index'
 import Modal from './Modal/Index'
-import Topics from '../Topics/Index'
-import SubTopics from '../SubTopics/Index'
-import Sidebar from './Sidebar/Index'
 import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content } from './Style'
 import UserProfile from '../UserProfile/Index'
-import Notifications from '../Notifications/Index'
-import TribunalSelectionNotification from '../TribunalNotifications/Index'
 import useSessionType from '../hooks/permissions/useSessionType'
 import IsLoadingHOC from '../../hocs/IsLoadingHOC'
-// const frontendApi = 'clerk.bjuk3.m71w1.lcl.dev'
-// const frontendApi = process.env.REACT_APP_CLERK_FRONTEND_API
+import useInitUserSession from '../hooks/auth/useInitUserSession'
+import MainContent from '../MainContent/Index'
 
 const Dashboard = React.lazy(() => import(
   /* webpackChunkName: "dashboard" */
@@ -64,6 +59,7 @@ const frontendApi = 'clerk.genuine.leech-38.lcl.dev'
 const LoadingBridge = ({ children, setIsLoading }) => {
   const [isUserDataPending, setIsUserDataPending] = useState(true)
   const sessionType = useSessionType()
+  useInitUserSession()
   useFetchAppData()
   useEffect(() => {
     setIsLoading(true)
@@ -96,6 +92,7 @@ const elitpicIn = cssTransition({
 const App = () => {
   // const essentialsConnector = new EssentialsConnector()
   // connectivity.registerConnector(essentialsConnector)
+
   const navigate = useNavigate()
   const memoNavigate = useCallback((to) => navigate(to))
   const dispatch = useDispatch()
@@ -116,7 +113,7 @@ const App = () => {
   return (
     <ClerkProvider frontendApi={frontendApi} navigate={memoNavigate}>
       <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect>
+        <WalletProvider wallets={wallets}>
           <WalletModalProvider>
 
             <GlobalStyle />
@@ -129,28 +126,19 @@ const App = () => {
               <LoadingSpinner />
               <ClerkLoaded>
                 <Header />
+                <LoadingBridgeWithSpinner>
 
-                <MainContainer>
-                  <Sidebar />
-                  <LoadingBridgeWithSpinner>
+                  <MainContainer>
 
                     <Content>
                       <Routes>
-                        <Route
-                          path="/topics/:topicId/subtopics/*"
-                          element={(
-                            <>
-                              <SubTopics />
-                            </>
-                      )}
-                        />
                         <Route
                           path="/dashboard"
                           element={(
                             <Suspense fallback={<div>Loading...</div>}>
                               <Dashboard />
                             </Suspense>
-                  )}
+                        )}
                         />
                         <Route path="/authenticate/*" element={<AuthFlow />} />
                         <Route
@@ -169,17 +157,15 @@ const App = () => {
                             </Suspense>
                   )}
                         />
-                        <Route path="/notifications" element={<Notifications />} />
-                        <Route path="/notifications-tribunal" element={<TribunalSelectionNotification />} />
-                        <Route path="/topics/*" element={<Topics />} />
-                        <Route path="/" element={<Navigate replace to="/topics" />} />
+                        <Route path="/home/*" element={<MainContent />} />
+                        <Route path="/" element={<Navigate replace to="/home/topics" />} />
                       </Routes>
                     </Content>
-                  </LoadingBridgeWithSpinner>
 
-                  <Modal closeModal={closeModal} />
-                  <ToastContainer autoClose={2000} className="toasty" transition={elitpicIn} />
-                </MainContainer>
+                    <Modal closeModal={closeModal} />
+                    <ToastContainer autoClose={2000} className="toasty" transition={elitpicIn} />
+                  </MainContainer>
+                </LoadingBridgeWithSpinner>
 
               </ClerkLoaded>
             </div>

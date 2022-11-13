@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Tab } from 'react-bootstrap'
 
 import { Line } from '../../../CommonComponents/Line'
-import CommentColumn from '../../../SubTopics/components/CommentColumn/Index'
-import { ColumnContainer } from '../../../SubTopics/components/SubTopicThread/Style'
+import CommentColumn from '../../../MainContent/components/SubTopicsPage/components/CommentColumn/Index'
+import { ColumnContainer } from '../../../MainContent/components/SubTopicsPage/components/CommentThread/Style'
 import useCategorizeComments from './hooks/useCategorizeComments'
 import { StyledThemeTab } from './Style/index'
 

@@ -22,13 +22,6 @@ const OpposingRecForm = ({ topicId, subTopicId }) => {
     uiActions, opposingRecsActions,
   )
 
-  // const user = useSelector((s) => s.session.currentUser)
-  // const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
-  // console.log(topic)
-  // useEffect(() => {
-  //   getTopic(topicId, user?.id)
-  // }, [topicId, user])
-
   return (
 
     <Container>
