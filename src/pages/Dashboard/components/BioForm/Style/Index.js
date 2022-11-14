@@ -8,16 +8,20 @@ export const OuterContainer = styled('div')`
 `
 
 export const Container = styled('div')`
+  width: 60vw;
   padding: 3em 2em;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 24px 48px;
   font-family: "Source Sans Pro", sans-serif;;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #151515;
   text-align: left;
-  border-radius: 0.5em;
-  width: 840px;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  background-color: white;
+  /* width: 840px; */
 `
 
 export const HeaderContainer = styled('div')`

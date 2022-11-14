@@ -38,6 +38,7 @@ import useSessionType from '../hooks/permissions/useSessionType'
 import IsLoadingHOC from '../../hocs/IsLoadingHOC'
 import useInitUserSession from '../hooks/auth/useInitUserSession'
 import MainContent from '../MainContent/Index'
+import useSetupInterceptorsEffect from '../hooks/auth/useSetupInterceptorsEffect'
 
 const Dashboard = React.lazy(() => import(
   /* webpackChunkName: "dashboard" */
@@ -59,12 +60,14 @@ const frontendApi = 'clerk.genuine.leech-38.lcl.dev'
 const LoadingBridge = ({ children, setIsLoading }) => {
   const [isUserDataPending, setIsUserDataPending] = useState(true)
   const sessionType = useSessionType()
+  useSetupInterceptorsEffect()
+
   useInitUserSession()
   useFetchAppData()
   useEffect(() => {
     setIsLoading(true)
     const get = async () => {
-      const { signedInViaClerk, signedInViaDID } = await sessionType
+      const { signedInViaClerk, signedInViaDID } = sessionType
       if (signedInViaClerk === undefined || signedInViaDID === undefined) {
         setIsUserDataPending(true)
         return
@@ -73,7 +76,7 @@ const LoadingBridge = ({ children, setIsLoading }) => {
       setIsLoading(false)
     }
     get()
-  }, [])
+  }, [sessionType])
 
   return (
     <>
@@ -92,7 +95,6 @@ const elitpicIn = cssTransition({
 const App = () => {
   // const essentialsConnector = new EssentialsConnector()
   // connectivity.registerConnector(essentialsConnector)
-
   const navigate = useNavigate()
   const memoNavigate = useCallback((to) => navigate(to))
   const dispatch = useDispatch()

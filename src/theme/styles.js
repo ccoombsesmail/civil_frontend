@@ -51,22 +51,25 @@ blockquote {
 }
 
 
-
   :root {
-    --m-primary-background-color: #339C7D;
-    --m-secondary-background-color: #E6EEF2;
-    --m-primary-btn-color: #3DC393;
-    --m-primary-btn-color:  #87C232;
-    --m-primary-btn-color: rgb(109, 174, 0);
-    /* --m-primary-btn-color: #04BECE; */
-    /* --m-primary-btn-color: #3F9BE1; */
+    /* New theme attempt */
+    --m-primary-btn-color: #87ACA3;
+
+    --m-primary-btn-color: #74B20D;
+    /* --m-primary-btn-color: #EBF0FB; */
+    --m-primary-background-color:  #527640;
+    --m-secondary-background-color: #1e392a;
+    --m-secondary-background-color: #EBF0FB;
+    /* --m-secondary-background-color: #828081; */
+
+    /* New theme attempt */
+
     --m-primary-peripherals-color: #474a4d;
     --m-highlight-color: #F8CA41;
     --m-btn-hover-color: #F5F8FF;
     --m-menu-item-hover: #D9DFDF;
 
     --m-elastos-theme: #8530F1;
-    /* --m-primary-background-1-color: #37B381; */
  
     --sidebar-width: 4vw;
     --m-primary-font-color: white;
@@ -144,7 +147,7 @@ blockquote {
     --clerk-primary-l2: hsl(85,59%,95%);
     --clerk-primary-a1: hsla(85,59%,48%,0.5);
     --clerk-primary-a2: hsla(85,59%,48%,0.25);
-    --clerk-font-family: "Source Sans Pro", sans-serif;
+    --clerk-font-family: "Roboto",Helvetica,Arial,sans-serif;
     --clerk-font-color: #151515;
     --clerk-font-color-rgb: 21,21,21;
     --clerk-font-color-l1: hsl(0,0%,50%);
@@ -169,7 +172,7 @@ blockquote {
   html {
     font-size: 10px;
     /* font-family: "Baloo 2", cursive; */
-    font-family: "Source Sans Pro", sans-serif ;
+    font-family: "Roboto",Helvetica,Arial,sans-serif;    
     overflow-x: hidden;
 
   }
@@ -279,29 +282,19 @@ blockquote {
 
 
   /* ******************************** CLERK RELATED STUFF ******************************** */
-  .cl-component.cl-user-button {
-    /* width: 4rem !important;
-    height: unset !important;
-     height: 4rem !important; 
-    margin-right: 1rem;
-    min-width: calc(var(--nav-size) * .9);
-  @media only screen and (max-width: 800px) {
-
-     height: calc(var(--nav-size) * .9) !important;  
-    } */
-  } 
-
-  .cl-component .cl-user-button-trigger>.cl-user-button-avatar {
-    /* height: calc(.7* var(--nav-size)) !important;
-    width: calc(.7* var(--nav-size)) !important; */
-
-    /* width: 3vw !important;
-    aspect-ratio: 32 / 32 !important;
-    width:  calc(var(--nav-size) * .9) !important;
-    height:  calc(var(--nav-size) * .9) !important;   */
-
-
+  .cl-userButton-popover {
+    width: 20vw !important;
+    @media only screen and (max-width: 1200px) {
+      width: 30vw !important;
+    }
+    @media only screen and (max-width: 700px) {
+      width: 80vw !important;
+    }
   }
+  .cl-userPreviewAvatarImage {
+    border-radius: 50% !important;
+  }
+
 
   .cl-component.cl-sign-in {
     width: 100% !important;
@@ -315,6 +308,23 @@ blockquote {
       font-size: .8vw !important;
     }
   }
+
+  /*********************************  CIVIC related stuff  ******************************** */
+
+  .wallet-button {
+    background-color: #FF6b4E;
+    transition: all 0.5s;
+
+  }
+
+  .wallet-button:hover {
+    background-color: white !important;
+    color: #FF6b4E;
+    border: 1px solid #FF6b4E;
+  }
+  /*********************************  CIVIC related stuff  ******************************** */
+
+
   /*********************************  Toastify related stuff  ******************************** */
 
   .toasty {

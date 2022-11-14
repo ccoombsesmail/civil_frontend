@@ -51,6 +51,7 @@ export default () => {
           }
           break
         case CIVIC_USER:
+          if (!wallet.wallet) wallet.select(localStorage.getItem('walletName2'))
           await wallet.connect()
           break
         default:
@@ -61,6 +62,10 @@ export default () => {
   }, [isLoaded, wallet])
 
   useEffect(() => {
+    if (wallet.connected && !currentUser) {
+      localStorage.setItem('previousSignInMethod', CIVIC_USER)
+      localStorage.setItem('walletName2', wallet.wallet.adapter.name)
+    }
     const sessionListener = async () => {
       if (wallet.connected && !currentUser) {
         const { publicKey } = wallet
@@ -70,7 +75,9 @@ export default () => {
           iconSrc: '',
         })
         await getCurrentUser(publicKey.toBase58(), true)
+        console.log(wallet)
         localStorage.setItem('previousSignInMethod', CIVIC_USER)
+        localStorage.setItem('walletName2', wallet.wallet.adapter.name)
       } else if (isSignedIn) localStorage.setItem('previousSignInMethod', CLERK_USER)
       else if (currentUser?.ELASTOS_USER) localStorage.setItem('previousSignInMethod', ELASTOS_USER)
     }

@@ -34,14 +34,19 @@ export const ThemeTab = styled(Tabs)`
 
 export const ThemeTabNew = styled(Tabs)`
   z-index: 9999;
-  /* border-bottom: 2px solid #ddd; */
-  box-shadow: 0 4px 12px -1px rgba(#121621, .08);
   background-color: white;
+  justify-content: space-between;
 
   li {
     /* border-radius: .5em; */
     background-color: white;
     margin: 0 .5em 0 0;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
     @media only screen and (max-width: 600px) {
       /* margin: 0; */
     }
@@ -52,26 +57,15 @@ export const ThemeTabNew = styled(Tabs)`
     @media only screen and (max-width: 800px) {
       display: none;
     }
+    height: 2vw;
   }
 
   .nav-link.active {
-    background-color: var(--m-primary-btn-color);
-    color: white;
+    /* background-color: var(--m-primary-btn-color); */
+    color: black;
     opacity: 1;
-
+    border-width: 10px;
   }
-
-  li:nth-child(2) {
-    .nav-link.active {
-      opacity: 1;
-    }
-    .nav-link {
-      opacity: .5;
-      color: white;
-    }
-
-  }
-
 
 
  .nav-link {
@@ -79,12 +73,12 @@ export const ThemeTabNew = styled(Tabs)`
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     /* background-color: var(--clerk-primary-l1); */
-    background-color: var(--m-primary-btn-color);
+    /* background-color: var(--m-primary-btn-color); */
 
     transition: background-color .5s, opacity .5s;
     opacity: .5;
 
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: 1.3vw;
     
@@ -97,7 +91,20 @@ export const ThemeTabNew = styled(Tabs)`
       padding: .5rem .9rem;
       
     }
+
+   
  }
 
+ /* li:nth-child(1) {
+  .nav-link {
+      background-color: #FF6b4E;
+    }
+  }
+
+  li:nth-child(3) {
+  .nav-link {
+      background-color: var(--m-elastos-theme);
+    }
+  } */
 
 `

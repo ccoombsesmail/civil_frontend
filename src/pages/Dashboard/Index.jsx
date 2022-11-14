@@ -21,7 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     const clerkWrapper = document.getElementsByClassName('cl-main')[0]
     if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null)
-    if (user) getCurrentUser(user?.id)
+    if (user) getCurrentUser(user?.userId)
   }, [])
   // const addVcCred = useAddVcCred()
   return (
@@ -29,7 +29,16 @@ const Dashboard = () => {
       <Container>
         <Header user={user} />
         <Line />
-        <UserProfile />
+        <UserProfile
+          appearance={{
+            variables: {
+              fontSize: '1.2vw',
+              fontSmoothing: 'antialiased',
+              fontWeight: 900,
+              fontFamily: 'Source Sans Pro, sans-serif',
+            },
+          }}
+        />
         {/* <Formik
           initialValues={INIT_DID_FORM_VALUES}
           onSubmit={(values, params) => addVcCred(values, params)}

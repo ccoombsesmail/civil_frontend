@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { SignUpComponent, SignInComponent } from './components/ClerkComponents/Index'
+import { SignUpComponent, SignInComponent } from './components/AuthMethodTabs/Index'
 import NewDidFlow from './components/NewDidFlow/Index'
 import RestoreDid from './components/RestoreDid/Index'
 import CivicTest from './components/CivicTest/Index'

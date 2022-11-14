@@ -1,35 +1,115 @@
-import React from 'react'
+import {
+  SignedIn, SignedOut,
+} from '@clerk/clerk-react'
+import React, { useMemo } from 'react'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+
 import { useSelector } from 'react-redux'
-import { Container, Icon } from './Style'
+import { ClerkSvg, Blockchain } from '../../svgs/svgs'
+import ExpandButton from '../CommonComponents/Buttons/ExpandButton/Index'
+import useSessionType from '../hooks/permissions/useSessionType'
+import useGoToAuthPage from '../hooks/routing/useGoToAuthPage'
+import {
+  Container, Icon, IdentityProviderContainer, IdentityImg,
+  IdentityProviderInnerContainer, AuthButtonContainer,
+} from './Style'
+import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
 
 const UserInformationDisplay = () => {
-  const user = useSelector((s) => s.session.currentUser)
-  console.log(user)
+  const currentUser = useSelector((s) => s.session.currentUser)
+
+  const {
+    signedInViaClerk,
+    signedInViaDID,
+    signedInViaCivic,
+  } = useSessionType()
+
+  const goToAuthPage = useGoToAuthPage()
+
+  const user = useMemo(() => {
+    if (!currentUser) {
+      return {
+        username: '',
+        tag: '',
+        numFollowers: '-',
+        numFollowed: '-',
+        numPosts: '-',
+        iconSrc: 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png',
+      }
+    }
+    return currentUser
+  }, [currentUser])
+
   return (
     <Container>
-      <Icon className="img" src={user?.iconSrc} alt="" />
+      <Icon className="img" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} alt="" />
       <h1>
-        {user?.username}
+        {longUsernameDisplay(user.username)}
         {/* <span>18</span> */}
       </h1>
-      <h2>{`@${user?.tag}`}</h2>
+      <h2>{user.tag ? `@${user.tag}` : ''}</h2>
       <div className="social">
         <h3>
-          10k
+          {user.numFollowers}
           <small>followers</small>
         </h3>
         <h3>
-          15k
-          <small>likes</small>
+          {user.numFollowed}
+          <small>followed</small>
         </h3>
         <h3>
-          110
-          <small>photos</small>
+          {user.numPosts}
+          <small>posts</small>
         </h3>
       </div>
-      <div className="center">
-        <div className="heart" />
-      </div>
+      <SignedIn>
+        <IdentityProviderContainer className="center">
+          <IdentityImg alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/icons8-checked-identification-documents-96+(1).png" />
+          <IdentityProviderInnerContainer>
+            <span>Identity Provider: </span>
+            {/* <IdentityProviderImg /> */}
+            <ClerkSvg />
+          </IdentityProviderInnerContainer>
+        </IdentityProviderContainer>
+      </SignedIn>
+      <SignedOut>
+        <AuthButtonContainer>
+          {
+            signedInViaCivic ? (
+              <WalletMultiButton
+                className="wallet-button"
+                startIcon={<Blockchain />}
+              />
+            ) : (
+              <>
+
+                <ExpandButton
+                  width="45%"
+                  height="2.5vw"
+                  type="button"
+                  backgroundColor="var(--m-primary-btn-color)"
+                  onClick={goToAuthPage}
+                >
+                  Sign Up
+                </ExpandButton>
+                <ExpandButton
+                  width="45%"
+                  height="2.5vw"
+                  type="button"
+                  backgroundColor="var(--m-primary-btn-color)"
+                  onClick={goToAuthPage}
+                >
+                  Sign In
+                </ExpandButton>
+              </>
+
+            )
+          }
+
+        </AuthButtonContainer>
+
+      </SignedOut>
+
     </Container>
   )
 }

@@ -6,13 +6,11 @@ import enumActions from '../../../redux/actions/enums'
 import userActions from '../../../redux/actions/users/index'
 import sessionActions from '../../../redux/actions/session'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
-import useSetupInterceptorsEffect from '../../hooks/auth/useSetupInterceptorsEffect'
 import useInitSocketEffect from './useInitSocketEffect'
 
 export default () => {
   const URL = `http://${window.location.hostname}:8093`
   const socket = io(URL, { autoConnect: false })
-  useSetupInterceptorsEffect()
 
   const {
     getAllEnums,

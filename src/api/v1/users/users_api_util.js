@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { BACKEND_DEV } from '../../endpoints/endpoints'
 
-export const getUser = (userId, requesterId) => axios.get(`${BACKEND_DEV}/users?userId=${userId}&requesterId=${requesterId}`)
+export const getUser = (userId) => axios.get(`${BACKEND_DEV}/users?userId=${userId}`)
 
 export const upsertDidUser = (didUserData) => axios.post(`${BACKEND_DEV}/users/did-user`, didUserData)
 

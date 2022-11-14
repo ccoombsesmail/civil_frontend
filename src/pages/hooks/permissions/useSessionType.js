@@ -1,20 +1,24 @@
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/clerk-react'
 import useIsLoggedInViaDID from '../../DID/hooks/useIsLoggedInViaDID'
 import useIsLoggedInViaCivic from '../../../civic/hooks/useIsLoggedInViaCivic.ts'
 
 export default () => {
-  const { user } = useUser({ withAssertions: true })
+  const [sessionState, setSessionState] = useState({})
+  const { isSignedIn } = useUser()
   const isLoggedInViaDID = useIsLoggedInViaDID()
   const isLoggedInViaCivic = useIsLoggedInViaCivic()
-  return useMemo(async () => {
-    // const docExistsButNotValid = currentUser?.doc && !currentUser.doc.isValid()
-    const loggedInViaDID = await isLoggedInViaDID()
-
-    return {
-      signedInViaClerk: Boolean(user),
-      signedInViaDID: loggedInViaDID,
-      signedInViaCivic: isLoggedInViaCivic(),
+  useEffect(() => {
+    const determineSessionState = async () => {
+      // const loggedInViaDID = await isLoggedInViaDID()
+      setSessionState({
+        signedInViaClerk: isSignedIn,
+        signedInViaDID: false,
+        signedInViaCivic: isLoggedInViaCivic(),
+      })
     }
-  }, [isLoggedInViaDID, isLoggedInViaCivic, user])
+    determineSessionState()
+  }, [isLoggedInViaDID, isLoggedInViaCivic, isSignedIn])
+
+  return sessionState
 }

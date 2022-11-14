@@ -1,42 +1,97 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
-const play = keyframes`
-  {
-  0% {
-    background-position: 0px 0px;
+export const IdentityProviderContainer = styled('div')`
+  display: flex;
+  flex-direction: column ;
+  align-items: center;
+
+`
+export const IdentityImg = styled('img')` 
+  width: 4vw;
+  padding: 2vw 0 1vw 0;
+`
+
+export const IdentityProviderInnerContainer = styled('div')`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-bottom: 2vw;
+
+  svg {
+    height: 1.6vw;
+    fill: green;
   }
-  100% {
-    background-position: -2800px 0px;
+  span {
+    font-size: 1vw;
+    margin-right: 1vw;
+    font-weight: bold;
   }
-}`
+
+  path {
+    fill: green;
+  }
+
+`
+
+export const IdentityProviderImg = styled('img')` 
+  width: 4vw;
+`
+
+export const AuthButtonContainer = styled('div')`
+  display: flex;
+  width: 100%;
+  padding: 2vw 0;
+  justify-content: space-around;
+
+  .wallet-adapter-dropdown-list-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-220px);
+  }
+
+`
 
 export const Container = styled('div')`
   --dark-cyan: hsl(185, 75%, 39%);
   --very-dark-blue: hsl(229, 23%, 23%);
   --very-gray-blue: hsl(227, 10%, 46%);
   --gray-dark: hsl(0, 0%, 59%);
-  z-index: 9999999;
+  z-index: 99999;
   /* width: 90%;
   max-height: 40vh; */
 
   width: 85%;
+  max-width: 24vw;
   text-align: center;
   margin: 1px;
-  padding-top: 180px;
+  padding-top: 80px;
   margin-top: 50px;
   background: white
-    url("https://www.highlanderibiza.com/wp-content/uploads/2013/01/bg-sea-beach5.jpg")
-    0 190%;
+    url("https://civil-dev.s3.us-west-1.amazonaws.com/assets/red-trees.jpg")
+    0 -30%;
   background-repeat: repeat no-repeat;
+  /* background-size: 200px 100px; */
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 15px 10px 0 rgba(81, 82, 81, 0.32);
+  border: 1px solid rgba(200,200,200,0.25);
+
+  h1 {
+    padding-top: 30px;
+  }
+
+  h2 {
+    padding-bottom: 30px;
+    color: var(--gray-dark);
+
+  }
 
 .social {
   padding: 10px 0;
   display: flex;
   justify-content: space-evenly;
   border-top: 1px solid var(--gray-dark);
+  border-bottom: 1px solid var(--gray-dark)
 }
 
 .social h3 {
@@ -55,55 +110,23 @@ export const Container = styled('div')`
   display: flex;
   justify-content: space-evenly;
 }
-.heart {
-  background: url('https://abs.twimg.com/a/1446686284/img/t1/web_heart_animation.png');
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: auto;
-  height: 100px;
-  width: 100px;
-}
 
-.heart:hover {
-  animation: ${play} 1s steps(100);
-}
-
-  h1 {
-    margin: 0;
-    margin-top: 15px;
-    font-size: 25px;
-  }
-
-  h1 span {
-  color: var(--gray-dark);
-  font-weight: 400;
-  }
-  h2 {
-    color: var(--gray-dark);
-    font-weight: 400;
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
-
-  @media (max-width: 600px) {
-    min-width: 300px;
-  }
 
 `
 
 export const Icon = styled('img')`
   object-fit: cover;
-  height: 128px;
-  width: 128px;
+  background-color: white;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   overflow: hidden;
   border: 10px solid white;
-  transition: all 500ms;
+  transition: all 500ms ease-in-out;
 
-  :active {
-    height: 158px;
-    width: 158px;
+  :hover {
+    height: 100px;
+    width: 100px;
     margin: 2rem;
   }
   @media (max-width: 600px) {

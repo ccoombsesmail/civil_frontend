@@ -5,8 +5,10 @@ const ExpandButton = ({
   children,
   backgroundColor,
   onClick,
+  width,
+  height,
 }) => (
-  <Container backgroundColor={backgroundColor}>
+  <Container backgroundColor={backgroundColor} width={width} height={height}>
     <StyledButton backgroundColor={backgroundColor} onClick={onClick}>
       <ButtonBackground backgroundColor={backgroundColor} />
       <span>{children}</span>

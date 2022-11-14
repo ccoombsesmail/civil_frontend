@@ -47,12 +47,24 @@ const Header = () => {
             onClick={() => navigate('/home/notifications-tribunal')}
           />
           <Divider />
-          <UserButton userProfileUrl="/dashboard" afterSignOutUrl="/" />
+          <UserButton
+            userProfileUrl="/dashboard"
+            afterSignOutUrl="/"
+            userProfileMode="navigation"
+            appearance={{
+              variables: {
+                fontSize: '1.2vw',
+                fontSmoothing: 'antialiased',
+                fontWeight: 600,
+                fontFamily: 'Source Sans Pro, sans-serif',
+              },
+            }}
+          />
         </NavContainer>
 
       </SignedIn>
       <SignedOut>
-        <WalletMultiButton />
+        {/* <WalletMultiButton /> */}
 
         <NavDropdownToggle>
           <DropdownMenu />

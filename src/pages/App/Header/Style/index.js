@@ -51,9 +51,12 @@ export const NavContainer = styled('nav')`
   height: 100%;
   align-items: center;
   margin-right: 30px;
-  .cl-user-button {
+  .cl-internal-7yhhw1 {
     width: 35px !important;
-    height: 35px !important; 
+    height: 35px !important;
+    img {
+      border-radius: 50%;
+    } 
   }
   button {
     margin: 0 10px;
