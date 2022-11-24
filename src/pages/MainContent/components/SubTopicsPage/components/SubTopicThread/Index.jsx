@@ -35,15 +35,13 @@ const SubTopicThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
-    const get = async () => {
-      const { signedInViaClerk, signedInViaDID } = await sessionType
-      if (!signedInViaClerk && !signedInViaDID) return new Promise()
-      getAllComments(subTopicId, user?.id)
-      getTopic(topicId, user?.id)
-      return new Promise()
+    // const { signedInViaClerk, signedInViaDID, signedInViaCivic } = sessionType
+    // if (!signedInViaClerk && !signedInViaDID) return new Promise()
+    if (user?.userId) {
+      getAllComments(subTopicId, user.userId)
+      getTopic(topicId, user.userId)
     }
-    get()
-  }, [user?.id])
+  }, [user])
   return (
 
     <ThreadContainer>

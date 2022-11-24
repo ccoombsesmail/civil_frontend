@@ -16,13 +16,20 @@ export const Container = styled('header')`
 export const FlexDiv = styled('div')`
   display: flex;
   align-items: center;
+  justify-content: center;
+  h1 {
+    text-align: center;
+    vertical-align: center;
+  }
+  margin-bottom: 2vw;
+
 
 `
 
 export const UserIcon = styled('img')`  
   margin-right: 1vw;
-  height: 2vw;
-  width: 2vw;
+  height: 4vw;
+  width: 4vw;
   border-radius: 50%;
 
 `

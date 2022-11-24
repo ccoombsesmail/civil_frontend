@@ -42,7 +42,7 @@ const Comment = ({ commentData, replies, commentRef }) => {
   return (
     <OuterContainer ref={commentRef}>
       <CommentContainer>
-        <Header onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
+        <Header onClick={() => navigate(`/home/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
           <UserInfoContainer>
             <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
             <ThemeTooltip
@@ -53,7 +53,7 @@ const Comment = ({ commentData, replies, commentRef }) => {
           <Username>{commentData.createdBy}</Username>
           <Date>{`${mins}`}</Date>
         </Header>
-        <Body shouldBlur={shouldBlur} onClick={() => navigate(`/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
+        <Body shouldBlur={shouldBlur} onClick={() => navigate(`/home/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>
           <Content ref={contentRef} />
           { replies.length !== 0
           && (

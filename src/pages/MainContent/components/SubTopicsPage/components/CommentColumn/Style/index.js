@@ -12,7 +12,7 @@ export const Container = styled('ul')`
   border-right: 1px solid black; */
   z-index: 99;
   opacity: .99;
-  width: 70vw;
+  width: 50vw;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: 1px solid lightgray;

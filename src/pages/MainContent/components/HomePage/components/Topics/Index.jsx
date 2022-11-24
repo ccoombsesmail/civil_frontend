@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import useBindDispatch from '../hooks/redux/useBindDispatch'
-import uiActionCreators from '../../redux/actions/ui'
-import topicActionCreators from '../../redux/actions/topics'
+import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
+import uiActionCreators from '../../../../../../redux/actions/ui'
+import topicActionCreators from '../../../../../../redux/actions/topics'
 
 import TopicItem from './components/TopicItem/Index'
 import Header from './components/Header/Index'
-import WavyBackground from '../CommonComponents/WavyBackground/Index'
+import WavyBackground from '../../../../../CommonComponents/WavyBackground/Index'
 import { CardContainer, Container, BorderContainer } from './Style'
 
 const Topics = () => {

@@ -12,7 +12,7 @@ type MessageSigner = {
 /**
  * Singleton class for storing a valid signature on-memory.
  */
-export class MemoryStoredToken {
+export class  MemoryStoredToken {
   private constructor(public token: string | null = null) {}
   private static instance: MemoryStoredToken;
   static getInstance(): MemoryStoredToken {
@@ -42,11 +42,6 @@ export const createCivicAuthToken = async (
   const { publicKey } = wallet
   const pubKey = publicKey?.toBase58()
   if (!pubKey) return undefined
-  // const solanaConnection = new Connection(clusterApiUrl('devnet'))
-  // const profile = await CivicProfile.get(pubKey, { solana: { connection: solanaConnection } })
-  // console.log("createCivicAuthToken -> profile:", profile)
-  // const gatewayTokens: GatewayToken[] = await profile.getPasses()
-  // console.log("createCivicAuthToken -> gatewayTokens:", gatewayTokens)
 
 
   const encodedMessage = new TextEncoder().encode(

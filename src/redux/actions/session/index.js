@@ -37,9 +37,21 @@ export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData
   .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getCurrentUser = (userId, didUser = false) => (dispatch) => UsersApiUtil
-  .getUser(userId)
-  .then((res) => {
+export const getCurrentUser = (userId, didUser = false) => (dispatch) => {
+  toast.promise(
+    UsersApiUtil.getUser(userId),
+    {
+      pending: 'Fetching User Data',
+      success: 'Success!',
+      error: {
+        render({ data: errorData }) {
+          const { response } = errorData
+          const { data: responseData } = response
+          return `${responseData.msg} 🤯 `
+        },
+      },
+    },
+  ).then((res) => {
     if (!res.data.tag) {
       dispatch({
         type: OPEN_MODAL,
@@ -48,7 +60,8 @@ export const getCurrentUser = (userId, didUser = false) => (dispatch) => UsersAp
     }
     return dispatch(didUser ? addSessionDataDID(res.data) : addUserActionCreatorBackend(res.data))
   })
-  .catch((error) => toast.error(errorFormatter(error)))
+    .catch((error) => toast.error(errorFormatter(error)))
+}
 
 export const logout = () => (dispatch) => {
   dispatch(logoutActionCreator())

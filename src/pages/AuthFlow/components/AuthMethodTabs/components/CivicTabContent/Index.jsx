@@ -1,5 +1,6 @@
+import { useWallet } from '@solana/wallet-adapter-react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Blockchain, LongDownArrow, VerifiedSvg, ArrowRightSvg,
 } from '../../../../../../svgs/svgs'
@@ -83,7 +84,25 @@ const BlockQuote = ({ quote, themeColor }) => (
 )
 
 const CivicTabContent = () => {
-  console.log('civic tab content')
+  const { connect, wallet } = useWallet()
+  useEffect(() => {
+    setTimeout(() => {
+      const selectWalletButtons = Array.from(document.getElementsByClassName('wallet-button'))
+      selectWalletButtons?.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          setTimeout(() => {
+            const getStartedButton = document.getElementsByClassName('wallet-adapter-modal-middle-button')[0]
+            getStartedButton?.addEventListener('click', () => {
+              setTimeout(() => {
+                console.log(document.getElementsByClassName('wallet-button')[0])
+                document.getElementsByClassName('wallet-button')[0].click()
+              }, 300)
+            })
+          }, 300)
+        })
+      })
+    }, 500)
+  }, [wallet, connect])
   return (
     <Container>
       <AlreadyKnowContainer>
@@ -127,7 +146,7 @@ const CivicTabContent = () => {
           Verify Your Profile.
         </li>
         <li>
-          By Completing the reCAPTCHA verification, you can obtain a stamp on your digital profile 
+          By Completing the reCAPTCHA verification, you can obtain a stamp on your digital profile
           that proves you are not a bot.
         </li>
         <li>

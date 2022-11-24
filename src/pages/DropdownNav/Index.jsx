@@ -19,6 +19,7 @@ import useOpenOnClick from './hooks/useOpenOnClick'
 import useLogout from './hooks/useLogout'
 import useGoToDash from './hooks/useGoToDash'
 import useCloseOnClick from './hooks/useCloseOnClick'
+import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
 
 export const NavDropdownToggle = ({ children }) => {
   const [open, setOpen] = useState(false)
@@ -45,10 +46,8 @@ export const DropdownMenu = ({ open, setOpen }) => {
   const closeOnClick = useCloseOnClick(setOpen)
 
   useEffect(() => {
-    (async () => {
-      const { signedInViaDID, signedInViaCivic } = await session
-      setLoggedInViaDIDOrCivic(signedInViaDID || signedInViaCivic)
-    })()
+    const { signedInViaDID, signedInViaCivic } = session
+    setLoggedInViaDIDOrCivic(signedInViaDID || signedInViaCivic)
   }, [session])
 
   const DropdownItem = ({
@@ -69,7 +68,7 @@ export const DropdownMenu = ({ open, setOpen }) => {
         <Greeting>
           Hello,
           {' '}
-          {user?.username || 'Friend'}
+          {longUsernameDisplay(user?.username) || 'Friend'}
           {' '}
         </Greeting>
         <DID>

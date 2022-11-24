@@ -50,6 +50,7 @@ const Card = ({
         userId={topic?.userId}
         userTag={topic?.createByTag}
         topicCreatorIsDidUser={topic?.topicCreatorIsDidUser}
+        userVerificationType={topic?.userVerificationType}
       />
       { shouldBlur && (
       <CensorOverlay

@@ -1,7 +1,7 @@
 import React from 'react'
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
-import Gateway from '../../../../civic/components/Gateway/Gateway'
+import Gateway from '../../../../civic/components/CaptchGateway/CaptchaGateway'
 import { Container } from './Style'
 
 const CivicTest = () => (

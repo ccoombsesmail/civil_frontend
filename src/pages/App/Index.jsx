@@ -106,7 +106,7 @@ const App = () => {
       new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
       new SolflareWalletAdapter({ network }),
-      new TorusWalletAdapter(),
+      // new TorusWalletAdapter(),
       new SolletWalletAdapter({ network }),
     ],
     [network],
@@ -115,7 +115,7 @@ const App = () => {
   return (
     <ClerkProvider frontendApi={frontendApi} navigate={memoNavigate}>
       <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets}>
+        <WalletProvider wallets={wallets} autoConnect={localStorage.getItem('previousSignInMethod') === 'civic_user'}>
           <WalletModalProvider>
 
             <GlobalStyle />

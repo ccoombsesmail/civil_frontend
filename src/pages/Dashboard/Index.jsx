@@ -11,6 +11,7 @@ import { Line } from '../CommonComponents/Line'
 // import Button from '../CommonComponents/Button/Index'
 
 import BioForm from './components/BioForm/Index'
+import CivicTest from '../AuthFlow/components/CivicTest/Index'
 // import BasicInformation from '../AuthFlow/components/BasicInformation/Index'
 // import { INIT_DID_FORM_VALUES } from '../util/form_helpers/init_form_values'
 // import useAddVcCred from '../DID/hooks/useAddVcCred'
@@ -59,6 +60,7 @@ const Dashboard = () => {
             </FormContainer>
           )}
         </Formik> */}
+        <CivicTest />
         <Line />
         <BioForm user={user} />
       </Container>

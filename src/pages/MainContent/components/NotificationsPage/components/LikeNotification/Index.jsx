@@ -35,7 +35,7 @@ const CommentLikeNotification = ({ notification }) => {
           {' '}
           Liked Your
           {' '}
-          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
+          <Link onClick={handleClick} to={`/home/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
             Comment!
           </Link>
           {' '}

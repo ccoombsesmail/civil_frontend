@@ -13,7 +13,8 @@ import { DownArrowCircleSvg } from '../../svgs/svgs'
 import Input from '../CommonComponents/Form/Input3/Index'
 import Select from '../CommonComponents/Form/Select/Index'
 import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
-import Button from '../CommonComponents/Button/Index'
+import ExpandButton from '../CommonComponents/Buttons/ExpandButton/Index'
+
 import UploadMediaContainer from './components/UploadMedia/Index'
 import DisplayMedia from './components/DisplayMedia/Index'
 import LinkTypeIcon from './components/LinkTypeIcon/Index'
@@ -165,12 +166,23 @@ const CreateTopicForm = () => {
                 </InputsContainer>
               </Modal.Body>
               <Modal.Footer>
-                <Button type="submit" disabled={isSubmitting} onClick={closeModal}>
+                <ExpandButton
+                  type="submit"
+                  height="2.5vw"
+                  backgroundColor="var(--m-primary-btn-color)"
+                  disabled={isSubmitting}
+                  onClick={closeModal}
+                >
                   Cancel
-                </Button>
-                <Button type="submit" disabled={isSubmitting}>
+                </ExpandButton>
+                <ExpandButton
+                  type="submit"
+                  height="2.5vw"
+                  backgroundColor="var(--m-primary-btn-color)"
+                  disabled={isSubmitting}
+                >
                   Submit
-                </Button>
+                </ExpandButton>
               </Modal.Footer>
             </FormContainer>
           </>

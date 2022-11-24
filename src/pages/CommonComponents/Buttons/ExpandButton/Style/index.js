@@ -41,7 +41,10 @@ export const ButtonBackground = styled('div')`
 export const StyledButton = styled('button')`
   font-size: 1vw;
   font-weight: bold;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   background: none;
   padding: 0;
@@ -55,6 +58,16 @@ export const StyledButton = styled('button')`
     padding: 1.5rem 3rem;
     /* mix-blend-mode: difference; */
   }
+
+  svg {
+    width: 1vw;
+    z-index: 999;
+    padding-right: .3vw;
+    path {
+      fill: white !important;
+    }
+  }
+
 
   @media only screen and (max-width: 800px) {
     font-size: 1.6vw;
@@ -70,11 +83,14 @@ export const StyledButton = styled('button')`
 
   @media (hover: hover) {
   :hover {
+    svg path {
+      fill: ${(props) => `${props.backgroundColor} !important` || 'black !important'};
+    }
     span {
       color: ${(props) => props.backgroundColor || 'black'};
     }
     ${ButtonBackground} {
-      transform: scale3d(1.1, 1.1, 1);
+      transform: scale3d(1, 1, 1);
       border: 1px solid ${(props) => props.backgroundColor || 'black'};
       ::before {
         transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);
@@ -93,7 +109,7 @@ export const StyledButton = styled('button')`
 export const Container = styled('div')`
   width: ${(props) => props.width || 'clamp(10vw, 200px, 35vw)'};
   height: ${(props) => props.height || 'clamp(2vw, 50px, 35vh)'};
-  margin: 0;
+  margin: ${(props) => props.margin ?? '0 1vw'};
   padding: 0;
   display: flex;
   flex-direction: column;

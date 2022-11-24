@@ -56,8 +56,10 @@ blockquote {
     --m-primary-btn-color: #87ACA3;
 
     --m-primary-btn-color: #74B20D;
+    --m-primary-btn-color: #2d8cb3;
     /* --m-primary-btn-color: #EBF0FB; */
     --m-primary-background-color:  #527640;
+    --m-primary-background-color: #256347;
     --m-secondary-background-color: #1e392a;
     --m-secondary-background-color: #EBF0FB;
     /* --m-secondary-background-color: #828081; */
@@ -70,6 +72,7 @@ blockquote {
     --m-menu-item-hover: #D9DFDF;
 
     --m-elastos-theme: #8530F1;
+    --m-civic-theme-main-color: #FF6b4E;
  
     --sidebar-width: 4vw;
     --m-primary-font-color: white;
@@ -223,6 +226,7 @@ blockquote {
   }
 
   body {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -234,6 +238,10 @@ blockquote {
     font-family: var(--clerk-font-family);
     font-size: var(--fontSizeMd);
     line-height: var(--lineHeightMd);
+  }
+  
+  #root {
+    position: relative;
   }
 
   .wallet-adapter-modal.wallet-adapter-modal-fade-in {
@@ -312,7 +320,7 @@ blockquote {
   /*********************************  CIVIC related stuff  ******************************** */
 
   .wallet-button {
-    background-color: #FF6b4E;
+    /* background-color: #FF6b4E; */
     transition: all 0.5s;
 
   }

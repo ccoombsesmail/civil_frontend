@@ -21,7 +21,7 @@ export default () => {
     axios.interceptors.request.use(
       async (req) => {
         req.headers['Access-Control-Max-Age'] = 6000
-        if (req.url.includes('eid')) return req
+        if (req.url.includes('eid') || req.url.includes('enums')) return req
         if (req.url.includes(AssistDIDAdapter.TESTNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
           return req
@@ -30,7 +30,6 @@ export default () => {
         const defaultDID = await getDefaultDID()
         let token = null
         token = await getToken({ template: 'jwt' })
-        console.log(token)
         if (token) {
           req.headers['X-JWT-TYPE'] = 'CLERK'
           req.headers.Authorization = `Bearer ${token}`

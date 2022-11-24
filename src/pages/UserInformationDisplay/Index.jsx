@@ -1,19 +1,21 @@
 import {
   SignedIn, SignedOut,
 } from '@clerk/clerk-react'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 import { useSelector } from 'react-redux'
-import { ClerkSvg, Blockchain } from '../../svgs/svgs'
+import { ClerkSvg } from '../../svgs/svgs'
 import ExpandButton from '../CommonComponents/Buttons/ExpandButton/Index'
 import useSessionType from '../hooks/permissions/useSessionType'
 import useGoToAuthPage from '../hooks/routing/useGoToAuthPage'
 import {
   Container, Icon, IdentityProviderContainer, IdentityImg,
-  IdentityProviderInnerContainer, AuthButtonContainer,
+  IdentityProviderInnerContainer, AuthButtonContainer, PassesContainer, StyledLine,
 } from './Style'
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
+import CaptchaGateway from '../../civic/components/CaptchGateway/CaptchaGateway'
+import UniquenessGateway from '../../civic/components/UniquenessGateway/UniquenessGateway'
 
 const UserInformationDisplay = () => {
   const currentUser = useSelector((s) => s.session.currentUser)
@@ -24,7 +26,23 @@ const UserInformationDisplay = () => {
     signedInViaCivic,
   } = useSessionType()
 
+  const [isSignedIn, authMethod] = useMemo(() => {
+    if (signedInViaClerk) return [true, 'Authenticated With Clerk']
+    if (signedInViaDID) return [true, 'Authenticated With Elastos DID']
+    if (signedInViaCivic) return [true, 'Auth Method ⟶ Civic DID']
+    return [false, '']
+  }, [signedInViaClerk, signedInViaDID, signedInViaCivic])
+
   const goToAuthPage = useGoToAuthPage()
+  const disconnectListItem = document.getElementsByClassName('wallet-adapter-dropdown-list-item')[2]
+
+  useEffect(() => {
+    disconnectListItem?.addEventListener('click', () => {
+      localStorage.setItem('walletName', null)
+      localStorage.setItem('walletName2', null)
+      localStorage.getItem('previousSignInMethod', null)
+    })
+  }, [disconnectListItem])
 
   const user = useMemo(() => {
     if (!currentUser) {
@@ -74,14 +92,30 @@ const UserInformationDisplay = () => {
       </SignedIn>
       <SignedOut>
         <AuthButtonContainer>
+          {/* { isSignedIn && (
+            <div style={{
+              display: 'flex', flexDirection: 'column',
+              width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: '1vw',
+            }}
+            >
+              <IdentityIcon src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/icons8-checked-identification-documents-64.png" alt="" />
+              <b>{authMethod}</b>
+            </div>
+          )} */}
           {
             signedInViaCivic ? (
-              <WalletMultiButton
-                className="wallet-button"
-                startIcon={<Blockchain />}
-              />
+              <div>
+                <WalletMultiButton />
+                <StyledLine />
+                <b>Civic Passes</b>
+                <PassesContainer>
+                  <CaptchaGateway />
+                  {/* <UniquenessGateway /> */}
+                </PassesContainer>
+              </div>
+
             ) : (
-              <>
+              <div style={{ display: 'flex', width: '100%' }}>
 
                 <ExpandButton
                   width="45%"
@@ -101,7 +135,7 @@ const UserInformationDisplay = () => {
                 >
                   Sign In
                 </ExpandButton>
-              </>
+              </div>
 
             )
           }

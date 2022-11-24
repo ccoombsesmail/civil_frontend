@@ -1287,3 +1287,10 @@ export const ClerkSvg = () => (
   </svg>
 
 )
+
+export const VerifiedSvgCivic = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 17" className="mt-px h-5 w-5 fill-secondary stroke-secondary stroke-0">
+    <path fill="current" d="M15.306 10.26a4.97 4.97 0 0 1-4.925 4.322h-2.8c-2.74 0-4.968-2.224-4.968-4.958V6.83c0-2.734 2.228-4.957 4.967-4.957h2.8a4.97 4.97 0 0 1 4.925 4.32h1.66A6.619 6.619 0 0 0 10.38.228h-2.8C3.931.227.964 3.188.964 6.829v2.795c0 3.64 2.967 6.603 6.615 6.603h2.8a6.619 6.619 0 0 0 6.585-5.966h-1.66Z" />
+    <path fill="none" stroke="current" strokeLinecap="round" strokeWidth="1.8" d="m6.031 8.71 1.624 1.624 4.248-4.248" />
+  </svg>
+)

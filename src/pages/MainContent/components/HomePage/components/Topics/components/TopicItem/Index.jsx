@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import EmbededTweet from '../../../CommonComponents/TopicCards/TweetCard/Index'
+import EmbededTweet from '../../../../../../../CommonComponents/TopicCards/TweetCard/Index'
 
-import EmbededYouTube from '../../../CommonComponents/TopicCards/YouTubeCard/Index'
-import ExternalContentCard from '../../../CommonComponents/TopicCards/ExternalContentCard/Index'
+import EmbededYouTube from '../../../../../../../CommonComponents/TopicCards/YouTubeCard/Index'
+import ExternalContentCard from '../../../../../../../CommonComponents/TopicCards/ExternalContentCard/Index'
 import {
   CardItem, CardFrame, CardTitle, CardOverlay, CardContent, CardBody,
 } from './Style'
-import UserProvidedMediaCard from '../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
+import UserProvidedMediaCard from '../../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
 // import useGoToSubTopics from '../../../hooks/routing/useGoToSubTopics'
 
 const TopicItem = ({ topic, user }) => {

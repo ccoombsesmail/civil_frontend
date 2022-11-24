@@ -33,6 +33,7 @@ const CommentThread = () => {
   } = useCategorizeComments()
 
   useEffect(() => {
+    console.log(commentId)
     getAllCommentReplies(commentId)
     getTopic(topicId, user?.id)
   }, [user, commentId])

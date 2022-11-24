@@ -1,8 +1,8 @@
 import React from 'react'
-import ThemeButton from '../../../CommonComponents/Button/Index'
-import UserIcon from '../../../CommonComponents/UserIcon/Index'
-import { CREATE_TOPIC } from '../../../App/Modal/Index'
+import UserIcon from '../../../../../../../CommonComponents/UserIcon/Index'
+import { CREATE_TOPIC } from '../../../../../../../App/Modal/Index'
 import { HeaderContainer, FlexDiv } from './Style/index'
+import ExpandButton from '../../../../../../../CommonComponents/Buttons/ExpandButton/Index'
 
 const Header = ({ user, openModal }) => (
   <HeaderContainer>
@@ -15,9 +15,15 @@ const Header = ({ user, openModal }) => (
         {'! '}
         Have Something You Would Like To Discuss?
       </p>
-      <ThemeButton type="button" onClick={() => openModal(CREATE_TOPIC)} width="100%">
+      <ExpandButton
+        type="button"
+        height="2.5vw"
+        backgroundColor="var(--m-primary-btn-color)"
+        onClick={() => openModal(CREATE_TOPIC)}
+        width="100%"
+      >
         Create Topic +
-      </ThemeButton>
+      </ExpandButton>
     </FlexDiv>
   </HeaderContainer>
 )

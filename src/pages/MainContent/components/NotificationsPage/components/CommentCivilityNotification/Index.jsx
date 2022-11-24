@@ -41,7 +41,7 @@ const CommentCivilityNotifcation = ({ notification }) => {
           {' '}
           Updated Civility Given For Your
           {' '}
-          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
+          <Link onClick={handleClick} to={`/home/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
             Comment
           </Link>
           {' '}

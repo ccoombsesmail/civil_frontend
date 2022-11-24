@@ -60,8 +60,8 @@ export const NotificationMark = styled('mark')`
   color: white;
   border: 2px solid white;
   border-radius: 50%;
-  height: 18px;
-  width: 18px;
+  height: 22px;
+  width: 22px;
   background: red;
   display: flex;
   justify-content: center;

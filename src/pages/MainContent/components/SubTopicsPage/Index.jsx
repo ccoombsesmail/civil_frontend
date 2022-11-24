@@ -37,9 +37,11 @@ const SubTopics = () => {
   const user = useSelector((s) => s.session.currentUser)
 
   useEffect(() => {
-    getTopic(topicId, user?.id)
+    if (user) {
+      getTopic(topicId, user.userId)
+    }
     if (subtopicsEmpty) getAllSubTopics(topicId)
-  }, [topicId, subtopicId])
+  }, [topicId, subtopicId, user])
 
   return (
     <Container>

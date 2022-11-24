@@ -9,7 +9,6 @@ import {
   Header, StyledScalesSvg, ReportStatsContainer, ReportStatItem,
   StyledPillarSvg, Timer,
 } from './Style/index'
-import TopicItem from '../Topics/components/TopicItem/Index'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 
 import topicActions from '../../redux/actions/topics/index'
@@ -23,6 +22,7 @@ import VotingBox from './components/VotingBox/Index'
 
 import Comment from '../MainContent/components/SubTopicsPage/components/Comment/Index'
 import { COMMENT, TOPIC } from '../../enums/content_type'
+import TopicItem from '../MainContent/components/HomePage/components/Topics/components/TopicItem/Index'
 
 const Tribunal = () => {
   const { contentId, contentType } = useParams()

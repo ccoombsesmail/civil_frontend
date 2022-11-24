@@ -35,7 +35,7 @@ const TopicLikeNotification = ({ notification }) => {
           {' '}
           Liked Your
           {' '}
-          <Link onClick={handleClick} to={`/topics/${topicId}/subtopics`}>
+          <Link onClick={handleClick} to={`/home/topics/${topicId}/subtopics`}>
             Topic!
           </Link>
           {' '}

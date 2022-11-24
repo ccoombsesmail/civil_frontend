@@ -10,7 +10,7 @@ export default (bio, experience) => {
   return useCallback((e) => {
     e.preventDefault()
 
-    toast.promise(updateUserBioInformation(currentUser?.id, bio || null, experience || null),
+    toast.promise(updateUserBioInformation(bio || null, experience || null),
       {
         pending: 'Saving Bio Infromation...',
         success: 'Bio Info Succefully Saved!',
