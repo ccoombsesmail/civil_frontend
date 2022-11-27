@@ -5,22 +5,15 @@ import {
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import App from './pages/App/Index'
-import configureStore from './redux/store'
+import configureStore from './redux/store.ts'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'unicode-emoji-picker'
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
 
-  const preloadedState = {
-    session: {
-      currentUser: null,
-    },
-  }
-  const store = configureStore(preloadedState)
-
   ReactDOM.createRoot(root).render(
-    <Provider store={store}>
+    <Provider store={configureStore}>
       <Router>
         <Routes>
           <Route path="/*" element={<App />} />
