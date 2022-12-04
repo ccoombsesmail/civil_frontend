@@ -159,8 +159,6 @@ def test_func(n):
   except:
     print("Other errors")
   
-# print(test_func(5))
-# print(test_func(0))
 
 
 # my_dict = {1:"one", 2:"two"}
@@ -176,12 +174,12 @@ def test_func(n):
 
 # my_tuple[2] = 44 ## cannot re-asign
 
-# my_list[2] = 44  ## can re-asign
+# my_list[2] = 44  ## CAN re-asign
 
 
 
 
-############################### Dictornaires #####################
+############################### Dictionaries #####################
 
 # a_list = (1,2,3,4,5,12, 234)
 
@@ -214,22 +212,32 @@ def string_to_int(stringNum):
 # print(max_value)
 
 
-# def get_frequencies(words):
-#   freq = {}
-#   for word in words:
-#     if word in freq: 
-#       freq[word] += 1
-#     else:
-#       freq[word] = 1 ## {"hey": 1}
-#   return freq
 
 
-# words = ["hey", "hi", "Mark", "hi", "mark"]
+
+### Dictionary lecture problem
+## words = ["hey", "hi", "Mark", "hi", "mark"]
+
+def get_frequencies(words):
+  freq = {}
+  for word in words:
+    if word in freq: 
+      freq[word] += 1
+    else:
+      freq[word] = 1 ## {"hey": 1}
+  return freq
 
 
-# print(get_frequencies(words))
+
+
+
+
+
+
+### ZY-BOOK problem 
 
 # Joe, 123-5432 Linda, 983-4123 Frank, 867-5309
+# get the input as above and then print the number associated with a name
 user_input = input()
 
 formatted_user_input = user_input.replace(",", "").split(" ")
@@ -246,6 +254,3 @@ print(user_contacts)
 name = input()
 
 print(user_contacts[name])
-
-# contact_name = input() 
-# print(user_contacts[contact_name]

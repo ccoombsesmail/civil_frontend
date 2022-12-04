@@ -1,27 +1,12 @@
 import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import HomePage from './components/HomePage/Index'
+import LoadingPage from '../CommonComponents/LoadingPage/Index'
 
-const SubTopicsPage = React.lazy(() => import(
-  /* webpackChunkName: "tribunal" */
-  /* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ './components/SubTopicsPage/Index'
-))
+const SubTopicsPage = React.lazy(() => import('./components/SubTopicsPage/Index'))
+const NotificationsPage = React.lazy(() => import('./components/NotificationsPage/Index'))
+const TribunalNotificationsPage = React.lazy(() => import('./components/TribunalNotificationsPage/Index'))
+const HomePage = React.lazy(() => import('./components/HomePage/Index'))
 
-const NotificationsPage = React.lazy(() => import(
-  /* webpackChunkName: "tribunal" */
-  /* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ './components/NotificationsPage/Index'
-))
-
-const TribunalNotificationsPage = React.lazy(() => import(
-  /* webpackChunkName: "tribunal" */
-  /* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ './components/TribunalNotificationsPage/Index'
-))
 
 const MainContent = () => (
   <>
@@ -29,7 +14,7 @@ const MainContent = () => (
       <Route
         path="/topics/:topicId/subtopics/*"
         element={(
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <SubTopicsPage />
           </Suspense>
           )}
@@ -37,7 +22,7 @@ const MainContent = () => (
       <Route
         path="/notifications"
         element={(
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <NotificationsPage />
           </Suspense>
       )}
@@ -45,12 +30,16 @@ const MainContent = () => (
       <Route
         path="/notifications-tribunal"
         element={(
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <TribunalNotificationsPage />
           </Suspense>
         )}
       />
-      <Route path="/topics" element={<HomePage />} />
+      <Route path="/topics" element={(
+          <Suspense fallback={<LoadingPage />}>
+            <HomePage />
+          </Suspense>
+        )} />
     </Routes>
   </>
 )

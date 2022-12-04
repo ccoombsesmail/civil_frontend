@@ -1,0 +1,1 @@
+import{j as a,r as e}from"./vendor.0dc98fef.js";import{b as c}from"./redux.3f1f2b08.js";import{b as i}from"./index.43cdcd02.js";const b=(t,o)=>{const r=a(),{openModal:s}=c(i,r);return e.exports.useCallback(()=>{s(t,o)},[t,o])};export{b as u};

@@ -22,7 +22,7 @@ require('@solana/wallet-adapter-react-ui/styles.css')
 const env = {
   gatekeeperNetwork: new PublicKey('ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6'),
   clusterUrl: clusterApiUrl('devnet'),
-  cluster: 'devnet',
+  cluster: 'devnet'
 }
 const RequestGatewayToken = () => {
   const [showPopover, setShowPopover] = useState(false)
