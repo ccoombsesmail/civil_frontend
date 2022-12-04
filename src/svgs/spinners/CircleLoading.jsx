@@ -2,7 +2,7 @@ import React from 'react'
 
 export const CircleLoading = ({ size, noBackground }) => (
   <div style={{
-    width: noBackground ? 'unset' : '100%', height: '100%', backgroundColor: noBackground ? 'none' : 'var(--m-secondary-background-color)', opacity: '0.8', 
+    width: noBackground ? 'unset' : '100%', height: noBackground ? 'unset' : '100%', backgroundColor: noBackground ? 'none' : 'var(--m-secondary-background-color)', opacity: '0.8', 
     minHeight: noBackground ? 'unset' : '10vh', display: 'flex', alignItems: 'center',
   }}
   >

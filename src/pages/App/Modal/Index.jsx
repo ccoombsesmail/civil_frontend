@@ -3,39 +3,24 @@
 import React, { Suspense } from 'react'
 import StrapModal from 'react-bootstrap/Modal'
 import { useSelector } from 'react-redux'
-// import { SignIn } from '@clerk/clerk-react'
-// import SignUpForm from '../../SessionForms/SignUp/Index'
-// import CreateTopicForm from '../../TopicForm/Index'
-// import CreateSubTopicForm from '../../SubTopicForm/Index'
-// import CommentForm from '../../CommentForm/Index'
 import { ModalWrapper } from './Style/index'
 
-import CreateTagForm from '../../CreateTagForm/Index'
-import OpposingRecForm from '../../OpposingRecForm/Index'
-import VoteForm from '../../VoteForm/Index'
+
 import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
-import { ReportForm } from '../../ReportForm/Index'
 
-const CreateTopicForm = React.lazy(() => import(
-  /* webpackChunkName: "topic-form" */
-  /* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ '../../TopicForm/Index'
+const CreateTopicForm = React.lazy(() => import('../../TopicForm/Index'
 ))
 
-const CommentForm = React.lazy(() => import(
-  /* webpackChunkName: "comment-form" */
-  /* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ '../../CommentForm/Index'
-))
+const CommentForm = React.lazy(() => import('../../CommentForm/Index'))
 
-const CreateSubTopicForm = React.lazy(() => import(
-  /* webpackChunkName: "subtopic-form" */
-  /* webpackMode: "lazy" */
-  /* webpackPrefetch: true */
-  /* webpackPreload: true */ '../../SubTopicForm/Index'
-))
+const CreateSubTopicForm = React.lazy(() => import('../../SubTopicForm/Index'))
+
+const OpposingRecForm = React.lazy(() => import('../../OpposingRecForm/Index'))
+const CreateTagForm = React.lazy(() => import('../../CreateTagForm/Index'))
+const VoteForm = React.lazy(() => import('../../VoteForm/Index'))
+const ReportForm = React.lazy(() => import('../../ReportForm/Index'))
+
+
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
 export const CREATE_TOPIC = 'CREATE_TOPIC'

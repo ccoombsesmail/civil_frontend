@@ -1,0 +1,1 @@
+print("asdfad" < 1)
