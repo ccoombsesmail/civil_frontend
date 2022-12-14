@@ -8,11 +8,12 @@ import tribunalCommentActions from '../../../redux/actions/tribunal_comments'
 import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
 import delay from '../../../generic/delay'
 import useDetectCurrentPage from '../../hooks/routing/useDetectCurrentPage'
+import { useCreateCommentMutation } from '../../../api/services/comments'
 
 export default (compState, content, rawText, modalProps, contentId, topicId) => {
   const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()
-
-  const {
+  const [createComment, {}] = useCreateCommentMutation()
+  const { 
     tribunalCommentUnderReviewId,
     commentId,
   } = modalProps || {}
@@ -24,7 +25,6 @@ export default (compState, content, rawText, modalProps, contentId, topicId) => 
   const rootId = isParentTribunalCommentUnderReview ? null : compState.rootParentCommentId
 
   const {
-    createComment,
     createTribunalComment,
   } = useBindDispatch(commentActions, tribunalCommentActions)
 
@@ -46,7 +46,7 @@ export default (compState, content, rawText, modalProps, contentId, topicId) => 
         error: 'Promise rejected 🤯',
       },
     ).then((data) => {
-      const toxicityScore = data[1].data.SEVERE_TOXICITY
+      const toxicityScore = data[1].data.TOXICITY
       let toxicityStatus
       if (toxicityScore < 0.6) toxicityStatus = 'NOT_TOXIC'
       if (toxicityScore > 0.9) toxicityStatus = 'TOXIC'

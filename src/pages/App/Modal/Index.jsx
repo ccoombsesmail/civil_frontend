@@ -7,6 +7,7 @@ import { ModalWrapper } from './Style/index'
 
 
 import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
+import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 
 const CreateTopicForm = React.lazy(() => import('../../TopicForm/Index'
 ))
@@ -68,7 +69,7 @@ const Modal = ({ closeModal }) => {
   return (
     <StrapModal contentClassName="react-strap-modal" show={isOpen} onHide={closeModal} container={document.getElementById('main-container')}>
       <ModalWrapper>
-        <Suspense fallback={<></>}>
+        <Suspense fallback={<CircleLoading />}>
           {component}
         </Suspense>
       </ModalWrapper>

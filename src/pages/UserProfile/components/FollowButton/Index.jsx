@@ -5,8 +5,8 @@ import useFollowClickHandler from '../../hooks/useFollowClickHandler'
 
 import {} from './Style'
 
-const FollowButton = ({ isFollowing, userId }) => {
-  const followClickHandler = useFollowClickHandler(userId, isFollowing)
+const FollowButton = ({ isFollowing, profileUserId }) => {
+  const followClickHandler = useFollowClickHandler(profileUserId, isFollowing)
 
   return (
     <div>

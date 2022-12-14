@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
-import topicActionCreators from '../../../../redux/actions/topics'
-import subTopicActionCreators from '../../../../redux/actions/subtopics'
-
-import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 import {
   Container, Line, MainContent, HeaderContainer,
 } from './Style'
@@ -20,28 +14,15 @@ import SubTopicsRouter from './components/SubTopicsRouter/Index'
 import { uuidRegEx } from '../../../../generic/regex/uuid'
 import UserInformationDisplay from '../../../UserInformationDisplay/Index'
 import Recommendations from '../RightSection/components/Recommendations/Index'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
+import { useGetAllSubTopicsQuery } from '../../../../api/services/subtopics'
+import { useGetTopicQuery } from '../../../../api/services/topics'
 
 const SubTopics = () => {
   const { topicId, '*': url } = useParams()
   const [subtopicId, commentId] = url ? url.match(uuidRegEx) : []
-  const {
-    getAllSubTopics,
-    getTopic,
-  } = useBindDispatch(
-    subTopicActionCreators,
-    topicActionCreators,
-  )
-  const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
 
-  const subtopicsEmpty = useSelector((s) => s.subtopics)
-  const user = useSelector((s) => s.session.currentUser)
 
-  useEffect(() => {
-    if (user) {
-      getTopic(topicId, user.userId)
-    }
-    if (subtopicsEmpty) getAllSubTopics(topicId)
-  }, [topicId, subtopicId, user])
 
   return (
     <Container>
@@ -52,7 +33,7 @@ const SubTopics = () => {
         <Middle>
           <MainContent>
             <HeaderContainer>
-              <Header topic={topic} user={user} />
+              <Header />
             </HeaderContainer>
             <Line />
             { commentId && <ParentComment topicId={topicId} /> }

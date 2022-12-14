@@ -46,9 +46,9 @@ const Card = ({
       <UserInfoHeader
         iconSrc={topic?.createdByIconSrc}
         time={getTimeSince(topic?.createdAt)}
-        username={topic?.createdBy}
-        userId={topic?.userId}
-        userTag={topic?.createByTag}
+        username={topic?.createdByUsername}
+        userId={topic?.createdByUserId}
+        userTag={topic?.createdByTag}
         topicCreatorIsDidUser={topic?.topicCreatorIsDidUser}
         userVerificationType={topic?.userVerificationType}
       />

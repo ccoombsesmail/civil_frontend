@@ -8,7 +8,9 @@ const TribunalNotificationsPage = React.lazy(() => import('./components/Tribunal
 const HomePage = React.lazy(() => import('./components/HomePage/Index'))
 
 
-const MainContent = () => (
+const MainContent = () => {
+
+return (
   <>
     <Routes>
       <Route
@@ -43,5 +45,6 @@ const MainContent = () => (
     </Routes>
   </>
 )
+      }
 
 export default MainContent

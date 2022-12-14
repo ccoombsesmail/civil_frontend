@@ -3,15 +3,20 @@ import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
 import topicActionCreators from '../../../../../../redux/actions/topics/index'
 import commentActionCreators from '../../../../../../redux/actions/comments/index'
 import tribunalCommentActionCreators from '../../../../../../redux/actions/tribunal_comments/index'
+import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics'
 
 import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
+import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
+import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
+import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments'
 
 export default (content, user, contentType) => {
   const {
-    updateTopicLikes,
-    updateCommentLikes,
     updateTribunalCommentLikes,
   } = useBindDispatch(topicActionCreators, commentActionCreators, tribunalCommentActionCreators)
+  const { isOnSubtopicsPage, isOnTribunalPage } = useDetectCurrentPage()
+  const [updateLikes, {}] = useUpdateTopicLikesMutation()
+  const [updateCommentLikes, {}] = useUpdateCommentLikesMutation()
 
   return useCallback(() => {
     let value
@@ -31,13 +36,15 @@ export default (content, user, contentType) => {
     const likeData = {
       id: content?.id,
       commentId: content?.id,
-      userId: user?.userId,
       value,
-      createdById: content.createdById || content.userId,
+      createdByUserId: content.createdByUserId,
+      updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
+      updateGetTopicQuery: isOnSubtopicsPage || isOnTribunalPage,
+      ...content
     }
     switch (contentType) {
       case TOPIC:
-        updateTopicLikes(likeData)
+        updateLikes(likeData)
         break
       case COMMENT:
         updateCommentLikes(likeData)
@@ -48,5 +55,5 @@ export default (content, user, contentType) => {
       default:
         break
     }
-  }, [content])
+  }, [content, contentType])
 }

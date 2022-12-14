@@ -1,1 +1,0 @@
-print("asdfad" < 1)

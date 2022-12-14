@@ -1,5 +1,5 @@
 import React, {
-  memo, useEffect, useMemo, useState,
+  memo, useContext, useEffect, useMemo, useState,
 } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -23,23 +23,29 @@ import VotingBox from './components/VotingBox/Index'
 import Comment from '../MainContent/components/SubTopicsPage/components/Comment/Index'
 import { COMMENT, TOPIC } from '../../enums/content_type'
 import TopicItem from '../MainContent/components/HomePage/components/Topics/components/TopicItem/Index'
+import { useGetCurrentUserQueryState } from '../../api/services/session'
+import { UserContext } from '../App/Index'
+import { useGetReportQuery } from '../../api/services/reports'
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
+import { useGetTopicQuery } from '../../api/services/topics'
+import { useWallet } from '@solana/wallet-adapter-react'
 
 const Tribunal = () => {
   const { contentId, contentType } = useParams()
-  const user = useSelector((s) => s.session.currentUser)
+  const { currentUser} = useGetCurrentUser()
+  const wallet = useWallet()
+  console.log(wallet)
   const topics = useSelector((s) => s.topics.list)
-  const comments = useSelector((s) => s.comments.list)
+  // const comments = useSelector((s) => s.comments.list)
   const tribunalComments = useSelector((s) => s.tribunalComments)
-  const reportStats = useSelector((s) => s.reports)[contentId]
   const [timeLeft, setTimeLeft] = useState({})
+  const { data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(contentId, { skip: !contentId || !currentUser})
 
   const {
-    getTopic,
-    getReport,
     getAllTribunalCommentsBatch,
     getComment,
-  } = useBindDispatch(topicActions, reportActions, tribunalCommentsActions, commentActions)
-
+  } = useBindDispatch(reportActions, tribunalCommentsActions, commentActions)
+  const { data: reportStats, isLoading, isUninitialized, isSuccess } = useGetReportQuery(contentId, {skip: !contentId || !currentUser})
   useEffect(() => {
     let timer
     if (reportStats) {
@@ -51,13 +57,12 @@ const Tribunal = () => {
   }, [reportStats])
 
   useEffect(() => {
-    if (contentId && user) {
-      if (contentType === COMMENT) getComment(contentId)
-      if (contentType === TOPIC) getTopic(contentId, user.id)
-      getReport(contentId)
-      getAllTribunalCommentsBatch(contentId)
+    if (contentId && currentUser) {
+      // if (contentType === COMMENT) getComment(contentId)
+      // if (contentType === TOPIC) getTopic(contentId, currentUser.id)
+      // getAllTribunalCommentsBatch(contentId)
     }
-  }, [contentId, user])
+  }, [contentId, currentUser])
 
   const timerComponents = []
 
@@ -79,12 +84,12 @@ const Tribunal = () => {
   const votingTimeUp = timerComponents.length === 0
 
   const Content = useMemo(() => {
-    const topic = topics?.find((t) => t.id === contentId)
-    const comment = comments?.find((c) => c.data.id === contentId)
-    if (topic) return <TopicItem key={topic.id} topic={topic} user={user} />
-    if (comment) return <Comment commentData={comment.data} replies={comment.children} />
+    if (isTopicLoading || isTopicUninitialized) return null
+    // const comment = comments?.find((c) => c.data.id === contentId)
+    if (topic) return <TopicItem key={topic.id} topic={topic} user={currentUser} />
+    // if (comment) return <Comment commentData={comment.data} replies={comment.children} />
     return null
-  }, [topics, comments, contentId])
+  }, [topic, contentId])
   return (
     <OuterContainer id="tribunal-container">
       <Header>
@@ -108,28 +113,29 @@ const Tribunal = () => {
         {Content}
         <StyledPillarSvg />
       </InnerContainer>
-      {reportStats && (
+      {isSuccess && (
       <VotingBox
         contentId={contentId}
         reportStats={reportStats}
         votingTimeUp={votingTimeUp}
       />
       )}
-      <ReportStatsContainer>
+     { isUninitialized ? null : (<ReportStatsContainer>
         <ReportStatItem>
           <h2>Toxic Reports</h2>
-          {reportStats && (reportStats.numToxicReports || 0)}
+          {isSuccess && (reportStats.numToxicReports || 0)}
         </ReportStatItem>
         <ReportStatItem>
           <h2>Personal Attack Reports</h2>
-          {reportStats && (reportStats.numPersonalAttackReports || 0)}
+          {isSuccess && (reportStats.numPersonalAttackReports || 0)}
         </ReportStatItem>
         <ReportStatItem>
           <h2>Spam Reports</h2>
-          {reportStats && (reportStats.numSpamReports || 0)}
+          {isSuccess && (reportStats.numSpamReports || 0)}
         </ReportStatItem>
       </ReportStatsContainer>
-      <TribunalComments comments={tribunalComments} />
+      )}
+      {/* <TribunalComments comments={tribunalComments} /> */}
     </OuterContainer>
   )
 }

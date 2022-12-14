@@ -6,7 +6,7 @@ import ExpandButton from '../../../../../../../CommonComponents/Buttons/ExpandBu
 
 const Header = ({ user, openModal }) => (
   <HeaderContainer>
-    <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} userId={user?.id} />
+    <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} userId={user?.userId} />
     <FlexDiv>
       <p className="text-focus-in">
         Hey

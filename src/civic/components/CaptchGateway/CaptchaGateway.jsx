@@ -30,7 +30,6 @@ const RequestGatewayToken = () => {
   const { gatewayStatus, requestGatewayToken, gatewayToken } = useGateway()
   const [color, statusMsg, icon] = useMemo(() => {
     let btnColor
-    console.log('In CAPTCHA Component', gatewayStatus, gatewayToken?.gatekeeperNetworkAddress)
 
     let btnIcon
     if (gatewayStatus === 9) {

@@ -1,27 +1,27 @@
 import { useCallback } from 'react'
-import { useSelector } from 'react-redux'
-
 import topicActions from '../../../redux/actions/topics/index'
-import subtopicActions from '../../../redux/actions/subtopics/index'
 
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 
 import checkLinkType from './checkLinkType'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
+import { useCreateSubTopicMutation } from '../../../api/services/subtopics'
 
 export default (metaData, topicId) => {
-  const { createSubTopic, uploadTopicMedia } = useBindDispatch(topicActions, subtopicActions)
-  const user = useSelector((s) => s.session.currentUser)
+  const { uploadTopicMedia } = useBindDispatch(topicActions)
+  const { currentUser } = useGetCurrentUser()
+  const [createSubTopic, {}] = useCreateSubTopicMutation()
 
   return useCallback((values, { setSubmitting, resetForm }, content) => {
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
-    const linkType = checkLinkType(values.contentUrl)
+    const linkType = checkLinkType(values.externalContentUrl)
     const data = {
       ...values,
       description: content,
-      createdBy: user.username,
-      userId: user.id,
+      createdBy: currentUser.username,
+      userId: currentUser.userId,
       evidenceLinks: eLinks,
-      [linkType]: values.contentUrl,
+      [linkType]: values.externalContentUrl,
       thumbImgUrl: metaData.ogImage?.url,
       topicId,
       tweetUrl: null,

@@ -32,14 +32,14 @@ const TopicItem = ({ topic, user }) => {
       />
     )
   }
-  if (topic.contentUrl) {
+  if (topic.externalContentUrl) {
     return (
       <ExternalContentCard
         {...commonProps}
       />
     )
   }
-  if (topic.vodUrl || topic.imageUrl) {
+  if (topic.createdByVodUrl || topic.createdByImageUrl) {
     return (
       <UserProvidedMediaCard
         {...commonProps}

@@ -48,7 +48,7 @@ const CreateTopicForm = () => {
   })
 
   const validator = useConfigFormErrors(VALIDATIONS)
-  const { contentUrl, getContentUrlOnBlur } = useGetLinkMetaDataOnBlur()
+  const { externalContentUrl, getContentUrlOnBlur } = useGetLinkMetaDataOnBlur()
   const handleSubmit = useHandleSubmit(metaData)
   const { closeModal } = useBindDispatch(uiActions)
 
@@ -95,14 +95,14 @@ const CreateTopicForm = () => {
                     <FlexDiv>
                       <Field
                         type="url"
-                        name="contentUrl"
+                        name="externalContentUrl"
                         placeholder="Link To Content"
                         label="Link To Content"
                         component={Input}
                         width="85%"
                         onBlur={getContentUrlOnBlur}
                       />
-                      { contentUrl && <LinkTypeIcon metaData={metaData} contentUrl={contentUrl} /> }
+                      { externalContentUrl && <LinkTypeIcon metaData={metaData} externalContentUrl={externalContentUrl} /> }
                     </FlexDiv>
 
                     <Line />
@@ -126,7 +126,7 @@ const CreateTopicForm = () => {
                 <DisplayMedia
                   imgFile={imgFile}
                   videoFile={videoFile}
-                  contentUrl={contentUrl}
+                  externalContentUrl={externalContentUrl}
                   setMetaData={setMetaData}
                 />
                 <RichTextEditor

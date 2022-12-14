@@ -7,10 +7,12 @@ import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
 import useCreateDidBasedJwt from './useCreateDidBasedJwt'
 import { AssistDIDAdapter } from '../../DID/AssistDIDAdapter.ts'
 import useGetCivicAuthHeader from '../../../civic/hooks/useGetCivicAuthHeader.ts'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
 export default () => {
   const { getToken } = useAuth()
-  const currentUser = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
+  
   const { user: clerkUser } = useUser({ withAssertions: true })
   const createDIDBasedJWT = useCreateDidBasedJwt()
   const getDefaultDID = useGetDefaultDID()

@@ -272,6 +272,7 @@ blockquote {
 
   .theme-tooltip {
     z-index: 999999999;
+    pointer-events: none;
   }
 
   .popover {
@@ -281,6 +282,7 @@ blockquote {
   .sticky-popover {
     outline: none;
     border: none;
+    pointer-events: none;
   }
 
   .feather {

@@ -2,13 +2,13 @@ import React from 'react'
 import LinkMetaData from '../LinkMetaData/Index'
 
 const DisplayMedia = ({
-  imgFile, videoFile, setMetaData, contentUrl,
+  imgFile, videoFile, setMetaData, externalContentUrl,
 }) => (
   <>
-    { contentUrl && (
+    { externalContentUrl && (
     <LinkMetaData
       setMetaData={setMetaData}
-      contentUrl={contentUrl}
+      externalContentUrl={externalContentUrl}
     />
     ) }
     { imgFile && <img src={imgFile} alt="" />}

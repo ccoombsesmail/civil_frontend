@@ -61,7 +61,7 @@ const ElastosQuote = () => (
       {' '}
       and
       {' '}
-      <em style={{ color: '#2F1730' }}>not</em>
+      <em style={{ color: '#2F1730' }}>NOT</em>
       {' '}
       corporations with
       {' '}
@@ -108,10 +108,7 @@ const CivicTabContent = () => {
       <AlreadyKnowContainer>
         <h1>Already Know What You Are Doing?</h1>
         <ArrowRightSvg />
-        <WalletMultiButton
-          className="wallet-button"
-          startIcon={<Blockchain />}
-        />
+        <WalletMultiButton />
       </AlreadyKnowContainer>
       <Line />
       <TopUnorderdList>

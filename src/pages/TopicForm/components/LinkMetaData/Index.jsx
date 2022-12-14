@@ -8,12 +8,12 @@ import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'
 import useGetLinkMetaDataEffect from './hooks/useGetLinkMetaDataEffect'
 
 const LinkMetaData = ({
-  topic, contentUrl, setMetaData, setIsLoading,
+  topic, externalContentUrl, setMetaData, setIsLoading,
 }) => {
-  const metaData = useGetLinkMetaDataEffect(topic, contentUrl, setMetaData, setIsLoading)
+  const metaData = useGetLinkMetaDataEffect(topic, externalContentUrl, setMetaData, setIsLoading)
   useEffect(() => {
     setIsLoading(true)
-  }, [contentUrl])
+  }, [externalContentUrl])
 
   return (
     <Container>

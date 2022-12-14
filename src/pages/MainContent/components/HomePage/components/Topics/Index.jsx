@@ -1,37 +1,38 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 
 import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
 import uiActionCreators from '../../../../../../redux/actions/ui'
-import topicActionCreators from '../../../../../../redux/actions/topics'
 
 import TopicItem from './components/TopicItem/Index'
 import Header from './components/Header/Index'
 import WavyBackground from '../../../../../CommonComponents/WavyBackground/Index'
 import { CardContainer, Container, BorderContainer } from './Style'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { useCreateTopicMutation, useGetAllTopicsQuery } from '../../../../../../api/services/topics'
+import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
+import useGetCivicAuthHeader from '../../../../../../civic/hooks/useGetCivicAuthHeader'
+import { MemoryStoredToken } from '../../../../../../civic/utils/generateCivicAuthHeader'
 
 const Topics = () => {
-  const { openModal, getAllTopics } = useBindDispatch(uiActionCreators, topicActionCreators)
-  const topics = useSelector((s) => s.topics.list) || []
-  const user = useSelector((s) => s.session.currentUser)
-  useEffect(() => {
-    setTimeout(() => {
-      if (user) {
-        getAllTopics()
-      }
-    }, 0)
-  }, [user])
+  const { openModal } = useBindDispatch(uiActionCreators)
+  const { currentUser } = useGetCurrentUser()
+
+  const {data: topics, isLoading, isUninitialized} = useGetAllTopicsQuery(null, {
+    skip: !currentUser
+  })
+  console.log(topics)
 
   return (
     <>
       <Container>
         <BorderContainer>
-          <Header user={user} openModal={openModal} />
-          <CardContainer>
+          <Header user={currentUser} openModal={openModal} />
+          { isLoading ? <CircleLoading size="30vw" noBackground /> :  <CardContainer>
             {
-            topics.map((topic) => <TopicItem key={topic.id} topic={topic} user={user} />)
+            isUninitialized ? null : topics?.map((topic) => <TopicItem key={topic.id} topic={topic} user={currentUser} />)  
             }
           </CardContainer>
+        }       
         </BorderContainer>
         <WavyBackground color="#EF5D45" top="100%" />
       </Container>

@@ -1,5 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useGetAllNotificationsQueryState } from '../../../../api/services/notifications'
+import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import UserInformationDisplay from '../../../UserInformationDisplay/Index'
 import {
   Middle, Left, Right, HomePageGrid,
@@ -10,7 +13,9 @@ import {
 } from './Style'
 
 const Notifications = () => {
-  const notifications = useSelector((s) => s.notifications.userNotificationsList)
+  const { currentUser } = useGetCurrentUser()
+  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser.userId)
+  const { userNotifications } = notifications || {}
   return (
     <HomePageGrid>
       <Left>
@@ -18,7 +23,7 @@ const Notifications = () => {
       </Left>
       <Middle>
 
-        <Container id="notifications-container">
+        { isUninitialized ? null : (<Container id="notifications-container">
 
           <BorderContainer>
             <Header>
@@ -27,12 +32,13 @@ const Notifications = () => {
               </p>
             </Header>
             <NotificationList>
-              {notifications.map((notification) => (
+              {isLoading ? <CircleLoading /> : userNotifications.map((notification) => (
                 <NotificationItem key={notification.id} notification={notification} />
               ))}
             </NotificationList>
           </BorderContainer>
-        </Container>
+        </Container>)
+      }
       </Middle>
       <Right>
         <span>.</span>

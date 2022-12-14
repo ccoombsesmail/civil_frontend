@@ -42,6 +42,7 @@ export const Header = styled('div')`
   }
 `
 export const Body = styled('div')`
+  transition: all 1s;
   filter: ${(props) => (props.shouldBlur ? 'blur(25px)' : 'unset')};
   pointer-events: ${(props) => (props.shouldBlur ? 'none' : 'initial')};
   width: 100%;
@@ -105,7 +106,6 @@ export const Container = styled('li')`
   box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
   border: none;
   cursor: pointer;
-  overflow: hidden;
   text-decoration: none;
   /* transition: all 1s ease-in-out; */
 

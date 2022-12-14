@@ -13,6 +13,7 @@ import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 import {
   FormContainer, Container, FlexDiv,
 } from './Style'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 
 const UploadIconForm = () => {
   const [file, setFile] = useState(null)
@@ -39,8 +40,9 @@ const UploadIconForm = () => {
 
   const { uploadUserIcon, updateUserIcon } = useBindDispatch(sessionActions)
 
-  const userId = useSelector((s) => s.session.currentUser)?.id
-  const user = useSelector((s) => s.users.list).find((u) => u.id === userId)
+  const { currentUser } = useGetCurrentUser()
+  
+  const user = useSelector((s) => s.users.list).find((u) => u.id === currentUser?.userId)
 
   return (
     <Container>

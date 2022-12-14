@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
 import userActions from '../../../../../redux/actions/users'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
 export default (bio, experience) => {
-  const currentUser = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
+
   const { updateUserBioInformation } = useBindDispatch(userActions)
   return useCallback((e) => {
     e.preventDefault()

@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux'
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
 export default () => {
-  const loggedIn = useSelector((s) => s.session.currentUser)
+  const { currentUser: loggedIn } = useGetCurrentUser()
   return {
     loggedIn,
   }

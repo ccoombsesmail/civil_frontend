@@ -1,5 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useGetAllNotificationsQueryState } from '../../../../api/services/notifications'
+import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import UserInformationDisplay from '../../../UserInformationDisplay/Index'
 import {
   Middle, Left, Right, HomePageGrid,
@@ -10,7 +12,9 @@ import {
 } from './Style'
 
 const TribunalNotifications = () => {
-  const notifications = useSelector((s) => s.notifications.tribunalNotificationsList)
+  const { currentUser } = useGetCurrentUser()
+  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser.userId)
+  const { tribunalNotifications } = notifications || {}
   return (
     <HomePageGrid>
       <Left>
@@ -26,11 +30,13 @@ const TribunalNotifications = () => {
                 Recent Notifications
               </p>
             </Header>
-            <NotificationList>
-              {notifications.map((notification) => (
+            { isUninitialized ? null : ( <NotificationList>
+              {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
                 <NotificationItem key={notification.id} notification={notification} />
               ))}
             </NotificationList>
+            )
+            }
           </BorderContainer>
         </Container>
       </Middle>

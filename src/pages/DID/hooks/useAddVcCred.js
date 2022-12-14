@@ -9,6 +9,7 @@ import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import sessionActions from '../../../redux/actions/session'
 import userActions from '../../../redux/actions/users/index'
 import { STORE_PATH } from '../constants'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
 const STORE_PASS = 'pwd'
 // const password = 'password'
@@ -26,7 +27,8 @@ const addVCToDoc = async (db, issuer, doc, id, value) => {
 
 export default () => {
   const { addDIDSession, upsertDidUser } = useBindDispatch(sessionActions, userActions)
-  const currentUser = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
+  
   return useCallback(async (props) => {
     DIDBackend.initialize(new AssistDIDAdapter('testnet'))
     const rootPath = STORE_PATH

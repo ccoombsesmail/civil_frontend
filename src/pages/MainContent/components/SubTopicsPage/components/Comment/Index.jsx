@@ -24,6 +24,7 @@ import { ParentCommentContext } from '../CommentColumn/Index'
 import ThemeTooltip from '../../../../../CommonComponents/Tooltip/Index'
 import { UNDER_REVIEW } from '../../../../../../enums/report_status'
 import { COMMENT } from '../../../../../../enums/content_type'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 
 const Comment = ({ commentData, replies, commentRef }) => {
   if (!commentData) return null
@@ -33,7 +34,7 @@ const Comment = ({ commentData, replies, commentRef }) => {
   const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState(false)
   const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW || commentData?.toxicityStatus === 'TOXIC')
-  const user = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
 
   useSetInnerHtml(contentRef, commentData?.content)
 
@@ -71,7 +72,7 @@ const Comment = ({ commentData, replies, commentRef }) => {
           <ActionToolbar
             likes={commentData?.likes}
             comment={commentData}
-            user={user}
+            user={currentUser}
           />
           <Collapse in={isOpen}>
             <EvidenceSection>

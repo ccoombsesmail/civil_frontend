@@ -1,14 +1,9 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import useBindDispatch from '../../hooks/redux/useBindDispatch'
-import uiActionCreators from '../../../redux/actions/ui/index'
-import topicTribunalVotesActionCreactors from '../../../redux/actions/tribunal_votes/index'
-// const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
+import { useCreateTribunalVoteMutation } from '../../../api/services/tribunal_votes'
 
 export default (contentId, voteForSelected, voteAgainstSelected) => {
-  const {
-    createTribunalVote,
-  } = useBindDispatch(uiActionCreators, topicTribunalVotesActionCreactors)
+  const [createTribunalVote, {}] = useCreateTribunalVoteMutation()
   return useCallback((values, { setSubmitting, resetForm }) => {
     const data = {
       contentId,

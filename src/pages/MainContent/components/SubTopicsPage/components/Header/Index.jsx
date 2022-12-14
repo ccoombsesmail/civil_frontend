@@ -18,6 +18,9 @@ import {
   Container, Description, TopicSummaryContainer, StyledLongDownArrow,
 } from './Style/index'
 import { uuidRegEx } from '../../../../../../generic/regex/uuid'
+import { useGetTopicQuery } from '../../../../../../api/services/topics'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 
 const TooltipComponent = ({ text, title, reference }) => (
   <OverlayTrigger
@@ -32,18 +35,23 @@ const TooltipComponent = ({ text, title, reference }) => (
   </OverlayTrigger>
 )
 
-const Header = ({ topic, user }) => {
+const Header = () => {
   let content = null
   let subtopicContent = null
-  const { '*': url } = useParams()
+  const {topicId, '*': url } = useParams()
+  
+  const { currentUser } = useGetCurrentUser()
+  const {data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized} = useGetTopicQuery(topicId, {
+    skip: !currentUser
+  })
   const [subtopicId, commentId] = url ? url.match(uuidRegEx) : []
 
   const subtopic = useSelector((s) => s.subtopics)[subtopicId]
   const showSubTopic = subtopic && subtopic?.title !== 'General'
 
   const commonProps = useMemo(() => ({
-    topic, user, showLinks: true,
-  }), [topic, user])
+    topic, user: currentUser, showLinks: true,
+  }), [topic, currentUser])
 
   const descRef = useRef(null)
   const subtopicRef = useRef(null)
@@ -52,8 +60,10 @@ const Header = ({ topic, user }) => {
   useSetInnerHtml(descRef, topic?.description)
 
   const commonPropsSubTopic = useMemo(() => ({
-    topic: subtopic, user, showLinks: true,
-  }), [subtopic, user])
+    topic: subtopic, user: currentUser , showLinks: true,
+  }), [subtopic, currentUser])
+
+  if (isTopicLoading) return <CircleLoading size="20vw" />
 
   if (topic?.tweetHtml) content = <EmbededTweet {...commonProps} />
   else if (topic?.ytUrl) content = <VideoShowPage {...commonProps} src={topic.ytUrl.replace('watch?v=', 'embed/')} />

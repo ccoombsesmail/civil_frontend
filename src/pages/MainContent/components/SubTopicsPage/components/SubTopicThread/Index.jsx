@@ -16,6 +16,8 @@ import { ColumnContainer, ThreadContainer } from './Style/index'
 import { ThemeTab } from '../../../../../CommonComponents/Tabs/Style'
 import { Line } from '../../Style'
 import useSessionType from '../../../../../hooks/permissions/useSessionType'
+import { useGetTopicQuery } from '../../../../../../api/services/topics'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
@@ -26,22 +28,17 @@ const SubTopicThread = () => {
   const subtopic = useSelector((state) => state.subtopics)[subTopicId]
   const [key, setKey] = useState('all')
   const sessionType = useSessionType()
+  const { currentUser } = useGetCurrentUser()
 
+  const { categorizedComments, isLoading, isUninitialized } = useCategorizeComments(subTopicId, currentUser)
   const {
     POSITIVE: positiveComments,
     NEUTRAL: neutralComments,
     NEGATIVE: negativeComments,
     all: allComments,
-  } = useCategorizeComments()
+  } = categorizedComments || {}
 
-  useEffect(() => {
-    // const { signedInViaClerk, signedInViaDID, signedInViaCivic } = sessionType
-    // if (!signedInViaClerk && !signedInViaDID) return new Promise()
-    if (user?.userId) {
-      getAllComments(subTopicId, user.userId)
-      getTopic(topicId, user.userId)
-    }
-  }, [user])
+
   return (
 
     <ThreadContainer>

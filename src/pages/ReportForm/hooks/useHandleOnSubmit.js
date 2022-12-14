@@ -1,12 +1,13 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { createReport } from '../../../api/v1/reports/reports_api_util'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import uiActionCreators from '../../../redux/actions/ui/index'
+import { useCreateReportMutation } from '../../../api/services/reports'
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (contentId) => {
   const { closeModal } = useBindDispatch(uiActionCreators)
+  const [createReport, {}] = useCreateReportMutation()
   return useCallback((values, { setSubmitting, resetForm }) => {
     const data = {
       contentId,

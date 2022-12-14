@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const CardItem = styled('li')` 
   /* height: 20vw; */
   width: 40vw;
-  overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;

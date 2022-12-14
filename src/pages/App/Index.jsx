@@ -3,6 +3,7 @@ import React, {
   useCallback,
   Suspense,
   useMemo,
+  createContext
 } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -30,10 +31,11 @@ import uiActionCreators from "../../redux/actions/ui";
 import Header from "./Header/Index";
 import Modal from "./Modal/Index";
 import LoadingSpinner from "./LoadingSpinner/Index";
-import { MainContainer, Content } from "./Style";
+import { MainContainer, Content, Wrapper } from "./Style";
 import LoadingBridgeWithSpinner from "./LoadingBridge/Index";
 import "@solana/wallet-adapter-react-ui"
 import LoadingPage from "../CommonComponents/LoadingPage/Index";
+import { CIVIC_USER } from "../../enums/session_type";
 
 const Dashboard = React.lazy(() => import("../Dashboard/Index"));
 
@@ -51,6 +53,9 @@ const elitpicIn = cssTransition({
   enter: "slide-in-elliptic-top-fwd",
   exit: "slide-out-elliptic-bottom-bck",
 });
+
+export const UserContext = createContext(null);
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -75,29 +80,21 @@ const App = () => {
         <WalletProvider
           wallets={wallets}
           autoConnect={
-            localStorage.getItem("previousSignInMethod") === "civic_user"
+            localStorage.getItem("previousSignInMethod") === CIVIC_USER
           }
         >
           <WalletModalProvider>
             <GlobalStyle />
-            <div
-              id="main-container"
-              style={{
-                width: "100vw",
-                height: "100vh",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <Wrapper id="main-container">
               <LoadingSpinner />
               <ClerkLoaded>
                 <Header />
                 <LoadingBridgeWithSpinner>
+                  {({ userId }) => (
+                <UserContext.Provider value={userId}>
                   <MainContainer>
                     <Content>
+
                       <Routes>
                         <Route
                           path="/dashboard"
@@ -135,7 +132,7 @@ const App = () => {
                           path="/home/*"
                           element={
                             <Suspense fallback={<LoadingPage />}>
-                              <MainContent />
+                              <MainContent userId={userId} />
                             </Suspense>
                           }
                         />
@@ -144,18 +141,20 @@ const App = () => {
                           element={<Navigate replace to="/home/topics" />}
                         />
                       </Routes>
+                    <Modal closeModal={closeModal} />
                     </Content>
 
-                    <Modal closeModal={closeModal} />
                     <ToastContainer
                       autoClose={2000}
                       className="toasty"
                       transition={elitpicIn}
                     />
                   </MainContainer>
+                  </UserContext.Provider>
+                  )}
                 </LoadingBridgeWithSpinner>
               </ClerkLoaded>
-            </div>
+            </Wrapper>
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

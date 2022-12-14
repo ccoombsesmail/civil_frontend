@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Container = styled('div')`
   min-width: 70%;
   width: 100%;
+
 `
 
 export const LinkWrapper = styled('a')`

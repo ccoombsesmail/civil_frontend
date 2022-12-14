@@ -1,8 +1,10 @@
 import { useCallback } from 'react'
-import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import { useCreateTopicMutation } from '../../../api/services/topics'
 
 import topicActions from '../../../redux/actions/topics/index'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
+import { UserContext } from '../../App/Index'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 
 import checkLinkType from './checkLinkType'
@@ -10,19 +12,20 @@ import checkLinkType from './checkLinkType'
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (metaData) => {
-  const { createTopic, uploadTopicMedia } = useBindDispatch(topicActions)
-  const user = useSelector((s) => s.session.currentUser)
-
+  const { uploadTopicMedia } = useBindDispatch(topicActions)
+  const [createTopic, { data: topic, isLoading }] = useCreateTopicMutation()
+  const { currentUser } = useGetCurrentUser()
   return useCallback((values, { setSubmitting, resetForm }, content) => {
+    if (isLoading) return
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
-    const linkType = checkLinkType(values.contentUrl)
+    const linkType = checkLinkType(values.externalContentUrl)
     const data = {
       ...values,
       description: content,
-      createdBy: user.username,
-      userId: user.id,
+      createdByUsername: currentUser.username,
+      createdByuserId: currentUser.userId,
       evidenceLinks: eLinks,
-      [linkType]: values.contentUrl,
+      [linkType]: values.externalContentUrl,
       thumbImgUrl: metaData.ogImage?.url,
     }
     if (values.file instanceof File) {

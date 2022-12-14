@@ -23,7 +23,7 @@ const addUserActionCreatorBackend = (userData) => ({
   payload: userData,
 })
 
-const addSessionDataDID = (didData) => ({
+export const addSessionDataDID = (didData) => ({
   type: ADD_SESSION_DATA_DID,
   payload: didData,
 })

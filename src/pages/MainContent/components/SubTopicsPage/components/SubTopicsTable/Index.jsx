@@ -9,11 +9,18 @@ import { Line } from '../../Style/index'
 import {
   Container, TableHeader, Table, ColHeader, ColItem,
 } from './Style'
+import { useGetAllSubTopicsQuery } from '../../../../../../api/services/subtopics'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 
 const SubTopicsTable = () => {
-  // const user = useSelector((state) => state.session.currentUser)
-  const subtopics = Object.values(useSelector((state) => state.subtopics))
+  const { currentUser } = useGetCurrentUser()
   const { topicId } = useParams()
+
+  const {data: subtopics, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized} = useGetAllSubTopicsQuery(topicId, {
+    skip: !currentUser
+  })
+
   return (
     <>
       <Line />
@@ -33,7 +40,7 @@ const SubTopicsTable = () => {
             </ColHeader>
           </thead>
           {
-            subtopics.map((subtopic) => (
+           isSubTopicLoading ? <CircleLoading /> : subtopics?.map((subtopic) => (
               <SubTopicsItem
                 key={subtopic.id}
                 {...subtopic}

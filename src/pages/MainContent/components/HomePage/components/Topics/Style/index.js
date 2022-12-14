@@ -12,6 +12,9 @@ export const Container = styled('div')`
 
 export const BorderContainer = styled('div')`
   width: 50vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   border: 1px solid rgba(200,200,200,0.25);
   border-top: none;
   z-index: 9999;
@@ -50,7 +53,7 @@ export const CardContainer = styled('ul')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   z-index: 9999;
   padding: 0;
   /* margin: 5em 0 0 0; */

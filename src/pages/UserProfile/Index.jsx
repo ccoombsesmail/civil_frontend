@@ -13,22 +13,23 @@ import {
 import UserList from './components/UserList/Index'
 import FollowButton from './components/FollowButton/Index'
 import UsernameAndTag from '../CommonComponents/UsernameAndTag/Index'
+import { useGetCurrentUserQuery } from '../../api/services/session'
 
 const UserProfile = () => {
-  const { userId } = useParams()
-  const user = useSelector((s) => s.users)[userId]
+  const { userId: profileUserId } = useParams()
+  const user = useSelector((s) => s.users)[profileUserId]
   const { followed, followers } = useSelector((s) => s.follows)
 
-  const currentUser = useSelector((s) => s.session.currentUser)
+  // const{ data: currentUser } = useGetCurrentUserQuery(profileUserId)
 
-  const showFollowButton = userId !== currentUser?.id
+  const showFollowButton = profileUserId !== currentUser?.id
   const isFollowing = user?.isFollowing
   const { getUser, getAllFollowed, getAllFollowers } = useBindDispatch(userActions, followActions)
 
   useEffect(() => {
     if (currentUser) {
-      getUser(userId, currentUser?.id)
-      getAllFollowed(userId)
+      // getUser(profileUserId, currentUser?.id)
+      getAllFollowed(profileUserId)
     }
   }, [currentUser])
   const [activeKey, setActiveKey] = useState('0')
@@ -42,7 +43,7 @@ const UserProfile = () => {
             <FlexDiv>
               <UsernameAndTag
                 usernameDisplay={user?.username}
-                userId={userId}
+                userId={profileUserId}
                 userTag={user?.tag}
               />
               <Bio>{user?.bio}</Bio>
@@ -53,11 +54,11 @@ const UserProfile = () => {
                 <Nav.Link eventKey="0">Following</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="1" onClick={() => getAllFollowers(userId)}>Followers</Nav.Link>
+                <Nav.Link eventKey="1" onClick={() => getAllFollowers(profileUserId)}>Followers</Nav.Link>
               </Nav.Item>
             </StyledNav>
           </TabsIconContainer>
-          { showFollowButton && <FollowButton isFollowing={isFollowing} userId={userId} /> }
+          { showFollowButton && <FollowButton isFollowing={isFollowing} profileUserId={profileUserId} /> }
 
         </HeaderContainer>
         <Content>

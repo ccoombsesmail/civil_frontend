@@ -6,11 +6,11 @@ import {
 import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'
 
 const LinkTypeIcon = ({
-  contentUrl, metaData, setIsLoading,
+  externalContentUrl, metaData, setIsLoading,
 }) => {
   useEffect(() => {
     setIsLoading(true)
-  }, [contentUrl])
+  }, [externalContentUrl])
 
   useEffect(() => {
     if (metaData) setIsLoading(false)

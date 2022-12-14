@@ -9,9 +9,10 @@ const ExpandButton = ({
   height,
   icon,
   margin,
+  type
 }) => (
   <Container backgroundColor={backgroundColor} width={width} height={height} margin={margin}>
-    <StyledButton backgroundColor={backgroundColor} onClick={onClick}>
+    <StyledButton backgroundColor={backgroundColor} onClick={onClick} type={type}>
       <ButtonBackground backgroundColor={backgroundColor} />
       {icon}
       <span>{children}</span>

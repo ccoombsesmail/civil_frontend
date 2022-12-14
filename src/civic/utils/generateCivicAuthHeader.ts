@@ -50,9 +50,15 @@ export const createCivicAuthToken = async (
       exp,
     })
   );
-  const signature = await wallet.signMessage(encodedMessage);
-  const pk = wallet.publicKey.toBase58();
-  const msg = b58.encode(encodedMessage);
-  const sig = b58.encode(signature);
-  return `${pk}.${msg}.${sig}`;
+
+  try {
+    const signature = await wallet.signMessage(encodedMessage);
+    const pk = wallet.publicKey.toBase58();
+    const msg = b58.encode(encodedMessage);
+    const sig = b58.encode(signature);
+    return `${pk}.${msg}.${sig}`;
+  } catch {
+    console.log("craPPPPP")
+  }
+ 
 };

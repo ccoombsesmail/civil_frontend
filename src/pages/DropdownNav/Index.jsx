@@ -20,6 +20,7 @@ import useLogout from './hooks/useLogout'
 import useGoToDash from './hooks/useGoToDash'
 import useCloseOnClick from './hooks/useCloseOnClick'
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
 export const NavDropdownToggle = ({ children }) => {
   const [open, setOpen] = useState(false)
@@ -36,7 +37,8 @@ export const NavDropdownToggle = ({ children }) => {
 }
 
 export const DropdownMenu = ({ open, setOpen }) => {
-  const user = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
+
   const { pathname } = useLocation()
   const session = useSessionType()
   const [loggedInViaDIDOrCivic, setLoggedInViaDIDOrCivic] = useState(false)
@@ -64,15 +66,15 @@ export const DropdownMenu = ({ open, setOpen }) => {
     <DropdownMenuContainer open={open}>
       { loggedInViaDIDOrCivic && (
       <UserInfoSection>
-        <UserIcon width="50px" userId={user?.id} />
+        <UserIcon width="50px" userId={currentUser?.id} />
         <Greeting>
           Hello,
           {' '}
-          {longUsernameDisplay(user?.username) || 'Friend'}
+          {longUsernameDisplay(currentUser?.username) || 'Friend'}
           {' '}
         </Greeting>
         <DID>
-          {user?.id}
+          {currentUser?.id}
           {' '}
           <AuthenticationSvg />
         </DID>

@@ -7,9 +7,11 @@ import {
 import { STORE_PATH } from '../constants'
 
 import { AssistDIDAdapter } from '../AssistDIDAdapter.ts'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
 export default () => {
-  const user = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
+
   DIDBackend.initialize(new AssistDIDAdapter('testnet'))
 
   return useCallback(async () => {
@@ -27,5 +29,5 @@ export default () => {
     } catch {
       return false
     }
-  }, [user])
+  }, [currentUser])
 }

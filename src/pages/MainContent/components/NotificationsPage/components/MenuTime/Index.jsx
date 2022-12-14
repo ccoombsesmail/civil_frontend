@@ -7,14 +7,16 @@ import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
 import {
   MenuTimeContainer, Time, MenuIconContainer, ActionMenu, ActionMenuItem,
 } from './Style/index'
+import { useUpdateNotificationToReadMutation } from '../../../../../../api/services/notifications'
 
-export const MenuTime = ({ time, id, eventType }) => {
+export const MenuTime = ({ time, id, eventType: notificationType }) => {
   const [isOpen, setIsOpen] = useState(false)
   const {
     updateNotificationToRead,
     deleteNotification,
   } = useBindDispatch(notificationActionCreators)
 
+  const [updateToRead, {}] = useUpdateNotificationToReadMutation()
   return (
     <MenuTimeContainer>
       <MenuIconContainer onClick={(e) => {
@@ -30,7 +32,7 @@ export const MenuTime = ({ time, id, eventType }) => {
       >
         <VerticalMenuDotsSvg />
         <ActionMenu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
-          <ActionMenuItem onClick={() => updateNotificationToRead(eventType, id)}>
+          <ActionMenuItem onClick={() => updateToRead({notificationType, id})}>
             <ReadSvg />
             <span>
               Mark As Read

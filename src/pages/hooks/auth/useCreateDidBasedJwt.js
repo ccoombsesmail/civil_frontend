@@ -3,10 +3,12 @@ import {
 } from '@elastosfoundation/did-js-sdk'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 import { STORE_PATH } from '../../DID/constants'
 
 export default () => {
-  const user = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
+
   return useCallback(async (doc) => {
     DIDBackend.initialize(new DefaultDIDAdapter('testnet'))
     const rootPath = STORE_PATH
@@ -37,8 +39,8 @@ export default () => {
       .setExpiration(exp)
       // .setNotBefore(nbf)
       .put('userId', doc.getSubject().repr)
-      .put('username', user?.username || doc.getSubject().getMethodSpecificId())
-      .put('userCivilTag', user?.tag)
+      .put('username', currentUser?.username || doc.getSubject().getMethodSpecificId())
+      .put('userCivilTag', currentUser?.tag)
 
     doc.getMetadata().attachStore(store)
 
@@ -54,5 +56,5 @@ export default () => {
       console.log('create jwt token failed.')
     }
     return token
-  }, [user])
+  }, [currentUser])
 }

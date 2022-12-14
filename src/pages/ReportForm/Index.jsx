@@ -11,7 +11,7 @@ import {
 } from './Style/Index'
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 
-export const ReportForm = ({ contentId }) => {
+const ReportForm = ({ contentId }) => {
   const handleOnSubmit = useHandleOnSubmit(contentId)
   return (
     <Container>
@@ -68,3 +68,6 @@ export const ReportForm = ({ contentId }) => {
 
   )
 }
+
+
+export default ReportForm

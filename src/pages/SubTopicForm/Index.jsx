@@ -25,6 +25,7 @@ import {
 } from './Style'
 import { DownArrowCircleSvg } from '../../svgs/svgs'
 import RichTextEditor from '../CommonComponents/RichTextEditor/Index'
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
 const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
 
@@ -45,11 +46,12 @@ const CreateSubTopicForm = () => {
   const { getTopic, closeModal } = useBindDispatch(
     uiActions, topicActions,
   )
-  const user = useSelector((s) => s.session.currentUser)
+
+  const { currentUser } = useGetCurrentUser()
   const topic = useSelector((s) => s.topics.list)?.find((t) => t.id === topicId)
 
   useEffect(() => {
-    getTopic(topicId, user?.id)
+    getTopic(topicId, currentUser?.id)
   }, [])
 
   return (
@@ -98,7 +100,7 @@ const CreateSubTopicForm = () => {
                       />
                     </FlexDiv>
 
-                    <Field type="url" name="contentUrl" placeholder="Link To Content" component={Input} width="100%" onBlur={getLinkMetaDataOnBlur} />
+                    <Field type="url" name="externalContentUrl" placeholder="Link To Content" component={Input} width="100%" onBlur={getLinkMetaDataOnBlur} />
                     <Line />
                     <FlexDiv>
                       <h2> Add your own media content </h2>

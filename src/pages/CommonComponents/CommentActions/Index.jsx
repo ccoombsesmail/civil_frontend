@@ -10,16 +10,17 @@ import { CommentSvg, LikeSvg, LikeClickedSvg } from '../../../svgs/svgs'
 import IconButton from '../IconButton/Index'
 import { Container } from './Style/index'
 import commentActions from '../../../redux/actions/comments/index'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
 const CommentActions = ({ commentId, liked }) => {
   const dispatch = useDispatch()
   const { updateCommentLikes } = bindActionCreators(commentActions, dispatch)
   const comments = useSelector((s) => s.comments.list)
-  const user = useSelector((s) => s.session.currentUser)
+  const { currentUser } = useGetCurrentUser()
   const thisComment = comments.find(({ id }) => id === commentId)
 
   const updateLikes = useCallback(() => {
-    updateCommentLikes({ id: commentId, userId: user?.id, increment: !liked })
+    updateCommentLikes({ id: commentId, userId: currentUser?.id, increment: !liked })
   }, [commentId, liked])
 
   return (

@@ -38,7 +38,7 @@ const VideoShowPage = ({
       <VideoPlayer src={src} loading="lazy" />
       <VideoDescriptionCard
         onClick={goToSubTopic}
-        username={topic?.createdBy}
+        username={topic?.createdByUsername}
         iconSrc={`${topic?.createdByIconSrc}`}
         summary={topic?.summary}
         time={getTimeSince(topic?.createdAt)}

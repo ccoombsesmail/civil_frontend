@@ -1,7 +1,7 @@
 import {
   SignedIn, SignedOut,
 } from '@clerk/clerk-react'
-import React, { useEffect, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 import { useSelector } from 'react-redux'
@@ -16,10 +16,12 @@ import {
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
 import CaptchaGateway from '../../civic/components/CaptchGateway/CaptchaGateway'
 import UniquenessGateway from '../../civic/components/UniquenessGateway/UniquenessGateway'
+import { useGetCurrentUserQueryState } from '../../api/services/session'
+import { UserContext } from '../App/Index'
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
 const UserInformationDisplay = () => {
-  const currentUser = useSelector((s) => s.session.currentUser)
-
+  const { currentUser } = useGetCurrentUser()
   const {
     signedInViaClerk,
     signedInViaDID,
@@ -63,7 +65,6 @@ const UserInformationDisplay = () => {
       <Icon className="img" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} alt="" />
       <h1>
         {longUsernameDisplay(user.username)}
-        {/* <span>18</span> */}
       </h1>
       <h2>{user.tag ? `@${user.tag}` : ''}</h2>
       <div className="social">

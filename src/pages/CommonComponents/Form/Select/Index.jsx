@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { Fade } from 'react-bootstrap'
 import { StyledSelect, Label, Container } from './Style'
 import Error from '../ErrorMessage/Index'
+import { useGetEnumsQueryState } from '../../../../api/services/enums'
 
 const Select = ({
   width, field, form, placeholder, setFieldValue, setFieldTouched, ...props
@@ -16,13 +17,13 @@ const Select = ({
   const [value, setValue] = useState('')
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
-  const enums = useSelector((state) => state.enums.topicCategories)
-
+  const { data: enums, isUninitialized } = useGetEnumsQueryState()
   const onChange = useCallback((e, setField) => {
     setField(field.name, e.target.value)
     setValue(e.target.value)
   }, [])
 
+  if (isUninitialized) return null
   return (
     <Container>
 
