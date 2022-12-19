@@ -4,9 +4,11 @@ import useOpenModal from '../../../hooks/useOpenModal'
 
 import { ICON_FORM } from '../../../App/Modal/Index'
 import { Container, FlexDiv, UserIcon } from './Style'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 
-const Header = ({ user }) => {
+const Header = () => {
   const openModal = useOpenModal(ICON_FORM)
+  const { currentUser: user } = useGetCurrentUser()
   return (
     <Container>
       <FlexDiv>

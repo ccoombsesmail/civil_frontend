@@ -4,6 +4,7 @@ import { closeModal } from '../../redux/actions/ui/index.js'
 import { Console } from 'console';
 import { Recipe } from '@reduxjs/toolkit/dist/query/core/buildThunks';
 import { enumsApi } from './enums';
+import { emptySplitApi } from './base';
 
 export enum TopicCategories {
   Technology,
@@ -27,21 +28,21 @@ export interface SubTopic {
   thumbImgUrl?: string;
 }
 
-export const subtopicsApi = createApi({
-  reducerPath: 'subtopics',
-  tagTypes: ['SubTopics'],
-  baseQuery: backendBaseQuery,
+export const subtopicsApi = emptySplitApi.injectEndpoints({
+  // reducerPath: 'subtopics',
+  // tagTypes: ['SubTopics'],
+  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllSubTopics: builder.query<any, any>({
       query: (topicId) => ({ url: `/subtopics?topicId=${topicId}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [
-            ...result.map(({ id }) => ({ type: 'SubTopics', id } as const)),
-            { type: 'SubTopics', id: 'LIST' },
+            ...result.map(({ id }) => ({ type: 'SubTopic', id } as const)),
+            { type: 'SubTopic', id: 'LIST' },
           ]
         : 
-          [{ type: 'SubTopics', id: 'LIST' }],
+          [{ type: 'SubTopic', id: 'LIST' }],
     }),
     getSubTopic: builder.query<any, any>({
       query: (subtopicId) => ({ url: `/subtopics/${subtopicId}`, method: 'GET' }),
@@ -55,7 +56,7 @@ export const subtopicsApi = createApi({
         data: body
       }
       )},
-      invalidatesTags: [{ type: 'SubTopics', id: 'LIST' }],
+      invalidatesTags: [{ type: 'SubTopic', id: 'LIST' }],
       async onCacheEntryAdded(
         arg,
         {

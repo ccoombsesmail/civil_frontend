@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import useGetLinkMetaDataEffect from '../../../TopicForm/components/LinkMetaData/hooks/useGetLinkMetaDataEffect'
+import useGetLinkMetaDataEffect from '../../../Forms/components/LinkMetaData/hooks/useGetLinkMetaDataEffect'
 import useNavigateToPage from './hooks/useNavigateToPage'
 
 import {

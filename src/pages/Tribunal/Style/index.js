@@ -7,6 +7,8 @@ export const OuterContainer = styled('div')`
   align-items: center;
   width: 100%;
   padding-bottom: 60vh;
+  background-color: #F2F6FC;
+
 `
 
 export const Header = styled('header')`
@@ -132,21 +134,6 @@ export const VotesFor = styled('div')`
 
   @media only screen and (max-width: 800px) {
     font-size: 4vw;
-  }
-`
-export const Timer = styled('div')`
-  font-size: 1.3vw; 
-  color: gray;
-  margin: 0 0 clamp(30px, 1vw, 100px) 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media only screen and (max-width: 800px) {
-    font-size: 4vw;
-  }
-
-  h4 {
-    color: black;
   }
 `
 

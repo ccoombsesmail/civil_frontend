@@ -20,6 +20,13 @@ const GlobalStyle = createGlobalStyle`
 }
 
 
+@media (max-width: 1250px) {
+  * {
+  /* font-size:calc(12px + 1.5vw) !important; */
+
+  }
+}
+
 ol, ul, h1, h2, h3 {
   margin: 0;
   padding: 0;
@@ -279,10 +286,13 @@ blockquote {
     z-index: 999999999;
   }
 
-  .sticky-popover {
-    outline: none;
-    border: none;
-    pointer-events: none;
+
+  .popover {
+    position: absolute;
+    border: 1px solid rgba(200,200,200,0.25);
+    box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
+    border-radius: 1rem;
+
   }
 
   .feather {

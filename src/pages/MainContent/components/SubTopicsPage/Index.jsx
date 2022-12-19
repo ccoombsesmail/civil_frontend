@@ -14,15 +14,10 @@ import SubTopicsRouter from './components/SubTopicsRouter/Index'
 import { uuidRegEx } from '../../../../generic/regex/uuid'
 import UserInformationDisplay from '../../../UserInformationDisplay/Index'
 import Recommendations from '../RightSection/components/Recommendations/Index'
-import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
-import { useGetAllSubTopicsQuery } from '../../../../api/services/subtopics'
-import { useGetTopicQuery } from '../../../../api/services/topics'
 
 const SubTopics = () => {
   const { topicId, '*': url } = useParams()
   const [subtopicId, commentId] = url ? url.match(uuidRegEx) : []
-
-
 
   return (
     <Container>
@@ -36,7 +31,11 @@ const SubTopics = () => {
               <Header />
             </HeaderContainer>
             <Line />
-            { commentId && <ParentComment topicId={topicId} /> }
+            { commentId ? (
+              <>
+                <ParentComment topicId={topicId} commentId={commentId} />
+              </>
+            ) : null}
           </MainContent>
         </Middle>
         <Right>

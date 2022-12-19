@@ -9,12 +9,16 @@ import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
 import { COMMENT, TRIBUNAL_COMMENT } from '../../../../enums/content_type'
+import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
 
 const CommentActionToolbar = ({
   likes, comment, user,
 }) => {
-  const { topicId, subTopicId, ...params } = useParams()
+  const {
+    topicId, subTopicId, contentId, ...params
+  } = useParams()
   const isTribunalComment = comment.commentType
+  const { isOnTribunalPage } = useDetectCurrentPage()
   return (
     <Container>
       <Left>
@@ -22,6 +26,7 @@ const CommentActionToolbar = ({
           content={comment}
           user={user}
           contentType={isTribunalComment ? TRIBUNAL_COMMENT : COMMENT}
+          disabled={isOnTribunalPage && contentId === comment?.id}
         />
         <span>
           {likes || 0}
@@ -30,12 +35,17 @@ const CommentActionToolbar = ({
           content={comment}
           user={user}
           contentType={isTribunalComment ? TRIBUNAL_COMMENT : COMMENT}
+          disabled={isOnTribunalPage && contentId === comment?.id}
         />
         { params['*'] && <CommentButton comment={comment} />}
-        <CivilityButton comment={comment} />
+        { (isOnTribunalPage && contentId === comment?.id) ? null : (
+          <CivilityButton
+            comment={comment}
+          />
+        )}
       </Left>
       <Right>
-        <TribunalButton contentId={comment?.id} />
+        { !isOnTribunalPage && <TribunalButton contentId={comment?.id} /> }
         <span>
           {likes || 0}
           {' '}

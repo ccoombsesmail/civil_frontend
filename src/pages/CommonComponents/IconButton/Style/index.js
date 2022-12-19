@@ -10,4 +10,8 @@ export const StyledButton = styled('button')`
    :hover {
     filter: drop-shadow(0 2px 4px black) brightness(.8);
   }
+  :disabled {
+    filter: none;
+    opacity: .3;
+  }
 `

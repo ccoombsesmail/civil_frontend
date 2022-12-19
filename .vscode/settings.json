@@ -1,5 +1,9 @@
 {
-  "files.watcherExclude": {
-    "**/target": true
-  }
+  "eslint.workingDirectories": [
+  "./backend", 
+  "./frontend"
+],
+ "typescript.suggest.paths": true ,
+ "javascript.suggest.paths": true,
+ "editor.formatOnSave": true
 }

@@ -9,7 +9,7 @@ const ExpandButton = ({
   height,
   icon,
   margin,
-  type
+  type,
 }) => (
   <Container backgroundColor={backgroundColor} width={width} height={height} margin={margin}>
     <StyledButton backgroundColor={backgroundColor} onClick={onClick} type={type}>

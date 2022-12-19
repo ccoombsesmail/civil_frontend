@@ -6,7 +6,7 @@ import CardDetails from '../CardDetails/Index'
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 
-import DisplayMedia from '../../../TopicForm/components/DisplayMedia/Index'
+import DisplayMedia from '../../../Forms/components/DisplayMedia/Index'
 
 const UserProvidedMediaCard = ({
   topic, user, showLinks,

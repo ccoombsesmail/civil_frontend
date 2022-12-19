@@ -6,7 +6,7 @@ export const getUser = (userId) => axios.get(`${BACKEND_DEV}/users?userId=${user
 
 export const upsertDidUser = (didUserData) => axios.post(`${BACKEND_DEV}/users/did-user`, didUserData)
 
-export const updateUserBioInformation = (bio, experience) => axios.patch(`${BACKEND_DEV}/users`, { bio, experience })
+export const updateUserBioInformation = (bio, experience) => axios.patch(`${BACKEND_DEV}/users/bio-experience`, { bio, experience })
 
 export const createUserTag = (tagData) => axios.patch(`${BACKEND_DEV}/users/tag`, tagData)
 

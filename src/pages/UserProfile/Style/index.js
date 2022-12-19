@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Nav } from 'react-bootstrap'
 
 export const Container = styled('div')`
-  width: calc(100% - 2vw);
+  width: calc(100%);
   float:right;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,7 @@ export const Container = styled('div')`
 `
 
 export const TabsIconContainer = styled('section')`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -24,7 +25,6 @@ export const HeaderContainer = styled('div')`
   display: flex;
   width: 100%;
   align-items: flex-end;
-  height: 20vh;
   border-bottom: 1px solid gray;
 
 `
@@ -32,13 +32,13 @@ export const HeaderContainer = styled('div')`
 export const StyledNav = styled(Nav)`
 
   --nav-tab-width: 6vw; 
+  --nav-tab-width-mobile: 15vw; 
 
   position: relative;
   transition: all 1s;
 
   .nav-item {
     width: var(--nav-tab-width);
-    
   }
 
   .line {
@@ -58,29 +58,59 @@ export const StyledNav = styled(Nav)`
     display: flex;
     justify-content: center;
   }
+  @media (max-width: 1250px) {
+    .nav-item {
+      width: var(--nav-tab-width-mobile);
+    }
+    .line {
+      width: var(--nav-tab-width-mobile);
+      transform: ${({ activeKey }) => `translateX(${activeKey * 15}vw)`};
+
+    }
+    .nav-link {
+      font-size: 2vw;
+    }
+
+  }
+
+  @media (max-width: 700px) {
+    .nav-item {
+      width: var(--nav-tab-width-mobile);
+    }
+    .line {
+      width: var(--nav-tab-width-mobile);
+      transform: ${({ activeKey }) => `translateX(${activeKey * 15}vw)`};
+      height: 2.5px;
+
+    }
+    .nav-link {
+      font-size: 3vw;
+    }
+
+  }
+
 
 `
 
 export const Banner = styled('img')`
-  aspect-ratio: 7.8;
   width: 100%;
+  max-height: 45vh;
 `
 
 export const Content = styled('section')` 
-  /* background-color: #F1F8E9; */
-  /* display: flex;
-  justify-content: center;
-  width: 100%; */
   min-height: 80vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
   background: #F0F2F5;
+  width: 100%;
+  justify-content: center;
 `
 
 export const Middle = styled('div')` 
-  flex: 50%;
+  /* flex: 100%; */
+  width: 60vw;
   
 `
 
@@ -109,14 +139,20 @@ export const ExperienceContainer = styled('div')`
 export const Experience = styled('p')`
   display: flex;
   font-size: .8vw;
+  @media (max-width: 700px) {
+   
+    font-size: 2vw;
+
+  }
+
 
 `
 
 export const UserIcon = styled('img')`  
   height: 4vw;
   width: 4vw;
-  margin-bottom: 2vw;
   border-radius: 50%;
+  transform: translate(0, -50%);
 
 `
 
@@ -127,10 +163,23 @@ export const Bio = styled('p')`
   padding-left: 1vw;
   border-left: 1px solid gray;
 
+  @media (max-width: 700px) {
+   
+    font-size: 2vw;
+
+  }
+
 `
 
 export const FlexDiv = styled('div')` 
   display: flex;
+  margin-bottom: 1vw;
+
+`
+export const FullWidthDiv = styled('div')` 
+  display: flex;
+  width: 100%;
+  justify-content: center;
   margin-bottom: 1vw;
 
 `

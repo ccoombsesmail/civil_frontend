@@ -11,12 +11,20 @@ import SubTopicsTable from '../SubTopicsTable/Index'
 import uiActionCreators from '../../../../../../redux/actions/ui'
 import { CREATE_SUB_TOPIC } from '../../../../../App/Modal/Index'
 import { Container } from './Style/index'
+import { useGetAllSubTopicsQuery } from '../../../../../../api/services/subtopics'
+import { useParams } from 'react-router-dom'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 
 const SubTopicsList = () => {
-  const subtopics = useSelector((s) => s.subtopics)
   const dispatch = useDispatch()
+  const { topicId } = useParams()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
-  const genSubTopic = Object.values(subtopics)?.find(({ title }) => title === 'General')
+  const { currentUser } = useGetCurrentUser()
+  const {data: subtopics } = useGetAllSubTopicsQuery(topicId, {
+    skip: !currentUser
+  })
+  console.log(subtopics)
+  const genSubTopic = subtopics?.find(({ title }) => title === 'General')
   const goToSubTopic = useGoToSubTopic(genSubTopic?.id)
 
   return (

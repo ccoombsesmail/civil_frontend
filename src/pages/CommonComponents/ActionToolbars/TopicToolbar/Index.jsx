@@ -25,7 +25,7 @@ const TopicActionToolbar = ({
           {likes || 0}
         </span>
         <DownVoteButton content={topic} user={user} contentType={TOPIC} />
-        { topicId && <CommentButton />}
+        { (topicId || isOnTribunalPage) && <CommentButton />}
       </Left>
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton topicId={topicId} subTopicId={subTopicId} /> }

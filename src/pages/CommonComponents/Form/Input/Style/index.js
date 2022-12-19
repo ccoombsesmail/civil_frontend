@@ -2,8 +2,10 @@ import styled from 'styled-components'
 
 export const Container = styled('div')`
   position: relative;
-  margin: 1.3em;
+  margin: 1.3em 0;
   font-family: 'Ubuntu', sans-serif;
+  width: 90%;
+  
 `
 
 export const Label = styled('label')`

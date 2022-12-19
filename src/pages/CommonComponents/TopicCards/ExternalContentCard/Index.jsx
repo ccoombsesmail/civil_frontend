@@ -7,7 +7,7 @@ import CardDetails from '../CardDetails/Index'
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
 
-import LinkMetaData from '../../../TopicForm/components/LinkMetaData/Index'
+import LinkMetaData from '../../../Forms/components/LinkMetaData/Index'
 
 const ExternalContentCard = ({
   topic, user, showLinks,

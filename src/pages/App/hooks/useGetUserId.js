@@ -1,6 +1,6 @@
 import { useUser } from '@clerk/clerk-react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
 import {
   CIVIC_USER, CLERK_USER, ELASTOS_USER,
@@ -8,24 +8,24 @@ import {
 
 export default () => {
   const [userId, setUserId] = useState(null)
-  
+
   // For Elastos DID users
   const getDefaultDID = useGetDefaultDID()
-  
+
   // For Civic DID users
   const wallet = useWallet()
   const { publicKey } = wallet
 
-  //For Clerk Users
+  // For Clerk Users
   const { user: clerkUser, isLoaded } = useUser({ withAssertions: true })
 
   useEffect(() => {
     const getUserId = async () => {
       const prevSignInMethod = localStorage.getItem('previousSignInMethod')
-      console.log(wallet, prevSignInMethod)
       switch (prevSignInMethod) {
         case CLERK_USER:
           setUserId(clerkUser?.id)
+          break
         case ELASTOS_USER:
           const defaultDID = await getDefaultDID()
           if (defaultDID) {
@@ -34,10 +34,13 @@ export default () => {
           } else {
             return null
           }
+          break
         case CIVIC_USER:
           setUserId(publicKey?.toBase58())
+          if (localStorage.getItem('previousSignInMethod') === CIVIC_USER && localStorage.getItem('walletName2') !== 'null' && localStorage.getItem('walletName2')) wallet.select(localStorage.getItem('walletName2'))
+          break
         default:
-          break;
+          break
       }
     }
     if (isLoaded) getUserId()

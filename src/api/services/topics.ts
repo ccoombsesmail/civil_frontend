@@ -4,6 +4,7 @@ import { closeModal } from '../../redux/actions/ui/index.js'
 import { Console } from 'console';
 import { Recipe } from '@reduxjs/toolkit/dist/query/core/buildThunks';
 import { enumsApi } from './enums';
+import { emptySplitApi } from './base';
 
 export enum TopicCategories {
   Technology,
@@ -34,21 +35,21 @@ export interface TopicLiked {
   updateLikeValue: number
 } 
 
-export const topicsApi = createApi({
-  reducerPath: 'topics',
-  tagTypes: ['Topics'],
-  baseQuery: backendBaseQuery,
+export const topicsApi = emptySplitApi.injectEndpoints({
+  // reducerPath: 'topics',
+  // tagTypes: ['Topics'],
+  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllTopics: builder.query<any, any>({
       query: () => ({ url: `/topics`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [
-            ...result.map(({ id }) => ({ type: 'Topics', id } as const)),
-            { type: 'Topics', id: 'LIST' },
+            ...result.map(({ id }) => ({ type: 'Topic', id } as const)),
+            { type: 'Topic', id: 'LIST' },
           ]
         : 
-          [{ type: 'Topics', id: 'LIST' }],
+          [{ type: 'Topic', id: 'LIST' }],
     }),
     getTopic: builder.query<any, any>({
       query: (topicId) => ({ url: `/topics/${topicId}`, method: 'GET' }),
@@ -63,7 +64,7 @@ export const topicsApi = createApi({
         data: body
       }
       )},
-      invalidatesTags: [{ type: 'Topics', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Topic', id: 'LIST' }],
       async onCacheEntryAdded(
         arg,
         {

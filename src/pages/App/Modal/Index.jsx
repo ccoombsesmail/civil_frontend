@@ -5,22 +5,19 @@ import StrapModal from 'react-bootstrap/Modal'
 import { useSelector } from 'react-redux'
 import { ModalWrapper } from './Style/index'
 
-
 import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 
-const CreateTopicForm = React.lazy(() => import('../../TopicForm/Index'
-))
+const CreateTopicForm = React.lazy(() => import('../../Forms/TopicForm/Index'))
 
 const CommentForm = React.lazy(() => import('../../CommentForm/Index'))
 
-const CreateSubTopicForm = React.lazy(() => import('../../SubTopicForm/Index'))
+const CreateSubTopicForm = React.lazy(() => import('../../Forms/SubTopicForm/Index'))
 
 const OpposingRecForm = React.lazy(() => import('../../OpposingRecForm/Index'))
 const CreateTagForm = React.lazy(() => import('../../CreateTagForm/Index'))
 const VoteForm = React.lazy(() => import('../../VoteForm/Index'))
 const ReportForm = React.lazy(() => import('../../ReportForm/Index'))
-
 
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'

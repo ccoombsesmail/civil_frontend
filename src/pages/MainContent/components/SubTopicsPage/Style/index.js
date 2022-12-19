@@ -24,8 +24,8 @@ export const MainContent = styled('div')`
 
 `
 export const Line = styled('hr')` 
-  width: 90%;
-  margin: 1em 0 2em 0;
+  width: 70%;
+  margin: 2em 0 2em 0;
   background-color: rgb(48,48,50);
   height: .5px;
   border: none;

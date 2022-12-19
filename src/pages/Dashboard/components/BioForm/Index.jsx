@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import useOnSubmit from './hooks/useOnSubmit'
 
 import {
@@ -8,15 +9,15 @@ import {
   FieldLabel, Textarea, ButtonContainer,
 } from './Style/Index'
 
-const BioForm = ({ user }) => {
-  const userData = useSelector((s) => s.users)[user?.id]
-  const [bio, setBio] = useState(userData?.bio)
-  const [experience, setExperience] = useState(userData?.experience)
+const BioForm = () => {
+  const { currentUser } = useGetCurrentUser()
+  const [bio, setBio] = useState(currentUser?.bio)
+  const [experience, setExperience] = useState(currentUser?.experience)
 
   useEffect(() => {
-    setBio(userData?.bio)
-    setExperience(userData?.experience)
-  }, [userData])
+    setBio(currentUser?.bio)
+    setExperience(currentUser?.experience)
+  }, [currentUser])
 
   useEffect(() => {
     const clerkWrapper = document.getElementsByClassName('cl-main')[0]

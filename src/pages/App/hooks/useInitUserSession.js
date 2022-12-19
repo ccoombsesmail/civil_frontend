@@ -1,6 +1,8 @@
 /* eslint-disable no-case-declarations */
 import { io } from 'socket.io-client'
 import { useEffect } from 'react'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { useUser } from '@clerk/clerk-react'
 import {
   CIVIC_USER, CLERK_USER, ELASTOS_USER,
 } from '../../../enums/session_type'
@@ -8,18 +10,17 @@ import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import sessionActions from '../../../redux/actions/session'
 import userActions from '../../../redux/actions/users'
 
-import { useUpsertDidUserMutation } from '../../../api/services/session'
+import { useUpsertDidUserMutation } from '../../../api/services/session.ts'
 import useInitSocketEffect from './useInitSocketEffect'
-import useGetUserId from './useGetUserId'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { useUser } from '@clerk/clerk-react'
 
-import { useGetAllNotificationsQuery } from '../../../api/services/notifications'
-import useGetCivicAuthHeader from '../../../civic/hooks/useGetCivicAuthHeader'
-export default (userId, userIsLoading, isSuccess) => {
+import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
+import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
+// import useGetCivicAuthHeader from '../../../civic/hooks/useGetCivicAuthHeader.ts'
+
+export default (userId, userIsLoading, isError) => {
   const URL = `http://${window.location.hostname}:8093`
   const socket = io(URL, { autoConnect: false })
-  const [upsertDidUser, {}] = useUpsertDidUserMutation()
+  const [upsertDidUser] = useUpsertDidUserMutation()
   const {
     addDIDSession,
   } = useBindDispatch(sessionActions, userActions)
@@ -27,10 +28,11 @@ export default (userId, userIsLoading, isSuccess) => {
   const wallet = useWallet()
   const { isSignedIn } = useUser()
   const { data } = useGetAllNotificationsQuery(userId, {
-    skip: !userId || userIsLoading
+    skip: !userId || userIsLoading,
   })
   useInitSocketEffect(socket, userId)
-  const getCivicAuthHeader = useGetCivicAuthHeader()
+  const getDefaultDID = useGetDefaultDID()
+  // const getCivicAuthHeader = useGetCivicAuthHeader()
 
   useEffect(() => {
     const initUser = async () => {
@@ -59,20 +61,17 @@ export default (userId, userIsLoading, isSuccess) => {
   }, [])
 
   useEffect(() => {
-    console.log(wallet.connected, userId)
     const sessionListener = async () => {
       if (wallet.connected && userId) {
         const { publicKey } = wallet
-        if (isSuccess) {
+        if (isError) {
           await upsertDidUser({
             userId: publicKey.toBase58(),
             username: publicKey.toBase58(),
             iconSrc: '',
           })
-          
         }
 
-       
         localStorage.setItem('previousSignInMethod', CIVIC_USER)
         localStorage.setItem('walletName2', wallet.wallet.adapter.name)
       } else if (isSignedIn) {
@@ -80,5 +79,5 @@ export default (userId, userIsLoading, isSuccess) => {
       } else if (false) localStorage.setItem('previousSignInMethod', ELASTOS_USER)
     }
     sessionListener()
-  }, [wallet.connected, isSignedIn, userId, isSuccess])
+  }, [wallet.connected, isSignedIn, userId, isError])
 }

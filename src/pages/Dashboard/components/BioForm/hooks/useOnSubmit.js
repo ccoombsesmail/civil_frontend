@@ -1,18 +1,13 @@
 import { useCallback } from 'react'
-import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
-import userActions from '../../../../../redux/actions/users'
-import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
+import { useUpdateUserBioInformationMutation } from '../../../../../api/services/users.ts'
 
 export default (bio, experience) => {
-  const { currentUser } = useGetCurrentUser()
-
-  const { updateUserBioInformation } = useBindDispatch(userActions)
+  const [updateUserBioInformation] = useUpdateUserBioInformationMutation()
   return useCallback((e) => {
     e.preventDefault()
 
-    toast.promise(updateUserBioInformation(bio || null, experience || null),
+    toast.promise(updateUserBioInformation({ bio: bio || null, experience: experience || null }),
       {
         pending: 'Saving Bio Infromation...',
         success: 'Bio Info Succefully Saved!',
@@ -24,5 +19,5 @@ export default (bio, experience) => {
           },
         },
       })
-  }, [currentUser, bio, experience])
+  }, [bio, experience])
 }

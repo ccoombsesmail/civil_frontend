@@ -1,4 +1,3 @@
-import { RequestOptions } from '@octokit/types/dist-types/RequestOptions';
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';

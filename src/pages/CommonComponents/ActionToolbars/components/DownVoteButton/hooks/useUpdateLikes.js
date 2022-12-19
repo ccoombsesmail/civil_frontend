@@ -1,24 +1,18 @@
 import { useCallback } from 'react'
-import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
-import topicActionCreators from '../../../../../../redux/actions/topics/index'
-import commentActionCreators from '../../../../../../redux/actions/comments/index'
-import tribunalCommentActionCreators from '../../../../../../redux/actions/tribunal_comments/index'
 import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics'
 
 import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
 import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
 import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
 import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments'
+import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments'
 
 export default (content, user, contentType) => {
-  const {
-    updateTribunalCommentLikes,
-  } = useBindDispatch(topicActionCreators, commentActionCreators, tribunalCommentActionCreators)
+  const [updateTribunalCommentLikes, {}] = useUpdateTribunalCommentLikesMutation()
   const [updateTopicLikes, {}] = useUpdateTopicLikesMutation()
   const [updateCommentLikes, {}] = useUpdateCommentLikesMutation()
-  useUpdateCommentLikesMutation
   const { isOnSubtopicsPage, isOnTribunalPage } = useDetectCurrentPage()
-  
+
   return useCallback(() => {
     let value
     switch (content.likeState) {
@@ -34,7 +28,6 @@ export default (content, user, contentType) => {
       default:
         break
     }
-    console.log(content)
     const likeData = {
       id: content?.id,
       commentId: content?.id,
@@ -42,7 +35,7 @@ export default (content, user, contentType) => {
       updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
       updateGetTopicQuery: isOnSubtopicsPage || isOnTribunalPage,
       createdByUserId: content.createdByUserId,
-      ...content
+      ...content,
 
     }
     switch (contentType) {

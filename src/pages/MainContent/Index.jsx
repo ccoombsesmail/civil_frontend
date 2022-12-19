@@ -7,10 +7,7 @@ const NotificationsPage = React.lazy(() => import('./components/NotificationsPag
 const TribunalNotificationsPage = React.lazy(() => import('./components/TribunalNotificationsPage/Index'))
 const HomePage = React.lazy(() => import('./components/HomePage/Index'))
 
-
-const MainContent = () => {
-
-return (
+const MainContent = () => (
   <>
     <Routes>
       <Route
@@ -37,14 +34,16 @@ return (
           </Suspense>
         )}
       />
-      <Route path="/topics" element={(
+      <Route
+        path="/topics"
+        element={(
           <Suspense fallback={<LoadingPage />}>
             <HomePage />
           </Suspense>
-        )} />
+        )}
+      />
     </Routes>
   </>
 )
-      }
 
 export default MainContent

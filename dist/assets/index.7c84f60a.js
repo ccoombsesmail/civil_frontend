@@ -1,1 +1,0 @@
-import{d as o}from"./vendor.0dc98fef.js";const n=o("hr").withConfig({displayName:"Line",componentId:"sc-vkufdn-0"})(["  width:90%;margin:2em 1.3em;background-color:rgb(48,48,50);height:.5px;border:none;"]);export{n as L};

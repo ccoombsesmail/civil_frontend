@@ -1,14 +1,13 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { notificationsBaseQuery } from '../util/axiosInstance'
+import { emptyNotificationsSplitApi } from './notificationsBaseApi'
 
 
 interface Id {
   id: string
 }
 
-export const notificationsApi = createApi({
-  reducerPath: 'notifications',
-  baseQuery: notificationsBaseQuery,
+export const notificationsApi = emptyNotificationsSplitApi.injectEndpoints({
+  // reducerPath: 'notifications',
+  // baseQuery: notificationsBaseQuery,
   endpoints: (builder) => ({
     getAllNotifications: builder.query<any, any>({
       query: (userId) => ({ url: `/notifications?userId=${userId}`, method: 'GET' })

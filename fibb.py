@@ -1,155 +1,167 @@
-"""
-Output the Fibonacci sequence step-by-step.
-Fibonacci sequence starts as:
-0 1 1 2 3 5 8 13 21 ... in which the first
-two numbers are 0 and 1 and each additional
-number is the sum of the previous two numbers
-"""
-def fibonacci(v1, v2, run_cnt):
-    print(f'{v1} + {v2} = {v1+v2}')
+# Type code here
+class ItemToPurchase:
+    def __init__(self,item_name = "none",item_price = 0,item_quantity = 0, item_description = "none"):
+        self.item_name = item_name
+        self.item_price = item_price
+        self.item_quantity = item_quantity
+        self.item_description = item_description
+    
+    def print_item_descripton(self, item):
+        print(item.item_description)
 
-    if run_cnt <= 1:  
-        pass  
-    else:             
-        fibonacci(v2, v1+v2, run_cnt-1)
+    def print_item_cost(self):
+        print("{} {} @ ${} = ${}".format(self.item_name,self.item_quantity,self.item_price,self.item_quantity*self.item_price))
+        return self.item_quantity * self.item_price
+        
+        
+        
+        
+class ShoppingCart:
+    def __init__(self,customer_name = "none",current_date = "January 1, 2016",cart_items = []):
+        self.customer_name = customer_name
+        self.current_date = current_date
+        self.cart_items = cart_items
+    def add_item(self, item):
+        self.cart_items.append(item)
+    
+    def remove_item(self, item_name):
+        for i in range(len(self.cart_items)):
+            if self.cart_items[i].item_name == item_name:
+                self.cart_items.pop(i)
+                return
+        print("Item not found in cart. Nothing removed.")
+    
+    def modify_item(self, item):
+        for i in range(len(self.cart_items)):
+            if self.cart_items[i].item_name == item.item_name:
+                self.cart_items[i].item_quantity = item.item_quantity
+                return
+        print("Item not found in cart. Nothing modifned.")
+    
+    def get_num_items_in_cart(self):
+        count = 0
+        for item in self.cart_items:
+            count += item.item_quantity
+        return count
+    
+    def get_cost_of_cart(self):
+        total_cost = 0
+        for item in self.cart_items:
+            total_cost = total_cost + item.print_item_cost()
+        return total_cost
+    
+    def print_total(self):
+        if len(self.cart_items) == 0:
+            print("SHOPPING CART IS EMPTY") 
+            return
+        print("{}'s Shopping Cart - {}".format(self.customer_name, self.current_date))
+        print("Number of Items: {}".format(self.get_num_items_in_cart()))
+        print()
+        for item in self.cart_items:
+            item.print_item_cost()
+        print()
+        print("Total: ${}".format(self.get_cost_of_cart()))
+    
+    def print_descriptions(self):
+        print("{}'s Shopping Cart - {}".format(self.customer_name, self.current_date))
+        print("Item Descriptions")
+        for item in self.cart_items:
+            print(item.item_description)
+        
+        
+def print_menu():
+    print("MENU")
+    print("a - Add item to cart\n", end="")
+    print("r - Remove item from cart\n", end="")
+    print("c - Change item quantity\n", end="")
+    print("i - Output items' descriptions\n", end="")
+    print("o - Output shopping cart\n", end="")
+    print("q - Quit\n", end="")
 
-
-
-
-# print ('This program outputs the\n'
-#        'Fibonacci sequence step-by-step,\n'
-#        'starting after the first 0 and 1.\n')
-
-# run_for = int(input('How many steps would you like?'))
-
-
-
-# fibonacci(0, 1, run_for)
-
-
-
-"""
-0 1 1 2 3 5 8 13 21 34 ... 
-"""
-
-# Given a number n, print the n-th Fibonacci Number.
-
-# Input  : n = 2
-# Output : 1
-
-# Input  : n = 9
-# Output : 34
-
-## fibb(0) => 0
-## fibb(1) => 1
-
-## fibb(5)
-
-## F_n = F_n-1 + F_n-2
-## fibb(n) = fibb(n-1) + fibb(n-2)
-
-# def fibb(n):
-#   if n == 0:
-#     return 0
-#   if n == 1:
-#     return 1
-  
-#   return fibb(n-1) + fibb(n-2)
-
-
-
-
-
-
-def scramble(r_letters, s_letters):
-    """
-    Output every possible combination of a word.
-    Each recursive call moves a letter from
-    r_letters (remaining letters) to
-    s_letters (scrambled letters)
-    """
-    if len(r_letters) == 0:
-        # Base case: All letters used
-        print(s_letters) 
+def execute_menu(option, cart):
+    if option == "a":
+         print("ADD ITEM TO CART")
+         print("Enter the item name:")
+         item_name = input()
+         print("Enter the item description:")
+         item_description = input()
+         print("Enter the item price:")
+         item_price = input()
+         print("Enter the item quantity:")
+         item_quantity = input()
+         item = ItemToPurchase(item_name, int(item_price), int(item_quantity), item_description)
+         cart.add_item(item)
+         return False
+    elif option ==  "r":
+         print("REMOVE ITEM FROM CART")
+         print("Enter name of item to remove:")
+         name = input()
+         cart.remove_item(name)
+         return False
+    elif option ==  "c":
+         print("CHANGE ITEM QUANTITY")
+         print("Enter the item name:")
+         item_name = input()
+         print("Enter the item quantity:")
+         item_quantity = input()
+         item = ItemToPurchase(item_name, None, item_quantity, None)
+         cart.modify_item(item)
+         return False
+    elif option ==   "i":
+         print("OUTPUT ITEMS' DESCRIPTIONS")
+         cart.print_descriptions()
+         return False
+    elif option ==  "o":
+         print("OUTPUT SHOPPING CART")
+         cart.print_total()
+         return False
+    elif option ==  "q":
+         return True
     else:
-        # Recursive case: For each call to scramble()
-        # move a letter from remaining to scrambled
-        'bc'
-        for i in range(len(r_letters)):    
-            # The letter at index i will be scrambled
-            scramble_letter = r_letters[i]   ## r_letters[0] = a
-            # Remove letter to scramble from remaining letters list
-            remaining_letters = r_letters[:i] + r_letters[i+1:]  ## r_letters[:0] + r_letters[0+1:] = "bc"
-            # Scramble letter
-            scramble(nameList, s_letters + scramble_letter)    
-            ##  for i = 0 scramble("bc", "a"),  for i = 1 scramble("ac", "b") for i=2 scramble("ab", "c")
+        return False
+    
+    
 
-# word = input('Enter a word to be scrambled: ')
-# scramble(word, '') 
+        
+if __name__ == "__main__":
+    commands = ['a', 'o', 'i', 'r', 'c', 'q']
+    print("Enter customer's name:")
+    name = input()
+    print("Enter today's date:")
+    date = input()
+    print()
+    print("Customer name: {}".format(name))
+    print("Today's date: {}\n".format(date))
 
-
-
-## gettting rid of a charecter at index i in a_string
-
-## factorial(1) = 1
-## factorial(0) = 1
-
-
-# 5! = 5 * 4!
-
-## n * n-1 * n-2 ...    
-
-# n-1 * n-2 ... 
-
-## n * factorial(n-1)
-
-# def factorial(n):
-#   if n == 1:
-#     return 1
-#   if n == 0:
-#     return 1
-  
-#   return n * factorial(n-1)
-
-
-# print(factorial(5))
-
-
-# "hello"
-
-# a_string[0] = "h"
-
-# a_string[1:] = 'ello'
-
-
-# def reverse_string(a_string):
-#   if len(a_string) == 0:
-#     return
-#   else:
-#     return reverse_string(a_string[1:])  + a_string[0]
-
-
-  ## reverse_string(ello) + h
-  ## reverse_string(llo)   e + h
-  ## reverse_string(lo) l + e + h
-  ## reverse_string(o) + l + l + e + h
-  ## reverse_string() + o + l + l + e + h = > olleh
-
-def bsearch(nums, target):
-
-  upper = len(nums) - 1
-
-  mid = upper // 2
-
-  if nums[mid] == target:
-    return True
-  if len(nums) == 0:
-    return False
-  
-
-  if nums[mid] < target:
-    bsearch(nums[mid+1:], target)
-  return bsearch(nums[0:mid], target)
-
-
-
+    cart = ShoppingCart(name, date)
+    quit = False
+    
+    while not quit:
+        print_menu()
+        user_selection = input()
+        
+        while(user_selection not in commands):
+            user_selection = input("Choose an option:\n")
+        quit = execute_menu(user_selection, cart)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    

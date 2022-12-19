@@ -5,24 +5,22 @@ import useFetchAppData from '../hooks/useFetchAppData'
 import useSessionType from '../../hooks/permissions/useSessionType'
 import IsLoadingHOC from '../../../hocs/IsLoadingHOC'
 import useInitUserSession from '../hooks/useInitUserSession'
-import useSetupInterceptorsEffect from '../../../api/util/axiosInstance'
-import { useGetCurrentUserQuery } from '../../../api/services/session'
+import useSetupInterceptorsEffect from '../../../api/util/axiosInstance.ts'
+import { useGetCurrentUserQuery } from '../../../api/services/session.ts'
 import useGetUserId from '../hooks/useGetUserId'
-
-
 
 const LoadingBridge = ({ children, setIsLoading }) => {
   const [isUserDataPending, setIsUserDataPending] = useState(true)
 
   const { userId } = useGetUserId()
-  const { data: currentUser, isLoading, isSuccess } = useGetCurrentUserQuery(userId, {
-    skip: !userId 
+  const { isLoading, isError } = useGetCurrentUserQuery(userId, {
+    skip: !userId,
   })
 
   const sessionType = useSessionType()
   useSetupInterceptorsEffect(isLoading)
 
-  useInitUserSession(userId, isLoading, isSuccess)
+  useInitUserSession(userId, isLoading, isError)
   useFetchAppData()
   useEffect(() => {
     setIsLoading(true)

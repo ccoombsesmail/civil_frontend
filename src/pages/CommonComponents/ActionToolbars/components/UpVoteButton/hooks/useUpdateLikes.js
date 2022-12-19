@@ -1,22 +1,17 @@
 import { useCallback } from 'react'
-import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
-import topicActionCreators from '../../../../../../redux/actions/topics/index'
-import commentActionCreators from '../../../../../../redux/actions/comments/index'
-import tribunalCommentActionCreators from '../../../../../../redux/actions/tribunal_comments/index'
 import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics'
 
 import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
 import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
-import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
 import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments'
+import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments'
+import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
 
 export default (content, user, contentType) => {
-  const {
-    updateTribunalCommentLikes,
-  } = useBindDispatch(topicActionCreators, commentActionCreators, tribunalCommentActionCreators)
-  const { isOnSubtopicsPage, isOnTribunalPage } = useDetectCurrentPage()
+  const [updateTribunalCommentLikes, {}] = useUpdateTribunalCommentLikesMutation()
   const [updateLikes, {}] = useUpdateTopicLikesMutation()
   const [updateCommentLikes, {}] = useUpdateCommentLikesMutation()
+  const { isOnSubtopicsPage, isOnTribunalPage } = useDetectCurrentPage()
 
   return useCallback(() => {
     let value

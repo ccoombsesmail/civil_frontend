@@ -16,8 +16,6 @@ import {
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
 import CaptchaGateway from '../../civic/components/CaptchGateway/CaptchaGateway'
 import UniquenessGateway from '../../civic/components/UniquenessGateway/UniquenessGateway'
-import { useGetCurrentUserQueryState } from '../../api/services/session'
-import { UserContext } from '../App/Index'
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
 const UserInformationDisplay = () => {
@@ -42,7 +40,7 @@ const UserInformationDisplay = () => {
     disconnectListItem?.addEventListener('click', () => {
       localStorage.setItem('walletName', null)
       localStorage.setItem('walletName2', null)
-      localStorage.getItem('previousSignInMethod', null)
+      // localStorage.setItem('previousSignInMethod', null)
     })
   }, [disconnectListItem])
 
@@ -74,7 +72,7 @@ const UserInformationDisplay = () => {
         </h3>
         <h3>
           {user.numFollowed}
-          <small>followed</small>
+          <small>following</small>
         </h3>
         <h3>
           {user.numPosts}

@@ -1,41 +1,42 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { Tab, Nav } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import useBindDispatch from '../hooks/redux/useBindDispatch'
-import userActions from '../../redux/actions/users/index'
-import followActions from '../../redux/actions/follows/index'
 
 import {
   Banner, Container, HeaderContainer, Content, StyledNav, UserIcon, TabsIconContainer, Bio,
-  Left, Middle, Right, Experience, ExperienceContainer, FlexDiv,
+  Left, Middle, Right, Experience, ExperienceContainer, FlexDiv, FullWidthDiv
 } from './Style/index'
 import UserList from './components/UserList/Index'
 import FollowButton from './components/FollowButton/Index'
 import UsernameAndTag from '../CommonComponents/UsernameAndTag/Index'
-import { useGetCurrentUserQuery } from '../../api/services/session'
+import { useGetUserQuery } from '../../api/services/users.ts'
+import { useGetAllFollowedQuery, useLazyGetAllFollowersQuery } from '../../api/services/follows.ts'
+
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
+import { CircleLoading } from '../../svgs/spinners/CircleLoading'
 
 const UserProfile = () => {
   const { userId: profileUserId } = useParams()
-  const user = useSelector((s) => s.users)[profileUserId]
-  const { followed, followers } = useSelector((s) => s.follows)
-
-  // const{ data: currentUser } = useGetCurrentUserQuery(profileUserId)
-
-  const showFollowButton = profileUserId !== currentUser?.id
-  const isFollowing = user?.isFollowing
-  const { getUser, getAllFollowed, getAllFollowers } = useBindDispatch(userActions, followActions)
-
-  useEffect(() => {
-    if (currentUser) {
-      // getUser(profileUserId, currentUser?.id)
-      getAllFollowed(profileUserId)
-    }
-  }, [currentUser])
   const [activeKey, setActiveKey] = useState('0')
+
+  const { currentUser, isLoading: isCurrentUserLoading, isUninitialized: isCurrentUserUninitialized } = useGetCurrentUser()
+  const { data: user, isLoading, isUninitialized } = useGetUserQuery(profileUserId, {
+    skip: !currentUser || !profileUserId,
+  })
+
+  const { data: followed, isLoading: isFollowedLoading, isUninitialized: isFollowedUninitialized } = useGetAllFollowedQuery(user?.userId, {
+    skip: !currentUser || !user,
+  })
+  const [getAllFollowers, { data: followers, isLoading: isFollowersLoading, isUninitialized: isFollowersUninitialized }] = useLazyGetAllFollowersQuery()
+
+  if (isCurrentUserUninitialized || isUninitialized) return null
+  if (isCurrentUserLoading || isLoading) return <CircleLoading size="20vw" />
+
+  const showFollowButton = profileUserId !== currentUser.userId
+
   return (
     <Container>
-      <Banner src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/default_banner.jpg" alt="" />
+      <Banner src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/red-trees.jpg" alt="" />
       <Tab.Container defaultActiveKey="0" onSelect={(key) => setActiveKey(key)}>
         <HeaderContainer>
           <TabsIconContainer>
@@ -48,43 +49,63 @@ const UserProfile = () => {
               />
               <Bio>{user?.bio}</Bio>
             </FlexDiv>
+            <FullWidthDiv>
+              { showFollowButton && <FollowButton isFollowing={user?.isFollowing} profileUserId={profileUserId} username={user?.username} /> }
+            </FullWidthDiv>
+
             <StyledNav activeKey={Number(activeKey)}>
               <div className="line" />
               <Nav.Item>
                 <Nav.Link eventKey="0">Following</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="1" onClick={() => getAllFollowers(profileUserId)}>Followers</Nav.Link>
+                <Nav.Link eventKey="1" onClick={() => getAllFollowers(user?.userId)}>Followers</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="2" onClick={() => getAllFollowers(user?.userId)}>Posts</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="3" onClick={() => getAllFollowers(user?.userId)}>About</Nav.Link>
               </Nav.Item>
             </StyledNav>
           </TabsIconContainer>
-          { showFollowButton && <FollowButton isFollowing={isFollowing} profileUserId={profileUserId} /> }
 
         </HeaderContainer>
         <Content>
-          <Left>
+          {/* <Left>
             <ExperienceContainer>
               <h1>Experience</h1>
               <Experience>
                 {user?.experience}
               </Experience>
             </ExperienceContainer>
-          </Left>
+          </Left> */}
           <Middle>
             <Tab.Content>
               <Tab.Pane eventKey="0">
                 <UserList
                   users={followed}
+                  isLoading={isFollowedLoading}
+                  isUninitialized={isFollowedUninitialized}
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="1">
                 <UserList
                   users={followers}
+                  isLoading={isFollowersLoading}
+                  isUninitialized={isFollowersUninitialized}
                 />
+              </Tab.Pane>
+              <Tab.Pane eventKey="3">
+                <ExperienceContainer>
+                  <h1>Experience</h1>
+                  <Experience>
+                    {user?.experience}
+                  </Experience>
+                </ExperienceContainer>
               </Tab.Pane>
             </Tab.Content>
           </Middle>
-          <Right />
         </Content>
       </Tab.Container>
     </Container>

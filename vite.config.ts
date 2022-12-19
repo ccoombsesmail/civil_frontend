@@ -3,6 +3,7 @@ import path from "path";
 import replace from '@rollup/plugin-replace';
 import EnvironmentPlugin from 'vite-plugin-environment'
 import { replaceCodePlugin } from "vite-plugin-replace";
+import eslint from 'vite-plugin-eslint'
 
 import { createHtmlPlugin } from "vite-plugin-html";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
@@ -14,7 +15,7 @@ import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import { dependencies } from './package.json';
 
 const reactDeps = Object.keys(dependencies).filter(key => key === 'react' || key.startsWith('react-') ||   key.startsWith('@civic')  ||
-key.startsWith('@solana'))
+key.startsWith('@solana') || key.startsWith("styled") )
 
 const manualChunks = {
   vendor: reactDeps,
@@ -36,7 +37,7 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: false,
       outDir: "../dist",
-      cssCodeSplit: false,
+      cssCodeSplit: true,
       rollupOptions: {
         output: {
           manualChunks
@@ -64,6 +65,8 @@ export default defineConfig(({ mode }) => {
     server: {
       https: false,
       port: 8080,
+      watch: false,
+      hmr: false,
     },
 
     resolve: {
@@ -82,6 +85,7 @@ export default defineConfig(({ mode }) => {
     publicDir: "./public",
     plugins: [      
       viteCommonjs(),
+      // eslint(),
       svgLoader(),
       createHtmlPlugin({}),
       svgr(),

@@ -1,6 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { backendBaseQuery } from '../util/axiosInstance'
-import { endpoint } from '@octokit/endpoint'
 
 export const enumsApi = createApi({
   reducerPath: 'enums',

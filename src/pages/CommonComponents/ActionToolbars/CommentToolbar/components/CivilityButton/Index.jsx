@@ -5,7 +5,7 @@ import RangeSlider from '../../../../Form/RangeSlider/Index'
 import PopoverStickOnHover from '../../../../PopoverStickOnHover/Index'
 import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
 
-const CivilityButton = ({ comment }) => {
+const CivilityButton = ({ comment, disabled }) => {
   const [showPopover, setShowPopover] = useState(false)
   const onClick = () => setShowPopover((prev) => !prev)
   const updateCommentCivility = useUpdateCommentCivility(comment)

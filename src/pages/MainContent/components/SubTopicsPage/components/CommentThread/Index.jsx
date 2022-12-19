@@ -1,5 +1,4 @@
 import React, { useEffect, useState, memo } from 'react'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { Tab } from 'react-bootstrap'
@@ -15,14 +14,27 @@ import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer } from './Style/index'
 import { ThemeTab } from '../../../../../CommonComponents/Tabs/Style'
 import { Line } from '../../Style'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { useGetAllCommentRepliesQuery } from '../../../../../../api/services/comments'
+import { useGetTopicQuery } from '../../../../../../api/services/topics'
 
 const CommentThread = () => {
-  const { commentId, topicId } = useParams()
-  const { getAllCommentReplies, getTopic } = useBindDispatch(
-    subTopicActions, commentActions, topicActions,
-  )
-  const user = useSelector((state) => state.session.currentUser)
-  // const subtopic = useSelector((state) => state.subtopics)[subTopicId]
+  const { commentId, topicId, subTopicId } = useParams()
+  const { currentUser } = useGetCurrentUser()
+
+  const {
+    data: comments,
+    isLoading: isCommentsLoading,
+    isUninitialized: isCommentsUninitialized,
+  } = useGetAllCommentRepliesQuery(commentId, { skip: !currentUser })
+
+  const {
+    data: topic,
+    isLoading: isTopicLoading,
+    isUninitialized: isTopicUninitialized,
+  } = useGetTopicQuery(topicId, {
+    skip: !currentUser,
+  })
   const [key, setKey] = useState('all')
 
   const {
@@ -30,13 +42,8 @@ const CommentThread = () => {
     NEUTRAL: neutralComments,
     NEGATIVE: negativeComments,
     all: allComments,
-  } = useCategorizeComments()
+  } = useCategorizeComments(comments?.replies)
 
-  useEffect(() => {
-    console.log(commentId)
-    getAllCommentReplies(commentId)
-    getTopic(topicId, user?.id)
-  }, [user, commentId])
   return (
 
     <ThreadContainer>

@@ -8,10 +8,8 @@ import { Line } from '../CommonComponents/Line'
 
 import BioForm from './components/BioForm/Index'
 import CivicTest from '../AuthFlow/components/CivicTest/Index'
-import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
 const Dashboard = () => {
-  const { currentUser } = useGetCurrentUser()
   useEffect(() => {
     const clerkWrapper = document.getElementsByClassName('cl-main')[0]
     if (clerkWrapper) clerkWrapper.insertBefore(document.getElementById('bio-dashboard'), null)
@@ -19,7 +17,7 @@ const Dashboard = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Container>
-        <Header user={currentUser} />
+        <Header />
         <Line />
         <UserProfile
           appearance={{
@@ -33,7 +31,7 @@ const Dashboard = () => {
         />
         <CivicTest />
         <Line />
-        <BioForm user={currentUser} />
+        <BioForm />
       </Container>
     </Suspense>
   )

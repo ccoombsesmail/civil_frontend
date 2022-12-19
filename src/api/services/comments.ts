@@ -2,6 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { backendBaseQuery } from '../util/axiosInstance'
 import { closeModal } from '../../redux/actions/ui/index.js'
 import { createDraft, finishDraft } from 'immer';
+import { toast } from 'react-toastify';
+import { emptySplitApi } from './base'
 
 
 
@@ -20,32 +22,48 @@ export interface Comment {
 }
 
 
-export const findComment = (payload, comment) => {
-  const { children } = comment
-  if (payload.commentId === comment.data.id) {
-    return comment
+export const findComment = (payload, root) => {
+  const queue = []
+  queue.push(root)
+  while (queue.length > 0) {
+    const currNode = queue.shift()
+    if (currNode.data.id === payload.commentId) {
+      return currNode
+    }
+    for (let child of currNode.children) {
+      queue.push(child)
+    }
   }
-  for (let i = 0; i < children.length; i += 1) {
-    return findComment(payload, children[i])
-  }
-}
+};
 
 
-export const commentsApi = createApi({
-  reducerPath: 'comments',
-  tagTypes: ['Comments'],
-  baseQuery: backendBaseQuery,
+
+export const commentsApi = emptySplitApi.injectEndpoints({
+  // reducerPath: 'comments',
+  // tagTypes: ['Comments'],
+  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllComments: builder.query<any, any>({
       query: (subtopicId) => ({ url: `/comments?subtopicId=${subtopicId}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [
-            ...result.map(({ id }) => ({ type: 'Comments', id } as const)),
-            { type: 'Comments', id: 'LIST' },
+            ...result.map(({ id }) => ({ type: 'Comment', id } as const)),
+            { type: 'Comment', id: 'LIST' },
           ]
         : 
-          [{ type: 'Comments', id: 'LIST' }],
+          [{ type: 'Comment', id: 'LIST' }],
+    }),
+    getAllCommentReplies: builder.query<any, any>({
+      query: (commentId) => ({ url: `/comments/replies/${commentId}`, method: 'GET' }),
+      providesTags: (result) =>
+      result ? 
+          [
+            ...result.replies.map(({ id }) => ({ type: 'Comment', id } as const)),
+            { type: 'Comment', id: 'LIST' },
+          ]
+        : 
+          [{ type: 'Comment', id: 'LIST' }],
     }),
     getComment: builder.query<any, any>({
       query: (commentId) => ({ url: `/comments/${commentId}`, method: 'GET' }),
@@ -60,7 +78,7 @@ export const commentsApi = createApi({
         data: body
       }
       )},
-      invalidatesTags: [{ type: 'Comments', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Comment', id: 'LIST' }],
       async onCacheEntryAdded(
         arg,
         {
@@ -111,6 +129,16 @@ export const commentsApi = createApi({
         )
       }
 
+      patchResult = dispatch(
+        commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
+          if (id) {
+            console.log(patch)
+            draft.comment.likeState = patch.value
+            draft.comment.likes += updateLikeValue
+          }
+        })
+      )
+
       try {
          await queryFulfilled
       } catch {
@@ -158,9 +186,19 @@ export const commentsApi = createApi({
         )
       }
 
+      patchResult = dispatch(
+        commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
+          if (id) {
+            console.log(patch)
+            draft.comment.civility = patch.value
+          }
+        })
+      )
+
       try {
          await queryFulfilled
-      } catch {
+      } catch ({ error }) {
+        toast.error(`${error.status}\n ${error.data.userMsg}`)
         patchResult.undo()
 
       }
@@ -169,4 +207,11 @@ export const commentsApi = createApi({
   })
 })
 
-export const {useGetAllCommentsQuery, useGetCommentQuery, useCreateCommentMutation, useUpdateCommentLikesMutation, useUpdateCommentCivilityMutation } = commentsApi
+export const {
+  useGetAllCommentsQuery, 
+  useGetCommentQuery, 
+  useCreateCommentMutation,
+  useUpdateCommentLikesMutation,
+  useUpdateCommentCivilityMutation,
+  useGetAllCommentRepliesQuery
+  } = commentsApi

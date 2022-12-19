@@ -1,47 +1,44 @@
-import { createApi, TypedUseQueryHookResult } from '@reduxjs/toolkit/query/react'
-import { backendBaseQuery } from '../util/axiosInstance'
-
-import { closeModal } from '../../redux/actions/ui/index.js'
-import { addSessionDataDID } from '../../redux/actions/session/index.js'
+import { toast } from 'react-toastify'
+import { emptySplitApi } from './base'
 interface UserData {
 
 }
 
-export const sessionApi = createApi({
-  reducerPath: 'session',
-  baseQuery: backendBaseQuery,
-  tagTypes: ['Users'],
+export const sessionApi = emptySplitApi.injectEndpoints({
+  // reducerPath: 'session',
+  // baseQuery: backendBaseQuery,
+  // tagTypes: ['User'],
   endpoints: (builder) => ({
     getCurrentUser: builder.query<UserData, string>({
       query: (userId) => ({ url: `/users?userId=${userId}`, method: 'GET' }),
-      transformResponse: (response, meta, arg) => {
-        return response
-      },
+      providesTags: ['Session'],
+      async onQueryStarted(_, {dispatch, queryFulfilled}) {
+        toast.promise(
+          queryFulfilled,
+          {
+            pending: 'Fetching Session Data...',
+            success: 'Session Successfully Loaded',
+            error: {
+              render({ data: errorData }) {
+                const { response } = errorData
+                const { data: responseData } = response
+                return `${responseData.msg} 🤯 `
+              },
+            },
+          },
+        )
+      }
+    
     }),
     upsertDidUser: builder.mutation<UserData, Partial<UserData>>({
-      query: (body) => {
+      query: (body: any) => {
         return ({ 
         url: `/users/did-user`, 
         method: 'POST',
         data: body
       }
       )},
-      invalidatesTags: [{ type: 'Users', id: 'LIST' }],
-      async onCacheEntryAdded(
-        arg,
-        {
-          dispatch,
-          getState,
-          extra,
-          requestId,
-          cacheEntryRemoved,
-          cacheDataLoaded,
-          getCacheEntry,
-        }
-      ) {
-        dispatch(closeModal())
-        // dispatch(addSessionDataDID(arg))
-      },
+      invalidatesTags: ['User'],
     })
   }),
 })

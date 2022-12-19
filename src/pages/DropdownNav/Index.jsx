@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 
 import {
   SignedOut,

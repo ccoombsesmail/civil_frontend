@@ -1,19 +1,18 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 
-import useBindDispatch from '../../hooks/redux/useBindDispatch'
-import commentActions from '../../../redux/actions/comments'
-import tribunalCommentActions from '../../../redux/actions/tribunal_comments'
-
 import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
 import delay from '../../../generic/delay'
 import useDetectCurrentPage from '../../hooks/routing/useDetectCurrentPage'
-import { useCreateCommentMutation } from '../../../api/services/comments'
+import { useCreateCommentMutation } from '../../../api/services/comments.ts'
+import { useCreateTribunalCommentMutation } from '../../../api/services/tribunal_comments.ts'
 
 export default (compState, content, rawText, modalProps, contentId, topicId) => {
   const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()
-  const [createComment, {}] = useCreateCommentMutation()
-  const { 
+  const [createComment] = useCreateCommentMutation()
+  const [createTribunalComment] = useCreateTribunalCommentMutation()
+
+  const {
     tribunalCommentUnderReviewId,
     commentId,
   } = modalProps || {}
@@ -23,10 +22,6 @@ export default (compState, content, rawText, modalProps, contentId, topicId) => 
 
   const parentId = isParentTribunalCommentUnderReview ? null : commentId || null
   const rootId = isParentTribunalCommentUnderReview ? null : compState.rootParentCommentId
-
-  const {
-    createTribunalComment,
-  } = useBindDispatch(commentActions, tribunalCommentActions)
 
   return useCallback((values, { setSubmitting, resetForm }) => {
     toast.promise(

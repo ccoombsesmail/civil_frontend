@@ -2,7 +2,12 @@ export const calculateTimeLeft = (reportEndTime) => {
   // const year = new Date().getFullYear()
   const difference = +new Date(reportEndTime) - +new Date()
 
-  let timeLeft = {}
+  let timeLeft = {
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  }
 
   if (difference > 0) {
     timeLeft = {
@@ -12,5 +17,5 @@ export const calculateTimeLeft = (reportEndTime) => {
       seconds: Math.floor((difference / 1000) % 60),
     }
   }
-  return timeLeft
+  return { timeLeft, reportPeriodEnded: difference <=0 }
 }

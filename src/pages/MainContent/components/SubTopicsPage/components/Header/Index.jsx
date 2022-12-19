@@ -18,7 +18,9 @@ import {
   Container, Description, TopicSummaryContainer, StyledLongDownArrow,
 } from './Style/index'
 import { uuidRegEx } from '../../../../../../generic/regex/uuid'
-import { useGetTopicQuery } from '../../../../../../api/services/topics'
+import { useGetTopicQuery } from '../../../../../../api/services/topics.ts'
+import { useGetSubTopicQuery } from '../../../../../../api/services/subtopics.ts'
+
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 
@@ -38,15 +40,18 @@ const TooltipComponent = ({ text, title, reference }) => (
 const Header = () => {
   let content = null
   let subtopicContent = null
-  const {topicId, '*': url } = useParams()
-  
-  const { currentUser } = useGetCurrentUser()
-  const {data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized} = useGetTopicQuery(topicId, {
-    skip: !currentUser
-  })
+  const { topicId, '*': url } = useParams()
   const [subtopicId, commentId] = url ? url.match(uuidRegEx) : []
 
-  const subtopic = useSelector((s) => s.subtopics)[subtopicId]
+  const { currentUser } = useGetCurrentUser()
+  const { data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
+    skip: !currentUser || !topicId,
+  })
+
+  const { data: subtopic, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized } = useGetSubTopicQuery(subtopicId, {
+    skip: !currentUser || !subtopicId,
+  })
+
   const showSubTopic = subtopic && subtopic?.title !== 'General'
 
   const commonProps = useMemo(() => ({
@@ -60,9 +65,10 @@ const Header = () => {
   useSetInnerHtml(descRef, topic?.description)
 
   const commonPropsSubTopic = useMemo(() => ({
-    topic: subtopic, user: currentUser , showLinks: true,
+    topic: subtopic, user: currentUser, showLinks: true,
   }), [subtopic, currentUser])
 
+  if (isTopicUninitialized) return null
   if (isTopicLoading) return <CircleLoading size="20vw" />
 
   if (topic?.tweetHtml) content = <EmbededTweet {...commonProps} />
@@ -104,7 +110,7 @@ const Header = () => {
           <UserInfoHeader
             iconSrc={topic?.createdByIconSrc}
             time={getTimeSince(topic?.createdAt)}
-            username={topic?.createdBy}
+            username={topic?.createdByUsername}
             userId={topic?.userId}
           />
           <img src={topic?.thumbImgUrl} alt="Nothing To Show" />
@@ -120,7 +126,7 @@ const Header = () => {
         {' '}
         <TooltipComponent text="Subtopic" title={subtopic?.title} reference={subtopicRef} />
       </h1>
-      <div hidden={!showSubTopic} ref={subtopicRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div hidden={!showSubTopic} ref={subtopicRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '90%' }}>
         {subtopicContent}
       </div>
     </Container>

@@ -12,12 +12,16 @@ import {
 import { useGetAllSubTopicsQuery } from '../../../../../../api/services/subtopics'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
+import { useGetTopicQuery } from '../../../../../../api/services/topics'
 
 const SubTopicsTable = () => {
   const { currentUser } = useGetCurrentUser()
   const { topicId } = useParams()
 
   const {data: subtopics, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized} = useGetAllSubTopicsQuery(topicId, {
+    skip: !currentUser
+  })
+  const {data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
     skip: !currentUser
   })
 
@@ -27,7 +31,7 @@ const SubTopicsTable = () => {
       <Container>
         <TableHeader>
           <h1>
-            <span>Covid</span>
+           { (isTopicUninitialized || isTopicLoading) ? null : <span>{topic.title}</span> }
             <span>Sub Topics</span>
           </h1>
         </TableHeader>

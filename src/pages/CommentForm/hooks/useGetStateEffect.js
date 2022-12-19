@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { useGetAllCommentsQuery } from '../../../api/services/comments'
-import { useGetTopicQuery } from '../../../api/services/topics'
+import { useGetAllCommentsQuery, useGetCommentQuery } from '../../../api/services/comments.ts'
+import { useGetTopicQuery } from '../../../api/services/topics.ts'
+import { useGetAllTribunalCommentsBatchQuery } from '../../../api/services/tribunal_comments.ts'
 import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
 const findCommentContent = (comment, id) => {
@@ -22,18 +22,32 @@ export default (topicId, subtopicId, modalProps) => {
   const { currentUser } = useGetCurrentUser()
 
   const { data: topic } = useGetTopicQuery(topicId)
-  const { data: comments } = useGetAllCommentsQuery(subtopicId)
+  const { data: comments } = useGetAllCommentsQuery(subtopicId, {
+    skip: !subtopicId || !currentUser,
+  })
   const comment = comments?.find(
     (c) => c.data?.id === modalProps?.rootParentCommentId || modalProps?.commentId,
   )
-  // const tribunalComment = useSelector((s) => s.tribunalComments.list)?.find(
-  //   (c) => c.data?.id === modalProps?.rootParentCommentId,
-  // )
 
-  const { createdBy, createdByIconSrc, createdAt } = comment?.data || {} || {}
+  const { data: commentUnderReview } = useGetCommentQuery(modalProps?.tribunalCommentUnderReviewId, {
+    skip: !currentUser,
+  })
+  const commentUnderReviewFormatted = {
+    data: commentUnderReview,
+    children: [],
+  }
+
+  const { data: tribunalComments } = useGetAllTribunalCommentsBatchQuery(modalProps?.tribunalCommentUnderReviewId, {
+    skip: !modalProps?.tribunalCommentUnderReviewId || !currentUser,
+  })
+  const tribunalComment = tribunalComments?.find(
+    (c) => c.data?.id === modalProps?.rootParentCommentId,
+  )
+
+  const { createdBy, createdByIconSrc, createdAt } = comment?.data || tribunalComment?.data || commentUnderReviewFormatted?.data || {}
   return useMemo(() => {
     const commentContent = modalProps?.replyType !== 'REPLY_FROM_TOPIC'
-      ? findCommentContent(comment || tribunalComment, modalProps?.commentId) : topic?.description
+      ? findCommentContent(comment || tribunalComment || commentUnderReviewFormatted, modalProps?.commentId) : topic?.description
     return {
       subtopicId,
       createdByIconSrc: createdByIconSrc || topic?.createdByIconSrc,

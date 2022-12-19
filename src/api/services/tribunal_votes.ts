@@ -1,16 +1,15 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { backendBaseQuery } from '../util/axiosInstance'
 import { closeModal } from '../../redux/actions/ui/index.js'
+import { emptySplitApi } from './base'
 
 
 export interface Vote {
  
 }
 
-export const tribunalVotesApi = createApi({
-  reducerPath: 'tribunalVotes',
-  tagTypes: ['TribunalVotes'],
-  baseQuery: backendBaseQuery,
+export const tribunalVotesApi = emptySplitApi.injectEndpoints({
+  // reducerPath: 'tribunalVotes',
+  // tagTypes: ['TribunalVotes'],
+  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     createTribunalVote: builder.mutation<Vote, Partial<Vote>>({
       query: (body) => {
@@ -20,7 +19,7 @@ export const tribunalVotesApi = createApi({
         data: body
       }
       )},
-      invalidatesTags: [{ type: 'TribunalVotes', id: 'LIST' }],
+      invalidatesTags: [{ type: 'TribunalVote', id: 'LIST' }],
       async onCacheEntryAdded(
         arg,
         {

@@ -5,39 +5,35 @@ import { useParams } from 'react-router-dom'
 import { Tab } from 'react-bootstrap'
 
 import useCategorizeComments from '../hooks/useCategorizeComments'
-import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
-
-import subTopicActions from '../../../../../../redux/actions/subtopics'
-import commentActions from '../../../../../../redux/actions/comments'
-import topicActions from '../../../../../../redux/actions/topics'
 
 import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer } from './Style/index'
 import { ThemeTab } from '../../../../../CommonComponents/Tabs/Style'
 import { Line } from '../../Style'
-import useSessionType from '../../../../../hooks/permissions/useSessionType'
-import { useGetTopicQuery } from '../../../../../../api/services/topics'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { useGetSubTopicQuery } from '../../../../../../api/services/subtopics'
+import { useGetAllCommentsQuery } from '../../../../../../api/services/comments'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
-  const { getAllComments, getTopic } = useBindDispatch(
-    subTopicActions, commentActions, topicActions,
-  )
-  const user = useSelector((state) => state.session.currentUser)
-  const subtopic = useSelector((state) => state.subtopics)[subTopicId]
   const [key, setKey] = useState('all')
-  const sessionType = useSessionType()
   const { currentUser } = useGetCurrentUser()
 
-  const { categorizedComments, isLoading, isUninitialized } = useCategorizeComments(subTopicId, currentUser)
+  const { data: subtopic, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized } = useGetSubTopicQuery(subTopicId, {
+    skip: !currentUser || !subTopicId,
+  })
+
+  const { data: comments } = useGetAllCommentsQuery(subTopicId, {
+    skip: !currentUser,
+  })
+
+  const categorizedComments = useCategorizeComments(comments)
   const {
     POSITIVE: positiveComments,
     NEUTRAL: neutralComments,
     NEGATIVE: negativeComments,
     all: allComments,
   } = categorizedComments || {}
-
 
   return (
 

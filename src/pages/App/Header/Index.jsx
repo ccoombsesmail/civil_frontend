@@ -2,19 +2,18 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
 
-import { useSelector } from 'react-redux'
 import {
   StyledHeader, ButtonsContainer, CivilIcon, NavContainer, Divider,
 } from './Style'
 import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
 import IconButton from '../../CommonComponents/IconButton/Index'
 import HeaderNavItem from './components/HeaderNavItem/Index'
-import { UserIconSvg, NotificationSvg, Gavel2 } from '../../../svgs/svgs'
+import { UserSettingsSvg, NotificationSvg, Gavel2 } from '../../../svgs/svgs'
 import useSessionType from '../../hooks/permissions/useSessionType'
 
 const NavButtons = () => {
   const navigate = useNavigate()
-  const { userNotificationsList, tribunalNotificationsList } = useSelector((s) => s.notifications)
+  const { userNotificationsList, tribunalNotificationsList } = [[], []]
   const [numUnreadUserNotifications, numUnreadTribunalNotifications] = [
     userNotificationsList?.filter((n) => n.isRead === false).length,
     tribunalNotificationsList?.filter((n) => n.isRead === false).length,
@@ -23,7 +22,7 @@ const NavButtons = () => {
   return (
     <>
       <HeaderNavItem
-        Icon={UserIconSvg}
+        Icon={UserSettingsSvg}
         text="Profile"
         onClick={() => navigate('/dashboard')}
       />
@@ -47,8 +46,6 @@ const NavButtons = () => {
 const Header = () => {
   const navigate = useNavigate()
   const {
-    signedInViaClerk,
-    signedInViaDID,
     signedInViaCivic,
   } = useSessionType()
   return (

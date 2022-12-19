@@ -1,19 +1,18 @@
 /* eslint-disable no-unused-expressions */
-import { useCallback, useContext } from 'react'
-import { useSelector } from 'react-redux'
-import { useGetCurrentUserQueryState } from '../../../api/services/session'
-import followActions from '../../../redux/actions/follows/index'
-import { UserContext } from '../../App/Index'
-import useBindDispatch from '../../hooks/redux/useBindDispatch'
+import { useCallback } from 'react'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
+import {
+  useAddNewFollowMutation, useRemoveFollowMutation,
+} from '../../../api/services/follows.ts'
 
 export default (profileUserId, isFollowing) => {
-  const { addNewFollow, removeFollow } = useBindDispatch(followActions)
-  const userContext = useContext(UserContext)
-  console.log(userContext)
-  const { data: currentUser } = useGetCurrentUserQueryState(userContext)
+  const [addNewFollow] = useAddNewFollowMutation()
+  const [removeFollow] = useRemoveFollowMutation()
+  const { currentUser } = useGetCurrentUser()
+
   return useCallback(() => {
     isFollowing
       ? removeFollow(profileUserId)
-      : addNewFollow(profileUserId)
+      : addNewFollow({ followedUserId: profileUserId })
   }, [currentUser, profileUserId, isFollowing])
 }
