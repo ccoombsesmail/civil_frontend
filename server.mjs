@@ -17,17 +17,17 @@ app.use(express.json({ extended: true, limit: 52428800 }))
 const server = app.listen(port, () => console.log(`Listening on port ${port}`))
 server.keepAliveTimeout = 65000
 
-// app.get('*.gz', (req, res, next) => {
-//   res.set('Content-Encoding', 'gzip')
-//   res.set('Content-Type', 'text/javascript')
-//   next()
-// })
+app.get('*.gz', (req, res, next) => {
+  res.set('Content-Encoding', 'gzip')
+  res.set('Content-Type', 'text/javascript')
+  next()
+})
 
 // app.use('/', expressStaticGzip(path.join(__dirname, 'public')))
-app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/', express.static(path.join(__dirname, 'dist')))
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'), (err) => {
     if (err) res.status(500).send(err)
   })
 })

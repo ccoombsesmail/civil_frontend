@@ -1,9 +1,5 @@
 import { defineConfig, loadEnv } from "vite";
 import path from "path";
-import replace from '@rollup/plugin-replace';
-import EnvironmentPlugin from 'vite-plugin-environment'
-import { replaceCodePlugin } from "vite-plugin-replace";
-import eslint from 'vite-plugin-eslint'
 
 import { createHtmlPlugin } from "vite-plugin-html";
 import { viteCommonjs } from "@originjs/vite-plugin-commonjs";
@@ -37,11 +33,13 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: false,
       outDir: "../dist",
-      cssCodeSplit: true,
+      minify: false,
+      cssCodeSplit: false,
       rollupOptions: {
         output: {
           manualChunks
         },
+        external: ["fsevents"]
       },
     },
     optimizeDeps:{
@@ -54,13 +52,13 @@ export default defineConfig(({ mode }) => {
         },
       }
     },
-    define: {
-      "process.env.STRIPE_API_KEY": JSON.stringify(env.STRIPE_API_KEY),
-      "process.env.API_DOMAIN": JSON.stringify(env.API_DOMAIN),
-      "process.env.API_PROXY_DOMAIN": JSON.stringify(env.API_PROXY_DOMAIN),
-      "process.env.SENTRY": JSON.stringify(env.SENTRY),
-      "process.env.STORMKIT_ENV": JSON.stringify(env.STORMKIT_ENV),
-    },
+    // define: {
+    //   "process.env.STRIPE_API_KEY": JSON.stringify(env.STRIPE_API_KEY),
+    //   "process.env.API_DOMAIN": JSON.stringify(env.API_DOMAIN),
+    //   "process.env.API_PROXY_DOMAIN": JSON.stringify(env.API_PROXY_DOMAIN),
+    //   "process.env.SENTRY": JSON.stringify(env.SENTRY),
+    //   "process.env.STORMKIT_ENV": JSON.stringify(env.STORMKIT_ENV),
+    // },
 
     server: {
       https: false,
