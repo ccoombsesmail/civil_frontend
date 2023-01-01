@@ -1,4 +1,5 @@
 import React from 'react'
+import * as buffer from 'buffer'
 import ReactDOM from 'react-dom/client'
 import {
   BrowserRouter as Router, Routes, Route,
@@ -10,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import 'unicode-emoji-picker'
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.Buffer = buffer.Buffer
   const root = document.getElementById('root')
 
   ReactDOM.createRoot(root).render(

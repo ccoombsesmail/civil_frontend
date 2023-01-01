@@ -161,8 +161,6 @@ const CivicTabContent = () => {
       <h1>Get Started By Clicking Here</h1>
       <LongDownArrow />
       <WalletMultiButton
-        className="wallet-button"
-        startIcon={<Blockchain />}
       />
       <Line />
 
