@@ -10,13 +10,22 @@ import IconButton from '../../CommonComponents/IconButton/Index'
 import HeaderNavItem from './components/HeaderNavItem/Index'
 import { UserSettingsSvg, NotificationSvg, Gavel2 } from '../../../svgs/svgs'
 import useSessionType from '../../hooks/permissions/useSessionType'
+import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
+import useGetCurrentUser from '../hooks/useGetCurrentUser'
 
 const NavButtons = () => {
   const navigate = useNavigate()
-  const { userNotificationsList, tribunalNotificationsList } = [[], []]
+  const { currentUser } = useGetCurrentUser()
+  console.log(currentUser)
+  const { data } = useGetAllNotificationsQuery(currentUser?.userId, {
+    skip: !currentUser,
+  })
+  const { userNotifications, tribunalNotifications } = data || {}
+  console.log(data)
+  console.log(userNotifications, tribunalNotifications)
   const [numUnreadUserNotifications, numUnreadTribunalNotifications] = [
-    userNotificationsList?.filter((n) => n.isRead === false).length,
-    tribunalNotificationsList?.filter((n) => n.isRead === false).length,
+    userNotifications?.filter((n) => n.isRead === false).length,
+    tribunalNotifications?.filter((n) => n.isRead === false).length,
   ]
 
   return (

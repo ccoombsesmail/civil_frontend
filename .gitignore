@@ -6,6 +6,8 @@
 ./.vscode
 
 /public/bundles
+dist
+
 
 node_modules
 

@@ -86,10 +86,10 @@ const App = () => {
             <Wrapper id="main-container">
               <LoadingSpinner />
               <ClerkLoaded>
-                <Header />
                 <LoadingBridgeWithSpinner>
                   {({ userId }) => (
                     <UserContext.Provider value={userId}>
+                      <Header />
                       <MainContainer>
                         { showLoadingPage ? <LoadingPage /> : null}
                         <Content>
