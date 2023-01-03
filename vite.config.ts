@@ -58,8 +58,8 @@ export default defineConfig(({ mode }) => {
     server: {
       https: false,
       port: 8080,
-      watch: false,
-      hmr: false,
+      // watch: false,
+      // hmr: false,
     },
 
     resolve: {
@@ -88,9 +88,11 @@ export default defineConfig(({ mode }) => {
       // }),import default from './src/pages/CommentForm/hooks/useHandleSubmit';
 
       react({
-        jsxRuntime: 'classic',
+        // jsxRuntime: 'classic',
         include: '**/*.{jsx,tsx}',
+       
         babel: {
+          presets: ['@babel/preset-react'],
           plugins: ['babel-plugin-styled-components'],
         },
       }),

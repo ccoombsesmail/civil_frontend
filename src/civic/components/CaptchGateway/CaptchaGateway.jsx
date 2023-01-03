@@ -20,9 +20,9 @@ import { VerifiedSvg, VerifiedSvgCivic, WarningSvg } from '../../../svgs/svgs'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 const env = {
-  gatekeeperNetwork: new PublicKey('ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6'),
+  gatekeeperNetwork: new PublicKey('tigoYhp9SpCDoCQmXGj2im5xa3mnjR1zuXrpCJ5ZRmi'),
   clusterUrl: clusterApiUrl('devnet'),
-  cluster: 'devnet'
+  cluster: 'devnet',
 }
 const RequestGatewayToken = () => {
   const [showPopover, setShowPopover] = useState(false)

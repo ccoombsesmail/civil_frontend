@@ -9,14 +9,15 @@ import useCreateDidBasedJwt from '../../pages/hooks/auth/useCreateDidBasedJwt'
 import useGetDefaultDid from '../../pages/DID/hooks/useGetDefaultDID.js'
 import { AssistDIDAdapter } from '../../pages/DID/AssistDIDAdapter';
 import { sessionApi } from '../services/session';
-import { BACKEND_DEV, NOTIFICATIONS_SERVICE } from '../endpoints/endpoints'
+import { selectedEndpoints } from '../endpoints/endpoints'
 import { MemoryStoredToken } from '../../civic/utils/generateCivicAuthHeader';
 
 const baseAxiosInstance = axios.create();
 
+console.log(selectedEndpoints)
 const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string } = { baseUrl: BACKEND_DEV }
+    { baseUrl }: { baseUrl: string } = { baseUrl: selectedEndpoints.BACKEND }
   ): BaseQueryFn<
     {
       url: string
@@ -44,7 +45,7 @@ const axiosBaseQuery =
 
 export const backendBaseQuery = axiosBaseQuery();
 
-export const notificationsBaseQuery = axiosBaseQuery({baseUrl: NOTIFICATIONS_SERVICE})
+export const notificationsBaseQuery = axiosBaseQuery({baseUrl: selectedEndpoints.NOTIFICATIONS_SERVICE})
 
 export default () => {
   
