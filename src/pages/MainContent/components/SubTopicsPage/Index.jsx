@@ -4,7 +4,7 @@ import {
   Container, Line, MainContent, HeaderContainer,
 } from './Style'
 import {
-  HomePageGrid, Left, Middle, Right,
+  SubTopicsGrid, Left, Middle, Right,
 } from '../../Style'
 
 import Header from './components/Header/Index'
@@ -21,7 +21,7 @@ const SubTopics = () => {
 
   return (
     <Container>
-      <HomePageGrid>
+      <SubTopicsGrid>
         <Left>
           <UserInformationDisplay />
         </Left>
@@ -38,11 +38,12 @@ const SubTopics = () => {
             ) : null}
           </MainContent>
         </Middle>
+        {document.documentElement.clientWidth <= 1250 ? <SubTopicsRouter /> : null }
         <Right>
           <Recommendations />
         </Right>
-      </HomePageGrid>
-      <SubTopicsRouter />
+      </SubTopicsGrid>
+      {document.documentElement.clientWidth > 1250 ? <SubTopicsRouter /> : null }
     </Container>
 
   )

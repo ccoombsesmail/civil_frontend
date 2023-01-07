@@ -26,6 +26,14 @@ export const Container = styled('div')`
     cursor: pointer;
   }
 
+  @media (max-width: 1250px) {
+    width: 100vw;
+  }
+
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
+
    @media only screen and (max-width: 600px) {
     padding: 1em 0;
   }

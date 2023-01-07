@@ -5,6 +5,12 @@ export const ThreadContainer = styled('div')`
   flex-direction: column;
   align-items: center;
   width: 70vw;
+  @media (max-width: 600px) {
+    width: 100vw;
+    }
+
+
+
 
 `
 export const Container = styled('div')`

@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 
 export const Container = styled('div')` 
-
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@ export const Container = styled('div')`
 `
 
 export const TableHeader = styled('header')` 
-    height: 10vh;
+    height: clamp(175px, 15vh, 600px);
     background-image: linear-gradient(to right, var(--m-primary-background-color), #83af9b);
     color: #fff;
     position: relative;
@@ -24,6 +24,9 @@ export const TableHeader = styled('header')`
     overflow: hidden;
     width: 100%;
     /* border-radius: 12px; */
+    svg {
+      margin: 2vw;
+    }
     h1 {
       width: 100%;
       height: 100%;
@@ -36,10 +39,11 @@ export const TableHeader = styled('header')`
       
       span {
         display: block;
+
       }
       
       span:first-child {
-        font-size: 1.5vw;
+        font-size: clamp(15px, 1.5vw, 25px);
         font-weight: 700;
         letter-spacing: 6.5px;
         @media only screen and (max-width: 600px) {
@@ -48,7 +52,7 @@ export const TableHeader = styled('header')`
       }
       
       span:last-child {
-        font-size: .8vw;
+        font-size: clamp(15px, 1.5vw, 25px);
         font-weight: 500;
         letter-spacing: 3.55px;
         opacity: .85;

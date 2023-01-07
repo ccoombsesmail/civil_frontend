@@ -108,7 +108,7 @@ export const StyledButton = styled('button')`
 
 export const Container = styled('div')`
   width: ${(props) => props.width || 'clamp(10vw, 200px, 35vw)'};
-  height: ${(props) => props.height || 'clamp(2vw, 50px, 35vh)'};
+  height: ${(props) => props.height || 'clamp(35px, 2.5vw, 40px)'};
   margin: ${(props) => props.margin ?? '0 1vw'};
   padding: 0;
   display: flex;

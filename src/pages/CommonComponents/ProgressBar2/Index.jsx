@@ -5,7 +5,6 @@ import { ProgressBarContainer, InnerProgressContainer, MiddleOfCircleContainer }
 const ProgressBar = ({ userLevelData }) => {
   const { exp, level, pointsForNextLevel } = userLevelData || {}
   const ratio = exp / (pointsForNextLevel)
-  console.log(exp, level, pointsForNextLevel)
   if (Number.isNaN(ratio)) return null
   return (
     <ProgressBarContainer>

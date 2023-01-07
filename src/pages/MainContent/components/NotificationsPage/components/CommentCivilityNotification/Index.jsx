@@ -6,6 +6,7 @@ import { getTimeSince } from '../../../../../../generic/string/dateFormatter'
 import { LeftContainer, MiddleContainer, ProfileIcon } from '../Style'
 
 import { CommentCivilityGiven } from '../../../../../../enums/notification_types'
+import { longUsernameDisplay } from '../../../../../../generic/string/longUsernameDisplay'
 
 const CommentCivilityNotifcation = ({ notification }) => {
   const {
@@ -36,7 +37,7 @@ const CommentCivilityNotifcation = ({ notification }) => {
         }
         <h3>
           <b>
-            {givingUserUsername}
+            {longUsernameDisplay(givingUserUsername)}
           </b>
           {' '}
           Updated Civility Given For Your

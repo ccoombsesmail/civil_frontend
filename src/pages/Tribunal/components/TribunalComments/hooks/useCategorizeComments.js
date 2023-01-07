@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-const commentType = new Set(['Defendant', 'Reporter', 'Jury', 'General'])
+const commentType = new Set(['Defendant', 'Reporter', 'Jury'])
 
 export default (tribunalComments) => useMemo(() => {
   const categorizedComments = {

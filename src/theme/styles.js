@@ -7,6 +7,12 @@ const GlobalStyle = createGlobalStyle`
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
+
+
+[data-testid="WRAPPER_CONTAINER"] {
+  z-index: 99999999999;
+}
+
 .wallet-adapter-button {
     background-color: transparent;
     border: none;
@@ -379,10 +385,11 @@ blockquote {
     --m-elastos-theme: #8530F1;
     --m-civic-theme-main-color: #FF6b4E;
  
-    --sidebar-width: 4vw;
+
     --m-primary-font-color: white;
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
 
+    --thin-border: 1px solid rgba(200,200,200,0.25);
     /* EMOJI */
     unicode-emoji-picker {
   
@@ -500,6 +507,14 @@ blockquote {
     width: 100%;
     background-color: white;
     z-index: 99999;
+
+    @media (max-width: 600px) {
+ 
+      -webkit-border-radius: 0px !important;
+      -moz-border-radius: 0px !important;
+      border-radius: 0px !important; 
+    }
+    
 
   }
 

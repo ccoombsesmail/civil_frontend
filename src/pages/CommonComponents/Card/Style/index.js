@@ -63,7 +63,7 @@ export const Description = styled('p')`
   width: 100%;
   padding: 2vw 0;
   margin-bottom: 0;
-  font-size: 1.2vw;
+  font-size: clamp(15px, 1.4vw, 22px);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -98,7 +98,7 @@ export const Container = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
-  min-width: 40vw;
+  min-width: 50vw;
   width: 100%;
   flex: 33%;
   margin: 2em 0;

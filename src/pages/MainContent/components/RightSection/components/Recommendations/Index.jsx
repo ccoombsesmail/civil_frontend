@@ -31,7 +31,7 @@ const Recommendations = () => {
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >
-        <Tab eventKey="recs" title="Recommended Content">
+        <Tab eventKey="recs" title="Similar Content">
           <RecommendationsList recs={recs} />
         </Tab>
         <Tab eventKey="opposingRecs" title="Opposing Views">

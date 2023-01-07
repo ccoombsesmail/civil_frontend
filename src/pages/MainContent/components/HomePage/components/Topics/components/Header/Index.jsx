@@ -17,7 +17,6 @@ const Header = ({ user, openModal }) => (
       </p>
       <ExpandButton
         type="button"
-        height="2.5vw"
         backgroundColor="var(--m-primary-btn-color)"
         onClick={() => openModal(CREATE_TOPIC)}
         width="100%"

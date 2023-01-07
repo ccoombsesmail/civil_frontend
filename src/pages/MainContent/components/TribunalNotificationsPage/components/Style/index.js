@@ -44,7 +44,7 @@ export const MiddleContainer = styled('div')`
     top: 8px;
   }
   h3 {
-    font-size: .9vw;
+    font-size: clamp(20px, 1.1vw, 30px);
   }
   a {
     font-weight: bold;

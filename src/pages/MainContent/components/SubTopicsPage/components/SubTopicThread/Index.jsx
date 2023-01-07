@@ -1,18 +1,19 @@
-import React, { useEffect, useState, memo } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Tab } from 'react-bootstrap'
 
 import useCategorizeComments from '../hooks/useCategorizeComments'
-
+import { TabNav, Glider } from '../../../../../CommonComponents/NonBootstrapTabs/Style'
+import TabContent from '../../../../../CommonComponents/NonBootstrapTabs/components/TabContent/Index'
+import TabNavItem from '../../../../../CommonComponents/NonBootstrapTabs/components/TabNavItem/Index'
 import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer } from './Style/index'
 import { ThemeTab } from '../../../../../CommonComponents/Tabs/Style'
 import { Line } from '../../Style'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
-import { useGetSubTopicQuery } from '../../../../../../api/services/subtopics'
-import { useGetAllCommentsQuery } from '../../../../../../api/services/comments'
+import { useGetSubTopicQuery } from '../../../../../../api/services/subtopics.ts'
+import { useGetAllCommentsQuery } from '../../../../../../api/services/comments.ts'
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
@@ -39,31 +40,35 @@ const SubTopicThread = () => {
 
     <ThreadContainer>
       <Line />
-      <ThemeTab
-        activeKey={key}
-        onSelect={(k) => setKey(k)}
-      >
-        <Tab eventKey="all" title="All">
-          <ColumnContainer>
-            <CommentColumn topicId={topicId} numComments={subtopic?.allComments} comments={allComments} commentSentiment="" color="#6A6E70" />
-          </ColumnContainer>
-        </Tab>
-        <Tab eventKey="positive" title="Generally Positive">
-          <ColumnContainer>
-            <CommentColumn topicId={topicId} numComments={subtopic?.positiveComments} comments={positiveComments} commentSentiment="Generally Positive" color="#6A6E70" />
-          </ColumnContainer>
-        </Tab>
-        <Tab eventKey="neutral" title="Neutral">
-          <ColumnContainer>
-            <CommentColumn topicId={topicId} numComments={subtopic?.neutralComments} comments={neutralComments} commentSentiment="Neutral" color="#474A4F" />
-          </ColumnContainer>
-        </Tab>
-        <Tab eventKey="negative" title="Generally Negative">
-          <ColumnContainer>
-            <CommentColumn topicId={topicId} numComments={subtopic?.negativeComments} comments={negativeComments} commentSentiment="Generally Negative" color="#6A6E70" />
-          </ColumnContainer>
-        </Tab>
-      </ThemeTab>
+      <TabNav>
+        <TabNavItem title="All" id={0} activeTab={key} setActiveTab={setKey} contentCount={allComments?.length} />
+        <TabNavItem title="Positive" id={1} activeTab={key} setActiveTab={setKey} contentCount={positiveComments?.length} />
+        <TabNavItem title="Neutral" id={2} activeTab={key} setActiveTab={setKey} contentCount={neutralComments?.length} />
+        <TabNavItem title="Negative" id={3} activeTab={key} setActiveTab={setKey} contentCount={negativeComments?.length} />
+
+        <Glider className="glider" />
+      </TabNav>
+
+      <TabContent id={0} activeTab={key}>
+        <ColumnContainer>
+          <CommentColumn comments={allComments} numComments={subtopic?.allComments} commentSentiment="All" color="white" />
+        </ColumnContainer>
+      </TabContent>
+      <TabContent id={1} activeTab={key}>
+        <ColumnContainer>
+          <CommentColumn comments={positiveComments} numComments={subtopic?.positiveComments} commentSentiment="Positive" color="white" />
+        </ColumnContainer>
+      </TabContent>
+      <TabContent id={2} activeTab={key}>
+        <ColumnContainer>
+          <CommentColumn comments={neutralComments} numComments={subtopic?.neutralComments} commentSentiment="Neutral" color="white" />
+        </ColumnContainer>
+      </TabContent>
+      <TabContent id={3} activeTab={key}>
+        <ColumnContainer>
+          <CommentColumn comments={negativeComments} numComments={subtopic?.negativeComments} commentSentiment="Negative" color="white" />
+        </ColumnContainer>
+      </TabContent>
     </ThreadContainer>
   )
 }

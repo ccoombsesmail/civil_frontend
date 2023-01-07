@@ -27,6 +27,7 @@ import Timer from './components/Timer/Index'
 import { CircleLoading } from '../../svgs/spinners/CircleLoading'
 import { useGetAllTribunalCommentsBatchQuery } from '../../api/services/tribunal_comments.ts'
 import { useGetCommentQuery } from '../../api/services/comments.ts'
+import { BgImage } from '../MainContent/Style'
 
 const Tribunal = () => {
   const { contentId, contentType } = useParams()
@@ -72,9 +73,10 @@ const Tribunal = () => {
 
   return (
     <OuterContainer id="tribunal-container">
+      <BgImage />
       <Header>
         <StyledScalesSvg />
-        <h1>Community Court</h1>
+        <h1>Community Tribunal</h1>
         <StyledScalesSvg />
       </Header>
       {isReportStatsUninitialized ? null : isReportStatsLoading ? (
@@ -83,9 +85,9 @@ const Tribunal = () => {
         <Timer reportStats={reportStats} refetch={refetch} />
       )}
       <InnerContainer>
-        <StyledPillarSvg />
+        {/* <StyledPillarSvg /> */}
         {Content}
-        <StyledPillarSvg />
+        {/* <StyledPillarSvg /> */}
       </InnerContainer>
       {isSuccess && (
         <VotingBox contentId={contentId} reportStats={reportStats} />
@@ -94,15 +96,15 @@ const Tribunal = () => {
         <ReportStatsContainer>
           <ReportStatItem>
             <h2>Toxic Reports</h2>
-            {isSuccess && (reportStats.numToxicReports || 0)}
+            {isSuccess && <span>{reportStats.numToxicReports || 0}</span>}
           </ReportStatItem>
           <ReportStatItem>
             <h2>Personal Attack Reports</h2>
-            {isSuccess && (reportStats.numPersonalAttackReports || 0)}
+            {isSuccess && <span>{reportStats.numPersonalAttackReports || 0}</span>}
           </ReportStatItem>
           <ReportStatItem>
             <h2>Spam Reports</h2>
-            {isSuccess && (reportStats.numSpamReports || 0)}
+            {isSuccess && <span>{reportStats.numSpamReports || 0}</span>}
           </ReportStatItem>
         </ReportStatsContainer>
       )}

@@ -13,8 +13,8 @@ export const Button = styled('button')`
   &:hover {
      letter-spacing: ${(props) => (props.small ? 'normal' : '0.125rem')};
     }
-  height: ${(props) => (props.height || 'unset')};;
-  font-size: ${(props) => (props.small ? '.7vw' : '.9vw')};
+  height: ${(props) => (props.height || 'clamp(45px, 2.5vw, 70px)')};;
+  font-size: clamp(12px, 1.4vw, 20px);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -66,7 +66,7 @@ const Modal = ({ closeModal }) => {
   return (
     <StrapModal contentClassName="react-strap-modal" show={isOpen} onHide={closeModal} container={document.getElementById('main-container')}>
       <ModalWrapper>
-        <Suspense fallback={<CircleLoading />}>
+        <Suspense fallback={<CircleLoading size="20vw" />}>
           {component}
         </Suspense>
       </ModalWrapper>

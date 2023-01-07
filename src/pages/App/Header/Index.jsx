@@ -2,8 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
 
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import {
-  StyledHeader, ButtonsContainer, CivilIcon, NavContainer, Divider,
+  StyledHeader, ButtonsContainer, CivilIcon, NavContainer, Divider, MobileContainer, WalletPassesContainer,
 } from './Style'
 import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
 import IconButton from '../../CommonComponents/IconButton/Index'
@@ -12,17 +13,16 @@ import { UserSettingsSvg, NotificationSvg, Gavel2 } from '../../../svgs/svgs'
 import useSessionType from '../../hooks/permissions/useSessionType'
 import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
 import useGetCurrentUser from '../hooks/useGetCurrentUser'
+import MobileMenu from './components/MobileMenu/Index'
+import { CaptchaGatewayMobile } from '../../../civic/components/CaptchGateway/CaptchaGateway'
 
 const NavButtons = () => {
   const navigate = useNavigate()
   const { currentUser } = useGetCurrentUser()
-  console.log(currentUser)
   const { data } = useGetAllNotificationsQuery(currentUser?.userId, {
     skip: !currentUser,
   })
   const { userNotifications, tribunalNotifications } = data || {}
-  console.log(data)
-  console.log(userNotifications, tribunalNotifications)
   const [numUnreadUserNotifications, numUnreadTribunalNotifications] = [
     userNotifications?.filter((n) => n.isRead === false).length,
     tribunalNotifications?.filter((n) => n.isRead === false).length,
@@ -57,6 +57,16 @@ const Header = () => {
   const {
     signedInViaCivic,
   } = useSessionType()
+  const { currentUser } = useGetCurrentUser()
+  const { data } = useGetAllNotificationsQuery(currentUser?.userId, {
+    skip: !currentUser,
+  })
+  const { userNotifications, tribunalNotifications } = data || {}
+  const [numUnreadUserNotifications, numUnreadTribunalNotifications] = [
+    userNotifications?.filter((n) => n.isRead === false).length,
+    tribunalNotifications?.filter((n) => n.isRead === false).length,
+  ]
+
   return (
     <StyledHeader>
       <ButtonsContainer>
@@ -92,8 +102,17 @@ const Header = () => {
             <DropdownMenu />
           </NavDropdownToggle>
         </NavContainer>
-
       </SignedOut>
+      <MobileContainer>
+        <WalletPassesContainer>
+          <CaptchaGatewayMobile />
+          <WalletMultiButton />
+          <Divider />
+        </WalletPassesContainer>
+
+        <MobileMenu numUnreadUserNotifications={numUnreadUserNotifications} numUnreadTribunalNotifications={numUnreadTribunalNotifications} />
+      </MobileContainer>
+
     </StyledHeader>
   )
 }

@@ -7,7 +7,9 @@ export const OuterContainer = styled('div')`
   align-items: center;
   width: 100%;
   padding-bottom: 60vh;
-  background-color: #F2F6FC;
+  /* background-color: #F2F6FC; */
+  background-color: transparent;
+
 
 `
 
@@ -15,6 +17,7 @@ export const Header = styled('header')`
   display: flex;
   align-items: center;
   margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
+  z-index: 9999;
   h1 {
     font-weight: bold;
     font-size: 2vw;
@@ -47,7 +50,14 @@ export const InnerContainer = styled('div')`
   display: flex;
   justify-content: space-between;
   /* align-items: center; */
-  width: 100%;
+  @media (max-width: 1200px) {
+    width: 80%;
+  }
+  
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
 
 `
 
@@ -97,14 +107,25 @@ export const ReportStatItem = styled('li')`
   align-items: center;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius: 0.5em;
-  background-color: var(--m-secondary-background-color);
-  font-size: 1vw;
+  /* background-color: var(--m-secondary-background-color); */
+  background-color: white;
+  font-size: clamp(15px, 1vw, 20px);
   padding: 2vw 4vw;
   margin: 2vw 4vw;
   @media only screen and (max-width: 800px) {
-      font-size: 4vw;
       margin: 2vw 2vw;
 
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    span {
+      margin-top: 5px;
+      padding: 5px 10px;
+      background-color: var(--m-secondary-background-color);
+      border-radius: 5px;
     }
 `
 export const VotesAgainst = styled('div')`

@@ -13,26 +13,28 @@ import { useGetAllSubTopicsQuery } from '../../../../../../api/services/subtopic
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 import { useGetTopicQuery } from '../../../../../../api/services/topics'
+import { RightTriangleArrowFillSvg } from '../../../../../../svgs/svgs'
 
 const SubTopicsTable = () => {
   const { currentUser } = useGetCurrentUser()
   const { topicId } = useParams()
 
-  const {data: subtopics, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized} = useGetAllSubTopicsQuery(topicId, {
-    skip: !currentUser
+  const { data: subtopics, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized } = useGetAllSubTopicsQuery(topicId, {
+    skip: !currentUser,
   })
-  const {data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
-    skip: !currentUser
+  const { data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
+    skip: !currentUser,
   })
 
   return (
     <>
-      <Line />
+      {/* <Line /> */}
       <Container>
         <TableHeader>
           <h1>
-           { (isTopicUninitialized || isTopicLoading) ? null : <span>{topic.title}</span> }
-            <span>Sub Topics</span>
+            { (isTopicUninitialized || isTopicLoading) ? null : <span>{`Topic: ${topic.title}`}</span> }
+            <RightTriangleArrowFillSvg size={50} rotateDown />
+            <span>Discussions</span>
           </h1>
         </TableHeader>
         <Table>
@@ -45,13 +47,13 @@ const SubTopicsTable = () => {
           </thead>
           {
            isSubTopicLoading ? <CircleLoading /> : subtopics?.map((subtopic) => (
-              <SubTopicsItem
-                key={subtopic.id}
-                {...subtopic}
-                subtopic={subtopic}
-                topicId={topicId}
-              />
-            ))
+             <SubTopicsItem
+               key={subtopic.id}
+               {...subtopic}
+               subtopic={subtopic}
+               topicId={topicId}
+             />
+           ))
           }
         </Table>
       </Container>

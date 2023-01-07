@@ -20,14 +20,17 @@ export const Container = styled('div')`
     -webkit-text-stroke-color: black;
     stroke: black;
   }
+  @media (max-width: 1024px) {
+    margin-right: 10px;
+  }
 `
 
 export const IconContainer = styled('div')`
   background-color: ${(props) => props.color || 'var(--m-civic-theme-main-color)'}; 
   border-radius: 50%;
   padding: .4vw;
-  width: 2.5vw;
-  height: 2.5vw;
+  width: clamp(45px, 2.5vw, 70px);
+  height: clamp(45px, 2.5vw, 70px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,8 +47,8 @@ export const PopoverToolTip = styled('div')`
     background-color: white;
     box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
     border-radius: 1rem;
-    font-size: 0.8vw;
+    font-size: clamp(10px, 0.8vw, 20px);
     padding: .8vw 1.8vw;
     font-weight: bold;
-    width: 18vw;
+    width: clamp(160px, 18vw, 340px);
 `

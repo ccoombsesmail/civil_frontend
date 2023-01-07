@@ -14,7 +14,7 @@ import {
 
 const Notifications = () => {
   const { currentUser } = useGetCurrentUser()
-  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser.userId)
+  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser?.userId, { skip: !currentUser })
   const { userNotifications } = notifications || {}
   return (
     <HomePageGrid>
@@ -23,22 +23,23 @@ const Notifications = () => {
       </Left>
       <Middle>
 
-        { isUninitialized ? null : (<Container id="notifications-container">
+        { isUninitialized ? null : (
+          <Container id="notifications-container">
 
-          <BorderContainer>
-            <Header>
-              <p>
-                Recent Notifications
-              </p>
-            </Header>
-            <NotificationList>
-              {isLoading ? <CircleLoading /> : userNotifications.map((notification) => (
-                <NotificationItem key={notification.id} notification={notification} />
-              ))}
-            </NotificationList>
-          </BorderContainer>
-        </Container>)
-      }
+            <BorderContainer>
+              <Header>
+                <p>
+                  Recent Notifications
+                </p>
+              </Header>
+              <NotificationList>
+                {isLoading ? <CircleLoading /> : userNotifications.map((notification) => (
+                  <NotificationItem key={notification.id} notification={notification} />
+                ))}
+              </NotificationList>
+            </BorderContainer>
+          </Container>
+        )}
       </Middle>
       <Right>
         <span>.</span>

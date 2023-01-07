@@ -7,6 +7,10 @@ export const BorderContainer = styled('div')`
   background-color: white;
   min-height: calc(100vh - var(--nav-size));
 
+  @media (max-width: 1250px) {
+    width: 100vw;
+  }
+
 `
 
 export const NotificationList = styled('ul')`

@@ -14,7 +14,7 @@ import {
   IdentityProviderInnerContainer, AuthButtonContainer, PassesContainer, StyledLine,
 } from './Style'
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
-import CaptchaGateway from '../../civic/components/CaptchGateway/CaptchaGateway'
+import { CaptchaGatewayDesktop } from '../../civic/components/CaptchGateway/CaptchaGateway'
 import UniquenessGateway from '../../civic/components/UniquenessGateway/UniquenessGateway'
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
@@ -108,7 +108,7 @@ const UserInformationDisplay = () => {
                 <StyledLine />
                 <b>Civic Passes</b>
                 <PassesContainer>
-                  <CaptchaGateway />
+                  <CaptchaGatewayDesktop />
                   {/* <UniquenessGateway /> */}
                 </PassesContainer>
               </div>

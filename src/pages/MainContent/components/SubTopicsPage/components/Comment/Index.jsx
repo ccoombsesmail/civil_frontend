@@ -25,6 +25,7 @@ import ThemeTooltip from '../../../../../CommonComponents/Tooltip/Index'
 import { UNDER_REVIEW } from '../../../../../../enums/report_status'
 import { COMMENT } from '../../../../../../enums/content_type'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { longUsernameDisplay } from '../../../../../../generic/string/longUsernameDisplay'
 
 const Comment = ({ commentData, replies, commentRef }) => {
   if (!commentData) return null
@@ -51,7 +52,7 @@ const Comment = ({ commentData, replies, commentRef }) => {
               tooltipText={commentData.createdByExperience}
             />
           </UserInfoContainer>
-          <Username>{commentData.createdBy}</Username>
+          <Username>{longUsernameDisplay(commentData.createdBy)}</Username>
           <Date>{`${mins}`}</Date>
         </Header>
         <Body shouldBlur={shouldBlur} onClick={() => navigate(`/home/topics/${topicId}/subtopics/${commentData.subtopicId}/comments/${commentData.id}`)}>

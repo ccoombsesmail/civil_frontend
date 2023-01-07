@@ -10,16 +10,16 @@ export const Container = styled('section')`
   align-items: center;
 
    > h1 {
+    background-color: white;
     padding: .5em 2em;
     border-radius: 2em;
-    margin-bottom: 2vw;
     box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
   }
   b {
     color: var(--m-primary-color);
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 1250px) {
     width: 100vw
   }
 `

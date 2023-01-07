@@ -10,24 +10,17 @@ const Recommendations = React.lazy(() => import(
   /* webpackPreload: true */ './components/Recommendations/Index'
 ))
 
-const RightSection = () => {
-  console.log('Right Section')
-  const parms = useParams()
-  const loc = useLocation()
-  console.log(loc)
-  console.log(parms)
-  return (
-    <Routes>
-      <Route
-        path="/"
-        element={(
-          <Suspense fallback={<div>Loading...</div>}>
-            <Recommendations />
-          </Suspense>
+const RightSection = () => (
+  <Routes>
+    <Route
+      path="/"
+      element={(
+        <Suspense fallback={<div>Loading...</div>}>
+          <Recommendations />
+        </Suspense>
       )}
-      />
-    </Routes>
-  )
-}
+    />
+  </Routes>
+)
 
 export default RightSection

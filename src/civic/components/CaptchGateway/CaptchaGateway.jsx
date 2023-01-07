@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useMemo, useState } from 'react'
-import { clusterApiUrl, PublicKey } from '@solana/web3.js'
+import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
@@ -14,65 +14,61 @@ import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
 } from './Style'
 import { CivilGatewayStatus } from '../../../enums/CivilGatewayStatus.ts'
-import { VerifiedSvg, VerifiedSvgCivic, WarningSvg } from '../../../svgs/svgs'
+import { VerifiedSvg, WarningSvg } from '../../../svgs/svgs'
+import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 const env = {
-  gatekeeperNetwork: new PublicKey('tigoYhp9SpCDoCQmXGj2im5xa3mnjR1zuXrpCJ5ZRmi'),
+  gatekeeperNetwork: new PublicKey('ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6'),
   clusterUrl: clusterApiUrl('devnet'),
   cluster: 'devnet',
 }
-const RequestGatewayToken = () => {
+
+const StatusIcon = ({ placement }) => {
   const [showPopover, setShowPopover] = useState(false)
   const onClick = () => setShowPopover((prev) => !prev)
-  const { gatewayStatus, requestGatewayToken, gatewayToken } = useGateway()
-  const [color, statusMsg, icon] = useMemo(() => {
-    let btnColor
-
-    let btnIcon
-    if (gatewayStatus === 9) {
-      btnColor = 'var(--m-civic-theme-main-color)'
-      btnIcon = <VerifiedSvg />
-    } else if (gatewayStatus === 13) {
-      btnIcon = <WarningSvg />
-      btnColor = '#DB3B21'
-    } else btnColor = 'var(--m-civic-theme-main-color)'
-    return [btnColor, Object.values(CivilGatewayStatus)[gatewayStatus], btnIcon]
-  }, [gatewayStatus])
+  const [color, statusMsg] = useGetGatewayStatus()
 
   return (
+    <IconContainer color={color}>
+      <Popover
+        trigger={['hover', 'click']}
+        component={(
+          <PopoverToolTip>
+            <b>The Pass Proves You Are Not A Bot</b>
+            <br />
+            <span>
+              {'Status: '}
+              {' '}
+              <i style={{ color }}>{statusMsg}</i>
+            </span>
+          </PopoverToolTip>
+      )}
+        placement={placement}
+        onMouseEnter={() => { }}
+        delay={200}
+        showPopover={showPopover}
+        setShowPopover={setShowPopover}
+      >
+        <img
+          onClick={onClick}
+          src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg"
+          alt=""
+        />
+      </Popover>
+
+    </IconContainer>
+  )
+}
+
+const RequestGatewayTokenDesktop = () => {
+  const { requestGatewayToken } = useGateway()
+  const [color, statusMsg, icon] = useGetGatewayStatus()
+  return (
     <Container>
-      <IconContainer color={color}>
-        <Popover
-          trigger={['hover', 'click']}
-          component={(
-            <PopoverToolTip>
-              <b>The Pass Proves You Are Not A Bot</b>
-              <br />
-              <span>
-                {'Status: '}
-                {' '}
-                <i style={{ color }}>{statusMsg}</i>
-              </span>
-            </PopoverToolTip>
-          )}
-          placement="right"
-          onMouseEnter={() => { }}
-          delay={200}
-          showPopover={showPopover}
-          setShowPopover={setShowPopover}
-        >
-          <img
-            onClick={onClick}
-            src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg"
-            alt=""
-          />
-        </Popover>
-
-      </IconContainer>
-
+      <StatusIcon placement="right" />
       <b>⟶</b>
       <StyledExpandButton
         width="8vw"
@@ -90,21 +86,49 @@ const RequestGatewayToken = () => {
   )
 }
 
-const CaptchaGateway = () => {
+const RequestGatewayTokenMobile = () => {
+  const { requestGatewayToken } = useGateway()
+  const [color, statusMsg, icon] = useGetGatewayStatus()
+  return (
+    <Container>
+      <StatusIcon placement="bottom" />
+    </Container>
+  )
+}
+
+export const CaptchaGatewayDesktop = () => {
   const wallet = useWallet()
   const { publicKey } = wallet
 
   const { gatekeeperNetwork, cluster, clusterUrl } = env
   return (
     <GatewayProvider
+      connection={new Connection(clusterApiUrl('devnet'), 'recent')}
       wallet={wallet}
       gatekeeperNetwork={gatekeeperNetwork}
       cluster={cluster}
-      clusterUrl={clusterUrl}
+      options={{
+        autoShowModal: false,
+      }}
     >
-      { publicKey && <RequestGatewayToken /> }
+      { publicKey ? <RequestGatewayTokenDesktop /> : null }
     </GatewayProvider>
   )
 }
 
-export default CaptchaGateway
+export const CaptchaGatewayMobile = () => {
+  const wallet = useWallet()
+  const { publicKey } = wallet
+
+  const { gatekeeperNetwork, cluster, clusterUrl } = env
+  return (
+    <GatewayProvider
+      connection={new Connection(clusterApiUrl('devnet', 'recent'))}
+      wallet={wallet}
+      gatekeeperNetwork={gatekeeperNetwork}
+      cluster={cluster}
+    >
+      { publicKey ? <RequestGatewayTokenMobile /> : null }
+    </GatewayProvider>
+  )
+}

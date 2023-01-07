@@ -35,6 +35,7 @@ import LoadingBridgeWithSpinner from './LoadingBridge/Index'
 import LoadingPage from '../CommonComponents/LoadingPage/Index'
 import { CIVIC_USER } from '../../enums/session_type'
 import { UserContext } from './UserContext/Index'
+import { BgImage } from '../MainContent/Style'
 
 const Dashboard = React.lazy(() => import('../Dashboard/Index'))
 
@@ -93,7 +94,7 @@ const App = () => {
                       <MainContainer>
                         { showLoadingPage ? <LoadingPage /> : null}
                         <Content>
-
+                          <BgImage />
                           <Routes>
                             <Route
                               path="/dashboard"

@@ -104,7 +104,7 @@ const Header = () => {
         }
       </h1>
 
-      <div ref={topicRef} style={{ width: '90%' }}>
+      <div ref={topicRef} style={{ width: '100%' }}>
         {!showSubTopic && content }
         <TopicSummaryContainer hidden={!showSubTopic}>
           <UserInfoHeader

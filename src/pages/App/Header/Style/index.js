@@ -62,10 +62,34 @@ export const NavContainer = styled('nav')`
     margin: 0 10px;
   }
 
+  @media (max-width: 1250px) {
+    display: none;
+  }
+
 `
 
 export const Divider = styled('div')`
   border-left: 1px solid lightgray;
   height: 40px;
   margin: 0 20px 0 10px;
+`
+
+export const MobileContainer = styled('div')`
+  display: none;
+  /* z-index: 999999999; */
+  @media (max-width: 1250px) {
+      display: block;
+    }
+  iframe {
+    min-height: 300px;
+  }
+`
+
+export const WalletPassesContainer = styled('div')`
+  display: flex;
+  margin-right: 50px;
+  align-items: center;
+  position: relative;
+
+  
 `

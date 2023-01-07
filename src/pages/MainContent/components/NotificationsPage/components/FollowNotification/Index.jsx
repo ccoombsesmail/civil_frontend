@@ -7,6 +7,7 @@ import UsernameAndTag from '../../../../../CommonComponents/UsernameAndTag/Index
 
 import { NewFollower } from '../../../../../../enums/notification_types'
 import { AddFriendSvg } from '../../../../../../svgs/svgs'
+import { longUsernameDisplay } from '../../../../../../generic/string/longUsernameDisplay'
 
 const FollowNotifcation = ({ notification }) => {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ const FollowNotifcation = ({ notification }) => {
           {' '}
           <Link to={`/user/${givingUserId}`}>
             <b>
-              {givingUserUsername}
+              {longUsernameDisplay(givingUserUsername)}
             </b>
           </Link>
           {' '}

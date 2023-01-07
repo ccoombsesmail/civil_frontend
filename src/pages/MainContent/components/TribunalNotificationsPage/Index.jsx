@@ -30,13 +30,13 @@ const TribunalNotifications = () => {
                 Recent Notifications
               </p>
             </Header>
-            { isUninitialized ? null : ( <NotificationList>
-              {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
-                <NotificationItem key={notification.id} notification={notification} />
-              ))}
-            </NotificationList>
-            )
-            }
+            { isUninitialized ? null : (
+              <NotificationList>
+                {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
+                  <NotificationItem key={notification.id} notification={notification} />
+                ))}
+              </NotificationList>
+            )}
           </BorderContainer>
         </Container>
       </Middle>

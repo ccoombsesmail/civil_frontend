@@ -9,6 +9,7 @@ export const Container = styled('div')`
 
   .tab-content {
    padding-bottom: 40vh;
+   background-color: white;
  }
 
  @media only screen and (max-width: 600px) {
@@ -43,5 +44,14 @@ export const TabContainer = styled('div')`
   flex-direction: column;
   background: white;
   border-left: 1px solid #dee2e6;
+
+  .tab-content {
+    padding-bottom: 40vh;
+    background-color: white;
+  }
+  @media (max-width: 1250px) {
+    width: 100%;
+
+  }
 
 `

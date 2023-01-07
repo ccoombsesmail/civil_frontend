@@ -23,6 +23,7 @@ export const SignInContainer = styled('div')`
 
   .tab-content {
     padding: 4vw 0 2vw 0;
+    
     display: flex;
     justify-content: center;
   }

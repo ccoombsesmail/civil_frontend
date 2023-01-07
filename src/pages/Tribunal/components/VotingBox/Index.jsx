@@ -9,7 +9,7 @@ import {
 
 const VotingBox = ({ contentId, reportStats }) => {
   const openModal = useOpenModal(TOPIC_VOTE_FORM, { contentId })
-  const votingTimeUp = +new Date(reportStats?.reportPeriodEnd) - +new Date() <= 0
+  const votingTimeUp = (+new Date(reportStats?.reportPeriodEnd) - +new Date()) <= 0
   const hasAlreadyVoted = useMemo(() => (reportStats.voteAgainst || reportStats.voteFor),
     [reportStats.voteAgainst, reportStats.voteFor])
 
@@ -34,12 +34,22 @@ const VotingBox = ({ contentId, reportStats }) => {
       </VotesAgainst>
       <MiddleSection verdict={verdict}>
         { votingTimeUp && (
-        <span>
-          {`VERDICT ⭢ ${verdict}`}
-          {' '}
-        </span>
+        <>
+          <span>
+            <Gavel2 />
+            VERDICT
+            <Gavel2 />
+          </span>
+          <span>
+            ↓
+          </span>
+          <span>
+            {verdict}
+          </span>
+
+        </>
         )}
-        { votingTimeUp ? <Gavel2 /> : <CastBallotSvg /> }
+        { !votingTimeUp && <CastBallotSvg /> }
         {(reportStats && !votingTimeUp) && (
         <ThemeButton onClick={openModal}>
           {hasAlreadyVoted ? 'Change Your Vote' : 'Cast Your Vote'}

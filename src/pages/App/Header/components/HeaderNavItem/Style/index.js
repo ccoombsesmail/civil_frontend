@@ -68,7 +68,7 @@ export const NotificationMark = styled('mark')`
   align-items: center;
   padding: 0;
   margin: 0;
-  font-size: .67vw;
+  font-size: clamp(10px, .67vw, 20px);
   transform-origin: center bottom;
   animation-duration: 1s;
   animation-fill-mode: both;   

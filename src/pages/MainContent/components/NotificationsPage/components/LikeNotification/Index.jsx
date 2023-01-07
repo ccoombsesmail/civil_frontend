@@ -7,6 +7,7 @@ import { LeftContainer, MiddleContainer, ProfileIcon } from '../Style'
 
 import { CommentLike } from '../../../../../../enums/notification_types'
 import { LikeClickedSvg } from '../../../../../../svgs/svgs'
+import { longUsernameDisplay } from '../../../../../../generic/string/longUsernameDisplay'
 
 const CommentLikeNotification = ({ notification }) => {
   const {
@@ -30,7 +31,7 @@ const CommentLikeNotification = ({ notification }) => {
       <MiddleContainer>
         <h3>
           <b>
-            {givingUserUsername}
+            {longUsernameDisplay(givingUserUsername)}
           </b>
           {' '}
           Liked Your

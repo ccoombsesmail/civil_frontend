@@ -7,8 +7,8 @@ const load = (ratio) => keyframes`
 
 export const ProgressBarContainer = styled('div')` 
   background:#fff;
-  width: clamp(200px, 20vw, 100vw);
-  height: clamp(200px, 20vw, 100vw);
+  width: clamp(400px, 20vw, 800px);
+  height: clamp(400px, 20vw, 800px);
   transform: scale(.9);
   display:flex;
   justify-content:center;
@@ -79,9 +79,9 @@ export const MiddleOfCircleContainer = styled('div')`
     position:absolute;
     color:#111;
     h2 {
-      font-size: 1.8vw;
+      font-size: clamp(20px, 1.8vw, 30px);
     span{
-      font-size:20px;
+      font-size: clamp(20px, 1.8vw, 30px);
     }
   }
 `

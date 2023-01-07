@@ -51,5 +51,6 @@ export const ItemDescription = styled('p')`
   justify-content: flex-start;
   flex: 80%;
   margin: unset !important;
+  font-size: clamp(15px, 1.4vw, 20px);
   
 `

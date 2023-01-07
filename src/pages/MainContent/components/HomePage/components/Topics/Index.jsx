@@ -17,8 +17,8 @@ const Topics = () => {
   const { openModal } = useBindDispatch(uiActionCreators)
   const { currentUser } = useGetCurrentUser()
 
-  const {data: topics, isLoading, isUninitialized} = useGetAllTopicsQuery(null, {
-    skip: !currentUser
+  const { data: topics, isLoading, isUninitialized } = useGetAllTopicsQuery(null, {
+    skip: !currentUser,
   })
   console.log(topics)
 
@@ -27,14 +27,15 @@ const Topics = () => {
       <Container>
         <BorderContainer>
           <Header user={currentUser} openModal={openModal} />
-          { isLoading ? <CircleLoading size="30vw" noBackground /> :  <CardContainer>
-            {
-            isUninitialized ? null : topics?.map((topic) => <TopicItem key={topic.id} topic={topic} user={currentUser} />)  
+          { isLoading ? <CircleLoading size="30vw" noBackground /> : (
+            <CardContainer>
+              {
+            isUninitialized ? null : topics?.map((topic) => <TopicItem key={topic.id} topic={topic} user={currentUser} />)
             }
-          </CardContainer>
-        }       
+            </CardContainer>
+          )}
         </BorderContainer>
-        <WavyBackground color="#EF5D45" top="100%" />
+        {/* <WavyBackground color="#EF5D45" top="100%" /> */}
       </Container>
     </>
   )

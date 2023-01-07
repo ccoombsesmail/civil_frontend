@@ -88,6 +88,9 @@ export const Container = styled('div')`
   overflow: hidden;
   box-shadow: 0 15px 10px 0 rgba(81, 82, 81, 0.32);
   border: 1px solid rgba(200,200,200,0.25);
+  @media (max-width: 1250px) {
+    display: none;
+  }
 
   h1 {
     padding-top: 30px;
@@ -163,6 +166,9 @@ export const PassesContainer = styled('div')`
   width: 100%;
   justify-content: center;
   margin-top: 0.2vw;
+  iframe {
+    min-height: 300px;
+  }
 `
 
 export const StyledLine = styled(Line)`

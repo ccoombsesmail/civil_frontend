@@ -35,7 +35,7 @@ export const Container = styled('div')`
   flex-direction: column;
   width: 100%;
   align-items: center;
-  margin: 4vw;
+  /* margin: 4vw; */
 
   .cl-card {
     width: 60vw;

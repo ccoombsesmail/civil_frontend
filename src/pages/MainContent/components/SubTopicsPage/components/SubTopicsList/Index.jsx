@@ -1,7 +1,8 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 // import { RiArrowDropRightFill } from 'react-icons/ri'
+import { useParams } from 'react-router-dom'
 import { RightTriangleArrowFillSvg } from '../../../../../../svgs/svgs'
 import useGoToSubTopic from '../../hooks/useGoToSubTopic'
 
@@ -11,8 +12,7 @@ import SubTopicsTable from '../SubTopicsTable/Index'
 import uiActionCreators from '../../../../../../redux/actions/ui'
 import { CREATE_SUB_TOPIC } from '../../../../../App/Modal/Index'
 import { Container } from './Style/index'
-import { useGetAllSubTopicsQuery } from '../../../../../../api/services/subtopics'
-import { useParams } from 'react-router-dom'
+import { useGetAllSubTopicsQuery } from '../../../../../../api/services/subtopics.ts'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 
 const SubTopicsList = () => {
@@ -20,10 +20,9 @@ const SubTopicsList = () => {
   const { topicId } = useParams()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
   const { currentUser } = useGetCurrentUser()
-  const {data: subtopics } = useGetAllSubTopicsQuery(topicId, {
-    skip: !currentUser
+  const { data: subtopics } = useGetAllSubTopicsQuery(topicId, {
+    skip: !currentUser,
   })
-  console.log(subtopics)
   const genSubTopic = subtopics?.find(({ title }) => title === 'General')
   const goToSubTopic = useGoToSubTopic(genSubTopic?.id)
 
@@ -32,14 +31,14 @@ const SubTopicsList = () => {
       <h1>
         Browse Some
         {' '}
-        <b>Sub-Topics</b>
+        <b>Discussions</b>
         {' '}
-        or Create Your Own...
+        or Start Your Own...
       </h1>
 
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', margin: '2em 0' }}>
         <ThemeButton type="button" onClick={() => openModal(CREATE_SUB_TOPIC)}>
-          Create Sub Topic +
+          Start A Discussion +
         </ThemeButton>
         <ThemeButton type="button" onClick={goToSubTopic}>
           General Discussion

@@ -27,7 +27,7 @@ const Timer = ({ reportStats, refetch }) => {
     <>
       <Container>
         <Headline>
-          { +new Date(reportStats?.reportPeriodEnd) - +new Date() > 0 ? 'Voting Period Timing Remaining' : 'Voting Has Ended' }
+          { +new Date(reportStats?.reportPeriodEnd) - +new Date() > 0 ? 'Voting Period Time Remaining' : 'Voting Has Ended' }
         </Headline>
         {'\n'}
         <ul>

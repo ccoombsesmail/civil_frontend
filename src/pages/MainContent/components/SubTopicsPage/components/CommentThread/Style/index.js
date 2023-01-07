@@ -36,7 +36,7 @@ export const ColumnContainer = styled('section')`
   display: flex;
   justify-content: space-evenly;
   /* border-top: 1px solid gray; */
-  width: 100vw;
+  width: 100%;
 
   ul:first-child {
     /* border-right: .1px dashed rgb(48,48,50); */

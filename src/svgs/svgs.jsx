@@ -234,9 +234,9 @@ export const InfoIconSvg = ({ onClick }) => (
   </svg>
 )
 
-export const RightTriangleArrowFillSvg = () => (
+export const RightTriangleArrowFillSvg = ({ rotateDown = false}) => (
   <svg
-    style={{ marginLeft: '10px' }}
+    style={{ marginLeft: '10px', transform: rotateDown ? 'rotate(90deg)' : 'rotate(0)' }}
     width="11px"
     height="14px"
     viewBox="0 0 11 14"

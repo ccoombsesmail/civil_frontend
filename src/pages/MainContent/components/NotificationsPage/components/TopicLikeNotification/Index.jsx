@@ -7,6 +7,7 @@ import { LeftContainer, MiddleContainer, ProfileIcon } from '../Style'
 
 import { TopicLike } from '../../../../../../enums/notification_types'
 import { LikeClickedSvg } from '../../../../../../svgs/svgs'
+import { longUsernameDisplay } from '../../../../../../generic/string/longUsernameDisplay'
 
 const TopicLikeNotification = ({ notification }) => {
   const {
@@ -30,7 +31,7 @@ const TopicLikeNotification = ({ notification }) => {
       <MiddleContainer>
         <h3>
           <b>
-            {givingUserUsername}
+            {longUsernameDisplay(givingUserUsername)}
           </b>
           {' '}
           Liked Your

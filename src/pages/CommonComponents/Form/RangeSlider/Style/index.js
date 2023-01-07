@@ -5,8 +5,8 @@ import styled from 'styled-components'
 export const Container = styled('div')`
   position: relative;
   /* border: 1px solid black; */
-  height: 2.5vw;
-  width: 10vw;
+  height: clamp(20px, 2.5vw, 50px);
+  width: clamp(200px, 10vw, 300px);
   display: flex;
   align-items: center;
 `
@@ -14,8 +14,11 @@ export const Container = styled('div')`
 export const Message = styled('div')`
   position: absolute;
   left: 50%;
-  bottom: 5%;
+  bottom: 100%;
   transform: translate(-50%);
+  font-weight: bold;
+  font-size: clamp(10px, 1vw, 15px);
+  white-space: nowrap;
 `
 
 export const Range = styled('div')`
@@ -40,6 +43,7 @@ export const Range = styled('div')`
     background: var(--clerk-primary);
     color: #fff;
     font-size: 12px;
+    font-weight: bold;
     display: block;
     position: absolute;
     left: 50%;
