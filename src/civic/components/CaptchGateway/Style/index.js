@@ -7,10 +7,9 @@ export const Container = styled('div')`
  justify-content: center;
  span {
     padding: 0 !important;
-    font-size: .8vw !important;
   }
   b {
-    margin: 0 1vw;
+    margin: 0 clamp(15px, 1vw, 25px);
     color: #FFFFFF00;
     font-family: "Aventa", Sans-serif;
     font-size: 2vw;
@@ -26,6 +25,7 @@ export const Container = styled('div')`
 `
 
 export const IconContainer = styled('div')`
+  height: 100%;
   background-color: ${(props) => props.color || 'var(--m-civic-theme-main-color)'}; 
   border-radius: 50%;
   padding: .4vw;
@@ -35,10 +35,16 @@ export const IconContainer = styled('div')`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
 `
 
 export const StyledExpandButton = styled(ExpandButton)`
   margin: 0;
+  width: clamp(150px, 5vw, 300px);
+  button {
+    font-size: clamp(15px, 1.4vw, 25px) !important;
+
+  }
 `
 
 export const PopoverToolTip = styled('div')`

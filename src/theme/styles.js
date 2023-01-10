@@ -11,6 +11,17 @@ const GlobalStyle = createGlobalStyle`
 
 [data-testid="WRAPPER_CONTAINER"] {
   z-index: 99999999999;
+  > div {
+    @media (max-width: 1250px) {
+      transform: translate(0, -35%);
+      height: 140vh !important;
+
+    }
+  }
+}
+
+[data-testid="IFRAME"] {
+  min-height: 640px;
 }
 
 .wallet-adapter-button {
@@ -365,12 +376,12 @@ blockquote {
   :root {
     /* New theme attempt */
     --m-primary-btn-color: #87ACA3;
-
     --m-primary-btn-color: #74B20D;
-    --m-primary-btn-color: #2d8cb3;
-    /* --m-primary-btn-color: #EBF0FB; */
-    --m-primary-background-color:  #527640;
+    --m-primary-btn-color: #56899e;
+    --m-primary-btn-color:  #56899e;
     --m-primary-background-color: #256347;
+    --m-primary-background-color:  #527640;
+ 
     --m-secondary-background-color: #1e392a;
     --m-secondary-background-color: #EBF0FB;
     /* --m-secondary-background-color: #828081; */

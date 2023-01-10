@@ -2,7 +2,9 @@ import { defineConfig, loadEnv } from 'vite'
 import path from 'path'
 // import inject from '@rollup/plugin-inject'
 // import * as stdLibBrowser from 'node-stdlib-browser'
+import nodePolyfills from 'rollup-plugin-polyfill-node'
 
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import react from '@vitejs/plugin-react'
@@ -11,7 +13,7 @@ import svgLoader from 'vite-svg-loader'
 
 import { dependencies } from './package.json'
 
-const reactDeps = Object.keys(dependencies).filter((key) => key === 'react' || key.startsWith('react-') || key.startsWith('@civic')
+const reactDeps = Object.keys(dependencies).filter((key) => key === 'react' || key.startsWith('react-')
 || key.startsWith('@solana') || key.startsWith('styled'))
 
 const manualChunks = {
@@ -32,11 +34,15 @@ export default defineConfig(({ mode }) => {
     base: '/',
 
     build: {
-      sourcemap: false,
+      sourcemap: true,
       outDir: '../dist',
-      minify: false,
+      minify: true,
       cssCodeSplit: false,
       rollupOptions: {
+        plugins: [
+          // ...plugins
+          nodePolyfills(),
+        ],
         output: {
           manualChunks,
         },
@@ -44,36 +50,50 @@ export default defineConfig(({ mode }) => {
       },
     },
 
+    
     optimizeDeps: {
+      
       esbuildOptions: {
         plugins: [
           esbuildCommonjs(['@civic/solana-gateway-react', '@solana/wallet-adapter-react-ui']),
+          NodeGlobalsPolyfillPlugin({
+            process: true,
+            buffer: true,
+          }),     
         ],
         define: {
           this: 'window',
+          global: 'globalThis'
         },
       },
     },
 
     server: {
-      https: false,
+      // https: false,
       port: 8080,
-      // watch: false,
-      // hmr: false,
+      watch: true,
+      hmr: true,
     },
 
     resolve: {
-      alias: [
+      alias: {
+        process: "process/browser",
+        stream: "stream-browserify",
+        zlib: "browserify-zlib",
+        util: "util",
+      },
+      // alias: [
+        
         // stdLibBrowser,
-        {
-          find: /^~/,
-          replacement: '',
-        },
-        {
-          find: '@',
-          replacement: path.resolve(__dirname, 'src'),
-        },
-      ],
+        // {
+        //   find: /^~/,
+        //   replacement: '',
+        // },
+        // {
+        //   find: '@',
+        //   replacement: path.resolve(__dirname, 'src'),
+        // },
+      // ],
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     },
     publicDir: './public',
@@ -83,10 +103,6 @@ export default defineConfig(({ mode }) => {
       svgLoader(),
       createHtmlPlugin({}),
       svgr(),
-      // replace({
-      //   'require("@solana/wallet-adapter-react-ui/styles.css")': 'import("@solana/wallet-adapter-react-ui/styles.css")'
-      // }),import default from './src/pages/CommentForm/hooks/useHandleSubmit';
-
       react({
         // jsxRuntime: 'classic',
         include: '**/*.{jsx,tsx}',

@@ -167,7 +167,7 @@ export const PassesContainer = styled('div')`
   justify-content: center;
   margin-top: 0.2vw;
   iframe {
-    min-height: 300px;
+    min-height: 640px;
   }
 `
 

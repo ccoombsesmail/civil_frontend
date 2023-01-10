@@ -12,11 +12,13 @@ export const ENDPOINTS = {
     BACKEND: `http://${window.location.hostname}/api/v1`,
     UPLOAD_SERVICE: `http://${window.location.hostname}/multi-api/v1`,
     NOTIFICATIONS_SERVICE: `http://${window.location.hostname}/notifications-api/v1`,
+    NOTIFICATIONS_SERVICE_WS: `http://${window.location.hostname}`,
   },
   development: {
     BACKEND: `http://${window.location.hostname}:8090/api/v1`,
     UPLOAD_SERVICE: `http://${window.location.hostname}:8091/multi-api/v1`,
     NOTIFICATIONS_SERVICE: `http://${window.location.hostname}:8093/notifications-api/v1`,
+    NOTIFICATIONS_SERVICE_WS: `http://${window.location.hostname}:8093`,
   },
 }
 

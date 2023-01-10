@@ -44,6 +44,9 @@ export const ColumnContainer = styled('section')`
   /* border-top: 1px solid gray; */
   width: 100vw;
 
+  ul {
+    background-color: white;
+  }
   ul:first-child {
     /* border-right: .1px dashed rgb(48,48,50); */
   }

@@ -6,7 +6,7 @@ export const OuterContainer = styled('div')`
   height: fit-content;
   background-color: white;
   z-index: 99;
-  margin-bottom: 5vw;
+  /* margin-bottom: 5vw; */
 
 `
 export const CommentContainer = styled('li')`
@@ -60,7 +60,7 @@ export const Body = styled('div')`
   pointer-events: ${(props) => (props.shouldBlur ? 'none' : 'initial')};
   position: relative;
   color: black;
-  min-height: 10vh;
+  /* height: clamp(300px, 10vh, 800px); */
   padding: 1em;
   width: 100%;
 `
@@ -97,6 +97,8 @@ export const Footer = styled('div')`
   width: 100%;
 `
 
-export const Content = styled('p')` 
+export const Content = styled('p')`
+  height: 80%;
+  overflow: scroll;
   padding: 1em;
 `

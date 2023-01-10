@@ -32,9 +32,13 @@ const SubTopicsTable = () => {
       <Container>
         <TableHeader>
           <h1>
-            { (isTopicUninitialized || isTopicLoading) ? null : <span>{`Topic: ${topic.title}`}</span> }
-            <RightTriangleArrowFillSvg size={50} rotateDown />
-            <span>Discussions</span>
+            { (isTopicUninitialized || isTopicLoading) ? null : (
+              <>
+                <span>{`Topic: ${topic.title}`}</span>
+                <RightTriangleArrowFillSvg size={50} rotateDown />
+                <span>Discussions</span>
+              </>
+            )}
           </h1>
         </TableHeader>
         <Table>

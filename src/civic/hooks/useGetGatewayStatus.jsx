@@ -13,7 +13,7 @@ export default () => {
       btnIcon = <VerifiedSvg />
     } else if (gatewayStatus === 13) {
       btnIcon = <WarningSvg />
-      btnColor = '#DB3B21'
+      btnColor = '#9B9B9B'
     } else btnColor = 'gray'
     return [btnColor, Object.values(CivilGatewayStatus)[gatewayStatus], btnIcon]
   }, [gatewayStatus])

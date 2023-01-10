@@ -19,10 +19,10 @@ export const StyledHeader = styled('header')`
   
 `
 export const CivilIcon = styled('img')`
-    width: 3vw;
+    /* width: 3vw; */
     height: 3vw;
   @media only screen and (max-width: 600px) {
-    width: 8vw;
+    /* width: 8vw; */
     height: 8vw;  
   }
   
@@ -81,7 +81,7 @@ export const MobileContainer = styled('div')`
       display: block;
     }
   iframe {
-    min-height: 300px;
+    min-height: 640px;
   }
 `
 
@@ -91,5 +91,15 @@ export const WalletPassesContainer = styled('div')`
   align-items: center;
   position: relative;
 
+
+  .wallet-adapter-button {
+    /* font-size: 12px !important;
+    line-height: 32px;
+    height: 32px;
+    i {
+      height: 15px;
+      width: 15px;
+    } */
+  }
   
 `

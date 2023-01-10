@@ -15,10 +15,11 @@ import useInitSocketEffect from './useInitSocketEffect'
 
 import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
 import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
+import { selectedEndpoints } from '../../../api/endpoints/endpoints'
 // import useGetCivicAuthHeader from '../../../civic/hooks/useGetCivicAuthHeader.ts'
 
 export default (userId, userIsLoading, isError) => {
-  const URL = `http://${window.location.hostname}:8093`
+  const URL = selectedEndpoints.NOTIFICATIONS_SERVICE_WS
   const socket = io(URL, { autoConnect: false })
   const [upsertDidUser] = useUpsertDidUserMutation()
   const {

@@ -53,12 +53,9 @@ export const CardContainer = styled('ul')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* flex-wrap: wrap; */
   z-index: 9999;
   padding: 0;
-  /* margin: 5em 0 0 0; */
   margin: 5em auto 0 auto;
-  padding-bottom: 30vh;
   background-color: #F0F2F5;
   background-color: white;
   width: 44vw;

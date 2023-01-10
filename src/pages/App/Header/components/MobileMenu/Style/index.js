@@ -1,6 +1,36 @@
 import styled from 'styled-components'
 // credit Max Misnikov (@maxim) from codepen
 
+export const PassesOuterContainer = styled('div')`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 40px;
+  transition: all .3s;
+  
+
+
+  b {
+    font-size: 30px !important;
+    margin: 0 15px;
+    color: #FFFFFF00;
+    font-family: "Aventa", Sans-serif;
+    font-weight: 400;
+    -webkit-text-stroke-width: 1px;
+    stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    stroke: black;
+
+  }
+  hr {
+    margin: 0 0 15px 0 !important;
+
+  }
+  
+
+`
+
 export const NotificationMarkMenu = styled('mark')` 
   position: absolute;
   top: 10px;
@@ -8,7 +38,7 @@ export const NotificationMarkMenu = styled('mark')`
   color: white;
   border: 2px solid white;
   border-radius: 50%;
-  z-index: 9999999999;
+  z-index: 9999999;
   height: 22px;
   width: 22px;
   background: red;
@@ -26,6 +56,10 @@ export const NotificationMarkMenu = styled('mark')`
 
 export const Container = styled('div')`
   display: block;
+    b {
+      font-size: clamp(15px, 1.4vw, 25px);
+
+    }
    .nav-links {
     display: block;
     position: absolute;
@@ -73,7 +107,7 @@ export const Container = styled('div')`
   }
 
   input[type="checkbox"] {
-  z-index: 99999999999;
+  z-index: 99;
   position: absolute;
   opacity: 0;
   visibility: hidden;
@@ -129,6 +163,7 @@ export const Container = styled('div')`
       }
       &:nth-child(4) {
         transition-delay: 400ms;
+        padding-left: 0;
       }
       /* @for $i from 1 through length($nav-links) {
         &:nth-child(#{$i}) {
@@ -141,7 +176,7 @@ export const Container = styled('div')`
 
 // Styling of the linked label element
 label {
-  z-index: 99999999999;
+  z-index: 9999998;
 
   background: none transparent;
   border: 4px solid var(--m-primary-btn-color);

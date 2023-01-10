@@ -109,7 +109,8 @@ export const Container = styled('div')`
 `
 
 export const OuterContainer = styled('div')`
-  width: ${(props) => props.width || '30%'};
+  width: clamp(300px, 90%, 450px);
+  margin: auto;
   position: relative;
   display: flex;
   flex-direction: column;

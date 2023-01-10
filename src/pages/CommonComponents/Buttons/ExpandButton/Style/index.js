@@ -39,7 +39,7 @@ export const ButtonBackground = styled('div')`
 `
 
 export const StyledButton = styled('button')`
-  font-size: 1vw;
+  font-size: clamp(15px, 1.4vw, 25px);
   font-weight: bold;
   /* text-transform: uppercase; */
   display: flex;
@@ -47,39 +47,31 @@ export const StyledButton = styled('button')`
   justify-content: center;
   width: 100%;
   background: none;
-  padding: 0;
+  padding: 5px 12px;
   border-radius: 0.85rem;
   border: none;
   span {
+    font-size: clamp(13px, .9vw, 25px);
+
     transition: color 0.6s;
     color: #fff;
     display: block;
     position: relative;
     padding: 1.5rem 3rem;
+
     /* mix-blend-mode: difference; */
   }
 
   svg {
-    width: 1vw;
+    width: clamp(15px, 1.4vw, 25px);
     z-index: 999;
-    padding-right: .3vw;
+    padding-right: clamp(5px, .3vw, 10px);
     path {
       fill: white !important;
     }
   }
 
 
-  @media only screen and (max-width: 800px) {
-    font-size: 1.6vw;
-  }
-
-  @media only screen and (max-width: 600px) {
-    font-size: 2.5vw;
-  }
-
-  @media only screen and (max-width: 450px) {
-    font-size: 3.5vw;
-  }
 
   @media (hover: hover) {
   :hover {
@@ -107,7 +99,7 @@ export const StyledButton = styled('button')`
 `
 
 export const Container = styled('div')`
-  width: ${(props) => props.width || 'clamp(10vw, 200px, 35vw)'};
+  width: ${(props) => props.width || 'clamp(150px, 175pxpx, 200px)'};
   height: ${(props) => props.height || 'clamp(35px, 2.5vw, 40px)'};
   margin: ${(props) => props.margin ?? '0 1vw'};
   padding: 0;
@@ -117,15 +109,15 @@ export const Container = styled('div')`
   justify-content: center;
   position: relative;
 
+  svg {
+    margin: clamp(7px, .4vw, 12px);
+    width: clamp(24px, 2vw, 48px);
+  }
   button:focus {
     /* Provide a fallback style for browsersthat don't support :focus-visible */
     outline: none;
   }
 
-  /* 
-  button:focus:not(:focus-visible) {
-  } 
-  */
 
   button:focus-visible {
     /* Draw a very noticeable focus style for keyboard-focus on browsers that do support:focus-visible */

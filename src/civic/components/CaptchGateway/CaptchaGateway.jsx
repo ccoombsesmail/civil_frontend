@@ -1,20 +1,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { Button, OverlayTrigger } from 'react-bootstrap'
-import ThemeTooltip, { TooltipPopover } from '../../../pages/CommonComponents/Tooltip/Index'
 import Popover from '../../../pages/CommonComponents/PopoverStickOnHover/Index'
 
 import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
 } from './Style'
-import { CivilGatewayStatus } from '../../../enums/CivilGatewayStatus.ts'
-import { VerifiedSvg, WarningSvg } from '../../../svgs/svgs'
 import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
 // Default styles that can be overridden by your app
@@ -71,8 +67,6 @@ const RequestGatewayTokenDesktop = () => {
       <StatusIcon placement="right" />
       <b>⟶</b>
       <StyledExpandButton
-        width="8vw"
-        height="2.2vw"
         margin={0}
         backgroundColor={color}
         type="submit"

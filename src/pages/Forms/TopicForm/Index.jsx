@@ -167,9 +167,9 @@ const CreateTopicForm = () => {
                           tooltipHeader="Supplemental Information"
                         />
                       </FlexDiv>
-                      <Field type="url" name="Evidence Link 1" component={Input} width="70%" label="Link To Evidence" />
-                      <Field type="url" name="Evidence Link 2" component={Input} width="70%" label="Link To Evidence" />
-                      <Field type="url" name="Evidence Link 3" component={Input} width="70%" label="Link To Evidence" />
+                      <Field type="url" name="Evidence Link 1" component={Input} width="100%" label="Link To Evidence" />
+                      <Field type="url" name="Evidence Link 2" component={Input} width="100%" label="Link To Evidence" />
+                      <Field type="url" name="Evidence Link 3" component={Input} width="100%" label="Link To Evidence" />
                     </div>
                   </Collapse>
                 </InputsContainer>
@@ -177,7 +177,6 @@ const CreateTopicForm = () => {
               <Modal.Footer>
                 <ExpandButton
                   type="submit"
-                  height="2.5vw"
                   backgroundColor="var(--m-primary-btn-color)"
                   disabled={isSubmitting}
                   onClick={closeModal}
@@ -186,7 +185,6 @@ const CreateTopicForm = () => {
                 </ExpandButton>
                 <ExpandButton
                   type="submit"
-                  height="2.5vw"
                   backgroundColor="var(--m-primary-btn-color)"
                   disabled={isSubmitting}
                 >

@@ -2,14 +2,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 
-import { Container, NotificationMarkMenu } from './Style/index'
+import { Link } from 'react-router-dom'
+import { Container, NotificationMarkMenu, PassesOuterContainer } from './Style/index'
 import {
   UserSettingsSvg,
   NotificationSvg,
   Gavel2,
 } from '../../../../../svgs/svgs'
 import { IconContainer, NotificationMark } from '../HeaderNavItem/Style'
-import { Link } from 'react-router-dom'
+import { Line } from '../../../../CommonComponents/Line'
+import { PassesContainer } from '../../../../UserInformationDisplay/Style'
+import { CaptchaGatewayDesktop } from '../../../../../civic/components/CaptchGateway/CaptchaGateway'
 
 const MobileMenu = ({
   numUnreadUserNotifications,
@@ -62,6 +65,17 @@ const MobileMenu = ({
             <Gavel2 />
           </IconContainer>
           <Link to="/home/notifications-tribunal">Tribunal Notifications</Link>
+        </li>
+        <li>
+          <PassesOuterContainer>
+            <b>Civic Passes</b>
+            <Line />
+            <PassesContainer>
+              <CaptchaGatewayDesktop />
+              {/* <UniquenessGateway /> */}
+            </PassesContainer>
+          </PassesOuterContainer>
+
         </li>
       </ul>
     </Container>

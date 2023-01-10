@@ -7,6 +7,12 @@ export const Warning = styled('span')`
   svg {
     margin-right: .5vw;
   }
+  @media only screen and (max-width: 800px) {
+    font-size: 2.7vw;
+    svg {
+      transform: scale(.8);
+    }
+  }
 
 `
 
@@ -21,14 +27,16 @@ export const MessageContainer = styled('div')`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--m-menu-item-hover);
+  background: #e6eef9;
   width: 90%;
   border-radius: .5em;
   padding: 20px 10px 10px 10px;
   cursor: pointer;
   height: ${(props) => (props.contentType === COMMENT ? 'clamp(0px, 60%, 200px)' : 'clamp(250px, 60%, 400px)')};
-  width: clamp(330px, 70%, 800px);
-
+  width: clamp(330px, 100%, 800px);
+  @media only screen and (max-width: 600px) {
+    border-radius: 0;
+  }
 
 `
 
@@ -36,10 +44,10 @@ export const Message = styled('h3')`
  
   text-align: center;
   font-weight: bold;
-  font-size: .85vw;
+  font-size: clamp(10px, 1.4vw, 25px);
 
   @media only screen and (max-width: 800px) {
-    font-size: 3.7vw;
+    font-size: 2.7vw;
   }
 
   :hover {

@@ -21,6 +21,7 @@ const CivilityButton = ({ comment, disabled }) => {
         <RangeSlider
           civility={comment.civility}
           updateCommentCivility={updateCommentCivility}
+          setShowPopover={setShowPopover}
         />
     )}
       placement="top"

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import useSessionType from '../../../pages/hooks/permissions/useSessionType'
 
-import { BACKEND_DEV, UPLOAD_SERVICE } from '../../endpoints/endpoints'
+import { BACKEND_DEV, UPLOAD_SERVICE, selectedEndpoints } from '../../endpoints/endpoints'
 
 export const createComment = (subTopicData) => axios.post(`${BACKEND_DEV}/comments`, subTopicData)
 
@@ -17,6 +17,6 @@ export const updateCommentLikes = (commentData) => axios.put(`${BACKEND_DEV}/com
 
 export const updateCommentCivility = (commentData) => axios.put(`${BACKEND_DEV}/comments/civility`, commentData)
 
-export const checkToxicity = (commentTextData) => axios.post(`${UPLOAD_SERVICE}/comments/toxicity`, commentTextData)
+export const checkToxicity = (commentTextData) => axios.post(`${selectedEndpoints.UPLOAD_SERVICE}/comments/toxicity`, commentTextData)
 
 // export const getSubTopic = (subTopicId) => axios.get(`${BACKEND_DEV}/subtopics/${subTopicId}`)

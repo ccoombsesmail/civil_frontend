@@ -14,7 +14,7 @@ export default () => (
       path=":subTopicId/comments/:commentId"
       element={(
         <>
-          <WavyBackground color="green" top="115%" />
+          {/* <WavyBackground color="green" top="115%" /> */}
           <CommentThread />
         </>
       )}
@@ -23,7 +23,7 @@ export default () => (
       path=":subTopicId"
       element={(
         <>
-          <WavyBackground color="green" top="115%" />
+          {/* <WavyBackground color="green" top="115%" /> */}
           <SubTopicThread />
         </>
       )}

@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { WarningSvg, ScalesSvg } from '../../../svgs/svgs'
 import { ThemeButton2 } from '../Button/Index'
+import ExpandButton from '../Buttons/ExpandButton/Index'
 
 import {
   Message,
@@ -21,7 +22,7 @@ const CensorOverlay = ({ setShouldBlur, contentId, contentType, showNavigationTo
       contentType={contentType}
     >
       <Message>
-        This Topic Has Been Reported or Flagged By
+        This Content Has Been Reported By Users or Flagged By
         AI And May Contain Explicit Visuals Or Offensive Language
       </Message>
       <Warning>
@@ -31,11 +32,14 @@ const CensorOverlay = ({ setShouldBlur, contentId, contentType, showNavigationTo
         </div>
       </Warning>
       { showNavigationToTribunal ? (
-        <ThemeButton2 onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}>
+        <ExpandButton
+        backgroundColor="var(--m-primary-btn-color)"
+        onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}
+        >
           <ScalesSvg />
           See Ongoing Review Process
           <ScalesSvg />
-        </ThemeButton2>
+        </ExpandButton>
       ) : <span />}
 
     </MessageContainer>

@@ -25,7 +25,7 @@ export const TableHeader = styled('header')`
     width: 100%;
     /* border-radius: 12px; */
     svg {
-      margin: 2vw;
+      margin: clamp(10px, 2vw, 15px);
     }
     h1 {
       width: 100%;
@@ -39,38 +39,24 @@ export const TableHeader = styled('header')`
       
       span {
         display: block;
+        font-size: clamp(18px, 1.6vw, 30px);
 
       }
       
       span:first-child {
-        font-size: clamp(15px, 1.5vw, 25px);
         font-weight: 700;
         letter-spacing: 6.5px;
-        @media only screen and (max-width: 600px) {
-          font-size: 3.5vw;
-        }
       }
       
       span:last-child {
-        font-size: clamp(15px, 1.5vw, 25px);
         font-weight: 500;
         letter-spacing: 3.55px;
         opacity: .85;
         transform: translateY(-2px);
-        @media only screen and (max-width: 600px) {
-          font-size: 3.3vw;
-        }
+ 
       }
     }
     
-    .leaderboard__icon {
-      fill: #fff;
-      opacity: .35;
-      width: 50px;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
 `
 
 export const Table = styled('table')` 
@@ -84,7 +70,7 @@ export const Table = styled('table')`
 
 export const ColHeader = styled('tr')`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 3fr 1.9fr 1fr;
   align-items: center;
   padding: 10px 30px 10px 10px;
   background-color: var(--bg-accent);
@@ -96,16 +82,16 @@ export const ColItem = styled('th')`
   color: white;
   font-weight: bold;
   letter-spacing: .1vw;
-  font-size: 1vw;
-  @media only screen and (max-width: 600px) {
+  font-size: clamp(12px, 1vw, 25px);
+  /* @media only screen and (max-width: 600px) {
     font-size: 2vw;
-  }
+  } */
 
 `
 
 export const Row = styled('tr')` 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 3fr 2fr 1fr;
     align-items: center;
     padding: 10px 30px 10px 10px;
     overflow: hidden;
@@ -115,7 +101,7 @@ export const Row = styled('tr')`
     transition: transform .25s cubic-bezier(.7,.98,.86,.98), box-shadow .25s cubic-bezier(.7,.98,.86,.98);
     background-color: #fff;
     z-index: 999999999;
-    
+
     &:hover {
       transform: scale(1.1);
       box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
@@ -132,10 +118,9 @@ export const RowItem = styled('td')`
   
   letter-spacing: .1vw;    
 
-  font-size: 1vw;
-  @media only screen and (max-width: 600px) {
-    font-size: 2vw;
-  }
+  font-size: clamp(12px, 1vw, 25px);
+
+
 
   img {
     width: 2vw;

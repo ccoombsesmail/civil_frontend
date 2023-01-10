@@ -17,7 +17,7 @@ import { useGetAllCommentsQuery } from '../../../../../../api/services/comments.
 
 const SubTopicThread = () => {
   const { subTopicId, topicId } = useParams()
-  const [key, setKey] = useState('all')
+  const [key, setKey] = useState(0)
   const { currentUser } = useGetCurrentUser()
 
   const { data: subtopic, isLoading: isSubTopicLoading, isUninitialized: isSubTopicUninitialized } = useGetSubTopicQuery(subTopicId, {

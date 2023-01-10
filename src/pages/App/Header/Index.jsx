@@ -70,8 +70,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />} onClick={() => navigate('/home/topics')}>
-          Civil
+        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/civil-logo.png" />} onClick={() => navigate('/home/topics')}>
         </IconButton>
       </ButtonsContainer>
       <SignedIn>
@@ -105,7 +104,7 @@ const Header = () => {
       </SignedOut>
       <MobileContainer>
         <WalletPassesContainer>
-          <CaptchaGatewayMobile />
+          {/* <CaptchaGatewayMobile /> */}
           <WalletMultiButton />
           <Divider />
         </WalletPassesContainer>

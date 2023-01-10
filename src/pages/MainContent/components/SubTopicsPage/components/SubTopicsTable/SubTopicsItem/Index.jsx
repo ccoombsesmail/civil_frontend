@@ -1,4 +1,5 @@
 import React from 'react'
+import { longUsernameDisplay } from '../../../../../../../generic/string/longUsernameDisplay'
 import useGoToCommentThread from '../../../../../../hooks/routing/useGoToCommentThread'
 
 import { Row, RowItem } from '../Style/index'
@@ -14,7 +15,7 @@ const SubTopicsItem = ({
           {' '}
           <img src={createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} alt="" />
           {' '}
-          {`${createdBy.substring(0, 12)}...`}
+          {`${longUsernameDisplay(createdBy)}...`}
         </RowItem>
         <RowItem>{title}</RowItem>
         <RowItem>{allComments}</RowItem>
