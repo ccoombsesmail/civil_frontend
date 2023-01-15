@@ -13,7 +13,7 @@ export const Container = styled('div')`
   --m-input-height-form: 2vw;
   --m-input-height-form-mobile: 8vw;
 
-  width: ${(props) => props.width || '30%'};
+  width: ${(props) => props.width || '100%'};
 
   span {
     color: red;

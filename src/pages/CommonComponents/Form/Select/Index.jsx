@@ -25,7 +25,7 @@ const Select = ({
 
   if (isUninitialized) return null
   return (
-    <Container>
+    <Container width={width}>
 
       <Fade in={open}>
         <div>

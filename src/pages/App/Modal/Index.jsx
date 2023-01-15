@@ -8,6 +8,8 @@ import { ModalWrapper } from './Style/index'
 import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 
+// import CreateTopicForm from '../../Forms/TopicForm/Index'
+
 const CreateTopicForm = React.lazy(() => import('../../Forms/TopicForm/Index'))
 
 const CommentForm = React.lazy(() => import('../../CommentForm/Index'))

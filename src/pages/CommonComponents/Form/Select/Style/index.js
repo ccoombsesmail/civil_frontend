@@ -4,10 +4,13 @@ export const Container = styled('div')`
   position: relative;
   margin: auto;
   font-family: 'Ubuntu', sans-serif;
-  .fade {
+  width: var(--form-input-width);
+
+
+  /* .fade {
     margin: auto;
     width: 85%;
-  }
+  } */
 `
 
 export const Label = styled('label')`
@@ -24,7 +27,7 @@ export const StyledSelect = styled('select')`
   margin: auto;
   padding: .5em;
   color: black;
-  width: ${(props) => props.width || '30%'};
+  width: ${(props) => props.width || '100%'};
   height: 3.5em;
   font-size: .8em;
   font-weight: bold;

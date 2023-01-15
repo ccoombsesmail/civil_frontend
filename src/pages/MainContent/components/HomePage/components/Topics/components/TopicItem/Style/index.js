@@ -123,3 +123,10 @@ export const CardContent = styled('div')`
     margin-bottom: 16px;
   }
 `
+
+export const VideoPlayer = styled('iframe')`
+  /* height: 20vw; */
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+`

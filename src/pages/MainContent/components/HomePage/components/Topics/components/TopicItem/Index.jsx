@@ -1,69 +1,64 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
-import EmbededTweet from '../../../../../../../CommonComponents/TopicCards/TweetCard/Index'
 
-import EmbededYouTube from '../../../../../../../CommonComponents/TopicCards/YouTubeCard/Index'
 import ExternalContentCard from '../../../../../../../CommonComponents/TopicCards/ExternalContentCard/Index'
-import {
-  CardItem, CardFrame, CardTitle, CardOverlay, CardContent, CardBody,
-} from './Style'
+import { VideoPlayer } from './Style'
+import { TweetComponent } from '../../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import UserProvidedMediaCard from '../../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
-// import useGoToSubTopics from '../../../hooks/routing/useGoToSubTopics'
+import { Twitter, Web, YouTube } from '../../../../../../../../enums/link_type'
+import Card from '../../../../../../../CommonComponents/TopicCard/Index'
+
+import { CircleLoading } from '../../../../../../../../svgs/spinners/CircleLoading'
+import useGoToSubTopics from '../../../../../../../hooks/routing/useGoToSubTopics'
 
 const TopicItem = ({ topic, user }) => {
-  const navigate = useNavigate()
-  const commonProps = useMemo(() => ({
-    topic, user, showLinks: false, hideReplyIcon: true,
-  }), [topic, user])
-  // const goToSubTopic = useGoToSubTopics(topic?.id)
-  if (topic.ytUrl) {
-    return (
-      <EmbededYouTube
-        {...commonProps}
-        src={topic.ytUrl.replace('watch?v=', 'embed/')}
+  const goToSubTopic = useGoToSubTopics(topic?.id)
+
+  const commonProps = useMemo(
+    () => ({
+      topic,
+      user,
+      showLinks: false,
+      hideReplyIcon: true,
+      onClick: goToSubTopic,
+    }),
+    [topic, user],
+  )
+
+  const linkType = topic.externalContentData?.linkType
+
+  let cardbody = null
+
+  if (linkType === YouTube) {
+    cardbody = (
+      <VideoPlayer
+        loading="lazy"
+        src={`https://www.youtube.com/embed/${topic.externalContentData?.embedId}`}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title="YouTube video"
       />
     )
-  }
-  if (topic.tweetHtml) {
-    return (
-      <EmbededTweet
-        {...commonProps}
+  } else if (linkType === Twitter) {
+    cardbody = (
+      <TweetComponent
+        tweetID={topic.externalContentData?.embedId}
+        format=""
+        className={{
+          base: '',
+          focus: '',
+        }}
+        loadingComponent={<CircleLoading size={20} />}
       />
     )
-  }
-  if (topic.externalContentUrl) {
-    return (
-      <ExternalContentCard
-        {...commonProps}
-      />
-    )
-  }
-  if (topic.createdByVodUrl || topic.createdByImageUrl) {
-    return (
-      <UserProvidedMediaCard
-        {...commonProps}
-      />
-    )
+  } else if (linkType === Web) {
+    return <ExternalContentCard {...commonProps} />
+  } else if (topic.createdByVodUrl || topic.createdByImageUrl) {
+    return <UserProvidedMediaCard {...commonProps} />
   }
 
-  return (
-    <CardItem
-      onClick={() => navigate(`/topics/${topic.id}/subtopics/`)}
-    >
-      <CardFrame className="card__frame">
-        <CardTitle className="card__title">
-          {topic.title}
-          <CardBody />
-        </CardTitle>
-        <CardOverlay className="card__overlay" />
-        <CardContent className="card__content">
-          <h2>{topic.title}</h2>
-          <p>{topic.description}</p>
-        </CardContent>
-      </CardFrame>
-    </CardItem>
-  )
+  return <Card {...commonProps}>{cardbody}</Card>
 }
 
 export default TopicItem

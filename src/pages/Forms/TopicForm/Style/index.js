@@ -2,6 +2,14 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 // import { FiArrowDownCircle } from 'react-icons/fi'
 
+export const Footer = styled('div')` 
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 10px;
+`
+
 export const FlexDiv = styled('div')` 
   display: flex;
   align-items: center;
@@ -9,12 +17,44 @@ export const FlexDiv = styled('div')`
   width: 100%;
 `
 
+export const FlexDivLink = styled('div')` 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;    
+  .toolbar-item {
+    background: #e6eef9 !important;
+    width: var(--form-input-width);
+    justify-content: flex-start !important;
+  }
+
+
+`
 export const FormContainer = styled(Form)`
-  /* display: flex;
-  align-items: flex-start; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: center;
+  width: 100%;
   margin-top: 1em;
    h2 {
     font-size: 1em;
+  }
+
+  #insert-embed-node {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  iframe {
+    width: 100% !important;
+    aspect-ratio: 16 / 9;
   }
  
 `
@@ -37,8 +77,11 @@ export const Left = styled('div')`
   display: flex;
   display: inline-block;
   flex-direction: column;
-  width: 50%;
-  border-right: 1px solid black;
+  width: 100%;
+  .toolbar {
+    height: 50px !important;
+  }
+  /* border-right: 1px solid black; */
   @media only screen and (max-width: 800px) {
     width: 100%;
     border-right: none;
@@ -101,6 +144,7 @@ export const Line = styled('hr')`
   background-color: rgb(48,48,50);
   height: .5px;
   border: none;
+  padding: 0;
 `
 
 export const UploadMediaContainer = styled('div')` 

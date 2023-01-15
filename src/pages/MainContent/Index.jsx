@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LoadingPage from '../CommonComponents/LoadingPage/Index'
+import { initialConfig } from '../CommonComponents/Lexical/App.tsx'
 
 const SubTopicsPage = React.lazy(() => import('./components/SubTopicsPage/Index'))
 const NotificationsPage = React.lazy(() => import('./components/NotificationsPage/Index'))
@@ -38,7 +40,9 @@ const MainContent = () => (
         path="/topics"
         element={(
           <Suspense fallback={<LoadingPage />}>
-            <HomePage />
+            <LexicalComposer initialConfig={initialConfig}>
+              <HomePage />
+            </LexicalComposer>
           </Suspense>
         )}
       />

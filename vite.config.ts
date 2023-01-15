@@ -34,9 +34,9 @@ export default defineConfig(({ mode }) => {
     base: '/',
 
     build: {
-      sourcemap: true,
+      sourcemap: false,
       outDir: '../dist',
-      minify: true,
+      minify: false,
       cssCodeSplit: false,
       rollupOptions: {
         plugins: [
@@ -69,7 +69,7 @@ export default defineConfig(({ mode }) => {
     },
 
     server: {
-      // https: false,
+      https: false,
       port: 8080,
       watch: true,
       hmr: true,
@@ -82,18 +82,6 @@ export default defineConfig(({ mode }) => {
         zlib: "browserify-zlib",
         util: "util",
       },
-      // alias: [
-        
-        // stdLibBrowser,
-        // {
-        //   find: /^~/,
-        //   replacement: '',
-        // },
-        // {
-        //   find: '@',
-        //   replacement: path.resolve(__dirname, 'src'),
-        // },
-      // ],
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     },
     publicDir: './public',
@@ -112,29 +100,6 @@ export default defineConfig(({ mode }) => {
           plugins: ['babel-plugin-styled-components'],
         },
       }),
-      // {
-      //   ...inject({
-      //     global: [
-      //       require.resolve(
-      //         'node-stdlib-browser/helpers/esbuild/shim',
-      //       ),
-      //       'global',
-      //     ],
-      //     process: [
-      //       global.require.resolve(
-      //         'node-stdlib-browser/helpers/esbuild/shim',
-      //       ),
-      //       'process',
-      //     ],
-      //     Buffer: [
-      //       global.require.resolve(
-      //         'node-stdlib-browser/helpers/esbuild/shim',
-      //       ),
-      //       'Buffer',
-      //     ],
-      //   }),
-      //   enforce: 'post',
-      // },
     ],
     esbuild: {
       define: {

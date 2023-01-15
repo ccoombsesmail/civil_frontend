@@ -7,7 +7,7 @@ export const Container = styled('div')`
   transform: translateX(-50%);
   padding: .5em;
   color: white;
-  width: ${(props) => props.width || '30%'};
+  width: ${(props) => props.width || '100%'};
   background-color: var(--m-danger-color);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;

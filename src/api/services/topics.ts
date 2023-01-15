@@ -13,19 +13,22 @@ export enum TopicCategories {
   General,
 }
 
+export interface ExternalContentData {
+  linkType: string,
+  externalContentUrl: string,
+  embedId: string | null,
+  thumbImgUrl: string | null
+}
+
 export interface Topic {
   id: string,
   title: string;
-  summary: string;
   description: string;
-  tweetUrl?: string;
-  ytUrl?: string;
-  externalContentUrl?: string;
+  externalContentData: ExternalContentData | null,
   evidenceLinks?: ReadonlyArray<string>;
   category: TopicCategories;
   imageUrl?: string;
   vodUrl?: string;
-  thumbImgUrl?: string;
 }
 
 export interface TopicLiked {

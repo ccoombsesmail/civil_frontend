@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 
-import Card from '../../Card/Index'
+import Card from '../../TopicCard/Index'
 // import LinkMetaData from '../../../TopicForm/components/LinkMetaData/Index'
-import CardDetails from '../CardDetails/Index'
+import CardDetails from '../../TopicCard/components/CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'

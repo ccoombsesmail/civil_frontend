@@ -6,5 +6,5 @@ export default () => {
     setContentUrl(e.currentTarget.value)
   }, [])
 
-  return { externalContentUrl, getContentUrlOnBlur }
+  return { externalContentUrl, getContentUrlOnBlur, setContentUrl }
 }

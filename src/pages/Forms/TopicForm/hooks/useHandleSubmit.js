@@ -14,18 +14,22 @@ export default (metaData) => {
   const { uploadTopicMedia } = useBindDispatch(topicActions)
   const [createTopic, { isLoading }] = useCreateTopicMutation()
   const { currentUser } = useGetCurrentUser()
-  return useCallback((values, { setSubmitting, resetForm }, content) => {
+  return useCallback((values, { setSubmitting, resetForm }, content, externalContentUrl) => {
     if (isLoading) return
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
-    const linkType = checkLinkType(values.externalContentUrl)
+    const linkType = checkLinkType(externalContentUrl?.url)
     const data = {
       ...values,
-      description: content,
+      description: JSON.stringify(content),
       createdByUsername: currentUser.username,
       createdByuserId: currentUser.userId,
       evidenceLinks: eLinks,
-      [linkType]: values.externalContentUrl,
-      thumbImgUrl: metaData.ogImage?.url,
+      externalContentData: !externalContentUrl ? null : {
+        linkType,
+        embedId: externalContentUrl?.id || null,
+        externalContentUrl: externalContentUrl.url,
+        thumbImgUrl: metaData?.ogImage?.url || null,
+      },
     }
     if (values.file instanceof File) {
       const [fileType, fileFormat] = values.file.type.split('/')

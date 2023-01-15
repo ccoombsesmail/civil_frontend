@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router, Routes, Route,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
+
 import App from './pages/App/Index'
 import configureStore from './redux/store.ts'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -21,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <Route path="/*" element={<App />} />
         </Routes>
       </Router>
-    </Provider>,
+    </Provider>
+
+    ,
   )
 })

@@ -12,6 +12,7 @@
   "compilerOptions": {
     "target": "es2015",
     "module": "es6",
+    "jsx": "react",
     "lib": [
       "es2017",
       "es7",
@@ -22,13 +23,13 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "emitDeclarationOnly": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": false,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
     "emitDecoratorMetadata": true,
-    "removeComments": false,
+    "removeComments": true,
     "isolatedModules": false,
     "preserveConstEnums": true,
     "experimentalDecorators": true,

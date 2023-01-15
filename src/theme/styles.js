@@ -5,8 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 ----------------------------------*/
 const GlobalStyle = createGlobalStyle`
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); */
 
 
 [data-testid="WRAPPER_CONTAINER"] {
@@ -401,6 +400,10 @@ blockquote {
     --m-primary-box-shadow: 5px 5px 10px #5a5a5a, -5px -5px 10px #ffffff; 
 
     --thin-border: 1px solid rgba(200,200,200,0.25);
+
+    --form-input-width: clamp(300px, 90%, 450px);
+
+
     /* EMOJI */
     unicode-emoji-picker {
   
@@ -415,11 +418,7 @@ blockquote {
     /* EMOJI */
 
 
-    --gutterSm: 0.4rem;
-    --gutterMd: 0.8rem;
-    --gutterLg: 1.6rem;
-    --gutterXl: 2.4rem;
-    --gutterXx: 7.2rem;
+  
     --fontFamily: "Baloo 2", cursive;
     --fontSizeSm: 1.2rem;
     --fontSizeMd: 1.6rem;
@@ -607,7 +606,7 @@ blockquote {
   }
 
   .popover {
-    z-index: 999999999;
+    z-index: 9999999999999;
   }
 
 
