@@ -23,10 +23,19 @@ export const FlexDivLink = styled('div')`
   justify-content: center;
   width: 100%;    
   .toolbar-item {
-    background: #e6eef9 !important;
+    background: var(--m-form-color) !important;
     width: var(--form-input-width);
+    height: var(--form-element-height);
     justify-content: flex-start !important;
   }
+
+  // not ideal. Don't want the hide the dropdown text when reusing this component outside the text editor
+  @media screen and (max-width: 1100px) {
+    .dropdown-button-text {
+      display: flex !important;
+    }
+  }
+
 
 
 `
@@ -108,13 +117,11 @@ export const InputWrapper = styled('div')`
 
 export const Container = styled('div')`
   overflow-y: scroll;
-  height: 90vh;
-  width: 100vw;
-  max-width: 1000px;
+  height: 75vh;
+  width: clamp(400px, 60vw, 1100px);
   background: white;
   
   border-radius: 1em;
-  /* box-shadow: var(--m-primary-box-shadow); */
   box-shadow:  5px 5px 5px -3px #000000;
 
   h1 {
@@ -125,17 +132,9 @@ export const Container = styled('div')`
     border-bottom: 1px solid black;
   }
   
-  /* @media only screen and (max-width: 1600px) {
-     width: 80vw;
+  @media (max-width: 700px) {
+    border-radius: 0;
   }
-
-  @media only screen and (max-width: 800px) {
-     width: 90vw;
-  }
-
-  @media only screen and (max-width: 600px) {
-     width: 100vw;
-  } */
  `
 
 export const Line = styled('hr')` 

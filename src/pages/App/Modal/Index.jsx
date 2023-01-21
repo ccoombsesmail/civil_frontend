@@ -8,13 +8,11 @@ import { ModalWrapper } from './Style/index'
 import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 
-// import CreateTopicForm from '../../Forms/TopicForm/Index'
-
 const CreateTopicForm = React.lazy(() => import('../../Forms/TopicForm/Index'))
 
-const CommentForm = React.lazy(() => import('../../CommentForm/Index'))
+const CommentForm = React.lazy(() => import('../../Forms/CommentForm/Index'))
 
-const CreateSubTopicForm = React.lazy(() => import('../../Forms/SubTopicForm/Index'))
+const CreateDiscussionForm = React.lazy(() => import('../../Forms/DiscussionForm/Index'))
 
 const OpposingRecForm = React.lazy(() => import('../../OpposingRecForm/Index'))
 const CreateTagForm = React.lazy(() => import('../../CreateTagForm/Index'))
@@ -44,7 +42,7 @@ const Modal = ({ closeModal }) => {
       component = <CreateTopicForm />
       break
     case CREATE_SUB_TOPIC:
-      component = <CreateSubTopicForm />
+      component = <CreateDiscussionForm />
       break
     case REPLY:
       component = <CommentForm modalProps={modalProps} />

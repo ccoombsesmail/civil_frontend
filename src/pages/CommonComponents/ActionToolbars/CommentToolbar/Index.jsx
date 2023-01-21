@@ -15,7 +15,7 @@ const CommentActionToolbar = ({
   likes, comment, user,
 }) => {
   const {
-    topicId, subTopicId, contentId, ...params
+    topicId, discussionId, contentId, ...params
   } = useParams()
   const isTribunalComment = comment.commentType
   const { isOnTribunalPage } = useDetectCurrentPage()

@@ -6,11 +6,6 @@ export const Container = styled('div')`
   font-family: 'Ubuntu', sans-serif;
   width: var(--form-input-width);
 
-
-  /* .fade {
-    margin: auto;
-    width: 85%;
-  } */
 `
 
 export const Label = styled('label')`
@@ -28,15 +23,17 @@ export const StyledSelect = styled('select')`
   padding: .5em;
   color: black;
   width: ${(props) => props.width || '100%'};
-  height: 3.5em;
+  height: var(--form-element-height);
+
   font-size: .8em;
   font-weight: bold;
   line-height: var(--inputLineHeight);
   outline:none;
   background: #E5E5E5;
   border: ${(props) => (props.showError ? '1px solid var(--m-danger-color)' : '1px solid var(--bg)')};
-  border-radius: 0.4rem;
+  border-radius: var(--form-element-border-radius);
   transition: box-shadow var(--transitionDuration);
+  background-color: var(--m-form-color);
 
   ::placeholder {
     color: var(--m-trim-color);
@@ -64,6 +61,9 @@ export const StyledSelect = styled('select')`
     color: var(--m-trim-color);
     font-size: .8em;
     cursor: pointer;
+    
   }
+
 }
+
 `

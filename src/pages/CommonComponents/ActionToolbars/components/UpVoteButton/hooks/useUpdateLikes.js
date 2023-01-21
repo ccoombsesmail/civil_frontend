@@ -11,7 +11,7 @@ export default (content, user, contentType) => {
   const [updateTribunalCommentLikes, {}] = useUpdateTribunalCommentLikesMutation()
   const [updateLikes, {}] = useUpdateTopicLikesMutation()
   const [updateCommentLikes, {}] = useUpdateCommentLikesMutation()
-  const { isOnSubtopicsPage, isOnTribunalPage } = useDetectCurrentPage()
+  const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage()
 
   return useCallback(() => {
     let value
@@ -34,7 +34,7 @@ export default (content, user, contentType) => {
       value,
       createdByUserId: content.createdByUserId,
       updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
-      updateGetTopicQuery: isOnSubtopicsPage || isOnTribunalPage,
+      updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
       ...content
     }
     switch (contentType) {

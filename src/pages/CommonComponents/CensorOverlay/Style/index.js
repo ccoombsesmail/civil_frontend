@@ -27,7 +27,7 @@ export const MessageContainer = styled('div')`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #e6eef9;
+  background: var(--m-form-color);
   width: 90%;
   border-radius: .5em;
   padding: 20px 10px 10px 10px;

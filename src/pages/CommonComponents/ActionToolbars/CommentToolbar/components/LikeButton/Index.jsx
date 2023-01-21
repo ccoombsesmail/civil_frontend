@@ -1,4 +1,4 @@
-import React, { useMemo, memo} from 'react'
+import React, { useMemo, memo } from 'react'
 import IconButton from '../../../../IconButton/Index'
 import { LikeClickedSvg, LikeSvg } from '../../../../../../svgs/svgs'
 import useUpdateLikes from './hooks/useUpdateLikes'

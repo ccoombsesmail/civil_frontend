@@ -80,9 +80,10 @@ export const Container = styled('div')`
   padding-top: 80px;
   margin-top: 50px;
   background: white
-    url("https://civil-dev.s3.us-west-1.amazonaws.com/assets/red-trees.jpg")
-    0 -30%;
+    url("https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png")
+    ;
   background-repeat: repeat no-repeat;
+  background-size: 90%;
   /* background-size: 200px 100px; */
   border-radius: 1rem;
   overflow: hidden;

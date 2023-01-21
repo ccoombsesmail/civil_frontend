@@ -115,7 +115,7 @@ width: 2.2vw;
 height: 2.2vw;
 margin-left: 0.75rem;
 border-radius: 50%;
-background-color: var(--secondary-color);
+background-color: var(--m-form-color);
 transition: 0.15s ease-in;
 
 `
@@ -125,7 +125,7 @@ position: absolute;
 display: flex;
 height: 54px;
 width: 200px;
-background-color: var(--secondary-color);
+background-color: var(--m-form-color);
 z-index: 1;
 border-radius: 99px; // just a high number to create pill effect
 transition: 0.25s ease-out;

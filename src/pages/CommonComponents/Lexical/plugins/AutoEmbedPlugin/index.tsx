@@ -26,11 +26,22 @@ import Button from '../../ui/Button';
 import {DialogActions} from '../../ui/Dialog';
 import {INSERT_TWEET_COMMAND} from '../TwitterPlugin';
 import {INSERT_YOUTUBE_COMMAND} from '../YouTubePlugin';
-import { LexicalFormContext } from '../../../../Forms/TopicForm/Index'
+import { LexicalFormContext } from '../../../../Forms/TopicForm/LexicalFormContext'
 import { YouTubeComponent } from '../../nodes/YouTubeNode';
 import { TweetComponent } from '../../nodes/TweetNode';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { initialConfig } from '../../App'
+import DisplayMedia from '../../../../Forms/components/DisplayMedia/Index'
+
+import { getLinkMetaData } from '../../../../../api/v1/topics/topics_api_util.js'
+
+
+export type LexicalFormContextValue = {
+  setContentUrl:(emb: EmbedMatchResult) => void,
+  setMetaData:(emb: EmbedMatchResult) => void
+
+}
+
 interface PlaygroundEmbedConfig extends EmbedConfig {
   // Human readable name of the embeded content e.g. Tweet or Google Map.
   contentName: string;
@@ -147,7 +158,7 @@ export const TwitterEmbedConfig: PlaygroundEmbedConfig = {
   type: 'tweet',
 };
 
-export const TwitterEmbedConfigTopic =(submitCallback): PlaygroundEmbedConfig => ({
+export const TwitterEmbedConfigTopic = (submitCallback): PlaygroundEmbedConfig => ({
   ...TwitterEmbedConfigShared,
   type: 'tweet-topic',
   submitCallback: (result: EmbedMatchResult) => ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
@@ -163,6 +174,45 @@ export const TwitterEmbedConfigTopic =(submitCallback): PlaygroundEmbedConfig =>
         format={''} 
         />
     </LexicalComposer>)
+  
+});
+
+export const ExternalLinkConfigTopic = (submitCallback): PlaygroundEmbedConfig => ({
+  contentName: 'External Link',
+
+  exampleUrl: 'https://lexical.dev/docs/concepts/read-only',
+
+  // Icon for display.
+  icon: <i className="fa fa-external-link icon" aria-hidden="true"></i>,
+
+  // Create the Lexical embed node from the url data.
+  insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
+    editor.dispatchCommand(INSERT_TWEET_COMMAND, result.id);
+  },
+
+  // For extra searching.
+  keywords: ['external', 'link'],
+
+  // Determine if a given URL is a match and return url data.
+  parseUrl: (text: string) => {
+    const match = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/.exec(text);
+
+    if (match != null) {
+      return {
+        id: null,
+        url: match[0]
+      }
+    }
+
+    return null;
+  },
+  type: 'external-link-topic',
+  submitCallback: (result: EmbedMatchResult) => ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
+    <DisplayMedia
+      metaData={result.data}
+      externalContentUrl={result.url}
+      />
+    )
   
 });
 
@@ -260,7 +310,11 @@ export function AutoEmbedDialog({
   const [text, setText] = useState('');
   const [editor] = useLexicalComposerContext();
   const [embedResult, setEmbedResult] = useState<EmbedMatchResult | null>(null);
-  const embedSubmitCallback: (emb: EmbedMatchResult) => void = React.useContext(LexicalFormContext)
+  const { setContentUrl } = React.useContext<LexicalFormContextValue>(LexicalFormContext)
+  const getMetaData = React.useCallback(async (url) => {
+    const { data } = await getLinkMetaData(url)
+    return data
+  }, [])
 
   const validateText = useMemo(
     () =>
@@ -279,19 +333,29 @@ export function AutoEmbedDialog({
     [embedConfig, embedResult],
   );
 
-  const onClick = () => {
+  const onClick = async () => {
     if (embedResult != null) {
-      console.log(embedConfig.submitCallback)
-      if (embedConfig.submitCallback) embedConfig.submitCallback(embedResult)
-      else embedConfig.insertNode(editor, embedResult);
-      console.log(embedResult)
-      embedSubmitCallback(embedResult)
+      if (embedConfig.type === 'external-link-topic') {
+        const metaData = await getMetaData(embedResult.url)
+        setContentUrl({
+          ...embedResult,
+          data: metaData
+        })
+        embedConfig.submitCallback({
+          ...embedResult,
+          data: metaData
+        })
+      }
+      else if (['tweet-topic', 'youtube-video-topic'].includes(embedConfig.type)) {
+        setContentUrl(embedResult)
+        embedConfig.submitCallback(embedResult)
+      } else embedConfig.insertNode(editor, embedResult);
       onClose();
     }
   };
 
   return (
-    <div style={{width: '600px'}}>
+    <div className="Dialog__wrapper">
       <div className="Input__wrapper">
         <input
           autoFocus
@@ -301,7 +365,6 @@ export function AutoEmbedDialog({
           value={text}
           data-test-id={`${embedConfig.type}-embed-modal-url`}
           onChange={(e) => {
-            console.log(e)
             const {value} = e.target;
             setText(value);
             validateText(value);
@@ -322,7 +385,7 @@ export function AutoEmbedDialog({
 
 export default function AutoEmbedPlugin(): JSX.Element {
   const [modal, showModal] = useModal();
-  const embedSubmitCallback = React.useContext(LexicalFormContext)
+  const { setContentUrl } = React.useContext<LexicalFormContextValue>(LexicalFormContext)
   const openEmbedModal = (embedConfig: PlaygroundEmbedConfig) => {
     showModal(`Embed ${embedConfig.contentName}`, (onClose) => (
       <AutoEmbedDialog embedConfig={embedConfig} onClose={onClose} />
@@ -345,10 +408,10 @@ export default function AutoEmbedPlugin(): JSX.Element {
   };
 
   return (
-    <>
+    <div className='Modal__popover_link'>
       {modal}
       <LexicalAutoEmbedPlugin<PlaygroundEmbedConfig>
-        embedConfigs={[...EmbedConfigs, TwitterEmbedConfigTopic(embedSubmitCallback), YoutubeEmbedConfigTopic(embedSubmitCallback)]}
+        embedConfigs={[...EmbedConfigs, TwitterEmbedConfigTopic(setContentUrl), YoutubeEmbedConfigTopic(setContentUrl), ExternalLinkConfigTopic(setContentUrl)]}
         onOpenEmbedModalForConfig={openEmbedModal}
         getMenuOptions={getMenuOptions}
         menuRenderFn={(
@@ -380,6 +443,6 @@ export default function AutoEmbedPlugin(): JSX.Element {
             : null
         }
       />
-    </>
+    </div>
   );
 }

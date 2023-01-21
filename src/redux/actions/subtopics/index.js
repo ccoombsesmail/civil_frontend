@@ -2,13 +2,13 @@
 // action creator is just a function that dispatches an action
 import { toast } from 'react-toastify'
 import { closeModal } from '../ui/index'
-import { ADD_SUB_TOPIC, GET_ALL_SUB_TOPICS } from '../../reducers/subtopics/subTopicsReducer'
-import * as SubTopicsApiUtil from '../../../api/v1/subtopics/subtopics_api_util'
+import { ADD_SUB_TOPIC, GET_ALL_SUB_TOPICS } from '../../reducers/discussions/subTopicsReducer'
+import * as DiscussionsApiUtil from '../../../api/v1/discussions/discussions_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
 
-const getAllTopicsActionCreator = (subtopics) => ({
+const getAllTopicsActionCreator = (discussions) => ({
   type: GET_ALL_SUB_TOPICS,
-  payload: subtopics,
+  payload: discussions,
 
 })
 
@@ -17,21 +17,21 @@ const addTopicActionCreator = (subTopicData) => ({
   payload: subTopicData,
 })
 
-export const createSubTopic = (topicData) => (dispatch) => SubTopicsApiUtil.createSubTopic(topicData)
+export const createDiscussion = (topicData) => (dispatch) => DiscussionsApiUtil.createDiscussion(topicData)
   .then((res) => dispatch(addTopicActionCreator(res.data)))
   .then(() => dispatch(closeModal()))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getAllSubTopics = (topicId) => (dispatch) => SubTopicsApiUtil.getAllSubTopics(topicId)
+export const getAllDiscussions = (topicId) => (dispatch) => DiscussionsApiUtil.getAllDiscussions(topicId)
   .then((res) => dispatch(getAllTopicsActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getSubTopic = (subTopicId) => (dispatch) => SubTopicsApiUtil.getSubTopic(subTopicId)
+export const getDiscussion = (subTopicId) => (dispatch) => DiscussionsApiUtil.getDiscussion(subTopicId)
   .then((res) => dispatch(addTopicActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
-  createSubTopic,
-  getAllSubTopics,
-  getSubTopic,
+  createDiscussion,
+  getAllDiscussions,
+  getDiscussion,
 }

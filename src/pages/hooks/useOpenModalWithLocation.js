@@ -10,7 +10,7 @@ import { uuidRegEx } from '../../generic/regex/uuid'
 
 export default (modalType, modalProps) => {
   const { pathname } = useLocation()
-  const subtopicId = pathname.match(uuidRegEx)?.[1]
+  const discussionId = pathname.match(uuidRegEx)?.[1]
   const dispatch = useDispatch()
   const { openModal } = bindActionCreators(uiActionCreators, dispatch)
   return useCallback(() => {

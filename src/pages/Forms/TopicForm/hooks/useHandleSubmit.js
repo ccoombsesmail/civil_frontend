@@ -8,9 +8,7 @@ import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
 import checkLinkType from '../../hooks/checkLinkType'
 
-// const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
-
-export default (metaData) => {
+export default (metaData, closeModal) => {
   const { uploadTopicMedia } = useBindDispatch(topicActions)
   const [createTopic, { isLoading }] = useCreateTopicMutation()
   const { currentUser } = useGetCurrentUser()
@@ -54,5 +52,6 @@ export default (metaData) => {
     }
     setSubmitting(false)
     resetForm({})
+    closeModal()
   }, [metaData])
 }

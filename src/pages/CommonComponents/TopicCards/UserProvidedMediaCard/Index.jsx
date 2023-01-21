@@ -4,7 +4,7 @@ import Card from '../../TopicCard/Index'
 import CardDetails from '../../TopicCard/components/CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
-import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
+import useGoToDiscussion from '../../../hooks/routing/useGoToDiscussions'
 
 import DisplayMedia from '../../../Forms/components/DisplayMedia/Index'
 
@@ -13,13 +13,13 @@ const UserProvidedMediaCard = ({
 }) => {
   const descRef = useRef(null)
 
-  const goToSubTopic = useGoToSubTopic(topic?.id)
+  const goToDiscussion= useGoToDiscussion(topic?.id)
 
   useSetInnerHtml(descRef, topic?.description)
 
   return (
     <Card
-      onClick={goToSubTopic}
+      onClick={goToDiscussion}
       topic={topic}
     >
       <DisplayMedia

@@ -10,7 +10,10 @@ export const OuterContainer = styled('div')`
   /* background-color: #F2F6FC; */
   background-color: transparent;
 
-
+  img {
+    width: 4vw;
+    margin: 0 1vw;
+  }
 `
 
 export const Header = styled('header')`
@@ -19,8 +22,9 @@ export const Header = styled('header')`
   margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
   z-index: 9999;
   h1 {
-    font-weight: bold;
+    font-weight: 650;
     font-size: 2vw;
+    letter-spacing: .4vw;
     @media only screen and (max-width: 600px) {
       font-size: 5.7vw;
     }
@@ -49,6 +53,7 @@ export const InnerContainer = styled('div')`
   position: relative;
   display: flex;
   justify-content: space-between;
+  width: 50vw;
   /* align-items: center; */
   @media (max-width: 1200px) {
     width: 80%;

@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import UserIcon from '../../../../../../../CommonComponents/UserIcon/Index'
-import { CREATE_TOPIC } from '../../../../../../../App/Modal/Index'
 import { HeaderContainer, FlexDiv } from './Style/index'
 import ExpandButton from '../../../../../../../CommonComponents/Buttons/ExpandButton/Index'
 import useModal from '../../../../../../../CommonComponents/Lexical/hooks/useModal.tsx'
+import { initialConfig } from '../../../../../../../CommonComponents/Lexical/App.tsx'
 
 const CreateTopicForm = React.lazy(() => import('../../../../../../../Forms/TopicForm/Index'))
 
@@ -17,7 +18,10 @@ const Header = ({ user }) => {
 
   return (
     <HeaderContainer>
-      {modal}
+      <LexicalComposer initialConfig={initialConfig}>
+        {modal}
+      </LexicalComposer>
+
       <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} userId={user?.userId} />
       <FlexDiv>
         <p className="text-focus-in">

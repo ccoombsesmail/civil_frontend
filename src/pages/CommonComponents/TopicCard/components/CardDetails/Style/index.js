@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Description = styled('p')`
+export const Description = styled('div')`
   width: 100%;
   font-size: 1vw;
   word-wrap: break-word;
@@ -9,4 +9,11 @@ export const Description = styled('p')`
   @media only screen and (max-width: 600px) {
     font-size: 4vw;
   }
+`
+
+export const LinkSectionContainer = styled('div')`
+  height: ${({ isOpen }) => (isOpen ? '10vh' : 0)};
+  transition: all 1s;
+
+ 
 `

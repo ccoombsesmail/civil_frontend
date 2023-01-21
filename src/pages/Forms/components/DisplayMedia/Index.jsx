@@ -1,27 +1,28 @@
 import React from 'react'
+import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 import LinkMetaData from '../LinkMetaData/Index'
 
 const DisplayMedia = ({
-  imgFile, videoFile, setMetaData, externalContentUrl,
+  imgFile, videoFile, externalContentUrl, metaData,
 }) => (
   <>
-    { externalContentUrl && (
-    <LinkMetaData
-      setMetaData={setMetaData}
-      externalContentUrl={externalContentUrl}
-    />
-    ) }
+    { metaData ? (
+      <LinkMetaData
+        externalContentUrl={externalContentUrl}
+        metaData={metaData}
+      />
+    ) : <CircleLoading size={30} />}
     { imgFile && <img src={imgFile} alt="" />}
     { videoFile && (
-    <video controls>
-      <track
-        default
-        kind="captions"
-        srcLang="en"
-      />
-      <source src={videoFile} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+      <video controls>
+        <track
+          default
+          kind="captions"
+          srcLang="en"
+        />
+        <source src={videoFile} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     )}
   </>
 

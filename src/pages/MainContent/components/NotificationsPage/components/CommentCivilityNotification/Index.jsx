@@ -11,7 +11,7 @@ import { longUsernameDisplay } from '../../../../../../generic/string/longUserna
 const CommentCivilityNotifcation = ({ notification }) => {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, topicId, subtopicId, commentId, createdAt, old, new: newVal, id,
+    givingUserTag, topicId, discussionId, commentId, createdAt, old, new: newVal, id,
   } = notification
   const navigate = useNavigate()
   const handleClick = (e) => {
@@ -42,7 +42,7 @@ const CommentCivilityNotifcation = ({ notification }) => {
           {' '}
           Updated Civility Given For Your
           {' '}
-          <Link onClick={handleClick} to={`/home/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
+          <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions/${discussionId}/comments/${commentId}`}>
             Comment
           </Link>
           {' '}

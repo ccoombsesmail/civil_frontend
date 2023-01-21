@@ -1,5 +1,5 @@
 export const INIT_TOPIC_FORM_VALUES = {
-  title: '', description: '', externalContentUrl: '', summary: '', category: '', tweetUrl: '', ytUrl: null,
+  title: '', category: '',
 }
 
 export const INIT_DID_FORM_VALUES = {

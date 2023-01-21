@@ -1,0 +1,129 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useMemo, useRef } from 'react'
+import { useParams } from 'react-router-dom'
+import { Tooltip, OverlayTrigger } from 'react-bootstrap'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { TweetComponent } from '../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
+import PlaygroundEditorTheme from '../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
+import PlaygroundNodes from '../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
+import UserProvidedMediaCard from '../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
+import LinkMetaData from '../../../../../Forms/components/LinkMetaData/Index'
+
+import {
+  Container,
+} from './Style/index'
+import { useGetTopicQuery } from '../../../../../../api/services/topics.ts'
+import { useGetLinkMetaDataQuery } from '../../../../../../api/services/links.ts'
+
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
+import { Twitter, Web, YouTube } from '../../../../../../enums/link_type'
+import { VideoPlayer } from '../../../HomePage/components/Topics/components/TopicItem/Style'
+import Card from '../../../../../CommonComponents/TopicCard/Index'
+import DiscussionCard from './components/DiscussionCard/Index'
+
+const TooltipComponent = ({ text, title, reference }) => (
+  <OverlayTrigger
+    placement="top"
+    overlay={(
+      <Tooltip>
+        <strong>{title}</strong>
+      </Tooltip>
+      )}
+  >
+    <span onClick={() => reference?.current?.scrollIntoView()}>{text}</span>
+  </OverlayTrigger>
+)
+
+const Header = () => {
+  let content = null
+  const { topicId } = useParams()
+
+  const { currentUser } = useGetCurrentUser()
+  const { data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
+    skip: !currentUser || !topicId,
+  })
+
+  const commonProps = useMemo(() => ({
+    topic, user: currentUser, showLinks: true,
+  }), [topic, currentUser])
+
+  const topicRef = useRef(null)
+
+  const linkType = topic?.externalContentData?.linkType
+  const { data: metaData, isLoading } = useGetLinkMetaDataQuery(topic?.externalContentData?.externalContentUrl, {
+    skip: linkType !== Web,
+  })
+
+  if (isTopicUninitialized) return null
+  if (isTopicLoading) return <CircleLoading size="20vw" />
+
+  if (linkType === YouTube) {
+    content = (
+      <VideoPlayer
+        loading="lazy"
+        src={`https://www.youtube.com/embed/${topic.externalContentData?.embedId}`}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title="YouTube video"
+      />
+    )
+  } else if (linkType === Twitter) {
+    content = (
+      <TweetComponent
+        tweetID={topic.externalContentData?.embedId}
+        format=""
+        className={{
+          base: '',
+          focus: '',
+        }}
+        loadingComponent={<CircleLoading size={20} />}
+      />
+    )
+  } else if (linkType === Web) {
+    content = isLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
+  } else if (topic?.createdByVodUrl || topic?.createdByImageUrl) {
+    content = <UserProvidedMediaCard {...commonProps} />
+  } else {
+    return null
+  }
+
+  const initialConfig = {
+    editorState: JSON.parse(topic.description),
+    namespace: 'Civil2',
+    nodes: [...PlaygroundNodes],
+    onError: (error) => {
+      throw error
+    },
+    editable: false,
+    theme: PlaygroundEditorTheme,
+  }
+
+  return (
+    <Container>
+      <h1 className="text-focus-in">
+        <>
+          {'We\'re Talking About This'}
+          {' '}
+          <TooltipComponent text="Topic" title={topic?.title} reference={topicRef} />
+        </>
+      </h1>
+      <div style={{ width: '100%' }}>
+        <LexicalComposer initialConfig={initialConfig}>
+          <Card {...commonProps}>
+            {content}
+          </Card>
+        </LexicalComposer>
+      </div>
+      <div style={{ width: '100%' }}>
+        <DiscussionCard />
+      </div>
+    </Container>
+
+  )
+}
+
+export default Header

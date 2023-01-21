@@ -8,6 +8,7 @@ export const Container = styled('div')`
 
 export const LinkWrapper = styled('a')`
   text-decoration: none;
+  width: 100%;
 
 `
 

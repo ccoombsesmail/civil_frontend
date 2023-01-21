@@ -60,7 +60,7 @@ const UserInformationDisplay = () => {
 
   return (
     <Container>
-      <Icon className="img" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} alt="" />
+      <Icon className="img" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} alt="" />
       <h1>
         {longUsernameDisplay(user.username)}
       </h1>

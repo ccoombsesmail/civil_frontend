@@ -7,11 +7,11 @@ export const Container = styled('div')`
   --m-label-font-size-form: .5vw;
   --m-label-font-form-mobile: 1vw;
 
-  --m-input-height-DID-form: 3vw;
-  --m-input-height-DID-form-mobile: 8vw;
+  --m-input-height-DID-form: var(--form-element-height);
+  --m-input-height-DID-form-mobile: var(--form-element-height);
 
-  --m-input-height-form: 2vw;
-  --m-input-height-form-mobile: 8vw;
+  --m-input-height-form: var(--form-element-height);
+  --m-input-height-form-mobile: var(--form-element-height);
 
   width: ${(props) => props.width || '100%'};
 
@@ -33,20 +33,18 @@ export const Container = styled('div')`
 
   input {
     font-size: ${(props) => (props.isDIDForm ? '1.5em' : '1em')};
-    border: 0;
     font-family: inherit;
     -webkit-appearance: none;
-    border-radius: ${(props) => (props.showError ? '0.5em 0.5em 0 0' : '0.5em')};;
+    border-radius: ${(props) => (props.showError ? 'var(--form-element-border-radius) var(--form-element-border-radius) 0 0' : 'var(--form-element-border-radius)')};
     border: ${({ validInput }) => {
     if (validInput === null) return '1px solid gray'
     if (validInput === true) return '2px solid var(--m-primary-btn-color)'
     return '2px solid var(--m-danger-color)'
-  }} ;
-    padding: 0;
+  }};
+    border-bottom: ${(props) => (props.showError ? 'none' : '1px solid gray')};;
     width: 100%;
     height: ${(props) => (props.isDIDForm ? 'var(--m-input-height-DID-form)' : 'var(--m-input-height-form)')};
-
-    /* height: var(--m-input-height); */
+    background-color: var(--m-form-color); 
     padding-left: .5em;
     cursor: text;
     ::placeholder  {
@@ -62,7 +60,6 @@ export const Container = styled('div')`
 
   input:focus {
     outline: 0;
-    /* border-bottom: 1px solid #666; */
   }
 
   label {

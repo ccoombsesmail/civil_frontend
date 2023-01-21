@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export const BgImage = styled('div')` 
-  background-image: url('https://civil-dev.s3.us-west-1.amazonaws.com/assets/town_square.png');
+  background-image: url('https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png');
+  background-image: url('https://cdn.discordapp.com/attachments/1048453486456619088/1065236487370711090/C00mbsie_create_a_background_image_of_a_community_of_people_deb_47a2f56a-13a5-465a-85d3-07e263769fe3.png');
+  
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -30,7 +32,7 @@ export const HomePageGrid = styled('div')`
   grid-template-columns: 1fr 2fr 1fr;
 `
 
-export const SubTopicsGrid = styled('div')`
+export const DiscussionsGrid = styled('div')`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 2fr 1fr;

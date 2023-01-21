@@ -12,7 +12,7 @@ import { longUsernameDisplay } from '../../../../../../generic/string/longUserna
 const CommentLikeNotification = ({ notification }) => {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, topicId, subtopicId, commentId,
+    givingUserTag, topicId, discussionId, commentId,
   } = notification
   const navigate = useNavigate()
   const handleClick = (e) => {
@@ -36,7 +36,7 @@ const CommentLikeNotification = ({ notification }) => {
           {' '}
           Liked Your
           {' '}
-          <Link onClick={handleClick} to={`/home/topics/${topicId}/subtopics/${subtopicId}/comments/${commentId}`}>
+          <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions/${discussionId}/comments/${commentId}`}>
             Comment!
           </Link>
           {' '}

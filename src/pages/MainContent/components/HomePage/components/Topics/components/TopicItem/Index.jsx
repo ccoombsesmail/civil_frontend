@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react'
 
-import ExternalContentCard from '../../../../../../../CommonComponents/TopicCards/ExternalContentCard/Index'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import LinkMetaData from '../../../../../../../Forms/components/LinkMetaData/Index'
 import { VideoPlayer } from './Style'
 import { TweetComponent } from '../../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import UserProvidedMediaCard from '../../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
@@ -9,10 +10,23 @@ import { Twitter, Web, YouTube } from '../../../../../../../../enums/link_type'
 import Card from '../../../../../../../CommonComponents/TopicCard/Index'
 
 import { CircleLoading } from '../../../../../../../../svgs/spinners/CircleLoading'
-import useGoToSubTopics from '../../../../../../../hooks/routing/useGoToSubTopics'
+import useGoToDiscussions from '../../../../../../../hooks/routing/useGoToDiscussions'
+import PlaygroundEditorTheme from '../../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
+import PlaygroundNodes from '../../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
+import { useGetLinkMetaDataQuery } from '../../../../../../../../api/services/links.ts'
 
 const TopicItem = ({ topic, user }) => {
-  const goToSubTopic = useGoToSubTopics(topic?.id)
+  const goToDiscussion = useGoToDiscussions(topic?.id)
+  const initialConfig = {
+    editorState: JSON.parse(topic.description),
+    namespace: 'Civil2',
+    nodes: [...PlaygroundNodes],
+    onError: (error) => {
+      throw error
+    },
+    editable: false,
+    theme: PlaygroundEditorTheme,
+  }
 
   const commonProps = useMemo(
     () => ({
@@ -20,12 +34,15 @@ const TopicItem = ({ topic, user }) => {
       user,
       showLinks: false,
       hideReplyIcon: true,
-      onClick: goToSubTopic,
+      onClick: goToDiscussion,
     }),
     [topic, user],
   )
 
   const linkType = topic.externalContentData?.linkType
+  const { data: metaData, isLoading, isUninitialized } = useGetLinkMetaDataQuery(topic.externalContentData?.externalContentUrl, {
+    skip: linkType !== Web,
+  })
 
   let cardbody = null
 
@@ -53,12 +70,21 @@ const TopicItem = ({ topic, user }) => {
       />
     )
   } else if (linkType === Web) {
-    return <ExternalContentCard {...commonProps} />
-  } else if (topic.createdByVodUrl || topic.createdByImageUrl) {
-    return <UserProvidedMediaCard {...commonProps} />
+    cardbody = isLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
+  } else if (topic?.createdByVodUrl || topic?.createdByImageUrl) {
+    cardbody = <UserProvidedMediaCard {...commonProps} />
+  } else {
+    return null
   }
 
-  return <Card {...commonProps}>{cardbody}</Card>
+  return (
+    <LexicalComposer initialConfig={initialConfig}>
+      <Card {...commonProps}>
+        {cardbody}
+      </Card>
+    </LexicalComposer>
+
+  )
 }
 
 export default TopicItem

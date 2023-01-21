@@ -61,7 +61,7 @@ const StatusIcon = ({ placement }) => {
 
 const RequestGatewayTokenDesktop = () => {
   const { requestGatewayToken } = useGateway()
-  const [color, statusMsg, icon] = useGetGatewayStatus()
+  const [color, statusMsg, icon, gatewayStatus] = useGetGatewayStatus()
   return (
     <Container>
       <StatusIcon placement="right" />
@@ -72,6 +72,7 @@ const RequestGatewayTokenDesktop = () => {
         type="submit"
         icon={icon}
         onClick={requestGatewayToken}
+        civicButton
       >
         {statusMsg}
 

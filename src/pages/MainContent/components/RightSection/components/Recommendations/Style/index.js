@@ -40,11 +40,12 @@ export const TabContainer = styled('div')`
   flex: 25%;
   display: flex;
   z-index: 99;
-  /* a: center; */
+  width: 100%;
   flex-direction: column;
   background: white;
   border-left: 1px solid #dee2e6;
-
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
   .tab-content {
     padding-bottom: 40vh;
     background-color: white;

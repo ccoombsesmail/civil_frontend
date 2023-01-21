@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 import React, {
   memo, useMemo,
@@ -11,13 +12,12 @@ import {
   StyledScalesSvg,
   ReportStatsContainer,
   ReportStatItem,
-  StyledPillarSvg,
 } from './Style/index'
 
 import TribunalComments from './components/TribunalComments/Index'
 import VotingBox from './components/VotingBox/Index'
 
-import Comment from '../MainContent/components/SubTopicsPage/components/Comment/Index'
+import Comment from '../MainContent/components/DiscussionsPage/components/Comment/Index'
 import { COMMENT, TOPIC } from '../../enums/content_type'
 import TopicItem from '../MainContent/components/HomePage/components/Topics/components/TopicItem/Index'
 import { useGetReportQuery } from '../../api/services/reports.ts'
@@ -75,9 +75,12 @@ const Tribunal = () => {
     <OuterContainer id="tribunal-container">
       <BgImage />
       <Header>
-        <StyledScalesSvg />
+        <img src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png' />
+        {/* <StyledScalesSvg /> */}
         <h1>Community Tribunal</h1>
-        <StyledScalesSvg />
+        <img src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png' />
+
+        {/* <StyledScalesSvg /> */}
       </Header>
       {isReportStatsUninitialized ? null : isReportStatsLoading ? (
         <CircleLoading size="10vw" />

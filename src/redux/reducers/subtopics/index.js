@@ -7,8 +7,8 @@ export const addSubtopic = (action, state) => {
 }
 
 export const addAllSubtopics = (action) => {
-  const newState = action.payload.reduce((acc, subtopic) => {
-    acc[subtopic.id] = subtopic
+  const newState = action.payload.reduce((acc, discussion) => {
+    acc[discussion.id] = discussion
     return acc
   }, {})
   return newState

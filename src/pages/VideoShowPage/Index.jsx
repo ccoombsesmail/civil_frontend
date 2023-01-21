@@ -14,7 +14,7 @@ import useSetInnerHtml from '../hooks/useSetInnerHtml'
 import useOpenModal from '../hooks/useOpenModalWithLocation'
 import useBindDispatch from '../hooks/redux/useBindDispatch'
 import useUpdateLikes from './hooks/useUpdateLikes'
-import useGoToSubTopic from '../hooks/routing/useGoToSubTopics'
+import useGoToDiscussion from '../hooks/routing/useGoToDiscussions'
 import { getTimeSince } from '../../generic/string/dateFormatter'
 
 import { VideoPlayer, Description, ExpandButton } from './Style'
@@ -26,7 +26,7 @@ const VideoShowPage = ({
   const [isOpen, setIsOpen] = useState(false)
 
   const openModal = useOpenModal('TOPIC_REPLY')
-  const goToSubTopic = useGoToSubTopic(topic.id)
+  const goToDiscussion = useGoToDiscussion(topic.id)
   const { updateTopicLikes } = useBindDispatch(topicActionCreators)
   const updateLikes = useUpdateLikes(updateTopicLikes, topic, user)
   useSetInnerHtml(descRef, topic?.description)
@@ -37,7 +37,7 @@ const VideoShowPage = ({
     <div style={{ width: '100%' }}>
       <VideoPlayer src={src} loading="lazy" />
       <VideoDescriptionCard
-        onClick={goToSubTopic}
+        onClick={goToDiscussion}
         username={topic?.createdByUsername || topic?.createdBy}
         iconSrc={`${topic?.createdByIconSrc}`}
         summary={topic?.summary}

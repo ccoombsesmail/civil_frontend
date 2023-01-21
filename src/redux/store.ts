@@ -8,6 +8,7 @@ import recsReducer from './reducers/recs/recsReducer.js'
 import { enumsApi } from '../api/services/enums';
 import { emptySplitApi } from '../api/services/base';
 import { emptyNotificationsSplitApi } from '../api/services/notificationsBaseApi';
+import { emptyMiscServiceSplitApi } from '../api/services/emptyMiscServiceBaseApi';
 
 const preloadedState = {
   ui: {
@@ -25,13 +26,14 @@ const preloadedState = {
 const reducers = {
   [emptySplitApi.reducerPath]: emptySplitApi.reducer,
   [emptyNotificationsSplitApi.reducerPath]: emptyNotificationsSplitApi.reducer,
+  [emptyMiscServiceSplitApi.reducerPath]: emptyMiscServiceSplitApi.reducer,
   // [topicsApi.reducerPath]: topicsApi.reducer,
   // [sessionApi.reducerPath]: sessionApi.reducer,
   [enumsApi.reducerPath]: enumsApi.reducer,
   // [notificationsApi.reducerPath]: notificationsApi.reducer,
   // [tribunalVotesApi.reducerPath]: tribunalVotesApi.reducer,
   // [reportsApi.reducerPath]: reportsApi.reducer,
-  // [subtopicsApi.reducerPath]: subtopicsApi.reducer,
+  // [discussionsApi.reducerPath]: discussionsApi.reducer,
   // [commentsApi.reducerPath]: commentsApi.reducer,
   // [tribunalCommentsApi.reducerPath]: tribunalCommentsApi.reducer,
   // [usersApi.reducerPath]: usersApi.reducer,
@@ -59,10 +61,11 @@ const store = configureStore({
     // sessionApi.middleware,
     enumsApi.middleware,
     emptyNotificationsSplitApi.middleware,
+    emptyMiscServiceSplitApi.middleware,
     // notificationsApi.middleware,
     // tribunalVotesApi.middleware,
     // reportsApi.middleware,
-    // subtopicsApi.middleware,
+    // discussionsApi.middleware,
     // commentsApi.middleware,
     // tribunalCommentsApi.middleware,
     // usersApi.middleware,

@@ -14,7 +14,6 @@ import useSessionType from '../../hooks/permissions/useSessionType'
 import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
 import useGetCurrentUser from '../hooks/useGetCurrentUser'
 import MobileMenu from './components/MobileMenu/Index'
-import { CaptchaGatewayMobile } from '../../../civic/components/CaptchGateway/CaptchaGateway'
 
 const NavButtons = () => {
   const navigate = useNavigate()
@@ -70,7 +69,8 @@ const Header = () => {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/civil-logo.png" />} onClick={() => navigate('/home/topics')}>
+        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/topics')}> 
+          Civil
         </IconButton>
       </ButtonsContainer>
       <SignedIn>

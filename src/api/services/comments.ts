@@ -44,7 +44,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
   // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllComments: builder.query<any, any>({
-      query: (subtopicId) => ({ url: `/comments?subtopicId=${subtopicId}`, method: 'GET' }),
+      query: (discussionId) => ({ url: `/comments?discussionId=${discussionId}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [
@@ -96,7 +96,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         data: body
       })
     },
-    async onQueryStarted({ id, rootId, subtopicId, updateLikeValue, updateGetTopicQuery, ...patch }, { dispatch, queryFulfilled }) {
+    async onQueryStarted({ id, rootId, discussionId, updateLikeValue, updateGetTopicQuery, ...patch }, { dispatch, queryFulfilled }) {
       let patchResult
       console.log("updateLikeValue", updateLikeValue)
       if (false) {
@@ -111,7 +111,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         )
       } else {
         patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllComments', subtopicId, (draft) => {
+          commentsApi.util.updateQueryData('getAllComments', discussionId, (draft) => {
             let comment
             const newDraft = createDraft(draft)
             const rootComment = newDraft.find((c) => c.data.id === rootId)
@@ -155,7 +155,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         data: body
       })
     },
-    async onQueryStarted({ id, rootId, civility, subtopicId, updateLikeValue, updateGetTopicQuery, ...patch }, { dispatch, queryFulfilled }) {
+    async onQueryStarted({ id, rootId, civility, discussionId, updateLikeValue, updateGetTopicQuery, ...patch }, { dispatch, queryFulfilled }) {
       let patchResult
       console.log("updateLikeValue", updateLikeValue)
       if (false) {
@@ -170,7 +170,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         )
       } else {
         patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllComments', subtopicId, (draft) => {
+          commentsApi.util.updateQueryData('getAllComments', discussionId, (draft) => {
             let comment
             const newDraft = createDraft(draft)
             const rootComment = newDraft.find((c) => c.data.id === rootId)

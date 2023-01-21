@@ -8,6 +8,8 @@
  */
 
 .Input__wrapper {
+  padding: 0 6px;
+
   display: flex;
   flex-direction: row;
   align-items: center;

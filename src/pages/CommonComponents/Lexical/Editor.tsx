@@ -17,7 +17,6 @@ import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {ListPlugin} from '@lexical/react/LexicalListPlugin';
 import {RichTextPlugin} from '@lexical/react/LexicalRichTextPlugin';
 import {TabIndentationPlugin} from '@lexical/react/LexicalTabIndentationPlugin';
-import {TablePlugin} from '@lexical/react/LexicalTablePlugin';
 import * as React from 'react';
 import {useState} from 'react';
 
@@ -36,6 +35,7 @@ import DraggableBlockPlugin from './plugins/DraggableBlockPlugin';
 import EmojiPickerPlugin from './plugins/EmojiPickerPlugin';
 import EmojisPlugin from './plugins/EmojisPlugin';
 import ExcalidrawPlugin from './plugins/ExcalidrawPlugin';
+import ExternalLinkPlugin from './plugins/ExternalLinkPlugin';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
 import FloatingTextFormatToolbarPlugin from './plugins/FloatingTextFormatToolbarPlugin';
 import HorizontalRulePlugin from './plugins/HorizontalRulePlugin';
@@ -49,35 +49,25 @@ import PollPlugin from './plugins/PollPlugin';
 import SpeechToTextPlugin from './plugins/SpeechToTextPlugin';
 import TabFocusPlugin from './plugins/TabFocusPlugin';
 import TableCellActionMenuPlugin from './plugins/TableActionMenuPlugin';
-import TableCellResizer from './plugins/TableCellResizer';
-import TableOfContentsPlugin from './plugins/TableOfContentsPlugin';
-import {TablePlugin as NewTablePlugin} from './plugins/TablePlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
-import TreeViewPlugin from './plugins/TreeViewPlugin';
 import TwitterPlugin from './plugins/TwitterPlugin';
 import YouTubePlugin from './plugins/YouTubePlugin';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import ContentEditable from './ui/ContentEditable';
 import Placeholder from './ui/Placeholder';
-import {$generateHtmlFromNodes} from '@lexical/html';
-const skipCollaborationInit =
-  // @ts-ignore
-  window.parent != null && window.parent.frames.right === window;
+
 
 export default function Editor(): JSX.Element {
   const {historyState} = useSharedHistoryContext();
-  const [editor] = useLexicalComposerContext()
   const {
     settings: {
       isAutocomplete,
       isMaxLength,
-      isCharLimit,
-      isCharLimitUtf8,
       isRichText,
       showTreeView,
     },
   } = useSettings();
-  const placeholder = <Placeholder>{"Placholder"}</Placeholder>;
+  const placeholder = <Placeholder>{"Write Something..."}</Placeholder>;
   const [floatingAnchorElem, setFloatingAnchorElem] =
     useState<HTMLDivElement | null>(null);
 
@@ -87,15 +77,6 @@ export default function Editor(): JSX.Element {
     }
   };
 
-  const cellEditorConfig = {
-    namespace: 'Civil',
-    nodes: [...TableCellNodes],
-    onError: (error: Error) => {
-      throw error;
-    },
-    theme: PlaygroundEditorTheme,
-  };
-
   return (
     <>
       {isRichText && <ToolbarPlugin />}
@@ -103,7 +84,8 @@ export default function Editor(): JSX.Element {
         className={`editor-container ${showTreeView ? 'tree-view' : ''} ${
           !isRichText ? 'plain-text' : ''
         }`}>
-        {isMaxLength && <MaxLengthPlugin maxLength={300} />}
+        {isMaxLength && <MaxLengthPlugin maxLength={420} />}
+        <ExternalLinkPlugin />
         <DragDropPaste />
         <AutoFocusPlugin />
         <ClearEditorPlugin />
@@ -135,7 +117,7 @@ export default function Editor(): JSX.Element {
             <ListMaxIndentLevelPlugin maxDepth={7} />
             <ImagesPlugin />
             <LinkPlugin />
-            <PollPlugin />
+            {/* <PollPlugin /> */}
             <TwitterPlugin />
             <YouTubePlugin />
             <ClickableLinkPlugin />

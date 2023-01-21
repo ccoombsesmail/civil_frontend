@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
 /* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); */
 
 
+
+.ExcalidrawModal__overlay {
+  z-index: 9999999999999999999 !important;
+}
 [data-testid="WRAPPER_CONTAINER"] {
   z-index: 99999999999;
   > div {
@@ -381,6 +385,12 @@ blockquote {
     --m-primary-background-color: #256347;
     --m-primary-background-color:  #527640;
  
+
+    --m-form-color: #e6eef9;
+    --form-element-height: 45px;
+    --form-input-width: clamp(300px, 90%, 450px);
+    --form-element-border-radius: 8px;
+
     --m-secondary-background-color: #1e392a;
     --m-secondary-background-color: #EBF0FB;
     /* --m-secondary-background-color: #828081; */
@@ -401,7 +411,6 @@ blockquote {
 
     --thin-border: 1px solid rgba(200,200,200,0.25);
 
-    --form-input-width: clamp(300px, 90%, 450px);
 
 
     /* EMOJI */

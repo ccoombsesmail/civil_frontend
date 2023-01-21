@@ -14,13 +14,16 @@ export const StyledHeader = styled('header')`
   /* box-shadow: 5px 5px 15px 5px #000000; */
 
   border-bottom: 1px solid lightgrey;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid var(--thin-border); */
+  /* background-color: var(--m-form-color); */
+  background-color: white;
 
   
 `
 export const CivilIcon = styled('img')`
     /* width: 3vw; */
-    height: 3vw;
+    height: 3.5vw;
+    border-radius: 50%;
   @media only screen and (max-width: 600px) {
     /* width: 8vw; */
     height: 8vw;  
@@ -30,7 +33,9 @@ export const CivilIcon = styled('img')`
 
 export const ButtonsContainer = styled('div')`
   margin-left: 2vw;
+  height: 100%;
   display: flex;
+  align-items: center;
   width: 25vw;
   font-size: 1.2vw;
   @media only screen and (max-width: 600px) {

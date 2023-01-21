@@ -7,7 +7,7 @@ const UserIcon = ({ width, iconSrc, userId }) => {
   return (
     <Thumb
       width={width}
-      src={iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'}
+      src={iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'}
       onClick={goToUserProfile}
       alt=""
     />

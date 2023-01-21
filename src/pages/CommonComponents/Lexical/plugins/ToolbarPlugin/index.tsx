@@ -272,12 +272,6 @@ function BlockFormatDropDown({
         <span className="text">Heading 2</span>
       </DropDownItem>
       <DropDownItem
-        className={'item ' + dropDownActiveClass(blockType === 'h3')}
-        onClick={() => formatHeading('h3')}>
-        <i className="icon h3" />
-        <span className="text">Heading 3</span>
-      </DropDownItem>
-      <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'bullet')}
         onClick={formatBulletList}>
         <i className="icon bullet-list" />
@@ -379,9 +373,6 @@ export default function ToolbarPlugin(): JSX.Element {
     null,
   );
   const [fontSize, setFontSize] = useState<string>('15px');
-  const [fontColor, setFontColor] = useState<string>('#000');
-  const [bgColor, setBgColor] = useState<string>('#fff');
-  const [fontFamily, setFontFamily] = useState<string>('Arial');
   const [isLink, setIsLink] = useState(false);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
@@ -389,9 +380,6 @@ export default function ToolbarPlugin(): JSX.Element {
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isSubscript, setIsSubscript] = useState(false);
   const [isSuperscript, setIsSuperscript] = useState(false);
-  const [isCode, setIsCode] = useState(false);
-  const [canUndo, setCanUndo] = useState(false);
-  const [canRedo, setCanRedo] = useState(false);
   const [modal, showModal] = useModal();
   const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>('');
@@ -423,7 +411,6 @@ export default function ToolbarPlugin(): JSX.Element {
       setIsStrikethrough(selection.hasFormat('strikethrough'));
       setIsSubscript(selection.hasFormat('subscript'));
       setIsSuperscript(selection.hasFormat('superscript'));
-      setIsCode(selection.hasFormat('code'));
       setIsRTL($isParentElementRTL(selection));
 
       // Update links
@@ -467,19 +454,6 @@ export default function ToolbarPlugin(): JSX.Element {
       setFontSize(
         $getSelectionStyleValueForProperty(selection, 'font-size', '15px'),
       );
-      setFontColor(
-        $getSelectionStyleValueForProperty(selection, 'color', '#000'),
-      );
-      setBgColor(
-        $getSelectionStyleValueForProperty(
-          selection,
-          'background-color',
-          '#fff',
-        ),
-      );
-      setFontFamily(
-        $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
-      );
     }
   }, [activeEditor]);
 
@@ -505,22 +479,6 @@ export default function ToolbarPlugin(): JSX.Element {
           updateToolbar();
         });
       }),
-      activeEditor.registerCommand<boolean>(
-        CAN_UNDO_COMMAND,
-        (payload) => {
-          setCanUndo(payload);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL,
-      ),
-      activeEditor.registerCommand<boolean>(
-        CAN_REDO_COMMAND,
-        (payload) => {
-          setCanRedo(payload);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL,
-      ),
     );
   }, [activeEditor, editor, updateToolbar]);
 
@@ -582,7 +540,7 @@ export default function ToolbarPlugin(): JSX.Element {
   };
 
   return (
-    <div className="toolbar">
+    <div className="toolbar editor-toolbar">
       {blockType in blockTypeToBlockName && activeEditor === editor && (
         <>
           <BlockFormatDropDown
@@ -777,6 +735,7 @@ export default function ToolbarPlugin(): JSX.Element {
             </DropDownItem>
         
             <DropDownItem
+              disabled={true}
               onClick={() => {
                 showModal('Insert Poll', (onClose) => (
                   <InsertPollDialog
@@ -785,7 +744,7 @@ export default function ToolbarPlugin(): JSX.Element {
                   />
                 ));
               }}
-              className="item">
+              className="item disabled">
               <i className="icon poll" />
               <span className="text">Poll</span>
             </DropDownItem>

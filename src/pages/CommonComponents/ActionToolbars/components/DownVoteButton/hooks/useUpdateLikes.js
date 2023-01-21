@@ -1,17 +1,17 @@
 import { useCallback } from 'react'
-import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics'
+import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics.ts'
 
 import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
 import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
 import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
-import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments'
-import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments'
+import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments.ts'
+import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments.ts'
 
 export default (content, user, contentType) => {
-  const [updateTribunalCommentLikes, {}] = useUpdateTribunalCommentLikesMutation()
-  const [updateTopicLikes, {}] = useUpdateTopicLikesMutation()
-  const [updateCommentLikes, {}] = useUpdateCommentLikesMutation()
-  const { isOnSubtopicsPage, isOnTribunalPage } = useDetectCurrentPage()
+  const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation()
+  const [updateTopicLikes] = useUpdateTopicLikesMutation()
+  const [updateCommentLikes] = useUpdateCommentLikesMutation()
+  const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage()
 
   return useCallback(() => {
     let value
@@ -33,7 +33,7 @@ export default (content, user, contentType) => {
       commentId: content?.id,
       value,
       updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
-      updateGetTopicQuery: isOnSubtopicsPage || isOnTribunalPage,
+      updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
       createdByUserId: content.createdByUserId,
       ...content,
 

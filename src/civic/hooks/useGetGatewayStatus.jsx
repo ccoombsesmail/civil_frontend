@@ -15,6 +15,6 @@ export default () => {
       btnIcon = <WarningSvg />
       btnColor = '#9B9B9B'
     } else btnColor = 'gray'
-    return [btnColor, Object.values(CivilGatewayStatus)[gatewayStatus], btnIcon]
+    return [btnColor, Object.values(CivilGatewayStatus)[gatewayStatus], btnIcon, gatewayStatus]
   }, [gatewayStatus])
 }

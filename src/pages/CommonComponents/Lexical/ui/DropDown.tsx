@@ -28,11 +28,13 @@ export function DropDownItem({
   className,
   onClick,
   title,
+  disabled = false
 }: {
   children: React.ReactNode;
   className: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   title?: string;
+  disabled?: boolean
 }) {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -52,8 +54,9 @@ export function DropDownItem({
 
   return (
     <button
+      // disabled={disabled}
       className={className}
-      onClick={onClick}
+      onClick={ disabled ? (e) => e.stopPropagation(): onClick}
       ref={ref}
       title={title}
       type="button">
@@ -203,6 +206,7 @@ export default function DropDown({
   return (
     <>
       <button
+        type='button'
         disabled={disabled}
         aria-label={buttonAriaLabel || buttonLabel}
         className={buttonClassName}

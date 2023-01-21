@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react'
 
 import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
@@ -25,8 +26,8 @@ const Topics = () => {
           { isLoading ? <CircleLoading size="30vw" noBackground /> : (
             <CardContainer>
               {
-            isUninitialized ? null : topics?.map((topic) => <TopicItem key={topic.id} topic={topic} user={currentUser} />)
-            }
+                isUninitialized ? null : isLoading ? <CircleLoading /> : topics?.map((topic) => <TopicItem key={topic.id} topic={topic} user={currentUser} />)
+              }
             </CardContainer>
           )}
         </BorderContainer>

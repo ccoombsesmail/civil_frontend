@@ -24,12 +24,11 @@ export const Button = styled('button')`
   padding: ${(props) => (props.small ? '.3em .8em' : '.5em 1em')};
   /* background: var(--m-primary-background-2-color); */
   background-color: ${(props) => (props.backgroundColor || 'var(--m-primary-btn-color)')};
-  text-transform: uppercase;
   width: ${(props) => (props.width || 'unset')};;
   :hover {
     filter: brightness(.8);
   }
-
+  background-image: linear-gradient(to right,var(--m-primary-background-color),#83af9b);
   @media only screen and (max-width: 600px) {
      font-size: 2.4vw;
   }

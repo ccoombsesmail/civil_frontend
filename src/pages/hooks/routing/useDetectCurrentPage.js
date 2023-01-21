@@ -5,6 +5,6 @@ export default () => {
   const { pathname } = useLocation()
   return useMemo(() => ({
     isOnTribunalPage: pathname.includes('tribunal'),
-    isOnSubtopicsPage: pathname.includes('subtopics')
+    isOnDiscussionsPage: pathname.includes('discussion'),
   }), [pathname])
 }

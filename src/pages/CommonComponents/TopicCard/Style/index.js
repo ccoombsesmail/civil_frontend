@@ -98,7 +98,6 @@ export const Container = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
-  min-width: 50vw;
   width: 100%;
   flex: 33%;
   margin: 2em 0;

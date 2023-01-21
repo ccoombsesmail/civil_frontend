@@ -13,7 +13,6 @@ import Input from '../../CommonComponents/Form/Input3/Index'
 import Select from '../../CommonComponents/Form/Select/Index'
 import ExpandButton from '../../CommonComponents/Buttons/ExpandButton/Index'
 import UploadMediaContainer from '../components/UploadMedia/Index'
-import DisplayMedia from '../components/DisplayMedia/Index'
 
 import ThemeTooltip from '../../CommonComponents/Tooltip/Index'
 
@@ -28,19 +27,18 @@ import { INIT_TOPIC_FORM_VALUES } from '../../util/form_helpers/init_form_values
 import useGetLinkMetaDataOnBlur from '../hooks/useGetLinkMetaDataOnBlur'
 import EmbedDropdown from '../components/EmbedDropdown/Index'
 
+import { LexicalFormContext } from './LexicalFormContext'
+
 const VALIDATIONS = {
   title: { REQUIRED: true },
   // summary: { REQUIRED: true, MIN_LENGTH: 5 },
   category: { REQUIRED: true },
 }
 
-export const LexicalFormContext = React.createContext('lexical-form')
-
 const CreateTopicForm = ({ closeModal }) => {
   const [open, setOpen] = useState(false)
   const [imgFile, setImgFile] = useState(null)
   const [videoFile, setVideoFile] = useState(null)
-  const [metaData, setMetaData] = useState(null)
 
   const [rotate, setRotate] = useState(0)
   const [richTextEditorContent, setRichTextEditorContent] = useState('')
@@ -50,7 +48,8 @@ const CreateTopicForm = ({ closeModal }) => {
   useEffect(() => {
     const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
       editorState.read(() => {
-        setRichTextEditorContent(editorState.toJSON())
+        const jsonString = JSON.stringify(editorState)
+        setRichTextEditorContent(jsonString)
       })
     })
 
@@ -59,7 +58,8 @@ const CreateTopicForm = ({ closeModal }) => {
 
   const validator = useConfigFormErrors(VALIDATIONS)
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
-  const handleSubmit = useHandleSubmit(metaData)
+
+  const handleSubmit = useHandleSubmit(externalContentUrl?.data, closeModal)
 
   return (
     <Container>
@@ -126,15 +126,11 @@ const CreateTopicForm = ({ closeModal }) => {
                 </Left>
               </InputsContainer>
               <Line />
-              <div id="insert-embed-node" />
-
-              {/* <DisplayMedia
-                imgFile={imgFile}
-                videoFile={videoFile}
-                externalContentUrl={externalContentUrl}
-                setMetaData={setMetaData}
-              /> */}
-              <LexicalFormContext.Provider value={setContentUrl}>
+              <LexicalFormContext.Provider value={{
+                setContentUrl,
+              }}
+              >
+                <div id="insert-embed-node" />
                 <LexicalEditor />
               </LexicalFormContext.Provider>
 

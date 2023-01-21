@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { BACKEND_DEV } from '../../endpoints/endpoints'
 
-export const createSubTopic = (subTopicData) => axios.post(`${BACKEND_DEV}/subtopics`, subTopicData)
+export const createDiscussion = (discussionData) => axios.post(`${BACKEND_DEV}/discussions`, discussionData)
 
-export const getAllSubTopics = (topicId) => axios.get(`${BACKEND_DEV}/subtopics?topicId=${topicId}`)
+export const getAllDiscussions = (topicId) => axios.get(`${BACKEND_DEV}/discussions?topicId=${topicId}`)
 
-export const getSubTopic = (subTopicId) => axios.get(`${BACKEND_DEV}/subtopics/${subTopicId}`)
+export const getDiscussion = (discussionId) => axios.get(`${BACKEND_DEV}/discussions/${discussionId}`)

@@ -7,7 +7,7 @@ import useBindDispatch from '../hooks/redux/useBindDispatch'
 import Input from '../CommonComponents/Form/Input/Index'
 import Button from '../CommonComponents/Button/Index'
 
-// import subTopicActions from '../../redux/actions/subtopics'
+// import subTopicActions from '../../redux/actions/discussions'
 // import topicActions from '../../redux/actions/topics'
 import uiActions from '../../redux/actions/ui'
 import opposingRecsActions from '../../redux/actions/opposing_recs'
@@ -36,11 +36,11 @@ const OpposingRecForm = ({ topicId, subTopicId }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const isSubTopic = Boolean(subTopicId)
+          const isDiscussion = Boolean(subTopicId)
           createOpposingRec({
             targetContentId: subTopicId || topicId,
             recommendedContentId: values.recommendedContentId || null,
-            isSubTopic,
+            isDiscussion,
             externalRecommendedContent: values.externalRecommendedContent || null,
             similarityScore: 0.0,
           })

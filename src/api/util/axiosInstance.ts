@@ -47,6 +47,9 @@ export const backendBaseQuery = axiosBaseQuery();
 
 export const notificationsBaseQuery = axiosBaseQuery({baseUrl: selectedEndpoints.NOTIFICATIONS_SERVICE})
 
+export const miscApiBaseQuery = axiosBaseQuery({baseUrl: selectedEndpoints.UPLOAD_SERVICE})
+
+
 export default () => {
   
   const { getToken } = useAuth()

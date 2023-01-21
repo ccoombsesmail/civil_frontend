@@ -8,9 +8,9 @@ import {
 import * as CommentsApiUtil from '../../../api/v1/comments/comments_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
 
-const getAllCommentsActionCreator = (subtopics) => ({
+const getAllCommentsActionCreator = (discussions) => ({
   type: GET_ALL_COMMENTS,
-  payload: subtopics,
+  payload: discussions,
 })
 
 const getAllCommentRepliesActionCreator = (commentWithReplies) => ({

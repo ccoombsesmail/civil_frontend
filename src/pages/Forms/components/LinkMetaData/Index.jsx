@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import {
   FlexDiv, OGUrl, OGTitle, OGDescription, OGImage, LinkWrapper, Container,
 } from './Style/index'
 import { Line } from '../../../CommonComponents/Line/index'
 import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'
-import useGetLinkMetaDataEffect from './hooks/useGetLinkMetaDataEffect'
 
 const LinkMetaData = ({
-  topic, externalContentUrl, setMetaData, setIsLoading,
+  metaData, setIsLoading = () => console.log('stub'),
 }) => {
-  const metaData = useGetLinkMetaDataEffect(topic, externalContentUrl, setMetaData, setIsLoading)
   useEffect(() => {
     setIsLoading(true)
-  }, [externalContentUrl])
+    if (metaData) setIsLoading(false)
+  }, [metaData])
 
   return (
     <Container>

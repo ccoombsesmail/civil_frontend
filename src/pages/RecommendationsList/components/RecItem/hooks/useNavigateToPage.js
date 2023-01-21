@@ -9,7 +9,7 @@ export default (rec) => {
       window.open(rec.externalRecommendedContent, '_blank')
       return
     }
-    if (topic) navigate(`/home/topics/${topic.id}/subtopics/`)
-    else navigate(`/home/topics/${subTopic.topicId}/subtopics/${subTopic.id}`)
+    if (topic) navigate(`/home/topics/${topic.id}/discussions/`)
+    else navigate(`/home/topics/${subTopic.topicId}/discussions/${subTopic.id}`)
   }, [rec])
 }

@@ -15,7 +15,7 @@ import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
 const TopicActionToolbar = ({
   likes, topic, user,
 }) => {
-  const { topicId, subTopicId, ...params } = useParams()
+  const { topicId, discussionId, ...params } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
   return (
     <Container>
@@ -28,7 +28,7 @@ const TopicActionToolbar = ({
         { (topicId || isOnTribunalPage) && <CommentButton />}
       </Left>
       <Right>
-        {!isOnTribunalPage && <OpposingViewsButton topicId={topicId} subTopicId={subTopicId} /> }
+        {!isOnTribunalPage && <OpposingViewsButton topicId={topicId} discussionId={discussionId} /> }
         {!isOnTribunalPage && <TribunalButton contentId={topic?.id} /> }
       </Right>
     </Container>

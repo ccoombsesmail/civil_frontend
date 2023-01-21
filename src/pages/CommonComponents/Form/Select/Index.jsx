@@ -4,11 +4,10 @@
 
 import React, { useState, useCallback } from 'react'
 import { ErrorMessage } from 'formik'
-import { useSelector } from 'react-redux'
 import { Fade } from 'react-bootstrap'
 import { StyledSelect, Label, Container } from './Style'
 import Error from '../ErrorMessage/Index'
-import { useGetEnumsQueryState } from '../../../../api/services/enums'
+import { useGetEnumsQueryState } from '../../../../api/services/enums.ts'
 
 const Select = ({
   width, field, form, placeholder, setFieldValue, setFieldTouched, ...props
@@ -44,7 +43,7 @@ const Select = ({
         onFocus={() => isOpen(true)}
         onBlur={() => isOpen(false)}
       >
-        <option value="">Select A Category</option>
+        <option value="">Select A Category*</option>
         {
         enums?.map((val) => <option key={val} value={val}>{val}</option>)
       }

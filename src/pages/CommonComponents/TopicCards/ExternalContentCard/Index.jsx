@@ -5,7 +5,7 @@ import Card from '../../TopicCard/Index'
 import CardDetails from '../../TopicCard/components/CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
-import useGoToSubTopic from '../../../hooks/routing/useGoToSubTopics'
+import useGoToDiscussion from '../../../hooks/routing/useGoToDiscussions'
 
 import LinkMetaData from '../../../Forms/components/LinkMetaData/Index'
 
@@ -15,12 +15,12 @@ const ExternalContentCard = ({
   if (!topic) return null
   const descRef = useRef(null)
 
-  const goToSubTopic = useGoToSubTopic(topic?.id)
+  const goToDiscussion = useGoToDiscussion(topic?.id)
   useSetInnerHtml(descRef, topic?.description)
 
   return (
     <Card
-      onClick={goToSubTopic}
+      onClick={goToDiscussion}
       topic={topic}
     >
       <LinkMetaData topic={topic} />
