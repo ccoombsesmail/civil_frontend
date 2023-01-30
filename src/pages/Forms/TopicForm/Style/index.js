@@ -122,7 +122,7 @@ export const Container = styled('div')`
   background: white;
   
   border-radius: 1em;
-  box-shadow:  5px 5px 5px -3px #000000;
+  /* box-shadow:  5px 5px 5px -3px #000000; */
 
   h1 {
     width: 100%;

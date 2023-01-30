@@ -54,7 +54,7 @@ export function DropDownItem({
 
   return (
     <button
-      // disabled={disabled}
+      disabled={disabled}
       className={className}
       onClick={ disabled ? (e) => e.stopPropagation(): onClick}
       ref={ref}

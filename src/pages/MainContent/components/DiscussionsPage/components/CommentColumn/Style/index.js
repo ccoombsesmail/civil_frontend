@@ -34,9 +34,9 @@ export const Container = styled('ul')`
     color: black;
     border: none;
     outline: none;
-    background-color: ${(props) => props.color};
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    background-color: ${(props) => (props.isReplies ? 'var(--m-form-color)' : 'white')};
+    /* border-top-left-radius: 5px;
+    border-top-right-radius: 5px; */
 
      @media only screen and (max-width: 600px) {
       border-top-left-radius: 0;

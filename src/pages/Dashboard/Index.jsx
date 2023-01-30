@@ -1,13 +1,13 @@
 import React, { useEffect, Suspense } from 'react'
 import { UserProfile } from '@clerk/clerk-react'
 
-import { Container } from './Style'
+import { Container, CivicPassesContainer } from './Style'
 
 import Header from './components/Header/Index'
 import { Line } from '../CommonComponents/Line'
 
 import BioForm from './components/BioForm/Index'
-import CivicTest from '../AuthFlow/components/CivicTest/Index'
+import { CaptchaGatewayDesktop } from '../../civic/components/CaptchGateway/CaptchaGateway'
 
 const Dashboard = () => {
   useEffect(() => {
@@ -29,7 +29,10 @@ const Dashboard = () => {
             },
           }}
         />
-        <CivicTest />
+        <CivicPassesContainer>
+          <b>Civic Passes</b>
+          <CaptchaGatewayDesktop />
+        </CivicPassesContainer>
         <Line />
         <BioForm />
       </Container>

@@ -13,9 +13,9 @@ import { TOPIC } from '../../../../enums/content_type'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
 
 const TopicActionToolbar = ({
-  likes, topic, user,
+  likes, topic, user, hideCommentButton, discussion,
 }) => {
-  const { topicId, discussionId, ...params } = useParams()
+  const { topicId, discussionId } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
   return (
     <Container>
@@ -25,7 +25,7 @@ const TopicActionToolbar = ({
           {likes || 0}
         </span>
         <DownVoteButton content={topic} user={user} contentType={TOPIC} />
-        { (topicId || isOnTribunalPage) && <CommentButton />}
+        { hideCommentButton ? null : <CommentButton discussion={discussion} topic={topic} />}
       </Left>
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton topicId={topicId} discussionId={discussionId} /> }

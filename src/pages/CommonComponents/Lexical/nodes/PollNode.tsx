@@ -18,13 +18,15 @@ import {
 } from 'lexical';
 import * as React from 'react';
 import {Suspense} from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export type Options = ReadonlyArray<Option>;
 
 export type Option = Readonly<{
   text: string;
-  uid: string;
-  votes: Array<number>;
+  id: string;
+  votes: number;
+  voteCast: boolean, // Determines if the requesting user has voted
 }>;
 
 const PollComponent = React.lazy(
@@ -32,30 +34,27 @@ const PollComponent = React.lazy(
   () => import('./PollComponent'),
 );
 
-function createUID(): string {
-  return Math.random()
-    .toString(36)
-    .replace(/[^a-z]+/g, '')
-    .substr(0, 5);
-}
 
 export function createPollOption(text = ''): Option {
   return {
     text,
-    uid: createUID(),
-    votes: [],
+    id: uuidv4(),
+    votes: 0,
+    voteCast: false,
   };
 }
 
 function cloneOption(
   option: Option,
   text: string,
-  votes?: Array<number>,
+  votes?: number,
+  voteCast?: boolean
 ): Option {
   return {
     text,
-    uid: option.uid,
-    votes: votes || Array.from(option.votes),
+    id: option.id,
+    votes: votes || 0,
+    voteCast
   };
 }
 
@@ -81,6 +80,7 @@ function convertPollElement(domNode: HTMLElement): DOMConversionOutput | null {
 export class PollNode extends DecoratorNode<JSX.Element> {
   __question: string;
   __options: Options;
+  __isCreating: boolean
 
   static getType(): string {
     return 'poll';
@@ -91,15 +91,16 @@ export class PollNode extends DecoratorNode<JSX.Element> {
   }
 
   static importJSON(serializedNode: SerializedPollNode): PollNode {
-    const node = $createPollNode(serializedNode.question);
-    serializedNode.options.forEach(node.addOption);
+    const node = $createPollNode(serializedNode.question, serializedNode.options);
+    // serializedNode.options.forEach(node.addOption);
     return node;
   }
 
-  constructor(question: string, options?: Options, key?: NodeKey) {
+  constructor(question: string, options?: Options, key?: NodeKey, isCreating?: boolean) {
     super(key);
     this.__question = question;
-    this.__options = options || [createPollOption(), createPollOption()];
+    this.__isCreating = isCreating;
+    this.__options = options || [createPollOption(''), createPollOption('')];
   }
 
   exportJSON(): SerializedPollNode {
@@ -128,26 +129,20 @@ export class PollNode extends DecoratorNode<JSX.Element> {
 
   setOptionText(option: Option, text: string): void {
     const self = this.getWritable();
-    const clonedOption = cloneOption(option, text);
+    const clonedOption = cloneOption(option, text, option.votes, option.voteCast);
     const options = Array.from(self.__options);
-    const index = options.indexOf(option);
+    const index = options.findIndex(opt => opt.id == option.id);
     options[index] = clonedOption;
     self.__options = options;
+    console.log(self.__options)
   }
 
-  toggleVote(option: Option, clientID: number): void {
+  toggleVote(option: Option): void {
     const self = this.getWritable();
-    const votes = option.votes;
-    const votesClone = Array.from(votes);
-    const voteIndex = votes.indexOf(clientID);
-    if (voteIndex === -1) {
-      votesClone.push(clientID);
-    } else {
-      votesClone.splice(voteIndex, 1);
-    }
-    const clonedOption = cloneOption(option, option.text, votesClone);
+    const votes = option;
+    const clonedOption = cloneOption(option, option.text, option.votes, option.voteCast);
     const options = Array.from(self.__options);
-    const index = options.indexOf(option);
+    const index = options.findIndex(opt => opt.id == option.id);
     options[index] = clonedOption;
     self.__options = options;
   }
@@ -189,14 +184,16 @@ export class PollNode extends DecoratorNode<JSX.Element> {
           question={this.__question}
           options={this.__options}
           nodeKey={this.__key}
+          isCreating={this.__isCreating}
+          
         />
       </Suspense>
     );
   }
 }
 
-export function $createPollNode(question: string): PollNode {
-  return new PollNode(question);
+export function $createPollNode(question: string, options?: Options, isCreating?: boolean): PollNode {
+  return new PollNode(question, options, undefined, isCreating);
 }
 
 export function $isPollNode(

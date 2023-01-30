@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
+import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 import useOnSubmit from './hooks/useOnSubmit'
 
 import {
@@ -46,7 +46,7 @@ const BioForm = () => {
             <Textarea value={experience} onChange={(e) => setExperience(e.target.value)} />
           </FieldContainer>
           <ButtonContainer>
-            <button type="submit">Save Bio Information</button>
+            <ExpandButton type="submit">Save Bio Information </ExpandButton>
           </ButtonContainer>
         </form>
       </Container>

@@ -21,6 +21,7 @@ export default function Button({
   disabled,
   small,
   title,
+  type
 }: {
   'data-test-id'?: string;
   children: ReactNode;
@@ -29,9 +30,11 @@ export default function Button({
   onClick: () => void;
   small?: boolean;
   title?: string;
+  type?: "button" | "submit" | "reset"
 }): JSX.Element {
   return (
     <button
+      type={type}
       disabled={disabled}
       className={joinClasses(
         'Button__root',

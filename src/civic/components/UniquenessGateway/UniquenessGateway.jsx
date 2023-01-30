@@ -1,20 +1,18 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useMemo, useState } from 'react'
-import { clusterApiUrl, PublicKey } from '@solana/web3.js'
+import React, { useState } from 'react'
+import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
-import { useWallet } from '@solana/wallet-adapter-react'
+import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
-} from './Style'
+} from '../Style'
 
-import { CivilGatewayStatus } from '../../../enums/CivilGatewayStatus.ts'
 import Popover from '../../../pages/CommonComponents/PopoverStickOnHover/Index'
-import { VerifiedSvg, WarningSvg } from '../../../svgs/svgs'
+import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
-// Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 const env = {
@@ -25,20 +23,8 @@ const env = {
 const RequestGatewayToken = () => {
   const [showPopover, setShowPopover] = useState(false)
   const onClick = () => setShowPopover((prev) => !prev)
-  const { gatewayStatus, requestGatewayToken, gatewayToken } = useGateway()
-  const [color, statusMsg, icon] = useMemo(() => {
-    console.log('In Uniqueness Component', gatewayStatus, gatewayToken?.gatekeeperNetworkAddress)
-    let btnColor
-    let btnIcon
-    if (gatewayStatus === 9) {
-      btnColor = 'var(--m-civic-theme-main-color)'
-      btnIcon = <VerifiedSvg />
-    } else if (gatewayStatus === 13) {
-      btnIcon = <WarningSvg />
-      btnColor = '#DB3B21'
-    } else btnColor = 'var(--m-civic-theme-main-color)'
-    return [btnColor, Object.values(CivilGatewayStatus)[gatewayStatus], btnIcon]
-  }, [gatewayStatus])
+  const { requestGatewayToken } = useGateway()
+  const [color, statusMsg, icon] = useGetGatewayStatus()
 
   return (
     <Container>
@@ -57,7 +43,7 @@ const RequestGatewayToken = () => {
             </PopoverToolTip>
           )}
           placement="right"
-          onMouseEnter={() => { }}
+          onMouseEnter={() => {}}
           delay={200}
           showPopover={showPopover}
           setShowPopover={setShowPopover}
@@ -73,16 +59,15 @@ const RequestGatewayToken = () => {
 
       <b>⟶</b>
       <StyledExpandButton
-        width="8vw"
-        height="2.2vw"
+        iconButton
         margin={0}
         backgroundColor={color}
         type="submit"
         icon={icon}
         onClick={requestGatewayToken}
+        civicButton
       >
         {statusMsg}
-
       </StyledExpandButton>
     </Container>
   )
@@ -92,15 +77,21 @@ const UniquenessGateway = () => {
   const wallet = useWallet()
   const { publicKey } = wallet
 
-  const { gatekeeperNetwork, cluster, clusterUrl } = env
+  const { gatekeeperNetwork, cluster } = env
+  const conn = useConnection()
+  console.log(conn)
+  // const conn = new Connection(clusterApiUrl('devnet', 'processed'))
+  // conn.requestAirdrop(publicKey, 1000000000)
+  if (!wallet || !publicKey || !conn) return null
   return (
     <GatewayProvider
+      connection={conn}
       wallet={wallet}
       gatekeeperNetwork={gatekeeperNetwork}
       cluster={cluster}
-      clusterUrl={clusterUrl}
+
     >
-      { publicKey && <RequestGatewayToken /> }
+      <RequestGatewayToken />
     </GatewayProvider>
   )
 }

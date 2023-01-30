@@ -40,9 +40,9 @@ export const updateTopicLikes = (data) => (dispatch) => TopicsApiUtil.updateTopi
 
 const uploadTopicMedia = (data, fileType, fileFormat, topicData) => (dispatch) => TopicsApiUtil
   .uploadTopicMedia(data, fileType, fileFormat)
-  .then((res) => {
-    createTopic({ ...topicData, ...res.data })(dispatch)
-  })
+  // .then((res) => {
+  //   createTopic({ ...topicData, ...res.data })(dispatch)
+  // })
   .catch((error) => toast.error(errorFormatter(error)))
 
 export default {

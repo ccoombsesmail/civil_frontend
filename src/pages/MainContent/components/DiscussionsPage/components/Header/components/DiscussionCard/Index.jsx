@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import useGetCurrentUser from '../../../../../../../App/hooks/useGetCurrentUser'
 import { useGetLinkMetaDataQuery } from '../../../../../../../../api/services/links.ts'
@@ -14,26 +14,28 @@ import PlaygroundEditorTheme from '../../../../../../../CommonComponents/Lexical
 import PlaygroundNodes from '../../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import UserProvidedMediaCard from '../../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
 import LinkMetaData from '../../../../../../../Forms/components/LinkMetaData/Index'
+import { uuidRegEx } from '../../../../../../../../generic/regex/uuid'
+import LineWithOverlayText from '../../../LineWithTextOverlay/Index'
 
 const DiscussionCard = () => {
-  const { discussionId } = useParams()
-
+  const { pathname } = useLocation()
+  const discussionId = pathname.match(uuidRegEx)?.[1]
   const { currentUser } = useGetCurrentUser()
   const { data: discussion, isLoading: isDiscussionLoading, isUninitialized: isDiscussionUninitialized } = useGetDiscussionQuery(discussionId, {
     skip: !currentUser || !discussionId,
   })
 
   const commonProps = useMemo(() => ({
-    topic: discussion, user: currentUser, showLinks: true,
+    topic: null, user: currentUser, showLinks: true, discussion,
   }), [discussion, currentUser])
 
-  if (isDiscussionUninitialized || discussion?.title === 'General') return null
-  if (isDiscussionLoading) return <CircleLoading size={40} />
-
-  const linkType = discussion.externalContentData?.linkType
+  const linkType = discussion?.externalContentData?.linkType
   const { data: metaData, isLoading } = useGetLinkMetaDataQuery(discussion?.externalContentData?.externalContentUrl, {
     skip: linkType !== Web,
   })
+
+  if (isDiscussionUninitialized || discussion?.title === 'General') return null
+  if (isDiscussionLoading) return <CircleLoading size={40} />
 
   let content
   if (linkType === YouTube) {
@@ -68,8 +70,8 @@ const DiscussionCard = () => {
   }
 
   const initialConfig = {
-    editorState: JSON.parse(discussion.description),
-    namespace: 'Civil2',
+    editorState: discussion?.description,
+    namespace: 'Civil-Discussion-Card',
     nodes: [...PlaygroundNodes],
     onError: (error) => {
       throw error
@@ -80,6 +82,10 @@ const DiscussionCard = () => {
 
   return (
     <>
+      <LineWithOverlayText>
+        Discussion
+      </LineWithOverlayText>
+
       <LexicalComposer initialConfig={initialConfig}>
         <Card {...commonProps}>
           {content}

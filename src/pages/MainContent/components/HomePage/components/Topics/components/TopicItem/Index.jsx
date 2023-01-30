@@ -15,11 +15,11 @@ import PlaygroundEditorTheme from '../../../../../../../CommonComponents/Lexical
 import PlaygroundNodes from '../../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import { useGetLinkMetaDataQuery } from '../../../../../../../../api/services/links.ts'
 
-const TopicItem = ({ topic, user }) => {
-  const goToDiscussion = useGoToDiscussions(topic?.id)
+const TopicItem = ({ topic, user, hideCommentButton }) => {
+  const goToDiscussion = useGoToDiscussions(topic.id)
   const initialConfig = {
     editorState: JSON.parse(topic.description),
-    namespace: 'Civil2',
+    namespace: `Civil-${topic.title}`,
     nodes: [...PlaygroundNodes],
     onError: (error) => {
       throw error
@@ -33,14 +33,14 @@ const TopicItem = ({ topic, user }) => {
       topic,
       user,
       showLinks: false,
-      hideReplyIcon: true,
+      hideCommentButton,
       onClick: goToDiscussion,
     }),
     [topic, user],
   )
 
   const linkType = topic.externalContentData?.linkType
-  const { data: metaData, isLoading, isUninitialized } = useGetLinkMetaDataQuery(topic.externalContentData?.externalContentUrl, {
+  const { data: metaData, isLoading } = useGetLinkMetaDataQuery(topic.externalContentData?.externalContentUrl, {
     skip: linkType !== Web,
   })
 

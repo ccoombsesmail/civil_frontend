@@ -28,8 +28,26 @@ export const FlexDiv = styled('div')`
 
 export const UserIcon = styled('img')`  
   margin-right: 1vw;
-  height: 4vw;
-  width: 4vw;
+  height: clamp(60px, 4vw, 70px);
+  width: clamp(60px, 4vw, 70px);
   border-radius: 50%;
+  cursor: pointer;
+  :hover {
+    filter: brightness(.8);
+  }
+
+`
+
+export const UserIconEditContainer = styled('div')`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 2vw;
+  svg {
+    :hover {
+      filter: brightness(.8);
+    }
+    cursor: pointer;
+  }
 
 `

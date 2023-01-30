@@ -8,8 +8,6 @@ export const Container = styled('div')`
   flex-direction: column;
   align-items: center;
   width: 50vw;
-  /* padding: 1em 1em 0 1em; */
-  /* border-top: none; */
   padding-top: 5em;
   z-index: 99;
   background-color: #F7F7F7;
@@ -77,4 +75,11 @@ export const TopicSummaryContainer = styled('div')`
 
 export const StyledLongDownArrow = styled(LongDownArrow)` 
   margin-bottom: 2vw;
+`
+
+export const TextOverlay = styled('h2')`
+  position: absolute;
+  top: 7%;
+  background-color: white;
+  z-index: 100;
 `

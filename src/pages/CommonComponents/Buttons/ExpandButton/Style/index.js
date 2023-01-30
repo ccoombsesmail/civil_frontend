@@ -43,10 +43,9 @@ export const ButtonBackground = styled('div')`
 export const StyledButton = styled('button')`
   font-size: clamp(15px, 1.4vw, 25px);
   font-weight: bold;
-  /* text-transform: uppercase; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) => (props.iconButton ? 'flex-start' : 'center')};
   width: 100%;
   background: none;
   padding: 5px 12px;
@@ -101,7 +100,7 @@ export const StyledButton = styled('button')`
 `
 
 export const Container = styled('div')`
-  width: ${(props) => props.width || 'clamp(150px, 175pxpx, 200px)'};
+  width: ${(props) => props.width || 'clamp(150px, 12vw, 240px)'};
   height: ${(props) => props.height || 'clamp(35px, 2.5vw, 40px)'};
   margin: ${(props) => props.margin ?? '0 1vw'};
   padding: 0;
@@ -116,13 +115,11 @@ export const Container = styled('div')`
     width: clamp(24px, 2vw, 48px);
   }
   button:focus {
-    /* Provide a fallback style for browsersthat don't support :focus-visible */
     outline: none;
   }
 
 
   button:focus-visible {
-    /* Draw a very noticeable focus style for keyboard-focus on browsers that do support:focus-visible */
     outline: 2px solid black;
     outline-offset: 2px;
   }
@@ -133,7 +130,6 @@ export const Container = styled('div')`
     background-color: ${(props) => props.backgroundColor || 'black'};
 
     border: none;
-    /* padding: 1.5rem 3rem; */
     margin: 0;
     font-family: inherit;
     font-size: inherit;

@@ -24,9 +24,7 @@
 }
 .Modal__modal {
   min-height: 100px;
-  /* width: clamp(400px, 60vw, 1100px); */
   display: flex;
-  flex-grow: 0px;
   background-color: #fff;
   flex-direction: column;
   position: relative;
@@ -66,7 +64,8 @@
   background-color: #ddd;
 }
 .Modal__content {
-  padding-top: 20px;
+  padding: 20px 20px 0 20px;
+  min-width: 450px;
 }
 
 

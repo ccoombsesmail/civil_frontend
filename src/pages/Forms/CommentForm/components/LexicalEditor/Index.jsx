@@ -5,16 +5,6 @@ import Editor from '../../../../CommonComponents/Lexical/Editor.tsx'
 const LexicalEditor = ({ setRichTextEditorData }) => {
   const [editor] = useLexicalComposerContext()
   useEffect(() => {
-    const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
-      editorState.read(() => {
-        const jsonString = JSON.stringify(editorState)
-        setRichTextEditorData((prev) => ({
-          ...prev,
-          lexicalContent: jsonString,
-        }))
-      })
-    })
-
     const removeTextContentListener = editor.registerTextContentListener(
       (textContent) => {
         setRichTextEditorData((prev) => ({
@@ -25,7 +15,6 @@ const LexicalEditor = ({ setRichTextEditorData }) => {
     )
     return () => {
       removeTextContentListener()
-      removeUpdateListener()
     }
   }, [])
 

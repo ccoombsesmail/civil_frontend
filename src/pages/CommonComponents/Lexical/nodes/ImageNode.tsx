@@ -196,6 +196,11 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     return false;
   }
 
+  setSrc(src: string): void {
+    const self = this.getWritable();
+    self.__src = src;
+  }
+
   getSrc(): string {
     return this.__src;
   }

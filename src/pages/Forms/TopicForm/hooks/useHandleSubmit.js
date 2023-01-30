@@ -7,18 +7,22 @@ import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
 import checkLinkType from '../../hooks/checkLinkType'
+import useUploadRichTextImages from './useUploadRichTextImages.ts'
 
 export default (metaData, closeModal) => {
   const { uploadTopicMedia } = useBindDispatch(topicActions)
   const [createTopic, { isLoading }] = useCreateTopicMutation()
   const { currentUser } = useGetCurrentUser()
-  return useCallback((values, { setSubmitting, resetForm }, content, externalContentUrl) => {
+  const uploadRichTextImages = useUploadRichTextImages(uploadTopicMedia)
+  // const getPollNode = useGetPollNode()
+  return useCallback(async (values, { setSubmitting, resetForm }, editor, externalContentUrl) => {
     if (isLoading) return
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
     const linkType = checkLinkType(externalContentUrl?.url)
+    const editorState = await uploadRichTextImages(editor)
     const data = {
       ...values,
-      description: JSON.stringify(content),
+      description: JSON.stringify(JSON.stringify(editorState)),
       createdByUsername: currentUser.username,
       createdByuserId: currentUser.userId,
       evidenceLinks: eLinks,
@@ -28,6 +32,7 @@ export default (metaData, closeModal) => {
         externalContentUrl: externalContentUrl.url,
         thumbImgUrl: metaData?.ogImage?.url || null,
       },
+      // pollNode,
     }
     if (values.file instanceof File) {
       const [fileType, fileFormat] = values.file.type.split('/')

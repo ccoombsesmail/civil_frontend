@@ -97,7 +97,7 @@ export function InsertImageUploadedDialogBody({
   const [altText, setAltText] = useState('');
 
   const isDisabled = src === '';
-
+  
   const loadImage = (files: FileList | null) => {
     const reader = new FileReader();
     reader.onload = function () {
@@ -110,7 +110,6 @@ export function InsertImageUploadedDialogBody({
       reader.readAsDataURL(files[0]);
     }
   };
-
   return (
     <>
       <FileInput
@@ -168,24 +167,6 @@ export function InsertImageDialog({
     <>
       {!mode && (
         <DialogButtonsList>
-          <Button
-            data-test-id="image-modal-option-sample"
-            onClick={() =>
-              onClick(
-                hasModifier.current
-                  ? {
-                      altText:
-                        'Daylight fir trees forest glacier green high ice landscape',
-                      src: null,
-                    }
-                  : {
-                      altText: 'Yellow flower in tilt shift lens',
-                      src: null,
-                    },
-              )
-            }>
-            Sample
-          </Button>
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode('url')}>

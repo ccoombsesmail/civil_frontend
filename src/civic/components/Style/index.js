@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ExpandButton from '../../../../pages/CommonComponents/Buttons/ExpandButton/Index'
+import ExpandButton from '../../../pages/CommonComponents/Buttons/ExpandButton/Index'
 
 export const Container = styled('div')`
  display: flex;
@@ -7,10 +7,9 @@ export const Container = styled('div')`
  justify-content: center;
  span {
     padding: 0 !important;
-    font-size: .8vw !important;
   }
   b {
-    margin: 0 1vw;
+    margin: 0 clamp(15px, 1vw, 25px);
     color: #FFFFFF00;
     font-family: "Aventa", Sans-serif;
     font-size: 2vw;
@@ -20,22 +19,32 @@ export const Container = styled('div')`
     -webkit-text-stroke-color: black;
     stroke: black;
   }
+  @media (max-width: 1024px) {
+    margin-right: 10px;
+  }
 `
 
 export const IconContainer = styled('div')`
+  height: 100%;
   background-color: ${(props) => props.color || 'var(--m-civic-theme-main-color)'}; 
   border-radius: 50%;
   padding: .4vw;
-  width: 2.5vw;
-  height: 2.5vw;
+  width: clamp(45px, 2.5vw, 70px);
+  height: clamp(45px, 2.5vw, 70px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
 `
 
 export const StyledExpandButton = styled(ExpandButton)`
   margin: 0;
+  width: clamp(150px, 5vw, 300px);
+  button {
+    font-size: clamp(15px, 1.4vw, 25px) !important;
+
+  }
 `
 
 export const PopoverToolTip = styled('div')`
@@ -44,8 +53,8 @@ export const PopoverToolTip = styled('div')`
     background-color: white;
     box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
     border-radius: 1rem;
-    font-size: 0.8vw;
+    font-size: clamp(10px, 0.8vw, 20px);
     padding: .8vw 1.8vw;
     font-weight: bold;
-    width: 18vw;
+    width: clamp(160px, 18vw, 340px);
 `

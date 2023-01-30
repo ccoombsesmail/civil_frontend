@@ -1,31 +1,32 @@
 import React, { memo, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import IconButton from '../../../../IconButton/Index'
 import { CommentSvg } from '../../../../../../svgs/svgs'
 import useModal from '../../../../Lexical/hooks/useModal.tsx'
 import CreateCommentForm from '../../../../../Forms/CommentForm/Index'
+import useGetCommentState from './hooks/useGetCommentState'
+import { initialConfig } from '../../../../Lexical/App.tsx'
 
 const CommentButton = ({ comment }) => {
-  const { contentId } = useParams()
+  const { contentId, topicId } = useParams()
   const [modal, showModal] = useModal()
+  const getFommentFormState = useGetCommentState(comment, contentId, topicId)
   const onClick = useCallback(() => {
+    const commentFormState = getFommentFormState()
     showModal('Write A Reply', (onClose) => (
       <CreateCommentForm
         closeModal={onClose}
-        modalProps={{
-          replyType: comment.commentType ? 'TRIBUNAL_COMMENT_REPLY' : 'COMMENT_REPLY',
-          commentId: comment.id,
-          rootParentCommentId: comment.rootId || comment.id,
-          commentType: comment.commentType,
-          tribunalCommentUnderReviewId: contentId,
-        }}
+        commentFormState={commentFormState}
       />
     ))
-  }, [])
+  }, [getFommentFormState])
 
   return (
     <>
-      {modal}
+      <LexicalComposer initialConfig={initialConfig}>
+        {modal}
+      </LexicalComposer>
       <IconButton icon={<CommentSvg />} onClick={onClick} />
 
     </>

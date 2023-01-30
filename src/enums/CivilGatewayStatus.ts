@@ -1,7 +1,7 @@
 export enum CivilGatewayStatus {
   UNKNOWN = 0,
   CHECKING = 1,
-  NOT_REQUESTED = 2,
+  "Not Requested" = 2,
   COLLECTING_USER_INFORMATION = 3,
   PROOF_OF_WALLET_OWNERSHIP = 4,
   IN_REVIEW = 5,

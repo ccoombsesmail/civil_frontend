@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-curly-newline */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Formik, Field } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
@@ -41,20 +41,8 @@ const CreateTopicForm = ({ closeModal }) => {
   const [videoFile, setVideoFile] = useState(null)
 
   const [rotate, setRotate] = useState(0)
-  const [richTextEditorContent, setRichTextEditorContent] = useState('')
 
   const [editor] = useLexicalComposerContext()
-
-  useEffect(() => {
-    const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
-      editorState.read(() => {
-        const jsonString = JSON.stringify(editorState)
-        setRichTextEditorContent(jsonString)
-      })
-    })
-
-    return () => removeUpdateListener()
-  }, [])
 
   const validator = useConfigFormErrors(VALIDATIONS)
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
@@ -66,7 +54,7 @@ const CreateTopicForm = ({ closeModal }) => {
       <Formik
         initialValues={INIT_TOPIC_FORM_VALUES}
         validate={validator}
-        onSubmit={((values, params) => handleSubmit(values, params, richTextEditorContent, externalContentUrl))}
+        onSubmit={((values, params) => handleSubmit(values, params, editor, externalContentUrl))}
       >
         {({ isSubmitting, setFieldValue, setFieldTouched }) => (
           <>

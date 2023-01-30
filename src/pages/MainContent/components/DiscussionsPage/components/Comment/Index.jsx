@@ -31,7 +31,7 @@ import { longUsernameDisplay } from '../../../../../../generic/string/longUserna
 import ReadOnlyEditor from '../../../../../CommonComponents/Lexical/ReadOnlyEditor.tsx'
 
 const Comment = ({
-  commentData, replies, commentRef, level,
+  commentData, replies, commentRef, level, isFocusedComment,
 }) => {
   if (!commentData) return null
   const { topicId } = React.useContext(ParentCommentContext) || {}
@@ -56,7 +56,7 @@ const Comment = ({
   const colors = ['#e6eef9', '#d6dee9', '#c6cee8', '#b6bee8', '#a6aee7', '#969ee7', '#868ee6', '#767ee6', '#666ee5', '#565ee5']
   return (
     <OuterContainer ref={commentRef}>
-      <CommentContainer color={colors[level]}>
+      <CommentContainer color={colors[level]} isFocusedComment={isFocusedComment}>
         <Header onClick={() => navigate(`/home/topics/${topicId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
           <UserInfoContainer>
             <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />

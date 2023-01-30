@@ -7,7 +7,12 @@ export const ThreadContainer = styled('div')`
   width: 70vw;
   margin-top: 20px;
 
+  @media screen and (max-width: 700px) {
+    width: 100vw;
+  }
+
 `
+
 export const Container = styled('div')`
   width: 100vw;
   height: 50vh;

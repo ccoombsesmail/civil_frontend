@@ -16,7 +16,6 @@ export const ProgressBarContainer = styled('div')`
   position:relative;
   flex-direction:column;
   border-radius: .4vw;
-  /* box-shadow:0 30px 60px rgba(0,0,0,.4); */
   transition: transform .5s;
   > h2, h1 {
     margin: 1vw 0;

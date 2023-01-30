@@ -5,7 +5,7 @@ import React, {
   useMemo,
 } from 'react'
 import {
-  Routes, Route, Navigate, useNavigate,
+  Routes, Route, Navigate, useNavigate, useLocation,
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -56,15 +56,16 @@ const elitpicIn = cssTransition({
 
 const App = () => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const memoNavigate = useCallback((to) => navigate(to))
   const showLoadingPage = useSelector((s) => s.ui.showLoadingPage)
   const dispatch = useDispatch()
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
   const network = WalletAdapterNetwork.Devnet
-  const endpoint = useMemo(() => clusterApiUrl(network), [network])
-  if (!localStorage.getItem('previousSignInMethod')) {
-    localStorage.setItem('previousSignInMethod', CIVIC_USER)
-  }
+  const endpoint = useMemo(() => clusterApiUrl(network, false), [network])
+  // if (!localStorage.getItem('previousSignInMethod')) {
+  //   localStorage.setItem('previousSignInMethod', CIVIC_USER)
+  // }
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
@@ -94,7 +95,7 @@ const App = () => {
                       <MainContainer>
                         { showLoadingPage ? <LoadingPage /> : null}
                         <Content>
-                          <BgImage />
+                          { pathname.includes('user') || pathname.includes('dashboard') ? null : <BgImage /> }
                           <Routes>
                             <Route
                               path="/dashboard"

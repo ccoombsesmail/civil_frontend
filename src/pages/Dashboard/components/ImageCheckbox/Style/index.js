@@ -19,6 +19,6 @@ export const Input = styled('input')`
   display: none;
   &:checked + ${Label} {
     /* background-image: ${(props) => `url(${props.iconSrc})`}; */
-    border: 1px solid black;
+    border: 2px solid green;
   }
 `

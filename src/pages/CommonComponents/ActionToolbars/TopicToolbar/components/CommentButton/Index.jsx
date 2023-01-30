@@ -1,27 +1,45 @@
 import React, { memo, useCallback } from 'react'
+import { useParams } from 'react-router-dom'
+import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { toast } from 'react-toastify'
 import IconButton from '../../../../IconButton/Index'
 import { CommentSvg } from '../../../../../../svgs/svgs'
 import useModal from '../../../../Lexical/hooks/useModal.tsx'
-import { REPLY_FROM_TOPIC } from '../../../../../App/Modal/Index'
 import CreateCommentForm from '../../../../../Forms/CommentForm/Index'
+import useGetDiscussionCommentState from './hooks/useGetDiscussionCommentState'
+import useGetTopicCommentState from './hooks/useGetTopicCommentState'
+import { initialConfig } from '../../../../Lexical/App.tsx'
+import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 
-const CommentButton = () => {
+const CommentButton = ({ discussion }) => {
   const [modal, showModal] = useModal()
+  const {
+    topicId,
+  } = useParams()
+  const getDiscussionCommentFormState = useGetDiscussionCommentState(discussion?.id)
+  const getTopicCommentFormState = useGetTopicCommentState(topicId)
+
   const onClick = useCallback(() => {
+    const discussionCommentFormState = getDiscussionCommentFormState()
+    const topicCommentFormState = getTopicCommentFormState()
+    if (!topicCommentFormState && !discussionCommentFormState) {
+      toast.error("We're sorry. Something is not right on our end")
+      return
+    }
     showModal('Write A Reply', (onClose) => (
       <CreateCommentForm
         closeModal={onClose}
-        modalProps={{
-          replyType: REPLY_FROM_TOPIC,
-        }}
+        commentFormState={discussion ? discussionCommentFormState : topicCommentFormState}
       />
     ))
-  }, [])
+  }, [getTopicCommentFormState, getDiscussionCommentFormState])
 
   return (
     <>
-      {modal}
-      <IconButton icon={<CommentSvg />} onClick={onClick} />
+      <LexicalComposer initialConfig={initialConfig}>
+        {modal}
+      </LexicalComposer>
+      { getTopicCommentFormState ? <IconButton icon={<CommentSvg />} onClick={onClick} /> : <CircleLoading size={5} /> }
 
     </>
   )

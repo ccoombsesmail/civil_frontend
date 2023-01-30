@@ -28,6 +28,7 @@ import { CircleLoading } from '../../svgs/spinners/CircleLoading'
 import { useGetAllTribunalCommentsBatchQuery } from '../../api/services/tribunal_comments.ts'
 import { useGetCommentQuery } from '../../api/services/comments.ts'
 import { BgImage } from '../MainContent/Style'
+import WhatDoYouThink from './components/WhatDoYouThink/Index'
 
 const Tribunal = () => {
   const { contentId, contentType } = useParams()
@@ -63,7 +64,7 @@ const Tribunal = () => {
 
   const Content = useMemo(() => {
     if (topicLoaded) {
-      return <TopicItem key={topic.id} topic={topic} user={currentUser} />
+      return <TopicItem key={topic.id} topic={topic} user={currentUser} hideCommentButton />
     }
     if (commentLoaded) {
       return <Comment commentData={comment} replies={[]} />
@@ -75,12 +76,9 @@ const Tribunal = () => {
     <OuterContainer id="tribunal-container">
       <BgImage />
       <Header>
-        <img src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png' />
-        {/* <StyledScalesSvg /> */}
+        <img src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
         <h1>Community Tribunal</h1>
-        <img src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png' />
-
-        {/* <StyledScalesSvg /> */}
+        <img src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
       </Header>
       {isReportStatsUninitialized ? null : isReportStatsLoading ? (
         <CircleLoading size="10vw" />
@@ -88,9 +86,7 @@ const Tribunal = () => {
         <Timer reportStats={reportStats} refetch={refetch} />
       )}
       <InnerContainer>
-        {/* <StyledPillarSvg /> */}
         {Content}
-        {/* <StyledPillarSvg /> */}
       </InnerContainer>
       {isSuccess && (
         <VotingBox contentId={contentId} reportStats={reportStats} />
@@ -111,6 +107,7 @@ const Tribunal = () => {
           </ReportStatItem>
         </ReportStatsContainer>
       )}
+      <WhatDoYouThink comment={comment} topic={topic} />
       { isTCommentsUninitialized ? null : isTCommentsLoaded ? (
         <CircleLoading size="10vw" />
       ) : (

@@ -24,6 +24,29 @@ export const UploadInput = styled('input')`
   left: -99999rem;
 `
 
+export const CivicPassesContainer = styled('div')` 
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.2vw;
+  iframe {
+    min-height: 640px;
+  }
+  b {
+    color: #FFFFFF00;
+    font-family: "Aventa", Sans-serif;
+    font-size: 2vw;
+    font-weight: 400;
+    -webkit-text-stroke-width: 1px;
+    stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    stroke: black;
+  }
+
+`
+
 // export const UploadIcon = styled(FiUser)`
 //   background-color: gray;
 //   border-radius: 50%;

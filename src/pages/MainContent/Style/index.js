@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import styled from 'styled-components'
 
 export const BgImage = styled('div')` 

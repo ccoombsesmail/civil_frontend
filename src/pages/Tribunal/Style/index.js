@@ -10,10 +10,6 @@ export const OuterContainer = styled('div')`
   /* background-color: #F2F6FC; */
   background-color: transparent;
 
-  img {
-    width: 4vw;
-    margin: 0 1vw;
-  }
 `
 
 export const Header = styled('header')`
@@ -29,7 +25,7 @@ export const Header = styled('header')`
       font-size: 5.7vw;
     }
   }
-  svg {
+  svg, img {
     width: 4vw !important;
     height: 4vw !important;
     @media only screen and (max-width: 600px) {

@@ -1,13 +1,13 @@
 import React, { memo, useCallback } from 'react'
 import { useGetAllCommentRepliesQuery } from '../../../../../../api/services/comments.ts'
 import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
-import { DownArrowSvg } from '../../../../../../svgs/svgs'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
-import { VerticalLine } from '../../Style'
+
 import Comment from '../Comment/Index'
 import { ParentCommentContext } from '../CommentColumn/Index'
+import LineWithOverlayText from '../LineWithTextOverlay/Index'
 
-const ParentComment = ({ topicId, commentId }) => {
+const ParentComment = ({ topicId, commentId, isFocusedComment }) => {
   const { currentUser } = useGetCurrentUser()
   const { data: commentData, isLoading, isUninitialized } = useGetAllCommentRepliesQuery(commentId, {
     skip: currentUser === undefined,
@@ -22,16 +22,17 @@ const ParentComment = ({ topicId, commentId }) => {
   if (isLoading) return <CircleLoading size="15vw" />
   return (
     <>
-      <>
-        <VerticalLine />
-      </>
+      <LineWithOverlayText>
+        Discussion Comment
+      </LineWithOverlayText>
       <ParentCommentContext.Provider
         value={{
           commentId,
           topicId,
+          isFocusedComment,
         }}
       >
-        <Comment commentRef={commentRef} commentData={commentData.comment} replies={[]} />
+        <Comment commentRef={commentRef} commentData={commentData.comment} replies={[]} isFocusedComment />
       </ParentCommentContext.Provider>
     </>
 

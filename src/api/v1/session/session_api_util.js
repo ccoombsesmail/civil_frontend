@@ -9,6 +9,6 @@ export const signOut = () => axios.delete('/session')
 
 export const updateUserIcon = (data) => axios.put(`${BACKEND_DEV}/users`, data)
 
-export const uploadUserIcon = (data, username) => axios.post(`${UPLOAD_SERVICE}/users/uploadIcon?username=${username}`, data)
+export const uploadUserIcon = (data, userId) => axios.post(`${UPLOAD_SERVICE}/users/uploadIcon?userId=${userId}`, data)
 
 export const getUser = (userId) => axios.get(`${BACKEND_DEV}/users?userId=${userId}`)

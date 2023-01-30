@@ -91,16 +91,6 @@ const UserInformationDisplay = () => {
       </SignedIn>
       <SignedOut>
         <AuthButtonContainer>
-          {/* { isSignedIn && (
-            <div style={{
-              display: 'flex', flexDirection: 'column',
-              width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: '1vw',
-            }}
-            >
-              <IdentityIcon src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/icons8-checked-identification-documents-64.png" alt="" />
-              <b>{authMethod}</b>
-            </div>
-          )} */}
           {
             signedInViaCivic ? (
               <div>

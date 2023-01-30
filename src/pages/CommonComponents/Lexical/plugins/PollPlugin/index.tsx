@@ -65,7 +65,7 @@ export default function PollPlugin(): JSX.Element | null {
     return editor.registerCommand<string>(
       INSERT_POLL_COMMAND,
       (payload) => {
-        const pollNode = $createPollNode(payload);
+        const pollNode = $createPollNode(payload, undefined, true);
         $insertNodes([pollNode]);
         if ($isRootOrShadowRoot(pollNode.getParentOrThrow())) {
           $wrapNodeInElement(pollNode, $createParagraphNode).selectEnd();

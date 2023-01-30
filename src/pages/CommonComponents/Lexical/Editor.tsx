@@ -117,7 +117,7 @@ export default function Editor(): JSX.Element {
             <ListMaxIndentLevelPlugin maxDepth={7} />
             <ImagesPlugin />
             <LinkPlugin />
-            {/* <PollPlugin /> */}
+            <PollPlugin />
             <TwitterPlugin />
             <YouTubePlugin />
             <ClickableLinkPlugin />
@@ -137,12 +137,12 @@ export default function Editor(): JSX.Element {
               </>
             )}
           </>
-        {/* {(isCharLimit || isCharLimitUtf8) && (
+        
           <CharacterLimitPlugin
-            charset={isCharLimit ? 'UTF-16' : 'UTF-8'}
-            maxLength={50}
+            charset={'UTF-8'}
+            maxLength={420}
           />
-        )} */}
+        
         {isAutocomplete && <AutocompletePlugin />}
       </div>
     </>

@@ -6,36 +6,36 @@ export const OuterContainer = styled('div')`
   height: fit-content;
   background-color: white;
   z-index: 99;
-  /* margin-bottom: 5vw; */
+  display: flex;
+  justify-content: center;
+
 
 `
 export const CommentContainer = styled('li')`
-  width: 100%;
+  width: ${(props) => (props.isFocusedComment ? '95%' : '100%')};
   outline: none;
   border-radius: .4em;
   position: relative;
   list-style: none;
-  margin-top: 1em;
+  margin-top: ${(props) => (props.isFocusedComment ? '0' : '1em')};
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) => (props.isFocusedComment ? 'var(--m-form-color)' : 'white')};
   border: 1px solid lightgray;
-  /* box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff; */
+  box-shadow: ${(props) => (props.isFocusedComment ? '-5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff' : 'none')};
   border-left-color: ${({ color }) => color};
   border-left-width: 2px;
 
 
 
   border-color: rgba(200,200,200,0.25);
+  border-left-color: ${({ color }) => color};
+  border-left-width: 5px;
   :hover {
-    /* opacity: .9; */
-    /* filter: brightness(.9); */
-    /* background-color: #ef5d4566; */
     background-color: #D8FFF1;
-    border-left-color: ${({ color }) => color};
-    border-left-width: 5px;
+
   }
 
    @media only screen and (max-width: 600px) {

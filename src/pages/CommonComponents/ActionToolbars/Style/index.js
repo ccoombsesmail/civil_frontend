@@ -13,14 +13,14 @@ export const Container = styled.div`
   }
 
   img {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.7em;
+    height: 1.7;
     cursor: pointer;
     margin: .3em .5em;
   }
   svg {
-    width: 1.5em;
-    height: 1.5em ;
+    width: 1.7em;
+    height: 1.7em ;
     margin: .3em .5em;
 
   }

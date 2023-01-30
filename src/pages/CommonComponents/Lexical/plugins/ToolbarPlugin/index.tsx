@@ -6,7 +6,7 @@
  *
  */
 
-import type {LexicalEditor, NodeKey} from 'lexical';
+import type {LexicalEditor, LexicalNode, NodeKey} from 'lexical';
 
 import {
   $createCodeNode,
@@ -24,7 +24,6 @@ import {
   ListNode,
   REMOVE_LIST_COMMAND,
 } from '@lexical/list';
-import {INSERT_EMBED_COMMAND} from '@lexical/react/LexicalAutoEmbedPlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {$isDecoratorBlockNode} from '@lexical/react/LexicalDecoratorBlockNode';
 import {INSERT_HORIZONTAL_RULE_COMMAND} from '@lexical/react/LexicalHorizontalRuleNode';
@@ -50,13 +49,10 @@ import {
 import {
   $createParagraphNode,
   $getNodeByKey,
-  $getRoot,
   $getSelection,
   $isRangeSelection,
   $isRootOrShadowRoot,
   $isTextNode,
-  CAN_REDO_COMMAND,
-  CAN_UNDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
   DEPRECATED_$isGridSelection,
   FORMAT_ELEMENT_COMMAND,
@@ -72,13 +68,9 @@ import * as React from 'react';
 import {IS_APPLE} from '../../shared/src/environment';
 
 import useModal from '../../hooks/useModal';
-// import catTypingGif from '../../images/cat-typing.gif';
-import {$createStickyNode} from '../../nodes/StickyNode';
-import ColorPicker from '../../ui/ColorPicker';
 import DropDown, {DropDownItem} from '../../ui/DropDown';
 import {getSelectedNode} from '../../utils/getSelectedNode';
 import {sanitizeUrl} from '../../utils/url';
-import {EmbedConfigs} from '../AutoEmbedPlugin';
 import {INSERT_COLLAPSIBLE_COMMAND} from '../CollapsiblePlugin';
 import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin';
 import {
@@ -87,7 +79,7 @@ import {
   InsertImagePayload,
 } from '../ImagesPlugin';
 import {InsertPollDialog} from '../PollPlugin';
-import {InsertNewTableDialog, InsertTableDialog} from '../TablePlugin';
+import useGetExistingNodes from '../../hooks/useGetExistingNodes';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -117,15 +109,6 @@ function getCodeLanguageOptions(): [string, string][] {
 }
 
 const CODE_LANGUAGE_OPTIONS = getCodeLanguageOptions();
-
-const FONT_FAMILY_OPTIONS: [string, string][] = [
-  ['Arial', 'Arial'],
-  ['Courier New', 'Courier New'],
-  ['Georgia', 'Georgia'],
-  ['Times New Roman', 'Times New Roman'],
-  ['Trebuchet MS', 'Trebuchet MS'],
-  ['Verdana', 'Verdana'],
-];
 
 const FONT_SIZE_OPTIONS: [string, string][] = [
   ['10px', '10px'],
@@ -348,7 +331,7 @@ function FontDropDown({
         style === 'font-family' ? 'icon block-type font-family' : ''
       }
       buttonAriaLabel={buttonAriaLabel}>
-      {(style === 'font-family' ? FONT_FAMILY_OPTIONS : FONT_SIZE_OPTIONS).map(
+      {(style === 'font-family' ? null : FONT_SIZE_OPTIONS).map(
         ([option, text]) => (
           <DropDownItem
             className={`item ${dropDownActiveClass(value === option)} ${
@@ -384,7 +367,23 @@ export default function ToolbarPlugin(): JSX.Element {
   const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
+  const [existingNodeTypes, setExistingNodeTypes] = useState({
+    poll: false,
+  })
+  editor.registerUpdateListener(({ editorState }) => {
 
+    editorState.read(() => {
+        const existingNodeTypes = {
+          poll: false,
+        }
+        editorState._nodeMap.forEach((node: LexicalNode, key: string, map: Map<string, LexicalNode>) => {
+          existingNodeTypes[node.__type] = true
+        })
+        setExistingNodeTypes(existingNodeTypes)
+      })
+    }
+  )
+  console.log(existingNodeTypes)
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
@@ -482,18 +481,6 @@ export default function ToolbarPlugin(): JSX.Element {
     );
   }, [activeEditor, editor, updateToolbar]);
 
-  const applyStyleText = useCallback(
-    (styles: Record<string, string>) => {
-      activeEditor.update(() => {
-        const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
-          $patchStyleText(selection, styles);
-        }
-      });
-    },
-    [activeEditor],
-  );
-
   const clearFormatting = useCallback(() => {
     activeEditor.update(() => {
       const selection = $getSelection();
@@ -535,9 +522,6 @@ export default function ToolbarPlugin(): JSX.Element {
     },
     [activeEditor, selectedElementKey],
   );
-  const insertGifOnClick = (payload: InsertImagePayload) => {
-    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-  };
 
   return (
     <div className="toolbar editor-toolbar">
@@ -688,17 +672,19 @@ export default function ToolbarPlugin(): JSX.Element {
             buttonAriaLabel="Insert specialized editor node"
             buttonIconClassName="icon plus">
             <DropDownItem
+              disabled={!activeEditor || activeEditor.getEditorState()._nodeMap.size === 1}
               onClick={() => {
                 activeEditor.dispatchCommand(
                   INSERT_HORIZONTAL_RULE_COMMAND,
                   undefined,
                 );
               }}
-              className="item">
+              className={`item ${activeEditor.getEditorState()._nodeMap.size !== 1 ? null : 'disabled'}`}>
               <i className="icon horizontal-rule" />
               <span className="text">Horizontal Rule</span>
             </DropDownItem>
             <DropDownItem
+              disabled={existingNodeTypes['image']}
               onClick={() => {
                 showModal('Insert Image', (onClose) => (
                   <InsertImageDialog
@@ -707,13 +693,15 @@ export default function ToolbarPlugin(): JSX.Element {
                   />
                 ));
               }}
-              className="item">
+              className={`item ${existingNodeTypes['image'] ? 'disabled' : null}`}>
               <i className="icon image" />
               <span className="text">Image</span>
             </DropDownItem>
-            <DropDownItem
+            {/* <DropDownItem
               onClick={() =>
-                insertGifOnClick({
+                
+                
+                ({
                   altText: 'Cat typing on a laptop',
                   src: null,
                 })
@@ -721,7 +709,7 @@ export default function ToolbarPlugin(): JSX.Element {
               className="item">
               <i className="icon gif" />
               <span className="text">GIF</span>
-            </DropDownItem>
+            </DropDownItem> */}
             <DropDownItem
               onClick={() => {
                 activeEditor.dispatchCommand(
@@ -735,7 +723,7 @@ export default function ToolbarPlugin(): JSX.Element {
             </DropDownItem>
         
             <DropDownItem
-              disabled={true}
+              disabled={existingNodeTypes['poll']}
               onClick={() => {
                 showModal('Insert Poll', (onClose) => (
                   <InsertPollDialog
@@ -744,7 +732,7 @@ export default function ToolbarPlugin(): JSX.Element {
                   />
                 ));
               }}
-              className="item disabled">
+              className={`item ${existingNodeTypes['poll'] ? 'disabled' : null}`}>
               <i className="icon poll" />
               <span className="text">Poll</span>
             </DropDownItem>

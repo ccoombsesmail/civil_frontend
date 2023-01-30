@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import styled from 'styled-components'
 import { Nav } from 'react-bootstrap'
 
@@ -19,6 +20,12 @@ export const TabsIconContainer = styled('section')`
   justify-content: flex-end;
   padding-left: 15vw;
   margin-right: 3vw;
+
+  img {
+    width: clamp(60px, 5vw, 150px);
+    height: clamp(60px, 5vw, 150px);
+
+  }
 `
 
 export const HeaderContainer = styled('div')`
@@ -92,9 +99,25 @@ export const StyledNav = styled(Nav)`
 
 `
 
-export const Banner = styled('img')`
+export const Banner = styled('div')`
   width: 100%;
-  max-height: 45vh;
+  height: 45vh;
+  background-image: url("https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  &::before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255, 1), rgba(255,255,255, .1));
+}
+
 `
 
 export const Content = styled('section')` 
@@ -153,6 +176,7 @@ export const UserIcon = styled('img')`
   width: 4vw;
   border-radius: 50%;
   transform: translate(0, -50%);
+  z-index: 2;
 
 `
 

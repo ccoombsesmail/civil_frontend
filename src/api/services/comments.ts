@@ -22,12 +22,12 @@ export interface Comment {
 }
 
 
-export const findComment = (payload, root) => {
+export const findComment = (id, root) => {
   const queue = []
   queue.push(root)
   while (queue.length > 0) {
     const currNode = queue.shift()
-    if (currNode.data.id === payload.commentId) {
+    if (currNode.data.id === id) {
       return currNode
     }
     for (let child of currNode.children) {
@@ -96,17 +96,35 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         data: body
       })
     },
-    async onQueryStarted({ id, rootId, discussionId, updateLikeValue, updateGetTopicQuery, ...patch }, { dispatch, queryFulfilled }) {
+    async onQueryStarted({ id, rootId, commentId, parentId, discussionId, isFocusedComment, updateLikeValue, updateGetTopicQuery, isReplies, ...patch }, { dispatch, queryFulfilled }) {
       let patchResult
-      console.log("updateLikeValue", updateLikeValue)
-      if (false) {
+      if (isFocusedComment) {
         patchResult = dispatch(
-          commentsApi.util.updateQueryData('getComment', id, (draft) => {
+          commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
             if (id) {
+              const newDraft = createDraft(draft)
               console.log(patch)
-              draft.likeState = patch.value
-              draft.likes += updateLikeValue
+              newDraft.comment.likeState = patch.value
+              newDraft.comment.likes += updateLikeValue
+              return finishDraft(newDraft)
+
             }
+          })
+        )
+      } else if (isReplies) {
+        patchResult = dispatch(
+          commentsApi.util.updateQueryData('getAllCommentReplies', rootId, (draft) => {
+            const newDraft = createDraft(draft)
+            const rootComment = newDraft.replies.find((c) => c.data.id === commentId)
+            if (parentId === rootId) {
+              rootComment.data.likeState = patch.value
+              rootComment.data.likes += updateLikeValue
+              return finishDraft(newDraft)
+            }
+            const comment = findComment(id, rootComment)
+            comment.data.likeState = patch.value
+            comment.data.likes += updateLikeValue
+            return finishDraft(newDraft)
           })
         )
       } else {
@@ -121,23 +139,13 @@ export const commentsApi = emptySplitApi.injectEndpoints({
               comment.data.likes += updateLikeValue
               return finishDraft(newDraft)
             }
-            comment = findComment(patch, rootComment)
+            comment = findComment(id, rootComment)
             comment.data.likeState = patch.value
             comment.data.likes += updateLikeValue
             return finishDraft(newDraft)
           })
         )
       }
-
-      patchResult = dispatch(
-        commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
-          if (id) {
-            console.log(patch)
-            draft.comment.likeState = patch.value
-            draft.comment.likes += updateLikeValue
-          }
-        })
-      )
 
       try {
          await queryFulfilled
@@ -179,7 +187,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
               comment.data.civility = patch.value
               return finishDraft(newDraft)
             }
-            comment = findComment(patch, rootComment)
+            comment = findComment(id, rootComment)
             comment.data.civility = patch.value
             return finishDraft(newDraft)
           })

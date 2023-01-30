@@ -7,25 +7,18 @@ import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
 import { useCreateCommentMutation } from '../../../../api/services/comments.ts'
 import { useCreateTribunalCommentMutation } from '../../../../api/services/tribunal_comments.ts'
 
-export default (compState, content, rawText, modalProps, contentId, topicId, closeModal) => {
+export default (commentFormState, richTextEditorData, closeModal) => {
   const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()
   const [createComment] = useCreateCommentMutation()
   const [createTribunalComment] = useCreateTribunalCommentMutation()
 
   const {
-    tribunalCommentUnderReviewId,
-    commentId,
-  } = modalProps || {}
-
-  const isParentTribunalCommentUnderReview = isTribunalComment
-  && tribunalCommentUnderReviewId === commentId
-
-  const parentId = isParentTribunalCommentUnderReview ? null : commentId || null
-  const rootId = isParentTribunalCommentUnderReview ? null : compState.rootParentCommentId
-
+    parentId, rootId, createdBy, discussionId, contentId, topicId,
+  } = commentFormState
+  console.log(commentFormState)
   return useCallback((values, { setSubmitting, resetForm }) => {
     toast.promise(
-      Promise.all([delay(1500), checkToxicity({ content })]),
+      Promise.all([delay(1500), checkToxicity({ content: richTextEditorData.lexicalContent })]),
       {
         pending: 'Analyzing Comment...',
         success: {
@@ -35,7 +28,6 @@ export default (compState, content, rawText, modalProps, contentId, topicId, clo
             if (toxicityScore >= 0.6 && toxicityScore <= 0.9) return 'Thanks for being semi-civil. Maybe say things a bit nicer'
             return 'You are being toxic :( \n Your comment will be flagged'
           },
-          // other options
           icon: '🟢',
         },
         error: 'Promise rejected 🤯',
@@ -47,15 +39,15 @@ export default (compState, content, rawText, modalProps, contentId, topicId, clo
       if (toxicityScore > 0.9) toxicityStatus = 'TOXIC'
       const comment = {
         ...values,
-        content: JSON.stringify(content),
+        content: JSON.stringify(richTextEditorData.lexicalContent),
         memeFlag: false,
         parentId,
         contentId,
-        discussionId: contentId,
+        discussionId,
         topicId,
-        createdBy: compState.username,
+        createdBy,
         rootId,
-        rawText,
+        rawText: richTextEditorData.rawText,
         toxicityStatus,
       }
       return isTribunalComment ? createTribunalComment(comment) : createComment(comment)
@@ -65,11 +57,8 @@ export default (compState, content, rawText, modalProps, contentId, topicId, clo
     resetForm({})
     closeModal()
   }, [
-    compState,
-    content,
-    rawText,
-    modalProps.tribunalCommentUnderReviewId,
-    modalProps.commentId,
+    commentFormState,
+    richTextEditorData,
     contentId,
   ])
 }

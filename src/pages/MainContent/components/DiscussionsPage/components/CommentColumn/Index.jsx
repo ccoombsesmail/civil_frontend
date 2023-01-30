@@ -9,7 +9,7 @@ export const ParentCommentContext = React.createContext(null)
 const CommentColumn = ({
   numComments, comments, commentSentiment, color, topicId, isReplies,
 }) => (
-  <Container color={color}>
+  <Container color={color} isReplies={isReplies}>
     <h1>
       {numComments || ''}
       {' '}
@@ -24,6 +24,7 @@ const CommentColumn = ({
               value={{
                 commentId: comment.data?.id,
                 topicId,
+                isReplies,
               }}
             >
               <Comment

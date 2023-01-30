@@ -48,6 +48,9 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
       query: (discussionId) => ({ url: `/discussions/${discussionId}`, method: 'GET' }),
       // providesTags: (result) => [{ type: 'Topics', id: 'LIST' }],
     }),
+    getGeneralDiscussionId: builder.query<any, any>({
+      query: (topicId) => ({ url: `/discussions/general/${topicId}`, method: 'GET' }),
+    }),
     createDiscussion: builder.mutation<Discussion, Partial<Discussion>>({
       query: (body) => {
         return ({ 
@@ -75,4 +78,4 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
   })
 })
 
-export const { useGetAllDiscussionsQuery, useGetDiscussionQuery, useCreateDiscussionMutation } = discussionsApi
+export const { useGetAllDiscussionsQuery, useGetDiscussionQuery, useCreateDiscussionMutation, useGetGeneralDiscussionIdQuery } = discussionsApi

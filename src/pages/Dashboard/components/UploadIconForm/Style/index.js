@@ -2,14 +2,18 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 
 export const FormContainer = styled(Form)`
-  /* height: 10vw; */
-  margin-top: 1em;
   border-radius: .5em;
-
+  padding: 0;
   section {
+    padding: 10px 30px;
+
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+  }
+
+  h2 {
+    padding: 20px 30px 0 30px;
   }
 `
 
@@ -17,8 +21,8 @@ export const FlexDiv = styled('div')`
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
-  padding-bottom: 1vw;
-  margin-bottom: 1vw;
+  padding: 0 30px 20px 30px;
+
   span {
     margin-left: 1vw;
   }
@@ -37,4 +41,6 @@ export const Container = styled('div')`
 export const ButtonContainer = styled('div')`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
 `

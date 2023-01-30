@@ -1,16 +1,18 @@
-import { useCallback } from 'react'
-import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics'
+import { useCallback, useContext } from 'react'
+import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics.ts'
 
 import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
 import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
-import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments'
-import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments'
+import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments.ts'
+import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments.ts'
 import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
+import { ParentCommentContext } from '../../../../../MainContent/components/DiscussionsPage/components/CommentColumn/Index'
 
 export default (content, user, contentType) => {
-  const [updateTribunalCommentLikes, {}] = useUpdateTribunalCommentLikesMutation()
-  const [updateLikes, {}] = useUpdateTopicLikesMutation()
-  const [updateCommentLikes, {}] = useUpdateCommentLikesMutation()
+  const { isReplies, isFocusedComment, commentId } = useContext(ParentCommentContext) || {}
+  const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation()
+  const [updateLikes] = useUpdateTopicLikesMutation()
+  const [updateCommentLikes] = useUpdateCommentLikesMutation()
   const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage()
 
   return useCallback(() => {
@@ -30,12 +32,14 @@ export default (content, user, contentType) => {
     }
     const likeData = {
       id: content?.id,
-      commentId: content?.id,
+      commentId,
       value,
       createdByUserId: content.createdByUserId,
       updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
       updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
-      ...content
+      isReplies,
+      isFocusedComment,
+      ...content,
     }
     switch (contentType) {
       case TOPIC:

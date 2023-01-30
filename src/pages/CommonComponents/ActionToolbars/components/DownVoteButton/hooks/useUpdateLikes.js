@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics.ts'
 
 import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
@@ -6,8 +6,11 @@ import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentP
 import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
 import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments.ts'
 import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments.ts'
+import { ParentCommentContext } from '../../../../../MainContent/components/DiscussionsPage/components/CommentColumn/Index'
 
 export default (content, user, contentType) => {
+  const { isReplies, isFocusedComment, commentId } = useContext(ParentCommentContext) || {}
+
   const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation()
   const [updateTopicLikes] = useUpdateTopicLikesMutation()
   const [updateCommentLikes] = useUpdateCommentLikesMutation()
@@ -30,11 +33,13 @@ export default (content, user, contentType) => {
     }
     const likeData = {
       id: content?.id,
-      commentId: content?.id,
+      commentId,
       value,
       updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
       updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
       createdByUserId: content.createdByUserId,
+      isReplies,
+      isFocusedComment,
       ...content,
 
     }

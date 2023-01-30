@@ -14,7 +14,6 @@ import { MemoryStoredToken } from '../../civic/utils/generateCivicAuthHeader';
 
 const baseAxiosInstance = axios.create();
 
-console.log(selectedEndpoints)
 const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: selectedEndpoints.BACKEND }
@@ -24,13 +23,15 @@ const axiosBaseQuery =
       method: AxiosRequestConfig['method']
       data?: AxiosRequestConfig['data']
       params?: AxiosRequestConfig['params'],
+      headers?: AxiosRequestConfig['headers']
     },
     unknown,
     unknown
   > =>
-  async ({ url, method, data, params }) => {
+  async ({ url, method, data, headers }) => {
     try {
-      const result = await baseAxiosInstance({ url: baseUrl + url, method, data, params })
+
+      const result = await baseAxiosInstance({ url: baseUrl + url, method, data, headers })
       return { data: result.data }
     } catch (axiosError) {
       let err = axiosError as AxiosError
@@ -63,13 +64,13 @@ export default () => {
       async (req) => {
         console.log("INTERCEPTING!!!!", req.url)
         req.headers['Access-Control-Max-Age'] = 6000
+        req.headers['Content-Type'] = 'multipart/form-data'
         if (req.url.includes('eid') || req.url.includes('enums')) return req
         if (req.url.includes(AssistDIDAdapter.TESTNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
           return req
         }
         const civicToken = await getCivicAuthHeader()
-        // const civicToken = MemoryStoredToken.getInstance().token
         const defaultDID = await getDefaultDID()
         let token = null
         token = await getToken({ template: 'jwt' })

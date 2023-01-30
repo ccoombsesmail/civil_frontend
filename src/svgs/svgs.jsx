@@ -36,7 +36,7 @@ export const FollowUser = () => (
     viewBox="0 0 640 512"
     width="35"
     height="35"
-    >
+  >
     <path d="M352 128c0 70.7-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0s128 57.3 128 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
   </svg>
 
@@ -50,7 +50,7 @@ export const UserSlash = () => (
     height="35"
   >
     {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-    <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L353.3 251.6C407.9 237 448 187.2 448 128C448 57.3 390.7 0 320 0C250.2 0 193.5 55.8 192 125.2L38.8 5.1zM264.3 304.3C170.5 309.4 96 387.2 96 482.3c0 16.4 13.3 29.7 29.7 29.7H514.3c3.9 0 7.6-.7 11-2.1l-261-205.6z"/>
+    <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L353.3 251.6C407.9 237 448 187.2 448 128C448 57.3 390.7 0 320 0C250.2 0 193.5 55.8 192 125.2L38.8 5.1zM264.3 304.3C170.5 309.4 96 387.2 96 482.3c0 16.4 13.3 29.7 29.7 29.7H514.3c3.9 0 7.6-.7 11-2.1l-261-205.6z" />
   </svg>
 )
 export const UserSettingsSvg = () => (
@@ -234,7 +234,7 @@ export const InfoIconSvg = ({ onClick }) => (
   </svg>
 )
 
-export const RightTriangleArrowFillSvg = ({ rotateDown = false}) => (
+export const RightTriangleArrowFillSvg = ({ rotateDown = false }) => (
   <svg
     style={{ marginLeft: '10px', transform: rotateDown ? 'rotate(90deg)' : 'rotate(0)' }}
     width="11px"
@@ -1328,5 +1328,31 @@ export const VerifiedSvgCivic = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 17" className="mt-px h-5 w-5 fill-secondary stroke-secondary stroke-0">
     <path fill="current" d="M15.306 10.26a4.97 4.97 0 0 1-4.925 4.322h-2.8c-2.74 0-4.968-2.224-4.968-4.958V6.83c0-2.734 2.228-4.957 4.967-4.957h2.8a4.97 4.97 0 0 1 4.925 4.32h1.66A6.619 6.619 0 0 0 10.38.228h-2.8C3.931.227.964 3.188.964 6.829v2.795c0 3.64 2.967 6.603 6.615 6.603h2.8a6.619 6.619 0 0 0 6.585-5.966h-1.66Z" />
     <path fill="none" stroke="current" strokeLinecap="round" strokeWidth="1.8" d="m6.031 8.71 1.624 1.624 4.248-4.248" />
+  </svg>
+)
+
+export const EditIcon = ({ onClick }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="28px"
+    height="28px"
+    onClick={onClick}
+    style={{
+      position: 'absolute',
+      // left: '-5px',
+      top: '60%',
+      fill: 'white',
+      borderRadius: '50%',
+      backgroundColor: 'gray',
+      padding: '5px',
+      // backgroundImage: 'linear-gradient(to right,var(--m-primary-background-color),#83af9b)',
+      display: 'flex',
+      zIndex: '999999999999999999',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+    viewBox="-3 -3 32 32"
+  >
+    <path d="M1.439 16.873l-1.439 7.127 7.128-1.437 16.873-16.872-5.69-5.69-16.872 16.872zm4.702 3.848l-3.582.724.721-3.584 2.861 2.86zm15.031-15.032l-13.617 13.618-2.86-2.861 10.825-10.826 2.846 2.846 1.414-1.414-2.846-2.846 1.377-1.377 2.861 2.86z"/>
   </svg>
 )

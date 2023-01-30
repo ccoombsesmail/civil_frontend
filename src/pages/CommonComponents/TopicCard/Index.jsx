@@ -21,13 +21,15 @@ const Card = ({
   onClick,
   listCard,
   topic,
+  discussion,
   user,
   showLinks,
+  hideCommentButton,
 }) => {
   const { pathname } = useLocation()
   const {
     id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, topicCreatorIsDidUser, userVerificationType, reportStatus,
-  } = topic || {}
+  } = topic || discussion || {}
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
 
@@ -58,8 +60,10 @@ const Card = ({
         {children}
         <CardDetails
           topic={topic}
+          discussion={discussion}
           user={user}
           showLinks={showLinks}
+          hideCommentButton={hideCommentButton}
         />
       </Body>
     </Container>

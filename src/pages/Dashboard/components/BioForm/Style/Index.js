@@ -96,26 +96,5 @@ export const ButtonContainer = styled('div')`
   margin-top: 2em;
   width: 100%;
 
-  button {
-    transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
-    padding: calc(1em - 2px);
-    line-height: 1.25rem;
-    background: #87C232;
-    border-color: #87C232;    
-    border-radius: 0.5em;
-    border: 2px solid #e5e5e5;
-    color: white;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 1rem;
-    margin: 0;
-    padding: 1em 2em;
-    border: 0;
-    outline: 0;
-  }
 
 `

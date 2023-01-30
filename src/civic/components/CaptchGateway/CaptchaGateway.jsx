@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
 import React, { useState } from 'react'
 import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
@@ -10,7 +11,7 @@ import Popover from '../../../pages/CommonComponents/PopoverStickOnHover/Index'
 
 import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
-} from './Style'
+} from '../Style'
 import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
 // Default styles that can be overridden by your app
@@ -61,12 +62,13 @@ const StatusIcon = ({ placement }) => {
 
 const RequestGatewayTokenDesktop = () => {
   const { requestGatewayToken } = useGateway()
-  const [color, statusMsg, icon, gatewayStatus] = useGetGatewayStatus()
+  const [color, statusMsg, icon] = useGetGatewayStatus()
   return (
     <Container>
       <StatusIcon placement="right" />
       <b>⟶</b>
       <StyledExpandButton
+        iconButton
         margin={0}
         backgroundColor={color}
         type="submit"
@@ -81,24 +83,24 @@ const RequestGatewayTokenDesktop = () => {
   )
 }
 
-const RequestGatewayTokenMobile = () => {
-  const { requestGatewayToken } = useGateway()
-  const [color, statusMsg, icon] = useGetGatewayStatus()
-  return (
-    <Container>
-      <StatusIcon placement="bottom" />
-    </Container>
-  )
-}
+// const RequestGatewayTokenMobile = () => {
+
+//   return (
+//     <Container>
+//       <StatusIcon placement="bottom" />
+//     </Container>
+//   )
+// }
 
 export const CaptchaGatewayDesktop = () => {
   const wallet = useWallet()
   const { publicKey } = wallet
-
-  const { gatekeeperNetwork, cluster, clusterUrl } = env
+  const { gatekeeperNetwork, cluster } = env
+  const conn = new Connection(clusterApiUrl('devnet'), 'processed')
+  if (!conn || !publicKey) return null
   return (
     <GatewayProvider
-      connection={new Connection(clusterApiUrl('devnet'), 'recent')}
+      connection={conn}
       wallet={wallet}
       gatekeeperNetwork={gatekeeperNetwork}
       cluster={cluster}
@@ -106,24 +108,24 @@ export const CaptchaGatewayDesktop = () => {
         autoShowModal: false,
       }}
     >
-      { publicKey ? <RequestGatewayTokenDesktop /> : null }
+      <RequestGatewayTokenDesktop />
     </GatewayProvider>
   )
 }
 
-export const CaptchaGatewayMobile = () => {
-  const wallet = useWallet()
-  const { publicKey } = wallet
+// export const CaptchaGatewayMobile = () => {
+//   const wallet = useWallet()
+//   const { publicKey } = wallet
 
-  const { gatekeeperNetwork, cluster, clusterUrl } = env
-  return (
-    <GatewayProvider
-      connection={new Connection(clusterApiUrl('devnet', 'recent'))}
-      wallet={wallet}
-      gatekeeperNetwork={gatekeeperNetwork}
-      cluster={cluster}
-    >
-      { publicKey ? <RequestGatewayTokenMobile /> : null }
-    </GatewayProvider>
-  )
-}
+//   const { gatekeeperNetwork, cluster } = env
+//   return (
+//     <GatewayProvider
+//       connection={new Connection(clusterApiUrl('devnet', 'recent'))}
+//       wallet={wallet}
+//       gatekeeperNetwork={gatekeeperNetwork}
+//       cluster={cluster}
+//     >
+//       { publicKey ? <RequestGatewayTokenMobile /> : null }
+//     </GatewayProvider>
+//   )
+// }

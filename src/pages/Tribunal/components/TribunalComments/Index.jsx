@@ -19,9 +19,9 @@ const TribunalComments = ({ tribunalComments }) => {
         <TabNav>
           <TabNavItem title="All" id={0} activeTab={key} setActiveTab={setKey} contentCount={comments.all?.length} />
           <TabNavItem title="Defendant" id={1} activeTab={key} setActiveTab={setKey} contentCount={comments.Defendant?.length} />
-          <TabNavItem title="Reporters" id={2} activeTab={key} setActiveTab={setKey} contentCount={comments.Reporter?.length}/>
+          <TabNavItem title="Reporters" id={2} activeTab={key} setActiveTab={setKey} contentCount={comments.Reporter?.length} />
           <TabNavItem title="Jury" id={3} activeTab={key} setActiveTab={setKey} contentCount={comments.Jury?.length} />
-          <TabNavItem title="General" id={4} activeTab={key} setActiveTab={setKey} contentCount={comments.General?.length}/>
+          <TabNavItem title="General" id={4} activeTab={key} setActiveTab={setKey} contentCount={comments.General?.length} />
 
           <Glider className="glider" />
         </TabNav>

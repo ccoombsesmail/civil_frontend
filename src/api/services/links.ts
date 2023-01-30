@@ -16,10 +16,23 @@ export const linksApi = emptyMiscServiceSplitApi.injectEndpoints({
         method: 'GET',
       }
       )},
+    }),
+    uploadTopicMedia: builder.mutation<any, any>({
+      query: (data) => {
+        console.log(data)
+        return ({ 
+        url: `/topics/upload-media`, 
+        method: 'POST',
+        body: data,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      )},
     })
   }),
 })
 
-export const { useGetLinkMetaDataQuery } = linksApi
+export const { useGetLinkMetaDataQuery, useUploadTopicMediaMutation } = linksApi
 
 // export const useGetAllNotificationsQueryState = linksApi.endpoints.getAllNotifications.useQueryState

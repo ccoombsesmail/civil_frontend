@@ -16,6 +16,12 @@
   margin: 0;
   position: relative;
 }
+
+.PlaygroundEditorTheme__paragraph:has(.PollNode__container) {
+  display: flex;
+  justify-content: center;
+}
+ 
 .PlaygroundEditorTheme__quote {
   margin: 0;
   margin-left: 20px;

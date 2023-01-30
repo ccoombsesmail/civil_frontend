@@ -1,8 +1,6 @@
+/* eslint-disable no-plusplus */
 import React, { useState, useCallback } from 'react'
-import { useSelector } from 'react-redux'
 import { Formik, Field } from 'formik'
-import Modal from 'react-bootstrap/Modal'
-
 import ImageCheckbox from '../ImageCheckbox/Index'
 import UploadIconInput from '../UploadIconInput/Index'
 import Button from '../../../CommonComponents/Button/Index'
@@ -11,13 +9,12 @@ import sessionActions from '../../../../redux/actions/session/index'
 import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
 import {
-  FormContainer, Container, FlexDiv,
+  FormContainer, Container, FlexDiv, ButtonContainer,
 } from './Style'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 
-const UploadIconForm = () => {
+const UploadIconForm = ({ closeModal }) => {
   const [file, setFile] = useState(null)
-  const [selectedIconIdx, setSelectedIconIdx] = useState(null)
   const onChange = useCallback((e, setFieldValue) => {
     setFieldValue('file', e.currentTarget.files[0])
     const reader = new FileReader()
@@ -29,20 +26,17 @@ const UploadIconForm = () => {
   }, [])
 
   const onChangeIcon = useCallback((e, idx, setFieldValue) => {
-    if (e.target.checked) {
-      setSelectedIconIdx(idx)
-      setFieldValue(e.target.name, true)
-    } else {
-      setSelectedIconIdx(null)
-      setFieldValue(e.target.name, false)
+    for (let i = 1; i < 4; i++) {
+      document.getElementById(`profile_icon_${i}`).checked = false
     }
+    document.getElementById(`profile_icon_${idx + 1}`).checked = true
+
+    setFieldValue(e.target.name, true)
   }, [])
 
   const { uploadUserIcon, updateUserIcon } = useBindDispatch(sessionActions)
 
-  const { currentUser } = useGetCurrentUser()
-  
-  const user = useSelector((s) => s.users.list).find((u) => u.id === currentUser?.userId)
+  const { currentUser: user } = useGetCurrentUser()
 
   return (
     <Container>
@@ -58,37 +52,51 @@ const UploadIconForm = () => {
           if (values.file instanceof File) {
             const formData = new FormData()
             formData.append('image', values.file)
-            uploadUserIcon(formData, user?.username)
+            console.log(formData)
+            uploadUserIcon(formData, user?.userId)
             setSubmitting(false)
           } else {
             const profileImg = Object.entries(values).find(([, v]) => v === true)?.[0]
-            updateUserIcon({ username: user?.username, iconSrc: profileImg })
+            updateUserIcon({ username: user?.username, iconSrc: `https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/${profileImg}.png` })
           }
+          closeModal()
         }}
       >
         {({ isSubmitting, setFieldValue }) => (
           <>
             <FormContainer>
-              <Modal.Header closeButton>
-                <Modal.Title>Choose A Profile Image</Modal.Title>
-              </Modal.Header>
-              <Modal.Body style={{ textAlign: 'center' }}>
-                <FlexDiv>
-                  <Field type="file" name="fileName" userIcon={user?.iconSrc} file={file} component={UploadIconInput} onChange={(e) => onChange(e, setFieldValue)} />
-                  <span>
-                    Upload A Profile Picture
-                  </span>
-                </FlexDiv>
+              <FlexDiv>
+                <Field
+                  type="file"
+                  name="fileName"
+                  userIcon={user?.iconSrc}
+                  file={file}
+                  component={UploadIconInput}
+                  onChange={(e) => onChange(e, setFieldValue)}
+                />
+                <span>
+                  Upload A Profile Picture
+                </span>
+              </FlexDiv>
+              <h2>
                 Or Choose An Avatar
-                <section>
-                  {
-                    new Array(16).fill(0).map((_, idx) => <Field onChange={(e) => onChangeIcon(e, idx, setFieldValue)} disabled={selectedIconIdx !== idx && selectedIconIdx !== null} key={String(idx)} iconSrc={`https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/64_${idx + 1}.png`} name={`profile_img_${idx + 1}`} component={ImageCheckbox} />)
+              </h2>
+              <section>
+                {
+                    new Array(16).fill(0).map((_, idx) => (
+                      <Field
+                        onChange={(e) => onChangeIcon(e, idx, setFieldValue)}
+                        key={String(idx)}
+                        iconSrc={`https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/profile_icon_${idx + 1}.png`}
+                        name={`profile_icon_${idx + 1}`}
+                        component={ImageCheckbox}
+                      />
+                    ))
                   }
-                </section>
-              </Modal.Body>
-              <Modal.Footer>
+              </section>
+              <ButtonContainer>
                 <Button type="submit" disabled={isSubmitting}>Submit</Button>
-              </Modal.Footer>
+              </ButtonContainer>
             </FormContainer>
           </>
         )}
