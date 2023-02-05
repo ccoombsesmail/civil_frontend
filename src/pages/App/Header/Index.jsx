@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
+// import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
 
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import {
@@ -15,7 +15,7 @@ import { useGetAllNotificationsQuery } from '../../../api/services/notifications
 import useGetCurrentUser from '../hooks/useGetCurrentUser'
 import MobileMenu from './components/MobileMenu/Index'
 
-const NavButtons = () => {
+function NavButtons() {
   const navigate = useNavigate()
   const { currentUser } = useGetCurrentUser()
   const { data } = useGetAllNotificationsQuery(currentUser?.userId, {
@@ -51,7 +51,7 @@ const NavButtons = () => {
   )
 }
 
-const Header = () => {
+function Header() {
   const navigate = useNavigate()
   const {
     signedInViaCivic,
@@ -69,11 +69,11 @@ const Header = () => {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/topics')}> 
+        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/topics')}>
           Civil
         </IconButton>
       </ButtonsContainer>
-      <SignedIn>
+      {/* <SignedIn>
         <NavContainer>
           <NavButtons />
           <Divider />
@@ -92,16 +92,16 @@ const Header = () => {
           />
         </NavContainer>
 
-      </SignedIn>
-      <SignedOut>
-        <NavContainer>
-          { signedInViaCivic ? <NavButtons /> : null }
-          <Divider />
-          <NavDropdownToggle>
-            <DropdownMenu />
-          </NavDropdownToggle>
-        </NavContainer>
-      </SignedOut>
+      </SignedIn> */}
+      {/* <SignedOut> */}
+      <NavContainer>
+        { signedInViaCivic ? <NavButtons /> : null }
+        <Divider />
+        <NavDropdownToggle>
+          <DropdownMenu />
+        </NavDropdownToggle>
+      </NavContainer>
+      {/* </SignedOut> */}
       <MobileContainer>
         <WalletPassesContainer>
           {/* <CaptchaGatewayMobile /> */}

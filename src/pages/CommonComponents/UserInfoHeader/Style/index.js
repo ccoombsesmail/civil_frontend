@@ -7,17 +7,17 @@ export const Header = styled('div')`
   width: 100%;
   padding: .5em .5em;    
   background-color: white;
-  /* height: 4vw;
-  max-height: 4vw; */
-  /* transition: filter 1s ease-in-out; */
 
   div {
     height: 100%;
     flex-grow: 1;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-left: 1em;
     background-color: white;
+    button {
+      margin: 5px;
+    }
   }
 
   time {

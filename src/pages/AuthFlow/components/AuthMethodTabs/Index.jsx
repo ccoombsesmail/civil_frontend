@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Tab } from 'react-bootstrap'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
-import {
-  SignIn,
-  SignUp,
-} from '@clerk/clerk-react'
+// import {
+//   SignIn,
+//   SignUp,
+// } from '@clerk/clerk-react'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
@@ -16,7 +16,7 @@ import { ThemeTabNew } from '../../../CommonComponents/Tabs/Style'
 import { Blockchain } from '../../../../svgs/svgs'
 import CivicTabContent from './components/CivicTabContent/Index'
 
-export const SignInComponent = () => {
+export function SignInComponent() {
   const { state } = useLocation()
   const [key, setKey] = useState('civic')
 
@@ -48,7 +48,7 @@ export const SignInComponent = () => {
             </div>
           )}
         >
-          <SignIn
+          {/* <SignIn
             signUpUrl="/authenticate/signup"
             afterSignInUrl={state?.redirectPath}
             appearance={{
@@ -59,7 +59,7 @@ export const SignInComponent = () => {
                 fontFamily: 'Source Sans Pro, sans-serif',
               },
             }}
-          />
+          /> */}
         </Tab>
         {/* <SignInContainer> */}
         <Tab
@@ -100,10 +100,12 @@ export const SignInComponent = () => {
   )
 }
 
-export const SignUpComponent = () => (
-  <SignInContainer>
-    <SignUp signInUrl="/authenticate" />
-  </SignInContainer>
-)
+export function SignUpComponent() {
+  return (
+    <SignInContainer>
+      {/* <SignUp signInUrl="/authenticate" /> */}
+    </SignInContainer>
+  )
+}
 
 export default SignInComponent

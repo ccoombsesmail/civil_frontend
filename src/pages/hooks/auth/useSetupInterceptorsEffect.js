@@ -1,4 +1,4 @@
-import { useAuth, useUser } from '@clerk/clerk-react'
+// import { useAuth, useUser } from '@clerk/clerk-react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -10,10 +10,10 @@ import useGetCivicAuthHeader from '../../../civic/hooks/useGetCivicAuthHeader.ts
 import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
 export default () => {
-  const { getToken } = useAuth()
+  // const { getToken } = useAuth()
   const { currentUser } = useGetCurrentUser()
-  
-  const { user: clerkUser } = useUser({ withAssertions: true })
+
+  // const { user: clerkUser } = useUser({ withAssertions: true })
   const createDIDBasedJWT = useCreateDidBasedJwt()
   const getDefaultDID = useGetDefaultDID()
   const getCivicAuthHeader = useGetCivicAuthHeader()
@@ -31,7 +31,7 @@ export default () => {
         const civicToken = await getCivicAuthHeader()
         const defaultDID = await getDefaultDID()
         let token = null
-        token = await getToken({ template: 'jwt' })
+        // token = await getToken({ template: 'jwt' })
         if (token) {
           req.headers['X-JWT-TYPE'] = 'CLERK'
           req.headers.Authorization = `Bearer ${token}`
@@ -86,5 +86,5 @@ export default () => {
     //     return Promise.reject(error)
     //   },
     // )
-  }, [currentUser, clerkUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])
+  }, [currentUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])  // clerkUser
 }

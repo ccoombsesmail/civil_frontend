@@ -1,4 +1,4 @@
-import { useUser } from '@clerk/clerk-react'
+// import { useUser } from '@clerk/clerk-react'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useEffect, useState } from 'react'
 import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
@@ -17,15 +17,15 @@ export default () => {
   const { publicKey } = wallet
 
   // For Clerk Users
-  const { user: clerkUser, isLoaded } = useUser({ withAssertions: true })
+  // const { user: clerkUser, isLoaded } = useUser({ withAssertions: true })
 
   useEffect(() => {
     const getUserId = async () => {
       const prevSignInMethod = localStorage.getItem('previousSignInMethod')
       switch (prevSignInMethod) {
-        case CLERK_USER:
-          setUserId(clerkUser?.id)
-          break
+        // case CLERK_USER:
+        //   setUserId(clerkUser?.id)
+        //   break
         case ELASTOS_USER:
           const defaultDID = await getDefaultDID()
           if (defaultDID) {
@@ -43,7 +43,7 @@ export default () => {
           break
       }
     }
-    if (isLoaded) getUserId()
+    getUserId()
   }, [wallet?.connected, wallet])
 
   return { userId }

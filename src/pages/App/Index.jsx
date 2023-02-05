@@ -1,16 +1,15 @@
 import React, {
   memo,
-  useCallback,
   Suspense,
   useMemo,
 } from 'react'
 import {
-  Routes, Route, Navigate, useNavigate, useLocation,
+  Routes, Route, Navigate, useLocation,
 } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ToastContainer, cssTransition } from 'react-toastify'
-import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-react'
+// import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-react'
 
 import {
   ConnectionProvider,
@@ -47,17 +46,17 @@ const AuthFlow = React.lazy(() => import('../AuthFlow/Index'))
 
 const MainContent = React.lazy(() => import('../MainContent/Index'))
 
-const frontendApi = 'clerk.genuine.leech-38.lcl.dev'
-
+// const frontendApi = 'clerk.genuine.leech-38.lcl.dev'
+// const REACT_APP_CLERK_PUBLISHABLE_KEY = 'pk_test_Y2xlcmsuZ2VudWluZS5sZWVjaC0zOC5sY2wuZGV2JA'
 const elitpicIn = cssTransition({
   enter: 'slide-in-elliptic-top-fwd',
   exit: 'slide-out-elliptic-bottom-bck',
 })
 
-const App = () => {
-  const navigate = useNavigate()
+function App() {
+  // const navigate = useNavigate()
   const { pathname } = useLocation()
-  const memoNavigate = useCallback((to) => navigate(to))
+  // const memoNavigate = useCallback((to) => navigate(to))
   const showLoadingPage = useSelector((s) => s.ui.showLoadingPage)
   const dispatch = useDispatch()
   const { closeModal } = bindActionCreators(uiActionCreators, dispatch)
@@ -75,91 +74,91 @@ const App = () => {
     [network],
   )
   return (
-    <ClerkProvider frontendApi={frontendApi} navigate={memoNavigate}>
-      <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider
-          wallets={wallets}
-          autoConnect={
+  // <ClerkProvider publishableKey={REACT_APP_CLERK_PUBLISHABLE_KEY} navigate={memoNavigate}>
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider
+        wallets={wallets}
+        autoConnect={
             localStorage.getItem('previousSignInMethod') === CIVIC_USER
           }
-        >
-          <WalletModalProvider>
-            <GlobalStyle />
-            <Wrapper id="main-container">
-              <LoadingSpinner />
-              <ClerkLoaded>
-                <LoadingBridgeWithSpinner>
-                  {({ userId }) => (
-                    <UserContext.Provider value={userId}>
-                      <Header />
-                      <MainContainer>
-                        { showLoadingPage ? <LoadingPage /> : null}
-                        <Content>
-                          { pathname.includes('user') || pathname.includes('dashboard') ? null : <BgImage /> }
-                          <Routes>
-                            <Route
-                              path="/dashboard"
-                              element={(
-                                <Suspense fallback={<LoadingPage />}>
-                                  <Dashboard />
-                                </Suspense>
+      >
+        <WalletModalProvider>
+          <GlobalStyle />
+          <Wrapper id="main-container">
+            <LoadingSpinner />
+            {/* <ClerkLoaded> */}
+            <LoadingBridgeWithSpinner>
+              {({ userId }) => (
+                <UserContext.Provider value={userId}>
+                  <Header />
+                  <MainContainer>
+                    { showLoadingPage ? <LoadingPage /> : null}
+                    <Content>
+                      { pathname.includes('user') || pathname.includes('dashboard') ? null : <BgImage /> }
+                      <Routes>
+                        <Route
+                          path="/dashboard"
+                          element={(
+                            <Suspense fallback={<LoadingPage />}>
+                              <Dashboard />
+                            </Suspense>
                           )}
-                            />
-                            <Route
-                              path="/authenticate/*"
-                              element={(
-                                <Suspense fallback={<LoadingPage />}>
-                                  <AuthFlow />
-                                </Suspense>
-                          )}
-                            />
-                            <Route
-                              path="/user/:userId"
-                              element={(
-                                <Suspense fallback={<LoadingPage />}>
-                                  <UserProfile />
-                                </Suspense>
-                          )}
-                            />
-                            <Route
-                              path="/tribunal/:contentType/:contentId"
-                              element={(
-                                <Suspense fallback={<LoadingPage />}>
-                                  <Tribunal />
-                                </Suspense>
-                          )}
-                            />
-                            <Route
-                              path="/home/*"
-                              element={(
-                                <Suspense fallback={<LoadingPage />}>
-                                  <MainContent userId={userId} />
-                                </Suspense>
-                          )}
-                            />
-                            <Route
-                              path="/"
-                              element={<Navigate replace to="/home/topics" />}
-                            />
-                          </Routes>
-                          <Modal closeModal={closeModal} />
-                        </Content>
-
-                        <ToastContainer
-                          autoClose={2000}
-                          className="toasty"
-                          transition={elitpicIn}
                         />
-                      </MainContainer>
-                    </UserContext.Provider>
-                  )}
-                </LoadingBridgeWithSpinner>
-              </ClerkLoaded>
-            </Wrapper>
-          </WalletModalProvider>
-        </WalletProvider>
-      </ConnectionProvider>
-    </ClerkProvider>
+                        <Route
+                          path="/authenticate/*"
+                          element={(
+                            <Suspense fallback={<LoadingPage />}>
+                              <AuthFlow />
+                            </Suspense>
+                          )}
+                        />
+                        <Route
+                          path="/user/:userId"
+                          element={(
+                            <Suspense fallback={<LoadingPage />}>
+                              <UserProfile />
+                            </Suspense>
+                          )}
+                        />
+                        <Route
+                          path="/tribunal/:contentType/:contentId"
+                          element={(
+                            <Suspense fallback={<LoadingPage />}>
+                              <Tribunal />
+                            </Suspense>
+                          )}
+                        />
+                        <Route
+                          path="/home/*"
+                          element={(
+                            <Suspense fallback={<LoadingPage />}>
+                              <MainContent userId={userId} />
+                            </Suspense>
+                          )}
+                        />
+                        <Route
+                          path="/"
+                          element={<Navigate replace to="/home/topics" />}
+                        />
+                      </Routes>
+                      <Modal closeModal={closeModal} />
+                    </Content>
+
+                    <ToastContainer
+                      autoClose={2000}
+                      className="toasty"
+                      transition={elitpicIn}
+                    />
+                  </MainContainer>
+                </UserContext.Provider>
+              )}
+            </LoadingBridgeWithSpinner>
+            {/* </ClerkLoaded> */}
+          </Wrapper>
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  // </ClerkProvider>
   )
 }
 

@@ -15,7 +15,7 @@ import {
 import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
 // Default styles that can be overridden by your app
-require('@solana/wallet-adapter-react-ui/styles.css')
+import '@solana/wallet-adapter-react-ui/styles.css'
 
 const env = {
   gatekeeperNetwork: new PublicKey('ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6'),
@@ -74,9 +74,12 @@ const RequestGatewayTokenDesktop = () => {
         type="submit"
         icon={icon}
         onClick={requestGatewayToken}
+        width="150px"
         civicButton
       >
-        {statusMsg}
+        <span style={{ marginLeft: '10px' }}>
+          {statusMsg}
+        </span>
 
       </StyledExpandButton>
     </Container>

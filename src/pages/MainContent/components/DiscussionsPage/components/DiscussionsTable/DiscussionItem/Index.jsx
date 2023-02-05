@@ -13,7 +13,7 @@ const DiscussionsItem = ({
       <Row onClick={goToCommentThread}>
         <RowItem>
           {' '}
-          <img src={createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} alt="" />
+          <img src={createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/profile_icon_2.png'} alt="" />
           {' '}
           {`${longUsernameDisplay(createdByUsername)}`}
         </RowItem>

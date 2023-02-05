@@ -1,10 +1,12 @@
 import { defineConfig, loadEnv } from 'vite'
 import path from 'path'
-// import inject from '@rollup/plugin-inject'
+import inject from '@rollup/plugin-inject'
 // import * as stdLibBrowser from 'node-stdlib-browser'
 import nodePolyfills from 'rollup-plugin-polyfill-node'
 
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+import { NodeGlobalsPolyfillPlugin,  } from '@esbuild-plugins/node-globals-polyfill'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import react from '@vitejs/plugin-react'
@@ -41,6 +43,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         plugins: [
           // ...plugins
+          inject(({ Buffer: ['Buffer', 'Buffer'], process: 'process'})),
           nodePolyfills(),
         ],
         output: {
@@ -56,14 +59,15 @@ export default defineConfig(({ mode }) => {
       esbuildOptions: {
         plugins: [
           esbuildCommonjs(['@civic/solana-gateway-react', '@solana/wallet-adapter-react-ui']),
-          NodeGlobalsPolyfillPlugin({
-            process: true,
-            buffer: true,
-          }),     
+          // NodeGlobalsPolyfillPlugin({
+          //   process: true,
+          //   // buffer: true,
+          // }),
+          // NodeModulesPolyfillPlugin()     
         ],
         define: {
           this: 'window',
-          global: 'globalThis'
+          global: '{}'
         },
       },
     },
@@ -81,6 +85,8 @@ export default defineConfig(({ mode }) => {
         stream: "stream-browserify",
         zlib: "browserify-zlib",
         util: "util",
+        // process: 'rollup-plugin-node-polyfills/polyfills/process-es6'
+
       },
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     },

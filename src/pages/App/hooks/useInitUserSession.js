@@ -2,7 +2,7 @@
 import { io } from 'socket.io-client'
 import { useEffect } from 'react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { useUser } from '@clerk/clerk-react'
+// import { useUser } from '@clerk/clerk-react'
 import {
   CIVIC_USER, CLERK_USER, ELASTOS_USER,
 } from '../../../enums/session_type'
@@ -27,7 +27,7 @@ export default (userId, userIsLoading, isError) => {
   } = useBindDispatch(sessionActions, userActions)
 
   const wallet = useWallet()
-  const { isSignedIn } = useUser()
+  // const { isSignedIn } = useUser()
   const { data } = useGetAllNotificationsQuery(userId, {
     skip: !userId || userIsLoading,
   })
@@ -75,10 +75,10 @@ export default (userId, userIsLoading, isError) => {
 
         localStorage.setItem('previousSignInMethod', CIVIC_USER)
         localStorage.setItem('walletName2', wallet.wallet.adapter.name)
-      } else if (isSignedIn) {
-        localStorage.setItem('previousSignInMethod', CLERK_USER)
+      // } else if (isSignedIn) {
+      //   localStorage.setItem('previousSignInMethod', CLERK_USER)
       } else if (false) localStorage.setItem('previousSignInMethod', ELASTOS_USER)
     }
     sessionListener()
-  }, [wallet.connected, isSignedIn, userId, isError])
+  }, [wallet.connected, userId, isError]) // isSignedIn
 }

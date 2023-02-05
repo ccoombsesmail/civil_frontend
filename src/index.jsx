@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import 'unicode-emoji-picker'
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.Buffer = buffer.Buffer
+  // window.Buffer = buffer.Buffer
   const root = document.getElementById('root')
 
   ReactDOM.createRoot(root).render(

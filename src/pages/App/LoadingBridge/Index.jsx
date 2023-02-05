@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect } from 'react'
 
 import useFetchAppData from '../hooks/useFetchAppData'
@@ -9,7 +10,7 @@ import useSetupInterceptorsEffect from '../../../api/util/axiosInstance.ts'
 import { useGetCurrentUserQuery } from '../../../api/services/session.ts'
 import useGetUserId from '../hooks/useGetUserId'
 
-const LoadingBridge = ({ children, setIsLoading }) => {
+function LoadingBridge({ children, setIsLoading }) {
   const [isUserDataPending, setIsUserDataPending] = useState(true)
 
   const { userId } = useGetUserId()
@@ -25,8 +26,8 @@ const LoadingBridge = ({ children, setIsLoading }) => {
   useEffect(() => {
     setIsLoading(true)
     const get = async () => {
-      const { signedInViaClerk, signedInViaDID } = sessionType
-      if (signedInViaClerk === undefined || signedInViaDID === undefined) {
+      const { signedInViaDID } = sessionType
+      if (signedInViaDID === undefined) { // signedInViaClerk === undefined
         setIsUserDataPending(true)
         return
       }

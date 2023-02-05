@@ -1,7 +1,7 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
-import { useAuth, useUser } from '@clerk/clerk-react';
+// import { useAuth, useUser } from '@clerk/clerk-react';
 import { useSelector } from 'react-redux';
 import useGetCivicAuthHeader from '../../civic/hooks/useGetCivicAuthHeader';
 import useCreateDidBasedJwt from '../../pages/hooks/auth/useCreateDidBasedJwt'
@@ -53,9 +53,9 @@ export const miscApiBaseQuery = axiosBaseQuery({baseUrl: selectedEndpoints.UPLOA
 
 export default () => {
   
-  const { getToken } = useAuth()
+  // const { getToken } = useAuth()
   const currentUser = useSelector((s) => s[sessionApi.reducerPath].currentUser)
-  const { user: clerkUser } = useUser()
+  // const { user: clerkUser } = useUser()
   const createDIDBasedJWT = useCreateDidBasedJwt()
   const getDefaultDID = useGetDefaultDid()
   const getCivicAuthHeader = useGetCivicAuthHeader()
@@ -73,7 +73,7 @@ export default () => {
         const civicToken = await getCivicAuthHeader()
         const defaultDID = await getDefaultDID()
         let token = null
-        token = await getToken({ template: 'jwt' })
+        // token = await getToken({ template: 'jwt' })
         if (token) {
           req.headers['X-JWT-TYPE'] = 'CLERK'
           req.headers.Authorization = `Bearer ${token}`
@@ -97,6 +97,6 @@ export default () => {
     )
     
 
-  }, [currentUser, clerkUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])
+  }, [currentUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])  //clerkUser
 }
 

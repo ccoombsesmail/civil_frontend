@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { useUser } from '@clerk/clerk-react'
+// import { useUser } from '@clerk/clerk-react'
 import useBindDispatch from '../../hooks/redux/useBindDispatch'
 import uiActionCreators, { closeModal } from '../../../redux/actions/ui/index'
 import userActionCreators from '../../../redux/actions/users/index'
@@ -9,19 +9,19 @@ import userActionCreators from '../../../redux/actions/users/index'
 
 export default (userId) => {
   const dispatch = useDispatch()
-  const { user } = useUser()
+  // const { user } = useUser()
 
   const {
     createUserTag,
   } = useBindDispatch(uiActionCreators, userActionCreators)
   return useCallback(async (values, { setSubmitting, resetForm }) => {
-    if (user) {
-      user.update({
-        unsafeMetadata: {
-          userCivilTag: values.tag,
-        },
-      })
-    }
+    // if (user) {
+    //   user.update({
+    //     unsafeMetadata: {
+    //       userCivilTag: values.tag,
+    //     },
+    //   })
+    // }
     await toast.promise(
       createUserTag(values),
       {

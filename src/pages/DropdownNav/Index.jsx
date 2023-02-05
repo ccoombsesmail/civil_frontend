@@ -21,7 +21,7 @@ import useCloseOnClick from './hooks/useCloseOnClick'
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
-export const NavDropdownToggle = ({ children }) => {
+export function NavDropdownToggle({ children }) {
   const [open, setOpen] = useState(false)
   const openOnClick = useOpenOnClick(setOpen)
 
@@ -35,7 +35,7 @@ export const NavDropdownToggle = ({ children }) => {
   )
 }
 
-export const DropdownMenu = ({ open, setOpen }) => {
+export function DropdownMenu({ open, setOpen }) {
   const { currentUser } = useGetCurrentUser()
 
   const { pathname } = useLocation()
@@ -51,15 +51,17 @@ export const DropdownMenu = ({ open, setOpen }) => {
     setLoggedInViaDIDOrCivic(signedInViaDID || signedInViaCivic)
   }, [session])
 
-  const DropdownItem = ({
+  function DropdownItem({
     children, leftIcon, rightIcon, onClick, to, state,
-  }) => (
-    <MenuItem to={to} onClick={onClick} state={state}>
-      <span className="icon-button">{leftIcon}</span>
-      {children}
-      <span className="icon-right">{rightIcon}</span>
-    </MenuItem>
-  )
+  }) {
+    return (
+      <MenuItem to={to} onClick={onClick} state={state}>
+        <span className="icon-button">{leftIcon}</span>
+        {children}
+        <span className="icon-right">{rightIcon}</span>
+      </MenuItem>
+    )
+  }
 
   return (
     <DropdownMenuContainer open={open}>
@@ -88,8 +90,8 @@ export const DropdownMenu = ({ open, setOpen }) => {
       </UserInfoSection>
       )}
       <Menu>
-        <SignedOut>
-          {!loggedInViaDIDOrCivic && (
+        {/* <SignedOut> */}
+        {!loggedInViaDIDOrCivic && (
           <DropdownItem
             leftIcon={<LoginSvg />}
             to="/authenticate"
@@ -98,8 +100,8 @@ export const DropdownMenu = ({ open, setOpen }) => {
           >
             Sign In
           </DropdownItem>
-          )}
-        </SignedOut>
+        )}
+        {/* </SignedOut> */}
       </Menu>
     </DropdownMenuContainer>
   )

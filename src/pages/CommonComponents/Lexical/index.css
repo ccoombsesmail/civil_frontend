@@ -76,7 +76,7 @@ header h1 {
 }
 
 .editor-scroller {
-  min-height: clamp(250px, 20vw, 600px);
+  min-height: clamp(250px, 15vw, 600px);
   height: 100%;
   border: 0;
   resize: none;

@@ -1,6 +1,6 @@
-import {
-  SignedIn, SignedOut,
-} from '@clerk/clerk-react'
+// import {
+//   SignedIn, SignedOut,
+// } from '@clerk/clerk-react'
 import React, { useContext, useEffect, useMemo } from 'react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
@@ -18,20 +18,20 @@ import { CaptchaGatewayDesktop } from '../../civic/components/CaptchGateway/Capt
 import UniquenessGateway from '../../civic/components/UniquenessGateway/UniquenessGateway'
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 
-const UserInformationDisplay = () => {
+function UserInformationDisplay() {
   const { currentUser } = useGetCurrentUser()
   const {
-    signedInViaClerk,
+    // signedInViaClerk,
     signedInViaDID,
     signedInViaCivic,
   } = useSessionType()
 
   const [isSignedIn, authMethod] = useMemo(() => {
-    if (signedInViaClerk) return [true, 'Authenticated With Clerk']
+    // if (signedInViaClerk) return [true, 'Authenticated With Clerk']
     if (signedInViaDID) return [true, 'Authenticated With Elastos DID']
     if (signedInViaCivic) return [true, 'Auth Method ⟶ Civic DID']
     return [false, '']
-  }, [signedInViaClerk, signedInViaDID, signedInViaCivic])
+  }, [signedInViaDID, signedInViaCivic]) // signedInViaClerk
 
   const goToAuthPage = useGoToAuthPage()
   const disconnectListItem = document.getElementsByClassName('wallet-adapter-dropdown-list-item')[2]
@@ -79,19 +79,18 @@ const UserInformationDisplay = () => {
           <small>posts</small>
         </h3>
       </div>
-      <SignedIn>
+      {/* <SignedIn>
         <IdentityProviderContainer className="center">
           <IdentityImg alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/icons8-checked-identification-documents-96+(1).png" />
           <IdentityProviderInnerContainer>
             <span>Identity Provider: </span>
-            {/* <IdentityProviderImg /> */}
             <ClerkSvg />
           </IdentityProviderInnerContainer>
         </IdentityProviderContainer>
-      </SignedIn>
-      <SignedOut>
-        <AuthButtonContainer>
-          {
+      </SignedIn> */}
+      {/* <SignedOut> */}
+      <AuthButtonContainer>
+        {
             signedInViaCivic ? (
               <div>
                 <WalletMultiButton />
@@ -129,9 +128,9 @@ const UserInformationDisplay = () => {
             )
           }
 
-        </AuthButtonContainer>
+      </AuthButtonContainer>
 
-      </SignedOut>
+      {/* </SignedOut> */}
 
     </Container>
   )

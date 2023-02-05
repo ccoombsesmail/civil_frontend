@@ -52,13 +52,13 @@ export const StyledButton = styled('button')`
   border-radius: 0.85rem;
   border: none;
   span {
-    font-size: clamp(13px, .9vw, 25px);
+    font-size: clamp(12px, .9vw, 25px);
 
     transition: color 0.6s;
     color: #fff;
     display: block;
     position: relative;
-    padding: 1.5rem 3rem;
+    padding: 0rem;
 
     /* mix-blend-mode: difference; */
   }
@@ -66,7 +66,10 @@ export const StyledButton = styled('button')`
   svg {
     width: clamp(15px, 1.4vw, 25px);
     z-index: 999;
-    padding-right: clamp(5px, .3vw, 10px);
+    /* margin: clamp(7px,0.4vw,12px);     */
+    /* padding-right: clamp(5px, .3vw, 10px); */
+    margin: 0 !important;
+    margin-right: 5px;
     path {
       fill: white !important;
     }
@@ -100,7 +103,7 @@ export const StyledButton = styled('button')`
 `
 
 export const Container = styled('div')`
-  width: ${(props) => props.width || 'clamp(150px, 12vw, 240px)'};
+  width: ${(props) => props.width || 'clamp(200px, 12vw, 240px)'};
   height: ${(props) => props.height || 'clamp(35px, 2.5vw, 40px)'};
   margin: ${(props) => props.margin ?? '0 1vw'};
   padding: 0;

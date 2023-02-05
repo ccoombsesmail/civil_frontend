@@ -6,9 +6,20 @@ export const LightButton = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: .2vw;
-  background: transparent !important;
+  border-radius: 50%;
   border: none;
+  background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
+  width: 25px;
+  height: 25px;
+  padding: 3px;
+  transition: all .4s;
+  :hover {
+    background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
+    /* filter: brightness(.9); */
+    transform: scale(2);
+    
+
+  }
 `
 
 export const TooltipContent = styled('div')`
