@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ExpandButton from '../../../pages/CommonComponents/Buttons/ExpandButton/Index'
+import ExpandButton from '../../../core/CommonComponents/Buttons/ExpandButton/Index'
 
 export const Container = styled('div')`
  display: flex;

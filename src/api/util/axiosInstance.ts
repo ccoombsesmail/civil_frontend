@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 // import { useAuth, useUser } from '@clerk/clerk-react';
 import { useSelector } from 'react-redux';
 import useGetCivicAuthHeader from '../../civic/hooks/useGetCivicAuthHeader';
-import useCreateDidBasedJwt from '../../pages/hooks/auth/useCreateDidBasedJwt'
+import useCreateDidBasedJwt from '../../core/hooks/auth/useCreateDidBasedJwt'
 
-import useGetDefaultDid from '../../pages/DID/hooks/useGetDefaultDID.js'
-import { AssistDIDAdapter } from '../../pages/DID/AssistDIDAdapter';
+import useGetDefaultDid from '../../core/DID/hooks/useGetDefaultDID'
+import { AssistDIDAdapter } from '../../core/DID/AssistDIDAdapter';
 import { sessionApi } from '../services/session';
 import { selectedEndpoints } from '../endpoints/endpoints'
 import { MemoryStoredToken } from '../../civic/utils/generateCivicAuthHeader';

@@ -7,7 +7,7 @@ import {
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import Popover from '../../../pages/CommonComponents/PopoverStickOnHover/Index'
+import Popover from '../../../core/CommonComponents/PopoverStickOnHover/Index'
 
 import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
@@ -23,7 +23,7 @@ const env = {
   cluster: 'devnet',
 }
 
-const StatusIcon = ({ placement }) => {
+function StatusIcon({ placement }) {
   const [showPopover, setShowPopover] = useState(false)
   const onClick = () => setShowPopover((prev) => !prev)
   const [color, statusMsg] = useGetGatewayStatus()
@@ -60,7 +60,7 @@ const StatusIcon = ({ placement }) => {
   )
 }
 
-const RequestGatewayTokenDesktop = () => {
+function RequestGatewayTokenDesktop() {
   const { requestGatewayToken } = useGateway()
   const [color, statusMsg, icon] = useGetGatewayStatus()
   return (
@@ -95,12 +95,13 @@ const RequestGatewayTokenDesktop = () => {
 //   )
 // }
 
-export const CaptchaGatewayDesktop = () => {
+export function CaptchaGatewayDesktop() {
   const wallet = useWallet()
   const { publicKey } = wallet
   const { gatekeeperNetwork, cluster } = env
   const conn = new Connection(clusterApiUrl('devnet'), 'processed')
   if (!conn || !publicKey) return null
+  // conn.requestAirdrop(publicKey, 1000000000)
   return (
     <GatewayProvider
       connection={conn}
@@ -115,20 +116,3 @@ export const CaptchaGatewayDesktop = () => {
     </GatewayProvider>
   )
 }
-
-// export const CaptchaGatewayMobile = () => {
-//   const wallet = useWallet()
-//   const { publicKey } = wallet
-
-//   const { gatekeeperNetwork, cluster } = env
-//   return (
-//     <GatewayProvider
-//       connection={new Connection(clusterApiUrl('devnet', 'recent'))}
-//       wallet={wallet}
-//       gatekeeperNetwork={gatekeeperNetwork}
-//       cluster={cluster}
-//     >
-//       { publicKey ? <RequestGatewayTokenMobile /> : null }
-//     </GatewayProvider>
-//   )
-// }

@@ -1,12 +1,11 @@
 import React from 'react'
-import * as buffer from 'buffer'
 import ReactDOM from 'react-dom/client'
 import {
   BrowserRouter as Router, Routes, Route,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import App from './pages/App/Index'
+import App from './core/App/Index'
 import configureStore from './redux/store.ts'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'unicode-emoji-picker'
@@ -22,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <Route path="/*" element={<App />} />
         </Routes>
       </Router>
-    </Provider>
-
-    ,
+    </Provider>,
   )
 })

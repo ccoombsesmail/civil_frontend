@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react'
-import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
+import { clusterApiUrl, PublicKey } from '@solana/web3.js'
 import {
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
@@ -10,7 +10,7 @@ import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
 } from '../Style'
 
-import Popover from '../../../pages/CommonComponents/PopoverStickOnHover/Index'
+import Popover from '../../../core/CommonComponents/PopoverStickOnHover/Index'
 import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
 require('@solana/wallet-adapter-react-ui/styles.css')
@@ -20,7 +20,7 @@ const env = {
   clusterUrl: clusterApiUrl('devnet'),
   cluster: 'devnet',
 }
-const RequestGatewayToken = () => {
+function RequestGatewayToken() {
   const [showPopover, setShowPopover] = useState(false)
   const onClick = () => setShowPopover((prev) => !prev)
   const { requestGatewayToken } = useGateway()
@@ -73,7 +73,7 @@ const RequestGatewayToken = () => {
   )
 }
 
-const UniquenessGateway = () => {
+function UniquenessGateway() {
   const wallet = useWallet()
   const { publicKey } = wallet
 

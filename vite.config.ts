@@ -42,7 +42,6 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: false,
       rollupOptions: {
         plugins: [
-          // ...plugins
           inject(({ Buffer: ['Buffer', 'Buffer'], process: 'process'})),
           nodePolyfills(),
         ],
@@ -63,11 +62,11 @@ export default defineConfig(({ mode }) => {
           //   process: true,
           //   // buffer: true,
           // }),
-          // NodeModulesPolyfillPlugin()     
+          NodeModulesPolyfillPlugin()     
         ],
         define: {
           this: 'window',
-          global: '{}'
+          // global: '{}'
         },
       },
     },

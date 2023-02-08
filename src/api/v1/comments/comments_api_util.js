@@ -1,5 +1,5 @@
 import axios from 'axios'
-import useSessionType from '../../../pages/hooks/permissions/useSessionType'
+import useSessionType from '../../../core/hooks/permissions/useSessionType'
 
 import { BACKEND_DEV, UPLOAD_SERVICE, selectedEndpoints } from '../../endpoints/endpoints'
 
