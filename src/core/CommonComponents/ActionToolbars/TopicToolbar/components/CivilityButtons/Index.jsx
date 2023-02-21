@@ -5,7 +5,7 @@ import PopoverStickOnHover from '../../../../PopoverStickOnHover/Index'
 import IconButton from '../../../../IconButton/Index'
 import { LightButton } from '../../../../Tooltip/Style/index'
 
-const CivilityButton = () => {
+function CivilityButton() {
   const popover = (
     <Popover id="popover">
       <Popover.Body>

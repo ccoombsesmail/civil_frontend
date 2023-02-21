@@ -8,13 +8,13 @@ export const LightButton = styled(Button)`
   align-items: center;
   border-radius: 50%;
   border: none;
-  background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
+  background-color: ${({ bgcolor }) => bgcolor || 'transparent'};
   width: 25px;
   height: 25px;
   padding: 3px;
   transition: all .4s;
   :hover {
-    background-color: ${({ backgroundColor }) => backgroundColor || 'transparent'};
+    background-color: ${({ bgcolor }) => bgcolor || 'transparent'};
     /* filter: brightness(.9); */
     transform: scale(2);
     

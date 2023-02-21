@@ -3,14 +3,14 @@ import React, { useState, memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import useCategorizeComments from '../hooks/useCategorizeComments'
-import { TabNav, Glider } from '../../../../../CommonComponents/NonBootstrapTabs/Style'
-import TabContent from '../../../../../CommonComponents/NonBootstrapTabs/components/TabContent/Index'
-import TabNavItem from '../../../../../CommonComponents/NonBootstrapTabs/components/TabNavItem/Index'
+import { TabNav, Glider } from '../../../../CommonComponents/NonBootstrapTabs/Style'
+import TabContent from '../../../../CommonComponents/NonBootstrapTabs/components/TabContent/Index'
+import TabNavItem from '../../../../CommonComponents/NonBootstrapTabs/components/TabNavItem/Index'
 import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer } from './Style/index'
-import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
-import { useGetDiscussionQuery } from '../../../../../../api/services/discussions.ts'
-import { useGetAllCommentsQuery } from '../../../../../../api/services/comments.ts'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
+import { useGetDiscussionQuery } from '../../../../../api/services/discussions.ts'
+import { useGetAllCommentsQuery } from '../../../../../api/services/comments.ts'
 
 function DiscussionThread() {
   const { topicId, discussionId } = useParams()

@@ -2,9 +2,8 @@
 import React, { useMemo } from 'react'
 
 import Comment from '../Comment/Index'
+import { ParentCommentContext } from './ParentCommentContext'
 import { Container } from './Style'
-
-export const ParentCommentContext = React.createContext(null)
 
 function CommentColumn({
   numComments, comments, commentSentiment, color, topicId, isReplies,

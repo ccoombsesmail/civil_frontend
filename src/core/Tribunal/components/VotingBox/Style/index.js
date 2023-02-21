@@ -15,6 +15,7 @@ export const VotingContainer = styled('section')`
   border: 0.5px solid lightgray;
   border-color: rgba(200, 200, 200, 0.25);
   margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
+  width: 95%;
 
   @media (max-width: 600px) {
     width: 100%;

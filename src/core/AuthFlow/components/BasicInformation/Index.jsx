@@ -2,9 +2,9 @@ import { Field } from 'formik'
 import React, { useState, useCallback } from 'react'
 import Input3 from '../../../CommonComponents/Form/Input3/Index'
 import { FieldContainer, NamesContainer } from './Style/Index'
-import UploadIconInput from '../../../Dashboard/components/UploadIconInput/Index'
+import UploadIconInput from '../../../pages/DashboardPage/components/UploadIconInput/Index'
 
-const BasicInformation = ({ setFieldValue }) => {
+function BasicInformation({ setFieldValue }) {
   const [file, setFile] = useState(null)
 
   const onChange = useCallback((e) => {

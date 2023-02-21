@@ -6,6 +6,8 @@ import nodePolyfills from 'rollup-plugin-polyfill-node'
 
 import { NodeGlobalsPolyfillPlugin,  } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
+import fs from 'fs';
+import babel from '@rollup/plugin-babel';
 
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
@@ -14,6 +16,7 @@ import svgr from 'vite-plugin-svgr'
 import svgLoader from 'vite-svg-loader'
 
 import { dependencies } from './package.json'
+
 
 const reactDeps = Object.keys(dependencies).filter((key) => key === 'react' || key.startsWith('react-')
 || key.startsWith('@solana') || key.startsWith('styled'))
@@ -48,7 +51,7 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks,
         },
-        external: ['fsevents'],
+        external: ['fsevents', 'bigint-buffer', "Buffer"],
       },
     },
 
@@ -58,10 +61,10 @@ export default defineConfig(({ mode }) => {
       esbuildOptions: {
         plugins: [
           esbuildCommonjs(['@civic/solana-gateway-react', '@solana/wallet-adapter-react-ui']),
-          // NodeGlobalsPolyfillPlugin({
-          //   process: true,
-          //   // buffer: true,
-          // }),
+          NodeGlobalsPolyfillPlugin({
+            process: true,
+            // buffer: true,
+          }),
           NodeModulesPolyfillPlugin()     
         ],
         define: {
@@ -84,8 +87,6 @@ export default defineConfig(({ mode }) => {
         stream: "stream-browserify",
         zlib: "browserify-zlib",
         util: "util",
-        // process: 'rollup-plugin-node-polyfills/polyfills/process-es6'
-
       },
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
     },

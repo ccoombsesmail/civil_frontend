@@ -345,6 +345,10 @@ const GlobalStyle = createGlobalStyle`
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 ol, ul, h1, h2, h3 {
   margin: 0;
   padding: 0;
@@ -384,7 +388,7 @@ blockquote {
     --m-primary-btn-color:  #56899e;
     --m-primary-background-color: #256347;
     --m-primary-background-color:  #527640;
- 
+    --box-shadow-inset: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
 
     --m-form-color: #e6eef9;
     --form-element-height: 45px;
@@ -416,16 +420,16 @@ blockquote {
 
 
     /* EMOJI */
-    unicode-emoji-picker {
+    /* unicode-emoji-picker { */
   
-      font-size: 24px;
+      /* font-size: 24px;
       z-index: 9999;
-      background-color: white;
+      background-color: white; */
     --min-width: 20.8em; /* 6 emojis wide */
     --min-height: 11.5em; /* 4 emojis tall */
     --max-width: 20.8em; /* 11 emojis wide */
     --max-height: 11.5em; /* 10 emojis tall */
-    }
+    /* } */
     /* EMOJI */
 
 

@@ -5,7 +5,6 @@ import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 import { VideoPlayer } from './Style'
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
-import UserProvidedMediaCard from '../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
 import Card from '../../../../../../CommonComponents/TopicCard/Index'
 
@@ -14,6 +13,7 @@ import useGoToDiscussions from '../../../../../../hooks/routing/useGoToDiscussio
 import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import { useGetLinkMetaDataQuery } from '../../../../../../../api/services/links.ts'
+import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
 
 function TopicItem({ topic, user, hideCommentButton }) {
   const goToDiscussion = useGoToDiscussions(topic.id)
@@ -71,8 +71,13 @@ function TopicItem({ topic, user, hideCommentButton }) {
     )
   } else if (linkType === Web) {
     cardbody = isLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
-  } else if (topic?.createdByVodUrl || topic?.createdByImageUrl) {
-    cardbody = <UserProvidedMediaCard {...commonProps} />
+  } else if (topic?.userUploadedImageUrl || topic?.userUploadedVodUrl) {
+    cardbody = (
+      <UserUploadedMedia
+        videoFile={topic.userUploadedVodUrl}
+        imgFile={topic.userUploadedImageUrl}
+      />
+    )
   } else {
     cardbody = null
   }

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
   GatewayProvider, useGateway,
@@ -62,6 +62,7 @@ function StatusIcon({ placement }) {
 
 function RequestGatewayTokenDesktop() {
   const { requestGatewayToken } = useGateway()
+
   const [color, statusMsg, icon] = useGetGatewayStatus()
   return (
     <Container>
@@ -70,38 +71,37 @@ function RequestGatewayTokenDesktop() {
       <StyledExpandButton
         iconButton
         margin={0}
-        backgroundColor={color}
+        bgColor={color}
         type="submit"
         icon={icon}
         onClick={requestGatewayToken}
-        width="150px"
+        width="170px"
         civicButton
       >
-        <span style={{ marginLeft: '10px' }}>
-          {statusMsg}
-        </span>
-
+        {statusMsg}
       </StyledExpandButton>
     </Container>
   )
 }
 
-// const RequestGatewayTokenMobile = () => {
-
-//   return (
-//     <Container>
-//       <StatusIcon placement="bottom" />
-//     </Container>
-//   )
-// }
-
 export function CaptchaGatewayDesktop() {
   const wallet = useWallet()
+
   const { publicKey } = wallet
   const { gatekeeperNetwork, cluster } = env
   const conn = new Connection(clusterApiUrl('devnet'), 'processed')
+  useEffect(() => {
+    const getBalance = async () => {
+      if (conn && publicKey) {
+        const bal = await conn.getBalance(publicKey)
+        if (0.000000001 * bal < 0.5) {
+          conn.requestAirdrop(publicKey, 1000000000)
+        }
+      }
+    }
+    getBalance()
+  }, [conn, publicKey])
   if (!conn || !publicKey) return null
-  // conn.requestAirdrop(publicKey, 1000000000)
   return (
     <GatewayProvider
       connection={conn}

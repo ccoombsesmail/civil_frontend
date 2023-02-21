@@ -4,17 +4,19 @@
 import React, { useMemo } from 'react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
+import { Link } from 'react-router-dom'
 import ExpandButton from '../CommonComponents/Buttons/ExpandButton/Index'
 import useSessionType from '../hooks/permissions/useSessionType'
 import useGoToAuthPage from '../hooks/routing/useGoToAuthPage'
 import {
-  Container, Icon, AuthButtonContainer, PassesContainer, StyledLine,
+  Container, Icon, AuthButtonContainer, PassesContainer, StyledLine, GetVerifiedContainer,
 } from './Style'
 import { longUsernameDisplay } from '../../generic/string/longUsernameDisplay'
 import { CaptchaGatewayDesktop } from '../../civic/components/CaptchGateway/CaptchaGateway'
-// import UniquenessGateway from '../../civic/components/UniquenessGateway/UniquenessGateway'
+import UniquenessGateway, { UniquenessStatus } from '../../civic/components/UniquenessGateway/UniquenessGateway'
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 import useReplaceDisconnectButtonEffect from '../../civic/hooks/useReplaceDisconnectButtonEffect'
+import { CivicArrow } from '../../svgs/svgs'
 
 function UserInformationDisplay() {
   const { currentUser } = useGetCurrentUser()
@@ -77,8 +79,18 @@ function UserInformationDisplay() {
                 <b>Civic Passes</b>
                 <PassesContainer>
                   <CaptchaGatewayDesktop />
-                  {/* <UniquenessGateway /> */}
+                  <UniquenessStatus />
                 </PassesContainer>
+                <Link to="/authenticate/civic-verify">
+                  <GetVerifiedContainer>
+                    <CivicArrow />
+                    <span>
+                      Get Verified
+                    </span>
+                    <CivicArrow />
+                  </GetVerifiedContainer>
+                </Link>
+
               </div>
 
             ) : (
@@ -88,7 +100,7 @@ function UserInformationDisplay() {
                   width="45%"
                   height="2.5vw"
                   type="button"
-                  backgroundColor="var(--m-primary-btn-color)"
+                  bgColor="var(--m-primary-btn-color)"
                   onClick={goToAuthPage}
                 >
                   Sign Up
@@ -97,7 +109,7 @@ function UserInformationDisplay() {
                   width="45%"
                   height="2.5vw"
                   type="button"
-                  backgroundColor="var(--m-primary-btn-color)"
+                  bgColor="var(--m-primary-btn-color)"
                   onClick={goToAuthPage}
                 >
                   Sign In

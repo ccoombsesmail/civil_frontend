@@ -1,10 +1,10 @@
-import React, { memo, useCallback } from 'react'
-import { useGetAllCommentRepliesQuery } from '../../../../../../api/services/comments.ts'
-import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
-import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import React, { memo, useCallback, useMemo } from 'react'
+import { useGetAllCommentRepliesQuery } from '../../../../../api/services/comments.ts'
+import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
 import Comment from '../Comment/Index'
-import { ParentCommentContext } from '../CommentColumn/Index'
+import { ParentCommentContext } from '../CommentColumn/ParentCommentContext'
 import LineWithOverlayText from '../LineWithTextOverlay/Index'
 
 function ParentComment({ topicId, commentId, isFocusedComment }) {
@@ -17,6 +17,11 @@ function ParentComment({ topicId, commentId, isFocusedComment }) {
       node.scrollIntoView()
     }
   }, [])
+  const contextValue = useMemo(() => ({
+    commentId,
+    topicId,
+    isFocusedComment,
+  }))
 
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="15vw" />
@@ -26,11 +31,7 @@ function ParentComment({ topicId, commentId, isFocusedComment }) {
         Discussion Comment
       </LineWithOverlayText>
       <ParentCommentContext.Provider
-        value={{
-          commentId,
-          topicId,
-          isFocusedComment,
-        }}
+        value={contextValue}
       >
         <Comment commentRef={commentRef} commentData={commentData.comment} replies={[]} isFocusedComment />
       </ParentCommentContext.Provider>

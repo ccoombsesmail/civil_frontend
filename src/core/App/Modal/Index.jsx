@@ -15,9 +15,8 @@ const CommentForm = React.lazy(() => import('../../Forms/CommentForm/Index'))
 const CreateDiscussionForm = React.lazy(() => import('../../Forms/DiscussionForm/Index'))
 
 const OpposingRecForm = React.lazy(() => import('../../OpposingRecForm/Index'))
-const CreateTagForm = React.lazy(() => import('../../CreateTagForm/Index'))
+const CreateTagForm = React.lazy(() => import('../../Forms/CreateTagForm/Index'))
 const VoteForm = React.lazy(() => import('../../VoteForm/Index'))
-const ReportForm = React.lazy(() => import('../../ReportForm/Index'))
 
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
@@ -31,7 +30,7 @@ export const TOPIC_VOTE_FORM = 'TOPIC_VOTE_FORM'
 
 export const REPLY_FROM_TOPIC = 'REPLY_FROM_TOPIC' // when replying directly to a topic
 
-const Modal = ({ closeModal }) => {
+function Modal({ closeModal }) {
   const { modalType, modalProps } = useSelector((s) => s.ui)
 
   const isOpen = useSelector((s) => s.ui.modalOpen)
@@ -49,9 +48,6 @@ const Modal = ({ closeModal }) => {
       break
     case OPPOSING_REC_FORM:
       component = <OpposingRecForm {...modalProps} />
-      break
-    case REPORT_FORM:
-      component = <ReportForm {...modalProps} />
       break
     case TOPIC_VOTE_FORM:
       component = <VoteForm {...modalProps} />

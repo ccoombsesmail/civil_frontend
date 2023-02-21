@@ -10,15 +10,15 @@ import UsernameAndTag from '../UsernameAndTag/Index'
 import { CAPTCHA_VERIFIED, FACE_ID_VERIFIED } from '../../../enums/UserVerifcationType'
 import { longUsernameDisplay } from '../../../generic/string/longUsernameDisplay'
 
-export const RobotIcon = () => (
-  <>
+export function RobotIcon() {
+  return (
     <img src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg" alt="" />
-  </>
-)
+  )
+}
 
-const UserInfoHeader = ({
+function UserInfoHeader({
   time, username, userId, iconSrc, topicCreatorIsDidUser, userTag, userVerificationType,
-}) => {
+}) {
   const usernameDisplay = userId?.startsWith('did') ? `${username.substring(0, 12)}` : username
   const openDidExplorer = useOpenDidExplorer(username)
   return (
@@ -36,7 +36,7 @@ const UserInfoHeader = ({
             <ThemeTooltip
               onClick={openDidExplorer}
               Icon={RobotIcon}
-              backgroundColor="var(--m-civic-theme-main-color)"
+              bgColor="var(--m-civic-theme-main-color)"
               tooltipHeader="CAPTCHA Verified"
               tooltipText={`User ${longUsernameDisplay(username)} Was Verfied To NOT Be A Bot At The Time This Content Was created`}
             />

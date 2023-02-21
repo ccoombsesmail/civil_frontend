@@ -7,7 +7,9 @@ import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { InfoIconSvg } from '../../../svgs/svgs'
 import { LightButton, TooltipContent } from './Style/index'
 
-export const TooltipPopover =  React.forwardRef(({ onClick, tooltipHeader, tooltipText, ...rest }, ref)  => (
+export const TooltipPopover = React.forwardRef(({
+  onClick, tooltipHeader, tooltipText, ...rest
+}, ref) => (
   <Popover ref={ref} id="popover" {...rest}>
     <Popover.Header as="h3">{tooltipHeader}</Popover.Header>
     <Popover.Body>
@@ -18,9 +20,9 @@ export const TooltipPopover =  React.forwardRef(({ onClick, tooltipHeader, toolt
   </Popover>
 ))
 
-const ThemeTooltip = ({
-  tooltipText, tooltipHeader, Icon, onClick, backgroundColor,
-}) => {
+function ThemeTooltip({
+  tooltipText, tooltipHeader, Icon, onClick, bgColor,
+}) {
   const popover = (
     <TooltipPopover
       onClick={onClick}
@@ -34,7 +36,7 @@ const ThemeTooltip = ({
       delay={{ show: 450, hide: 0 }}
       overlay={popover}
     >
-      <LightButton variant="light" backgroundColor={backgroundColor}>
+      <LightButton variant="light" bgcolor={bgColor}>
         {
           Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
         }

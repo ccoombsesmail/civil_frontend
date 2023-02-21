@@ -78,10 +78,9 @@ export const Container = styled('div')`
   text-align: center;
   margin: 1px;
   padding-top: 80px;
-  margin-top: 50px;
+  margin-top: 20px;
   background: white
-    url("https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png")
-    ;
+    url("https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png");
   background-repeat: repeat no-repeat;
   background-size: 90%;
   /* background-size: 200px 100px; */
@@ -94,11 +93,11 @@ export const Container = styled('div')`
   }
 
   h1 {
-    padding-top: 30px;
+    padding: 0;
   }
 
   h2 {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     color: var(--gray-dark);
 
   }
@@ -170,9 +169,37 @@ export const PassesContainer = styled('div')`
   iframe {
     min-height: 640px;
   }
+  button {
+    border-radius: 4px;
+  }
+
 `
 
 export const StyledLine = styled(Line)`
-  margin: 1.4vw 0;
+  margin: 1vw 0;
   width: 100%;
+`
+
+export const GetVerifiedContainer = styled('div')`
+  -webkit-text-stroke-width: .5px;
+  stroke-width: .5px;
+  font-size: 1vw;
+  margin-top: 10px;
+  border-radius: 10px;
+  transition: all .5s;
+  color: rgba(255,96,65, 1);
+  box-shadow: var(--box-shadow-inset);
+
+  cursor: pointer; 
+  :hover {
+    background-color: rgba(255,96,65, 1);
+    color: white;
+  }
+  svg:nth-child(3) {
+    transform: rotate(180deg);
+  }
+  svg {
+    margin: 5px;
+    width: 1.5vw;
+  }
 `

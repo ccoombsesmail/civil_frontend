@@ -8,10 +8,12 @@ import CreateCommentForm from '../../../Forms/CommentForm/Index'
 import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 import { initialConfig } from '../../../CommonComponents/Lexical/App.tsx'
 
-const WhatDoYouThink = ({ topic, comment }) => {
+function WhatDoYouThink({ topic, comment }) {
   const { contentId } = useParams()
   const [modal, showModal] = useModal()
   const getFommentFormState = useGetCommentState(topic, comment, contentId)
+  console.log(topic)
+  console.log(comment)
   const onClick = useCallback(() => {
     const commentFormState = getFommentFormState()
     showModal('Write A Reply', (onClose) => (

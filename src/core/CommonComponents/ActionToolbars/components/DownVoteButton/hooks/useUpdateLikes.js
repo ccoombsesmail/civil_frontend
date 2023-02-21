@@ -6,7 +6,7 @@ import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentP
 import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
 import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments.ts'
 import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments.ts'
-import { ParentCommentContext } from '../../../../../pages/DiscussionsPage/components/CommentColumn/Index'
+import { ParentCommentContext } from '../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
 
 export default (content, user, contentType) => {
   const { isReplies, isFocusedComment, commentId } = useContext(ParentCommentContext) || {}

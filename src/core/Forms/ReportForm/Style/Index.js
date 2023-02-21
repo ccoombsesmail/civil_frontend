@@ -36,6 +36,7 @@ export const Item = styled('li')`
 
 export const Container = styled('div')`
   position: relative;
+  width: clamp(400px, 50vw, 1000px);
   h1 {
     width: 100%;
     margin: 0;

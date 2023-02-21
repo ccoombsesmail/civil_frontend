@@ -24,7 +24,7 @@ import {
 } from '../TopicForm/Style'
 import LexicalEditor from './components/LexicalEditor/Index'
 
-const CreateCommentForm = ({ closeModal, commentFormState }) => {
+function CreateCommentForm({ closeModal, commentFormState }) {
   const [richTextEditorData, setRichTextEditorData] = useState({
     lexicalContent: '',
     rawText: '',
@@ -50,9 +50,7 @@ const CreateCommentForm = ({ closeModal, commentFormState }) => {
     lexicalRawContent, createdByIconSrc, createdBy, time,
   } = commentFormState
 
-  const handleSubmit = useHandleSubmit(
-    commentFormState, richTextEditorData, closeModal,
-  )
+  const handleSubmit = useHandleSubmit(commentFormState, richTextEditorData, closeModal)
   const initialConfigReadOnly = {
     editorState: lexicalRawContent,
     namespace: 'Civil-Comment-Form',
@@ -82,48 +80,43 @@ const CreateCommentForm = ({ closeModal, commentFormState }) => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <>
-            <FormContainer>
-              <UserInfoHeader
-                iconSrc={createdByIconSrc}
-                username={createdBy}
-                time={getTimeSince(time)}
-              />
+          <FormContainer>
+            <UserInfoHeader
+              iconSrc={createdByIconSrc}
+              username={createdBy}
+              time={getTimeSince(time)}
+            />
 
-              <EditorsWrapper>
-                <LexicalComposer initialConfig={initialConfigReadOnly}>
-                  <ReadOnlyEditor />
-                </LexicalComposer>
-                <Line />
-                <LexicalEditor setRichTextEditorData={setRichTextEditorData} />
-              </EditorsWrapper>
+            <EditorsWrapper>
+              <LexicalComposer initialConfig={initialConfigReadOnly}>
+                <ReadOnlyEditor />
+              </LexicalComposer>
               <Line />
-              <Footer>
-
-                <ToxicityControls>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <Button
-                        type="button"
-                        onClick={() => checkToxicity({ content: richTextEditorData.rawText }).then((res) => {
-                          setToxicityScore(res.data.SEVERE_TOXICITY.toFixed(2))
-                        })}
-                      >
-                        Check Toxicity Score
-                      </Button>
-                      <AnimatedCheckmark toxicityScore={toxicityScore} />
-                    </div>
-                    <p>{ toxicityScore && `Your toxicity score is ${toxicityScore}`}</p>
+              <LexicalEditor setRichTextEditorData={setRichTextEditorData} />
+            </EditorsWrapper>
+            <Footer>
+              <ToxicityControls>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Button
+                      type="button"
+                      onClick={() => checkToxicity({ content: richTextEditorData.rawText }).then((res) => {
+                        setToxicityScore(res.data.SEVERE_TOXICITY.toFixed(2))
+                      })}
+                    >
+                      Check Toxicity Score
+                    </Button>
+                    <AnimatedCheckmark toxicityScore={toxicityScore} />
                   </div>
-                </ToxicityControls>
-                <Button type="submit" disabled={isSubmitting}>
-                  Submit
-                </Button>
-              </Footer>
+                  <p>{ toxicityScore && `Your toxicity score is ${toxicityScore}`}</p>
+                </div>
+              </ToxicityControls>
+              <Button type="submit" disabled={isSubmitting}>
+                Submit
+              </Button>
+            </Footer>
 
-            </FormContainer>
-
-          </>
+          </FormContainer>
         )}
       </Formik>
     </Container>

@@ -8,10 +8,8 @@ import { Provider } from 'react-redux'
 import App from './core/App/Index'
 import configureStore from './redux/store.ts'
 import 'react-toastify/dist/ReactToastify.min.css'
-import 'unicode-emoji-picker'
 
 document.addEventListener('DOMContentLoaded', () => {
-  // window.Buffer = buffer.Buffer
   const root = document.getElementById('root')
 
   ReactDOM.createRoot(root).render(

@@ -6,31 +6,35 @@ import { Container, Link } from './Style'
 
 const domainExtractor = new RegExp(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im)
 
-const TooltipComponent = ({ idx, linkText, link }) => (
-  <OverlayTrigger
-    placement="right"
-    overlay={(
-      <Tooltip>
-        <strong>{link}</strong>
-      </Tooltip>
+function TooltipComponent({ idx, linkText, link }) {
+  return (
+    <OverlayTrigger
+      placement="right"
+      overlay={(
+        <Tooltip>
+          <strong>{link}</strong>
+        </Tooltip>
       )}
-  >
-    <Link key={String(idx)} href={link} target="_blank">
-      {linkText[1]}
-    </Link>
-  </OverlayTrigger>
-)
+    >
+      <Link key={String(idx)} href={link} target="_blank">
+        {linkText[1]}
+      </Link>
+    </OverlayTrigger>
+  )
+}
 
-const SupplementalLinks = ({ links }) => (
-  <Container>
-    {links?.map((link, idx) => {
-      const linkText = link.match(domainExtractor)
-      return (
-        <TooltipComponent key={String(idx)} linkText={linkText} idx={idx} link={link} />
+function SupplementalLinks({ links }) {
+  return (
+    <Container>
+      {links?.map((link, idx) => {
+        const linkText = link.match(domainExtractor)
+        return (
+          <TooltipComponent key={String(idx)} linkText={linkText} idx={idx} link={link} />
 
-      )
-    })}
-  </Container>
-)
+        )
+      })}
+    </Container>
+  )
+}
 
 export default SupplementalLinks

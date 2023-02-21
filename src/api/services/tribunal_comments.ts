@@ -17,12 +17,12 @@ export interface Comment {
   thumbImgUrl?: string;
 }
 
-export const findComment = (payload, root) => {
+export const findComment = (id, root) => {
   const queue = []
   queue.push(root)
   while (queue.length > 0) {
     const currNode = queue.shift()
-    if (currNode.data.id === payload.commentId) {
+    if (currNode.data.id === id) {
       return currNode
     }
     for (let child of currNode.children) {
@@ -32,9 +32,6 @@ export const findComment = (payload, root) => {
 };
 
 export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
-  // reducerPath: "tribunalComments",
-  // tagTypes: ["TribunalComments"],
-  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllTribunalComments: builder.query<any, any>({
       query: (contentId, commentType) => ({
@@ -106,7 +103,7 @@ export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
                 comment.data.likes += updateLikeValue;
                 return finishDraft(newDraft);
               }
-              comment = findComment(patch, rootComment);
+              comment = findComment(id, rootComment);
               comment.data.likeState = patch.value;
               comment.data.likes += updateLikeValue;
               return finishDraft(newDraft);
@@ -136,6 +133,7 @@ export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
           civility,
           reportedContentId,
           updateGetTopicQuery,
+          parentId,
           ...patch
         },
         { dispatch, queryFulfilled }
@@ -148,13 +146,14 @@ export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
             (draft) => {
               let comment;
               const newDraft = createDraft(draft);
-              const rootComment = newDraft.find((c) => c.data.id === rootId);
-              if (!rootId) {
+              if (!parentId) {
                 comment = newDraft.find((c) => c.data.id === id);
                 comment.data.civility = patch.value;
                 return finishDraft(newDraft);
               }
-              comment = findComment(patch, rootComment);
+
+              const rootComment = newDraft.find((c) => c.data.id === rootId);
+              comment = findComment(id, rootComment);
               comment.data.civility = patch.value;
               return finishDraft(newDraft);
             }

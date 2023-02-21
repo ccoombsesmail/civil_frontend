@@ -27,10 +27,11 @@ import {
   FlexDivLink, Footer, SectionDescription, FormContainer, InputsContainer, Container, Left,
   Line, Arrow, FlexDiv,
 } from '../TopicForm/Style'
+import DisplayMedia from '../components/DisplayMedia/Index'
 
 const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
 
-const CreateDiscussionForm = ({ closeModal }) => {
+function CreateDiscussionForm({ closeModal }) {
   const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
   const [imgFile, setImgFile] = useState(null)
@@ -64,114 +65,110 @@ const CreateDiscussionForm = ({ closeModal }) => {
         // validate={validator}
         onSubmit={((values, params) => handleSubmit(values, params, richTextEditorContent, externalContentUrl))}
       >
-        {({ isSubmitting, setFieldValue, setFieldTouched }) => (
-          <>
+        {({ isSubmitting, setFieldValue }) => (
+          <FormContainer>
+            <InputsContainer>
+              <Left>
+                <FlexDiv>
+                  <SectionDescription> Discussion Title </SectionDescription>
+                  <ThemeTooltip
+                    tooltipHeader="Topic Description"
+                    tooltipText="Enter A Short Title To Indicate What You Would Like To Dicuss in Relation To The Current Topic"
+                  />
+                </FlexDiv>
+                <Field type="text" name="title" label="Title*" component={Input} placeholder="Enter A Topic Title" />
+                <Line />
 
-            <FormContainer>
-              <InputsContainer>
-                <Left>
-                  <FlexDiv>
-                    <SectionDescription> Discussion Title </SectionDescription>
-                    <ThemeTooltip
-                      tooltipHeader="Topic Description"
-                      tooltipText="Enter A Short Title To Indicate What You Would Like To Dicuss in Relation To The Current Topic"
-                    />
-                  </FlexDiv>
-                  <Field type="text" name="title" label="Title*" component={Input} placeholder="Enter A Topic Title" />
-                  <Line />
+                <FlexDiv>
+                  <SectionDescription> Add your own media content </SectionDescription>
+                  <ThemeTooltip
+                    tooltipHeader="User Provided Content"
+                    tooltipText="This could be an image, graphic, or video pertaining to the the discussion"
+                  />
+                </FlexDiv>
+                <FlexDiv direction="column">
+                  <UploadMediaContainer
+                    setFieldValue={setFieldValue}
+                    imgFile={imgFile}
+                    videoFile={videoFile}
+                    setImgFile={setImgFile}
+                    setVideoFile={setVideoFile}
+                  />
+                </FlexDiv>
+                <DisplayMedia imgFile={imgFile} videoFile={videoFile} />
+                <Line />
 
-                  <FlexDiv>
-                    <SectionDescription> Add your own media content </SectionDescription>
-                    <ThemeTooltip
-                      tooltipHeader="User Provided Content"
-                      tooltipText="This could be an image, graphic, or video pertaining to the the discussion"
-                    />
-                  </FlexDiv>
-                  <FlexDiv>
-                    <UploadMediaContainer
-                      setFieldValue={setFieldValue}
-                      imgFile={imgFile}
-                      videoFile={videoFile}
-                      setImgFile={setImgFile}
-                      setVideoFile={setVideoFile}
-                    />
-                  </FlexDiv>
-                  <Line />
-
-                  <FlexDiv>
-                    <SectionDescription>
-                      Link to what you want to discuss here...
-                    </SectionDescription>
-                    <ThemeTooltip
-                      tooltipHeader="Discussed Content"
-                      tooltipText="Add a link to the external content which pertains to the discussion (
+                <FlexDiv>
+                  <SectionDescription>
+                    Link to what you want to discuss here...
+                  </SectionDescription>
+                  <ThemeTooltip
+                    tooltipHeader="Discussed Content"
+                    tooltipText="Add a link to the external content which pertains to the discussion (
                         e.g a YouTube video, Tweet, publication, or anything else). Use this if the content you are linking is the main subject of the discussion"
+                  />
+                </FlexDiv>
+                <FlexDivLink className="toolbar">
+                  <EmbedDropdown setContentUrl={setContentUrl} />
+                </FlexDivLink>
+              </Left>
+            </InputsContainer>
+            <Line />
+            <LexicalFormContext.Provider value={{
+              setContentUrl,
+            }}
+            >
+              <div id="insert-embed-node" />
+              <LexicalEditor />
+            </LexicalFormContext.Provider>
+
+            <Arrow
+              rotate={rotate}
+              onClick={() => {
+                setOpen(!open)
+                setRotate(rotate + (open ? -180 : 180))
+              }}
+            >
+              <DownArrowCircleSvg />
+            </Arrow>
+            <Fade in={!open}>
+              <div>
+                References
+              </div>
+            </Fade>
+            <InputsContainer>
+              <Collapse in={open}>
+                <div style={{ whiteSpace: 'nowrap', width: '100%' }}>
+                  <FlexDiv>
+                    <h2> Enter Links To Supplemental Evidence </h2>
+                    <ThemeTooltip
+                      tooltipText="Provide links to additional reading or evidence etc..."
+                      tooltipHeader="Supplemental Information"
                     />
                   </FlexDiv>
-                  <FlexDivLink className="toolbar">
-                    <EmbedDropdown setContentUrl={setContentUrl} />
-                  </FlexDivLink>
-                </Left>
-              </InputsContainer>
-              <Line />
-              <LexicalFormContext.Provider value={{
-                setContentUrl,
-              }}
-              >
-                <div id="insert-embed-node" />
-                <LexicalEditor />
-              </LexicalFormContext.Provider>
-
-              <Arrow
-                rotate={rotate}
-                onClick={() => {
-                  setOpen(!open)
-                  setRotate(rotate + (open ? -180 : 180))
-                }}
-              >
-                <DownArrowCircleSvg />
-              </Arrow>
-              <Fade in={!open}>
-                <div>
-                  References
+                  <Field type="url" name="Evidence Link 1" component={Input} width="100%" label="Link To Evidence" />
+                  <Field type="url" name="Evidence Link 2" component={Input} width="100%" label="Link To Evidence" />
+                  <Field type="url" name="Evidence Link 3" component={Input} width="100%" label="Link To Evidence" />
                 </div>
-              </Fade>
-              <InputsContainer>
-                <Collapse in={open}>
-                  <div style={{ whiteSpace: 'nowrap', width: '100%' }}>
-                    <FlexDiv>
-                      <h2> Enter Links To Supplemental Evidence </h2>
-                      <ThemeTooltip
-                        tooltipText="Provide links to additional reading or evidence etc..."
-                        tooltipHeader="Supplemental Information"
-                      />
-                    </FlexDiv>
-                    <Field type="url" name="Evidence Link 1" component={Input} width="100%" label="Link To Evidence" />
-                    <Field type="url" name="Evidence Link 2" component={Input} width="100%" label="Link To Evidence" />
-                    <Field type="url" name="Evidence Link 3" component={Input} width="100%" label="Link To Evidence" />
-                  </div>
-                </Collapse>
-              </InputsContainer>
-              <Line />
-
-              <Footer>
-                <ExpandButton
-                  type="submit"
-                  backgroundColor="var(--m-primary-btn-color)"
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </ExpandButton>
-                <ExpandButton
-                  type="submit"
-                  backgroundColor="var(--m-primary-btn-color)"
-                  disabled={isSubmitting}
-                >
-                  Submit
-                </ExpandButton>
-              </Footer>
-            </FormContainer>
-          </>
+              </Collapse>
+            </InputsContainer>
+            <Footer>
+              <ExpandButton
+                type="submit"
+                bgColor="var(--m-primary-btn-color)"
+                disabled={isSubmitting}
+              >
+                Cancel
+              </ExpandButton>
+              <ExpandButton
+                type="submit"
+                bgColor="var(--m-primary-btn-color)"
+                disabled={isSubmitting}
+              >
+                Submit
+              </ExpandButton>
+            </Footer>
+          </FormContainer>
         )}
       </Formik>
     </Container>

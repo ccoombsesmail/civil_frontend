@@ -1,9 +1,10 @@
 import React from 'react'
+import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 import { ButtonBackground, StyledButton, Container } from './Style'
 
-const ExpandButton = ({
+function ExpandButton({
   children,
-  backgroundColor,
+  bgColor,
   onClick,
   width,
   height,
@@ -12,13 +13,19 @@ const ExpandButton = ({
   type,
   civicButton,
   iconButton,
-}) => (
-  <Container backgroundColor={backgroundColor} width={width} height={height} margin={margin}>
-    <StyledButton backgroundColor={backgroundColor} onClick={onClick} type={type} iconButton={iconButton}>
-      <ButtonBackground backgroundColor={backgroundColor} civicButton={civicButton} />
-      {icon}
-      <span>{children}</span>
-    </StyledButton>
-  </Container>
-)
+  disabled,
+}) {
+  return (
+    <Container backgroundColor={bgColor} width={width} height={height} margin={margin}>
+      { disabled ? <CircleLoading size={5} />
+        : (
+          <StyledButton backgroundColor={bgColor} onClick={onClick} type={type} iconButton={iconButton} disabled={disabled}>
+            <ButtonBackground backgroundColor={bgColor} civicButton={civicButton} />
+            {icon}
+            <span>{children}</span>
+          </StyledButton>
+        )}
+    </Container>
+  )
+}
 export default ExpandButton

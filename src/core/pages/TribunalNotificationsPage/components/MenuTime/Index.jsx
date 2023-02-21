@@ -2,19 +2,17 @@ import React, { useState } from 'react'
 import {
   VerticalMenuDotsSvg, DeleteSvg, ReadSvg,
 } from '../../../../../svgs/svgs'
-import notificationActionCreators from '../../../../../redux/actions/notifications/index'
-import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
+import { useUpdateNotificationToReadMutation, useDeleteNotificationMutation } from '../../../../../api/services/notifications.ts'
 import {
   MenuTimeContainer, Time, MenuIconContainer, ActionMenu, ActionMenuItem,
 } from './Style/index'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
 export function MenuTime({ time, id, eventType }) {
   const [isOpen, setIsOpen] = useState(false)
-  const {
-    updateNotificationToRead,
-    deleteNotification,
-  } = useBindDispatch(notificationActionCreators)
-
+  const [updateNotificationToRead] = useUpdateNotificationToReadMutation()
+  const [deleteNotification] = useDeleteNotificationMutation()
+  const { currentUser } = useGetCurrentUser()
   return (
     <MenuTimeContainer>
       <MenuIconContainer onClick={(e) => {
@@ -30,13 +28,13 @@ export function MenuTime({ time, id, eventType }) {
       >
         <VerticalMenuDotsSvg />
         <ActionMenu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
-          <ActionMenuItem onClick={() => updateNotificationToRead(eventType, id)}>
+          <ActionMenuItem onClick={() => updateNotificationToRead({ notificationType: eventType, id, userId: currentUser.userId })}>
             <ReadSvg />
             <span>
               Mark As Read
             </span>
           </ActionMenuItem>
-          <ActionMenuItem onClick={() => deleteNotification(eventType, id)}>
+          <ActionMenuItem onClick={() => deleteNotification({ notificationType: eventType, id, userId: currentUser.userId })}>
             <DeleteSvg />
             <span>
               Delete Notification

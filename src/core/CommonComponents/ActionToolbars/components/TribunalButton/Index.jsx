@@ -2,18 +2,24 @@ import React, { memo, useState, useCallback } from 'react'
 
 import { ScalesSvg, CommunityCourtSvg } from '../../../../../svgs/svgs'
 import { Menu, Container, Item } from './Style'
-import { REPORT_FORM } from '../../../../App/Modal/Index'
-import useOpenModal from '../../../../hooks/useOpenModal'
+import useModal from '../../../Lexical/hooks/useModal.tsx'
+import ReportForm from '../../../../Forms/ReportForm/Index'
 
-const TribunalButton = ({ contentId }) => {
+function TribunalButton({ contentId }) {
   const [isOpen, setIsOpen] = useState(false)
-  const openModal = useOpenModal(REPORT_FORM, { contentId })
+  const [modal, showModal] = useModal()
+  const openModal = useCallback(() => {
+    showModal('Create Tag', (onClose) => (
+      <ReportForm closeModal={onClose} contentId={contentId} />
+    ))
+  }, [contentId])
   const onCourtClick = useCallback(() => {
     openModal()
     setIsOpen(false)
   }, [openModal])
   return (
     <Container>
+      {modal}
       <Menu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <Item onClick={onCourtClick}>
           <CommunityCourtSvg />

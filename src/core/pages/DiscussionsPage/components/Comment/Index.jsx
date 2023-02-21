@@ -22,13 +22,13 @@ import { getTimeSince } from '../../../../../generic/string/dateFormatter'
 import PlaygroundEditorTheme from '../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
 import PlaygroundNodes from '../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 
-import { ParentCommentContext } from '../CommentColumn/Index'
 import ThemeTooltip from '../../../../CommonComponents/Tooltip/Index'
 import { UNDER_REVIEW } from '../../../../../enums/report_status'
 import { COMMENT } from '../../../../../enums/content_type'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 import ReadOnlyEditor from '../../../../CommonComponents/Lexical/ReadOnlyEditor.tsx'
+import { ParentCommentContext } from '../CommentColumn/ParentCommentContext'
 
 function Comment({
   commentData, replies, commentRef, level, isFocusedComment,
@@ -59,7 +59,7 @@ function Comment({
       <CommentContainer color={colors[level]} isFocusedComment={isFocusedComment}>
         <Header onClick={() => navigate(`/home/topics/${topicId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
           <UserInfoContainer>
-            <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_img_1.png'} />
+            <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} />
             <ThemeTooltip
               tooltipHeader="Experience"
               tooltipText={commentData.createdByExperience}

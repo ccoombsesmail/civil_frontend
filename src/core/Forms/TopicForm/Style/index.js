@@ -2,12 +2,28 @@ import styled from 'styled-components'
 import { Form } from 'formik'
 // import { FiArrowDownCircle } from 'react-icons/fi'
 
+export const UploadImage = styled('img')`
+  border-radius: 1em;
+  max-width: 500px;
+  margin-top: 2vw;
+
+`
+
+export const UploadVideo = styled('video')`
+  border-radius: 1em;
+  max-width: 100%;
+  margin-top: 2vw;
+
+`
+
 export const Footer = styled('div')` 
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  margin: 10px;
+  margin: 20px 0 10px 0;
+  padding: 20px 0 10px 0;
+  border-top: 1px solid #ccc;
 `
 
 export const FlexDiv = styled('div')` 
@@ -15,6 +31,7 @@ export const FlexDiv = styled('div')`
   align-items: center;
   justify-content: center;
   width: 100%;
+  flex-direction: ${(props) => props.direction || 'row'};
 `
 
 export const FlexDivLink = styled('div')` 

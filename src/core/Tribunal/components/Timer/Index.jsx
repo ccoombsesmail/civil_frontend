@@ -8,7 +8,7 @@ import {
 
 import { calculateTimeLeft } from '../../../../generic/time/calculateTimeLeft'
 
-const Timer = ({ reportStats, refetch }) => {
+function Timer({ reportStats, refetch }) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(reportStats.reportPeriodEnd).timeLeft)
   useEffect(() => {
     const timer = setInterval(() => {
@@ -24,32 +24,30 @@ const Timer = ({ reportStats, refetch }) => {
   }, [reportStats])
 
   return (
-    <>
-      <Container>
-        <Headline>
-          { +new Date(reportStats?.reportPeriodEnd) - +new Date() > 0 ? 'Voting Period Time Remaining' : 'Voting Has Ended' }
-        </Headline>
-        {'\n'}
-        <ul>
-          <TimeItem>
-            <span id="days">{timeLeft.days}</span>
-            Days
-          </TimeItem>
-          <TimeItem>
-            <span id="hours">{timeLeft.hours}</span>
-            Hours
-          </TimeItem>
-          <TimeItem>
-            <span id="minutes">{timeLeft.minutes}</span>
-            Minutes
-          </TimeItem>
-          <TimeItem>
-            <span id="seconds">{timeLeft.seconds}</span>
-            Seconds
-          </TimeItem>
-        </ul>
-      </Container>
-    </>
+    <Container>
+      <Headline>
+        { +new Date(reportStats?.reportPeriodEnd) - +new Date() > 0 ? 'Voting Period Time Remaining' : 'Voting Has Ended' }
+      </Headline>
+      {'\n'}
+      <ul>
+        <TimeItem>
+          <span id="days">{timeLeft.days}</span>
+          Days
+        </TimeItem>
+        <TimeItem>
+          <span id="hours">{timeLeft.hours}</span>
+          Hours
+        </TimeItem>
+        <TimeItem>
+          <span id="minutes">{timeLeft.minutes}</span>
+          Minutes
+        </TimeItem>
+        <TimeItem>
+          <span id="seconds">{timeLeft.seconds}</span>
+          Seconds
+        </TimeItem>
+      </ul>
+    </Container>
   )
 }
 

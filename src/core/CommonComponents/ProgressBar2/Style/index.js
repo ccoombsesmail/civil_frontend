@@ -7,8 +7,8 @@ const load = (ratio) => keyframes`
 
 export const ProgressBarContainer = styled('div')` 
   background:#fff;
-  width: clamp(400px, 20vw, 800px);
-  height: clamp(400px, 20vw, 800px);
+  width: clamp(440px, 20vw, 800px);
+  height: clamp(280px, 20vw, 800px);
   transform: scale(.9);
   display:flex;
   justify-content:center;

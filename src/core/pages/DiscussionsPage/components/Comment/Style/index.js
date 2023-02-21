@@ -4,7 +4,6 @@ export const OuterContainer = styled('div')`
   position: relative;
   width: 100%;
   height: fit-content;
-  background-color: white;
   z-index: 99;
   display: flex;
   justify-content: center;
@@ -17,7 +16,8 @@ export const CommentContainer = styled('li')`
   border-radius: .4em;
   position: relative;
   list-style: none;
-  margin-top: ${(props) => (props.isFocusedComment ? '0' : '1em')};
+  margin-top: ${(props) => (props.isFocusedComment ? '0' : '5px')};
+  background-color: #eee;
   cursor: pointer;
   display: flex;
   flex-direction: column;

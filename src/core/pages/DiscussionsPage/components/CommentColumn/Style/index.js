@@ -9,13 +9,11 @@ export const Container = styled('ul')`
   margin: 0;
   padding: 0;
   color: black;
-  /* border-left: 1px solid black;
-  border-right: 1px solid black; */
+  border-radius: 20px;
+
   z-index: 99;
   opacity: .99;
   width: clamp(700px, 50vw, 1200px);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   border: 1px solid lightgray;
   border-color: rgba(200,200,200,0.25);
 
@@ -24,6 +22,7 @@ export const Container = styled('ul')`
   }
 
   h1 {
+    border-radius: 20px;
     display: flex;
     width: 100%;
     align-items: center;
@@ -35,8 +34,6 @@ export const Container = styled('ul')`
     border: none;
     outline: none;
     background-color: ${(props) => (props.isReplies ? 'var(--m-form-color)' : 'white')};
-    /* border-top-left-radius: 5px;
-    border-top-right-radius: 5px; */
 
      @media only screen and (max-width: 600px) {
       border-top-left-radius: 0;

@@ -7,11 +7,13 @@ import {
   VotingContainer, VotesAgainst, VotesFor, MiddleSection,
 } from './Style'
 
-const VotingBox = ({ contentId, reportStats }) => {
+function VotingBox({ contentId, reportStats }) {
   const openModal = useOpenModal(TOPIC_VOTE_FORM, { contentId })
   const votingTimeUp = (+new Date(reportStats?.reportPeriodEnd) - +new Date()) <= 0
-  const hasAlreadyVoted = useMemo(() => (reportStats.voteAgainst || reportStats.voteFor),
-    [reportStats.voteAgainst, reportStats.voteFor])
+  const hasAlreadyVoted = useMemo(
+    () => (reportStats.voteAgainst || reportStats.voteFor),
+    [reportStats.voteAgainst, reportStats.voteFor],
+  )
 
   const verdict = useMemo(() => {
     if (reportStats.numVotesFor > reportStats.numVotesAgainst) return 'Violation'

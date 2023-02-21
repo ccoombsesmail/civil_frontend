@@ -5,14 +5,20 @@ export const Container = styled('div')`
  display: flex;
  align-items: center;
  justify-content: center;
+ margin: 5px 0;
+ 
+ button {
+  box-shadow: var(--box-shadow-inset);
+
+ }
  span {
     padding: 0 !important;
   }
   b {
-    margin: 0 clamp(15px, 1vw, 25px);
+    margin: 0 clamp(12px, 1vw, 20px);
     color: #FFFFFF00;
     font-family: "Aventa", Sans-serif;
-    font-size: 2vw;
+    font-size: clamp(12px, 1.5vw, 25px);
     font-weight: 400;
     -webkit-text-stroke-width: 1px;
     stroke-width: 1px;
@@ -35,16 +41,17 @@ export const IconContainer = styled('div')`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: var(--box-shadow-inset);
+
 
 `
 
 export const StyledExpandButton = styled(ExpandButton)`
   margin: 0;
-  width: clamp(150px, 5vw, 300px);
-  button {
-    font-size: clamp(15px, 1.4vw, 25px) !important;
-
+  > span {
+    font-size: clamp(2px, 178vw, 285px) !important;
   }
+  
 `
 
 export const PopoverToolTip = styled('div')`

@@ -23,7 +23,7 @@ const VALIDATIONS = {
   category: { REQUIRED: true },
 }
 
-const NewDidFlow = () => {
+function NewDidFlow() {
   const [formStep, setFormStep] = useState(0)
   const backButtonOnClick = useBackButtonOnClick(formStep, setFormStep)
   const validator = useConfigFormErrors(VALIDATIONS)

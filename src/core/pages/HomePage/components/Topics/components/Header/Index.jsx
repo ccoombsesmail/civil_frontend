@@ -33,7 +33,7 @@ function Header({ user }) {
         </p>
         <ExpandButton
           type="button"
-          backgroundColor="var(--m-primary-btn-color)"
+          bgColor="var(--m-primary-btn-color)"
           onClick={onClick}
           width="100%"
         >

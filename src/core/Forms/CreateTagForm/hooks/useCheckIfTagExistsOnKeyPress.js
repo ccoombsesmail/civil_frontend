@@ -1,14 +1,15 @@
 import { useCallback, useState } from 'react'
-import { checkIfTagExists } from '../../../api/v1/users/users_api_util'
+import { useLazyCheckIfTagExistsQuery } from '../../../../api/services/users.ts'
 
 export default () => {
   const [isValid, setIsValid] = useState(null)
+  const [trigger, result] = useLazyCheckIfTagExistsQuery()
   const checkIfTagExistsOnKeyPress = useCallback(async (e) => {
-    const res = await checkIfTagExists(e.target.value)
-    const { tagExists } = await res.data
+    await trigger(e.target.value)
+    const { tagExists } = result.data
     if (!e.target.value) setIsValid(null)
     else setIsValid(!tagExists)
-  }, [isValid])
+  }, [isValid, result])
 
   return { isValid, checkIfTagExistsOnKeyPress }
 }

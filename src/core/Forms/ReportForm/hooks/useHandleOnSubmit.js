@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import useBindDispatch from '../../hooks/redux/useBindDispatch'
-import uiActionCreators from '../../../redux/actions/ui/index'
-import { useCreateReportMutation } from '../../../api/services/reports'
+import useBindDispatch from '../../../hooks/redux/useBindDispatch'
+import uiActionCreators from '../../../../redux/actions/ui/index'
+import { useCreateReportMutation } from '../../../../api/services/reports.ts'
 // const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
 export default (contentId) => {

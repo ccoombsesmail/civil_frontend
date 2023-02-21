@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ProgressBarContainer, InnerProgressContainer, MiddleOfCircleContainer } from './Style/index'
 
-const ProgressBar = ({ userLevelData }) => {
+function ProgressBar({ userLevelData }) {
   const { exp, level, pointsForNextLevel } = userLevelData || {}
   const ratio = exp / (pointsForNextLevel)
   if (Number.isNaN(ratio)) return null

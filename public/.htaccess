@@ -1,4 +1,4 @@
-AddEncoding x-gzip .gz
+<!-- AddEncoding x-gzip .gz
 
 RewriteEngine On
 
@@ -9,4 +9,4 @@ RewriteRule ^(.*)$ $1.gz [QSA,L]
 <FilesMatch  \.js\.gz$>
     ForceType "text/javascript; charset=utf-8"
     Header set Cache-control: private
-</FilesMatch>
+</FilesMatch> -->

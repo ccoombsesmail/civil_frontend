@@ -1,7 +1,6 @@
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
-// import { useAuth, useUser } from '@clerk/clerk-react';
 import { useSelector } from 'react-redux';
 import useGetCivicAuthHeader from '../../civic/hooks/useGetCivicAuthHeader';
 import useCreateDidBasedJwt from '../../core/hooks/auth/useCreateDidBasedJwt'
@@ -10,7 +9,6 @@ import useGetDefaultDid from '../../core/DID/hooks/useGetDefaultDID'
 import { AssistDIDAdapter } from '../../core/DID/AssistDIDAdapter';
 import { sessionApi } from '../services/session';
 import { selectedEndpoints } from '../endpoints/endpoints'
-import { MemoryStoredToken } from '../../civic/utils/generateCivicAuthHeader';
 
 const baseAxiosInstance = axios.create();
 
@@ -53,9 +51,7 @@ export const miscApiBaseQuery = axiosBaseQuery({baseUrl: selectedEndpoints.UPLOA
 
 export default () => {
   
-  // const { getToken } = useAuth()
   const currentUser = useSelector((s) => s[sessionApi.reducerPath].currentUser)
-  // const { user: clerkUser } = useUser()
   const createDIDBasedJWT = useCreateDidBasedJwt()
   const getDefaultDID = useGetDefaultDid()
   const getCivicAuthHeader = useGetCivicAuthHeader()
@@ -64,7 +60,6 @@ export default () => {
       async (req) => {
         console.log("INTERCEPTING!!!!", req.url)
         req.headers['Access-Control-Max-Age'] = 6000
-        req.headers['Content-Type'] = 'multipart/form-data'
         if (req.url.includes('eid') || req.url.includes('enums')) return req
         if (req.url.includes(AssistDIDAdapter.TESTNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
@@ -72,8 +67,8 @@ export default () => {
         }
         const civicToken = await getCivicAuthHeader()
         const defaultDID = await getDefaultDID()
+        console.log(civicToken)
         let token = null
-        // token = await getToken({ template: 'jwt' })
         if (token) {
           req.headers['X-JWT-TYPE'] = 'CLERK'
           req.headers.Authorization = `Bearer ${token}`
@@ -97,6 +92,6 @@ export default () => {
     )
     
 
-  }, [currentUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])  //clerkUser
+  }, [currentUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])
 }
 

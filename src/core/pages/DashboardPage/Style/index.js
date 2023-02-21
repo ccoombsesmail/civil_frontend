@@ -28,16 +28,19 @@ export const CivicPassesContainer = styled('div')`
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 100%;
   justify-content: center;
   margin-top: 0.2vw;
+  background-color: white;
+  padding: 20px;
+  border-radius: .4vw;
+  min-width: 400px;
   iframe {
     min-height: 640px;
   }
   b {
     color: #FFFFFF00;
     font-family: "Aventa", Sans-serif;
-    font-size: 2vw;
+    font-size: clamp(14px, 2vw, 25px);
     font-weight: 400;
     -webkit-text-stroke-width: 1px;
     stroke-width: 1px;
@@ -58,6 +61,7 @@ export const Container = styled('div')`
   flex-direction: column;
   width: 100%;
   align-items: center;
+  background-color: #eee;
   /* margin: 4vw; */
 
   .cl-card {

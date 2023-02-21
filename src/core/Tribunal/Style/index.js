@@ -5,10 +5,14 @@ export const OuterContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  margin: auto;
+  width: 80%;
   padding-bottom: 60vh;
   /* background-color: #F2F6FC; */
-  background-color: transparent;
+  background-color: #eee;
+  @media only screen and (max-width: 800px) {
+      width: 100vw;
+    }
 
 `
 
@@ -64,7 +68,6 @@ export const InnerContainer = styled('div')`
 
 export const VotingContainer = styled('section')`
   position: relative;
-  width: 50%;
   height: 14vw;
   display: flex;
   flex-direction: column;
@@ -76,6 +79,7 @@ export const VotingContainer = styled('section')`
   border: 0.5px solid lightgray;
   border-color: rgba(200, 200, 200, 0.25);
   margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
+  width: 95%;
 
   @media only screen and (max-width: 800px) {
     width: 90%;
@@ -98,6 +102,10 @@ export const VotingContainer = styled('section')`
 
 export const ReportStatsContainer = styled('ul')`
   display: flex;
+  background-color: white;
+  border-radius: 0.5em;
+  width: 95%;
+
 `
 
 export const ReportStatItem = styled('li')`
@@ -120,12 +128,13 @@ export const ReportStatItem = styled('li')`
 
     h2 {
       text-align: center;
+      
     }
 
     span {
       margin-top: 5px;
       padding: 5px 10px;
-      background-color: var(--m-secondary-background-color);
+      background-color: var(--m-form-color);
       border-radius: 5px;
     }
 `

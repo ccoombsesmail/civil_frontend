@@ -7,9 +7,9 @@ import useCategorizeComments from '../hooks/useCategorizeComments'
 import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer } from './Style/index'
 import ParentComment from '../ParentComment/Index'
-import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
-import { useGetAllCommentRepliesQuery } from '../../../../../../api/services/comments.ts'
-import { useGetTopicQuery } from '../../../../../../api/services/topics.ts'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
+import { useGetAllCommentRepliesQuery } from '../../../../../api/services/comments.ts'
+import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
 import { Container } from '../ParentComment/Style'
 
 function CommentThread() {

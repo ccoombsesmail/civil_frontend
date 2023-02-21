@@ -3,9 +3,9 @@ import React, { useCallback } from 'react'
 
 import { StyledButton, ButtonText, IconContainer } from './Style/index'
 
-const AnimatedIconButton = ({
+function AnimatedIconButton({
   Icon, onClick, disabled, buttonText, hidden,
-}) => {
+}) {
   const onClickHandler = useCallback((e) => {
     e.stopPropagation()
     onClick()

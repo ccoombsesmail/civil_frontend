@@ -52,8 +52,8 @@ export const StyledButton = styled('button')`
   border-radius: 0.85rem;
   border: none;
   span {
-    font-size: clamp(12px, .9vw, 25px);
-
+    font-size: clamp(14px, .75vw, 22px);
+    margin-left: 10px;
     transition: color 0.6s;
     color: #fff;
     display: block;
@@ -71,7 +71,7 @@ export const StyledButton = styled('button')`
     margin: 0 !important;
     margin-right: 5px;
     path {
-      fill: white !important;
+      /* fill: white; */
     }
   }
 

@@ -17,9 +17,9 @@ import {
 import TribunalComments from './components/TribunalComments/Index'
 import VotingBox from './components/VotingBox/Index'
 
-import Comment from '../MainContent/components/DiscussionsPage/components/Comment/Index'
+import Comment from '../pages/DiscussionsPage/components/Comment/Index'
 import { COMMENT, TOPIC } from '../../enums/content_type'
-import TopicItem from '../MainContent/components/HomePage/components/Topics/components/TopicItem/Index'
+import TopicItem from '../pages/HomePage/components/Topics/components/TopicItem/Index'
 import { useGetReportQuery } from '../../api/services/reports.ts'
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 import { useGetTopicQuery } from '../../api/services/topics.ts'
@@ -27,7 +27,7 @@ import Timer from './components/Timer/Index'
 import { CircleLoading } from '../../svgs/spinners/CircleLoading'
 import { useGetAllTribunalCommentsBatchQuery } from '../../api/services/tribunal_comments.ts'
 import { useGetCommentQuery } from '../../api/services/comments.ts'
-import { BgImage } from '../MainContent/Style'
+import { BgImage } from '../pages/Style'
 import WhatDoYouThink from './components/WhatDoYouThink/Index'
 
 function Tribunal() {

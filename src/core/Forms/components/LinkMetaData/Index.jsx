@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import {
   FlexDiv, OGUrl, OGTitle, OGDescription, OGImage, LinkWrapper, Container,
@@ -6,9 +6,9 @@ import {
 import { Line } from '../../../CommonComponents/Line/index'
 import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'
 
-const LinkMetaData = ({
+function LinkMetaData({
   metaData, setIsLoading = () => console.log('stub'),
-}) => {
+}) {
   useEffect(() => {
     setIsLoading(true)
     if (metaData) setIsLoading(false)

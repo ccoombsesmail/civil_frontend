@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux'
 
 import { Tab } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import { ThemeTab } from '../../../../../CommonComponents/Tabs/Style'
+import { ThemeTab } from '../../../../CommonComponents/Tabs/Style'
 import { TabContainer } from './Style'
-import recsActionCreators from '../../../../../../redux/actions/recs/index'
-import oppRecsActionCreators from '../../../../../../redux/actions/opposing_recs/index'
+import recsActionCreators from '../../../../../redux/actions/recs/index'
+import oppRecsActionCreators from '../../../../../redux/actions/opposing_recs/index'
 
-import useBindDispatch from '../../../../../hooks/redux/useBindDispatch'
-import RecommendationsList from '../../../../../RecommendationsList/Index'
+import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
+import RecommendationsList from '../../../../RecommendationsList/Index'
 
-const Recommendations = () => {
+function Recommendations() {
   const [key, setKey] = useState('recs')
   const { topicId } = useParams()
   const { getAllRecs, getAllOpposingRecs } = useBindDispatch(

@@ -1,5 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { backendBaseQuery } from '../util/axiosInstance'
 import { closeModal } from '../../redux/actions/ui/index.js'
 import { createDraft, finishDraft } from 'immer';
 import { toast } from 'react-toastify';
@@ -39,9 +37,6 @@ export const findComment = (id, root) => {
 
 
 export const commentsApi = emptySplitApi.injectEndpoints({
-  // reducerPath: 'comments',
-  // tagTypes: ['Comments'],
-  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllComments: builder.query<any, any>({
       query: (discussionId) => ({ url: `/comments?discussionId=${discussionId}`, method: 'GET' }),
@@ -163,16 +158,25 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         data: body
       })
     },
-    async onQueryStarted({ id, rootId, civility, discussionId, updateLikeValue, updateGetTopicQuery, ...patch }, { dispatch, queryFulfilled }) {
+    async onQueryStarted({ id, rootId, civility, discussionId, updateLikeValue, updateGetTopicQuery, isReplies, isFocusedComment, ...patch }, { dispatch, queryFulfilled }) {
       let patchResult
-      console.log("updateLikeValue", updateLikeValue)
-      if (false) {
+      if (isFocusedComment) {
         patchResult = dispatch(
-          commentsApi.util.updateQueryData('getComment', id, (draft) => {
+          commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
+            if (id) {
+              const newDraft = createDraft(draft)
+              newDraft.comment.civility = patch.value
+              return finishDraft(newDraft)
+
+            }
+          })
+        )
+      } else if (isReplies) {
+        patchResult = dispatch(
+          commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
             if (id) {
               console.log(patch)
-              draft.likeState = patch.value
-              draft.likes += updateLikeValue
+              draft.comment.civility = patch.value
             }
           })
         )
@@ -193,15 +197,6 @@ export const commentsApi = emptySplitApi.injectEndpoints({
           })
         )
       }
-
-      patchResult = dispatch(
-        commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
-          if (id) {
-            console.log(patch)
-            draft.comment.civility = patch.value
-          }
-        })
-      )
 
       try {
          await queryFulfilled

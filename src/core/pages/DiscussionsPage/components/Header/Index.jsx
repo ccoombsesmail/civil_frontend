@@ -5,11 +5,10 @@ import React, { useMemo, useRef } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { Tooltip, OverlayTrigger } from 'react-bootstrap'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
-import { TweetComponent } from '../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
-import PlaygroundEditorTheme from '../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
-import PlaygroundNodes from '../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
-import UserProvidedMediaCard from '../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
-import LinkMetaData from '../../../../../Forms/components/LinkMetaData/Index'
+import { TweetComponent } from '../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
+import PlaygroundEditorTheme from '../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
+import PlaygroundNodes from '../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
+import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
 
 import {
   Container,
@@ -25,7 +24,8 @@ import { Twitter, Web, YouTube } from '../../../../../enums/link_type'
 import { VideoPlayer } from '../../../HomePage/components/Topics/components/TopicItem/Style'
 import Card from '../../../../CommonComponents/TopicCard/Index'
 import DiscussionCard from './components/DiscussionCard/Index'
-import { uuidRegEx } from '../../../../../../generic/regex/uuid'
+import { uuidRegEx } from '../../../../../generic/regex/uuid'
+import UserUploadedMedia from '../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
 
 function TooltipComponent({ text, title, reference }) {
   return (
@@ -96,9 +96,14 @@ function Header() {
   } else if (linkType === Web) {
     content = isLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
   } else if (topic?.createdByVodUrl || topic?.createdByImageUrl) {
-    content = <UserProvidedMediaCard {...commonProps} />
+    content = (
+      <UserUploadedMedia
+        videoFile={topic.userUploadedVodUrl}
+        imgFile={topic.userUploadedImageUrl}
+      />
+    )
   } else {
-    return null
+    content = null
   }
 
   const initialConfig = {

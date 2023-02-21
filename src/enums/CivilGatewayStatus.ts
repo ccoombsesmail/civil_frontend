@@ -1,7 +1,7 @@
 export enum CivilGatewayStatus {
   UNKNOWN = 0,
   CHECKING = 1,
-  "Not Requested" = 2,
+  "Request" = 2,
   COLLECTING_USER_INFORMATION = 3,
   PROOF_OF_WALLET_OWNERSHIP = 4,
   IN_REVIEW = 5,
@@ -12,7 +12,7 @@ export enum CivilGatewayStatus {
   ERROR = 10,
   LOCATION_NOT_SUPPORTED = 11,
   VPN_NOT_SUPPORTED = 12,
-  "Refresh" = 13,
+  "Needs Refresh" = 13,
   VALIDATING_USER_INFORMATION = 14,
   USER_INFORMATION_VALIDATED = 15,
   USER_INFORMATION_REJECTED = 16

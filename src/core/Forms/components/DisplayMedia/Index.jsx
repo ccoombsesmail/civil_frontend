@@ -1,31 +1,21 @@
 import React from 'react'
-import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
-import LinkMetaData from '../LinkMetaData/Index'
+import { UploadImage, UploadVideo } from '../../TopicForm/Style'
 
-const DisplayMedia = ({
-  imgFile, videoFile, externalContentUrl, metaData,
-}) => (
-  <>
-    { metaData ? (
-      <LinkMetaData
-        externalContentUrl={externalContentUrl}
-        metaData={metaData}
-      />
-    ) : <CircleLoading size={30} />}
-    { imgFile && <img src={imgFile} alt="" />}
-    { videoFile && (
-      <video controls>
-        <track
-          default
-          kind="captions"
-          srcLang="en"
-        />
-        <source src={videoFile} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    )}
-  </>
-
-)
+function DisplayMedia({
+  imgFile, videoFile,
+}) {
+  return (
+    <>
+      { imgFile ? <UploadImage src={imgFile} alt="content to upload" /> : null}
+      { videoFile ? (
+        <UploadVideo src={videoFile} alt="content to upload" controls>
+          <source src="movie.mp4" type="video/mp4" />
+          <source src="movie.ogg" type="video/ogg" />
+          Your browser does not support the video tag.
+        </UploadVideo>
+      ) : null}
+    </>
+  )
+}
 
 export default DisplayMedia

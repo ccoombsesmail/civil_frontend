@@ -4,11 +4,11 @@ import { longUsernameDisplay } from '../../../generic/string/longUsernameDisplay
 import useGoToUserProfile from '../../hooks/routing/useGoToUserProfile'
 import { Container } from './Style'
 
-const UsernameAndTag = ({
+function UsernameAndTag({
   usernameDisplay,
   userId,
   userTag,
-}) => {
+}) {
   const goToUserProfile = useGoToUserProfile(userId)
   const formattedUsername = longUsernameDisplay(usernameDisplay)
   const formattedTag = longUsernameDisplay(userTag)

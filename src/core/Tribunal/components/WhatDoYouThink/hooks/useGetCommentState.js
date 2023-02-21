@@ -11,7 +11,7 @@ export default (topicData, commentData, contentId) => {
     } = topicData || commentData
     const {
       createdBy, content, id: commentId,
-    } = commentData
+    } = commentData || {}
     return {
       contentId,
       discussionId: null,

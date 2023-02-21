@@ -6,6 +6,7 @@ export const BorderContainer = styled('div')`
   z-index: 9999;
   background-color: white;
   min-height: calc(100vh - var(--nav-size));
+  width: 50vw;
   @media (max-width: 1250px) {
     width: 100vw;
   }

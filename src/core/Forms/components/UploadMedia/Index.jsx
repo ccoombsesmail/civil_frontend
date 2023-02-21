@@ -9,14 +9,15 @@ import useOnFileChangeHandler from '../../hooks/useOnFileChangeHandler'
 
 import { Container } from './Style/index'
 
-const UploadMediaContainer = ({
+function UploadMediaContainer({
   setFieldValue, imgFile, videoFile, setImgFile, setVideoFile,
-}) => {
+}) {
   const onFileChange = useOnFileChangeHandler()
   return (
     <Container>
       <Field
         fileType="file"
+        accept="image/*"
         name="topicImage"
         disabled={Boolean(videoFile)}
         file={imgFile}

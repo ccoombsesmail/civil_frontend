@@ -10,9 +10,9 @@ import {
   MessageContainer,
 } from './Style'
 
-const CensorOverlay = ({
+function CensorOverlay({
   setShouldBlur, contentId, contentType, showNavigationToTribunal,
-}) => {
+}) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   return (
@@ -36,7 +36,7 @@ const CensorOverlay = ({
       { showNavigationToTribunal ? (
         <ExpandButton
           width="auto"
-          backgroundColor="var(--m-primary-btn-color)"
+          bgColor="var(--m-primary-btn-color)"
           onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}
         >
           <ScalesSvg />
