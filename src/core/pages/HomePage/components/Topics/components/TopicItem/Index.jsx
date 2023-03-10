@@ -18,7 +18,7 @@ import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/comp
 function TopicItem({ topic, user, hideCommentButton }) {
   const goToDiscussion = useGoToDiscussions(topic.id)
   const initialConfig = {
-    editorState: JSON.parse(topic.description),
+    editorState: JSON.parse(JSON.stringify(topic.editorState)),
     namespace: `Civil-${topic.title}`,
     nodes: [...PlaygroundNodes],
     onError: (error) => {

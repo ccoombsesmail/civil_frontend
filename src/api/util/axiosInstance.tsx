@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
@@ -9,6 +11,8 @@ import useGetDefaultDid from '../../core/DID/hooks/useGetDefaultDID'
 import { AssistDIDAdapter } from '../../core/DID/AssistDIDAdapter';
 import { sessionApi } from '../services/session';
 import { selectedEndpoints } from '../endpoints/endpoints'
+import { toast } from 'react-toastify';
+import { ErrorMessage } from './ErrorMessage';
 
 const baseAxiosInstance = axios.create();
 
@@ -33,6 +37,7 @@ const axiosBaseQuery =
       return { data: result.data }
     } catch (axiosError) {
       let err = axiosError as AxiosError
+      toast.error(() => <ErrorMessage errorMsg={axiosError.response?.data.userMsg || axiosError.message.userMsg} />, {autoClose: false, position: 'top-center', className: 'toasty-error'})
       return {
         error: {
           status: err.response?.status,
@@ -41,6 +46,7 @@ const axiosBaseQuery =
       }
     }
   }
+  // ${axiosError.response?.data.userMsg || axiosError.message.userMsg}`, {autoClose: false})
 
 export const backendBaseQuery = axiosBaseQuery();
 
@@ -58,16 +64,16 @@ export default () => {
   useEffect(() => {
     baseAxiosInstance.interceptors.request.use(
       async (req) => {
-        console.log("INTERCEPTING!!!!", req.url)
         req.headers['Access-Control-Max-Age'] = 6000
         if (req.url.includes('eid') || req.url.includes('enums')) return req
         if (req.url.includes(AssistDIDAdapter.TESTNET_RPC_ENDPOINT)) {
           req.headers.Authorization = AssistDIDAdapter.API_KEY
           return req
         }
+        console.log("INTERCEPTING!!!!", req.url)
+
         const civicToken = await getCivicAuthHeader()
         const defaultDID = await getDefaultDID()
-        console.log(civicToken)
         let token = null
         if (token) {
           req.headers['X-JWT-TYPE'] = 'CLERK'
@@ -92,6 +98,6 @@ export default () => {
     )
     
 
-  }, [currentUser, createDIDBasedJWT, getDefaultDID, getCivicAuthHeader])
+  }, [currentUser, getCivicAuthHeader])
 }
 

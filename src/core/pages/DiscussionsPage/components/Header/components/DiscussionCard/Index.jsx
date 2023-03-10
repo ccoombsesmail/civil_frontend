@@ -36,7 +36,6 @@ function DiscussionCard() {
 
   if (isDiscussionUninitialized || discussion?.title === 'General') return null
   if (isDiscussionLoading) return <CircleLoading size={40} />
-
   let content
   if (linkType === YouTube) {
     content = (
@@ -66,11 +65,10 @@ function DiscussionCard() {
   } else if (discussion?.createdByVodUrl || discussion?.createdByImageUrl) {
     content = <UserProvidedMediaCard {...commonProps} />
   } else {
-    return null
+    content = null
   }
-
   const initialConfig = {
-    editorState: discussion?.description,
+    editorState: discussion?.editorState,
     namespace: 'Civil-Discussion-Card',
     nodes: [...PlaygroundNodes],
     onError: (error) => {
@@ -79,7 +77,6 @@ function DiscussionCard() {
     editable: false,
     theme: PlaygroundEditorTheme,
   }
-
   return (
     <>
       <LineWithOverlayText>

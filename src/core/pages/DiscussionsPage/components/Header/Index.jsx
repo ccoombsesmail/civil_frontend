@@ -107,7 +107,7 @@ function Header() {
   }
 
   const initialConfig = {
-    editorState: JSON.parse(topic.description),
+    editorState: JSON.parse(topic?.editorState),
     namespace: 'Civil-Topic-Card__Discussions',
     nodes: [...PlaygroundNodes],
     onError: (error) => {

@@ -11,7 +11,6 @@ export const Item = styled('li')`
   /* cursor: pointer; */
   padding-right: .5vw;
   transition: all 0.5s;
-
   :hover {
     background-color: #F8F9FA;
   }

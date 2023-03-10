@@ -7,10 +7,10 @@ export default (topicData, commentData, contentId) => {
   return useCallback(() => {
     if (!topicData && !commentData) return null
     const {
-      createdByUsername, createdByIconSrc, createdAt, description, id,
+      createdByUsername, createdByIconSrc, createdAt, editorState, id,
     } = topicData || commentData
     const {
-      createdBy, content, id: commentId,
+      createdByUsername: createdByUsernameComment, editorState: commentEditorState, id: commentId,
     } = commentData || {}
     return {
       contentId,
@@ -18,9 +18,9 @@ export default (topicData, commentData, contentId) => {
       topicId: id || commentId,
       createdByIconSrc,
       username: currentUser?.username,
-      createdBy: createdByUsername || createdBy,
+      createdBy: createdByUsername || createdByUsernameComment,
       time: createdAt,
-      lexicalRawContent: JSON.parse(description || content),
+      lexicalRawContent: JSON.parse(editorState || commentEditorState),
       parentId: null,
       rootId: null,
     }

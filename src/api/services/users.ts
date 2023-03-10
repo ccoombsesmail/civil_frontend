@@ -7,9 +7,6 @@ interface UserData {
 }
 
 export const usersApi = emptySplitApi.injectEndpoints({
-  // reducerPath: 'users',
-  // baseQuery: backendBaseQuery,
-  // tagTypes: ['User'],
   endpoints: (builder) => ({
     getUser: builder.query<UserData, UserData>({
       query: (userId) => ({ url: `/users?userId=${userId}`, method: "GET" }),

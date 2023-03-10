@@ -49,6 +49,16 @@ export const commentsApi = emptySplitApi.injectEndpoints({
         : 
           [{ type: 'Comment', id: 'LIST' }],
     }),
+    getUserComments: builder.query<any, any>({
+      query: (userId) => ({ url: `/comments/user/${userId}`, method: "GET" }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: "Comments", id } as const)),
+              { type: "Comments", id: "LIST" },
+            ]
+          : [{ type: "Comments", id: "LIST" }],
+    }),
     getAllCommentReplies: builder.query<any, any>({
       query: (commentId) => ({ url: `/comments/replies/${commentId}`, method: 'GET' }),
       providesTags: (result) =>
@@ -201,7 +211,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
       try {
          await queryFulfilled
       } catch ({ error }) {
-        toast.error(`${error.status}\n ${error.data.userMsg}`)
+        // toast.error(`${error.status}\n ${error.data.userMsg}`)
         patchResult.undo()
 
       }
@@ -216,5 +226,6 @@ export const {
   useCreateCommentMutation,
   useUpdateCommentLikesMutation,
   useUpdateCommentCivilityMutation,
-  useGetAllCommentRepliesQuery
+  useGetAllCommentRepliesQuery,
+  useLazyGetUserCommentsQuery
   } = commentsApi

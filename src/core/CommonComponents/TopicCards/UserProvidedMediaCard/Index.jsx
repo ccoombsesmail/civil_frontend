@@ -15,7 +15,7 @@ function UserProvidedMediaCard({
 
   const goToDiscussion = useGoToDiscussion(topic?.id)
 
-  useSetInnerHtml(descRef, topic?.description)
+  useSetInnerHtml(descRef, topic?.editorState)
 
   return (
     <Card

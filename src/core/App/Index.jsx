@@ -58,7 +58,7 @@ function App() {
   const wallets = useMemo(
     () => [
       new TorusWalletAdapter(),
-      // new PhantomWalletAdapter(),
+      new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
     ],
     [network],
@@ -135,6 +135,7 @@ function App() {
                       autoClose={2000}
                       className="toasty"
                       transition={elitpicIn}
+                      limit={2}
                     />
                   </MainContainer>
                 </UserContext.Provider>

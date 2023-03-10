@@ -6,17 +6,19 @@ import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
 import checkLinkType from '../../hooks/checkLinkType'
 import { useCreateDiscussionMutation } from '../../../../api/services/discussions.ts'
+import useGetLexicalTextContent from '../../hooks/useGetLexicalTextContent'
 
-export default (metaData, topicId, closeModal) => {
+export default (metaData, topicId, closeModal, editor) => {
   const { uploadTopicMedia } = useBindDispatch(topicActions)
   const [createDiscussion] = useCreateDiscussionMutation()
+  const editorTextContent = useGetLexicalTextContent(editor)
 
   return useCallback((values, { setSubmitting, resetForm }, content, externalContentUrl) => {
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
     const linkType = checkLinkType(externalContentUrl?.url)
     const data = {
       ...values,
-      description: content,
+      editorState: JSON.stringify(editor.getEditorState()),
       evidenceLinks: eLinks,
       topicId,
       externalContentData: !externalContentUrl ? null : {
@@ -25,6 +27,8 @@ export default (metaData, topicId, closeModal) => {
         externalContentUrl: externalContentUrl.url,
         thumbImgUrl: metaData?.ogImage?.url || null,
       },
+      editorTextContent: editorTextContent.replace(/\n/g, ' '),
+
     }
     if (values.file instanceof File) {
       const [fileType, fileFormat] = values.file.type.split('/')
@@ -50,5 +54,5 @@ export default (metaData, topicId, closeModal) => {
     setSubmitting(false)
     resetForm({})
     closeModal()
-  }, [metaData, topicId])
+  }, [metaData, topicId, editor, editorTextContent])
 }

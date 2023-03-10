@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-curly-newline */
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 import { Formik, Field } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
@@ -20,7 +20,7 @@ import LexicalEditor from '../../CommonComponents/Lexical/App.tsx'
 
 import {
   FormContainer, InputsContainer, Container, Left, SectionDescription, FlexDivLink,
-  Line, Arrow, FlexDiv, Footer, UploadImage, UploadVideo,
+  Line, Arrow, FlexDiv, Footer,
 } from './Style'
 
 import { INIT_TOPIC_FORM_VALUES } from '../../util/form_helpers/init_form_values'
@@ -40,7 +40,6 @@ function CreateTopicForm({ closeModal }) {
   const [open, setOpen] = useState(false)
   const [imgFile, setImgFile] = useState(null)
   const [videoFile, setVideoFile] = useState(null)
-  console.log(videoFile)
 
   const [rotate, setRotate] = useState(0)
 
@@ -49,14 +48,18 @@ function CreateTopicForm({ closeModal }) {
   const validator = useConfigFormErrors(VALIDATIONS)
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
 
-  const handleSubmit = useHandleSubmit(externalContentUrl?.data, closeModal)
+  const handleSubmit = useHandleSubmit(externalContentUrl?.data, closeModal, editor)
+
+  const contextValues = useMemo(() => ({
+    setContentUrl,
+  }), [setContentUrl])
 
   return (
     <Container>
       <Formik
         initialValues={INIT_TOPIC_FORM_VALUES}
         validate={validator}
-        onSubmit={((values, params) => handleSubmit(values, params, editor, externalContentUrl))}
+        onSubmit={((values, params) => handleSubmit(values, params, externalContentUrl))}
       >
         {({ isSubmitting, setFieldValue, setFieldTouched }) => (
           <FormContainer>
@@ -115,10 +118,7 @@ function CreateTopicForm({ closeModal }) {
               </Left>
             </InputsContainer>
             <Line />
-            <LexicalFormContext.Provider value={{
-              setContentUrl,
-            }}
-            >
+            <LexicalFormContext.Provider value={contextValues}>
               <div id="insert-embed-node" />
               <LexicalEditor />
             </LexicalFormContext.Provider>

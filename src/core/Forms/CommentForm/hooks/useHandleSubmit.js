@@ -13,9 +13,8 @@ export default (commentFormState, richTextEditorData, closeModal) => {
   const [createTribunalComment] = useCreateTribunalCommentMutation()
 
   const {
-    parentId, rootId, createdBy, discussionId, contentId, topicId,
+    parentId, rootId, createdByUsername, discussionId, contentId, topicId,
   } = commentFormState
-  console.log(commentFormState)
   return useCallback((values, { setSubmitting, resetForm }) => {
     toast.promise(
       Promise.all([delay(1500), checkToxicity({ content: richTextEditorData.lexicalContent })]),
@@ -39,15 +38,15 @@ export default (commentFormState, richTextEditorData, closeModal) => {
       if (toxicityScore > 0.9) toxicityStatus = 'TOXIC'
       const comment = {
         ...values,
-        content: JSON.stringify(richTextEditorData.lexicalContent),
+        editorState: JSON.stringify(richTextEditorData.lexicalContent),
         memeFlag: false,
         parentId,
         contentId,
         discussionId,
         topicId,
-        createdBy,
+        createdByUsername,
         rootId,
-        rawText: richTextEditorData.rawText,
+        editorTextContent: richTextEditorData.editorTextContent,
         toxicityStatus,
       }
       return isTribunalComment ? createTribunalComment(comment) : createComment(comment)

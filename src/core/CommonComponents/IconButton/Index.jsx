@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import { StyledButton } from './Style'
 
 function IconButton({
-  icon, children, onClick, disabled, rest,
+  icon, children, onClick, disabled, rest, hideTextMobile,
 }) {
   const onClickHandler = useCallback((e) => {
     e.stopPropagation()
@@ -12,9 +12,11 @@ function IconButton({
   }, [onClick])
 
   return (
-    <StyledButton {...rest} onClick={onClickHandler} disabled={disabled}>
+    <StyledButton {...rest} onClick={onClickHandler} disabled={disabled} hideTextMobile={hideTextMobile}>
       {icon}
-      {children}
+      <span>
+        {children}
+      </span>
     </StyledButton>
   )
 }

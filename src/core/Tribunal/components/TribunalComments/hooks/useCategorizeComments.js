@@ -10,7 +10,7 @@ export default (tribunalComments) => useMemo(() => {
     General: [],
     all: tribunalComments,
   }
-  tribunalComments.forEach((comment) => {
+  tribunalComments?.forEach((comment) => {
     if (commentType.has(comment.data?.commentType)) {
       categorizedComments[comment.data?.commentType].push(comment)
     }

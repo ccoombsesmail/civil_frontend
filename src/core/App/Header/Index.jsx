@@ -14,6 +14,7 @@ import useSessionType from '../../hooks/permissions/useSessionType'
 import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
 import useGetCurrentUser from '../hooks/useGetCurrentUser'
 import MobileMenu from './components/MobileMenu/Index'
+import SearchBar from '../../SearchBar/Index';
 
 function NavButtons() {
   const navigate = useNavigate()
@@ -70,31 +71,11 @@ function Header() {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/topics')}>
+        <IconButton hideTextMobile icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/topics')}>
           Civil
         </IconButton>
       </ButtonsContainer>
-      {/* <SignedIn>
-        <NavContainer>
-          <NavButtons />
-          <Divider />
-          <UserButton
-            userProfileUrl="/dashboard"
-            afterSignOutUrl="/"
-            userProfileMode="navigation"
-            appearance={{
-              variables: {
-                fontSize: '1.2vw',
-                fontSmoothing: 'antialiased',
-                fontWeight: 600,
-                fontFamily: 'Source Sans Pro, sans-serif',
-              },
-            }}
-          />
-        </NavContainer>
-
-      </SignedIn> */}
-      {/* <SignedOut> */}
+      <SearchBar />
       <NavContainer>
         { signedInViaCivic ? <NavButtons /> : null }
         <Divider />
@@ -102,11 +83,8 @@ function Header() {
           <DropdownMenu />
         </NavDropdownToggle>
       </NavContainer>
-      {/* </SignedOut> */}
       <MobileContainer>
         <WalletPassesContainer>
-          {/* <CaptchaGatewayMobile /> */}
-          <WalletMultiButton />
           <Divider />
         </WalletPassesContainer>
 

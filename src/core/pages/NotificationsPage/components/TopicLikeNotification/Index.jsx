@@ -1,56 +1,62 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../../generic/string/dateFormatter'
 import UsernameAndTag from '../../../../CommonComponents/UsernameAndTag/Index'
-import { LeftContainer, MiddleContainer, ProfileIcon } from '../Style'
+import { ProfileIcon } from '../Style'
 
 import { TopicLike } from '../../../../../enums/notification_types'
 import { LikeClickedSvg } from '../../../../../svgs/svgs'
 import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
+import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 
 function TopicLikeNotification({ notification }) {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
     givingUserTag, topicId,
   } = notification
-  const navigate = useNavigate()
   const handleClick = (e) => {
     e.stopPropagation()
   }
   return (
-    <>
-      <LeftContainer onClick={() => navigate(`/user/${givingUserId}`)}>
-        <ProfileIcon src={givingUserIconSrc} />
-        <UsernameAndTag
-          userId={givingUserId}
-          usernameDisplay={givingUserUsername}
-          userTag={givingUserTag}
-        />
-      </LeftContainer>
-      <MiddleContainer>
-        <h3>
-          <b>
-            {longUsernameDisplay(givingUserUsername)}
-          </b>
-          {' '}
-          Liked Your
-          {' '}
-          <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions`}>
-            Topic!
-          </Link>
-          {' '}
-          😊
-        </h3>
-        <LikeClickedSvg />
+    <tbody>
+      <Row gridTemplateCols="1fr 1fr 3fr 1fr">
+        <RowItem>
+          <ProfileIcon src={givingUserIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} />
+          <UsernameAndTag
+            userId={givingUserId}
+            usernameDisplay={givingUserUsername}
+            userTag={givingUserTag}
+          />
+        </RowItem>
+        <RowItem>
+          <LikeClickedSvg />
+        </RowItem>
+        <RowItem>
 
-      </MiddleContainer>
-      <MenuTime
-        time={getTimeSince(notification.createdAt)}
-        id={notification.id}
-        eventType={TopicLike}
-      />
-    </>
+          <h3>
+            <b>
+              {longUsernameDisplay(givingUserUsername)}
+            </b>
+            {' '}
+            Liked Your
+            {' '}
+            <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions`}>
+              Topic!
+            </Link>
+            {' '}
+            😊
+          </h3>
+        </RowItem>
+        <RowItem alignItems="flex-end">
+          <MenuTime
+            time={getTimeSince(notification.createdAt)}
+            id={notification.id}
+            eventType={TopicLike}
+          />
+        </RowItem>
+      </Row>
+    </tbody>
   )
 }
 

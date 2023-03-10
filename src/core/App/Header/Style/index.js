@@ -11,21 +11,15 @@ export const StyledHeader = styled('header')`
   justify-content: space-between;
   flex-flow: row nowrap;
   background-color: transparent;
-  /* box-shadow: 5px 5px 15px 5px #000000; */
-
   border-bottom: 1px solid lightgrey;
-  /* border-bottom: 1px solid var(--thin-border); */
-  /* background-color: var(--m-form-color); */
   background-color: white;
 
   
 `
 export const CivilIcon = styled('img')`
-    /* width: 3vw; */
     height: 3.5vw;
     border-radius: 50%;
   @media only screen and (max-width: 600px) {
-    /* width: 8vw; */
     height: 8vw;  
   }
   
@@ -36,10 +30,13 @@ export const ButtonsContainer = styled('div')`
   height: 100%;
   display: flex;
   align-items: center;
-  width: 25vw;
-  font-size: 1.2vw;
+  justify-content: flex-start;
+  /* width: 25vw; */
+  flex: 25%;
+
+  font-size: clamp(20px, 1.2vw, 25px);
   @media only screen and (max-width: 600px) {
-    font-size: 3.5vw;
+    flex: 11%;
   }
 `
 
@@ -53,9 +50,12 @@ export const ProfileIcon = styled('img')`
 
 export const NavContainer = styled('nav')`
   display: flex;
+  justify-content: flex-end;
   height: 100%;
   align-items: center;
   margin-right: 30px;
+  flex: 25%;
+
   .cl-internal-7yhhw1 {
     width: 35px !important;
     height: 35px !important;
@@ -81,7 +81,8 @@ export const Divider = styled('div')`
 
 export const MobileContainer = styled('div')`
   display: none;
-  /* z-index: 999999999; */
+  flex: 10%;
+
   @media (max-width: 1250px) {
       display: block;
     }
@@ -95,16 +96,5 @@ export const WalletPassesContainer = styled('div')`
   margin-right: 50px;
   align-items: center;
   position: relative;
-
-
-  .wallet-adapter-button {
-    /* font-size: 12px !important;
-    line-height: 32px;
-    height: 32px;
-    i {
-      height: 15px;
-      width: 15px;
-    } */
-  }
   
 `

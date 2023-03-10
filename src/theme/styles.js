@@ -746,10 +746,16 @@ blockquote {
 
   .toasty {
     z-index: 99999999999;
+    width: auto;
+    min-width: 300px;
     div {
       white-space: pre-line !important;
 
     }
+  }
+
+  .toasty-error {
+    width: 50vw;
   }
 
 

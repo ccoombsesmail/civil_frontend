@@ -8,7 +8,7 @@ export default (comment) => {
   const { updateCommentCivility } = bindActionCreators(commentActions, dispatch)
   return useCallback((civility, removeCivility) => {
     updateCommentCivility({
-      userId: comment.createdById, commentId: comment.id, civility, removeCivility,
+      userId: comment.createdByUserId, commentId: comment.id, civility, removeCivility,
     })
   }, [comment.civil])
 }

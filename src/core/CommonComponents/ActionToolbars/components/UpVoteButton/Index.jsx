@@ -3,9 +3,9 @@ import IconButton from '../../../IconButton/Index'
 // import { UpVoteFill, UpVoteOutline } from '../../../../../svgs/svgs'
 import useUpdateLikes from './hooks/useUpdateLikes'
 
-const UpVoteButton = ({
+function UpVoteButton({
   content, user, contentType, disabled,
-}) => {
+}) {
   const updateLikes = useUpdateLikes(content, user, contentType)
   const outline = <img src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/agree-outline.png" alt="" />
   const fill = <img src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/agree-fill.png" alt="" />

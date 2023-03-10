@@ -17,4 +17,10 @@ export const StyledButton = styled('button')`
     filter: none;
     opacity: .3;
   }
+
+  @media screen and (max-width: 600px) {
+    span {
+      display: ${(props) => (props.hideTextMobile ? 'none' : 'block')};
+    }
+  }
 `

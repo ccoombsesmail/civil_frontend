@@ -3,7 +3,6 @@
 import React, { useState, useMemo, useEffect } from 'react'
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js'
 import {
-  Badge,
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
@@ -166,12 +165,11 @@ function UniquenessGateway() {
 
   const { publicKey } = wallet
   const { gatekeeperNetwork, cluster } = env
-  // const conn = new Connection(clusterApiUrl('devnet'), 'processed')
-  const { connection } = useConnection()
-  if (!publicKey || !connection) return null
+  const conn = new Connection(clusterApiUrl('devnet'), 'processed')
+  if (!publicKey || !conn) return null
   return (
     <GatewayProvider
-      connection={connection}
+      connection={conn}
       wallet={wallet}
       gatekeeperNetwork={gatekeeperNetwork}
       cluster={cluster}

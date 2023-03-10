@@ -13,11 +13,12 @@ import { IconContainer, NotificationMark } from '../HeaderNavItem/Style'
 import { Line } from '../../../../CommonComponents/Line'
 import { PassesContainer } from '../../../../UserInformationDisplay/Style'
 import { CaptchaGatewayDesktop } from '../../../../../civic/components/CaptchGateway/CaptchaGateway'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
-const MobileMenu = ({
+function MobileMenu({
   numUnreadUserNotifications,
   numUnreadTribunalNotifications,
-}) => {
+}) {
   let numNotifications
   let isUnreadNotifs = true
   const unreadUserNotif = numUnreadUserNotifications ? Number(numUnreadUserNotifications) : 0
@@ -68,6 +69,7 @@ const MobileMenu = ({
         </li>
         <li>
           <PassesOuterContainer>
+            <WalletMultiButton />
             <b>Civic Passes</b>
             <Line />
             <PassesContainer>

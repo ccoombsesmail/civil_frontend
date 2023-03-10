@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import { useCreateTribunalVoteMutation } from '../../../api/services/tribunal_votes'
+import { useCreateTribunalVoteMutation } from '../../../../api/services/tribunal_votes.ts'
 
-export default (contentId, voteForSelected, voteAgainstSelected) => {
-  const [createTribunalVote, {}] = useCreateTribunalVoteMutation()
+export default (contentId, voteForSelected, voteAgainstSelected, closeModal) => {
+  const [createTribunalVote] = useCreateTribunalVoteMutation()
   return useCallback((values, { setSubmitting, resetForm }) => {
     const data = {
       contentId,
@@ -26,5 +26,6 @@ export default (contentId, voteForSelected, voteAgainstSelected) => {
     )
     setSubmitting(false)
     resetForm({})
+    closeModal()
   }, [contentId, voteForSelected, voteAgainstSelected])
 }

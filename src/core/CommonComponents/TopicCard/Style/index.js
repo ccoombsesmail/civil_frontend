@@ -99,7 +99,6 @@ export const Container = styled('li')`
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
   width: 100%;
-  flex: 33%;
   margin: 2em 0;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;

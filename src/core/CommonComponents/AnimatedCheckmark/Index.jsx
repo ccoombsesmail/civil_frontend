@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Container, Input } from './Style/index'
 
-const AnimatedCheckmark = ({ toxicityScore }) => {
+function AnimatedCheckmark({ toxicityScore }) {
   let color
   let text
   if (toxicityScore < 0.6) { color = 'green'; text = 'Great!' }

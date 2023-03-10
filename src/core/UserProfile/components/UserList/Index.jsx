@@ -4,25 +4,27 @@ import React from 'react'
 import UserItem from './components/UserItem/Index'
 import { getTimeSince } from '../../../../generic/string/dateFormatter'
 
-import {
-  ListItem, List,
-} from './Style'
 import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
+import { Table, ColHeader, ColItem } from '../../../CommonComponents/AppTable/Style'
 
-const UserList = ({ users, isLoading, isUninitialized }) => {
+function UserList({ users, isLoading, isUninitialized, listTitle }) {
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="30vw" />
   return (
-    <List>
+    <Table>
+      <thead>
+        <ColHeader gridTemplateCols="1fr">
+          <ColItem>
+            {listTitle}
+          </ColItem>
+        </ColHeader>
+      </thead>
       {
         users.length ? users.map((user) => (
-          <ListItem key={user.userId}>
-            <UserItem {...user} time={getTimeSince(user.createdAt)} />
-          </ListItem>
+          <UserItem {...user} time={getTimeSince(user.createdAt)} />
         )) : <h1>Nothing here...</h1>
       }
-    </List>
-
+    </Table>
   )
 }
 export default UserList

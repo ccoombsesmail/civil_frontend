@@ -43,7 +43,7 @@ function Comment({
 
   const mins = getTimeSince(commentData.createdAt)
   const initialConfigReadOnly = {
-    editorState: JSON.parse(commentData?.content),
+    editorState: JSON.parse(commentData?.editorState),
     namespace: 'Civil3',
     nodes: [...PlaygroundNodes],
     onError: (error) => {
@@ -65,7 +65,7 @@ function Comment({
               tooltipText={commentData.createdByExperience}
             />
           </UserInfoContainer>
-          <Username>{longUsernameDisplay(commentData.createdBy)}</Username>
+          <Username>{longUsernameDisplay(commentData.createdByUsername)}</Username>
           <Date>{`${mins}`}</Date>
         </Header>
         <Body shouldBlur={shouldBlur} onClick={() => navigate(`/home/topics/${topicId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>

@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom'
 import DiscussionsItem from './DiscussionItem/Index'
 
 import {
-  Container, TableHeader, Table, ColHeader, ColItem,
+  Container, TableHeader,
 } from './Style'
 import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions.ts'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
 import { RightTriangleArrowFillSvg } from '../../../../../svgs/svgs'
+import { Table, ColHeader, ColItem } from '../../../../CommonComponents/AppTable/Style'
 
 function DiscussionsTable() {
   const { currentUser } = useGetCurrentUser()
@@ -40,7 +41,7 @@ function DiscussionsTable() {
         </TableHeader>
         <Table>
           <thead>
-            <ColHeader>
+            <ColHeader gridTemplateCols="1fr 2fr 1fr">
               <ColItem> Created By </ColItem>
               <ColItem> Title </ColItem>
               <ColItem> Comments </ColItem>

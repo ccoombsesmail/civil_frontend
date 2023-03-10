@@ -44,29 +44,29 @@ export const createComment = (commentData) => (dispatch) => {
     .then(() => {
       toast.success('Saved Comment', { delay: 1000 })
     })
-    .catch((error) => toast.error(errorFormatter(error)))
+    // .catch((error) => toast.error(errorFormatter(error)))
     .finally(() => dispatch(closeModal()))
 }
 
 export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId, userId)
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  // .catch((error) => toast.error(errorFormatter(error)))
 
 export const getAllCommentReplies = (commentId) => (dispatch) => CommentsApiUtil.getAllCommentReplies(commentId)
   .then((res) => dispatch(getAllCommentRepliesActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  // .catch((error) => toast.error(errorFormatter(error)))
 
 export const getComment = (commentId) => (dispatch) => CommentsApiUtil.getComment(commentId)
   .then((res) => dispatch(addReportedCommentActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  // .catch((error) => toast.error(errorFormatter(error)))
 
 export const updateCommentLikes = (data) => (dispatch) => CommentsApiUtil.updateCommentLikes(data)
   .then((res) => dispatch(updateCommentActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  // .catch((error) => toast.error(errorFormatter(error)))
 
 export const updateCommentCivility = (data) => (dispatch) => CommentsApiUtil.updateCommentCivility(data)
   .then((res) => dispatch(updateCommentCivilityActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  // .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
   createComment,

@@ -6,7 +6,7 @@ import RevealButton from '../../../CommonComponents/Buttons/RevealButton/Index'
 import { HoverLink } from '../../../CommonComponents/HoverLink/Style'
 import { longUsernameDisplay } from '../../../../generic/string/longUsernameDisplay'
 
-const FollowButton = ({ isFollowing, profileUserId, username }) => {
+function FollowButton({ isFollowing, profileUserId, username }) {
   const followClickHandler = useFollowClickHandler(profileUserId, isFollowing)
   return (
     <div>

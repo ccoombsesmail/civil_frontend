@@ -58,7 +58,7 @@ export const CardContainer = styled('ul')`
   margin: 5em auto 0 auto;
   background-color: #F0F2F5;
   background-color: white;
-  /* width: 44vw; */
+  width: 100%;
 
   @media only screen and (max-width: 800px) {
      width: 100%;

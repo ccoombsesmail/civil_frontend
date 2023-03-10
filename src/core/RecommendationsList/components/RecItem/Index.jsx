@@ -6,9 +6,9 @@ import {
   Container, Thumb, DescriptionContainer, Title, SubTitle, OGImage,
 } from './Style/index'
 
-const RecItem = ({ rec }) => {
+function RecItem({ rec }) {
   let content = null
-  const { topic, subTopic } = rec
+  const { topic, discussion } = rec
   const metaData = useGetLinkMetaDataEffect({ externalContentUrl: rec.externalRecommendedContent })
   const navigateToPage = useNavigateToPage(rec)
   if (topic) {
@@ -38,7 +38,7 @@ const RecItem = ({ rec }) => {
         </Title>
         {/* <Line /> */}
         <SubTitle>
-          { rec.topic?.createdBy || rec.subTopic?.createdBy}
+          { rec.topic?.createdByUsername || rec.subTopic?.createdByUsername}
           {metaData && metaData?.ogDescription}
         </SubTitle>
       </DescriptionContainer>

@@ -27,7 +27,7 @@ import LexicalEditor from './components/LexicalEditor/Index'
 function CreateCommentForm({ closeModal, commentFormState }) {
   const [richTextEditorData, setRichTextEditorData] = useState({
     lexicalContent: '',
-    rawText: '',
+    editorTextContent: '',
   })
 
   const [editor] = useLexicalComposerContext()
@@ -47,7 +47,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
 
   const [toxicityScore, setToxicityScore] = useState(null)
   const {
-    lexicalRawContent, createdByIconSrc, createdBy, time,
+    lexicalRawContent, createdByIconSrc, createdByUsername, time,
   } = commentFormState
 
   const handleSubmit = useHandleSubmit(commentFormState, richTextEditorData, closeModal)
@@ -65,7 +65,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
     <Container>
       <Formik
         initialValues={{
-          content: '',
+          editorState: '',
           positive: '',
           negative: '',
           neutral: '',
@@ -83,7 +83,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
           <FormContainer>
             <UserInfoHeader
               iconSrc={createdByIconSrc}
-              username={createdBy}
+              username={createdByUsername}
               time={getTimeSince(time)}
             />
 
@@ -100,7 +100,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button
                       type="button"
-                      onClick={() => checkToxicity({ content: richTextEditorData.rawText }).then((res) => {
+                      onClick={() => checkToxicity({ content: richTextEditorData.editorTextContent }).then((res) => {
                         setToxicityScore(res.data.SEVERE_TOXICITY.toFixed(2))
                       })}
                     >

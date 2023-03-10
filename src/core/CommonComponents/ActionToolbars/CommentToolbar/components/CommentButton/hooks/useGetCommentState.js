@@ -9,7 +9,7 @@ const findCommentContent = (comment, id) => {
   while (q.length !== 0) {
     const currNode = q.shift()
     visited.add(currNode.data.id)
-    if (currNode.data.id === id) return currNode.data.content
+    if (currNode.data.id === id) return currNode.data.editorState
     currNode.children.forEach((child) => {
       if (!visited.has(child.data.id)) q.push(child)
     })
@@ -28,7 +28,7 @@ export default (commentData, contentId, topicId) => {
     skip: !contentId || !currentUser,
   })
 
-  const { createdBy, createdByIconSrc, createdAt } = commentData || {}
+  const { createdByUsername, createdByIconSrc, createdAt } = commentData || {}
   return useCallback(() => {
     const rootComment = comments?.find(
       (c) => c.data.id === rootCommentId,
@@ -51,7 +51,7 @@ export default (commentData, contentId, topicId) => {
       topicId: topicId || contentId,
       createdByIconSrc,
       username: currentUser?.username,
-      createdBy,
+      createdByUsername,
       time: createdAt,
       lexicalRawContent: lexicalContent,
       parentId: commentData.id || null,

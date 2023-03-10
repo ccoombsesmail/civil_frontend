@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
 export const MenuTimeContainer = styled('div')` 
-  z-index: 99999;
+  z-index: 999999999;
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
   align-items: flex-end;
   padding: 5px 0;
-  width: 8%;
-  border-left: 1px solid lightgray;
   border-color: rgba(200,200,200,0.25);
+  position: relative;
 
 `
 
@@ -48,7 +47,7 @@ export const ActionMenu = styled('ul')`
   position: absolute;
   transform: translate(-55%, 55%) ;
   display: ${(props) => (props.isOpen ? 'block' : 'none')} ;
-  width: 10vw;
+  width: 12vw;
   background-color: white;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius:  .5em;

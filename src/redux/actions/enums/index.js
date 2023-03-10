@@ -11,7 +11,7 @@ const getAllEnumsActionCreator = (enums) => ({
 
 export const getAllEnums = () => (dispatch) => EnumApiUtil.getAllEnums()
   .then((res) => dispatch(getAllEnumsActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  // .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
   getAllEnums,

@@ -11,9 +11,9 @@ import { Container, Left, Right } from '../Style/index'
 import { COMMENT, TRIBUNAL_COMMENT } from '../../../../enums/content_type'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
 
-const CommentActionToolbar = ({
+function CommentActionToolbar({
   likes, comment, user,
-}) => {
+}) {
   const {
     topicId, discussionId, contentId, ...params
   } = useParams()

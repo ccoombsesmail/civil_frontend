@@ -1,49 +1,55 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../../generic/string/dateFormatter'
-import { MiddleContainer, LeftContainer, ProfileIcon } from '../Style'
+import { ProfileIcon } from '../Style'
 import UsernameAndTag from '../../../../CommonComponents/UsernameAndTag/Index'
+import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 
 import { NewFollower } from '../../../../../enums/notification_types'
 import { AddFriendSvg } from '../../../../../svgs/svgs'
 import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 
 function FollowNotifcation({ notification }) {
-  const navigate = useNavigate()
   const {
     givingUserId, givingUserUsername, givingUserIconSrc, givingUserTag, createdAt, id,
   } = notification
   return (
-    <>
-      <LeftContainer onClick={() => navigate(`/user/${givingUserId}`)}>
-        <ProfileIcon src={givingUserIconSrc} />
-        <UsernameAndTag
-          userId={givingUserId}
-          usernameDisplay={givingUserUsername}
-          userTag={givingUserTag}
-        />
-      </LeftContainer>
-      <MiddleContainer>
-        <AddFriendSvg size="15vh" />
-        <h3>
-          {' '}
-          <Link to={`/user/${givingUserId}`}>
-            <b>
-              {longUsernameDisplay(givingUserUsername)}
-            </b>
-          </Link>
-          {' '}
-          Followed You
-        </h3>
+    <tbody>
+      <Row gridTemplateCols="1fr 1fr 3fr 1fr">
+        <RowItem>
+          <ProfileIcon src={givingUserIconSrc} />
+          <UsernameAndTag
+            userId={givingUserId}
+            usernameDisplay={givingUserUsername}
+            userTag={givingUserTag}
+          />
+        </RowItem>
+        <RowItem>
+          <AddFriendSvg size="15vh" />
+        </RowItem>
+        <RowItem>
 
-      </MiddleContainer>
-      <MenuTime
-        time={getTimeSince(createdAt)}
-        id={id}
-        eventType={NewFollower}
-      />
-    </>
+          <h3>
+            {' '}
+            <Link to={`/user/${givingUserId}`}>
+              <b>
+                {longUsernameDisplay(givingUserUsername)}
+              </b>
+            </Link>
+            {' '}
+            Followed You
+          </h3>
+        </RowItem>
+        <RowItem alignItems="flex-end">
+          <MenuTime
+            time={getTimeSince(createdAt)}
+            id={id}
+            eventType={NewFollower}
+          />
+        </RowItem>
+      </Row>
+    </tbody>
   )
 }
 

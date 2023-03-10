@@ -15,6 +15,8 @@ import { useGetAllFollowedQuery, useLazyGetAllFollowersQuery } from '../../api/s
 
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../svgs/spinners/CircleLoading'
+import UserPosts from './components/UserPosts/Index'
+import ProgressBar from '../CommonComponents/ProgressBar2/Index'
 
 function UserProfile() {
   const { userId: profileUserId } = useParams()
@@ -63,24 +65,16 @@ function UserProfile() {
                 <Nav.Link eventKey="1" onClick={() => getAllFollowers(user?.userId)}>Followers</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="2" onClick={() => getAllFollowers(user?.userId)}>Posts</Nav.Link>
+                <Nav.Link eventKey="2">Posts</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="3" onClick={() => getAllFollowers(user?.userId)}>About</Nav.Link>
+                <Nav.Link eventKey="3">About</Nav.Link>
               </Nav.Item>
             </StyledNav>
           </TabsIconContainer>
 
         </HeaderContainer>
         <Content>
-          {/* <Left>
-            <ExperienceContainer>
-              <h1>Experience</h1>
-              <Experience>
-                {user?.experience}
-              </Experience>
-            </ExperienceContainer>
-          </Left> */}
           <Middle>
             <Tab.Content>
               <Tab.Pane eventKey="0">
@@ -88,6 +82,7 @@ function UserProfile() {
                   users={followed}
                   isLoading={isFollowedLoading}
                   isUninitialized={isFollowedUninitialized}
+                  listTitle="Following"
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="1">
@@ -95,13 +90,19 @@ function UserProfile() {
                   users={followers}
                   isLoading={isFollowersLoading}
                   isUninitialized={isFollowersUninitialized}
+                  listTitle="Followers"
                 />
               </Tab.Pane>
+              <Tab.Pane eventKey="2">
+                <UserPosts profileUserId={profileUserId} user={currentUser} />
+              </Tab.Pane>
+
               <Tab.Pane eventKey="3">
                 <ExperienceContainer>
                   <h1>Experience</h1>
                   <Experience>
                     {user?.experience}
+                    <ProgressBar userLevelData={user?.userLevelData} />
                   </Experience>
                 </ExperienceContainer>
               </Tab.Pane>

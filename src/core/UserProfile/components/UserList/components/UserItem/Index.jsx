@@ -1,42 +1,42 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { memo } from 'react'
-import { Container, UsernameContainer } from './Style/index'
-import ThemeTooltip from '../../../../../CommonComponents/Tooltip/Index'
+import { UsernameContainer } from './Style/index'
 import UserIcon from '../../../../../CommonComponents/UserIcon/Index'
-import useOpenDidExplorer from '../../../../../CommonComponents/UserInfoHeader/hooks/useOpenDidExplorer'
 import useGoToUserProfile from '../../../../../hooks/routing/useGoToUserProfile'
-import { VerifiedSvg } from '../../../../../../svgs/svgs'
-import { Button } from '../../../../../CommonComponents/Button/Style/index';
+import { Button } from '../../../../../CommonComponents/Button/Style/index'
+import { Row, RowItem } from '../../../../../CommonComponents/AppTable/Style'
+import { MenuTime } from '../../../../../pages/NotificationsPage/components/MenuTime/Index'
+import UsernameAndTag from '../../../../../CommonComponents/UsernameAndTag/Index'
+import ExpandButton from '../../../../../CommonComponents/Buttons/ExpandButton/Index'
 
-const UserItem = ({
-  userId, iconSrc, time, username, userTag, isDidUser,
-}) => {
+function UserItem({
+  userId, iconSrc, time, username, userTag, bio
+}) {
   const usernameDisplay = userId?.startsWith('did') ? `${username.substring(0, 12)}` : username
-  const openDidExplorer = useOpenDidExplorer(username)
   const goToUserProfile = useGoToUserProfile(userId)
   return (
-    <Container>
-      <UserIcon width="3vw" userId={userId} iconSrc={iconSrc} />
-      <div>
-        <time>{`Joined ${time} ago`}</time>
-        <UsernameContainer>
-          <h2>{usernameDisplay}</h2>
-          <h3 onClick={goToUserProfile} onKeyPress={goToUserProfile}>
-            {`@${userTag || usernameDisplay}`}
-          </h3>
-        </UsernameContainer>
-        {isDidUser
-      && (
-      <ThemeTooltip
-        onClick={openDidExplorer}
-        Icon={VerifiedSvg}
-        tooltipHeader="Verification Status"
-        tooltipText={`This Is a DID Verified User with ID: ${username}`}
-      />
-      )}
-      </div>
-      <Button>Unfollow</Button>
-    </Container>
+    <tbody>
+      <Row gridTemplateCols="1fr 1fr 1fr">
+        <RowItem alignItems="flex-start">
+          <UserIcon width="3vw" userId={userId} iconSrc={iconSrc} />
+          <UsernameAndTag
+            userId={userId}
+            usernameDisplay={username}
+            userTag={userTag}
+          />
+        </RowItem>
+
+        <RowItem>
+          <ExpandButton width="clamp(120px, 10vw, 300px)">Unfollow</ExpandButton>
+          {bio}
+        </RowItem>
+        <RowItem alignItems="flex-end">
+          <MenuTime
+            time={null}
+          />
+        </RowItem>
+      </Row>
+    </tbody>
 
   )
 }

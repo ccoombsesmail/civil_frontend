@@ -29,9 +29,6 @@ export interface Discussion {
 }
 
 export const discussionsApi = emptySplitApi.injectEndpoints({
-  // reducerPath: 'discussions',
-  // tagTypes: ['discussions'],
-  // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllDiscussions: builder.query<any, any>({
       query: (topicId) => ({ url: `/discussions?topicId=${topicId}`, method: 'GET' }),
@@ -43,6 +40,16 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
           ]
         : 
           [{ type: 'Discussion', id: 'LIST' }],
+    }),
+    getUserDiscussions: builder.query<any, any>({
+      query: (userId) => ({ url: `/discussions/user/${userId}`, method: "GET" }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: "Discussion", id } as const)),
+              { type: "Discussion", id: "LIST" },
+            ]
+          : [{ type: "Discussion", id: "LIST" }],
     }),
     getDiscussion: builder.query<any, any>({
       query: (discussionId) => ({ url: `/discussions/${discussionId}`, method: 'GET' }),
@@ -78,4 +85,11 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
   })
 })
 
-export const { useGetAllDiscussionsQuery, useGetDiscussionQuery, useCreateDiscussionMutation, useGetGeneralDiscussionIdQuery } = discussionsApi
+export const { 
+  useGetAllDiscussionsQuery, 
+  useGetDiscussionQuery,
+  useCreateDiscussionMutation, 
+  useGetGeneralDiscussionIdQuery,
+  useGetUserDiscussionsQuery,
+  useLazyGetUserDiscussionsQuery 
+  } = discussionsApi

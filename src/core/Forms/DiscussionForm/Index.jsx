@@ -36,7 +36,7 @@ function CreateDiscussionForm({ closeModal }) {
   const [open, setOpen] = useState(false)
   const [imgFile, setImgFile] = useState(null)
   const [videoFile, setVideoFile] = useState(null)
-  const [metaData, setMetaData] = useState(null)
+  // const [metaData, setMetaData] = useState(null)
 
   const [rotate, setRotate] = useState(0)
   const [richTextEditorContent, setRichTextEditorContent] = useState('')
@@ -44,19 +44,19 @@ function CreateDiscussionForm({ closeModal }) {
   const [topicId] = pathname.match(uuidRegEx)
   const [editor] = useLexicalComposerContext()
 
-  useEffect(() => {
-    const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
-      editorState.read(() => {
-        const jsonString = JSON.stringify(editorState)
-        setRichTextEditorContent(jsonString)
-      })
-    })
+  // useEffect(() => {
+  //   const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
+  //     editorState.read(() => {
+  //       const jsonString = JSON.stringify(editorState)
+  //       setRichTextEditorContent(jsonString)
+  //     })
+  //   })
 
-    return () => removeUpdateListener()
-  }, [])
+  //   return () => removeUpdateListener()
+  // }, [])
 
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
-  const handleSubmit = useHandleSubmit(externalContentUrl?.data, topicId, closeModal)
+  const handleSubmit = useHandleSubmit(externalContentUrl?.data, topicId, closeModal, editor)
 
   return (
     <Container>

@@ -11,7 +11,7 @@ import useGetTopicCommentState from './hooks/useGetTopicCommentState'
 import { initialConfig } from '../../../../Lexical/App.tsx'
 import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 
-const CommentButton = ({ discussion }) => {
+function CommentButton({ discussion }) {
   const [modal, showModal] = useModal()
   const {
     topicId,

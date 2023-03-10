@@ -2,13 +2,14 @@ import React from 'react'
 import { useGetAllNotificationsQueryState } from '../../../api/services/notifications.ts'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
+import { Table, ColHeader, ColItem } from '../../CommonComponents/AppTable/Style'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
   Middle, Left, Right, HomePageGrid,
 } from '../Style'
 import NotificationItem from './components/NotificationItem/Index'
 import {
-  BorderContainer, NotificationList, Container, Header,
+  BorderContainer, Container, Header,
 } from './Style'
 
 function Notifications() {
@@ -31,11 +32,19 @@ function Notifications() {
                   Recent Notifications
                 </p>
               </Header>
-              <NotificationList>
+              <Table>
+                <thead>
+                  <ColHeader gridTemplateCols="1fr 1fr 3fr 1fr">
+                    <ColItem> From</ColItem>
+                    <ColItem> Action</ColItem>
+                    <ColItem> Description </ColItem>
+                    <ColItem>  </ColItem>
+                  </ColHeader>
+                </thead>
                 {isLoading ? <CircleLoading /> : userNotifications.map((notification) => (
                   <NotificationItem key={notification.id} notification={notification} />
                 ))}
-              </NotificationList>
+              </Table>
             </BorderContainer>
           </Container>
         )}

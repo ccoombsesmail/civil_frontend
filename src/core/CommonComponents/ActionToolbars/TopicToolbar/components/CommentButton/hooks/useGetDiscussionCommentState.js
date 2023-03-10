@@ -12,14 +12,14 @@ export default (discussionId) => {
 
   return useCallback(() => {
     if (isUninitialized || isLoading || discussion?.title === 'General') return null
-    const replyingToContent = discussion?.description
+    const replyingToContent = discussion?.editorState
     return {
       discussionId,
       contentId: discussionId,
       topicId: discussion.topicId,
       createdByIconSrc: discussion?.createdByIconSrc,
       username: currentUser?.username,
-      createdBy: discussion?.createdByUsername,
+      createdByUsername: discussion?.createdByUsername,
       time: discussion?.createdAt,
       lexicalRawContent: replyingToContent,
       parentId: null,

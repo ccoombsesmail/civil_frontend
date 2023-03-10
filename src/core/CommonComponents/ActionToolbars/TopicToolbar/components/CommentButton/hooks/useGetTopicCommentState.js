@@ -20,14 +20,14 @@ export default (topicId) => {
 
   return useCallback(() => {
     if (isTopicLoading || isTopicUninit || isIdLoading || isIdUninit) return null
-    const replyingToContent = topic?.description
+    const replyingToContent = topic?.editorState
     return {
       discussionId: genDiscussionId.id,
       topicId,
       contentId: genDiscussionId.id,
       createdByIconSrc: topic?.createdByIconSrc,
       username: currentUser?.username,
-      createdBy: topic?.createdByUsername,
+      createdByUsername: topic?.createdByUsername,
       time: topic?.createdAt,
       lexicalRawContent: JSON.parse(replyingToContent),
       parentId: null,

@@ -29,7 +29,7 @@ function VideoShowPage({
   const goToDiscussion = useGoToDiscussion(topic.id)
   const { updateTopicLikes } = useBindDispatch(topicActionCreators)
   const updateLikes = useUpdateLikes(updateTopicLikes, topic, user)
-  useSetInnerHtml(descRef, topic?.description)
+  useSetInnerHtml(descRef, topic?.editorState)
 
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
 
@@ -38,7 +38,7 @@ function VideoShowPage({
       <VideoPlayer src={src} loading="lazy" />
       <VideoDescriptionCard
         onClick={goToDiscussion}
-        username={topic?.createdByUsername || topic?.createdBy}
+        username={topic?.createdByUsername}
         iconSrc={`${topic?.createdByIconSrc}`}
         summary={topic?.summary}
         time={getTimeSince(topic?.createdAt)}

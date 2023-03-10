@@ -9,14 +9,14 @@ import useGoToDiscussion from '../../../hooks/routing/useGoToDiscussions'
 
 import LinkMetaData from '../../../Forms/components/LinkMetaData/Index'
 
-const ExternalContentCard = ({
+function ExternalContentCard({
   topic, user, showLinks,
-}) => {
+}) {
   if (!topic) return null
   const descRef = useRef(null)
 
   const goToDiscussion = useGoToDiscussion(topic?.id)
-  useSetInnerHtml(descRef, topic?.description)
+  useSetInnerHtml(descRef, topic?.editorState)
 
   return (
     <Card

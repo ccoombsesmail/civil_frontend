@@ -9,22 +9,18 @@ export const Container = styled('section')`
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;
-    font-size: 1vw;
-    @media only screen and (max-width: 800px) {
-      font-size: 3.4vw;
-    }
+    font-size: clamp(12px, 1vw, 20px);
+   
   }
     h3 {
     text-decoration: underline;
-    font-size: .8vw;
+    font-size: clamp(10px, .8vw, 18px);
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;
     color: gray;
     cursor: pointer;
-    @media only screen and (max-width: 800px) {
-      font-size: 3vw;
-    }
+
     :hover {
       color: var(--m-primary-btn-color);
     }

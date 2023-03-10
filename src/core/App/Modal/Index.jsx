@@ -16,7 +16,6 @@ const CreateDiscussionForm = React.lazy(() => import('../../Forms/DiscussionForm
 
 const OpposingRecForm = React.lazy(() => import('../../OpposingRecForm/Index'))
 const CreateTagForm = React.lazy(() => import('../../Forms/CreateTagForm/Index'))
-const VoteForm = React.lazy(() => import('../../VoteForm/Index'))
 
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
@@ -48,9 +47,6 @@ function Modal({ closeModal }) {
       break
     case OPPOSING_REC_FORM:
       component = <OpposingRecForm {...modalProps} />
-      break
-    case TOPIC_VOTE_FORM:
-      component = <VoteForm {...modalProps} />
       break
     case CREATE_TAG_FORM:
       component = <CreateTagForm {...modalProps} />

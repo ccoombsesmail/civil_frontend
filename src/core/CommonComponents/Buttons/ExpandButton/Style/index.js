@@ -53,26 +53,18 @@ export const StyledButton = styled('button')`
   border: none;
   span {
     font-size: clamp(14px, .75vw, 22px);
-    margin-left: 10px;
     transition: color 0.6s;
     color: #fff;
     display: block;
     position: relative;
     padding: 0rem;
-
-    /* mix-blend-mode: difference; */
   }
 
   svg {
     width: clamp(15px, 1.4vw, 25px);
     z-index: 999;
-    /* margin: clamp(7px,0.4vw,12px);     */
-    /* padding-right: clamp(5px, .3vw, 10px); */
     margin: 0 !important;
     margin-right: 5px;
-    path {
-      /* fill: white; */
-    }
   }
 
 

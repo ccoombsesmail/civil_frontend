@@ -23,7 +23,7 @@ export const Container = styled('div')`
     /* font-weight: bold; */
   }
   span {
-    font-weight: bold;
+    /* font-weight: bold; */
     cursor: pointer;
   }
 

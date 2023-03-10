@@ -16,14 +16,13 @@ export default (comment) => {
     const isTribunal = pathname.includes('tribunal')
     const data = {
       givingUserId: currentUser.id,
-      receivingUserId: comment.createdById,
+      receivingUserId: comment.createdByUserId,
       commentId,
       value: Number(e.currentTarget.value),
       isFocusedComment,
       isReplies,
       ...comment,
     }
-    console.log("useUpdateCommentCivility", data)
     return isTribunal ? updateTribunalCommentCivility(data) : updateCommentCivility(data)
   }, [comment.civil])
 }

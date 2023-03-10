@@ -6,13 +6,16 @@ import { uploadTopicMedia } from '../../../../api/v1/topics/topics_api_util'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 
 import checkLinkType from '../../hooks/checkLinkType'
+import useGetLexicalTextContent from '../../hooks/useGetLexicalTextContent'
 import useUploadRichTextImages from './useUploadRichTextImages.ts'
 
-export default (metaData, closeModal) => {
+export default (metaData, closeModal, editor) => {
   const [createTopic, { isLoading }] = useCreateTopicMutation()
   const { currentUser } = useGetCurrentUser()
   const uploadRichTextImages = useUploadRichTextImages(uploadTopicMedia)
-  return useCallback(async (values, { setSubmitting, resetForm }, editor, externalContentUrl) => {
+  const editorTextContent = useGetLexicalTextContent(editor)
+
+  return useCallback(async (values, { setSubmitting, resetForm }, externalContentUrl) => {
     if (isLoading) return
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
     const linkType = checkLinkType(externalContentUrl?.url)
@@ -37,7 +40,7 @@ export default (metaData, closeModal) => {
       ...values,
       userUploadedVodUrl,
       userUploadedImageUrl,
-      description: JSON.stringify(JSON.stringify(editorState)),
+      editorState: JSON.stringify(JSON.stringify(editorState)),
       createdByUsername: currentUser.username,
       createdByuserId: currentUser.userId,
       evidenceLinks: eLinks,
@@ -47,6 +50,7 @@ export default (metaData, closeModal) => {
         externalContentUrl: externalContentUrl.url,
         thumbImgUrl: metaData?.ogImage?.url || null,
       },
+      editorTextContent: editorTextContent.replace(/\n/g, ' '),
     }
 
     toast.promise(
@@ -67,5 +71,5 @@ export default (metaData, closeModal) => {
     setSubmitting(false)
     resetForm({})
     closeModal()
-  }, [metaData])
+  }, [metaData, editor, editorTextContent])
 }

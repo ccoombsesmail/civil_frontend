@@ -1,4 +1,3 @@
-import { $getRoot, $getSelection, $createParagraphNode, $createTextNode } from "lexical";
 import { useCallback } from "react";
 
 /* eslint-disable no-underscore-dangle */

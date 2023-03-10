@@ -163,7 +163,7 @@ export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
         try {
           await queryFulfilled;
         } catch ({ error }) {
-          toast.error(`${error.status}\n ${error.data.userMsg}`)
+          // toast.error(`${error.status}\n ${error.data.userMsg}`)
           patchResult.undo();
         }
       },

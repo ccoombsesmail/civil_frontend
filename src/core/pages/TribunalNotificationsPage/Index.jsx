@@ -10,10 +10,11 @@ import NotificationItem from './components/NotificationItem/Index'
 import {
   BorderContainer, NotificationList, Container, Header,
 } from './Style'
+import { Table, ColHeader, ColItem } from '../../CommonComponents/AppTable/Style'
 
 function TribunalNotifications() {
   const { currentUser } = useGetCurrentUser()
-  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser.userId)
+  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser?.userId)
   const { tribunalNotifications } = notifications || {}
   return (
     <HomePageGrid>
@@ -30,13 +31,24 @@ function TribunalNotifications() {
                 Recent Notifications
               </p>
             </Header>
-            { isUninitialized ? null : (
-              <NotificationList>
-                {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
-                  <NotificationItem key={notification.id} notification={notification} />
-                ))}
-              </NotificationList>
-            )}
+            <Table>
+              <thead>
+                <ColHeader gridTemplateCols="1fr 1fr 3fr 1fr">
+                  <ColItem> From</ColItem>
+                  <ColItem> Action</ColItem>
+                  <ColItem> Description </ColItem>
+                  <ColItem>  </ColItem>
+                </ColHeader>
+              </thead>
+              { isUninitialized ? null : (
+                <NotificationList>
+                  {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
+                    <NotificationItem key={notification.id} notification={notification} />
+                  ))}
+                </NotificationList>
+              )}
+            </Table>
+
           </BorderContainer>
         </Container>
       </Middle>

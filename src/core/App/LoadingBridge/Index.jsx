@@ -6,7 +6,7 @@ import useFetchAppData from '../hooks/useFetchAppData'
 import useSessionType from '../../hooks/permissions/useSessionType'
 import IsLoadingHOC from '../../../hocs/IsLoadingHOC'
 import useInitUserSession from '../hooks/useInitUserSession'
-import useSetupInterceptorsEffect from '../../../api/util/axiosInstance.ts'
+import useSetupInterceptorsEffect from '../../../api/util/axiosInstance.tsx'
 import { useGetCurrentUserQuery } from '../../../api/services/session.ts'
 import useGetUserId from '../hooks/useGetUserId'
 
