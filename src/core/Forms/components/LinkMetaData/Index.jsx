@@ -4,16 +4,18 @@ import {
   FlexDiv, OGUrl, OGTitle, OGDescription, OGImage, LinkWrapper, Container,
 } from './Style/index'
 import { Line } from '../../../CommonComponents/Line/index'
-import IsLoadingHOC from '../../../../hocs/IsLoadingHOC'
+import { useGetLinkMetaDataMutation } from '../../../../api/services/links.ts'
+import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 
-function LinkMetaData({
-  metaData, setIsLoading = () => console.log('stub'),
-}) {
+function LinkMetaData({ url }) {
+  const [getMetaData, res, isLoading] = useGetLinkMetaDataMutation(url)
+
   useEffect(() => {
-    setIsLoading(true)
-    if (metaData) setIsLoading(false)
-  }, [metaData])
+    getMetaData(url)
+  }, [])
+  const metaData = res?.data
 
+  if (isLoading) return <CircleLoading />
   return (
     <Container>
       { metaData
@@ -31,4 +33,4 @@ function LinkMetaData({
     </Container>
   )
 }
-export default IsLoadingHOC(LinkMetaData)
+export default LinkMetaData

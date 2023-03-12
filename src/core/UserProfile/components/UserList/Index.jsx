@@ -20,7 +20,7 @@ function UserList({ users, isLoading, isUninitialized, listTitle }) {
         </ColHeader>
       </thead>
       {
-        users.length ? users.map((user) => (
+        users?.length ? users.map((user) => (
           <UserItem {...user} time={getTimeSince(user.createdAt)} />
         )) : <h1>Nothing here...</h1>
       }

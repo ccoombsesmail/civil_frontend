@@ -35,13 +35,21 @@ export const FlexDiv = styled('div')`
 `
 
 export const FlexDivLink = styled('div')` 
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;    
+  overflow: visible;
+  margin: auto;
+  width: var(--form-input-width);
+  /* height: var(--form-element-height); */
+  .dropdown {
+    top: 50px;
+    left: 0;
+  }
   .toolbar-item {
     background: var(--m-form-color) !important;
-    width: var(--form-input-width);
+    width: 100%;
     height: var(--form-element-height);
     justify-content: flex-start !important;
   }

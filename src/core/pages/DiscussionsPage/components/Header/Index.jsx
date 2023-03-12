@@ -16,8 +16,6 @@ import {
 import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
 import { useGetDiscussionQuery } from '../../../../../api/services/discussions.ts'
 
-import { useGetLinkMetaDataQuery } from '../../../../../api/services/links.ts'
-
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import { Twitter, Web, YouTube } from '../../../../../enums/link_type'
@@ -63,10 +61,6 @@ function Header() {
   const topicRef = useRef(null)
 
   const linkType = topic?.externalContentData?.linkType
-  const { data: metaData, isLoading } = useGetLinkMetaDataQuery(topic?.externalContentData?.externalContentUrl, {
-    skip: linkType !== Web,
-  })
-
   if (isTopicUninitialized) return null
   if (isTopicLoading) return <CircleLoading size="20vw" />
 
@@ -94,7 +88,7 @@ function Header() {
       />
     )
   } else if (linkType === Web) {
-    content = isLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
+    content = <LinkMetaData url={topic.externalContentData?.externalContentUrl} />
   } else if (topic?.createdByVodUrl || topic?.createdByImageUrl) {
     content = (
       <UserUploadedMedia

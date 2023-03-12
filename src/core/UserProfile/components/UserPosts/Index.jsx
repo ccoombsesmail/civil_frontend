@@ -22,7 +22,7 @@ function UserPosts({ profileUserId, user }) {
   const { data: topics, isLoading } = useGetUserTopicsQuery(profileUserId, {
     skip: !profileUserId,
   })
-
+  console.log(profileUserId)
   const [getUserDiscussions, { data: discussions, isLoading: isDiscussionsLoading }] = useLazyGetUserDiscussionsQuery()
   const [getUserComments, { data: comments, isLoading: isCommentsLoading }] = useLazyGetUserCommentsQuery()
   return (
@@ -34,10 +34,10 @@ function UserPosts({ profileUserId, user }) {
             <Nav.Link eventKey="0">Topics</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="1" onClick={() => getUserDiscussions(user?.userId)}>Discussions</Nav.Link>
+            <Nav.Link eventKey="1" onClick={() => getUserDiscussions(profileUserId)}>Discussions</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="2" onClick={() => getUserComments(user?.userId)}>Comments</Nav.Link>
+            <Nav.Link eventKey="2" onClick={() => getUserComments(profileUserId)}>Comments</Nav.Link>
           </Nav.Item>
         </StyledNav>
         <Tab.Content>

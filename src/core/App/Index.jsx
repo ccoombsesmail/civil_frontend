@@ -58,7 +58,7 @@ function App() {
   const wallets = useMemo(
     () => [
       new TorusWalletAdapter(),
-      new PhantomWalletAdapter(),
+      // new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
     ],
     [network],

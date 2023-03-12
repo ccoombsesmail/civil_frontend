@@ -10,6 +10,7 @@ import { emptySplitApi } from '../api/services/base';
 import { emptyNotificationsSplitApi } from '../api/services/notificationsBaseApi';
 import { emptyMiscServiceSplitApi } from '../api/services/emptyMiscServiceBaseApi';
 import { searchApi } from '../api/services/search';
+import { emptyWebScraperServiceSplitApi } from '../api/services/emptyLinkMetaDataBaseApi';
 
 const preloadedState = {
   ui: {
@@ -28,6 +29,8 @@ const reducers = {
   [emptySplitApi.reducerPath]: emptySplitApi.reducer,
   [emptyNotificationsSplitApi.reducerPath]: emptyNotificationsSplitApi.reducer,
   [emptyMiscServiceSplitApi.reducerPath]: emptyMiscServiceSplitApi.reducer,
+  [emptyWebScraperServiceSplitApi.reducerPath]: emptyWebScraperServiceSplitApi.reducer,
+
   // [topicsApi.reducerPath]: topicsApi.reducer,
   // [sessionApi.reducerPath]: sessionApi.reducer,
   [enumsApi.reducerPath]: enumsApi.reducer,
@@ -65,6 +68,7 @@ const store = configureStore({
     enumsApi.middleware,
     emptyNotificationsSplitApi.middleware,
     emptyMiscServiceSplitApi.middleware,
+    emptyWebScraperServiceSplitApi.middleware,
     searchApi.middleware,
     // notificationsApi.middleware,
     // tribunalVotesApi.middleware,

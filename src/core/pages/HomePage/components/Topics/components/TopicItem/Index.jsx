@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
@@ -12,13 +12,12 @@ import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import useGoToDiscussions from '../../../../../../hooks/routing/useGoToDiscussions'
 import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
-import { useGetLinkMetaDataQuery } from '../../../../../../../api/services/links.ts'
 import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
 
 function TopicItem({ topic, user, hideCommentButton }) {
   const goToDiscussion = useGoToDiscussions(topic.id)
   const initialConfig = {
-    editorState: JSON.parse(JSON.stringify(topic.editorState)),
+    editorState: JSON.parse(topic?.editorState),
     namespace: `Civil-${topic.title}`,
     nodes: [...PlaygroundNodes],
     onError: (error) => {
@@ -40,9 +39,6 @@ function TopicItem({ topic, user, hideCommentButton }) {
   )
 
   const linkType = topic.externalContentData?.linkType
-  const { data: metaData, isLoading } = useGetLinkMetaDataQuery(topic.externalContentData?.externalContentUrl, {
-    skip: linkType !== Web,
-  })
 
   let cardbody = null
 
@@ -70,7 +66,7 @@ function TopicItem({ topic, user, hideCommentButton }) {
       />
     )
   } else if (linkType === Web) {
-    cardbody = isLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
+    cardbody = <LinkMetaData url={topic?.externalContentData?.externalContentUrl} /> // metaData={metaData.data} isLoading={isLoading}
   } else if (topic?.userUploadedImageUrl || topic?.userUploadedVodUrl) {
     cardbody = (
       <UserUploadedMedia

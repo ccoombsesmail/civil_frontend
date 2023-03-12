@@ -170,11 +170,11 @@ export default function DropDown({
 
     if (showDropDown && button !== null && dropDown !== null) {
       const {top, left} = button.getBoundingClientRect();
-      dropDown.style.top = `${top + 40}px`;
-      dropDown.style.left = `${Math.min(
-        left,
-        window.innerWidth - dropDown.offsetWidth - 20,
-      )}px`;
+      // dropDown.style.top = `${top + 40}px`;
+      // dropDown.style.left = `${Math.min(
+      //   left,
+      //   window.innerWidth - dropDown.offsetWidth - 20,
+      // )}px`;
     }
   }, [dropDownRef, buttonRef, showDropDown]);
 
@@ -202,7 +202,6 @@ export default function DropDown({
       };
     }
   }, [dropDownRef, buttonRef, showDropDown, stopCloseOnClickSelf]);
-
   return (
     <>
       <button
@@ -224,7 +223,7 @@ export default function DropDown({
           <DropDownItems dropDownRef={dropDownRef} onClose={handleClose}>
             {children}
           </DropDownItems>,
-          document.body,
+          document.getElementById('embed-toolbar'),
         )}
     </>
   );

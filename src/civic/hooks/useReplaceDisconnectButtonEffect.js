@@ -12,7 +12,7 @@ export default (containerId) => {
     setTimeout(() => {
       const container = document.getElementById(containerId)
       const disconnectListItem = container.getElementsByClassName('wallet-adapter-dropdown-list-item')[2]
-      disconnectListItem.remove()
+      disconnectListItem?.remove()
       const list = container.getElementsByClassName('wallet-adapter-dropdown-list')[0]
       const li = document.createElement('li')
       li.addEventListener('click', () => {

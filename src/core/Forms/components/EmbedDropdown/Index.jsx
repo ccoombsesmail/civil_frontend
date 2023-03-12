@@ -6,7 +6,7 @@ import { DropDownItem } from '../../../CommonComponents/Lexical/ui/DropDown.tsx'
 import { TwitterEmbedConfigTopic, YoutubeEmbedConfigTopic, ExternalLinkConfigTopic } from '../../../CommonComponents/Lexical/plugins/AutoEmbedPlugin/index.tsx'
 import { StyledDropDown } from './Style'
 
-const EmbedDropdown = () => {
+function EmbedDropdown() {
   const [editor] = useLexicalComposerContext()
   const EmbedConfigs = useMemo(() => {
     const yt = YoutubeEmbedConfigTopic()

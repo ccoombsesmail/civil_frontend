@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
-import { useGetLinkMetaDataQuery } from '../../../../../../../api/services/links.ts'
+import { useGetLinkMetaDataMutation } from '../../../../../../../api/services/links.ts'
 import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
@@ -16,6 +16,7 @@ import UserProvidedMediaCard from '../../../../../../CommonComponents/TopicCards
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 import { uuidRegEx } from '../../../../../../../generic/regex/uuid'
 import LineWithOverlayText from '../../../LineWithTextOverlay/Index'
+import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
 
 function DiscussionCard() {
   const { pathname } = useLocation()
@@ -30,9 +31,6 @@ function DiscussionCard() {
   }), [discussion, currentUser])
 
   const linkType = discussion?.externalContentData?.linkType
-  const { data: metaData, isLoading } = useGetLinkMetaDataQuery(discussion?.externalContentData?.externalContentUrl, {
-    skip: linkType !== Web,
-  })
 
   if (isDiscussionUninitialized || discussion?.title === 'General') return null
   if (isDiscussionLoading) return <CircleLoading size={40} />
@@ -61,14 +59,19 @@ function DiscussionCard() {
       />
     )
   } else if (linkType === Web) {
-    content = isDiscussionLoading ? <CircleLoading size={40} /> : <LinkMetaData metaData={metaData} isLoading={isLoading} />
+    content = <LinkMetaData url={discussion?.externalContentData?.externalContentUrl} />
   } else if (discussion?.createdByVodUrl || discussion?.createdByImageUrl) {
     content = <UserProvidedMediaCard {...commonProps} />
   } else {
-    content = null
+    content = (
+      <UserUploadedMedia
+        videoFile={discussion.userUploadedVodUrl}
+        imgFile={discussion.userUploadedImageUrl}
+      />
+    )
   }
   const initialConfig = {
-    editorState: discussion?.editorState,
+    editorState: JSON.parse(discussion?.editorState),
     namespace: 'Civil-Discussion-Card',
     nodes: [...PlaygroundNodes],
     onError: (error) => {

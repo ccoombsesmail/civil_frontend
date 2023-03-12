@@ -86,7 +86,7 @@ export default defineConfig({
   },
   server: {
     https: false,
-    port: 8080,
+    port: 8000,
     watch: true,
     hmr: true,
   },

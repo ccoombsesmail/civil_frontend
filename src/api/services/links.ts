@@ -1,38 +1,27 @@
-import { emptyMiscServiceSplitApi } from './emptyMiscServiceBaseApi'
+import { emptyWebScraperServiceSplitApi } from './emptyLinkMetaDataBaseApi'
 
 
 interface Id {
   id: string
 }
 
-export const linksApi = emptyMiscServiceSplitApi.injectEndpoints({
-  // reducerPath: 'notifications',
-  // baseQuery: notificationsBaseQuery,
+export const linksApi = emptyWebScraperServiceSplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    getLinkMetaData: builder.query<Id, any>({
-      query: (url) => {
-        return ({ 
-        url: `/topics/link-meta-data?url=${url}`, 
-        method: 'GET',
+  getLinkMetaData: builder.mutation<any, any>({
+    query: (url) => {
+      return ({ 
+      url: `/og/`, 
+      method: 'POST',
+      data: {
+        url
       }
-      )},
-    }),
-    uploadTopicMedia: builder.mutation<any, any>({
-      query: (data) => {
-        console.log(data)
-        return ({ 
-        url: `/topics/upload-media`, 
-        method: 'POST',
-        body: data,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      )},
-    })
+    }
+    )},
   }),
 })
 
-export const { useGetLinkMetaDataQuery, useUploadTopicMediaMutation } = linksApi
+})
+
+export const { useGetLinkMetaDataMutation } = linksApi
 
 // export const useGetAllNotificationsQueryState = linksApi.endpoints.getAllNotifications.useQueryState

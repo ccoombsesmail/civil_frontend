@@ -7,7 +7,7 @@
  */
 
 import type {LexicalEditor} from 'lexical';
-
+import { useEffect } from 'react'
 import {
   AutoEmbedOption,
   EmbedConfig,
@@ -31,9 +31,13 @@ import { YouTubeComponent } from '../../nodes/YouTubeNode';
 import { TweetComponent } from '../../nodes/TweetNode';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { initialConfig } from '../../App'
-import DisplayMedia from '../../../../Forms/components/DisplayMedia/Index'
+import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
 
 import { getLinkMetaData } from '../../../../../api/v1/topics/topics_api_util.js'
+import { INSERT_EXTERNAL_LINK_COMMAND } from '../ExternalLinkPlugin/index';
+import { useGetLinkMetaDataMutation } from '../../../../../api/services/links';
+import { Provider } from 'react-redux';
+import configureStore from './../../../../../redux/store';
 
 
 export type LexicalFormContextValue = {
@@ -187,7 +191,7 @@ export const ExternalLinkConfigTopic = (submitCallback): PlaygroundEmbedConfig =
 
   // Create the Lexical embed node from the url data.
   insertNode: (editor: LexicalEditor, result: EmbedMatchResult) => {
-    editor.dispatchCommand(INSERT_TWEET_COMMAND, result.id);
+    editor.dispatchCommand(INSERT_EXTERNAL_LINK_COMMAND, result.id);
   },
 
   // For extra searching.
@@ -208,10 +212,13 @@ export const ExternalLinkConfigTopic = (submitCallback): PlaygroundEmbedConfig =
   },
   type: 'external-link-topic',
   submitCallback: (result: EmbedMatchResult) => ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
-    <DisplayMedia
-      metaData={result.data}
-      externalContentUrl={result.url}
-      />
+    <Provider store={configureStore}>
+      <LinkMetaData
+        metaData={result.data}
+        externalContentUrl={result.url}
+        url={result.url}
+        />
+    </Provider>
     )
   
 });
@@ -311,11 +318,7 @@ export function AutoEmbedDialog({
   const [editor] = useLexicalComposerContext();
   const [embedResult, setEmbedResult] = useState<EmbedMatchResult | null>(null);
   const { setContentUrl } = React.useContext<LexicalFormContextValue>(LexicalFormContext)
-  const getMetaData = React.useCallback(async (url) => {
-    const { data } = await getLinkMetaData(url)
-    return data
-  }, [])
-
+  
   const validateText = useMemo(
     () =>
       debounce((inputText: string) => {
@@ -336,14 +339,13 @@ export function AutoEmbedDialog({
   const onClick = async () => {
     if (embedResult != null) {
       if (embedConfig.type === 'external-link-topic') {
-        const metaData = await getMetaData(embedResult.url)
         setContentUrl({
           ...embedResult,
-          data: metaData
+          data: embedResult.url
         })
         embedConfig.submitCallback({
           ...embedResult,
-          data: metaData
+          data: embedResult.url
         })
       }
       else if (['tweet-topic', 'youtube-video-topic'].includes(embedConfig.type)) {
