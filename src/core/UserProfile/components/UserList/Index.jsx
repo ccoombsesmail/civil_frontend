@@ -7,7 +7,9 @@ import { getTimeSince } from '../../../../generic/string/dateFormatter'
 import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 import { Table, ColHeader, ColItem } from '../../../CommonComponents/AppTable/Style'
 
-function UserList({ users, isLoading, isUninitialized, listTitle }) {
+function UserList({
+  users, isLoading, isUninitialized, listTitle,
+}) {
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="30vw" />
   return (

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 import React, { useMemo } from 'react'
+import ErrorBoundary from '../../../../CommonComponents/ErrorBoundry/Index'
 
 import Comment from '../Comment/Index'
 import { ParentCommentContext } from './ParentCommentContext'
@@ -25,6 +26,8 @@ function CommentColumn({
               isReplies,
             }), [comment.data?.id, topicId, isReplies])
             return (
+              <ErrorBoundary>
+
               <ParentCommentContext.Provider
                 key={comment.data?.id || String(idx)}
                 value={value}
@@ -36,6 +39,8 @@ function CommentColumn({
                   replies={comment.children}
                 />
               </ParentCommentContext.Provider>
+              </ErrorBoundary>
+
             )
           })
         }

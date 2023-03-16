@@ -39,7 +39,7 @@ export default (content, user, contentType) => {
       updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
       isReplies,
       isFocusedComment,
-      ...content,
+      ...content
     }
     switch (contentType) {
       case TOPIC:

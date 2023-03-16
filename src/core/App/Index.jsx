@@ -28,7 +28,6 @@ import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content, Wrapper } from './Style'
 import LoadingBridgeWithSpinner from './LoadingBridge/Index'
 import LoadingPage from '../CommonComponents/LoadingPage/Index'
-import { CIVIC_USER } from '../../enums/session_type'
 import { UserContext } from './UserContext/Index'
 import { BgImage } from '../pages/Style'
 
@@ -51,14 +50,10 @@ function App() {
   const { pathname } = useLocation()
   const network = WalletAdapterNetwork.Devnet
   const endpoint = useMemo(() => clusterApiUrl(network, false), [network])
-  if (!localStorage.getItem('previousSignInMethod')) {
-    localStorage.removeItem('walletName')
-    localStorage.setItem('previousSignInMethod', CIVIC_USER)
-  }
   const wallets = useMemo(
     () => [
       new TorusWalletAdapter(),
-      // new PhantomWalletAdapter(),
+      new PhantomWalletAdapter(),
       new GlowWalletAdapter(),
     ],
     [network],
@@ -67,9 +62,7 @@ function App() {
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider
         wallets={wallets}
-        autoConnect={
-            localStorage.getItem('previousSignInMethod') === CIVIC_USER
-          }
+        autoConnect={false}
       >
         <WalletModalProvider>
           <GlobalStyle />

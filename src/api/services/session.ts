@@ -1,13 +1,16 @@
 import { toast } from 'react-toastify'
 import { emptySplitApi } from './base'
+
+
 interface UserData {
+  userId: string 
+  username: string,
+
 
 }
 
 export const sessionApi = emptySplitApi.injectEndpoints({
-  // reducerPath: 'session',
-  // baseQuery: backendBaseQuery,
-  // tagTypes: ['User'],
+ 
   endpoints: (builder) => ({
     getCurrentUser: builder.query<UserData, string>({
       query: (userId) => ({ url: `/users?userId=${userId}`, method: 'GET' }),
@@ -38,11 +41,10 @@ export const sessionApi = emptySplitApi.injectEndpoints({
         data: body
       }
       )},
-      invalidatesTags: ['User'],
     })
   }),
 })
 
-export const { useGetCurrentUserQuery, useUpsertDidUserMutation } = sessionApi
+export const { useGetCurrentUserQuery, useUpsertDidUserMutation, useLazyGetCurrentUserQuery } = sessionApi
 
 export const useGetCurrentUserQueryState = sessionApi.endpoints.getCurrentUser.useQueryState

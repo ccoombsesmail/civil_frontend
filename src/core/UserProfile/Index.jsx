@@ -35,7 +35,7 @@ function UserProfile() {
   if (isCurrentUserUninitialized || isUninitialized) return null
   if (isCurrentUserLoading || isLoading) return <CircleLoading size="20vw" />
 
-  const showFollowButton = profileUserId !== currentUser.userId
+  const isCurrentUserProfile = profileUserId === currentUser.userId
 
   return (
     <Container>
@@ -53,7 +53,7 @@ function UserProfile() {
               <Bio>{user?.bio}</Bio>
             </FlexDiv>
             <FullWidthDiv>
-              { showFollowButton && <FollowButton isFollowing={user?.isFollowing} profileUserId={profileUserId} username={user?.username} /> }
+              { isCurrentUserProfile ? null : <FollowButton isFollowing={user?.isFollowing} profileUserId={profileUserId} username={user?.username} /> }
             </FullWidthDiv>
 
             <StyledNav activeKey={Number(activeKey)}>
@@ -83,6 +83,7 @@ function UserProfile() {
                   isLoading={isFollowedLoading}
                   isUninitialized={isFollowedUninitialized}
                   listTitle="Following"
+                  isCurrentUserProfile={isCurrentUserProfile}
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="1">
@@ -91,6 +92,7 @@ function UserProfile() {
                   isLoading={isFollowersLoading}
                   isUninitialized={isFollowersUninitialized}
                   listTitle="Followers"
+                  isCurrentUserProfile={isCurrentUserProfile}
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="2">

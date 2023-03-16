@@ -1,19 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { memo } from 'react'
-import { UsernameContainer } from './Style/index'
 import UserIcon from '../../../../../CommonComponents/UserIcon/Index'
-import useGoToUserProfile from '../../../../../hooks/routing/useGoToUserProfile'
-import { Button } from '../../../../../CommonComponents/Button/Style/index'
 import { Row, RowItem } from '../../../../../CommonComponents/AppTable/Style'
-import { MenuTime } from '../../../../../pages/NotificationsPage/components/MenuTime/Index'
 import UsernameAndTag from '../../../../../CommonComponents/UsernameAndTag/Index'
-import ExpandButton from '../../../../../CommonComponents/Buttons/ExpandButton/Index'
+import ItemMenu from '../../../../../CommonComponents/ItemMenu/Index'
 
 function UserItem({
-  userId, iconSrc, time, username, userTag, bio
+  userId, iconSrc, username, userTag, bio,
 }) {
-  const usernameDisplay = userId?.startsWith('did') ? `${username.substring(0, 12)}` : username
-  const goToUserProfile = useGoToUserProfile(userId)
   return (
     <tbody>
       <Row gridTemplateCols="1fr 1fr 1fr">
@@ -27,12 +21,15 @@ function UserItem({
         </RowItem>
 
         <RowItem>
-          <ExpandButton width="clamp(120px, 10vw, 300px)">Unfollow</ExpandButton>
+          {/* { isCurrentUserProfile ? <ExpandButton onClick={followClickHandler} width="clamp(120px, 10vw, 300px)">Unfollow</ExpandButton> : null } */}
           {bio}
         </RowItem>
         <RowItem alignItems="flex-end">
-          <MenuTime
-            time={null}
+          <ItemMenu
+            menuType="Follows"
+            time="4d"
+            userId={userId}
+            username={username}
           />
         </RowItem>
       </Row>

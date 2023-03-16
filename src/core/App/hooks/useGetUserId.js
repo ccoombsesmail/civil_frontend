@@ -1,52 +1,69 @@
 // import { useUser } from '@clerk/clerk-react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { useEffect, useState } from 'react'
-import useGetDefaultDID from '../../DID/hooks/useGetDefaultDID'
+import { useEffect, useState, useRef } from 'react'
 import {
-  CIVIC_USER, CLERK_USER, ELASTOS_USER,
+  CIVIC_USER,
 } from '../../../enums/session_type'
+import { useUpsertDidUserMutation, useLazyGetCurrentUserQuery } from '../../../api/services/session.ts'
 
 export default () => {
   const [userId, setUserId] = useState(null)
+  const [signInMethod, setSignInMethod] = useState(localStorage.getItem('previousSignInMethod') || null)
+  const prevSignInMethod = useRef(localStorage.getItem('previousSignInMethod') || null)
 
-  // For Elastos DID users
-  const getDefaultDID = useGetDefaultDID()
+  const [upsertDidUser] = useUpsertDidUserMutation()
 
-  // For Civic DID users
   const wallet = useWallet()
-  const { publicKey } = wallet
 
-  // For Clerk Users
-  // const { user: clerkUser, isLoaded } = useUser({ withAssertions: true })
+  const [trigger, { isLoading }] = useLazyGetCurrentUserQuery()
 
   useEffect(() => {
-    const getUserId = async () => {
-      const prevSignInMethod = localStorage.getItem('previousSignInMethod')
-      switch (prevSignInMethod) {
-        // case CLERK_USER:
-        //   setUserId(clerkUser?.id)
-        //   break
-        case ELASTOS_USER:
-          const defaultDID = await getDefaultDID()
-          if (defaultDID) {
-            const doc = await defaultDID.resolve()
-            setUserId(doc.getSubject().repr)
-          } else {
-            return null
+    const handleStorageChange = async () => {
+      if (prevSignInMethod.current === null && signInMethod === CIVIC_USER && !isLoading) {
+        wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
+        const { publicKey } = wallet
+        await upsertDidUser({
+          userId: publicKey.toBase58(),
+          username: publicKey.toBase58(),
+          iconSrc: '',
+        })
+        await trigger(publicKey?.toBase58())
+        setUserId(publicKey?.toBase58())
+        prevSignInMethod.current = signInMethod
+      }
+    }
+
+    const setupUser = async () => {
+      switch (signInMethod) {
+        case CIVIC_USER: {
+          wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
+          await wallet.connect()
+          const { publicKey } = wallet
+          if (publicKey && !isLoading && prevSignInMethod.current !== null) {
+            await trigger(publicKey?.toBase58(), { preferCacheValue: true })
+            setUserId(publicKey?.toBase58())
           }
+
           break
-        case CIVIC_USER:
-          setUserId(publicKey?.toBase58())
-          if (localStorage.getItem('previousSignInMethod') === CIVIC_USER && localStorage.getItem('walletName2') !== 'null' && localStorage.getItem('walletName2')) {
-            wallet.select(localStorage.getItem('walletName2'))
-          }
-          break
+        }
         default:
+          setUserId(null)
           break
       }
     }
-    getUserId()
-  }, [wallet?.connected, wallet])
+    handleStorageChange()
+    setupUser()
+  }, [wallet, prevSignInMethod, signInMethod])
+
+  useEffect(() => {
+    const sessionListener = async () => {
+      if (wallet.connected) {
+        setSignInMethod(CIVIC_USER)
+        localStorage.setItem('previousSignInMethod', CIVIC_USER)
+      }
+    }
+    sessionListener()
+  }, [wallet.connected])
 
   return { userId }
 }

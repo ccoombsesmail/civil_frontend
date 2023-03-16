@@ -11,19 +11,6 @@ export const usersApi = emptySplitApi.injectEndpoints({
     getUser: builder.query<UserData, UserData>({
       query: (userId) => ({ url: `/users?userId=${userId}`, method: "GET" }),
       providesTags: ["User"],
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        toast.promise(queryFulfilled, {
-          pending: "Fetching User Profile Data...",
-          success: "User Profile Successfully Loaded!",
-          error: {
-            render({ data: errorData }) {
-              const { response } = errorData;
-              const { data: responseData } = response;
-              return `${responseData.msg} 🤯 `;
-            },
-          },
-        });
-      },
     }),
     updateUserBioInformation: builder.mutation<any, any>({
       query: (body) => {

@@ -40,7 +40,6 @@ function Comment({
   const [isOpen, setIsOpen] = useState(false)
   const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW || commentData?.toxicityStatus === 'TOXIC')
   const { currentUser } = useGetCurrentUser()
-
   const mins = getTimeSince(commentData.createdAt)
   const initialConfigReadOnly = {
     editorState: JSON.parse(commentData?.editorState),
@@ -101,6 +100,7 @@ function Comment({
                   level={level + 1}
                 />
               ))
+
               }
             </EvidenceSection>
           </Collapse>

@@ -17,7 +17,8 @@ export const SearchItem = styled('a')`
     span {
       justify-content: center;
       width: 50%;
-      margin: auto;
+      word-wrap: break-word;
+      margin: 0 5px 0 auto;
       b {
         display: inline;
       }

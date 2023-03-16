@@ -108,8 +108,9 @@ export const ResultContainer = styled('div')`
   background-color: white;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 70vh;
   overflow: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   ::-webkit-scrollbar {
   display: none;
   }
