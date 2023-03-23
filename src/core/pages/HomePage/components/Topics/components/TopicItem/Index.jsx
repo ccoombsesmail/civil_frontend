@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo, forwardRef } from 'react'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
@@ -14,7 +14,9 @@ import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/th
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
 
-function TopicItem({ topic, user, hideCommentButton }) {
+const TopicItem = forwardRef(({
+  topic, user, hideCommentButton, id,
+}, ref) => {
   const goToDiscussion = useGoToDiscussions(topic.id)
   const initialConfig = {
     editorState: JSON.parse(topic?.editorState),
@@ -80,12 +82,12 @@ function TopicItem({ topic, user, hideCommentButton }) {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <Card {...commonProps}>
+      <Card {...commonProps} ref={ref} id={id}>
         {cardbody}
       </Card>
     </LexicalComposer>
 
   )
-}
+})
 
 export default TopicItem

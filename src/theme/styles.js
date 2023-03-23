@@ -513,7 +513,7 @@ blockquote {
     font-size: 10px;
     /* font-family: "Baloo 2", cursive; */
     font-family: "Roboto",Helvetica,Arial,sans-serif;    
-    overflow-x: hidden;
+    overflow: hidden;
 
   }
   .wallet-adapter-button-trigger {
@@ -662,10 +662,6 @@ blockquote {
     margin: 0 !important;
   }
 
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 
 
   .text-editor .ql-container {

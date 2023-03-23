@@ -36,14 +36,14 @@ export interface TopicLiked {
 export const topicsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllTopics: builder.query<any, any>({
-      query: () => ({ url: `/topics`, method: "GET" }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Topic", id } as const)),
-              { type: "Topic", id: "LIST" },
-            ]
-          : [{ type: "Topic", id: "LIST" }],
+      query: (currentPage) => ({ url: `/topics?skip=${currentPage*5}`, method: "GET" }),  
+      // providesTags: (result) =>
+      //   result
+      //     ? [
+      //         ...result.map(({ id }) => ({ type: "Topic", id } as const)),
+      //         { type: "Topic", id: "LIST" },
+      //       ]
+      //     : [{ type: "Topic", id: "LIST" }],
     }),
     getTopic: builder.query<any, any>({
       query: (topicId) => ({ url: `/topics/${topicId}`, method: "GET" }),

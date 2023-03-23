@@ -14,7 +14,7 @@ import useSessionType from '../../hooks/permissions/useSessionType'
 import { useGetAllNotificationsQuery } from '../../../api/services/notifications.ts'
 import useGetCurrentUser from '../hooks/useGetCurrentUser'
 import MobileMenu from './components/MobileMenu/Index'
-import SearchBar from '../../SearchBar/Index';
+import SearchBar from '../../SearchBar/Index'
 
 function NavButtons() {
   const navigate = useNavigate()
@@ -60,13 +60,14 @@ function Header() {
   } = useSessionType()
   const { currentUser } = useGetCurrentUser()
   const { data } = useGetAllNotificationsQuery(currentUser?.userId, {
-    skip: !currentUser,
+    skip: !currentUser || true,
   })
   const { userNotifications, tribunalNotifications } = data || {}
   const [numUnreadUserNotifications, numUnreadTribunalNotifications] = [
     userNotifications?.filter((n) => n.isRead === false).length,
     tribunalNotifications?.filter((n) => n.isRead === false).length,
   ]
+  const screenWidth = window.screen.width
 
   return (
     <StyledHeader>
@@ -83,13 +84,15 @@ function Header() {
           <DropdownMenu />
         </NavDropdownToggle>
       </NavContainer>
-      <MobileContainer>
-        <WalletPassesContainer>
-          <Divider />
-        </WalletPassesContainer>
+      { screenWidth < 1250 ? (
+        <MobileContainer>
+          <WalletPassesContainer>
+            <Divider />
+          </WalletPassesContainer>
 
-        <MobileMenu numUnreadUserNotifications={numUnreadUserNotifications} numUnreadTribunalNotifications={numUnreadTribunalNotifications} />
-      </MobileContainer>
+          <MobileMenu numUnreadUserNotifications={numUnreadUserNotifications} numUnreadTribunalNotifications={numUnreadTribunalNotifications} />
+        </MobileContainer>
+      ) : null}
 
     </StyledHeader>
   )

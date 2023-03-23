@@ -86,10 +86,14 @@
 // export default InfiniteScrollingFeed;
 
 import React, {
-  useRef, useState, useCallback, useEffect, useMemo,
+  useRef, useState, useCallback, useEffect, useMemo, PureComponent,
 } from 'react'
 
 import { useDebouncedCallback } from 'use-lodash-debounce'
+
+import { FixedSizeList as List } from 'react-window'
+import InfiniteLoader from 'react-window-infinite-loader'
+
 import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
 import uiActionCreators from '../../../../../redux/actions/ui'
 
@@ -100,84 +104,46 @@ import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { useGetAllTopicsQuery } from '../../../../../api/services/topics.ts'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import { ObserverContext } from '../ObserverContext'
+import ExampleWrapper from './InfiniteLoader'
 
-const PAGE_SIZE = 5
+// const PAGE_SIZE = 5
 
-function containsEmptySlots(array) {
-  for (let i = 0; i < array.length; i++) {
-    if (!(i in array)) {
-      return true
-    }
-  }
-  return false
-}
+// const LOADING = 1
+// const LOADED = 2
+// const itemStatusMap = {}
+
+// function containsEmptySlots(array) {
+//   for (let i = 0; i < array.length; i++) {
+//     if (!(i in array)) {
+//       return true
+//     }
+//   }
+//   return false
+// }
 
 function Topics() {
   const { openModal } = useBindDispatch(uiActionCreators)
   const { currentUser } = useGetCurrentUser()
-  const [currentPage, setCurrentPage] = useState(1)
-  const topRef = useRef(null)
-  const bottomRef = useRef(null)
-  const prevRef = useRef(null)
-  // const [savedScrollPosition, setSavedScrollPosition] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [allData, setAllData] = useState([])
 
-  console.log(currentPage)
-
-  const {
-    data: lastTopics, isLoading: isLoadingLast, isFetching: isFetchingLast, isSuccess: isLastSuccess,
-  } = useGetAllTopicsQuery(currentPage - 1, {
-    skip: !currentUser || currentPage === 0,
-  })
   const {
     data: currentTopics, isLoading: isLoadingCurrent, isFetching: isFetchingCurrent, isSuccess: isCurrentSuccess, isUninitialized: isCurrentUninitialized,
   } = useGetAllTopicsQuery(currentPage, {
     skip: !currentUser,
   })
 
-  const {
-    data: nextTopics, isLoading: isLoadingNext, isFetching: isFetchingNext, isSuccess: isNextSuccess,
-  } = useGetAllTopicsQuery(currentPage + 1, {
-    skip: !currentUser,
-  })
-
-  const combined = useMemo(() => {
-    // const arr = new Array(PAGE_SIZE * (currentPage + 1))
-    const arr = new Array(15)
-    if (lastTopics) {
-      arr.splice(0, 5, ...lastTopics.items)
-    }
-
+  useEffect(() => {
     if (currentTopics) {
-      arr.splice(5, 5, ...currentTopics.items)
+      setAllData([...allData, ...currentTopics.items])
     }
-    if (nextTopics) {
-      arr.splice(10, 5, ...nextTopics.items)
-    }
+  }, [currentTopics])
 
-    return arr
-  }, [currentPage, lastTopics, currentTopics, nextTopics])
+  const rowCount = allData.length
 
-  const options = {
-    rootMargin: '500px',
-    threshold: 0.4,
-  }
-  const handleIntersect = (entries) => {
-    const topNode = topRef.current
-    const bottomNode = bottomRef.current
-    entries.forEach((entry) => {
-      if (entry.target.isEqualNode(topNode) && currentPage !== 1 && entry.isIntersecting) {
-        alert('intersecting top')
-        setTimeout(() => setCurrentPage((prevPage) => prevPage - 1), 200)
-      } else if (entry.target.isEqualNode(bottomNode) && entry.isIntersecting) {
-        alert('intersecting bottom')
-        setTimeout(() => setCurrentPage((prevPage) => prevPage + 1), 200)
-        // document.getElementById('main-scroll').scrollTop
-      }
-    })
-  }
-  const debouncedHandleIntersect = useDebouncedCallback(handleIntersect, 1000)
-
-  const observer = useMemo(() => new IntersectionObserver(debouncedHandleIntersect, options), [debouncedHandleIntersect, options])
+  const fetchMore = useCallback(() => {
+    setCurrentPage((prevPage) => prevPage + 1)
+  }, [])
 
   return (
     <Container>
@@ -185,30 +151,15 @@ function Topics() {
         <Header user={currentUser} openModal={openModal} />
         { isCurrentUninitialized ? null : (
           <CardContainer>
-            <ObserverContext.Provider value={observer}>
-
-              {
-                isLoadingCurrent || isLoadingLast || isLoadingNext || containsEmptySlots(combined.length) ? <CircleLoading /> : combined?.map((topic, i) => {
-                  let ref
-                  if (i === 0) {
-                    ref = topRef
-                  } else if (i === combined.length - 1) {
-                    ref = bottomRef
-                  } else ref = null
-                  return (
-                    <TopicItem
-                      key={topic.id}
-                      topic={topic}
-                      user={currentUser}
-                      ref={ref}
-                    />
-                  )
-                })
-            }
-            </ObserverContext.Provider>
+            <ExampleWrapper
+              hasNextPage
+              isNextPageLoading={isLoadingCurrent}
+              items={allData}
+              loadNextPage={fetchMore}
+            />
           </CardContainer>
         )}
-        {isFetchingNext && <CircleLoading size="200px" /> }
+        {/* {isFetchingNext && <CircleLoading size="200px" /> } */}
 
       </BorderContainer>
     </Container>

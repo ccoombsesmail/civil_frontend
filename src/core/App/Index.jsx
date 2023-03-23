@@ -74,7 +74,7 @@ function App() {
                   <Header />
                   <MainContainer>
                     <CreateTagModal />
-                    <Content>
+                    <Content id="main-scroll">
                       { pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate') ? null : <BgImage /> }
                       <Routes>
                         <Route

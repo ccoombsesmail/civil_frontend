@@ -159,6 +159,7 @@ export function UniquenessStatus() {
     </Container>
   )
 }
+// https://solana-mainnet.g.alchemy.com/v2/cgns7vIgz5PLpQdI7Tx4CYAzBOZ3glGs
 
 function UniquenessGateway() {
   const wallet = useWallet()

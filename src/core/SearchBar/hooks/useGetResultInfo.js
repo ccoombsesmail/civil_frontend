@@ -6,7 +6,7 @@ export default (result, clearInput) => {
 
   return useMemo(() => {
     const {
-      topic, discussion, comment,
+      topic, discussion, comment, user,
     } = result
     let textContent
     let linkToOnClick
@@ -23,10 +23,15 @@ export default (result, clearInput) => {
         navigate(`home/topics/${discussion.topicId}/discussions/${discussion.id}`)
         clearInput()
       }
-    } else {
+    } else if (comment) {
       textContent = comment?.editorTextContent
       linkToOnClick = () => {
         navigate(`home/topics/${comment.topicId}/discussions/${comment.discussionId}/comments/${comment.id}`)
+        clearInput()
+      }
+    } else {
+      linkToOnClick = () => {
+        navigate(`user/${user?.userId}`)
         clearInput()
       }
     }

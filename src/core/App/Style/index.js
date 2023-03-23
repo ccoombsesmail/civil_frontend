@@ -13,6 +13,10 @@ export const Content = styled('div')`
   flex-grow: 1;
   overflow-y: scroll;
   overflow-x: hidden;
+  ::-webkit-scrollbar {
+    /* display: none; */
+  }
+  
 `
 
 export const Wrapper = styled('div')`

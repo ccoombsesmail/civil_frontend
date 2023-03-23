@@ -55,7 +55,7 @@ export const CardContainer = styled('ul')`
   align-items: center;
   z-index: 9999;
   padding: 0;
-  margin: 5em auto 0 auto;
+  margin: 0em auto 0 auto;
   background-color: #F0F2F5;
   background-color: white;
   width: 100%;

@@ -1,5 +1,5 @@
 import React, {
-  useRef, useEffect, useState, useMemo,
+  useRef, useEffect, useState, useMemo, forwardRef,
 } from 'react'
 import { useLocation } from 'react-router-dom'
 import { UNDER_REVIEW } from '../../../enums/report_status'
@@ -15,8 +15,9 @@ import {
 } from './Style'
 import { TOPIC } from '../../../enums/content_type'
 import CardDetails from './components/CardDetails/Index'
+import { ObserverContext } from '../../pages/HomePage/components/ObserverContext'
 
-function Card({
+const Card = forwardRef(({
   children,
   onClick,
   listCard,
@@ -25,7 +26,7 @@ function Card({
   user,
   showLinks,
   hideCommentButton,
-}) {
+}, ref) => {
   const { pathname } = useLocation()
   const {
     id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, topicCreatorIsDidUser, userVerificationType, reportStatus,
@@ -33,8 +34,19 @@ function Card({
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
 
+  // const observer = React.useContext(ObserverContext) || {}
+
+  // useEffect(() => {
+  //   console.log(observer)
+  //   console.log(ref?.current)
+  //   if (observer && ref?.current) {
+  //     observer.observe(ref.current)
+  //   }
+  //   return () => observer.disconnect()
+  // }, [observer, ref])
   return (
     <Container
+      ref={ref}
       onClick={onContainerClick}
       listCard={listCard}
       shouldBlur={shouldBlur}
@@ -68,7 +80,7 @@ function Card({
       </Body>
     </Container>
   )
-}
+})
 
 export function VideoDescriptionCard({
   children,

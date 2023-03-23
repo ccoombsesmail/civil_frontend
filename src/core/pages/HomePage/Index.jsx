@@ -1,5 +1,5 @@
 import React from 'react'
-import Topics from './components/Topics/Index'
+import Topics from './components/Topics/TestFeed'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
   Left, Middle, Right, HomePageGrid,
