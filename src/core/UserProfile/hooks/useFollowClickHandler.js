@@ -6,13 +6,15 @@ import {
 } from '../../../api/services/follows.ts'
 
 export default (profileUserId, isFollowing) => {
-  const [addNewFollow] = useAddNewFollowMutation()
-  const [removeFollow] = useRemoveFollowMutation()
+  const [addNewFollow, { isLoading: isAddLoading }] = useAddNewFollowMutation()
+  const [removeFollow,  { isLoading: isRemovingLoading }] = useRemoveFollowMutation()
   const { currentUser } = useGetCurrentUser()
 
-  return useCallback(() => {
+  const onFollowBtnClick = useCallback(() => {
     isFollowing
       ? removeFollow(profileUserId)
       : addNewFollow({ followedUserId: profileUserId })
   }, [currentUser, profileUserId, isFollowing])
+
+  return { onFollowBtnClick, isLoading: isAddLoading || isRemovingLoading}
 }

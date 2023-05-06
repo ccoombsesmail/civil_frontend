@@ -7,6 +7,7 @@ import useModal from '../../../CommonComponents/Lexical/hooks/useModal.tsx'
 import CreateCommentForm from '../../../Forms/CommentForm/Index'
 import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 import { initialConfig } from '../../../CommonComponents/Lexical/App.tsx'
+import { WhatDoYouThinkContainer } from './Style'
 
 function WhatDoYouThink({ topic, comment }) {
   const { contentId } = useParams()
@@ -23,7 +24,7 @@ function WhatDoYouThink({ topic, comment }) {
     ))
   }, [topic, contentId, getFommentFormState])
   return (
-    <>
+    <WhatDoYouThinkContainer>
       <LexicalComposer initialConfig={initialConfig}>
 
         {modal}
@@ -32,7 +33,7 @@ function WhatDoYouThink({ topic, comment }) {
         What Do You Think?
       </ExpandButton>
 
-    </>
+    </WhatDoYouThinkContainer>
   )
 }
 

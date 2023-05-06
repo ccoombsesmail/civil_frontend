@@ -1,12 +1,11 @@
-import { closeModal } from '../../redux/actions/ui/index.js'
-import { createDraft, finishDraft } from 'immer';
-import { toast } from 'react-toastify';
-import { emptySplitApi } from './base'
-
-
+import { createDraft, finishDraft } from "immer";
+import { emptySplitApi } from "./base";
+import onUpdateCivilityQueryStarted from "../util/comments/updateCivility.js";
+import onUpdateLikesQueryStarted from "../util/comments/updateLikes";
+import addReplyToCache from "../util/comments/addReplyToCache";
 
 export interface Comment {
-  id: string,
+  id: string;
   title: string;
   summary: string;
   description: string;
@@ -19,35 +18,30 @@ export interface Comment {
   thumbImgUrl?: string;
 }
 
-
 export const findComment = (id, root) => {
-  const queue = []
-  queue.push(root)
+  const queue = [];
+  queue.push(root);
   while (queue.length > 0) {
-    const currNode = queue.shift()
+    const currNode = queue.shift();
     if (currNode.data.id === id) {
-      return currNode
+      return currNode;
     }
     for (let child of currNode.children) {
-      queue.push(child)
+      queue.push(child);
     }
   }
 };
 
-
-
 export const commentsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllComments: builder.query<any, any>({
-      query: (discussionId) => ({ url: `/comments?discussionId=${discussionId}`, method: 'GET' }),
-      providesTags: (result) =>
-      result ? 
-          [
-            ...result.map(({ id }) => ({ type: 'Comment', id } as const)),
-            { type: 'Comment', id: 'LIST' },
-          ]
-        : 
-          [{ type: 'Comment', id: 'LIST' }],
+      query: ({ discussionId, currentPage }) => ({
+        url: `/comments?discussionId=${discussionId}&skip=${currentPage * 10}`,
+        method: "GET",
+      }),
+      providesTags: (result, error, arg) => {
+        return [{ type: "CommentPage", id: arg.toString() }];
+      },
     }),
     getUserComments: builder.query<any, any>({
       query: (userId) => ({ url: `/comments/user/${userId}`, method: "GET" }),
@@ -60,172 +54,74 @@ export const commentsApi = emptySplitApi.injectEndpoints({
           : [{ type: "Comments", id: "LIST" }],
     }),
     getAllCommentReplies: builder.query<any, any>({
-      query: (commentId) => ({ url: `/comments/replies/${commentId}`, method: 'GET' }),
+      query: (commentId) => ({
+        url: `/comments/replies/${commentId}`,
+        method: "GET",
+      }),
       providesTags: (result) =>
-      result ? 
-          [
-            ...result.replies.map(({ id }) => ({ type: 'Comment', id } as const)),
-            { type: 'Comment', id: 'LIST' },
-          ]
-        : 
-          [{ type: 'Comment', id: 'LIST' }],
+        result
+          ? [
+              ...result.replies.map(
+                ({ id }) => ({ type: "CommentWithReplies", id } as const)
+              ),
+              { type: "CommentWithReplies", id: "LIST" },
+            ]
+          : [{ type: "CommentWithReplies", id: "LIST" }],
     }),
     getComment: builder.query<any, any>({
-      query: (commentId) => ({ url: `/comments/${commentId}`, method: 'GET' }),
-      // providesTags: (result) => [{ type: 'Topics', id: 'LIST' }],
-
+      query: (commentId) => ({ url: `/comments/${commentId}`, method: "GET" }),
     }),
     createComment: builder.mutation<any, any>({
       query: (body) => {
-        return ({ 
-        url: `/comments`, 
-        method: 'POST',
-        data: body
-      }
-      )},
-      invalidatesTags: [{ type: 'Comment', id: 'LIST' }],
-      async onCacheEntryAdded(
-        arg,
-        {
-          dispatch,
-        }
-      ) {
-        dispatch(closeModal())
+        return {
+          url: `/comments`,
+          method: "POST",
+          data: body,
+        };
+      },
+      invalidatesTags: (result, error, arg) => {
+        return [
+          { type: "CommentPage", id: arg.currentPage },
+          { type: "Comment", id: arg.id },
+        ];
+      },
+      async onCacheEntryAdded(args, helpers) {
+        await addReplyToCache(args, helpers)
       },
     }),
     updateCommentLikes: builder.mutation<any, any>({
       query: (body) => {
-        return ({ 
-        url: `/comments/likes`, 
-        method: 'PUT',
-        data: body
-      })
-    },
-    async onQueryStarted({ id, rootId, commentId, parentId, discussionId, isFocusedComment, updateLikeValue, updateGetTopicQuery, isReplies, ...patch }, { dispatch, queryFulfilled }) {
-      let patchResult
-      if (isFocusedComment) {
-        patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
-            if (id) {
-              const newDraft = createDraft(draft)
-              console.log(patch)
-              newDraft.comment.likeState = patch.value
-              newDraft.comment.likes += updateLikeValue
-              return finishDraft(newDraft)
-
-            }
-          })
-        )
-      } else if (isReplies) {
-        patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllCommentReplies', rootId, (draft) => {
-            const newDraft = createDraft(draft)
-            const rootComment = newDraft.replies.find((c) => c.data.id === commentId)
-            if (parentId === rootId) {
-              rootComment.data.likeState = patch.value
-              rootComment.data.likes += updateLikeValue
-              return finishDraft(newDraft)
-            }
-            const comment = findComment(id, rootComment)
-            comment.data.likeState = patch.value
-            comment.data.likes += updateLikeValue
-            return finishDraft(newDraft)
-          })
-        )
-      } else {
-        patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllComments', discussionId, (draft) => {
-            let comment
-            const newDraft = createDraft(draft)
-            const rootComment = newDraft.find((c) => c.data.id === rootId)
-            if (!rootId) {
-              comment = newDraft.find((c) => c.data.id === id)
-              comment.data.likeState = patch.value
-              comment.data.likes += updateLikeValue
-              return finishDraft(newDraft)
-            }
-            comment = findComment(id, rootComment)
-            comment.data.likeState = patch.value
-            comment.data.likes += updateLikeValue
-            return finishDraft(newDraft)
-          })
-        )
-      }
-
-      try {
-         await queryFulfilled
-      } catch {
-        patchResult.undo()
-
-      }
-    },
+        return {
+          url: `/comments/likes`,
+          method: "PUT",
+          data: body,
+        };
+      },
+      async onQueryStarted(args, helpers) {
+        await onUpdateLikesQueryStarted(args, helpers)
+      },
     }),
     updateCommentCivility: builder.mutation<any, any>({
       query: (body) => {
-        return ({ 
-        url: `/comments/civility`, 
-        method: 'PUT',
-        data: body
-      })
-    },
-    async onQueryStarted({ id, rootId, civility, discussionId, updateLikeValue, updateGetTopicQuery, isReplies, isFocusedComment, ...patch }, { dispatch, queryFulfilled }) {
-      let patchResult
-      if (isFocusedComment) {
-        patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
-            if (id) {
-              const newDraft = createDraft(draft)
-              newDraft.comment.civility = patch.value
-              return finishDraft(newDraft)
-
-            }
-          })
-        )
-      } else if (isReplies) {
-        patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllCommentReplies', id, (draft) => {
-            if (id) {
-              console.log(patch)
-              draft.comment.civility = patch.value
-            }
-          })
-        )
-      } else {
-        patchResult = dispatch(
-          commentsApi.util.updateQueryData('getAllComments', discussionId, (draft) => {
-            let comment
-            const newDraft = createDraft(draft)
-            const rootComment = newDraft.find((c) => c.data.id === rootId)
-            if (!rootId) {
-              comment = newDraft.find((c) => c.data.id === id)
-              comment.data.civility = patch.value
-              return finishDraft(newDraft)
-            }
-            comment = findComment(id, rootComment)
-            comment.data.civility = patch.value
-            return finishDraft(newDraft)
-          })
-        )
-      }
-
-      try {
-         await queryFulfilled
-      } catch ({ error }) {
-        // toast.error(`${error.status}\n ${error.data.userMsg}`)
-        patchResult.undo()
-
-      }
-    },
+        return {
+          url: `/comments/civility`,
+          method: "PUT",
+          data: body,
+        };
+      },
+      async onQueryStarted(args, helpers) {
+          await onUpdateCivilityQueryStarted(args, helpers)
+      },
     }),
-  })
-})
+  }),
+});
 
 export const {
-  useGetAllCommentsQuery, 
-  useGetCommentQuery, 
+  useGetAllCommentsQuery,
+  useGetCommentQuery,
   useCreateCommentMutation,
   useUpdateCommentLikesMutation,
   useUpdateCommentCivilityMutation,
   useGetAllCommentRepliesQuery,
-  useLazyGetUserCommentsQuery
-  } = commentsApi
+  useLazyGetUserCommentsQuery,
+} = commentsApi;

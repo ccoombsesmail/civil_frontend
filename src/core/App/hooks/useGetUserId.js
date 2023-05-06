@@ -11,17 +11,19 @@ export default () => {
   const [signInMethod, setSignInMethod] = useState(localStorage.getItem('previousSignInMethod') || null)
   const prevSignInMethod = useRef(localStorage.getItem('previousSignInMethod') || null)
 
-  const [upsertDidUser] = useUpsertDidUserMutation()
+  const [upsertDidUser, { isLoading: isUpsertLoading }] = useUpsertDidUserMutation()
 
   const wallet = useWallet()
 
-  const [trigger, { isLoading }] = useLazyGetCurrentUserQuery()
+  const [trigger, { isLoading: isUserLoading, isUninitialized }] = useLazyGetCurrentUserQuery()
 
   useEffect(() => {
     const handleStorageChange = async () => {
-      if (prevSignInMethod.current === null && signInMethod === CIVIC_USER && !isLoading) {
+      console.log(prevSignInMethod.current)
+      if (prevSignInMethod.current === null && signInMethod === CIVIC_USER && !isUpsertLoading) {
         wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
         const { publicKey } = wallet
+        console.log("UPSERTING!!!!")
         await upsertDidUser({
           userId: publicKey.toBase58(),
           username: publicKey.toBase58(),
@@ -39,8 +41,9 @@ export default () => {
           wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
           await wallet.connect()
           const { publicKey } = wallet
-          if (publicKey && !isLoading && prevSignInMethod.current !== null) {
-            await trigger(publicKey?.toBase58(), { preferCacheValue: true })
+          if (publicKey && !isUpsertLoading && !isUserLoading && isUninitialized && prevSignInMethod.current !== null) {
+            console.log("Setup USER!!!!")
+            await trigger(publicKey?.toBase58())
             setUserId(publicKey?.toBase58())
           }
 
@@ -53,7 +56,7 @@ export default () => {
     }
     handleStorageChange()
     setupUser()
-  }, [wallet, prevSignInMethod, signInMethod])
+  }, [wallet, prevSignInMethod, signInMethod, isUpsertLoading, isUserLoading])
 
   useEffect(() => {
     const sessionListener = async () => {

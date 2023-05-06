@@ -1,21 +1,20 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export const VotingContainer = styled('section')`
+export const VotingContainer = styled("section")`
   position: relative;
-  min-width: 600px;
   width: 70vw;
-  height: clamp(350px, 14vw, 400px);
+  /* height: clamp(350px, 14vw, 400px); */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius: 0.5em;
-  background-color: white;
   border: 0.5px solid lightgray;
   border-color: rgba(200, 200, 200, 0.25);
   margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
   width: 95%;
+  background-color: var(--m-menu-item-hover);
 
   @media (max-width: 600px) {
     width: 100%;
@@ -27,76 +26,143 @@ export const VotingContainer = styled('section')`
       height: 9vw;
     }
   }
+`;
 
-  span {
-    font-size: clamp(20px, 1.3vw, 35px);
-
-    /* @media only screen and (max-width: 800px) {
-      font-size: 4vw;
-    } */
-  }
-`
-
-export const VotesAgainst = styled('div')`
+export const VotesAgainst = styled("div")`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  right: 10%;
-  top: 60%;
-  transform: translate(0, -50%);
-  font-size: clamp(18px, 1.3vw, 35px);
+  padding: 5vw;
+  font-size: clamp(20px, 1.3vw, 35px);
   align-items: center;
+  background: white;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+  color: black;
+  box-shadow: 15px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  margin: 20px auto;
+  border-radius: 20px;
 
-  @media only screen and (max-width: 800px) {
-    right: 20%;
-    top: 75%;
+  :hover {
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5%;
+    box-shadow: 10px 10px rgba(0, 0, 0, 0.25);
   }
-`
-
-export const VotesFor = styled('div')`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  left: 10%;
-  top: 60%;
-  transform: translate(0, -50%);
-  font-size: clamp(18px, 1.3vw, 35px);
-  align-items: center;
   @media only screen and (max-width: 800px) {
-    left: 20%;
-    top: 75%;
-  }
-`
-
-export const MiddleSection = styled('div')`
-  span:first-child {
-    letter-spacing: 0.8vw;
-    font-style: italic;
-
-    font-size: clamp(25px, 2vw, 40px);
-    font-weight: bold;
-    color: ${(props) => (props.verdict === 'Violation' ? 'coral' : 'green')};
-    path {
-      fill: coral;
+    box-shadow: 8px 8px rgba(0, 0, 0, 0.15);
+    :hover {
+      box-shadow: 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
-  span:nth-child(2) {
-    margin-bottom: 5px;
-    font-size: clamp(25px, 2vw, 40px)
-  }
-  span:nth-child(3) {
-    font-size: clamp(25px, 2vw, 40px);
-    border: var(--thin-border);
-    border-style: inset;
+`;
 
-    padding: 1vw 4vw;
-    border-radius: 5px;
-    color: ${(props) => (props.verdict === 'Violation' ? 'red' : 'green')};
+export const VotesFor = styled("div")`
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(20px, 1.3vw, 35px);
+  align-items: center;
+  background: white;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+  color: black;
+  box-shadow: 15px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  padding: 5vw;
+  margin: auto;
+  border-radius: 20px;
+  :hover {
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5%;
+    box-shadow: 10px 10px rgba(0, 0, 0, 0.25);
   }
-  transform: translate(0, -35%);
+  @media only screen and (max-width: 800px) {
+    box-shadow: 8px 8px rgba(0, 0, 0, 0.15);
+    :hover {
+      box-shadow: 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+`;
+
+export const MiddleSection = styled("div")`
   height: 55%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+`;
+export const VerdictContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+  transition: all 0.4s ease;
+  padding: 1vw;
+`;
+
+export const CoolText = styled("span")` 
+    font-size: clamp(50px, 2vw, 40px);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f5f5f5;
+    /* border: ${(props) =>
+      props.verdict === undefined
+        ? "none"
+        : props.verdict === "No Violation"
+        ? "5px solid green"
+        : "5px solid red"}; */
+    border-style: ${(props) => (props.verdict ? "inset" : "none")};
+    padding: ${(props) => (props.verdict ? "2vw" : "none")};
+    border-radius: 20px;
+    text-shadow: ${(props) =>
+      props.verdict === undefined
+        ? `1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 18px 6px rgba(16,16,16,0.4),
+        1px 22px 10px rgba(16,16,16,0.2),
+        1px 25px 35px rgba(16,16,16,0.2),
+        1px 30px 60px rgba(16,16,16,0.4)`
+        : props.verdict === "No Violation"
+        ? `1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 18px 6px rgba(16,136,16,0.4),
+        1px 22px 10px rgba(16,136,16,0.2),
+        1px 25px 35px rgba(16,136,16,0.2),
+        1px 30px 60px rgba(16,136,16,0.4)`
+        : `1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+        1px 18px 6px rgba(136,16,16,0.4),
+        1px 22px 10px rgba(136,16,16,0.2),
+        1px 25px 35px rgba(136,16,16,0.2),
+        1px 30px 60px rgba(136,16,16,0.4)`
+    };
+  
+  
+    
+ 
+    svg {
+      width: clamp(45px, 5vw, 40px);
+      height: clamp(45px, 5vw, 40px);
+      margin: clamp(20px, 3vw, 40px);
+    }
+    path {
+      fill: #9b7653 !important;
+    }
+
 `
+
+/* 1px 6px 1px #919191,
+        1px 7px 1px #919191, */
+/* 1px 8px 1px #919191,
+        1px 9px 1px #919191,
+        1px 10px 1px #919191, */
+
+export const VotesContainer = styled("div")`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;

@@ -1,37 +1,47 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
-import { useGetLinkMetaDataMutation } from '../../../../../../../api/services/links.ts'
 import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
 import { VideoPlayer } from '../../../../../HomePage/components/Topics/components/TopicItem/Style'
 import Card from '../../../../../../CommonComponents/TopicCard/Index'
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
-import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
-import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import UserProvidedMediaCard from '../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 import { uuidRegEx } from '../../../../../../../generic/regex/uuid'
 import LineWithOverlayText from '../../../LineWithTextOverlay/Index'
 import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
+import useInitLexicalConfig from '../../../../../../hooks/lexical/useInitLexicalConfig'
 
-function DiscussionCard() {
+function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitialized }) {
   const { pathname } = useLocation()
   const discussionId = pathname.match(uuidRegEx)?.[1]
   const { currentUser } = useGetCurrentUser()
-  const { data: discussion, isLoading: isDiscussionLoading, isUninitialized: isDiscussionUninitialized } = useGetDiscussionQuery(discussionId, {
-    skip: !currentUser || !discussionId,
-  })
+  const [editorState, setEditorState] = useState(discussion.editorState)
+
 
   const commonProps = useMemo(() => ({
     topic: null, user: currentUser, showLinks: true, discussion,
   }), [discussion, currentUser])
 
-  const linkType = discussion?.externalContentData?.linkType
+  const linkType = discussion.externalContentData?.linkType
 
+  useEffect(() => {
+    setEditorState(discussion.editorState)
+
+    return () => {
+      setEditorState(null)
+    }
+
+  }, [editorState, discussion])
+
+
+  const initLexicalConfig = useInitLexicalConfig(editorState, `Civil-Discussion-Card-${discussionId}`, false, discussion)
+
+  if (editorState !== discussion.editorState) return null
   if (isDiscussionUninitialized || discussion?.title === 'General') return null
   if (isDiscussionLoading) return <CircleLoading size={40} />
   let content
@@ -70,23 +80,14 @@ function DiscussionCard() {
       />
     )
   }
-  const initialConfig = {
-    editorState: JSON.parse(discussion?.editorState),
-    namespace: 'Civil-Discussion-Card',
-    nodes: [...PlaygroundNodes],
-    onError: (error) => {
-      throw error
-    },
-    editable: false,
-    theme: PlaygroundEditorTheme,
-  }
+
   return (
     <>
       <LineWithOverlayText>
         Discussion
       </LineWithOverlayText>
 
-      <LexicalComposer initialConfig={initialConfig}>
+      <LexicalComposer initialConfig={{...initLexicalConfig}}>
         <Card {...commonProps}>
           {content}
         </Card>
@@ -97,3 +98,4 @@ function DiscussionCard() {
 }
 
 export default DiscussionCard
+

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Table = styled('table')` 
+export const Table = styled('div')` 
   border-radius: 0 0 12px 12px;
   padding: 15px 15px 20px;
   display: grid;
@@ -9,7 +9,7 @@ export const Table = styled('table')`
   
 `
 
-export const ColHeader = styled('tr')`
+export const ColHeader = styled('div')`
   display: grid;
   grid-template-columns: ${(props) => props.gridTemplateCols || '3fr 1.9fr 1fr'};
   align-items: center;
@@ -19,7 +19,7 @@ export const ColHeader = styled('tr')`
 
 `
 
-export const ColItem = styled('th')`
+export const ColItem = styled('div')`
   color: white;
   font-weight: bold;
   letter-spacing: .1vw;
@@ -31,7 +31,7 @@ export const ColItem = styled('th')`
 
 `
 
-export const Row = styled('tr')` 
+export const Row = styled('div')` 
     display: grid;
     grid-template-columns: ${(props) => props.gridTemplateCols || '3fr 2fr 1fr'};
     align-items: center;
@@ -54,7 +54,7 @@ export const Row = styled('tr')`
   
 `
 
-export const RowItem = styled('td')` 
+export const RowItem = styled('div')` 
   /* opacity: .8; */
   font-weight: 600;
   color: #979cb0;

@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 import { emptySplitApi } from './base'
-
+import { showLoadingSpinner, hideLoadingSpinner } from '../../redux/actions/ui'
 
 interface UserData {
   userId: string 
@@ -16,20 +16,23 @@ export const sessionApi = emptySplitApi.injectEndpoints({
       query: (userId) => ({ url: `/users?userId=${userId}`, method: 'GET' }),
       providesTags: ['Session'],
       async onQueryStarted(_, {dispatch, queryFulfilled}) {
-        toast.promise(
-          queryFulfilled,
-          {
-            pending: 'Fetching Session Data...',
-            success: 'Session Successfully Loaded',
-            error: {
-              render({ data: errorData }) {
-                const { response } = errorData
-                const { data: responseData } = response
-                return `${responseData.msg} 🤯 `
-              },
-            },
-          },
-        )
+        dispatch(showLoadingSpinner())
+        queryFulfilled.finally(() => dispatch(hideLoadingSpinner()))
+        // toast.promise(
+        //   queryFulfilled,
+        //   {
+        //     pending: 'Fetching Session Data...',
+        //     success: 'Session Successfully Loaded',
+        //     error: {
+        //       render({ data: errorData }) {
+        //         console.log(errorData)
+        //         const { error } = errorData
+        //         const { data: responseData } = error
+        //         return `${responseData.userMsg} 🤯 `
+        //       },
+        //     },
+        //   },
+        // )
       }
     
     }),

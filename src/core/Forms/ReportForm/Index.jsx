@@ -13,8 +13,8 @@ import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 import ExpandButton from '../../CommonComponents/Buttons/ExpandButton/Index'
 import { Line } from '../../CommonComponents/Line/index';
 
-function ReportForm({ contentId }) {
-  const handleOnSubmit = useHandleOnSubmit(contentId)
+function ReportForm({ contentId, closeModal }) {
+  const handleOnSubmit = useHandleOnSubmit(contentId, closeModal)
   return (
     <Container>
       <Formik

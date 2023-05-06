@@ -1,0 +1,5 @@
+export const Defendant = 'Defendant'
+export const Reporter = 'Reporter'
+export const Jury = 'Jury'
+export const General = 'General'
+export const All = 'All'

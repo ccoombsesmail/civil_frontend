@@ -2,6 +2,9 @@ import { closeModal } from "../../redux/actions/ui/index.js";
 import { createDraft, finishDraft } from "immer";
 import { toast } from "react-toastify";
 import { emptySplitApi } from "./base";
+import onUpdateLikesQueryStartedTribunal from "../util/tribunal_comments/updateLikes.js";
+import onUpdateCivilityQueryStartedTribunal from "../util/tribunal_comments/updateCivility.js";
+import { All } from '../../enums/tribunal_comment_type' 
 
 export interface Comment {
   id: string;
@@ -34,7 +37,7 @@ export const findComment = (id, root) => {
 export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllTribunalComments: builder.query<any, any>({
-      query: (contentId, commentType) => ({
+      query: ({contentId, commentType = All}) => ({
         url: `/tribunal-comments?contentId=${contentId}&commentType=${commentType}`,
         method: "GET",
       }),
@@ -84,38 +87,8 @@ export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
           data: body,
         };
       },
-      async onQueryStarted(
-        { id, reportedContentId, rootId, updateLikeValue, ...patch },
-        { dispatch, queryFulfilled }
-      ) {
-        let patchResult;
-        patchResult = dispatch(
-          tribunalCommentsApi.util.updateQueryData(
-            "getAllTribunalCommentsBatch",
-            reportedContentId,
-            (draft) => {
-              let comment;
-              const newDraft = createDraft(draft);
-              const rootComment = newDraft.find((c) => c.data.id === rootId);
-              if (!rootId) {
-                comment = newDraft.find((c) => c.data.id === id);
-                comment.data.likeState = patch.value;
-                comment.data.likes += updateLikeValue;
-                return finishDraft(newDraft);
-              }
-              comment = findComment(id, rootComment);
-              comment.data.likeState = patch.value;
-              comment.data.likes += updateLikeValue;
-              return finishDraft(newDraft);
-            }
-          )
-        );
-
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
+      async onQueryStarted(args, helpers) {
+        await onUpdateLikesQueryStartedTribunal(args, helpers)
       },
     }),
     updateTribunalCommentCivility: builder.mutation<any, any>({
@@ -126,48 +99,10 @@ export const tribunalCommentsApi = emptySplitApi.injectEndpoints({
           data: body,
         };
       },
-      async onQueryStarted(
-        {
-          id,
-          rootId,
-          civility,
-          reportedContentId,
-          updateGetTopicQuery,
-          parentId,
-          ...patch
-        },
-        { dispatch, queryFulfilled }
-      ) {
-        let patchResult;
-        patchResult = dispatch(
-          tribunalCommentsApi.util.updateQueryData(
-            "getAllTribunalCommentsBatch",
-            reportedContentId,
-            (draft) => {
-              let comment;
-              const newDraft = createDraft(draft);
-              if (!parentId) {
-                comment = newDraft.find((c) => c.data.id === id);
-                comment.data.civility = patch.value;
-                return finishDraft(newDraft);
-              }
-
-              const rootComment = newDraft.find((c) => c.data.id === rootId);
-              comment = findComment(id, rootComment);
-              comment.data.civility = patch.value;
-              return finishDraft(newDraft);
-            }
-          )
-        );
-
-        try {
-          await queryFulfilled;
-        } catch ({ error }) {
-          // toast.error(`${error.status}\n ${error.data.userMsg}`)
-          patchResult.undo();
-        }
-      },
-    }),
+      async onQueryStarted(args, helpers) {
+        await onUpdateCivilityQueryStartedTribunal(args, helpers)
+      }
+    })
   }),
 });
 
@@ -177,4 +112,8 @@ export const {
   useGetAllTribunalCommentsQuery,
   useUpdateTribunalCommentCivilityMutation,
   useUpdateTribunalCommentLikesMutation,
+  useLazyGetAllTribunalCommentsQuery,
 } = tribunalCommentsApi;
+
+
+export const useGetAllTribunalCommentsQueryState = tribunalCommentsApi.endpoints.getAllTribunalComments.useQueryState

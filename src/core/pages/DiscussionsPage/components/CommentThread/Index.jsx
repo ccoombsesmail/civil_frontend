@@ -11,6 +11,7 @@ import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { useGetAllCommentRepliesQuery } from '../../../../../api/services/comments.ts'
 import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
 import { Container } from '../ParentComment/Style'
+import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 
 function CommentThread() {
   const { commentId, topicId } = useParams()
@@ -37,12 +38,16 @@ function CommentThread() {
     all: allComments,
   } = useCategorizeComments(comments?.replies)
 
+  if (isCommentsUninitialized) return null
   return (
     <Container>
       <ParentComment topicId={topicId} commentId={commentId} isFocusedComment />
       <ThreadContainer>
         <ColumnContainer>
-          <CommentColumn comments={allComments} commentSentiment="All" color="white" topicId={topicId} isReplies />
+         {
+         isCommentsLoading ? <CircleLoading size={30} /> : <CommentColumn comments={allComments} commentSentiment="All" color="white" topicId={topicId} isReplies />
+        }
+        
         </ColumnContainer>
       </ThreadContainer>
     </Container>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 
 import { Backdrop, InnerContainer } from './Style'
 
@@ -10,6 +11,7 @@ const LoadingSpinner = () => {
       {
         showSpinner && (
         <Backdrop>
+          {/* <CircleLoading /> */}
           <InnerContainer>
             <div className="dot-overtaking" />
           </InnerContainer>

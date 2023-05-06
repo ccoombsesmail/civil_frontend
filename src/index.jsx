@@ -1,3 +1,4 @@
+// import "../wdyr"
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
@@ -8,6 +9,7 @@ import { Provider } from 'react-redux'
 import App from './core/App/Index'
 import configureStore from './redux/store.ts'
 import 'react-toastify/dist/ReactToastify.min.css'
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')

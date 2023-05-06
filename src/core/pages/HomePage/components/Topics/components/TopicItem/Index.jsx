@@ -14,12 +14,13 @@ import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/th
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
 
-const TopicItem = forwardRef(({
-  topic, user, hideCommentButton, id,
-}, ref) => {
+const TopicItem = ({
+  topic, user, hideCommentButton, id, currentPage 
+}) => {
+ 
   const goToDiscussion = useGoToDiscussions(topic.id)
   const initialConfig = {
-    editorState: JSON.parse(topic?.editorState),
+    editorState: topic?.editorState,
     namespace: `Civil-${topic.title}`,
     nodes: [...PlaygroundNodes],
     onError: (error) => {
@@ -36,8 +37,9 @@ const TopicItem = forwardRef(({
       showLinks: false,
       hideCommentButton,
       onClick: goToDiscussion,
+      currentPage
     }),
-    [topic, user],
+    [topic, user, currentPage],
   )
 
   const linkType = topic.externalContentData?.linkType
@@ -82,12 +84,12 @@ const TopicItem = forwardRef(({
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <Card {...commonProps} ref={ref} id={id}>
+      <Card {...commonProps} id={id}>
         {cardbody}
       </Card>
     </LexicalComposer>
 
   )
-})
+}
 
 export default TopicItem

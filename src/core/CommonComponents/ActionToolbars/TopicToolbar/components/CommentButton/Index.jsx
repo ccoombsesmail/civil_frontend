@@ -26,7 +26,6 @@ function CommentButton({ discussion }) {
       toast.error("We're sorry. Something is not right on our end")
       return
     }
-    console.log(discussionCommentFormState)
     showModal('Write A Reply', (onClose) => (
       <CreateCommentForm
         closeModal={onClose}

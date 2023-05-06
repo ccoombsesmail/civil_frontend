@@ -108,7 +108,7 @@ function CreateDiscussionForm({ closeModal }) {
                         e.g a YouTube video, Tweet, publication, or anything else). Use this if the content you are linking is the main subject of the discussion"
                   />
                 </FlexDiv>
-                <FlexDivLink className="toolbar">
+                <FlexDivLink className="toolbar" id="embed-toolbar">
                   <EmbedDropdown setContentUrl={setContentUrl} />
                 </FlexDivLink>
               </Left>

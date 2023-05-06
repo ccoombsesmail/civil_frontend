@@ -13,6 +13,7 @@ function CardDetails({
   discussion,
   user,
   hideCommentButton,
+  currentPage
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
@@ -40,6 +41,7 @@ function CardDetails({
         topic={topic}
         user={user}
         hideCommentButton={hideCommentButton}
+        currentPage={currentPage}
       />
     </>
   )

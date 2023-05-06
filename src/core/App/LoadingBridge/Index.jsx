@@ -14,7 +14,7 @@ function LoadingBridge({ children }) {
   useFetchAppData()
   return (
     <>
-      {children({ userId })}
+      {(userId || localStorage.getItem('previousSignInMethod') == null) && children({ userId })}
     </>
   )
 }

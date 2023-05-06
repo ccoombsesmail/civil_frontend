@@ -1,12 +1,8 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import useBindDispatch from '../../../hooks/redux/useBindDispatch'
-import uiActionCreators from '../../../../redux/actions/ui/index'
 import { useCreateReportMutation } from '../../../../api/services/reports.ts'
-// const resolveAfter1500ms = new Promise((resolve) => setTimeout(resolve, 1500))
 
-export default (contentId) => {
-  const { closeModal } = useBindDispatch(uiActionCreators)
+export default (contentId, closeModal) => {
   const [createReport, {}] = useCreateReportMutation()
   return useCallback((values, { setSubmitting, resetForm }) => {
     const data = {
@@ -21,7 +17,6 @@ export default (contentId) => {
         pending: 'Submitting Report...',
         success: {
           render() {
-            closeModal()
             return 'Report Successfully Submitted!'
           },
         },
@@ -34,7 +29,8 @@ export default (contentId) => {
         },
       },
     )
+    closeModal()
     setSubmitting(false)
     resetForm({})
-  }, [contentId])
+  }, [contentId, closeModal])
 }

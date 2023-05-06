@@ -78,7 +78,7 @@ const store = configureStore({
     // tribunalCommentsApi.middleware,
     // usersApi.middleware,
     // followsApi.middleware,
-    logger
+    // logger
   ]),
 })
 

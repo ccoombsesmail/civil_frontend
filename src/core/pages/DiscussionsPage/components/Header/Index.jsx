@@ -6,8 +6,6 @@ import { useLocation, useParams } from 'react-router-dom'
 import { Tooltip, OverlayTrigger } from 'react-bootstrap'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { TweetComponent } from '../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
-import PlaygroundEditorTheme from '../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
-import PlaygroundNodes from '../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
 
 import {
@@ -24,6 +22,7 @@ import Card from '../../../../CommonComponents/TopicCard/Index'
 import DiscussionCard from './components/DiscussionCard/Index'
 import { uuidRegEx } from '../../../../../generic/regex/uuid'
 import UserUploadedMedia from '../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
+import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
 
 function TooltipComponent({ text, title, reference }) {
   return (
@@ -50,7 +49,7 @@ function Header() {
     skip: !currentUser || !topicId,
   })
 
-  const { data: discussion } = useGetDiscussionQuery(discussionId, {
+  const { data: discussion, isDiscussionLoading, isDiscussionUninitialized } = useGetDiscussionQuery(discussionId, {
     skip: !currentUser || !discussionId,
   })
 
@@ -61,6 +60,8 @@ function Header() {
   const topicRef = useRef(null)
 
   const linkType = topic?.externalContentData?.linkType
+  const initLexicalConfig = useInitLexicalConfig(topic?.editorState, 'Civil-Topic-Card__Discussions', false)
+
   if (isTopicUninitialized) return null
   if (isTopicLoading) return <CircleLoading size="20vw" />
 
@@ -100,16 +101,6 @@ function Header() {
     content = null
   }
 
-  const initialConfig = {
-    editorState: JSON.parse(topic?.editorState),
-    namespace: 'Civil-Topic-Card__Discussions',
-    nodes: [...PlaygroundNodes],
-    onError: (error) => {
-      throw error
-    },
-    editable: false,
-    theme: PlaygroundEditorTheme,
-  }
 
   return (
     <Container>
@@ -121,7 +112,7 @@ function Header() {
         </>
       </h1>
       <div style={{ width: '100%' }}>
-        <LexicalComposer initialConfig={initialConfig}>
+        <LexicalComposer initialConfig={initLexicalConfig}>
           <Card {...commonProps}>
             {content}
           </Card>
@@ -131,7 +122,7 @@ function Header() {
         width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative',
       }}
       >
-        <DiscussionCard />
+        {discussion && discussionId ?  <DiscussionCard key={discussionId} discussion={discussion} isDiscussionLoading={isDiscussionLoading} isDiscussionUninitialized={isDiscussionUninitialized} /> : null}
       </div>
     </Container>
 

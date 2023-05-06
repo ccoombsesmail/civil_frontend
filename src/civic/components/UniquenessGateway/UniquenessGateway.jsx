@@ -105,7 +105,7 @@ export function UniquenessStatus() {
   useEffect(() => {
     const getTokens = async () => {
       if (conn && publicKey) {
-        const gatewayToken = await findGatewayTokens(conn, publicKey, gatekeeperNetwork)
+        const gatewayToken = await findGatewayTokens(conn.connection, publicKey, gatekeeperNetwork)
         setIsValid(isTokenValid(gatewayToken[0]))
       }
     }

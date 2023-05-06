@@ -9,7 +9,6 @@ function DiscussionsItem({
 }) {
   const goToCommentThread = useGoToCommentThread(topicId, id)
   return (
-    <tbody>
       <Row onClick={goToCommentThread} gridTemplateCols="1fr 2fr 1fr" height="10vh">
         <RowItem>
           {' '}
@@ -20,7 +19,6 @@ function DiscussionsItem({
         <RowItem>{title}</RowItem>
         <RowItem>{allComments}</RowItem>
       </Row>
-    </tbody>
   )
 }
 

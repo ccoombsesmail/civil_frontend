@@ -44,6 +44,7 @@ export const ColumnContainer = styled('section')`
   /* border-top: 1px solid gray; */
   width: 100vw;
 
+
   ul {
     background-color: white;
   }
@@ -55,5 +56,49 @@ export const ColumnContainer = styled('section')`
     /* border-left: .1px solid rgb(48,48,50); */
   }
 
+
+`
+
+
+export const ListContainer = styled('ul')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+  margin: 0;
+  padding: 0;
+  color: black;
+  border-radius: 20px;
+
+  z-index: 99;
+  opacity: .99;
+  width: clamp(700px, 50vw, 1200px);
+  border: 1px solid lightgray;
+  border-color: rgba(200,200,200,0.25);
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+
+  h1 {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    font-weight: bold;
+    padding: 1em;
+    font-size: clamp(15px, 1vw, 30px);
+    border-bottom: 1px solid black;
+    color: black;
+    border: none;
+    outline: none;
+    background-color: var(--m-form-color);
+  }
+
+  .List {
+    @media (max-width: 700px) {
+      width: 100% !important;
+    }
+
+  }
 
 `

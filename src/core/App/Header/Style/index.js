@@ -13,7 +13,6 @@ export const StyledHeader = styled('header')`
   background-color: transparent;
   border-bottom: 1px solid lightgrey;
   background-color: white;
-
   
 `
 export const CivilIcon = styled('img')`

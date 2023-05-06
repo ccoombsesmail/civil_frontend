@@ -3,7 +3,7 @@ import { GatewayToken } from '@civic/profile';
 
 
 export const isValid = (token: GatewayToken) => {
-  return token.state === State.ACTIVE && !hasExpired(token);
+  return token?.state === State.ACTIVE && !hasExpired(token);
 }
 
 const hasExpired = (token: GatewayToken): boolean => {

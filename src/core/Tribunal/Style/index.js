@@ -105,6 +105,8 @@ export const ReportStatsContainer = styled('ul')`
   background-color: white;
   border-radius: 0.5em;
   width: 95%;
+  background-color: var(--m-menu-item-hover);
+
 
 `
 
@@ -117,14 +119,28 @@ export const ReportStatItem = styled('li')`
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius: 0.5em;
   /* background-color: var(--m-secondary-background-color); */
-  background-color: white;
   font-size: clamp(15px, 1vw, 20px);
   padding: 2vw 4vw;
   margin: 2vw 4vw;
+  background: white;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+  color: black;
+  box-shadow: 15px 15px rgba(0,0,0,.15);
+  transition: all .4s ease;
+  :hover {
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+    box-shadow: 10px 10px rgba(0,0,0,.25);
+  }
   @media only screen and (max-width: 800px) {
       margin: 2vw 2vw;
+      box-shadow: 8px 8px rgba(0,0,0,.15);
+      :hover {
+        box-shadow: 4px 4px rgba(0,0,0,.25);
+
+      }
 
     }
+
 
     h2 {
       text-align: center;

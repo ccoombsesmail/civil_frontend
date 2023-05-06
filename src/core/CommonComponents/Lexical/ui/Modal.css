@@ -31,11 +31,11 @@
   box-shadow: 0 0 20px 0 #444;
   border-radius: 10px;
 
+
 }
 
 .Modal__title_container {
   padding: 20px 0;
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ccc;
@@ -65,21 +65,17 @@
   background-color: #ddd;
 }
 .Modal__content {
-  /* padding: 20px 20px 0 20px; */
-  min-width: 450px;
+  min-width: 380px;
 }
 
 
-/* .Modal__popover_link .Modal__modal  {
-  width: clamp(400px, 60vw, 500px) !important;
-
-} */
 
 
 
 @media (max-width: 700px) {
   .Modal__modal {
-    border-radius: 0;
+    width: 98%;
+    border-radius: 5px;
   }
   
 }

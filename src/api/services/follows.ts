@@ -8,7 +8,7 @@ export const followsApi = emptySplitApi.injectEndpoints({
   // baseQuery: backendBaseQuery,
   endpoints: (builder) => ({
     getAllFollowers: builder.query<any, any>({
-      query: (userId) => ({ url: `/follows/followers?userId=${userId}`, method: 'GET' }),
+      query: (userId) => ({ url: `/follows/followers/${userId}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [
@@ -18,7 +18,7 @@ export const followsApi = emptySplitApi.injectEndpoints({
           [{ type: 'Follow', id: 'LIST' }],
     }),
     getAllFollowed: builder.query<any, any>({
-      query: (userId) => ({ url: `/follows/followed?userId=${userId}`, method: 'GET' }),
+      query: (userId) => ({ url: `/follows/followed/${userId}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [

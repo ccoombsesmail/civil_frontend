@@ -38,7 +38,7 @@ export class  MemoryStoredToken {
 export const createCivicAuthToken = async (
   wallet: MessageSigner,
   exp = Date.now() + 2_000_000
-) => {
+): Promise<string> => {
   const { publicKey } = wallet
   const pubKey = publicKey?.toBase58()
   if (!pubKey) return undefined
@@ -57,7 +57,8 @@ export const createCivicAuthToken = async (
     const msg = b58.encode(encodedMessage);
     const sig = b58.encode(signature);
     return `${pk}.${msg}.${sig}`;
-  } catch {
+  } catch(e) {
+    console.error(e)
     console.log("craPPPPP")
   }
  

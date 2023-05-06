@@ -52,6 +52,8 @@ export const Body = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   .twitter-tweet {
     max-width: 90%;
   }
@@ -98,11 +100,10 @@ export const Container = styled('li')`
   flex-direction: column;
   align-items: center;
   height: ${(props) => (`${props.height}px`)};
-  width: 100%;
-  min-height: 1000px;
-  margin: 2em 0;
+  width: 98%;
   border-radius: .5em;
-  box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;
+  box-shadow:  5px 5px 10px #5a5a5a, 5px 5px 10px #ffffff;
+  margin: auto;
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -123,7 +124,6 @@ export const Container = styled('li')`
   @media only screen and (max-width: 600px) {
     width: 100%;
     border-radius: 0;
-    margin: 4vw auto;
   }
 
 `

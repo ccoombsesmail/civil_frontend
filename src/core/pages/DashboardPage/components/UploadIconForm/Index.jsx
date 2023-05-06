@@ -53,7 +53,6 @@ function UploadIconForm({ closeModal }) {
           if (values.file instanceof File) {
             const formData = new FormData()
             formData.append('image', values.file)
-            console.log(formData)
             uploadUserIcon(formData, user?.userId)
             setSubmitting(false)
           } else {

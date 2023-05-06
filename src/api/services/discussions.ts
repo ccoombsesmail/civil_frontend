@@ -31,7 +31,7 @@ export interface Discussion {
 export const discussionsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllDiscussions: builder.query<any, any>({
-      query: (topicId) => ({ url: `/discussions?topicId=${topicId}`, method: 'GET' }),
+      query: ({ topicId, currentPage }) => ({ url: `/discussions?topicId=${topicId}&skip=${currentPage*10}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [

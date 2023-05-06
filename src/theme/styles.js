@@ -7,7 +7,39 @@ const GlobalStyle = createGlobalStyle`
 
 /* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); */
 
+/* .List::-webkit-scrollbar {
+  display: none;
 
+} */
+
+.List div div {
+  transition: all .5s;
+  /* background-color: red; */
+}
+.List {
+  background-color: white;
+}
+
+.List::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #eee;
+}
+
+.List::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #eee;
+  display: none;
+}
+
+.List::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #527640;
+}
 
 .ExcalidrawModal__overlay {
   z-index: 9999999999999999999 !important;
@@ -387,7 +419,7 @@ blockquote {
     --m-primary-btn-color: #56899e;
     --m-primary-btn-color:  #56899e;
     --m-primary-background-color: #256347;
-    --m-primary-background-color:  #527640;
+    /* --m-primary-background-color:  #527640; */
     --box-shadow-inset: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
 
     --m-form-color: #e6eef9;
@@ -418,6 +450,10 @@ blockquote {
     --thin-border: 1px solid rgba(200,200,200,0.25);
 
 
+
+    --secondary-blue: #E3EBEF;
+    --primary-turquoise: #21B7B7;
+    --fg-gray: #747F8B;
 
     /* EMOJI */
     /* unicode-emoji-picker { */
@@ -514,6 +550,7 @@ blockquote {
     /* font-family: "Baloo 2", cursive; */
     font-family: "Roboto",Helvetica,Arial,sans-serif;    
     overflow: hidden;
+    /* font-family: 'Quicksand', sans-serif !important; */
 
   }
   .wallet-adapter-button-trigger {

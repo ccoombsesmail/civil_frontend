@@ -145,9 +145,34 @@ export const Container = styled('div')`
   height: 75vh;
   width: clamp(400px, 60vw, 1100px);
   background: white;
+
+  @media only screen and (max-width: 700px) {
+    width: 100%;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
   
   border-radius: 1em;
-  /* box-shadow:  5px 5px 5px -3px #000000; */
+  ::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #eee;
+}
+
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #eee;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #527640;
+}
 
   h1 {
     width: 100%;

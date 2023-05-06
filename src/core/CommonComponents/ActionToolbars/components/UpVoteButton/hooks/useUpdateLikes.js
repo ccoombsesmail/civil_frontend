@@ -1,58 +1,74 @@
-import { useCallback, useContext } from 'react'
-import { useUpdateTopicLikesMutation } from '../../../../../../api/services/topics.ts'
+import { useCallback, useContext } from "react";
+import { useUpdateTopicLikesMutation } from "../../../../../../api/services/topics.ts";
 
-import { TOPIC, COMMENT, TRIBUNAL_COMMENT } from '../../../../../../enums/content_type'
-import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
-import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments.ts'
-import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments.ts'
-import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage'
-import { ParentCommentContext } from '../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
+import {
+  TOPIC,
+  COMMENT,
+  TRIBUNAL_COMMENT,
+} from "../../../../../../enums/content_type";
+import { calculateLikeValueToAdd } from "../../../utils/calculateLikeValueToAdd";
+import { useUpdateCommentLikesMutation } from "../../../../../../api/services/comments.ts";
+import { useUpdateTribunalCommentLikesMutation } from "../../../../../../api/services/tribunal_comments.ts";
+import useDetectCurrentPage from "../../../../../hooks/routing/useDetectCurrentPage";
+import { ParentCommentContext } from "../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext";
+import {
+  LikedState,
+  NeutralState,
+} from "../../../../../../enums/like_state.js";
+import { TopicItemContext } from "../../../../../pages/HomePage/components/Topics/components/TopicItem/TopicItemContex.jsx";
 
-export default (content, user, contentType) => {
-  const { isReplies, isFocusedComment, commentId } = useContext(ParentCommentContext) || {}
-  const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation()
-  const [updateLikes] = useUpdateTopicLikesMutation()
-  const [updateCommentLikes] = useUpdateCommentLikesMutation()
-  const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage()
+export default (content, user, contentType, currentPageTopic) => {
+  const {
+    isReplies,
+    isFocusedComment,
+    commentId,
+    currentPage,
+    rootOfCommentReplyThreadId,
+    commentType,
+    reportedContentId,
+  } = useContext(ParentCommentContext) || {};
 
-  return useCallback(() => {
-    let value
-    switch (content.likeState) {
-      case -1:
-        value = 1
-        break
-      case 0:
-        value = 1
-        break
-      case 1:
-        value = 0
-        break
-      default:
-        break
-    }
+  const { updateFollowedTopicsQuery } = useContext(TopicItemContext) || {};
+
+  const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation();
+  const [updateLikes] = useUpdateTopicLikesMutation();
+  const [updateCommentLikes] = useUpdateCommentLikesMutation();
+  const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage();
+  return useCallback(async () => {
     const likeData = {
       id: content?.id,
       commentId,
-      value,
       createdByUserId: content.createdByUserId,
-      updateLikeValue: calculateLikeValueToAdd(content.likeState, value),
+      updateLikeValue: calculateLikeValueToAdd(
+        content.likeState,
+        content.likeState === LikedState ? NeutralState : LikedState
+      ),
       updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
       isReplies,
       isFocusedComment,
-      ...content
-    }
+      ...content,
+      currentPage: currentPageTopic ?? currentPage,
+      rootOfCommentReplyThreadId,
+      rootId: content?.rootId,
+      newLikeState:
+        content.likeState === LikedState ? NeutralState : LikedState,
+      likeAction: content.likeState === LikedState ? NeutralState : LikedState,
+      commentType,
+      reportedContentId,
+      updateFollowedTopicsQuery
+    };
     switch (contentType) {
       case TOPIC:
-        updateLikes(likeData)
-        break
+        await updateLikes(likeData);
+        break;
       case COMMENT:
-        updateCommentLikes(likeData)
-        break
+        await updateCommentLikes(likeData);
+        break;
       case TRIBUNAL_COMMENT:
-        updateTribunalCommentLikes(likeData)
-        break
+        await updateTribunalCommentLikes(likeData);
+        break;
       default:
-        break
+        break;
     }
-  }, [content, contentType])
-}
+  }, [content, contentType]);
+};

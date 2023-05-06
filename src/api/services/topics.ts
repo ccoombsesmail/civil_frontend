@@ -1,5 +1,6 @@
 import { closeModal } from "../../redux/actions/ui/index.js";
 import { emptySplitApi } from "./base";
+import { current } from "@reduxjs/toolkit";
 
 export enum TopicCategories {
   Technology,
@@ -36,14 +37,20 @@ export interface TopicLiked {
 export const topicsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllTopics: builder.query<any, any>({
-      query: (currentPage) => ({ url: `/topics?skip=${currentPage*5}`, method: "GET" }),  
-      // providesTags: (result) =>
-      //   result
-      //     ? [
-      //         ...result.map(({ id }) => ({ type: "Topic", id } as const)),
-      //         { type: "Topic", id: "LIST" },
-      //       ]
-      //     : [{ type: "Topic", id: "LIST" }],
+      query: (currentPage) => ({ url: `/topics?skip=${currentPage*5}`, method: "GET" }),
+      providesTags: (result, error, arg) => {
+        return [{type: "TopicPage", id: arg.toString()}]
+      }
+    }),
+    getAllFollowedTopics: builder.query<any, any>({
+      query: () => ({ url: `/topics-followed`, method: 'GET' }),
+      providesTags: (result) =>
+      result ? 
+          [
+            ...result.map(({ userId }) => ({ type: 'Topic', id: userId } as const)),
+          ]
+        : 
+          [{ type: 'Topic', id: 'LIST' }],
     }),
     getTopic: builder.query<any, any>({
       query: (topicId) => ({ url: `/topics/${topicId}`, method: "GET" }),
@@ -92,29 +99,40 @@ export const topicsApi = emptySplitApi.injectEndpoints({
         };
       },
       async onQueryStarted(
-        { id, updateLikeValue, updateGetTopicQuery, ...patch },
+        { id, updateLikeValue, updateGetTopicQuery, updateFollowedTopicsQuery, currentPage, newLikeState, ...patch },
         { dispatch, queryFulfilled }
       ) {
+        console.log(updateFollowedTopicsQuery)
         let patchResult;
         if (updateGetTopicQuery) {
           patchResult = dispatch(
             topicsApi.util.updateQueryData("getTopic", id, (draft) => {
               if (id) {
-                draft.likeState = patch.value;
+                draft.likeState = newLikeState;
                 draft.likes += updateLikeValue;
               }
             })
           );
-        } else {
+        } else if (updateFollowedTopicsQuery) {
           patchResult = dispatch(
-            topicsApi.util.updateQueryData("getAllTopics", null, (draft) => {
-              const index = draft.findIndex((t) => t.id === id);
+            topicsApi.util.updateQueryData("getAllFollowedTopics", undefined, (draft) => {
+              const index = draft.findIndex((t) => t.id === id)
               if (index !== -1) {
-                draft[index].likeState = patch.value;
+                draft[index].likeState = newLikeState;
                 draft[index].likes += updateLikeValue;
               }
             })
-          );
+          )
+        } else {
+          patchResult = dispatch(
+            topicsApi.util.updateQueryData("getAllTopics", currentPage, (draft) => {
+              const index = draft.findIndex((t) => t.id === id)
+              if (index !== -1) {
+                draft[index].likeState = newLikeState;
+                draft[index].likes += updateLikeValue;
+              }
+            })
+          )
         }
 
         try {
@@ -127,10 +145,13 @@ export const topicsApi = emptySplitApi.injectEndpoints({
   }),
 });
 
+topicsApi.endpoints.getAllTopics.initiate
 export const {
   useGetAllTopicsQuery,
   useCreateTopicMutation,
   useGetTopicQuery,
   useUpdateTopicLikesMutation,
   useGetUserTopicsQuery,
+  useLazyGetAllFollowedTopicsQuery,
+  useGetAllFollowedTopicsQuery  
 } = topicsApi;

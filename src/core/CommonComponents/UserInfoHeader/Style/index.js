@@ -1,32 +1,69 @@
 import styled from 'styled-components'
 
-export const Header = styled('div')` 
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: .5em .5em;    
-  background-color: white;
+export const Separator = styled('span')`
+  margin: 0 10px;
+  border-left: 1px solid lightgray;
+  height: 80%;
+`
 
-  div {
-    height: 100%;
-    flex-grow: 1;
-    display: flex;
-    align-items: flex-start;
-    margin-left: 1em;
-    background-color: white;
-    button {
-      margin: 5px;
-    }
+
+
+export const Right = styled('div')`
+  flex-basis: 35%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: column;
+  height: 100%;
+
+  img {
+    margin-top: 10px;
+
+    width: 25px;
+    height: 25px;
   }
 
-  time {
-      position: absolute;
-      top: 1em;
-      right: 1em;
-      color: gray;
-      font-size: .5em;
-    }
+
+`
+
+export const Left = styled('div')`
+  flex-basis: 65%;
+  display: flex;
+  align-items: flex-start;
+  margin-left: 1em;
+  background-color: white;
+  height: 100%;
+  padding-top: 10px;
+  button {
+    margin: 5px 10px;
+  }
+  
+  > img:first-child {
+    margin-right: 5px;
+  }
+
+  /* @media only screen and (max-width: 800px) {
+      font-size: 3.4vw;
+    } */
+
+`
+
+export const Header = styled('div')` 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.2em .5em;    
+  background-color: white;
+  transition: height 0.3s ease-in-out;
+  height: 80px;
+  border-bottom: 1px solid lightgray;
+  :hover {
+    /* height: 90px; */
+  }
 
   h2 {
     line-height: unset;
@@ -72,3 +109,53 @@ export const UsernameContainer = styled('section')`
   flex-direction: column;
 
 `
+
+export const CategoryAndTime = styled('div')` 
+
+  display: flex;
+  font-size: clamp(8px, .7vw, 12px);
+  color: gray;
+  span {
+    margin: 0 5px;
+
+  }
+  time {
+    display: flex;
+    margin: 0 5px;
+    color: gray;
+  }
+
+`
+
+export const BadgeContainer = styled('div')`
+  display: flex;
+  background-color: aliceblue;
+  border-radius: 30px;
+  min-width: 100px;
+  margin: 0 6px;
+  button {
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(58, 65, 111, .5) 0 -3px 0 inset;;
+    width: clamp(30px, 2vw, 30px);
+    height: clamp(30px, 2vw, 30px);
+  
+  }
+`
+
+export const Title = styled.span`
+  flex-grow: 1;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 30px;
+  margin-top: 10px;
+  width: 98%;
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+  text-decoration: underline;
+
+   font-family: 'Nunito Sans', sans-serif;
+;
+
+`;
+
+

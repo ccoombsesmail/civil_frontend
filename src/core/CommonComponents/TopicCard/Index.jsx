@@ -15,9 +15,9 @@ import {
 } from './Style'
 import { TOPIC } from '../../../enums/content_type'
 import CardDetails from './components/CardDetails/Index'
-import { ObserverContext } from '../../pages/HomePage/components/ObserverContext'
+import { Title } from '../UserInfoHeader/Style'
 
-const Card = forwardRef(({
+const Card = ({
   children,
   onClick,
   listCard,
@@ -26,7 +26,8 @@ const Card = forwardRef(({
   user,
   showLinks,
   hideCommentButton,
-}, ref) => {
+  currentPage
+}) => {
   const { pathname } = useLocation()
   const {
     id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, topicCreatorIsDidUser, userVerificationType, reportStatus,
@@ -34,19 +35,8 @@ const Card = forwardRef(({
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
 
-  // const observer = React.useContext(ObserverContext) || {}
-
-  // useEffect(() => {
-  //   console.log(observer)
-  //   console.log(ref?.current)
-  //   if (observer && ref?.current) {
-  //     observer.observe(ref.current)
-  //   }
-  //   return () => observer.disconnect()
-  // }, [observer, ref])
   return (
     <Container
-      ref={ref}
       onClick={onContainerClick}
       listCard={listCard}
       shouldBlur={shouldBlur}
@@ -59,6 +49,7 @@ const Card = forwardRef(({
         userTag={createdByTag}
         topicCreatorIsDidUser={topicCreatorIsDidUser}
         userVerificationType={userVerificationType}
+        topic={topic}
       />
       { shouldBlur && (
       <CensorOverlay
@@ -69,6 +60,9 @@ const Card = forwardRef(({
       />
       )}
       <Body shouldBlur={shouldBlur}>
+        <Title>
+          {topic.title}
+        </Title>
         {children}
         <CardDetails
           topic={topic}
@@ -76,11 +70,12 @@ const Card = forwardRef(({
           user={user}
           showLinks={showLinks}
           hideCommentButton={hideCommentButton}
+          currentPage={currentPage}
         />
       </Body>
     </Container>
   )
-})
+}
 
 export function VideoDescriptionCard({
   children,

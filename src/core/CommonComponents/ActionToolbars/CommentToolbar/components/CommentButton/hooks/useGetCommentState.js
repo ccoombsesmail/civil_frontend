@@ -1,51 +1,84 @@
-import { useCallback } from 'react'
-import { useGetAllCommentsQuery } from '../../../../../../../api/services/comments.ts'
-import { useGetAllTribunalCommentsBatchQuery } from '../../../../../../../api/services/tribunal_comments.ts'
-import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
+import { useCallback, useContext } from "react";
+import {
+  useGetAllCommentsQuery,
+  useGetAllCommentRepliesQuery,
+} from "../../../../../../../api/services/comments.ts";
+import { useGetAllTribunalCommentsQuery } from "../../../../../../../api/services/tribunal_comments.ts";
+import useGetCurrentUser from "../../../../../../App/hooks/useGetCurrentUser";
+import { ParentCommentContext } from "../../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext";
+import useDetectCurrentPage from "../../../../../../hooks/routing/useDetectCurrentPage.js";
+import prettyLog from "../../../../../../../generic/logging/prettyLog.js";
 
 const findCommentContent = (comment, id) => {
-  const visited = new Set()
-  const q = [comment]
+  const visited = new Set();
+  const q = [comment];
   while (q.length !== 0) {
-    const currNode = q.shift()
-    visited.add(currNode.data.id)
-    if (currNode.data.id === id) return currNode.data.editorState
+    const currNode = q.shift();
+    visited.add(currNode.data.id);
+    if (currNode.data.id === id) return currNode.data.editorState;
     currNode.children.forEach((child) => {
-      if (!visited.has(child.data.id)) q.push(child)
-    })
+      if (!visited.has(child.data.id)) q.push(child);
+    });
   }
-  return ''
-}
+  return "";
+};
 
-export default (commentData, contentId, topicId) => {
-  const rootCommentId = commentData.rootId || commentData.id
-  const { currentUser } = useGetCurrentUser()
-  const { data: comments } = useGetAllCommentsQuery(commentData.discussionId, {
-    skip: !commentData || !currentUser,
-  })
+export default (commentData, contentId, topicId, commentId) => {
+  const { isOnTribunalPage } = useDetectCurrentPage();
 
-  const { data: tribunalComments } = useGetAllTribunalCommentsBatchQuery(contentId, {
-    skip: !contentId || !currentUser,
-  })
+  const { currentUser } = useGetCurrentUser();
+  const {
+    currentPage,
+    rootCommentId,
+    commentId: rootId,
+    isFocusedComment,
+    rootOfCommentReplyThreadId,
+    isReplies,
+    commentType
+  } = useContext(ParentCommentContext) || {};
 
-  const { createdByUsername, createdByIconSrc, createdAt } = commentData || {}
+  const { data: comments } = useGetAllCommentsQuery({ discussionId: commentData.discussionId, currentPage }, {
+      skip: !commentData || !currentUser || commentId || isOnTribunalPage,
+    });
+
+  const { data: commentWithReplies } = useGetAllCommentRepliesQuery(commentId, {
+    skip: !commentData || !currentUser || !commentId || isOnTribunalPage,
+  });
+
+  const { data: tribunalComments } = useGetAllTribunalCommentsQuery({contentId, commentType}, {
+      skip: !contentId || !currentUser || !isOnTribunalPage || !commentType,
+    });
+
+  const { createdByUsername, createdByIconSrc, createdAt } = commentData || {};
   return useCallback(() => {
-    const rootComment = comments?.find(
-      (c) => c.data.id === rootCommentId,
-    )
-    const tribunalRootComment = tribunalComments?.find(
-      (c) => c.data?.id === rootCommentId,
-    )
+    const rootComment = comments?.find((c) => c.data.id === rootId);
 
-    if (!rootComment && !tribunalRootComment) return null
-    const commentContent = findCommentContent(rootComment || tribunalRootComment, commentData.id)
-    let lexicalContent
-    try {
-      lexicalContent = JSON.parse(commentContent)
-    } catch {
-      lexicalContent = commentContent
-    }
+    const tribunalRootComment = tribunalComments?.find(
+      (c) => c.data?.id === rootCommentId
+    );
+
+    const commentReplyRootComment = commentWithReplies?.replies.find(
+      (c) => c.data?.id === rootCommentId
+    );
+
+    const focusedComment = commentWithReplies?.comment;
+
+    if (
+      !rootComment &&
+      !tribunalRootComment &&
+      !commentReplyRootComment &&
+      !focusedComment
+    )
+      return null;
+    const commentContent = findCommentContent(
+      rootComment ||
+        tribunalRootComment ||
+        commentReplyRootComment || { data: focusedComment },
+      commentData.id
+    );
+      console.log(commentData)
     return {
+      ...commentData,
       contentId: commentData.discussionId || contentId,
       discussionId: commentData.discussionId,
       topicId: topicId || contentId,
@@ -53,9 +86,15 @@ export default (commentData, contentId, topicId) => {
       username: currentUser?.username,
       createdByUsername,
       time: createdAt,
-      lexicalRawContent: lexicalContent,
+      lexicalRawContent: commentContent,
       parentId: commentData.id || null,
-      rootId: rootCommentId,
-    }
-  }, [currentUser, commentData, contentId])
-}
+      rootId: rootOfCommentReplyThreadId,
+      currentPage,
+      isFocusedComment,
+      id: commentData.id,
+      rootOfCommentReplyThreadId,
+      isReplies,
+      commentType
+    };
+  }, [currentUser, commentData, contentId, commentId, commentType]);
+};

@@ -5,21 +5,30 @@ export const TabContentContainer = styled('div')`
   align-items: center;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  .active {
+    background-color: var(--m-form-color);
+
+  }
 
 `
 
 export const TabNav = styled('nav')`
 --primary-color: #185ee0;
 --secondary-color: #e6eef9;
-margin-top: 1vw;
 font-family: "Inter", sans-serif;
 display: flex; 
 position: relative;
 background-color: #fff;
 box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
-
+width: 100%;
 padding: 0.75rem;
-border-radius: clamp(40px, 1vw, 99px);
+
+${props => props.pill && `
+  border-radius: clamp(40px, 1vw, 99px);
+  width: unset;
+  `
+}
 
 
 @media (max-width: 600px) {
@@ -35,6 +44,7 @@ border-radius: clamp(40px, 1vw, 99px);
 	&:checked {
 		& + label {
 			color: var(--primary-color);
+      background-color: var(--m-form-color);
 			& > .notification {
 				background-color: var(--primary-color);
 				color: #fff;
@@ -63,7 +73,7 @@ export const TabNavInput = styled('input')`
 `
 
 export const TabNavLabel = styled('label')`
-  display: flex;
+display: flex;
 align-items: center;
 justify-content: center;
 height: 54px;
@@ -82,6 +92,7 @@ transition: color 0.15s ease-in;
 
 @media (max-width: 600px) {
   width: 100px;
+  border-radius: 0px;
 }
 
 @media (max-width: 520px) {
@@ -120,7 +131,7 @@ height: 54px;
 width: 200px;
 background-color: var(--m-form-color);
 z-index: 1;
-border-radius: 99px; // just a high number to create pill effect
+border-radius: 99px;
 transition: 0.25s ease-out;
 @media (max-width: 1200px) {
   width: 150px;

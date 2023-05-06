@@ -26,13 +26,13 @@ export const CommentContainer = styled('li')`
   border: 1px solid lightgray;
   box-shadow: ${(props) => (props.isFocusedComment ? '-5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff' : 'none')};
   border-left-color: ${({ color }) => color};
-  border-left-width: 2px;
 
 
 
   border-color: rgba(200,200,200,0.25);
   border-left-color: ${({ color }) => color};
-  border-left-width: 5px;
+  border-left-width: ${props => props.hideBorder ? 0 : '5px'};
+
   :hover {
     background-color: #D8FFF1;
 

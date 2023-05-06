@@ -12,7 +12,9 @@ export const LinkWrapper = styled('a')`
 
 `
 
-export const FlexDiv = styled('div')` 
+export const FlexDiv = styled('div')`
+  max-height: 500px;
+  overflow: scroll; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +26,9 @@ export const FlexDiv = styled('div')`
   padding: 1em;
   :hover {
     opacity: .8;
+  }
+  ::-webkit-scrollbar {
+    display: none;
   }
 `
 export const OGImage = styled('img')` 

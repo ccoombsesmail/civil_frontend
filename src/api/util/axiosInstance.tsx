@@ -39,11 +39,12 @@ const axiosBaseQuery = (
     return { data: result.data };
   } catch (axiosError) {
     let err = axiosError as AxiosError;
+    console.log(err.response)
     toast.error(
       () => (
         <ErrorMessage
           errorMsg={
-            axiosError.response?.data.userMsg || axiosError.message.userMsg
+            axiosError.response?.data || axiosError.message
           }
         />
       ),
@@ -108,6 +109,7 @@ export default () => {
           req.headers["X-JWT-TYPE"] = `ELASTOS-DID ${didDoc.subject.repr}`;
           req.headers.Authorization = `Bearer ${token}`;
         } else {
+          if (!civicToken) return null
           req.headers["X-JWT-TYPE"] = "CIVIC-DID";
           req.headers.Authorization = `Bearer ${civicToken}`;
         }

@@ -47,8 +47,10 @@ function CreateCommentForm({ closeModal, commentFormState }) {
 
   const [toxicityScore, setToxicityScore] = useState(null)
   const {
-    lexicalRawContent, createdByIconSrc, createdByUsername, time,
+    lexicalRawContent, createdByIconSrc, createdByUsername, time, createdByTag
   } = commentFormState
+
+  console.log(commentFormState)
 
   const handleSubmit = useHandleSubmit(commentFormState, richTextEditorData, closeModal)
   const initialConfigReadOnly = {
@@ -84,6 +86,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
             <UserInfoHeader
               iconSrc={createdByIconSrc}
               username={createdByUsername}
+              userTag={createdByTag}
               time={getTimeSince(time)}
             />
 

@@ -21,7 +21,7 @@ export const TooltipPopover = React.forwardRef(({
 ))
 
 function ThemeTooltip({
-  tooltipText, tooltipHeader, Icon, onClick, bgColor,
+  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow
 }) {
   const popover = (
     <TooltipPopover
@@ -36,7 +36,7 @@ function ThemeTooltip({
       delay={{ show: 450, hide: 0 }}
       overlay={popover}
     >
-      <LightButton variant="light" bgcolor={bgColor}>
+      <LightButton variant="light" bgcolor={bgColor} grow={grow}>
         {
           Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
         }

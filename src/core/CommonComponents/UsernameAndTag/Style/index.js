@@ -20,7 +20,7 @@ export const Container = styled('section')`
     font-weight: bold;
     color: gray;
     cursor: pointer;
-
+    text-underline-offset: 2px;
     :hover {
       color: var(--m-primary-btn-color);
     }

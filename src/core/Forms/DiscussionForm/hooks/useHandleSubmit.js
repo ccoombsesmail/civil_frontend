@@ -39,8 +39,8 @@ export default (metaData, topicId, closeModal, editor) => {
       toast.promise(
         createDiscussion(data),
         {
-          pending: 'Creating Sub-Topic...',
-          success: 'Sub-Topic Successfully Created!',
+          pending: 'Creating New Discussion...',
+          success: 'Discussion Successfully Started!',
           error: {
             render({ data: errorData }) {
               const { response } = errorData

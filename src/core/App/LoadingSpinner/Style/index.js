@@ -10,7 +10,6 @@ const dotOvertaking = keyframes`
   }
 }
 `
-
 export const Backdrop = styled('div')`
   position: absolute;
   top: 0;
@@ -19,7 +18,7 @@ export const Backdrop = styled('div')`
   bottom: 0;
   z-index: 999999999;
   background-color: rgba(0, 0, 0, .6);
-  opacity: .99;
+  opacity: .43;
 `
 
 export const InnerContainer = styled('div')` 
@@ -30,7 +29,7 @@ export const InnerContainer = styled('div')`
   transform: scale(2);
 
 .dot-overtaking {
-  transform: scale(2);
+  transform: scale(4);
   position: relative;
   z-index: 9999999999;
   width: 12px;

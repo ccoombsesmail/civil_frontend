@@ -9,7 +9,6 @@ export const Container = styled('div')`
  
  button {
   box-shadow: var(--box-shadow-inset);
-
  }
  span {
     padding: 0 !important;

@@ -6,57 +6,38 @@ import RevealButton from '../../../CommonComponents/Buttons/RevealButton/Index'
 import { HoverLink } from '../../../CommonComponents/HoverLink/Style'
 import { longUsernameDisplay } from '../../../../generic/string/longUsernameDisplay'
 import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
-import { FollowButtonContainer } from './Style'
+import { FollowButtonContainer, FollowBtn } from './Style'
+import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 
-function FollowButton({ isFollowing, profileUserId, username }) {
-  const followClickHandler = useFollowClickHandler(profileUserId, isFollowing)
+function FollowButton({ isFollowing, profileUserId, username, user, isUserLoading, isUserFetching }) {
+  const { onFollowBtnClick, isLoading } = useFollowClickHandler(profileUserId, user?.isFollowing)
   return (
     <FollowButtonContainer>
       {
-        <ExpandButton onClick={followClickHandler}>
+        <FollowBtn onClick={onFollowBtnClick}>
           {
-            isFollowing ? (
+             user.isFollowing ? (
+
               <>
-                <RemoveFriendSvg />
+                 {(isLoading || isUserLoading || isUserFetching) ? <CircleLoading size={25}  noBackground stroke="black" /> : <RemoveFriendSvg /> }
                 <b>
-                  Unfollow
-                  {username}
+                  Unfollow {' '}
+                  {user.username}
                 </b>
               </>
             ) : (
               <>
-                <AddFriendSvg />
+               {(isLoading || isUserLoading || isUserFetching) ? <CircleLoading size={25}  noBackground stroke="black" /> : <AddFriendSvg /> }
+            
                 <b>
-                  Follow
-                  {username}
+                  Follow {' '}
+                  {user.username}
                 </b>
               </>
             )
           }
 
-        </ExpandButton>
-      // isFollowing ? (
-      //   <RevealButton Icon={RemoveFriendSvg} buttonText="Unfollow" onClick={followClickHandler} size="3.5vw">
-      //     <HoverLink>
-      //       Unfollow
-      //       {' '}
-      //       <span>
-      //         {longUsernameDisplay(username)}
-      //       </span>
-      //     </HoverLink>
-      //   </RevealButton>
-      // )
-      //   : (
-      //     <RevealButton Icon={AddFriendSvg} buttonText="Follow" onClick={followClickHandler} size="3.5vw">
-      //       <HoverLink>
-      //         Follow
-      //         {' '}
-      //         <span>
-      //           {longUsernameDisplay(username)}
-      //         </span>
-      //       </HoverLink>
-      //     </RevealButton>
-      //   )
+        </FollowBtn>
     }
     </FollowButtonContainer>
 

@@ -4,9 +4,10 @@ import React from 'react'
 import { TabNavContentCount, TabNavInput, TabNavLabel } from '../../Style'
 
 const TabNavItem = ({
-  id, title, activeTab, setActiveTab, contentCount,
+  id, title, activeTab, setActiveTab, contentCount, onClick
 }) => {
   const handleClick = () => {
+    onClick()
     setActiveTab(id)
   }
 

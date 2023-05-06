@@ -16,11 +16,8 @@ export default (topicId) => {
     skip: !topicId || !currentUser,
   })
 
-  console.log(isTopicLoading, isTopicUninit, isIdLoading, isIdUninit)
-
   return useCallback(() => {
     if (isTopicLoading || isTopicUninit || isIdLoading || isIdUninit) return null
-    const replyingToContent = topic?.editorState
     return {
       discussionId: genDiscussionId.id,
       topicId,
@@ -29,7 +26,7 @@ export default (topicId) => {
       username: currentUser?.username,
       createdByUsername: topic?.createdByUsername,
       time: topic?.createdAt,
-      lexicalRawContent: JSON.parse(replyingToContent),
+      lexicalRawContent: topic?.editorState,
       parentId: null,
       rootId: null,
     }

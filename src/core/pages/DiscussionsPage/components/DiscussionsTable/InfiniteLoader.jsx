@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React from 'react'
+import React, { useRef } from 'react'
 import { VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import TopicItem from './components/TopicItem/Index'
+import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions'
+import DiscussionsItem from './DiscussionItem/Index'
 
 // Render an item or a loading indicator.
 
@@ -21,10 +22,15 @@ export default function ExampleWrapper({
 
   // Callback function responsible for loading the next page of items.
   loadNextPage,
+  topicId
 }) {
   // If there are more items to be loaded then add an extra row to hold a loading indicator.
+  // const itemCount = items.length
   const itemCount = hasNextPage ? items.length + 1 : items.length
   const { currentUser } = useGetCurrentUser()
+  const infiniteLoaderRef = useRef(null);
+
+
 
   // Only load 1 page of items at a time.
   // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
@@ -34,19 +40,24 @@ export default function ExampleWrapper({
   const isItemLoaded = (index) => !hasNextPage || index < items.length
 
   function Item({ index, style }) {
+    const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllDiscussionsQuery({ topicId, currentPage: Math.floor(index / 10) }, {
+      skip: !currentUser,
+    })
+
     let content
-    if (!isItemLoaded(index)) {
-      content = 'Loading...'
+    if (isLoadingCurrent || isUninitialized || !data) {
+      content = <div>Loading...</div>
     } else {
-      const topic = items[index]
-      content = (
-        <TopicItem
-          style={style}
-          key={topic.id}
-          topic={topic}
-          user={currentUser}
+      const discussion = data[index%10]
+      content = discussion ? (
+        <DiscussionsItem
+            style={style}
+            key={discussion.id}
+            {...discussion}
+            discussion={discussion}
+            topicId={topicId}
         />
-      )
+      ) : null
     }
 
     return <div style={style}>{content}</div>
@@ -54,6 +65,7 @@ export default function ExampleWrapper({
 
   return (
     <InfiniteLoader
+      ref={infiniteLoaderRef}
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
       loadMoreItems={loadMoreItems}
@@ -61,10 +73,9 @@ export default function ExampleWrapper({
       {({ onItemsRendered, ref }) => (
         <List
           className="List"
-          height={1000}
+          height={800}
           itemCount={itemCount}
-          itemSize={() => 600}
-          estimatedItemSize={600}
+          itemSize={() => 100}
           onItemsRendered={onItemsRendered}
           ref={ref}
           width="100%"

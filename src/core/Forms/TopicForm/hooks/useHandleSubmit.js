@@ -14,13 +14,12 @@ export default (metaData, closeModal, editor) => {
   const { currentUser } = useGetCurrentUser()
   const uploadRichTextImages = useUploadRichTextImages(uploadTopicMedia)
   const editorTextContent = useGetLexicalTextContent(editor)
-
   return useCallback(async (values, { setSubmitting, resetForm }, externalContentUrl) => {
     if (isLoading) return
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
     const linkType = checkLinkType(externalContentUrl?.url)
     const editorState = await uploadRichTextImages(editor)
-
+    console.log(editorState)
     let userUploadedVodUrl = null
     let userUploadedImageUrl = null
     if (values.file instanceof File) {
@@ -40,7 +39,7 @@ export default (metaData, closeModal, editor) => {
       ...values,
       userUploadedVodUrl,
       userUploadedImageUrl,
-      editorState: JSON.stringify(JSON.stringify(editorState)),
+      editorState: JSON.stringify(editorState),
       createdByUsername: currentUser.username,
       createdByuserId: currentUser.userId,
       evidenceLinks: eLinks,

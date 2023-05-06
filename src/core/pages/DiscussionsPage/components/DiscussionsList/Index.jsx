@@ -7,7 +7,7 @@ import useGoToDiscussion from '../../hooks/useGoToDiscussion'
 import DiscussionsTable from '../DiscussionsTable/Index'
 
 import { Container, ActionItemsContainer } from './Style/index'
-import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions.ts'
+import { useGetGeneralDiscussionIdQuery } from '../../../../../api/services/discussions.ts'
 import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
 
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
@@ -22,11 +22,12 @@ function DiscussionsList() {
   const { data: topic, isUninitialized } = useGetTopicQuery(topicId, {
     skip: !topicId,
   })
-  const { data: discussions } = useGetAllDiscussionsQuery(topicId, {
-    skip: !currentUser,
+
+  const {data: generalDiscussionId } = useGetGeneralDiscussionIdQuery(topicId, {
+    skip: !currentUser
   })
-  const genDiscussion = discussions?.find(({ title }) => title === 'General')
-  const goToDiscussion = useGoToDiscussion(genDiscussion?.id)
+
+  const goToDiscussion = useGoToDiscussion(generalDiscussionId?.id)
 
   const topicTitle = isUninitialized ? null : topic?.title
 

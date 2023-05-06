@@ -23,7 +23,7 @@ function UserProfile() {
   const [activeKey, setActiveKey] = useState('0')
 
   const { currentUser, isLoading: isCurrentUserLoading, isUninitialized: isCurrentUserUninitialized } = useGetCurrentUser()
-  const { data: user, isLoading, isUninitialized } = useGetUserQuery(profileUserId, {
+  const { data: user, isLoading, isUninitialized, isFetching } = useGetUserQuery(profileUserId, {
     skip: !currentUser || !profileUserId,
   })
 
@@ -52,8 +52,9 @@ function UserProfile() {
               />
               <Bio>{user?.bio}</Bio>
             </FlexDiv>
+            { isCurrentUserProfile ? null : <FollowButton isUserLoading={isLoading} isUserFetching={isFetching} user={user} profileUserId={profileUserId} /> }
             <FullWidthDiv>
-              { isCurrentUserProfile ? null : <FollowButton isFollowing={user?.isFollowing} profileUserId={profileUserId} username={user?.username} /> }
+             
             </FullWidthDiv>
 
             <StyledNav activeKey={Number(activeKey)}>

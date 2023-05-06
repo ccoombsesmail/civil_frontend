@@ -7,21 +7,18 @@ import Comment from '../Comment/Index'
 import { ParentCommentContext } from '../CommentColumn/ParentCommentContext'
 import LineWithOverlayText from '../LineWithTextOverlay/Index'
 
-function ParentComment({ topicId, commentId, isFocusedComment }) {
+function ParentComment({ topicId, commentId }) {
   const { currentUser } = useGetCurrentUser()
   const { data: commentData, isLoading, isUninitialized } = useGetAllCommentRepliesQuery(commentId, {
     skip: currentUser === undefined,
   })
-  const commentRef = useCallback((node) => {
-    if (node !== null) {
-      node.scrollIntoView()
-    }
-  }, [])
+
   const contextValue = useMemo(() => ({
     commentId,
     topicId,
-    isFocusedComment,
-  }))
+    isFocusedComment: true,
+    rootOfCommentReplyThreadId: commentData?.comment.id,
+  }), [commentId, topicId, commentData])
 
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="15vw" />
@@ -33,7 +30,7 @@ function ParentComment({ topicId, commentId, isFocusedComment }) {
       <ParentCommentContext.Provider
         value={contextValue}
       >
-        <Comment commentRef={commentRef} commentData={commentData.comment} replies={[]} isFocusedComment />
+        <Comment commentData={commentData.comment} replies={[]} isFocusedComment />
       </ParentCommentContext.Provider>
     </>
 

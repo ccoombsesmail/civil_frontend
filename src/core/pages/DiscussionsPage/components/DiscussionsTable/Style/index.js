@@ -39,6 +39,7 @@ export const TableHeader = styled('header')`
       span {
         display: block;
         font-size: clamp(18px, 1.6vw, 30px);
+        color: white;
 
       }
       

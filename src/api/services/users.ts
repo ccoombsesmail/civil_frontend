@@ -26,7 +26,7 @@ export const usersApi = emptySplitApi.injectEndpoints({
       query: (body) => {
         return {
           url: `/users/tag`,
-          method: "PATCH",
+          method: "PUT",
           data: body,
         };
       },

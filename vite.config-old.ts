@@ -102,7 +102,14 @@ export default defineConfig(({ mode }) => {
         include: '**/*.{jsx,tsx}',
        
         babel: {
-          presets: ['@babel/preset-react'],
+    
+"presets": [
+  ["@babel/preset-react", {
+  "runtime": "automatic",
+  "development": true,
+  "importSource": "@welldone-software/why-did-you-render"
+}]
+],
           plugins: ['babel-plugin-styled-components'],
         },
       }),

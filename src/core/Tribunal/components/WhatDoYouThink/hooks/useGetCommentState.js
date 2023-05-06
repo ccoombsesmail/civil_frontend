@@ -7,20 +7,25 @@ export default (topicData, commentData, contentId) => {
   return useCallback(() => {
     if (!topicData && !commentData) return null
     const {
-      createdByUsername, createdByIconSrc, createdAt, editorState, id,
+      createdByUsername, createdByIconSrc, createdAt, editorState, id
     } = topicData || commentData
     const {
-      createdByUsername: createdByUsernameComment, editorState: commentEditorState, id: commentId,
+      createdByUsername: createdByUsernameComment, editorState: commentEditorState, id: commentId
     } = commentData || {}
+
+    console.log(commentData)
+
     return {
+      ...topicData,
+      ...commentData,
       contentId,
       discussionId: null,
-      topicId: id || commentId,
+      topicId: topicData?.id || id,
       createdByIconSrc,
       username: currentUser?.username,
       createdBy: createdByUsername || createdByUsernameComment,
       time: createdAt,
-      lexicalRawContent: JSON.parse(editorState || commentEditorState),
+      lexicalRawContent: editorState || commentEditorState,
       parentId: null,
       rootId: null,
     }

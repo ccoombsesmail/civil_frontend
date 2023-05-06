@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-import React, {
-  memo, useMemo,
-} from 'react'
-import { useParams } from 'react-router-dom'
+import React, { memo, useMemo } from "react";
+import { useParams } from "react-router-dom";
 
 import {
   OuterContainer,
@@ -12,84 +10,94 @@ import {
   StyledScalesSvg,
   ReportStatsContainer,
   ReportStatItem,
-} from './Style/index'
+} from "./Style/index";
 
-import TribunalComments from './components/TribunalComments/Index'
-import VotingBox from './components/VotingBox/Index'
+import TribunalComments from "./components/TribunalComments/Index";
+import VotingBox from "./components/VotingBox/Index";
 
-import Comment from '../pages/DiscussionsPage/components/Comment/Index'
-import { COMMENT, TOPIC } from '../../enums/content_type'
-import TopicItem from '../pages/HomePage/components/Topics/components/TopicItem/Index'
-import { useGetReportQuery } from '../../api/services/reports.ts'
-import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
-import { useGetTopicQuery } from '../../api/services/topics.ts'
-import Timer from './components/Timer/Index'
-import { CircleLoading } from '../../svgs/spinners/CircleLoading'
-import { useGetAllTribunalCommentsBatchQuery } from '../../api/services/tribunal_comments.ts'
-import { useGetCommentQuery } from '../../api/services/comments.ts'
-import { BgImage } from '../pages/Style'
-import WhatDoYouThink from './components/WhatDoYouThink/Index'
+import Comment from "../pages/DiscussionsPage/components/Comment/Index";
+import { COMMENT, TOPIC } from "../../enums/content_type";
+import TopicItem from "../pages/HomePage/components/Topics/components/TopicItem/Index";
+import { useGetReportQuery } from "../../api/services/reports.ts";
+import useGetCurrentUser from "../App/hooks/useGetCurrentUser";
+import { useGetTopicQuery } from "../../api/services/topics.ts";
+import Timer from "./components/Timer/Index";
+import { CircleLoading } from "../../svgs/spinners/CircleLoading";
+import { useGetCommentQuery } from "../../api/services/comments.ts";
+import { BgImage } from "../pages/Style";
+import WhatDoYouThink from "./components/WhatDoYouThink/Index";
 
 function Tribunal() {
-  const { contentId, contentType } = useParams()
-  const { currentUser } = useGetCurrentUser()
+  const { contentId, contentType } = useParams();
+  const { currentUser } = useGetCurrentUser();
   const {
     data: topic,
     isLoading: isTopicLoading,
     isUninitialized: isTopicUninitialized,
     isSuccess: topicLoaded,
-  } = useGetTopicQuery(contentId, { skip: !contentId || !currentUser || contentType !== TOPIC })
+  } = useGetTopicQuery(contentId, {
+    skip: !contentId || !currentUser || contentType !== TOPIC,
+  });
 
   const {
     data: comment,
     isLoading: isCommentLoading,
     isUninitialized: isCommentUninitialized,
     isSuccess: commentLoaded,
-  } = useGetCommentQuery(contentId, { skip: !contentId || !currentUser || contentType !== COMMENT })
+  } = useGetCommentQuery(contentId, {
+    skip: !contentId || !currentUser || contentType !== COMMENT,
+  });
 
-  const {
-    data: tribunalComments,
-    isLoading: isTCommentsLoaded,
-    isUninitialized: isTCommentsUninitialized,
-  } = useGetAllTribunalCommentsBatchQuery(contentId, {
-    skip: !currentUser,
-  })
+
+  
   const {
     data: reportStats,
     isLoading: isReportStatsLoading,
     isUninitialized: isReportStatsUninitialized,
     isSuccess,
+    isFetching,
     refetch,
-  } = useGetReportQuery(contentId, { skip: !contentId || !currentUser })
+  } = useGetReportQuery(contentId, { skip: !contentId || !currentUser });
 
   const Content = useMemo(() => {
     if (topicLoaded) {
-      return <TopicItem key={topic.id} topic={topic} user={currentUser} hideCommentButton />
+      return (
+        <TopicItem
+          key={topic.id}
+          topic={topic}
+          user={currentUser}
+          hideCommentButton
+        />
+      );
     }
     if (commentLoaded) {
-      return <Comment commentData={comment} replies={[]} />
+      return <Comment commentData={{ ...comment, isReportedComment: true}} replies={[]} isReportedComment />;
     }
-    return null
-  }, [topic, comment, commentLoaded, topicLoaded, contentId, currentUser])
+    return null;
+  }, [topic, comment, commentLoaded, topicLoaded, contentId, currentUser]);
 
   return (
     <OuterContainer id="tribunal-container">
       <BgImage />
       <Header>
-        <img src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
-        <h1>Community Tribunal</h1>
-        <img src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
+        <img
+          src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png"
+          alt=""
+        />
+        <h1 style={{color: 'darkolivegreen'}}>Community Tribunal</h1>
+        <img
+          src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png"
+          alt=""
+        />
       </Header>
       {isReportStatsUninitialized ? null : isReportStatsLoading ? (
         <CircleLoading size="10vw" />
       ) : (
         <Timer reportStats={reportStats} refetch={refetch} />
       )}
-      <InnerContainer>
-        {Content}
-      </InnerContainer>
+      <InnerContainer>{Content}</InnerContainer>
       {isSuccess && (
-        <VotingBox contentId={contentId} reportStats={reportStats} />
+        <VotingBox contentId={contentId} reportStats={reportStats} isFetching={isFetching} />
       )}
       {isReportStatsUninitialized ? null : (
         <ReportStatsContainer>
@@ -99,7 +107,9 @@ function Tribunal() {
           </ReportStatItem>
           <ReportStatItem>
             <h2>Personal Attack Reports</h2>
-            {isSuccess && <span>{reportStats.numPersonalAttackReports || 0}</span>}
+            {isSuccess && (
+              <span>{reportStats.numPersonalAttackReports || 0}</span>
+            )}
           </ReportStatItem>
           <ReportStatItem>
             <h2>Spam Reports</h2>
@@ -107,14 +117,10 @@ function Tribunal() {
           </ReportStatItem>
         </ReportStatsContainer>
       )}
-      <WhatDoYouThink comment={comment} topic={topic} />
-      { isTCommentsUninitialized ? null : isTCommentsLoaded ? (
-        <CircleLoading size="10vw" />
-      ) : (
-        <TribunalComments tribunalComments={tribunalComments} />
-      )}
+      <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} topic={topic} />
+      <TribunalComments contentId={contentId} />
     </OuterContainer>
-  )
+  );
 }
 
-export default memo(Tribunal)
+export default memo(Tribunal);

@@ -10,9 +10,9 @@ export const ButtonBackground = styled('div')`
   border-radius: 0.85rem;
   overflow: hidden;
   transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);
-  background-image: linear-gradient(to right,var(--m-primary-background-color),#83af9b);
+  background-image: linear-gradient(to right,var(--m-primary-background-color),#427a4e);
   background-image: ${(props) => (props.civicButton && 'none !important')};
-
+  /* background-image: linear-gradient(90deg, rgba(33,183,183,1) 0%, var(--m-primary-background-color) 100%); */
   ::before,
   ::after {
     content: '';

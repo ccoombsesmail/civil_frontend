@@ -5,10 +5,11 @@ import useModal from '../../../CommonComponents/Lexical/hooks/useModal.tsx'
 import VoteForm from '../../../Forms/VoteForm/Index'
 
 import {
-  VotingContainer, VotesAgainst, VotesFor, MiddleSection,
+  VotingContainer, VotesAgainst, VotesFor, MiddleSection, VerdictContainer, VotesContainer, CoolText
 } from './Style'
+import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 
-function VotingBox({ contentId, reportStats }) {
+function VotingBox({ contentId, reportStats, isFetching }) {
   const [modal, showModal] = useModal()
   const onClick = useCallback(() => {
     showModal('Cast Your Vote', (onClose) => (
@@ -30,42 +31,47 @@ function VotingBox({ contentId, reportStats }) {
   return (
     <VotingContainer>
       {modal}
-      <VotesFor>
-        Violation Votes
-        <span>
-          {reportStats && (reportStats.numVotesFor ?? '?')}
-        </span>
-      </VotesFor>
-      <VotesAgainst>
-        No Violation Votes
-        <span>
-          {reportStats && (reportStats.numVotesAgainst ?? '?')}
-        </span>
-      </VotesAgainst>
       <MiddleSection verdict={verdict}>
-        { votingTimeUp && (
-        <>
-          <span>
-            <Gavel2 />
+        { (votingTimeUp && !isFetching) && (
+        <VerdictContainer>
+          <CoolText>
+            {/* <Gavel2 /> */}
             VERDICT
-            <Gavel2 />
-          </span>
-          <span>
+            {/* <Gavel2 /> */}
+          </CoolText>
+          <CoolText>
+          <Gavel2 />
             ↓
-          </span>
-          <span>
-            {verdict}
-          </span>
+          <Gavel2 />
 
-        </>
+          </CoolText>
+          <CoolText verdict={verdict}>
+            {verdict}
+          </CoolText>
+
+        </VerdictContainer>
         )}
         { !votingTimeUp && <CastBallotSvg /> }
         {(reportStats && !votingTimeUp) && (
-        <ThemeButton onClick={onClick}>
+        <ExpandButton onClick={onClick}>
           {hasAlreadyVoted ? 'Change Your Vote' : 'Cast Your Vote'}
-        </ThemeButton>
+        </ExpandButton>
         )}
       </MiddleSection>
+      <VotesContainer>
+        <VotesFor>
+          Violation Votes
+          <span>
+            {reportStats && (reportStats.numVotesFor ?? '?')}
+          </span>
+        </VotesFor>
+        <VotesAgainst>
+          No Violation Votes
+          <span>
+            {reportStats && (reportStats.numVotesAgainst ?? '?')}
+          </span>
+        </VotesAgainst>
+      </VotesContainer>
     </VotingContainer>
 
   )

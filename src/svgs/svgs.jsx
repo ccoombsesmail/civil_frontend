@@ -572,7 +572,7 @@ export function LongDownArrow({ hidden }) {
 
 export function AuthenticationSvg() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="1.2vw">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style={{marginLeft: '2px'}}>
       <title>fingerprint lock</title>
       <g id="fingerprint_lock" data-name="fingerprint lock">
         <path d="M35.52,57.84A21.824,21.824,0,0,1,26,60c-.41,0-.78-.01-1.14-.03a1,1,0,0,0-.79,1.67.967.967,0,0,0,.69.33c.41.02.83.03,1.24.03a23.7,23.7,0,0,0,10.39-2.36,1,1,0,0,0,.57-.9,1.129,1.129,0,0,0-.1-.44A1.021,1.021,0,0,0,35.52,57.84Z" />
@@ -639,6 +639,7 @@ export function VerifiedSvg({ onClick }) {
       viewBox="0 0 122.88 122.88"
       enableBackground="new 0 0 122.88 122.88"
       xmlSpace="preserve"
+      style={{marginBottom: '2px'}}
     >
       <g>
         <path
