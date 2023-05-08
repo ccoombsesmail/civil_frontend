@@ -10,10 +10,15 @@ const TabNavItem = ({
     onClick()
     setActiveTab(id)
   }
+  
+  const handleChange = (event) => {
+    setActiveTab(event.target.value)
+  }
+
 
   return (
     <>
-      <TabNavInput type="radio" id={`radio-${id}`} tabNum={Number(id)} checked={activeTab === id} />
+      <TabNavInput type="radio" id={`radio-${id}`} tabNum={Number(id)} checked={activeTab === id} onChange={handleChange}/>
       <TabNavLabel htmlFor={`radio-${id}`} onClick={handleClick} className={activeTab === id ? 'active' : ''}>
         { title }
         { contentCount ? (

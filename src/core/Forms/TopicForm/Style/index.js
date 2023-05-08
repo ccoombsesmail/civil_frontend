@@ -143,7 +143,7 @@ export const InputWrapper = styled('div')`
 export const Container = styled('div')`
   overflow-y: scroll;
   height: 75vh;
-  width: clamp(400px, 60vw, 1100px);
+  width: clamp(400px, 70vw, 1100px);
   background: white;
 
   @media only screen and (max-width: 700px) {

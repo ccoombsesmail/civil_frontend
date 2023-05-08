@@ -95,13 +95,7 @@ transition: color 0.15s ease-in;
   border-radius: 0px;
 }
 
-@media (max-width: 520px) {
-  width: 90px;
-}
 
-@media (max-width: 440px) {
-  width: 85px;
-}
 
 @media (max-width: 390px) {
   width: 75px;

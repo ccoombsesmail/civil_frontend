@@ -9,7 +9,9 @@ export const StyledButton = styled('button')`
   display: flex;
   align-items: center;
   font-family: inherit;
-  background: transparent;
+  background-color: aliceblue;
+  border-radius: 7px;
+  margin: 0 8px;
    :hover {
     filter: drop-shadow(0 2px 4px black) brightness(.8);
   }

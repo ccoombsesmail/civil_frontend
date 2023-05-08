@@ -9,7 +9,7 @@ function TribunalButton({ contentId }) {
   const [isOpen, setIsOpen] = useState(false)
   const [modal, showModal] = useModal()
   const openModal = useCallback(() => {
-    showModal('Create Tag', (onClose) => (
+    showModal('Report Content', (onClose) => (
       <ReportForm closeModal={onClose} contentId={contentId} />
     ))
   }, [contentId])

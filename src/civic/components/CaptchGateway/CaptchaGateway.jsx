@@ -75,7 +75,7 @@ function RequestGatewayTokenDesktop() {
         type="submit"
         icon={icon}
         onClick={requestGatewayToken}
-        width="170px"
+        width="180px"
         civicButton
       >
         {statusMsg}

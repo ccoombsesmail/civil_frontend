@@ -30,6 +30,10 @@ export const Left = styled('div')`
   display: flex;
   align-items: center;
 
+  span {
+    /* background-color: aliceblue; */
+  }
+
 `
 
 export const Right = styled('div')`

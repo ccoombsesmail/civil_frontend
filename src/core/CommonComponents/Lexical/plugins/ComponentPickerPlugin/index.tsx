@@ -21,7 +21,7 @@ import {
   useBasicTypeaheadTriggerMatch,
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import {$createHeadingNode, $createQuoteNode} from '@lexical/rich-text';
-import {$setBlocksType_experimental} from '@lexical/selection';
+import {$setBlocksType} from '@lexical/selection';
 import {INSERT_TABLE_COMMAND} from '@lexical/table';
 import {
   $createParagraphNode,
@@ -40,7 +40,7 @@ import {INSERT_COLLAPSIBLE_COMMAND} from '../CollapsiblePlugin';
 import {INSERT_EXCALIDRAW_COMMAND} from '../ExcalidrawPlugin';
 import {INSERT_IMAGE_COMMAND, InsertImageDialog} from '../ImagesPlugin';
 import {InsertPollDialog} from '../PollPlugin';
-import {InsertTableDialog} from '../TablePlugin';
+import {InsertNewTableDialog, InsertTableDialog} from '../TablePlugin';
 
 class ComponentPickerOption extends TypeaheadOption {
   // What shows up in the editor
@@ -171,9 +171,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
           editor.update(() => {
             const selection = $getSelection();
             if ($isRangeSelection(selection)) {
-              $setBlocksType_experimental(selection, () =>
-                $createParagraphNode(),
-              );
+              $setBlocksType(selection, () => $createParagraphNode());
             }
           }),
       }),
@@ -186,7 +184,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
               editor.update(() => {
                 const selection = $getSelection();
                 if ($isRangeSelection(selection)) {
-                  $setBlocksType_experimental(selection, () =>
+                  $setBlocksType(selection, () =>
                     // @ts-ignore Correct types, but since they're dynamic TS doesn't like it.
                     $createHeadingNode(`h${n}`),
                   );
@@ -200,6 +198,14 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
         onSelect: () =>
           showModal('Insert Table', (onClose) => (
             <InsertTableDialog activeEditor={editor} onClose={onClose} />
+          )),
+      }),
+      new ComponentPickerOption('Table (Experimental)', {
+        icon: <i className="icon table" />,
+        keywords: ['table', 'grid', 'spreadsheet', 'rows', 'columns'],
+        onSelect: () =>
+          showModal('Insert Table', (onClose) => (
+            <InsertNewTableDialog activeEditor={editor} onClose={onClose} />
           )),
       }),
       new ComponentPickerOption('Numbered List', {
@@ -227,7 +233,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
           editor.update(() => {
             const selection = $getSelection();
             if ($isRangeSelection(selection)) {
-              $setBlocksType_experimental(selection, () => $createQuoteNode());
+              $setBlocksType(selection, () => $createQuoteNode());
             }
           }),
       }),
@@ -240,7 +246,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
 
             if ($isRangeSelection(selection)) {
               if (selection.isCollapsed()) {
-                $setBlocksType_experimental(selection, () => $createCodeNode());
+                $setBlocksType(selection, () => $createCodeNode());
               } else {
                 // Will this ever happen?
                 const textContent = selection.getTextContent();
@@ -286,7 +292,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
         onSelect: () =>
           editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
             altText: 'Cat typing on a laptop',
-            src: null,
+            src: '',
           }),
       }),
       new ComponentPickerOption('Image', {

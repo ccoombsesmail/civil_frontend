@@ -30,6 +30,7 @@ import LoadingBridgeWithSpinner from './LoadingBridge/Index'
 import LoadingPage from '../CommonComponents/LoadingPage/Index'
 import { UserContext } from './UserContext/Index'
 import { BgImage } from '../pages/Style'
+import ErrorBoundary from '../CommonComponents/ErrorBoundry/Index'
 
 const Dashboard = React.lazy(() => import('../pages/DashboardPage/Index'))
 
@@ -72,7 +73,10 @@ function App() {
               {({ userId }) => (
                 <UserContext.Provider value={userId}>
                   <Header />
+
                   <MainContainer>
+                    <ErrorBoundary>
+
                     <CreateTagModal />
                     <Content id="main-scroll">
                       { pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate') ? null : <BgImage /> }
@@ -130,10 +134,14 @@ function App() {
                       transition={elitpicIn}
                       limit={2}
                     />
+                    </ErrorBoundary>
+
                   </MainContainer>
+
                 </UserContext.Provider>
               )}
             </LoadingBridgeWithSpinner>
+
           </Wrapper>
         </WalletModalProvider>
       </WalletProvider>

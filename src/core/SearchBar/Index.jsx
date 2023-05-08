@@ -59,8 +59,8 @@ function SearchBar({ placeholder }) {
       </InnerSearch>
       {wordEntered && (
         <ResultContainer>
-          {results?.slice(0, 15).map((result, key) => (<SearchResultItem clearInput={clearInput} result={result} wordEntered={wordEntered} />)) }
-          {userResults?.slice(0, 15).map((result, key) => (<SearchResultItem clearInput={clearInput} result={result} wordEntered={wordEntered} />)) }
+          {results?.slice(0, 15).map((result, key) => (<SearchResultItem key={key} clearInput={clearInput} result={result} wordEntered={wordEntered} />)) }
+          {userResults?.slice(0, 15).map((result, key) => (<SearchResultItem key={key} clearInput={clearInput} result={result} wordEntered={wordEntered} />)) }
 
         </ResultContainer>
       )}

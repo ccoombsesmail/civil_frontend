@@ -38,9 +38,7 @@ export const HeaderContainer = styled('section')`
   background-color: white;
   align-items: center;
   width: 100%;
-  li {
-    margin: 0;
-  }
+
 
   @media only screen and (max-width: 600px) {
     width: 100%;

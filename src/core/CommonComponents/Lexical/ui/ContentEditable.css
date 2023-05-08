@@ -16,3 +16,10 @@
   padding: 10px 10px 10px 28px;
   min-height: calc(100% - 16px);
 }
+
+
+@media (max-width: 500px) {
+  .ContentEditable__root{
+    padding: 0;
+  }
+}

@@ -38,7 +38,7 @@ import {
   $isParentElementRTL,
   $patchStyleText,
   $selectAll,
-  $setBlocksType_experimental,
+  $setBlocksType,
 } from '@lexical/selection';
 import {
   $findMatchingParent,
@@ -138,6 +138,7 @@ function BlockFormatDropDown({
   editor: LexicalEditor;
   disabled?: boolean;
 }): JSX.Element {
+
   const formatParagraph = () => {
     if (blockType !== 'paragraph') {
       editor.update(() => {
@@ -146,7 +147,7 @@ function BlockFormatDropDown({
           $isRangeSelection(selection) ||
           DEPRECATED_$isGridSelection(selection)
         )
-          $setBlocksType_experimental(selection, () => $createParagraphNode());
+          $setBlocksType(selection, () => $createParagraphNode());
       });
     }
   };
@@ -159,7 +160,7 @@ function BlockFormatDropDown({
           $isRangeSelection(selection) ||
           DEPRECATED_$isGridSelection(selection)
         ) {
-          $setBlocksType_experimental(selection, () =>
+          $setBlocksType(selection, () =>
             $createHeadingNode(headingSize),
           );
         }
@@ -199,7 +200,7 @@ function BlockFormatDropDown({
           $isRangeSelection(selection) ||
           DEPRECATED_$isGridSelection(selection)
         ) {
-          $setBlocksType_experimental(selection, () => $createQuoteNode());
+          $setBlocksType(selection, () => $createQuoteNode());
         }
       });
     }
@@ -215,7 +216,7 @@ function BlockFormatDropDown({
           DEPRECATED_$isGridSelection(selection)
         ) {
           if (selection.isCollapsed()) {
-            $setBlocksType_experimental(selection, () => $createCodeNode());
+            $setBlocksType(selection, () => $createCodeNode());
           } else {
             const textContent = selection.getTextContent();
             const codeNode = $createCodeNode();
@@ -235,7 +236,8 @@ function BlockFormatDropDown({
       buttonClassName="toolbar-item block-controls"
       buttonIconClassName={'icon block-type ' + blockType}
       buttonLabel={blockTypeToBlockName[blockType]}
-      buttonAriaLabel="Formatting options for text style">
+      buttonAriaLabel="Formatting options for text style"
+      >
       <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'paragraph')}
         onClick={formatParagraph}>
@@ -303,6 +305,7 @@ function FontDropDown({
   style: string;
   disabled?: boolean;
 }): JSX.Element {
+
   const handleClick = useCallback(
     (option: string) => {
       editor.update(() => {
@@ -330,7 +333,8 @@ function FontDropDown({
       buttonIconClassName={
         style === 'font-family' ? 'icon block-type font-family' : ''
       }
-      buttonAriaLabel={buttonAriaLabel}>
+      buttonAriaLabel={buttonAriaLabel}
+      >
       {(style === 'font-family' ? null : FONT_SIZE_OPTIONS).map(
         ([option, text]) => (
           <DropDownItem
@@ -370,6 +374,7 @@ export default function ToolbarPlugin(): JSX.Element {
   const [existingNodeTypes, setExistingNodeTypes] = useState({
     poll: false,
   })
+  const [showDropDown, setShowDropDown] = useState(false)
   editor.registerUpdateListener(({ editorState }) => {
 
     editorState.read(() => {
@@ -540,7 +545,8 @@ export default function ToolbarPlugin(): JSX.Element {
             disabled={!isEditable}
             buttonClassName="toolbar-item code-language"
             buttonLabel={getLanguageFriendlyName(codeLanguage)}
-            buttonAriaLabel="Select language">
+            buttonAriaLabel="Select language"
+            >
             {CODE_LANGUAGE_OPTIONS.map(([value, name]) => {
               return (
                 <DropDownItem
@@ -617,7 +623,8 @@ export default function ToolbarPlugin(): JSX.Element {
             buttonClassName="toolbar-item spaced"
             buttonLabel=""
             buttonAriaLabel="Formatting options for additional text styles"
-            buttonIconClassName="icon dropdown-more">
+            buttonIconClassName="icon dropdown-more"
+            >
             <DropDownItem
               onClick={() => {
                 activeEditor.dispatchCommand(
@@ -669,7 +676,8 @@ export default function ToolbarPlugin(): JSX.Element {
             buttonClassName="toolbar-item spaced"
             buttonLabel="Insert"
             buttonAriaLabel="Insert specialized editor node"
-            buttonIconClassName="icon plus">
+            buttonIconClassName="icon plus"
+            >
             <DropDownItem
               disabled={!activeEditor || activeEditor.getEditorState()._nodeMap.size === 1}
               onClick={() => {
@@ -752,7 +760,8 @@ export default function ToolbarPlugin(): JSX.Element {
         buttonLabel="Align"
         buttonIconClassName="icon left-align"
         buttonClassName="toolbar-item spaced alignment"
-        buttonAriaLabel="Formatting options for text alignment">
+        buttonAriaLabel="Formatting options for text alignment"
+        >
         <DropDownItem
           onClick={() => {
             activeEditor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');

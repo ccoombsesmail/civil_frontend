@@ -30,7 +30,7 @@ const Card = ({
 }) => {
   const { pathname } = useLocation()
   const {
-    id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, topicCreatorIsDidUser, userVerificationType, reportStatus,
+    id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, topicCreatorIsDidUser, userVerificationType, reportStatus, title, category
   } = topic || discussion || {}
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
@@ -50,6 +50,7 @@ const Card = ({
         topicCreatorIsDidUser={topicCreatorIsDidUser}
         userVerificationType={userVerificationType}
         topic={topic}
+        category={category}
       />
       { shouldBlur && (
       <CensorOverlay
@@ -61,7 +62,7 @@ const Card = ({
       )}
       <Body shouldBlur={shouldBlur}>
         <Title>
-          {topic.title}
+          {title}
         </Title>
         {children}
         <CardDetails

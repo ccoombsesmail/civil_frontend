@@ -68,7 +68,7 @@ function RequestGatewayToken() {
         type="submit"
         icon={icon}
         onClick={requestGatewayToken}
-        width="170px"
+        width="180px"
         civicButton
       >
         {statusMsg}
@@ -150,7 +150,7 @@ export function UniquenessStatus() {
         margin={0}
         bgColor={color}
         type="submit"
-        width="170px"
+        width="180px"
         icon={icon}
         civicButton
       >

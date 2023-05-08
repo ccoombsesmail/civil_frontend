@@ -16,7 +16,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       // Fallback UI to display when an error has occurred
-      return <h1>Something went wrong.</h1>
+      return <h1 style={{width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Something went wrong.</h1>
     }
     // Render the children components as normal
     return this.props.children

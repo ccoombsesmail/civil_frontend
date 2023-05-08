@@ -21,7 +21,7 @@ export const TooltipPopover = React.forwardRef(({
 ))
 
 function ThemeTooltip({
-  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow
+  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false
 }) {
   const popover = (
     <TooltipPopover

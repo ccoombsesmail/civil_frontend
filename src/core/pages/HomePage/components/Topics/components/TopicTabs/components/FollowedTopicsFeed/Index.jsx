@@ -26,7 +26,6 @@ function FollowedTopicsFeed() {
     setCurrentPage((prevPage) => prevPage + 1)
   }, [])
 
-  console.log(followedTopics)
   return (
     <>
       { (isUninitialized || isLoadingFollowedTopics || allData.length === 0) ? <CircleLoading size={60} /> : (

@@ -69,10 +69,12 @@ function DropDownItems({
   children,
   dropDownRef,
   onClose,
+  dropdownLeft
 }: {
   children: React.ReactNode;
   dropDownRef: React.Ref<HTMLDivElement>;
   onClose: () => void;
+  dropdownLeft: number
 }) {
   const [items, setItems] = useState<React.RefObject<HTMLButtonElement>[]>();
   const [highlightedItem, setHighlightedItem] =
@@ -125,11 +127,12 @@ function DropDownItems({
     if (highlightedItem && highlightedItem.current) {
       highlightedItem.current.focus();
     }
-  }, [items, highlightedItem]);
+    console.log(dropDownRef)
+  }, [items, highlightedItem, dropDownRef]);
 
   return (
     <DropDownContext.Provider value={contextValue}>
-      <div className="dropdown" ref={dropDownRef} onKeyDown={handleKeyDown}>
+      <div style={{left: `${dropdownLeft}px`, top: "40px"}} className="dropdown" ref={dropDownRef} onKeyDown={handleKeyDown}>
         {children}
       </div>
     </DropDownContext.Provider>
@@ -143,7 +146,7 @@ export default function DropDown({
   buttonClassName,
   buttonIconClassName,
   children,
-  stopCloseOnClickSelf,
+  stopCloseOnClickSelf
 }: {
   disabled?: boolean;
   buttonAriaLabel?: string;
@@ -155,7 +158,8 @@ export default function DropDown({
 }): JSX.Element {
   const dropDownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [showDropDown, setShowDropDown] = useState(false);
+  const [dropdownLeft, setDropdownLeft] = useState(0)
+  const [showDropDown, setShowDropDown] = useState(false)
 
   const handleClose = () => {
     setShowDropDown(false);
@@ -166,17 +170,102 @@ export default function DropDown({
 
   useEffect(() => {
     const button = buttonRef.current;
-    const dropDown = dropDownRef.current;
+    const toolbar = document.getElementsByClassName('editor-toolbar')[0]
 
-    if (showDropDown && button !== null && dropDown !== null) {
-      const {top, left} = button.getBoundingClientRect();
-      // dropDown.style.top = `${top + 40}px`;
-      // dropDown.style.left = `${Math.min(
-      //   left,
-      //   window.innerWidth - dropDown.offsetWidth - 20,
-      // )}px`;
+    const headerRect = toolbar.getBoundingClientRect();
+    const button1Rect = button.getBoundingClientRect();
+
+    const button1Pos = button1Rect.left - headerRect.left;
+
+    setDropdownLeft(button1Pos)
+    if (button !== null && showDropDown) {
+      const handle = (event: MouseEvent) => {
+        const target = event.target;
+        console.log(target)
+        console.log(stopCloseOnClickSelf)
+        if (true) {
+          if (
+            dropDownRef.current &&
+            dropDownRef.current.contains(target as Node)
+          )
+            return;
+        }
+        if (!button.contains(target as Node)) {
+          setShowDropDown(false);
+        }
+      };
+      document.getElementsByClassName('Modal__overlay')[0].addEventListener('click', handle);
+
+      return () => {
+        document.getElementsByClassName('Modal__overlay')[0].removeEventListener('click', handle);
+      };
     }
-  }, [dropDownRef, buttonRef, showDropDown]);
+  }, [dropDownRef, buttonRef, showDropDown, stopCloseOnClickSelf]);
+
+  return (
+    <>
+      <button
+        type='button'
+        disabled={disabled}
+        aria-label={buttonAriaLabel || buttonLabel}
+        className={buttonClassName}
+        onClick={() => {
+          setShowDropDown(!showDropDown)
+        }}
+        ref={buttonRef}>
+        {buttonIconClassName && <span className={buttonIconClassName} />}
+        {buttonLabel && (
+          <span className="text dropdown-button-text">{buttonLabel}</span>
+        )}
+        <i className="chevron-down" />
+      </button>
+      {showDropDown && <DropDownItems dropdownLeft={dropdownLeft} dropDownRef={dropDownRef} onClose={handleClose}>
+            {children}
+      </DropDownItems>
+    }   
+
+      {/* {showDropDown &&
+        createPortal(
+          <DropDownItems dropDownRef={dropDownRef} onClose={handleClose}>
+            {children}
+          </DropDownItems>,
+          document.getElementById(anchorId),
+        )} */}
+    </>
+  );
+}
+
+
+export function DropDownFromExternal({
+  disabled = false,
+  buttonLabel,
+  buttonAriaLabel,
+  buttonClassName,
+  buttonIconClassName,
+  children,
+  stopCloseOnClickSelf,
+  showDropDown,
+  setShowDropDown
+}: {
+  disabled?: boolean;
+  buttonAriaLabel?: string;
+  buttonClassName: string;
+  buttonIconClassName?: string;
+  buttonLabel?: string;
+  children: ReactNode;
+  stopCloseOnClickSelf?: boolean;
+  showDropDown: boolean;
+  setShowDropDown: (b: boolean) => void
+}): JSX.Element {
+  const dropDownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleClose = () => {
+    setShowDropDown(false);
+    if (buttonRef && buttonRef.current) {
+      buttonRef.current.focus();
+    }
+  };
 
   useEffect(() => {
     const button = buttonRef.current;
@@ -202,6 +291,7 @@ export default function DropDown({
       };
     }
   }, [dropDownRef, buttonRef, showDropDown, stopCloseOnClickSelf]);
+
   return (
     <>
       <button
@@ -217,14 +307,18 @@ export default function DropDown({
         )}
         <i className="chevron-down" />
       </button>
+      {showDropDown && <DropDownItems dropdownLeft={0} dropDownRef={dropDownRef} onClose={handleClose}>
+            {children}
+      </DropDownItems>
+    }   
 
-      {showDropDown &&
+      {/* {showDropDown &&
         createPortal(
           <DropDownItems dropDownRef={dropDownRef} onClose={handleClose}>
             {children}
           </DropDownItems>,
-          document.getElementById('embed-toolbar'),
-        )}
+          document.getElementById(anchorId),
+        )} */}
     </>
   );
 }

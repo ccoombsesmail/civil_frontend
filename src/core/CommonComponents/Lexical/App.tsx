@@ -6,7 +6,6 @@
  *
  */
 
-import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import * as React from 'react';
 
 import {SettingsContext, useSettings} from './context/SettingsContext';
@@ -32,14 +31,7 @@ export const initialConfig = {
 };
 
 function App(): JSX.Element {
-  const {
-    settings: {isCollab, measureTypingPerf},
-  } = useSettings();
-
-
-
   return (
-    // <LexicalComposer initialConfig={initialConfig}>
       <SharedHistoryContext>
         <TableContext>
           <SharedAutocompleteContext>
@@ -49,7 +41,6 @@ function App(): JSX.Element {
           </SharedAutocompleteContext>
         </TableContext>
       </SharedHistoryContext>
-    // </LexicalComposer>
   );
 }
 

@@ -33,7 +33,7 @@ function DiscussionsList() {
 
   const [modal, showModal] = useModal()
   const onClick = useCallback(() => {
-    showModal(`Start A Discussion Regarding The Topic ${topicTitle}`, (onClose) => (
+    showModal(`${topicTitle}`, (onClose) => (
       <CreateDiscussionForm
         closeModal={onClose}
       />

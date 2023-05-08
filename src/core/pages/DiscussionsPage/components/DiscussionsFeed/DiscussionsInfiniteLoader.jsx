@@ -2,11 +2,11 @@
 import React, { memo, useCallback, useRef } from 'react'
 import { VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
-import { Web, YouTube, Twitter } from '../../../../../../enums/link_type'
+import { Web, YouTube, Twitter } from '../../../../../enums/link_type'
 
 
 
-function ExampleWrapper({
+function DiscussionsInfiniteLoader({
   hasNextPage,
   isNextPageLoading,
   items,
@@ -65,4 +65,4 @@ function ExampleWrapper({
   )
 }
 
-export default memo(ExampleWrapper)
+export default memo(DiscussionsInfiniteLoader)
