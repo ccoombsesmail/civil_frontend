@@ -8,15 +8,15 @@ import { VideoPlayer } from './Style'
 import { TweetComponent } from '../Lexical/nodes/TweetNode.tsx'
 import PlaygroundNodes from '../Lexical/nodes/PlaygroundNodes.ts'
 import PlaygroundEditorTheme from '../Lexical/themes/PlaygroundEditorTheme.ts'
-import Card from '../TopicCard/Index'
+import Card from '../SpaceCard/Index'
 
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 import LinkMetaData from '../../Forms/components/LinkMetaData/Index'
-import UserUploadedMedia from '../TopicCard/components/UserUploadedMedia/Index'
+import UserUploadedMedia from '../SpaceCard/components/UserUploadedMedia/Index'
 
 function DiscussionItem({ discussion, currentUser }) {
   const commonProps = useMemo(() => ({
-    topic: null, user: currentUser, showLinks: true, discussion,
+    space: null, user: currentUser, showLinks: true, discussion,
   }), [discussion, currentUser])
   const linkType = discussion?.externalContentData?.linkType
 

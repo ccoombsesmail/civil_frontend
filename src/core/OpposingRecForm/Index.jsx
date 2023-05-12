@@ -7,8 +7,8 @@ import useBindDispatch from '../hooks/redux/useBindDispatch'
 import Input from '../CommonComponents/Form/Input/Index'
 import Button from '../CommonComponents/Button/Index'
 
-// import subTopicActions from '../../redux/actions/discussions'
-// import topicActions from '../../redux/actions/topics'
+// import subSpaceActions from '../../redux/actions/discussions'
+// import spaceActions from '../../redux/actions/spaces'
 import uiActions from '../../redux/actions/ui'
 import opposingRecsActions from '../../redux/actions/opposing_recs'
 
@@ -17,7 +17,7 @@ import {
 } from './Style'
 import ThemeTooltip from '../CommonComponents/Tooltip/Index'
 
-const OpposingRecForm = ({ topicId, subTopicId }) => {
+const OpposingRecForm = ({ spaceId, subSpaceId }) => {
   const { createOpposingRec, closeModal } = useBindDispatch(
     uiActions, opposingRecsActions,
   )
@@ -36,9 +36,9 @@ const OpposingRecForm = ({ topicId, subTopicId }) => {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
-          const isDiscussion = Boolean(subTopicId)
+          const isDiscussion = Boolean(subSpaceId)
           createOpposingRec({
-            targetContentId: subTopicId || topicId,
+            targetContentId: subSpaceId || spaceId,
             recommendedContentId: values.recommendedContentId || null,
             isDiscussion,
             externalRecommendedContent: values.externalRecommendedContent || null,
@@ -51,7 +51,7 @@ const OpposingRecForm = ({ topicId, subTopicId }) => {
           <>
             <Modal.Header closeButton>
               <Modal.Title>
-                Recommened Some Content That Presents A Differing Viewpoint On This Topic
+                Recommened Some Content That Presents A Differing Viewpoint On This Space
               </Modal.Title>
             </Modal.Header>
             <FormContainer>
@@ -61,7 +61,7 @@ const OpposingRecForm = ({ topicId, subTopicId }) => {
                     <Field type="text" placeholder="Recommended Content Id" label="Recommended Content Id" name="recommendedContentId" component={Input} />
                     <ThemeTooltip
                       tooltipHeader="Content Id"
-                      tooltipText="Provide The Id From A Topic Or Subtopic Posted on Civil"
+                      tooltipText="Provide The Id From A Space Or Subspace Posted on Civil"
                     />
                   </FieldWrapper>
                   <FieldWrapper>

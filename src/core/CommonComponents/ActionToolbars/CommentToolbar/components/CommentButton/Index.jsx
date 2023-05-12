@@ -9,9 +9,9 @@ import useGetCommentState from './hooks/useGetCommentState'
 import { initialConfig } from '../../../../Lexical/App.tsx'
 
 const CommentButton = ({ comment }) => {
-  const { contentId, topicId, commentId } = useParams()
+  const { contentId, spaceId, commentId } = useParams()
   const [modal, showModal] = useModal()
-  const getFommentFormState = useGetCommentState(comment, contentId, topicId, commentId)
+  const getFommentFormState = useGetCommentState(comment, contentId, spaceId, commentId)
   const onClick = useCallback(() => {
     const commentFormState = getFommentFormState()
     showModal('Write A Reply', (onClose) => (

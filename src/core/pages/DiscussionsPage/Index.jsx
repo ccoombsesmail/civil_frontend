@@ -15,7 +15,7 @@ import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import Recommendations from '../RightSection/components/Recommendations/Index'
 
 function Discussions() {
-  const { topicId, commentId } = useParams()
+  const { spaceId, commentId } = useParams()
   return (
     <Container>
       <DiscussionsGrid>
@@ -27,7 +27,7 @@ function Discussions() {
             <HeaderContainer>
               <Header />
               { commentId ? (
-                <ParentComment topicId={topicId} commentId={commentId} />
+                <ParentComment spaceId={spaceId} commentId={commentId} />
               ) : null}
             </HeaderContainer>
 

@@ -6,14 +6,14 @@ import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
-import { VideoPlayer } from '../../../../../HomePage/components/Topics/components/TopicItem/Style'
-import Card from '../../../../../../CommonComponents/TopicCard/Index'
+import { VideoPlayer } from '../../../../../HomePage/components/Spaces/components/SpaceItem/Style'
+import Card from '../../../../../../CommonComponents/SpaceCard/Index'
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
-import UserProvidedMediaCard from '../../../../../../CommonComponents/TopicCards/UserProvidedMediaCard/Index'
+import UserProvidedMediaCard from '../../../../../../CommonComponents/SpaceCards/UserProvidedMediaCard/Index'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 import { uuidRegEx } from '../../../../../../../generic/regex/uuid'
 import LineWithOverlayText from '../../../LineWithTextOverlay/Index'
-import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
+import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
 import useInitLexicalConfig from '../../../../../../hooks/lexical/useInitLexicalConfig'
 
 function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitialized }) {
@@ -24,7 +24,7 @@ function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitial
 
 
   const commonProps = useMemo(() => ({
-    topic: null, user: currentUser, showLinks: true, discussion,
+    space: null, user: currentUser, showLinks: true, discussion,
   }), [discussion, currentUser])
 
   const linkType = discussion.externalContentData?.linkType

@@ -1,5 +1,5 @@
 import React from 'react'
-import { UploadImage, UploadVideo } from '../../TopicForm/Style'
+import { UploadImage, UploadVideo } from '../../SpaceForm/Style'
 
 function DisplayMedia({
   imgFile, videoFile,

@@ -18,14 +18,14 @@ const getAllCommentRepliesActionCreator = (commentWithReplies) => ({
   payload: commentWithReplies,
 })
 
-const addCommentActionCreator = (subTopicData) => ({
+const addCommentActionCreator = (subSpaceData) => ({
   type: ADD_COMMENT,
-  payload: subTopicData,
+  payload: subSpaceData,
 })
 
-const addReportedCommentActionCreator = (subTopicData) => ({
+const addReportedCommentActionCreator = (subSpaceData) => ({
   type: ADD_REPORTED_COMMENT,
-  payload: subTopicData,
+  payload: subSpaceData,
 })
 
 const updateCommentActionCreator = (data) => ({
@@ -48,7 +48,7 @@ export const createComment = (commentData) => (dispatch) => {
     .finally(() => dispatch(closeModal()))
 }
 
-export const getAllComments = (subTopicId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subTopicId, userId)
+export const getAllComments = (subSpaceId, userId) => (dispatch) => CommentsApiUtil.getAllComments(subSpaceId, userId)
   .then((res) => dispatch(getAllCommentsActionCreator(res.data)))
   // .catch((error) => toast.error(errorFormatter(error)))
 

@@ -4,11 +4,11 @@ import { Collapse } from 'react-bootstrap'
 import { UpArrowSvg, DownArrowSvg } from '../../svgs/svgs'
 
 import { VideoDescriptionCard } from '../CommonComponents/Card/Index'
-import ActionToolbar from '../CommonComponents/ActionToolbars/TopicToolbar/Index'
+import ActionToolbar from '../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 import LinkSection from '../CommonComponents/LinkSection/Index'
 import IconButton from '../CommonComponents/IconButton/Index'
 
-import topicActionCreators from '../../redux/actions/topics'
+import spaceActionCreators from '../../redux/actions/spaces'
 
 import useSetInnerHtml from '../hooks/useSetInnerHtml'
 import useOpenModal from '../hooks/useOpenModalWithLocation'
@@ -20,16 +20,16 @@ import { getTimeSince } from '../../generic/string/dateFormatter'
 import { VideoPlayer, Description, ExpandButton } from './Style'
 
 function VideoShowPage({
-  topic, user, src, showLinks,
+  space, user, src, showLinks,
 }) {
   const descRef = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
 
-  const openModal = useOpenModal('TOPIC_REPLY')
-  const goToDiscussion = useGoToDiscussion(topic.id)
-  const { updateTopicLikes } = useBindDispatch(topicActionCreators)
-  const updateLikes = useUpdateLikes(updateTopicLikes, topic, user)
-  useSetInnerHtml(descRef, topic?.editorState)
+  const openModal = useOpenModal('SPACE_REPLY')
+  const goToDiscussion = useGoToDiscussion(space.id)
+  const { updateSpaceLikes } = useBindDispatch(spaceActionCreators)
+  const updateLikes = useUpdateLikes(updateSpaceLikes, space, user)
+  useSetInnerHtml(descRef, space?.editorState)
 
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />
 
@@ -38,33 +38,33 @@ function VideoShowPage({
       <VideoPlayer src={src} loading="lazy" />
       <VideoDescriptionCard
         onClick={goToDiscussion}
-        username={topic?.createdByUsername}
-        iconSrc={`${topic?.createdByIconSrc}`}
-        summary={topic?.summary}
-        time={getTimeSince(topic?.createdAt)}
+        username={space?.createdByUsername}
+        iconSrc={`${space?.createdByIconSrc}`}
+        summary={space?.summary}
+        time={getTimeSince(space?.createdAt)}
       >
         <Description>
           <span ref={descRef} />
         </Description>
-        {topic?.evidenceLinks.length !== 0
+        {space?.evidenceLinks.length !== 0
         && (
         <ExpandButton>
           <IconButton
             icon={expandIcon}
             onClick={() => setIsOpen(!isOpen)}
           >
-            Show Additional Info
+            Additional Info
           </IconButton>
         </ExpandButton>
         )}
         <Collapse in={isOpen}>
           <div>
-            <LinkSection topic={topic} showLinks={showLinks} />
+            <LinkSection space={space} showLinks={showLinks} />
           </div>
         </Collapse>
         <ActionToolbar
-          likes={topic?.likes}
-          topic={topic}
+          likes={space?.likes}
+          space={space}
           user={user}
         />
       </VideoDescriptionCard>

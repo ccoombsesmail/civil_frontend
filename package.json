@@ -51,6 +51,7 @@
     "react-is": "^18.2.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^6.0.1",
+    "react-select-search": "^4.1.6",
     "react-test-renderer": "18.3.0-next-fecc288b7-20221025",
     "react-toastify": "^8.1.0",
     "react-window": "^1.8.8",

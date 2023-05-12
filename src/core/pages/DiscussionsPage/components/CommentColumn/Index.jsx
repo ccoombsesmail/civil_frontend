@@ -7,17 +7,17 @@ import { ParentCommentContext } from './ParentCommentContext'
 import { Container } from './Style'
 
 function CommentColumn({
-  numComments, comments, commentSentiment, color, topicId, isReplies, commentType, reportedContentId
+  numComments, comments, commentSentiment, color, spaceId, isReplies, commentType, reportedContentId
 }) {
   const getContextValue = useCallback((comment) => ({
     commentId: comment.data.id,
-    topicId,
+    spaceId,
     isReplies,
     rootCommentId: comment.data.id,
     rootOfCommentReplyThreadId: comment.data.id,
     commentType,
     reportedContentId
-  }), [isReplies, topicId, commentType])
+  }), [isReplies, spaceId, commentType])
   return (
     <Container color={color} isReplies={isReplies}>
       <h1>

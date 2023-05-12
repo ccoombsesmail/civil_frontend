@@ -14,7 +14,6 @@ const GlobalStyle = createGlobalStyle`
 
 .List div div {
   transition: all .5s;
-  /* background-color: red; */
 }
 .List {
   background-color: white;

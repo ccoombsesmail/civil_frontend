@@ -18,7 +18,7 @@ function UploadMediaContainer({
       <Field
         fileType="file"
         accept="image/*"
-        name="topicImage"
+        name="spaceImage"
         disabled={Boolean(videoFile)}
         file={imgFile}
         component={UploadFileInput}
@@ -27,7 +27,7 @@ function UploadMediaContainer({
       />
       <Field
         fileType="file"
-        name="topicVideo"
+        name="spaceVideo"
         disabled={Boolean(imgFile)}
         file={videoFile}
         component={UploadFileInput}

@@ -3,13 +3,13 @@
 import React, { useState, useMemo } from 'react'
 import { Tab, Nav } from 'react-bootstrap'
 
-import { useGetUserTopicsQuery } from '../../../../api/services/topics.ts'
+import { useGetUserSpacesQuery } from '../../../../api/services/spaces.ts'
 import { useLazyGetUserDiscussionsQuery } from '../../../../api/services/discussions.ts'
 import { useLazyGetUserCommentsQuery } from '../../../../api/services/comments.ts'
 
 import { StyledNav } from '../../Style'
 import { Container } from './Style'
-import TopicItem from '../../../pages/HomePage/components/Topics/components/TopicItem/Index'
+import SpaceItem from '../../../pages/HomePage/components/Spaces/components/SpaceItem/Index'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import DiscussionItem from '../../../CommonComponents/DiscussionItem/Index'
 import Comment from '../../../pages/DiscussionsPage/components/Comment/Index'
@@ -19,7 +19,7 @@ import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 function UserPosts({ profileUserId, user }) {
   const { currentUser } = useGetCurrentUser()
   const [activeKey, setActiveKey] = useState('0')
-  const { data: topics, isLoading } = useGetUserTopicsQuery(profileUserId, {
+  const { data: spaces, isLoading } = useGetUserSpacesQuery(profileUserId, {
     skip: !profileUserId,
   })
   console.log(profileUserId)
@@ -31,7 +31,7 @@ function UserPosts({ profileUserId, user }) {
         <StyledNav activeKey={Number(activeKey)} backgroundColor="white">
           <div className="line" />
           <Nav.Item>
-            <Nav.Link eventKey="0">Topics</Nav.Link>
+            <Nav.Link eventKey="0">Spaces</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="1" onClick={() => getUserDiscussions(profileUserId)}>Discussions</Nav.Link>
@@ -42,7 +42,7 @@ function UserPosts({ profileUserId, user }) {
         </StyledNav>
         <Tab.Content>
           <Tab.Pane eventKey="0">
-            {activeKey === '0' && topics?.map((topic) => <TopicItem topic={topic} user={user} hideCommentButton />)}
+            {activeKey === '0' && spaces?.map((space) => <SpaceItem space={space} user={user} hideCommentButton />)}
           </Tab.Pane>
           <Tab.Pane eventKey="1">
             {
@@ -59,7 +59,7 @@ function UserPosts({ profileUserId, user }) {
                   key={comment.data?.id || String(idx)}
                   value={{
                     commentId: comment.data?.id,
-                    topicId: null,
+                    spaceId: null,
                     isReplies: false,
                   }}
                 >

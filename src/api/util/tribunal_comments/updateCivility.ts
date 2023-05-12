@@ -12,7 +12,7 @@ export default async function onUpdateCivilityQueryStartedTribunal(
     civility,
     discussionId,
     updateLikeValue,
-    updateGetTopicQuery,
+    updateGetSpaceQuery,
     isReplies,
     isFocusedComment,
     rootOfCommentReplyThreadId,

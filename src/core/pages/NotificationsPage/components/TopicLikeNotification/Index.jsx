@@ -5,15 +5,15 @@ import { getTimeSince } from '../../../../../generic/string/dateFormatter'
 import UsernameAndTag from '../../../../CommonComponents/UsernameAndTag/Index'
 import { ProfileIcon } from '../Style'
 
-import { TopicLike } from '../../../../../enums/notification_types'
+import { SpaceLike } from '../../../../../enums/notification_types'
 import { LikeClickedSvg } from '../../../../../svgs/svgs'
 import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 
-function TopicLikeNotification({ notification }) {
+function SpaceLikeNotification({ notification }) {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, topicId,
+    givingUserTag, spaceId,
   } = notification
   const handleClick = (e) => {
     e.stopPropagation()
@@ -41,8 +41,8 @@ function TopicLikeNotification({ notification }) {
             {' '}
             Liked Your
             {' '}
-            <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions`}>
-              Topic!
+            <Link onClick={handleClick} to={`/home/spaces/${spaceId}/discussions`}>
+              Space!
             </Link>
             {' '}
             😊
@@ -52,7 +52,7 @@ function TopicLikeNotification({ notification }) {
           <MenuTime
             time={getTimeSince(notification.createdAt)}
             id={notification.id}
-            eventType={TopicLike}
+            eventType={SpaceLike}
           />
         </RowItem>
       </Row>
@@ -60,4 +60,4 @@ function TopicLikeNotification({ notification }) {
   )
 }
 
-export default TopicLikeNotification
+export default SpaceLikeNotification

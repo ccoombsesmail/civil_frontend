@@ -11,17 +11,17 @@ import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
 import {
   Container,
 } from './Style/index'
-import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
+import { useGetSpaceQuery } from '../../../../../api/services/spaces.ts'
 import { useGetDiscussionQuery } from '../../../../../api/services/discussions.ts'
 
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import { Twitter, Web, YouTube } from '../../../../../enums/link_type'
-import { VideoPlayer } from '../../../HomePage/components/Topics/components/TopicItem/Style'
-import Card from '../../../../CommonComponents/TopicCard/Index'
+import { VideoPlayer } from '../../../HomePage/components/Spaces/components/SpaceItem/Style'
+import Card from '../../../../CommonComponents/SpaceCard/Index'
 import DiscussionCard from './components/DiscussionCard/Index'
 import { uuidRegEx } from '../../../../../generic/regex/uuid'
-import UserUploadedMedia from '../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
+import UserUploadedMedia from '../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
 import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
 
 function TooltipComponent({ text, title, reference }) {
@@ -41,12 +41,12 @@ function TooltipComponent({ text, title, reference }) {
 
 function Header() {
   let content = null
-  const { topicId } = useParams()
+  const { spaceId } = useParams()
   const { pathname } = useLocation()
   const discussionId = pathname.match(uuidRegEx)?.[1]
   const { currentUser } = useGetCurrentUser()
-  const { data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
-    skip: !currentUser || !topicId,
+  const { data: space, isLoading: isSpaceLoading, isUninitialized: isSpaceUninitialized } = useGetSpaceQuery(spaceId, {
+    skip: !currentUser || !spaceId,
   })
 
   const { data: discussion, isDiscussionLoading, isDiscussionUninitialized } = useGetDiscussionQuery(discussionId, {
@@ -54,22 +54,22 @@ function Header() {
   })
 
   const commonProps = useMemo(() => ({
-    topic, user: currentUser, showLinks: true, hideCommentButton: Boolean(discussionId) && (discussion?.title && discussion.title !== 'General'),
-  }), [topic, currentUser, discussionId, discussion])
+    space, user: currentUser, showLinks: true, hideCommentButton: Boolean(discussionId) && (discussion?.title && discussion.title !== 'General'),
+  }), [space, currentUser, discussionId, discussion])
 
-  const topicRef = useRef(null)
+  const spaceRef = useRef(null)
 
-  const linkType = topic?.externalContentData?.linkType
-  const initLexicalConfig = useInitLexicalConfig(topic?.editorState, 'Civil-Topic-Card__Discussions', false)
+  const linkType = space?.externalContentData?.linkType
+  const initLexicalConfig = useInitLexicalConfig(space?.editorState, 'Civil-Space-Card__Discussions', false)
 
-  if (isTopicUninitialized) return null
-  if (isTopicLoading) return <CircleLoading size="20vw" />
+  if (isSpaceUninitialized) return null
+  if (isSpaceLoading) return <CircleLoading size="20vw" />
 
   if (linkType === YouTube) {
     content = (
       <VideoPlayer
         loading="lazy"
-        src={`https://www.youtube.com/embed/${topic.externalContentData?.embedId}`}
+        src={`https://www.youtube.com/embed/${space.externalContentData?.embedId}`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -79,7 +79,7 @@ function Header() {
   } else if (linkType === Twitter) {
     content = (
       <TweetComponent
-        tweetID={topic.externalContentData?.embedId}
+        tweetID={space.externalContentData?.embedId}
         format=""
         className={{
           base: '',
@@ -89,12 +89,12 @@ function Header() {
       />
     )
   } else if (linkType === Web) {
-    content = <LinkMetaData url={topic.externalContentData?.externalContentUrl} />
-  } else if (topic?.createdByVodUrl || topic?.createdByImageUrl) {
+    content = <LinkMetaData url={space.externalContentData?.externalContentUrl} />
+  } else if (space?.createdByVodUrl || space?.createdByImageUrl) {
     content = (
       <UserUploadedMedia
-        videoFile={topic.userUploadedVodUrl}
-        imgFile={topic.userUploadedImageUrl}
+        videoFile={space.userUploadedVodUrl}
+        imgFile={space.userUploadedImageUrl}
       />
     )
   } else {
@@ -108,7 +108,7 @@ function Header() {
         <>
           {'We\'re Talking About This'}
           {' '}
-          <TooltipComponent text="Topic" title={topic?.title} reference={topicRef} />
+          <TooltipComponent text="Space" title={space?.title} reference={spaceRef} />
         </>
       </h1>
       <div style={{ width: '100%' }}>

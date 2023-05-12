@@ -12,7 +12,7 @@ import { longUsernameDisplay } from '../../../../../generic/string/longUsernameD
 function CommentCivilityNotifcation({ notification }) {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, topicId, discussionId, commentId, createdAt, old, new: newVal, id,
+    givingUserTag, spaceId, discussionId, commentId, createdAt, old, new: newVal, id,
   } = notification
   const handleClick = (e) => {
     e.stopPropagation()
@@ -47,7 +47,7 @@ function CommentCivilityNotifcation({ notification }) {
             {' '}
             Updated Civility Given For Your
             {' '}
-            <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions/${discussionId}/comments/${commentId}`}>
+            <Link onClick={handleClick} to={`/home/spaces/${spaceId}/discussions/${discussionId}/comments/${commentId}`}>
               Comment
             </Link>
             {' '}

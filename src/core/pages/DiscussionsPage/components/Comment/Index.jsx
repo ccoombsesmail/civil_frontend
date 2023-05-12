@@ -43,7 +43,7 @@ function Comment({
     numReplies: replies.length
   });
 
-  const { topicId, index, onReplyToggle, resetCacheAtIndex, isReplies } = React.useContext(ParentCommentContext) || {}
+  const { spaceId, index, onReplyToggle, resetCacheAtIndex, isReplies } = React.useContext(ParentCommentContext) || {}
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW || commentData?.toxicityStatus === 'TOXIC')
@@ -89,7 +89,7 @@ function Comment({
   return (
     <OuterContainer>
       <CommentContainer hideBorder={level === 0} color={COLORS[level]} isFocusedComment={isFocusedComment}>
-        <Header onClick={() => navigate(`/home/topics/${topicId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
+        <Header onClick={() => navigate(`/home/spaces/${spaceId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
           <UserInfoContainer>
             <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} />
             <ThemeTooltip
@@ -100,7 +100,7 @@ function Comment({
           <Username>{longUsernameDisplay(commentData.createdByUsername)}</Username>
           <Date>{`${mins}`}</Date>
         </Header>
-        <Body shouldBlur={shouldBlur} onClick={() => navigate(`/home/topics/${topicId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
+        <Body shouldBlur={shouldBlur} onClick={() => navigate(`/home/spaces/${spaceId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
           <LexicalComposer initialConfig={initLexicalConfig}>
             <ReadOnlyEditor />
           </LexicalComposer>

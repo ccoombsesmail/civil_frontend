@@ -3,8 +3,8 @@
 import { combineReducers } from 'redux'
 import sessionReducer from './sessionReducer'
 import uiReducer from './ui_reducer'
-import topicsReducer from './topicsReducer'
-import discussionsReducer from './discussions/subTopicsReducer'
+import spacesReducer from './spacesReducer'
+import discussionsReducer from './discussions/subSpacesReducer'
 import commentsReducer from './comments/commentsReducer'
 import usersReducer from './users/usersReducer'
 import followsReducer from './follows/followsReducer'
@@ -17,7 +17,7 @@ import tribunalCommentsReducer from './tribunal_comments/tribunalCommentsReducer
 const reducers = combineReducers({
   session: sessionReducer,
   ui: uiReducer,
-  topics: topicsReducer,
+  spaces: spacesReducer,
   discussions: discussionsReducer,
   comments: commentsReducer,
   enums: enumsReducer,

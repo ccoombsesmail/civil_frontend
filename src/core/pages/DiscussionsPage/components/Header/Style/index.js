@@ -58,7 +58,7 @@ export const Description = styled('p')`
   padding: 1em;
 `
 
-export const TopicSummaryContainer = styled('div')`  
+export const SpaceSummaryContainer = styled('div')`  
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -23,7 +23,7 @@ const findCommentContent = (comment, id) => {
   return "";
 };
 
-export default (commentData, contentId, topicId, commentId) => {
+export default (commentData, contentId, spaceId, commentId) => {
   const { isOnTribunalPage } = useDetectCurrentPage();
 
   const { currentUser } = useGetCurrentUser();
@@ -81,7 +81,7 @@ export default (commentData, contentId, topicId, commentId) => {
       ...commentData,
       contentId: commentData.discussionId || contentId,
       discussionId: commentData.discussionId,
-      topicId: topicId || contentId,
+      spaceId: spaceId || contentId,
       createdByIconSrc,
       username: currentUser?.username,
       createdByUsername,

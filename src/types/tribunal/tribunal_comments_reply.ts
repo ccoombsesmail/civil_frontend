@@ -46,7 +46,7 @@ export interface IncomingComment {
   parentId?: string;
   rootId?: string;
   source?: string;
-  topicId: string;
+  spaceId: string;
 }
 
 
@@ -58,5 +58,5 @@ export const TribunalCommentKeys = [
   'parentId',
   'rootId',
   'source',
-  'topicId',
+  'spaceId',
 ]

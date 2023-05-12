@@ -1,6 +1,5 @@
-import React, { useMemo, memo, useEffect, useCallback } from 'react'
+import React, { useMemo, memo } from 'react'
 import IconButton from '../../../IconButton/Index'
-// import { UpVoteFill, UpVoteOutline } from '../../../../../svgs/svgs'
 import useUpdateLikes from './hooks/useUpdateLikes'
 import { LikedState } from '../../../../../enums/like_state'
 

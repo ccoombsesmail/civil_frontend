@@ -21,7 +21,7 @@ import {
 } from './Style'
 import {
   Line, Footer, Container, FormContainer,
-} from '../TopicForm/Style'
+} from '../SpaceForm/Style'
 import LexicalEditor from './components/LexicalEditor/Index'
 
 function CreateCommentForm({ closeModal, commentFormState }) {

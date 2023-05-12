@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import topicActions from '../../../../redux/actions/topics/index'
+import spaceActions from '../../../../redux/actions/spaces/index'
 
 import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
@@ -8,8 +8,8 @@ import checkLinkType from '../../hooks/checkLinkType'
 import { useCreateDiscussionMutation } from '../../../../api/services/discussions.ts'
 import useGetLexicalTextContent from '../../hooks/useGetLexicalTextContent'
 
-export default (metaData, topicId, closeModal, editor) => {
-  const { uploadTopicMedia } = useBindDispatch(topicActions)
+export default (metaData, spaceId, closeModal, editor) => {
+  const { uploadSpaceMedia } = useBindDispatch(spaceActions)
   const [createDiscussion] = useCreateDiscussionMutation()
   const editorTextContent = useGetLexicalTextContent(editor)
 
@@ -20,7 +20,7 @@ export default (metaData, topicId, closeModal, editor) => {
       ...values,
       editorState: JSON.stringify(editor.getEditorState()),
       evidenceLinks: eLinks,
-      topicId,
+      spaceId,
       externalContentData: !externalContentUrl ? null : {
         linkType,
         embedId: externalContentUrl?.id || null,
@@ -34,7 +34,7 @@ export default (metaData, topicId, closeModal, editor) => {
       const [fileType, fileFormat] = values.file.type.split('/')
       const formData = new FormData()
       formData.append('image', values.file)
-      uploadTopicMedia(formData, fileType, fileFormat, data)
+      uploadSpaceMedia(formData, fileType, fileFormat, data)
     } else {
       toast.promise(
         createDiscussion(data),
@@ -54,5 +54,5 @@ export default (metaData, topicId, closeModal, editor) => {
     setSubmitting(false)
     resetForm({})
     closeModal()
-  }, [metaData, topicId, editor, editorTextContent])
+  }, [metaData, spaceId, editor, editorTextContent])
 }

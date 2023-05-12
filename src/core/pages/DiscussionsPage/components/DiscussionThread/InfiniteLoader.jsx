@@ -40,7 +40,7 @@ export default function ExampleWrapper({
   items,
   loadNextPage,
   discussionId,
-  topicId
+  spaceId
 }) {
   const commentCache = new CommentCache();
   const itemCount = hasNextPage ? items.length + 1 : items.length
@@ -63,14 +63,14 @@ export default function ExampleWrapper({
 
   const getContextValue = useCallback((comment, currentPage, index) => ({
     commentId: comment.data?.id,
-    topicId,
+    spaceId,
     isReplies: false,
     currentPage,
     index,
     onReplyToggle,
     resetCacheAtIndex,
     rootOfCommentReplyThreadId: comment.data?.id
-  }), [topicId, onReplyToggle])
+  }), [spaceId, onReplyToggle])
 
 
 

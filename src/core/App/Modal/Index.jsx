@@ -8,7 +8,7 @@ import { ModalWrapper } from './Style/index'
 import { CREATE_TAG_FORM } from '../../../redux/actions/session/index'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 
-const CreateTopicForm = React.lazy(() => import('../../Forms/TopicForm/Index'))
+const CreateSpaceForm = React.lazy(() => import('../../Forms/SpaceForm/Index'))
 
 const CommentForm = React.lazy(() => import('../../Forms/CommentForm/Index'))
 
@@ -19,15 +19,15 @@ const CreateTagForm = React.lazy(() => import('../../Forms/CreateTagForm/Index')
 
 export const SIGN_UP = 'SIGN_UP'
 export const SIGN_IN = 'SIGN_IN'
-export const CREATE_TOPIC = 'CREATE_TOPIC'
-export const CREATE_SUB_TOPIC = 'CREATE_SUB_TOPIC'
+export const CREATE_SPACE = 'CREATE_SPACE'
+export const CREATE_SUB_SPACE = 'CREATE_SUB_SPACE'
 export const REPLY = 'REPLY'
 export const ICON_FORM = 'ICON_FORM'
 export const OPPOSING_REC_FORM = 'OPPOSING_REC_FORM'
 export const REPORT_FORM = 'REPORT_FORM'
-export const TOPIC_VOTE_FORM = 'TOPIC_VOTE_FORM'
+export const SPACE_VOTE_FORM = 'SPACE_VOTE_FORM'
 
-export const REPLY_FROM_TOPIC = 'REPLY_FROM_TOPIC' // when replying directly to a topic
+export const REPLY_FROM_SPACE = 'REPLY_FROM_SPACE' // when replying directly to a space
 
 function Modal({ closeModal }) {
   const { modalType, modalProps } = useSelector((s) => s.ui)
@@ -36,10 +36,10 @@ function Modal({ closeModal }) {
 
   let component
   switch (modalType) {
-    case CREATE_TOPIC:
-      component = <CreateTopicForm />
+    case CREATE_SPACE:
+      component = <CreateSpaceForm />
       break
-    case CREATE_SUB_TOPIC:
+    case CREATE_SUB_SPACE:
       component = <CreateDiscussionForm />
       break
     case REPLY:

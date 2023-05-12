@@ -11,7 +11,7 @@ function MainContent() {
   return (
     <Routes>
       <Route
-        path="/topics/:topicId/discussions/*"
+        path="/spaces/:spaceId/discussions/*"
         element={(
           <Suspense fallback={<LoadingPage />}>
             <DiscussionsPage />
@@ -35,7 +35,7 @@ function MainContent() {
         )}
       />
       <Route
-        path="/topics"
+        path="/spaces"
         element={(
           <Suspense fallback={<LoadingPage />}>
             <HomePage />

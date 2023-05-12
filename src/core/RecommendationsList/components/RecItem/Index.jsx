@@ -8,18 +8,18 @@ import {
 
 function RecItem({ rec }) {
   let content = null
-  const { topic, discussion } = rec
+  const { space, discussion } = rec
   const metaData = useGetLinkMetaDataEffect({ externalContentUrl: rec.externalRecommendedContent })
   const navigateToPage = useNavigateToPage(rec)
-  if (topic) {
-    if (topic?.ytUrl) {
+  if (space) {
+    if (space?.ytUrl) {
       const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
-      const match = topic.ytUrl.match(regExp)
+      const match = space.ytUrl.match(regExp)
       if (match && match[2].length === 11) {
         content = <img src={`http://img.youtube.com/vi/${match[2]}/sddefault.jpg`} alt="No Thumb" />
       }
-    } else if (!topic?.ytUrl && topic?.externalContentUrl) {
-      content = <img src={topic.thumbImgUrl} alt="No Thumb" />
+    } else if (!space?.ytUrl && space?.externalContentUrl) {
+      content = <img src={space.thumbImgUrl} alt="No Thumb" />
     }
   } else {
     // content = <img src="./image.png" alt="No Thumb" />
@@ -33,12 +33,12 @@ function RecItem({ rec }) {
       </Thumb>
       <DescriptionContainer>
         <Title>
-          { rec.topic ? rec.topic.title : rec.subTopic?.title}
+          { rec.space ? rec.space.title : rec.subSpace?.title}
           {metaData && metaData.ogTitle}
         </Title>
         {/* <Line /> */}
         <SubTitle>
-          { rec.topic?.createdByUsername || rec.subTopic?.createdByUsername}
+          { rec.space?.createdByUsername || rec.subSpace?.createdByUsername}
           {metaData && metaData?.ogDescription}
         </SubTitle>
       </DescriptionContainer>

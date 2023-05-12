@@ -3,11 +3,11 @@ import { emptyMiscServiceSplitApi } from './emptyMiscServiceBaseApi'
 
 export const uploadMediaApi = emptyMiscServiceSplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    uploadTopicMedia: builder.mutation<any, any>({
+    uploadSpaceMedia: builder.mutation<any, any>({
       query: (data) => {
         console.log(data)
         return ({ 
-        url: `/topics/upload-media`, 
+        url: `/spaces/upload-media`, 
         method: 'POST',
         body: data,
         headers: {
@@ -19,5 +19,5 @@ export const uploadMediaApi = emptyMiscServiceSplitApi.injectEndpoints({
   }),
 })
 
-export const { useUploadTopicMediaMutation } = uploadMediaApi
+export const { useUploadSpaceMediaMutation } = uploadMediaApi
 

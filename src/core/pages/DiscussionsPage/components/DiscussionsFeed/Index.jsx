@@ -14,9 +14,9 @@ function DiscussionsFeed({ feedType }) {
   const { currentUser } = useGetCurrentUser()
   const [currentPage, setCurrentPage] = useState(0)
   const [allData, setAllData] = useState([])
-  const { topicId } = useParams()
+  const { spaceId } = useParams()
 
-  const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({topicId, currentPage }, {
+  const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({spaceId, currentPage }, {
     skip: !currentUser,
   })
 

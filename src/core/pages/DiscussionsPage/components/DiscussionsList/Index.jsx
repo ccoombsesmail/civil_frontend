@@ -8,7 +8,7 @@ import DiscussionsTable from '../DiscussionsTable/Index'
 
 import { Container, ActionItemsContainer } from './Style/index'
 import { useGetGeneralDiscussionIdQuery } from '../../../../../api/services/discussions.ts'
-import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
+import { useGetSpaceQuery } from '../../../../../api/services/spaces.ts'
 
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import useModal from '../../../../CommonComponents/Lexical/hooks/useModal.tsx'
@@ -17,28 +17,28 @@ import { initialConfig } from '../../../../CommonComponents/Lexical/App.tsx'
 import ExpandButton from '../../../../CommonComponents/Buttons/ExpandButton/Index'
 
 function DiscussionsList() {
-  const { topicId } = useParams()
+  const { spaceId } = useParams()
   const { currentUser } = useGetCurrentUser()
-  const { data: topic, isUninitialized } = useGetTopicQuery(topicId, {
-    skip: !topicId,
+  const { data: space, isUninitialized } = useGetSpaceQuery(spaceId, {
+    skip: !spaceId,
   })
 
-  const {data: generalDiscussionId } = useGetGeneralDiscussionIdQuery(topicId, {
+  const {data: generalDiscussionId } = useGetGeneralDiscussionIdQuery(spaceId, {
     skip: !currentUser
   })
 
   const goToDiscussion = useGoToDiscussion(generalDiscussionId?.id)
 
-  const topicTitle = isUninitialized ? null : topic?.title
+  const spaceTitle = isUninitialized ? null : space?.title
 
   const [modal, showModal] = useModal()
   const onClick = useCallback(() => {
-    showModal(`${topicTitle}`, (onClose) => (
+    showModal(`${spaceTitle}`, (onClose) => (
       <CreateDiscussionForm
         closeModal={onClose}
       />
     ))
-  }, [topicTitle])
+  }, [spaceTitle])
 
   return (
     <Container>

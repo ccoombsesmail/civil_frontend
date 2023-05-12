@@ -6,27 +6,27 @@ export default (result, clearInput) => {
 
   return useMemo(() => {
     const {
-      topic, discussion, comment, user,
+      space, discussion, comment, user,
     } = result
     let textContent
     let linkToOnClick
 
-    if (topic) {
-      textContent = topic?.editorTextContent
+    if (space) {
+      textContent = space?.editorTextContent
       linkToOnClick = () => {
-        navigate(`home/topics/${topic.id}/discussions`)
+        navigate(`home/spaces/${space.id}/discussions`)
         clearInput()
       }
     } else if (discussion) {
       textContent = discussion?.editorTextContent
       linkToOnClick = () => {
-        navigate(`home/topics/${discussion.topicId}/discussions/${discussion.id}`)
+        navigate(`home/spaces/${discussion.spaceId}/discussions/${discussion.id}`)
         clearInput()
       }
     } else if (comment) {
       textContent = comment?.editorTextContent
       linkToOnClick = () => {
-        navigate(`home/topics/${comment.topicId}/discussions/${comment.discussionId}/comments/${comment.id}`)
+        navigate(`home/spaces/${comment.spaceId}/discussions/${comment.discussionId}/comments/${comment.id}`)
         clearInput()
       }
     } else {

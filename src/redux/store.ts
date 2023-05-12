@@ -30,21 +30,9 @@ const reducers = {
   [emptyNotificationsSplitApi.reducerPath]: emptyNotificationsSplitApi.reducer,
   [emptyMiscServiceSplitApi.reducerPath]: emptyMiscServiceSplitApi.reducer,
   [emptyWebScraperServiceSplitApi.reducerPath]: emptyWebScraperServiceSplitApi.reducer,
-
-  // [topicsApi.reducerPath]: topicsApi.reducer,
-  // [sessionApi.reducerPath]: sessionApi.reducer,
   [enumsApi.reducerPath]: enumsApi.reducer,
   [searchApi.reducerPath]: searchApi.reducer,
-
-  // [notificationsApi.reducerPath]: notificationsApi.reducer,
-  // [tribunalVotesApi.reducerPath]: tribunalVotesApi.reducer,
-  // [reportsApi.reducerPath]: reportsApi.reducer,
-  // [discussionsApi.reducerPath]: discussionsApi.reducer,
-  // [commentsApi.reducerPath]: commentsApi.reducer,
-  // [tribunalCommentsApi.reducerPath]: tribunalCommentsApi.reducer,
-  // [usersApi.reducerPath]: usersApi.reducer,
   ui: uiReducer,
-  // [followsApi.reducerPath]: followsApi.reducer,
   recommendations: recsReducer
  };
 const combinedReducer = combineReducers<typeof reducers>(reducers);
@@ -63,21 +51,11 @@ const store = configureStore({
   preloadedState,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
     emptySplitApi.middleware,
-    // topicsApi.middleware, 
-    // sessionApi.middleware,
     enumsApi.middleware,
     emptyNotificationsSplitApi.middleware,
     emptyMiscServiceSplitApi.middleware,
     emptyWebScraperServiceSplitApi.middleware,
     searchApi.middleware,
-    // notificationsApi.middleware,
-    // tribunalVotesApi.middleware,
-    // reportsApi.middleware,
-    // discussionsApi.middleware,
-    // commentsApi.middleware,
-    // tribunalCommentsApi.middleware,
-    // usersApi.middleware,
-    // followsApi.middleware,
     // logger
   ]),
 })

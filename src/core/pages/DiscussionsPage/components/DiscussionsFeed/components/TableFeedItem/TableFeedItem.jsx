@@ -9,9 +9,9 @@ import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
 
 function FeedItem({
-  id, title, createdByUsername, allComments, topicId, createdByIconSrc,
+  id, title, createdByUsername, allComments, spaceId, createdByIconSrc,
 }) {
-  const goToCommentThread = useGoToCommentThread(topicId, id)
+  const goToCommentThread = useGoToCommentThread(spaceId, id)
   return (
       <Row onClick={goToCommentThread} gridTemplateCols="1fr 2fr 1fr" height="10vh">
         <RowItem>
@@ -29,8 +29,8 @@ function FeedItem({
 
 function TableFeedItem({ index, style }) {
   const { currentUser } = useGetCurrentUser()
-  const { topicId } = useParams()
-  const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllDiscussionsQuery({ topicId, currentPage: Math.floor(index / 10) }, {
+  const { spaceId } = useParams()
+  const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10) }, {
     skip: !currentUser,
   })
 
@@ -45,7 +45,7 @@ function TableFeedItem({ index, style }) {
           key={discussion.id}
           {...discussion}
           discussion={discussion}
-          topicId={topicId}
+          spaceId={spaceId}
       />
     ) : null
   }

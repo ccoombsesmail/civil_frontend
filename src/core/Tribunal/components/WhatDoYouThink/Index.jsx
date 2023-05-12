@@ -9,10 +9,10 @@ import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 import { initialConfig } from '../../../CommonComponents/Lexical/App.tsx'
 import { WhatDoYouThinkContainer } from './Style'
 
-function WhatDoYouThink({ topic, comment }) {
+function WhatDoYouThink({ space, comment }) {
   const { contentId } = useParams()
   const [modal, showModal] = useModal()
-  const getFommentFormState = useGetCommentState(topic, comment, contentId)
+  const getFommentFormState = useGetCommentState(space, comment, contentId)
 
   const onClick = useCallback(() => {
     const commentFormState = getFommentFormState()
@@ -22,7 +22,7 @@ function WhatDoYouThink({ topic, comment }) {
         commentFormState={commentFormState}
       />
     ))
-  }, [topic, contentId, getFommentFormState])
+  }, [space, contentId, getFommentFormState])
   return (
     <WhatDoYouThinkContainer>
       <LexicalComposer initialConfig={initialConfig}>

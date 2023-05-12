@@ -18,15 +18,15 @@ import ThemeTooltip from '../../CommonComponents/Tooltip/Index'
 
 import LexicalEditor from '../../CommonComponents/Lexical/App.tsx'
 
-import { INIT_TOPIC_FORM_VALUES } from '../../util/form_helpers/init_form_values'
+import { INIT_SPACE_FORM_VALUES } from '../../util/form_helpers/init_form_values'
 import useGetLinkMetaDataOnBlur from '../hooks/useGetLinkMetaDataOnBlur'
 import EmbedDropdown from '../components/EmbedDropdown/Index'
 
-import { LexicalFormContext } from '../TopicForm/LexicalFormContext'
+import { LexicalFormContext } from '../SpaceForm/LexicalFormContext'
 import {
   FlexDivLink, Footer, SectionDescription, FormContainer, InputsContainer, Container, Left,
   Line, Arrow, FlexDiv,
-} from '../TopicForm/Style'
+} from '../SpaceForm/Style'
 import DisplayMedia from '../components/DisplayMedia/Index'
 
 const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
@@ -41,7 +41,7 @@ function CreateDiscussionForm({ closeModal }) {
   const [rotate, setRotate] = useState(0)
   const [richTextEditorContent, setRichTextEditorContent] = useState('')
 
-  const [topicId] = pathname.match(uuidRegEx)
+  const [spaceId] = pathname.match(uuidRegEx)
   const [editor] = useLexicalComposerContext()
 
   // useEffect(() => {
@@ -56,12 +56,12 @@ function CreateDiscussionForm({ closeModal }) {
   // }, [])
 
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
-  const handleSubmit = useHandleSubmit(externalContentUrl?.data, topicId, closeModal, editor)
+  const handleSubmit = useHandleSubmit(externalContentUrl?.data, spaceId, closeModal, editor)
 
   return (
     <Container>
       <Formik
-        initialValues={INIT_TOPIC_FORM_VALUES}
+        initialValues={INIT_SPACE_FORM_VALUES}
         // validate={validator}
         onSubmit={((values, params) => handleSubmit(values, params, richTextEditorContent, externalContentUrl))}
       >
@@ -72,11 +72,11 @@ function CreateDiscussionForm({ closeModal }) {
                 <FlexDiv>
                   <SectionDescription> Discussion Title </SectionDescription>
                   <ThemeTooltip
-                    tooltipHeader="Topic Description"
-                    tooltipText="Enter A Short Title To Indicate What You Would Like To Dicuss in Relation To The Current Topic"
+                    tooltipHeader="Space Description"
+                    tooltipText="Enter A Short Title To Indicate What You Would Like To Dicuss in Relation To The Current Space"
                   />
                 </FlexDiv>
-                <Field type="text" name="title" label="Title*" component={Input} placeholder="Enter A Topic Title" />
+                <Field type="text" name="title" label="Title*" component={Input} placeholder="Enter A Space Title" />
                 <Line />
 
                 <FlexDiv>

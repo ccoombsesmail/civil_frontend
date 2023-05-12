@@ -9,12 +9,12 @@ import { ColumnContainer, ThreadContainer } from './Style/index'
 import ParentComment from '../ParentComment/Index'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { useGetAllCommentRepliesQuery } from '../../../../../api/services/comments.ts'
-import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
+import { useGetSpaceQuery } from '../../../../../api/services/spaces.ts'
 import { Container } from '../ParentComment/Style'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 
 function CommentThread() {
-  const { commentId, topicId } = useParams()
+  const { commentId, spaceId } = useParams()
   const { currentUser } = useGetCurrentUser()
 
   const {
@@ -24,10 +24,10 @@ function CommentThread() {
   } = useGetAllCommentRepliesQuery(commentId, { skip: !currentUser })
 
   const {
-    data: topic,
-    isLoading: isTopicLoading,
-    isUninitialized: isTopicUninitialized,
-  } = useGetTopicQuery(topicId, {
+    data: space,
+    isLoading: isSpaceLoading,
+    isUninitialized: isSpaceUninitialized,
+  } = useGetSpaceQuery(spaceId, {
     skip: !currentUser,
   })
 
@@ -41,11 +41,11 @@ function CommentThread() {
   if (isCommentsUninitialized) return null
   return (
     <Container>
-      <ParentComment topicId={topicId} commentId={commentId} isFocusedComment />
+      <ParentComment spaceId={spaceId} commentId={commentId} isFocusedComment />
       <ThreadContainer>
         <ColumnContainer>
          {
-         isCommentsLoading ? <CircleLoading size={30} /> : <CommentColumn comments={allComments} commentSentiment="All" color="white" topicId={topicId} isReplies />
+         isCommentsLoading ? <CircleLoading size={30} /> : <CommentColumn comments={allComments} commentSentiment="All" color="white" spaceId={spaceId} isReplies />
         }
         
         </ColumnContainer>

@@ -123,7 +123,7 @@ function App() {
                         />
                         <Route
                           path="/"
-                          element={<Navigate replace to="/home/topics" />}
+                          element={<Navigate replace to="/home/spaces" />}
                         />
                       </Routes>
                     </Content>

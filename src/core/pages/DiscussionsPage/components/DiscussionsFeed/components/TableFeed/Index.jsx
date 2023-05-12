@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useGetAllDiscussionsQuery } from '../../../../../../../api/services/discussions.ts'
-import { useGetTopicQuery } from '../../../../../../../api/services/topics.ts'
+import { useGetSpaceQuery } from '../../../../../../../api/services/spaces.ts'
 
 import InfiniteLoader from '../../DiscussionsInfiniteLoader'
 import TableFeedItem from "../TableFeedItem/TableFeedItem.jsx";
@@ -8,11 +8,11 @@ import useGetCurrentUser from "../../../../../../App/hooks/useGetCurrentUser.js"
 
 function TableFeed() {
   const { currentUser } = useGetCurrentUser()
-  const { topicId } = useParams()
+  const { spaceId } = useParams()
   const [currentPage, setCurrentPage] = useState(0)
   const [allData, setAllData] = useState([])
 
-  const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({topicId, currentPage }, {
+  const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({spaceId, currentPage }, {
     skip: !currentUser,
   })
 
@@ -36,7 +36,7 @@ function TableFeed() {
           items={allData}
           loadNextPage={fetchMore}
           currentPage={currentPage}
-          topicId={topicId}
+          spaceId={spaceId}
           Item={TableFeedItem}
         />
         )

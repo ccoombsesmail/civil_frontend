@@ -16,11 +16,11 @@ import TribunalComments from "./components/TribunalComments/Index";
 import VotingBox from "./components/VotingBox/Index";
 
 import Comment from "../pages/DiscussionsPage/components/Comment/Index";
-import { COMMENT, TOPIC } from "../../enums/content_type";
-import TopicItem from "../pages/HomePage/components/Topics/components/TopicItem/Index";
+import { COMMENT, SPACE } from "../../enums/content_type";
+import SpaceItem from "../pages/HomePage/components/Spaces/components/SpaceItem/Index";
 import { useGetReportQuery } from "../../api/services/reports.ts";
 import useGetCurrentUser from "../App/hooks/useGetCurrentUser";
-import { useGetTopicQuery } from "../../api/services/topics.ts";
+import { useGetSpaceQuery } from "../../api/services/spaces.ts";
 import Timer from "./components/Timer/Index";
 import { CircleLoading } from "../../svgs/spinners/CircleLoading";
 import { useGetCommentQuery } from "../../api/services/comments.ts";
@@ -31,12 +31,12 @@ function Tribunal() {
   const { contentId, contentType } = useParams();
   const { currentUser } = useGetCurrentUser();
   const {
-    data: topic,
-    isLoading: isTopicLoading,
-    isUninitialized: isTopicUninitialized,
-    isSuccess: topicLoaded,
-  } = useGetTopicQuery(contentId, {
-    skip: !contentId || !currentUser || contentType !== TOPIC,
+    data: space,
+    isLoading: isSpaceLoading,
+    isUninitialized: isSpaceUninitialized,
+    isSuccess: spaceLoaded,
+  } = useGetSpaceQuery(contentId, {
+    skip: !contentId || !currentUser || contentType !== SPACE,
   });
 
   const {
@@ -60,11 +60,11 @@ function Tribunal() {
   } = useGetReportQuery(contentId, { skip: !contentId || !currentUser });
 
   const Content = useMemo(() => {
-    if (topicLoaded) {
+    if (spaceLoaded) {
       return (
-        <TopicItem
-          key={topic.id}
-          topic={topic}
+        <SpaceItem
+          key={space.id}
+          space={space}
           user={currentUser}
           hideCommentButton
         />
@@ -74,7 +74,7 @@ function Tribunal() {
       return <Comment commentData={{ ...comment, isReportedComment: true}} replies={[]} isReportedComment />;
     }
     return null;
-  }, [topic, comment, commentLoaded, topicLoaded, contentId, currentUser]);
+  }, [space, comment, commentLoaded, spaceLoaded, contentId, currentUser]);
 
   return (
     <OuterContainer id="tribunal-container">
@@ -117,7 +117,7 @@ function Tribunal() {
           </ReportStatItem>
         </ReportStatsContainer>
       )}
-      <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} topic={topic} />
+      <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} space={space} />
       <TribunalComments contentId={contentId} />
     </OuterContainer>
   );

@@ -15,7 +15,7 @@ import {
 } from './Style/Index'
 import useCheckIfTagExistsOnKeyPress from './hooks/useCheckIfTagExistsOnKeyPress'
 import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
-import { Footer } from '../TopicForm/Style'
+import { Footer } from '../SpaceForm/Style'
 
 function CreateTagModal() {
   const { currentUser } = useGetCurrentUser()

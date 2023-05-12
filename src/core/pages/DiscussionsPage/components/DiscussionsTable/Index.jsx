@@ -7,7 +7,7 @@ import {
 } from './Style'
 import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions.ts'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import { useGetTopicQuery } from '../../../../../api/services/topics.ts'
+import { useGetSpaceQuery } from '../../../../../api/services/spaces.ts'
 import { Table, ColHeader, ColItem } from '../../../../CommonComponents/AppTable/Style'
 import { TabNav } from '../../../../CommonComponents/NonBootstrapTabs/Style'
 import TabContent from '../../../../CommonComponents/NonBootstrapTabs/components/TabContent/Index'
@@ -18,15 +18,15 @@ const ITEMS_PER_PAGE = 10
 
 function DiscussionsTable() {
   const { currentUser } = useGetCurrentUser()
-  const { topicId } = useParams()
+  const { spaceId } = useParams()
   const [currentPage, setCurrentPage] = useState(0)
   const [allData, setAllData] = useState([])
   const [key, setKey] = useState(1);
 
-  // const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({topicId, currentPage }, {
+  // const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({spaceId, currentPage }, {
   //   skip: !currentUser,
   // })
-  // const { data: topic, isLoading: isTopicLoading, isUninitialized: isTopicUninitialized } = useGetTopicQuery(topicId, {
+  // const { data: space, isLoading: isSpaceLoading, isUninitialized: isSpaceUninitialized } = useGetSpaceQuery(spaceId, {
   //   skip: !currentUser,
   // })
 
@@ -89,7 +89,7 @@ function DiscussionsTable() {
             items={allData}
             loadNextPage={fetchMore}
             currentPage={currentPage}
-            topicId={topicId}
+            spaceId={spaceId}
           />
           )
           

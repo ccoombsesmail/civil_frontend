@@ -26,14 +26,14 @@ import Button from '../../ui/Button';
 import {DialogActions} from '../../ui/Dialog';
 import {INSERT_TWEET_COMMAND} from '../TwitterPlugin';
 import {INSERT_YOUTUBE_COMMAND} from '../YouTubePlugin';
-import { LexicalFormContext } from '../../../../Forms/TopicForm/LexicalFormContext'
+import { LexicalFormContext } from '../../../../Forms/SpaceForm/LexicalFormContext'
 import { YouTubeComponent } from '../../nodes/YouTubeNode';
 import { TweetComponent } from '../../nodes/TweetNode';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { initialConfig } from '../../App'
 import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
 
-import { getLinkMetaData } from '../../../../../api/v1/topics/topics_api_util.js'
+import { getLinkMetaData } from '../../../../../api/v1/spaces/spaces_api_util.js'
 import { INSERT_EXTERNAL_LINK_COMMAND } from '../ExternalLinkPlugin/index';
 import { useGetLinkMetaDataMutation } from '../../../../../api/services/links';
 import { Provider } from 'react-redux';
@@ -104,7 +104,7 @@ export const YoutubeEmbedConfig: PlaygroundEmbedConfig = {
   type: 'youtube-video',
 };
 
-export const YoutubeEmbedConfigTopic = (submitCallback): PlaygroundEmbedConfig => ({
+export const YoutubeEmbedConfigSpace = (submitCallback): PlaygroundEmbedConfig => ({
   ...YouTubeSharedConfig,
   submitCallback: (result: EmbedMatchResult) => ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
     <LexicalComposer initialConfig={initialConfig} > 
@@ -113,12 +113,12 @@ export const YoutubeEmbedConfigTopic = (submitCallback): PlaygroundEmbedConfig =
           base: '',
           focus: '',
         }}
-        nodeKey="youtube-video-topic"
+        nodeKey="youtube-video-space"
         videoID={result.id} 
         format={''} 
         />
     </LexicalComposer>),
-  type: 'youtube-video-topic',
+  type: 'youtube-video-space',
 });
 
 
@@ -162,9 +162,9 @@ export const TwitterEmbedConfig: PlaygroundEmbedConfig = {
   type: 'tweet',
 };
 
-export const TwitterEmbedConfigTopic = (submitCallback): PlaygroundEmbedConfig => ({
+export const TwitterEmbedConfigSpace = (submitCallback): PlaygroundEmbedConfig => ({
   ...TwitterEmbedConfigShared,
-  type: 'tweet-topic',
+  type: 'tweet-space',
   submitCallback: (result: EmbedMatchResult) => ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
     <LexicalComposer initialConfig={initialConfig} > 
       <TweetComponent 
@@ -173,7 +173,7 @@ export const TwitterEmbedConfigTopic = (submitCallback): PlaygroundEmbedConfig =
           focus: '',
         }}
         loadingComponent="Loading..."
-        nodeKey="tweet-topic"
+        nodeKey="tweet-space"
         tweetID={result.id} 
         format={''} 
         />
@@ -181,7 +181,7 @@ export const TwitterEmbedConfigTopic = (submitCallback): PlaygroundEmbedConfig =
   
 });
 
-export const ExternalLinkConfigTopic = (submitCallback): PlaygroundEmbedConfig => ({
+export const ExternalLinkConfigSpace = (submitCallback): PlaygroundEmbedConfig => ({
   contentName: 'External Link',
 
   exampleUrl: 'https://lexical.dev/docs/concepts/read-only',
@@ -210,7 +210,7 @@ export const ExternalLinkConfigTopic = (submitCallback): PlaygroundEmbedConfig =
 
     return null;
   },
-  type: 'external-link-topic',
+  type: 'external-link-space',
   submitCallback: (result: EmbedMatchResult) => ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
     <Provider store={configureStore}>
       <LinkMetaData
@@ -229,9 +229,9 @@ export const EmbedConfigs = [
   YoutubeEmbedConfig,
 ];
 
-export const EmbedConfigsTopic = [
-  TwitterEmbedConfigTopic,
-  YoutubeEmbedConfigTopic,
+export const EmbedConfigsSpace = [
+  TwitterEmbedConfigSpace,
+  YoutubeEmbedConfigSpace,
 ];
 
 
@@ -338,7 +338,7 @@ export function AutoEmbedDialog({
 
   const onClick = async () => {
     if (embedResult != null) {
-      if (embedConfig.type === 'external-link-topic') {
+      if (embedConfig.type === 'external-link-space') {
         setContentUrl({
           ...embedResult,
           data: embedResult.url
@@ -348,7 +348,7 @@ export function AutoEmbedDialog({
           data: embedResult.url
         })
       }
-      else if (['tweet-topic', 'youtube-video-topic'].includes(embedConfig.type)) {
+      else if (['tweet-space', 'youtube-video-space'].includes(embedConfig.type)) {
         setContentUrl(embedResult)
         embedConfig.submitCallback(embedResult)
       } else embedConfig.insertNode(editor, embedResult);
@@ -413,7 +413,7 @@ export default function AutoEmbedPlugin(): JSX.Element {
     <div className='Modal__popover_link'>
       {modal}
       <LexicalAutoEmbedPlugin<PlaygroundEmbedConfig>
-        embedConfigs={[...EmbedConfigs, TwitterEmbedConfigTopic(setContentUrl), YoutubeEmbedConfigTopic(setContentUrl), ExternalLinkConfigTopic(setContentUrl)]}
+        embedConfigs={[...EmbedConfigs, TwitterEmbedConfigSpace(setContentUrl), YoutubeEmbedConfigSpace(setContentUrl), ExternalLinkConfigSpace(setContentUrl)]}
         onOpenEmbedModalForConfig={openEmbedModal}
         getMenuOptions={getMenuOptions}
         menuRenderFn={(

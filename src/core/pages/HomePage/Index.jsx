@@ -1,5 +1,5 @@
 import React from 'react'
-import Topics from './components/Topics/TopicFeed'
+import Spaces from './components/Spaces/SpacesFeed'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
   Left, Middle, Right, HomePageGrid,
@@ -12,7 +12,7 @@ function HomePage() {
         <UserInformationDisplay />
       </Left>
       <Middle>
-        <Topics />
+        <Spaces />
       </Middle>
       <Right>
         <span>.</span>

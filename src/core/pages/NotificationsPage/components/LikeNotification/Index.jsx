@@ -13,7 +13,7 @@ import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 function CommentLikeNotification({ notification }) {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, topicId, discussionId, commentId,
+    givingUserTag, spaceId, discussionId, commentId,
   } = notification
   const handleClick = (e) => {
     e.stopPropagation()
@@ -42,7 +42,7 @@ function CommentLikeNotification({ notification }) {
             {' '}
             Liked Your
             {' '}
-            <Link onClick={handleClick} to={`/home/topics/${topicId}/discussions/${discussionId}/comments/${commentId}`}>
+            <Link onClick={handleClick} to={`/home/spaces/${spaceId}/discussions/${discussionId}/comments/${commentId}`}>
               Comment!
             </Link>
             {' '}

@@ -9,7 +9,7 @@ import {
   FormContainer, ItemList, Container, Item, ItemDescription,
 } from './Style/Index'
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
-import { Footer } from '../TopicForm/Style'
+import { Footer } from '../SpaceForm/Style'
 
 function VoteForm({ contentId, closeModal }) {
   const [voteForSelected, setVoteForSelected] = useState(false)

@@ -22,7 +22,7 @@ export default function ExampleWrapper({
 
   // Callback function responsible for loading the next page of items.
   loadNextPage,
-  topicId
+  spaceId
 }) {
   // If there are more items to be loaded then add an extra row to hold a loading indicator.
   // const itemCount = items.length
@@ -40,7 +40,7 @@ export default function ExampleWrapper({
   const isItemLoaded = (index) => !hasNextPage || index < items.length
 
   function Item({ index, style }) {
-    const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllDiscussionsQuery({ topicId, currentPage: Math.floor(index / 10) }, {
+    const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10) }, {
       skip: !currentUser,
     })
 
@@ -55,7 +55,7 @@ export default function ExampleWrapper({
             key={discussion.id}
             {...discussion}
             discussion={discussion}
-            topicId={topicId}
+            spaceId={spaceId}
         />
       ) : null
     }

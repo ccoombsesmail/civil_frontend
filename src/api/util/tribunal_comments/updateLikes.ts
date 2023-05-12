@@ -11,7 +11,7 @@ export default async function onUpdateLikesQueryStartedTribunal({
   discussionId,
   isFocusedComment,
   updateLikeValue,
-  updateGetTopicQuery,
+  updateGetSpaceQuery,
   isReplies,
   rootOfCommentReplyThreadId,
   newLikeState,

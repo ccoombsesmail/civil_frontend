@@ -1,8 +1,8 @@
 import { useCallback, useContext } from "react";
-import { useUpdateTopicLikesMutation } from "../../../../../../api/services/topics.ts";
+import { useUpdateSpaceLikesMutation } from "../../../../../../api/services/spaces.ts";
 
 import {
-  TOPIC,
+  SPACE,
   COMMENT,
   TRIBUNAL_COMMENT,
 } from "../../../../../../enums/content_type";
@@ -15,9 +15,9 @@ import {
   LikedState,
   NeutralState,
 } from "../../../../../../enums/like_state.js";
-import { TopicItemContext } from "../../../../../pages/HomePage/components/Topics/components/TopicItem/TopicItemContex.jsx";
+import { SpaceItemContext } from "../../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.jsx";
 
-export default (content, user, contentType, currentPageTopic) => {
+export default (content, user, contentType, currentPageSpace) => {
   const {
     isReplies,
     isFocusedComment,
@@ -28,10 +28,10 @@ export default (content, user, contentType, currentPageTopic) => {
     reportedContentId,
   } = useContext(ParentCommentContext) || {};
 
-  const { updateFollowedTopicsQuery } = useContext(TopicItemContext) || {};
+  const { updateFollowedSpacesQuery } = useContext(SpaceItemContext) || {};
 
   const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation();
-  const [updateLikes] = useUpdateTopicLikesMutation();
+  const [updateLikes] = useUpdateSpaceLikesMutation();
   const [updateCommentLikes] = useUpdateCommentLikesMutation();
   const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage();
   return useCallback(async () => {
@@ -43,11 +43,11 @@ export default (content, user, contentType, currentPageTopic) => {
         content.likeState,
         content.likeState === LikedState ? NeutralState : LikedState
       ),
-      updateGetTopicQuery: isOnDiscussionsPage || isOnTribunalPage,
+      updateGetSpaceQuery: isOnDiscussionsPage || isOnTribunalPage,
       isReplies,
       isFocusedComment,
       ...content,
-      currentPage: currentPageTopic ?? currentPage,
+      currentPage: currentPageSpace ?? currentPage,
       rootOfCommentReplyThreadId,
       rootId: content?.rootId,
       newLikeState:
@@ -55,10 +55,10 @@ export default (content, user, contentType, currentPageTopic) => {
       likeAction: content.likeState === LikedState ? NeutralState : LikedState,
       commentType,
       reportedContentId,
-      updateFollowedTopicsQuery
+      updateFollowedSpacesQuery
     };
     switch (contentType) {
-      case TOPIC:
+      case SPACE:
         await updateLikes(likeData);
         break;
       case COMMENT:

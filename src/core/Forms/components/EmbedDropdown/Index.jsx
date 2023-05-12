@@ -3,15 +3,15 @@ import React, { useMemo, useState } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { INSERT_EMBED_COMMAND } from '@lexical/react/LexicalAutoEmbedPlugin'
 import { DropDownFromExternal, DropDownItem } from '../../../CommonComponents/Lexical/ui/DropDown.tsx'
-import { TwitterEmbedConfigTopic, YoutubeEmbedConfigTopic, ExternalLinkConfigTopic } from '../../../CommonComponents/Lexical/plugins/AutoEmbedPlugin/index.tsx'
+import { TwitterEmbedConfigSpace, YoutubeEmbedConfigSpace, ExternalLinkConfigSpace } from '../../../CommonComponents/Lexical/plugins/AutoEmbedPlugin/index.tsx'
 import { StyledDropDown } from './Style'
 
 function EmbedDropdown() {
   const [editor] = useLexicalComposerContext()
   const EmbedConfigs = useMemo(() => {
-    const yt = YoutubeEmbedConfigTopic()
-    const tw = TwitterEmbedConfigTopic()
-    const el = ExternalLinkConfigTopic()
+    const yt = YoutubeEmbedConfigSpace()
+    const tw = TwitterEmbedConfigSpace()
+    const el = ExternalLinkConfigSpace()
     return [yt, tw, el]
   }, [])
   const [showDropDown, setShowDropDown] = useState(false);

@@ -20,7 +20,7 @@ import { CircleLoading } from "../../../../../svgs/spinners/CircleLoading";
 const ITEMS_PER_PAGE = 10;
 
 function DiscussionThread() {
-  const { topicId, discussionId } = useParams();
+  const { spaceId, discussionId } = useParams();
   const [key, setKey] = useState(0);
   const { currentUser } = useGetCurrentUser();
   const [currentPage, setCurrentPage] = useState(0);
@@ -94,27 +94,27 @@ function DiscussionThread() {
               loadNextPage={fetchMore}
               currentPage={currentPage}
               discussionId={discussionId}
-              topicId={topicId}
+              spaceId={spaceId}
             />
           )}
         </ListContainer>
 
-        {/* <CommentColumn comments={allComments} numComments={discussion?.allComments} commentSentiment="All" color="white" topicId={topicId} /> */}
+        {/* <CommentColumn comments={allComments} numComments={discussion?.allComments} commentSentiment="All" color="white" spaceId={spaceId} /> */}
       </ColumnContainer>
       {/* </TabContent> */}
       {/* <TabContent id={1} activeTab={key}>
         <ColumnContainer>
-          <CommentColumn comments={positiveComments} numComments={discussion?.positiveComments} commentSentiment="Positive" color="white" topicId={topicId} />
+          <CommentColumn comments={positiveComments} numComments={discussion?.positiveComments} commentSentiment="Positive" color="white" spaceId={spaceId} />
         </ColumnContainer>
       </TabContent>
       <TabContent id={2} activeTab={key}>
         <ColumnContainer>
-          <CommentColumn comments={neutralComments} numComments={discussion?.neutralComments} commentSentiment="Neutral" color="white" topicId={topicId} />
+          <CommentColumn comments={neutralComments} numComments={discussion?.neutralComments} commentSentiment="Neutral" color="white" spaceId={spaceId} />
         </ColumnContainer>
       </TabContent>
       <TabContent id={3} activeTab={key}>
         <ColumnContainer>
-          <CommentColumn comments={negativeComments} numComments={discussion?.negativeComments} commentSentiment="Negative" color="white" topicId={topicId} />
+          <CommentColumn comments={negativeComments} numComments={discussion?.negativeComments} commentSentiment="Negative" color="white" spaceId={spaceId} />
         </ColumnContainer>
       </TabContent> */}
     </ThreadContainer>

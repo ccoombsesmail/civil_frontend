@@ -28,7 +28,7 @@ function DiscussionsInfiniteLoader({
       default:
         console.log(item)
         if (item?.editorState.includes("image")) return 1000
-        return 500
+        return 1000
     }
   }, [items])
 

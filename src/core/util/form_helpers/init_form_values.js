@@ -1,4 +1,4 @@
-export const INIT_TOPIC_FORM_VALUES = {
+export const INIT_SPACE_FORM_VALUES = {
   title: '', category: '',
 }
 

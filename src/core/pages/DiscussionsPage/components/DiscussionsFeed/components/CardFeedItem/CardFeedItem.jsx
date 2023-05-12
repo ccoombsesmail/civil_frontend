@@ -7,13 +7,13 @@ import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
-import Card from '../../../../../../CommonComponents/TopicCard/Index'
+import Card from '../../../../../../CommonComponents/SpaceCard/Index'
 
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme'
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes'
-import UserUploadedMedia from '../../../../../../CommonComponents/TopicCard/components/UserUploadedMedia/Index'
-import { VideoPlayer } from '../../../../../HomePage/components/Topics/components/TopicItem/Style'
+import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
+import { VideoPlayer } from '../../../../../HomePage/components/Spaces/components/SpaceItem/Style'
 
 import { useGetAllDiscussionsQuery } from '../../../../../../../api/services/discussions'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser.js';
@@ -35,7 +35,7 @@ const DiscussionItem = ({
 
   const commonProps = useMemo(
     () => ({
-      topic: null,
+      space: null,
       discussion,
       user,
       showLinks: false,
@@ -101,24 +101,25 @@ const DiscussionItem = ({
 
 
 function DiscussionsFeedItem({ index, style }) {
-  const { topicId } = useParams()
-  const { data, isLoading, isUninitialized } = useGetAllDiscussionsQuery({ topicId, currentPage: Math.floor(index / 10)});
+  const { spaceId } = useParams()
+  const { data, isLoading, isUninitialized } = useGetAllDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10)});
   const { currentUser } = useGetCurrentUser()
   let content
   if (isLoading || isUninitialized || !data) {
     content = <CircleLoading size={60} /> 
   } else {
     const discussion = data[index%10]
-    content = discussion ? (
-      // <TopicItemContext.Provider value={{currentPage: Math.floor(index / 5)}}>
+    console.log(discussion)
+    content = discussion && discussion.title !== "General" ? (
+      // <SpaceItemContext.Provider value={{currentPage: Math.floor(index / 5)}}>
         <DiscussionItem
           style={style}
           key={discussion.id}
-          topdiscussionic={discussion}
+          discussion={discussion}
           user={currentUser}
           currentPage={Math.floor(index/5)}
         />
-      // </TopicItemContext.Provider>
+      // </SpaceItemContext.Provider>
 
      ) : null    
   }

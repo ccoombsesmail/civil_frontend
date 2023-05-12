@@ -13,15 +13,15 @@ import RecommendationsList from '../../../../RecommendationsList/Index'
 
 function Recommendations() {
   const [key, setKey] = useState('recs')
-  const { topicId } = useParams()
+  const { spaceId } = useParams()
   const { getAllRecs, getAllOpposingRecs } = useBindDispatch(
     recsActionCreators,
     oppRecsActionCreators,
   )
   useEffect(() => {
-    getAllOpposingRecs(topicId)
-    getAllRecs(topicId)
-  }, [topicId])
+    getAllOpposingRecs(spaceId)
+    getAllRecs(spaceId)
+  }, [spaceId])
 
   const recs = useSelector((s) => s.recommendations.recs)
   const opposingRecs = useSelector((s) => s.recommendations.opposingRecs)

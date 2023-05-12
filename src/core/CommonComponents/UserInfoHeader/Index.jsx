@@ -28,7 +28,7 @@ function UniquenessIcon() {
 }
 
 function UserInfoHeader({
-  time, username, userId, iconSrc, category, userTag, userVerificationType, topic
+  time, username, userId, iconSrc, category, userTag, userVerificationType, space
 }) {
   const [toggle, setToggle] = useState(true)
   const usernameDisplay = userId?.startsWith('did') ? `${username.substring(0, 12)}` : username
@@ -74,7 +74,7 @@ function UserInfoHeader({
 
       </Left>
       <Right>
-        { topic ? <WatchButton topic={topic}/> : null }
+        { space ? <WatchButton space={space}/> : null }
         <CategoryAndTime>
           <span>
             {category}

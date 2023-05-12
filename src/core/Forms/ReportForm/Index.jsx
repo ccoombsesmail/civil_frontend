@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Formik, Field } from 'formik'
-import { Footer } from '../TopicForm/Style'
+import { Footer } from '../SpaceForm/Style'
 
 import Button from '../../CommonComponents/Button/Index'
 import { Checkbox } from '../../CommonComponents/Form/Checkbox/Index'

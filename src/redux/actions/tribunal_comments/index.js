@@ -18,9 +18,9 @@ const getAllCommentsBatchActionCreator = (payload) => ({
   payload,
 })
 
-const addCommentActionCreator = (subTopicData) => ({
+const addCommentActionCreator = (subSpaceData) => ({
   type: ADD_TRIBUNAL_COMMENT,
-  payload: subTopicData,
+  payload: subSpaceData,
 })
 
 const updateCommentActionCreator = (data) => ({

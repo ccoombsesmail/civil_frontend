@@ -1,16 +1,16 @@
 import React, { memo } from 'react'
 import { WatchIcon } from './Style'
-import useAddRemoveTopicFollow from './hooks/useAddRemoveTopicFollow'
+import useAddRemoveSpaceFollow from './hooks/useAddRemoveSpaceFollow'
 
 
 
 
-function WatchButton({ topic }) {
-  const { onFollowBtnClick, isLoading } = useAddRemoveTopicFollow(topic)
+function WatchButton({ space }) {
+  const { onFollowBtnClick, isLoading } = useAddRemoveSpaceFollow(space)
   return (
     <>
     {
-      topic.isFollowing ? (
+      space.isFollowing ? (
         <WatchIcon onClick={onFollowBtnClick} src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/monitor-icon-slash.png' alt=''/>
       ) : (
         <WatchIcon onClick={onFollowBtnClick} src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/monitor-icon.png' alt=''/>

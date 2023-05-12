@@ -2,14 +2,14 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default (rec) => {
-  const { topic, subTopic } = rec
+  const { space, subSpace } = rec
   const navigate = useNavigate()
   return useCallback(() => {
     if (rec.externalRecommendedContent) {
       window.open(rec.externalRecommendedContent, '_blank')
       return
     }
-    if (topic) navigate(`/home/topics/${topic.id}/discussions/`)
-    else navigate(`/home/topics/${subTopic.topicId}/discussions/${subTopic.id}`)
+    if (space) navigate(`/home/spaces/${space.id}/discussions/`)
+    else navigate(`/home/spaces/${subSpace.spaceId}/discussions/${subSpace.id}`)
   }, [rec])
 }

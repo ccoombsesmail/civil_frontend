@@ -72,7 +72,7 @@ function Header() {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton hideTextMobile icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/topics')}>
+        <IconButton hideTextMobile icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/spaces')}>
           Civil
         </IconButton>
       </ButtonsContainer>

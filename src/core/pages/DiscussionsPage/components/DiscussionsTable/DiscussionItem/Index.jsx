@@ -5,9 +5,9 @@ import UserIcon from '../../../../../CommonComponents/UserIcon/Index'
 import useGoToCommentThread from '../../../../../hooks/routing/useGoToCommentThread'
 
 function DiscussionsItem({
-  id, title, createdByUsername, allComments, topicId, createdByIconSrc,
+  id, title, createdByUsername, allComments, spaceId, createdByIconSrc,
 }) {
-  const goToCommentThread = useGoToCommentThread(topicId, id)
+  const goToCommentThread = useGoToCommentThread(spaceId, id)
   return (
       <Row onClick={goToCommentThread} gridTemplateCols="1fr 2fr 1fr" height="10vh">
         <RowItem>

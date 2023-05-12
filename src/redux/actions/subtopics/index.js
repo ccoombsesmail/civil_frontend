@@ -2,32 +2,32 @@
 // action creator is just a function that dispatches an action
 import { toast } from 'react-toastify'
 import { closeModal } from '../ui/index'
-import { ADD_SUB_TOPIC, GET_ALL_SUB_TOPICS } from '../../reducers/discussions/subTopicsReducer'
+import { ADD_SUB_SPACE, GET_ALL_SUB_SPACES } from '../../reducers/discussions/subSpacesReducer'
 import * as DiscussionsApiUtil from '../../../api/v1/discussions/discussions_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
 
-const getAllTopicsActionCreator = (discussions) => ({
-  type: GET_ALL_SUB_TOPICS,
+const getAllSpacesActionCreator = (discussions) => ({
+  type: GET_ALL_SUB_SPACES,
   payload: discussions,
 
 })
 
-const addTopicActionCreator = (subTopicData) => ({
-  type: ADD_SUB_TOPIC,
-  payload: subTopicData,
+const addSpaceActionCreator = (subSpaceData) => ({
+  type: ADD_SUB_SPACE,
+  payload: subSpaceData,
 })
 
-export const createDiscussion = (topicData) => (dispatch) => DiscussionsApiUtil.createDiscussion(topicData)
-  .then((res) => dispatch(addTopicActionCreator(res.data)))
+export const createDiscussion = (spaceData) => (dispatch) => DiscussionsApiUtil.createDiscussion(spaceData)
+  .then((res) => dispatch(addSpaceActionCreator(res.data)))
   .then(() => dispatch(closeModal()))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getAllDiscussions = (topicId) => (dispatch) => DiscussionsApiUtil.getAllDiscussions(topicId)
-  .then((res) => dispatch(getAllTopicsActionCreator(res.data)))
+export const getAllDiscussions = (spaceId) => (dispatch) => DiscussionsApiUtil.getAllDiscussions(spaceId)
+  .then((res) => dispatch(getAllSpacesActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
-export const getDiscussion = (subTopicId) => (dispatch) => DiscussionsApiUtil.getDiscussion(subTopicId)
-  .then((res) => dispatch(addTopicActionCreator(res.data)))
+export const getDiscussion = (subSpaceId) => (dispatch) => DiscussionsApiUtil.getDiscussion(subSpaceId)
+  .then((res) => dispatch(addSpaceActionCreator(res.data)))
   .catch((error) => toast.error(errorFormatter(error)))
 
 export default {
