@@ -2,19 +2,19 @@ import React from 'react'
 
 import { Field } from 'formik'
 
+import { Toolbar } from 'primereact/toolbar'
 import UploadFileInput from '../UploadImageInput/Index'
 import { VideoSvg, ImageSvg } from '../../../../svgs/svgs'
 
 import useOnFileChangeHandler from '../../hooks/useOnFileChangeHandler'
 
-import { Container } from './Style/index'
-
 function UploadMediaContainer({
   setFieldValue, imgFile, videoFile, setImgFile, setVideoFile,
 }) {
   const onFileChange = useOnFileChangeHandler()
-  return (
-    <Container>
+
+  const startContent = (
+    <>
       <Field
         fileType="file"
         accept="image/*"
@@ -24,6 +24,7 @@ function UploadMediaContainer({
         component={UploadFileInput}
         onChange={(e) => onFileChange(e, setFieldValue, setImgFile)}
         icon={<ImageSvg />}
+        className="mr-2"
       />
       <Field
         fileType="file"
@@ -33,8 +34,12 @@ function UploadMediaContainer({
         component={UploadFileInput}
         onChange={(e) => onFileChange(e, setFieldValue, setVideoFile)}
         icon={<VideoSvg />}
+        className="mr-2"
       />
-    </Container>
+    </>
+  )
+  return (
+    <Toolbar start={startContent} endContent={<>sdf</>} className="w-5" />
   )
 }
 

@@ -1,16 +1,16 @@
 import { useCallback, useContext } from "react";
 import { useUpdateSpaceLikesMutation } from "../../../../../api/services/spaces";
 
-import { SPACE } from "../../../../../enums/content_type";
 import { calculateLikeValueToAdd } from "../../utils/calculateLikeValueToAdd";
 import useDetectCurrentPage from "../../../../hooks/routing/useDetectCurrentPage";
-import { LikedState, NeutralState } from "../../../../../enums/like_state.js";
+import { LikedState, NeutralState } from "../../../../../enums/like_state";
 import { SpaceItemContext, SpaceItemContextValue } from "../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.jsx";
 import { Space } from "../../../../../types/spaces/space";
 
-export default (content: Space, contentType: string) => {
-  const { id, createdByUserId, likeState } = content;
-  const { updateFollowedSpacesQuery, currentPage } = useContext<SpaceItemContextValue>(SpaceItemContext);
+export default (content: Space) => {
+  const { id, createdByUserId, likeState } = content || {};
+  const { updateFollowedSpacesQuery, currentPage } = useContext<SpaceItemContextValue>(SpaceItemContext) || {};
+  console.log(content, currentPage)
 
   const [updateLikes] = useUpdateSpaceLikesMutation();
   const { isOnDiscussionsPage } = useDetectCurrentPage();
@@ -22,23 +22,20 @@ export default (content: Space, contentType: string) => {
     createdByUserId: createdByUserId,
     updateLikeValue: calculateLikeValueToAdd(likeState, newLikeState),
     updateGetSpaceQuery: isOnDiscussionsPage,
-    ...content,
     currentPage,
     newLikeState,
     likeAction: newLikeState,
     updateFollowedSpacesQuery
   });
 
+
   const handleUpdateLikes = useCallback(async () => {
     const likeData = prepareLikeData();
-    switch (contentType) {
-      case SPACE:
-        await updateLikes(likeData);
-        break;
-      default:
-        break;
-    }
-  }, [contentType, prepareLikeData]);
+    console.log(likeData)
+
+    await updateLikes(likeData);
+
+  }, [prepareLikeData]);
 
   return handleUpdateLikes;
 };

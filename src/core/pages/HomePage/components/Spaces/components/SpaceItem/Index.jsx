@@ -4,7 +4,7 @@ import React, { useMemo, forwardRef } from 'react'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 import { VideoPlayer } from './Style'
-import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode'
+import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
 import Card from '../../../../../../CommonComponents/SpaceCard/Index'
 
@@ -14,10 +14,9 @@ import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/th
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes'
 import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
 
-const SpaceItem = ({
-  space, user, hideCommentButton, id, currentPage 
-}) => {
- 
+function SpaceItem({
+  space, user, hideCommentButton, id, currentPage,
+}) {
   const goToDiscussion = useGoToDiscussions(space.id)
   const initialConfig = {
     editorState: space?.editorState,
@@ -37,7 +36,7 @@ const SpaceItem = ({
       showLinks: Boolean(space.referenceLinks),
       hideCommentButton,
       onClick: goToDiscussion,
-      currentPage
+      currentPage,
     }),
     [space, user, currentPage],
   )

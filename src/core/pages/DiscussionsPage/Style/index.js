@@ -6,7 +6,7 @@ export const Container = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 10vw;
+  /* padding-bottom: 10vw; */
 
  @media only screen and (max-width: 600px) {
     flex-direction: column;

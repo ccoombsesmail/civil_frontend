@@ -4,7 +4,6 @@ import React, { memo, useCallback, useEffect } from 'react'
 
 import { Formik, Field } from 'formik'
 
-import Button from '../../CommonComponents/Button/Index'
 import Input3 from '../../CommonComponents/Form/Input3/Index'
 import useModal from '../../CommonComponents/Lexical/hooks/useModal.tsx'
 
@@ -69,9 +68,9 @@ function CreateTagForm({ userId, closeModal }) {
               <Field name="tag" label="Enter Tag" component={Input3} width="50%" onKeyUp={checkIfTagExistsOnKeyPress} validInput={isValid} />
             </InputContainer>
             <Footer>
-              <Button type="submit" disabled={isSubmitting}>
+              {/* <Button type="submit" disabled={isSubmitting}>
                 Submit
-              </Button>
+              </Button> */}
             </Footer>
           </FormContainer>
         )}

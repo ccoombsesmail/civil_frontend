@@ -12,6 +12,7 @@ export const StyledButton = styled('button')`
   background-color: aliceblue;
   border-radius: 7px;
   margin: 0 8px;
+  font-size: 1.2rem;
    :hover {
     filter: drop-shadow(0 2px 4px black) brightness(.8);
   }

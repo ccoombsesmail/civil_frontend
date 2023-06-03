@@ -6,6 +6,7 @@ import { UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
 import CensorOverlay from '../CensorOverlay/Index'
 import { getTimeSince } from '../../../generic/string/dateFormatter'
+import { Card } from 'primereact/card'
 
 import {
   Container,
@@ -17,7 +18,7 @@ import { SPACE } from '../../../enums/content_type'
 import CardDetails from './components/CardDetails/Index'
 import { Title } from '../UserInfoHeader/Style'
 
-const Card = ({
+function PostCard({
   children,
   onClick,
   listCard,
@@ -26,11 +27,11 @@ const Card = ({
   user,
   showLinks,
   hideCommentButton,
-  currentPage
-}) => {
+  currentPage,
+}) {
   const { pathname } = useLocation()
   const {
-    id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, spaceCreatorIsDidUser, userVerificationType, reportStatus, title, category
+    id, createdAt, createdByIconSrc, createdByUsername, createdByUserId, createdByTag, spaceCreatorIsDidUser, userVerificationType, reportStatus, title, category,
   } = space || discussion || {}
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
@@ -78,41 +79,4 @@ const Card = ({
   )
 }
 
-export function VideoDescriptionCard({
-  children,
-  summary,
-  iconSrc,
-  username,
-  time,
-  onClick,
-  listCard,
-  height,
-  userId,
-}) {
-  const ref = useRef(null)
-  const [totalHeight, setTotalHeight] = useState('unset')
-  useEffect(() => {
-    const totalCompHeight = [...ref?.current?.children].reduce((acc, child) => {
-      const compStyles = window.getComputedStyle(child)
-      const heightComp = compStyles.getPropertyValue('height')
-      return acc + Number(heightComp.slice(0, heightComp.length - 2))
-    }, 0)
-    if (height) setTotalHeight(totalCompHeight + height)
-  }, [ref])
-
-  return (
-    <VideoDescriptionContainer ref={ref} height={totalHeight} onClick={onClick} listCard={listCard}>
-      <UserInfoHeader iconSrc={iconSrc} time={time} username={username} userId={userId} />
-      <Description className="text-pop-up-top">
-        &ldquo;
-        {summary}
-        &rdquo;
-      </Description>
-      <Body>
-        {children}
-      </Body>
-    </VideoDescriptionContainer>
-  )
-}
-
-export default Card
+export default PostCard

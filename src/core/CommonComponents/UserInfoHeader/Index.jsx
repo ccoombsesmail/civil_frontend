@@ -54,7 +54,7 @@ function UserInfoHeader({
               bgColor={captchaVerified ? 'var(--m-civic-theme-main-color)' : 'lightgray'}
               tooltipHeader={captchaVerified ? "Captcha Verified" : "NOT Captcha Verified"}
               tooltipText={captchaVerified ? `User ${longUsernameDisplay(username)} Was Captcha Verfied At The Time This Content Was Created. It Is Very Unlikely This Content Was Created By A Bot` : 'User Was Not CAPTCHA Verfied At The Time of Creating This Content, Meaning There Is A Chance A Bot Created This Content'}
-              grow={true}
+              grow={"true"}
 
             />
           )
@@ -66,7 +66,7 @@ function UserInfoHeader({
               bgColor={faceIdVerified ? 'var(--m-civic-theme-main-color)' : 'lightgray'}
               tooltipHeader={faceIdVerified ? "Face ID Verified" : "Not Face ID Verified"}
               tooltipText={faceIdVerified ? `User ${longUsernameDisplay(username)} Is A Verified Unique User` : `User Was NOT A Verified Unique User At The Time of Creating This Content`}
-              grow={true}
+              grow={"true"}
             />
           )
         }

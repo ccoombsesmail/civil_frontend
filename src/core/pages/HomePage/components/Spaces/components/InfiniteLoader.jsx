@@ -4,17 +4,15 @@ import { VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import { Web, YouTube, Twitter } from '../../../../../../enums/link_type'
 
-
-
 function ExampleWrapper({
   hasNextPage,
   isNextPageLoading,
   items,
   loadNextPage,
-  Item
+  Item,
 }) {
   const itemCount = hasNextPage ? items.length : items.length
-  const infiniteLoaderRef = useRef(null);
+  const infiniteLoaderRef = useRef(null)
 
   const getItemSize = useCallback((index) => {
     const item = items[index]
@@ -22,23 +20,20 @@ function ExampleWrapper({
       case YouTube:
         return 1000
       case Web:
-        return 1000;
+        return 1000
       case Twitter:
-        return 1200;
+        return 1200
       default:
-        console.log(item)
-        if (item?.editorState.includes("image")) return 1000
+        if (item?.editorState.includes('image')) return 1000
         return 500
     }
   }, [items])
 
   const loadMoreItems = useCallback(() => {
-    if(!isNextPageLoading) loadNextPage()
+    if (!isNextPageLoading) loadNextPage()
   }, [isNextPageLoading])
-  
-  const isItemLoaded = useCallback((index) => {
-    return index < items.length-1
-  }, [items.length])
+
+  const isItemLoaded = useCallback((index) => index < items.length - 1, [items.length])
 
   return (
     <InfiniteLoader

@@ -17,6 +17,8 @@ export const Container = styled('div')`
 export const TableHeader = styled('header')` 
     height: clamp(175px, 15vh, 600px);
     background-image: linear-gradient(to right, var(--m-primary-background-color), #83af9b);
+    background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6) !important;
+
     color: #fff;
     position: relative;
     overflow: hidden;

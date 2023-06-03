@@ -10,21 +10,23 @@ import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
 import { SPACE } from '../../../../enums/content_type'
-import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage'
+import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
+import useUpdateSpaceLikes from './hooks/useUpdateSpaceLikes.ts'
 
-const SpaceActionToolbar = ({
-  likes, space, user, hideCommentButton, discussion, currentPage  
-}) => {
+function SpaceActionToolbar({
+  likes, space, user, hideCommentButton, discussion, currentPage,
+}) {
   const { spaceId, discussionId } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
+  const updateSpaceLikes = useUpdateSpaceLikes(space)
   return (
     <Container>
       <Left>
-        <UpVoteButton content={space} user={user} contentType={SPACE} currentPage={currentPage} />
+        <UpVoteButton updateLikes={updateSpaceLikes} content={space} user={user} contentType={SPACE} currentPage={currentPage} />
         <span>
           {likes || 0}
         </span>
-        <DownVoteButton content={space} user={user} contentType={SPACE}  currentPage={currentPage}/>
+        <DownVoteButton content={space} user={user} contentType={SPACE} currentPage={currentPage} />
         { hideCommentButton ? null : <CommentButton discussion={discussion} space={space} />}
       </Left>
       <Right>

@@ -10,17 +10,18 @@ export const Container = styled.div`
 
   span {
     color: black;
+    font-size: 1rem;
   }
 
   img {
-    width: 1.7em;
-    height: 1.7;
+    width: 1.4rem;
+    height: 1.4rem;
     cursor: pointer;
     margin: .3em .5em;
   }
   svg {
-    width: 1.7em;
-    height: 1.7em ;
+    width: 1.4rem;
+    height: 1.4rem ;
     margin: .3em .5em;
 
   }

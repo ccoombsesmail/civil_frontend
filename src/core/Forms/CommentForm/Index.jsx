@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import Button from '../../CommonComponents/Button/Index'
+import { Button } from 'primereact/button'
 import UserInfoHeader from '../../CommonComponents/UserInfoHeader/Index'
 import AnimatedCheckmark from '../../CommonComponents/AnimatedCheckmark/Index'
 import PlaygroundEditorTheme from '../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
@@ -47,7 +47,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
 
   const [toxicityScore, setToxicityScore] = useState(null)
   const {
-    lexicalRawContent, createdByIconSrc, createdByUsername, time, createdByTag
+    lexicalRawContent, createdByIconSrc, createdByUsername, time, createdByTag,
   } = commentFormState
 
   console.log(commentFormState)

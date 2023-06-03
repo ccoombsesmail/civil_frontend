@@ -71,12 +71,6 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
         arg,
         {
           dispatch,
-          getState,
-          extra,
-          requestId,
-          cacheEntryRemoved,
-          cacheDataLoaded,
-          getCacheEntry,
         }
       ) {
         dispatch(closeModal())
@@ -91,11 +85,11 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
         };
       },
       async onQueryStarted(
-        { id, updateLikeValue, updateGetSpaceQuery, updateFollowedSpacesQuery, currentPage, newLikeState, ...patch },
+        { id, spaceId, updateLikeValue, updateGetDiscussionQuery, currentPage, newLikeState, ...patch },
         { dispatch, queryFulfilled }
       ) {
         let patchResult;
-        if (updateGetSpaceQuery) {
+        if (updateGetDiscussionQuery) {
           patchResult = dispatch(
             discussionsApi.util.updateQueryData("getDiscussion", id, (draft) => {
               if (id) {
@@ -104,21 +98,9 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
               }
             })
           );
-        } 
-        // else if (updateFollowedSpacesQuery) {
-        //   patchResult = dispatch(
-        //     discussionsApi.util.updateQueryData("getAllFollowedSpaces", undefined, (draft) => {
-        //       const index = draft.findIndex((t) => t.id === id)
-        //       if (index !== -1) {
-        //         draft[index].likeState = newLikeState;
-        //         draft[index].likes += updateLikeValue;
-        //       }
-        //     })
-        //   )
-        // } 
-        else {
+        } else {
           patchResult = dispatch(
-            discussionsApi.util.updateQueryData("getAllDiscussions", currentPage, (draft) => {
+            discussionsApi.util.updateQueryData("getAllDiscussions", {spaceId, currentPage}, (draft) => {
               const index = draft.findIndex((t) => t.id === id)
               if (index !== -1) {
                 draft[index].likeState = newLikeState;
@@ -126,8 +108,7 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
               }
             })
           )
-        }
-
+        } 
         try {
           await queryFulfilled;
         } catch {
@@ -144,5 +125,6 @@ export const {
   useCreateDiscussionMutation, 
   useGetGeneralDiscussionIdQuery,
   useGetUserDiscussionsQuery,
-  useLazyGetUserDiscussionsQuery 
+  useLazyGetUserDiscussionsQuery,
+  useUpdateDiscussionLikesMutation
   } = discussionsApi

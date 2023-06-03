@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { Dialog } from 'primereact/dialog'
 import { RightTriangleArrowFillSvg } from '../../../../../svgs/svgs'
 import useGoToDiscussion from '../../hooks/useGoToDiscussion'
 
@@ -11,7 +12,6 @@ import { useGetGeneralDiscussionIdQuery } from '../../../../../api/services/disc
 import { useGetSpaceQuery } from '../../../../../api/services/spaces.ts'
 
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import useModal from '../../../../CommonComponents/Lexical/hooks/useModal.tsx'
 import CreateDiscussionForm from '../../../../Forms/DiscussionForm/Index'
 import { initialConfig } from '../../../../CommonComponents/Lexical/App.tsx'
 import ExpandButton from '../../../../CommonComponents/Buttons/ExpandButton/Index'
@@ -24,26 +24,22 @@ function DiscussionsList() {
   })
 
   const {data: generalDiscussionId } = useGetGeneralDiscussionIdQuery(spaceId, {
-    skip: !currentUser
+    skip: !currentUser,
   })
 
   const goToDiscussion = useGoToDiscussion(generalDiscussionId?.id)
 
   const spaceTitle = isUninitialized ? null : space?.title
 
-  const [modal, showModal] = useModal()
-  const onClick = useCallback(() => {
-    showModal(`${spaceTitle}`, (onClose) => (
-      <CreateDiscussionForm
-        closeModal={onClose}
-      />
-    ))
-  }, [spaceTitle])
+  const [visible, setVisible] = useState(false)
 
   return (
     <Container>
       <LexicalComposer initialConfig={initialConfig}>
-        {modal}
+        <Dialog header="Create Discussion" visible={visible} onHide={() => setVisible(false)}>
+          <CreateDiscussionForm spaceTitle={spaceTitle} closeModal={() => setVisible(false)} />
+        </Dialog>
+
       </LexicalComposer>
       <ActionItemsContainer>
         <h1>
@@ -54,7 +50,7 @@ function DiscussionsList() {
           or Start Your Own...
         </h1>
         <div style={{ display: 'flex', margin: '2em 0' }}>
-          <ExpandButton type="button" onClick={onClick}>
+          <ExpandButton type="button" onClick={() => setVisible(true)}>
             Start A Discussion +
           </ExpandButton>
           <ExpandButton type="button" onClick={goToDiscussion}>

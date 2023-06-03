@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, { useState } from 'react'
 
-import { Formik, Field } from 'formik'
+import { Formik } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { useLocation } from 'react-router-dom'
+import { Button } from 'primereact/button'
 import useHandleSubmit from './hooks/useHandleSubmit'
 import useConfigFormErrors from '../../util/form_helpers/hooks/useConfigFormErrors'
 
 import { DownArrowCircleSvg } from '../../../svgs/svgs'
-import Input from '../../CommonComponents/Form/Input3/Index'
-import Select from '../../CommonComponents/Form/Select/Index'
-import ExpandButton from '../../CommonComponents/Buttons/ExpandButton/Index'
 import UploadMediaContainer from '../components/UploadMedia/Index'
 
-import ThemeTooltip from '../../CommonComponents/Tooltip/Index'
 
 import LexicalEditor from '../../CommonComponents/Lexical/App.tsx'
 
@@ -24,68 +22,75 @@ import EmbedDropdown from '../components/EmbedDropdown/Index'
 
 import { LexicalFormContext } from '../SpaceForm/LexicalFormContext'
 import {
-  FlexDivLink, Footer, SectionDescription, FormContainer, InputsContainer, Container, Left,
+  Footer, SectionDescription, FormContainer, InputsContainer, Container, Left,
   Line, Arrow, FlexDiv,
 } from '../SpaceForm/Style'
 import DisplayMedia from '../components/DisplayMedia/Index'
+import FormikController from '../Formik/FormikController/Index'
+import Overlay from '../../CommonComponents/Overlay/Index'
+import useGetLexicalTextContent from '../hooks/useGetLexicalTextContent'
 
-const uuidRegEx = new RegExp(/\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g)
+const uuidRegEx = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g
+
+const VALIDATIONS = {
+  title: { REQUIRED: true },
+  // summary: { REQUIRED: true, MIN_LENGTH: 5 },
+  // category: { REQUIRED: true },
+}
 
 function CreateDiscussionForm({ closeModal }) {
   const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
   const [imgFile, setImgFile] = useState(null)
   const [videoFile, setVideoFile] = useState(null)
-  // const [metaData, setMetaData] = useState(null)
+  const [linkMetadata, setLinkMetadata] = useState(null)
+  const validator = useConfigFormErrors(VALIDATIONS)
 
   const [rotate, setRotate] = useState(0)
-  const [richTextEditorContent, setRichTextEditorContent] = useState('')
 
   const [spaceId] = pathname.match(uuidRegEx)
   const [editor] = useLexicalComposerContext()
 
-  // useEffect(() => {
-  //   const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
-  //     editorState.read(() => {
-  //       const jsonString = JSON.stringify(editorState)
-  //       setRichTextEditorContent(jsonString)
-  //     })
-  //   })
+  const editorTextContent = useGetLexicalTextContent(editor)
 
-  //   return () => removeUpdateListener()
-  // }, [])
-
-  const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
-  const handleSubmit = useHandleSubmit(externalContentUrl?.data, spaceId, closeModal, editor)
+  const handleSubmit = useHandleSubmit(linkMetadata, spaceId, closeModal, editor, editorTextContent)
 
   return (
     <Container>
       <Formik
         initialValues={INIT_SPACE_FORM_VALUES}
-        // validate={validator}
-        onSubmit={((values, params) => handleSubmit(values, params, richTextEditorContent, externalContentUrl))}
+        validate={validator}
+        onSubmit={((values, params) => handleSubmit(values, params))}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting, setFieldValue, ...rest }) => (
           <FormContainer>
             <InputsContainer>
               <Left>
-                <FlexDiv>
+                <Overlay
+                  header="Discussion Description"
+                  body="Enter A Short Title To Indicate What You Would Like To Dicuss in Relation To The Current Space"
+                  target="description_overlay"
+                >
                   <SectionDescription> Discussion Title </SectionDescription>
-                  <ThemeTooltip
-                    tooltipHeader="Space Description"
-                    tooltipText="Enter A Short Title To Indicate What You Would Like To Dicuss in Relation To The Current Space"
-                  />
-                </FlexDiv>
-                <Field type="text" name="title" label="Title*" component={Input} placeholder="Enter A Space Title" />
+                </Overlay>
+
+                <FormikController
+                  control="input"
+                  label="Title*"
+                  name="title"
+                  type="text"
+                  {...rest}
+                />
+
                 <Line />
 
-                <FlexDiv>
+                <Overlay
+                  header="User Provided Content"
+                  body="This could be an image, graphic, or video pertaining to the the discussion"
+                  target="user_media_overlay"
+                >
                   <SectionDescription> Add your own media content </SectionDescription>
-                  <ThemeTooltip
-                    tooltipHeader="User Provided Content"
-                    tooltipText="This could be an image, graphic, or video pertaining to the the discussion"
-                  />
-                </FlexDiv>
+                </Overlay>
                 <FlexDiv direction="column">
                   <UploadMediaContainer
                     setFieldValue={setFieldValue}
@@ -98,27 +103,23 @@ function CreateDiscussionForm({ closeModal }) {
                 <DisplayMedia imgFile={imgFile} videoFile={videoFile} />
                 <Line />
 
-                <FlexDiv>
-                  <SectionDescription>
-                    Link to what you want to discuss here...
-                  </SectionDescription>
-                  <ThemeTooltip
-                    tooltipHeader="Discussed Content"
-                    tooltipText="Add a link to the external content which pertains to the discussion (
-                        e.g a YouTube video, Tweet, publication, or anything else). Use this if the content you are linking is the main subject of the discussion"
-                  />
-                </FlexDiv>
-                <FlexDivLink className="toolbar" id="embed-toolbar">
-                  <EmbedDropdown setContentUrl={setContentUrl} />
-                </FlexDivLink>
+                <Overlay
+                  header="Discussed Content"
+                  body="Add a link to the external content which pertains to the discussion (
+                    e.g a YouTube video, Tweet, publication, or anything else). Use this if the content you are linking is the main subject of the discussion"
+                  target="external_link_overlay"
+                >
+                  <SectionDescription> Link to what you want to discuss here... </SectionDescription>
+                </Overlay>
+                <EmbedDropdown setLinkMetadata={setLinkMetadata} />
               </Left>
             </InputsContainer>
             <Line />
             <LexicalFormContext.Provider value={{
-              setContentUrl,
+              setLinkMetadata,
             }}
             >
-              <div id="insert-embed-node" />
+              <div id="insert-embed-node" className="w-full" />
               <LexicalEditor />
             </LexicalFormContext.Provider>
 
@@ -139,34 +140,60 @@ function CreateDiscussionForm({ closeModal }) {
             <InputsContainer>
               <Collapse in={open}>
                 <div style={{ whiteSpace: 'nowrap', width: '100%' }}>
-                  <FlexDiv>
-                    <h2> Enter Links To Supplemental Evidence </h2>
-                    <ThemeTooltip
-                      tooltipText="Provide links to additional reading or evidence etc..."
-                      tooltipHeader="Supplemental Information"
+                  <FlexDiv direction="column">
+                    <div className="mb-5">
+                      <Overlay
+                        header="Supplemental Information"
+                        body="Provide links to additional reading or evidence etc..."
+                        target="supplemental_overlay"
+                      >
+                        <SectionDescription> Enter Links To Supplemental Evidence </SectionDescription>
+                      </Overlay>
+
+                    </div>
+
+                    <FormikController
+                      control="input"
+                      label="Link To Evidence"
+                      name="Evidence Link 1"
+                      type="url"
+                      {...rest}
+                    />
+                    <FormikController
+                      control="input"
+                      label="Link To Evidence"
+                      name="Evidence Link 2"
+                      type="url"
+                      {...rest}
+                    />
+                    <FormikController
+                      control="input"
+                      label="Link To Evidence"
+                      name="Evidence Link 3"
+                      type="url"
+                      {...rest}
                     />
                   </FlexDiv>
-                  <Field type="url" name="Evidence Link 1" component={Input} width="100%" label="Link To Evidence" />
-                  <Field type="url" name="Evidence Link 2" component={Input} width="100%" label="Link To Evidence" />
-                  <Field type="url" name="Evidence Link 3" component={Input} width="100%" label="Link To Evidence" />
+
                 </div>
               </Collapse>
             </InputsContainer>
             <Footer>
-              <ExpandButton
+              <Button
+                raised
+                type="button"
+                disabled={isSubmitting || editorTextContent?.length < 6}
+                onClick={closeModal}
+                label="Cancel"
+              />
+
+              <Button
+                raised
                 type="submit"
-                bgColor="var(--m-primary-btn-color)"
-                disabled={isSubmitting}
-              >
-                Cancel
-              </ExpandButton>
-              <ExpandButton
-                type="submit"
-                bgColor="var(--m-primary-btn-color)"
-                disabled={isSubmitting}
-              >
-                Submit
-              </ExpandButton>
+                disabled={isSubmitting || editorTextContent?.length < 6}
+                label="Submit"
+                className="m-2"
+              />
             </Footer>
           </FormContainer>
         )}

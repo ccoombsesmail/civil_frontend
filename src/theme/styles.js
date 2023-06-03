@@ -1,16 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
-/* --------------------------------
-
-----------------------------------*/
 const GlobalStyle = createGlobalStyle`
 
-/* @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); */
-
-/* .List::-webkit-scrollbar {
-  display: none;
-
-} */
 
 .List div div {
   transition: all .5s;
@@ -21,28 +12,29 @@ const GlobalStyle = createGlobalStyle`
 
 .List::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #eee;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #eee;
 }
 
 .List::-webkit-scrollbar
 {
-	width: 12px;
-	background-color: #eee;
+  width: 12px;
+  background-color: #eee;
   display: none;
-}
+  }
 
 .List::-webkit-scrollbar-thumb
 {
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #527640;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #527640;
 }
 
 .ExcalidrawModal__overlay {
   z-index: 9999999999999999999 !important;
 }
+
 [data-testid="WRAPPER_CONTAINER"] {
   z-index: 99999999999;
   > div {
@@ -76,6 +68,8 @@ const GlobalStyle = createGlobalStyle`
 
 .wallet-adapter-button-trigger {
     background-color: #512da8;
+    background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6) !important;
+
 }
 
 .wallet-adapter-button:not([disabled]):focus-visible {
@@ -353,15 +347,6 @@ const GlobalStyle = createGlobalStyle`
 }
 
 
-/*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
-
-/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
-/* *:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
-    all: unset;
-    display: revert;
-} */
-
-/* Preferred box-sizing value */
 *,
 *::before,
 *::after {
@@ -545,13 +530,59 @@ blockquote {
   }
 
   html {
-    font-size: 10px;
+    font-size: 14px;
     /* font-family: "Baloo 2", cursive; */
     font-family: "Roboto",Helvetica,Arial,sans-serif;    
+
     overflow: hidden;
     /* font-family: 'Quicksand', sans-serif !important; */
 
   }
+
+  body {
+    font-family: var(--font-family) !important; 
+
+  }
+
+  /* .p-menu-overlay {
+    position: sticky !important;
+  } */
+
+  .yt-lite {
+    width: 90%;
+    border-radius: 10px;
+  }
+  .p-inputtext.p-invalid.p-component {
+    box-shadow: 0 0 0 0.2rem #fa9898 !important;
+  }
+  .p-tooltip-arrow {
+    border-top-color: white !important;
+  }
+
+  .p-tooltip-active {
+    z-index: 9999999999999 !important;
+    background: transparent !important;
+  }
+
+  .p-tooltip-text {
+    padding: 0 !important;
+  }
+
+  .p-float-label input:focus ~ label {
+    top: -1rem !important;
+  }
+
+  .p-dialog-header {
+    border-bottom: 1px solid lightgray !important;
+  }
+  .p-dialog-mask {
+    z-index: 9999999999999999 !important;
+  }
+  .p-dropdown-panel {
+    z-index: 999999999999999 !important;
+    margin-top: 2px !important;
+  }
+
   .wallet-adapter-button-trigger {
     background-color: #56899e;
     background-image: linear-gradient(to right,var(--m-primary-background-color),#83af9b);

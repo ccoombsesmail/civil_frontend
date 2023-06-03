@@ -1,27 +1,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo, forwardRef } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 
-import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode'
+import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
 import Card from '../../../../../../CommonComponents/SpaceCard/Index'
 
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
-import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme'
-import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes'
+import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
+import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
 import { VideoPlayer } from '../../../../../HomePage/components/Spaces/components/SpaceItem/Style'
 
-import { useGetAllDiscussionsQuery } from '../../../../../../../api/services/discussions'
-import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser.js';
+import { useGetAllDiscussionsQuery } from '../../../../../../../api/services/discussions.ts'
+import { DiscussionItemContex } from './DiscussionItemContext.ts'
+import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
-const DiscussionItem = ({
-  discussion, user, hideCommentButton, id, currentPage 
-}) => {
- 
+function DiscussionItem({
+  discussion, user, hideCommentButton, id, currentPage,
+}) {
   const initialConfig = {
     editorState: discussion?.editorState,
     namespace: `Civil-${discussion?.title}`,
@@ -40,7 +40,7 @@ const DiscussionItem = ({
       user,
       showLinks: false,
       hideCommentButton,
-      currentPage
+      currentPage,
     }),
     [discussion, user, currentPage],
   )
@@ -95,33 +95,27 @@ const DiscussionItem = ({
   )
 }
 
-
-
-
-
-
 function DiscussionsFeedItem({ index, style }) {
   const { spaceId } = useParams()
-  const { data, isLoading, isUninitialized } = useGetAllDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10)});
+  const { data, isLoading, isUninitialized } = useGetAllDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10)})
   const { currentUser } = useGetCurrentUser()
   let content
   if (isLoading || isUninitialized || !data) {
-    content = <CircleLoading size={60} /> 
+    content = <CircleLoading size={60} />
   } else {
-    const discussion = data[index%10]
-    console.log(discussion)
-    content = discussion && discussion.title !== "General" ? (
-      // <SpaceItemContext.Provider value={{currentPage: Math.floor(index / 5)}}>
+    const discussion = data[index % 10]
+    content = discussion && discussion.title !== 'General' ? (
+      <DiscussionItemContex.Provider value={{currentPage: Math.floor(index / 5), spaceId}}>
         <DiscussionItem
           style={style}
           key={discussion.id}
           discussion={discussion}
           user={currentUser}
-          currentPage={Math.floor(index/5)}
+          currentPage={Math.floor(index / 5)}
         />
-      // </SpaceItemContext.Provider>
+      </DiscussionItemContex.Provider>
 
-     ) : null    
+    ) : null
   }
   return <div style={style}>{content}</div>
 }

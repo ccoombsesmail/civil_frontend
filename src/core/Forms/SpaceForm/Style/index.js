@@ -109,13 +109,12 @@ export const InputsContainer = styled('div')`
 
 export const Left = styled('div')`
   display: flex;
-  display: inline-block;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   .toolbar {
     height: 50px !important;
   }
-  /* border-right: 1px solid black; */
   @media only screen and (max-width: 800px) {
     width: 100%;
     border-right: none;
@@ -141,7 +140,6 @@ export const InputWrapper = styled('div')`
 `
 
 export const Container = styled('div')`
-  overflow-y: scroll;
   height: 60vh;
   width: clamp(400px, 70vw, 1100px);
   background: white;

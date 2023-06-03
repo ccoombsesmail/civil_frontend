@@ -3,8 +3,8 @@ import React, { useCallback } from 'react'
 import {
   useAddNewSpaceFollowMutation, useRemoveSpaceFollowMutation,
 } from '../../../../../../api/services/spaceFollows.ts'
-import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser.js'
-import { SpaceItemContext } from '../../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.jsx'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
+import { SpaceItemContext } from '../../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.tsx'
 
 export default (space) => {
   const { currentPage, updateFollowedSpacesQuery } = React.useContext(SpaceItemContext) || {}

@@ -10,7 +10,7 @@ import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import {
   LexicalTypeaheadMenuPlugin,
   QueryMatch,
-  TypeaheadOption,
+  MenuOption,
   useBasicTypeaheadTriggerMatch,
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import {TextNode} from 'lexical';
@@ -587,7 +587,7 @@ function getPossibleQueryMatch(text: string): QueryMatch | null {
   return match === null ? checkForCapitalizedNameMentions(text, 3) : match;
 }
 
-class MentionTypeaheadOption extends TypeaheadOption {
+class MentionTypeaheadOption extends MenuOption {
   name: string;
   picture: JSX.Element;
 

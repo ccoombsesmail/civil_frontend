@@ -101,7 +101,6 @@ function Header() {
     content = null
   }
 
-
   return (
     <Container>
       <h1 className="text-focus-in">
@@ -122,7 +121,7 @@ function Header() {
         width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative',
       }}
       >
-        {discussion && discussionId ?  <DiscussionCard key={discussionId} discussion={discussion} isDiscussionLoading={isDiscussionLoading} isDiscussionUninitialized={isDiscussionUninitialized} /> : null}
+        {discussion && discussionId ? <DiscussionCard key={discussionId} discussion={discussion} isDiscussionLoading={isDiscussionLoading} isDiscussionUninitialized={isDiscussionUninitialized} /> : null}
       </div>
     </Container>
 

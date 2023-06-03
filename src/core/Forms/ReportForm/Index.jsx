@@ -3,7 +3,6 @@ import React from 'react'
 import { Formik, Field } from 'formik'
 import { Footer } from '../SpaceForm/Style'
 
-import Button from '../../CommonComponents/Button/Index'
 import { Checkbox } from '../../CommonComponents/Form/Checkbox/Index'
 
 import {
@@ -11,7 +10,6 @@ import {
 } from './Style/Index'
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 import ExpandButton from '../../CommonComponents/Buttons/ExpandButton/Index'
-import { Line } from '../../CommonComponents/Line/index';
 
 function ReportForm({ contentId, closeModal }) {
   const handleOnSubmit = useHandleOnSubmit(contentId, closeModal)

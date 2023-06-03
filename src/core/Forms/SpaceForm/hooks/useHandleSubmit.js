@@ -33,7 +33,7 @@ export default (metaData, closeModal, editor) => {
         userUploadedVodUrl = urlData.vodUrl
       }
     }
-
+    console.log(values)
     const data = {
       ...values,
       userUploadedVodUrl,
@@ -43,6 +43,7 @@ export default (metaData, closeModal, editor) => {
       createdByuserId: currentUser.userId,
       referenceLinks: eLinks,
       editorTextContent: editorTextContent.replace(/\n/g, ' '),
+      category: values.category.name,
     }
 
     toast.promise(

@@ -7,10 +7,10 @@ export const ButtonBackground = styled('div')`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.backgroundColor || 'black'};
-  border-radius: 0.85rem;
+  border-radius: 5px;
   overflow: hidden;
   transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);
-  background-image: linear-gradient(to right,var(--m-primary-background-color),#427a4e);
+  background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6);
   background-image: ${(props) => (props.civicButton && 'none !important')};
   /* background-image: linear-gradient(90deg, rgba(33,183,183,1) 0%, var(--m-primary-background-color) 100%); */
   ::before,
@@ -80,6 +80,8 @@ export const StyledButton = styled('button')`
     ${ButtonBackground} {
       transform: scale3d(1, 1, 1);
       border: 1px solid ${(props) => props.backgroundColor || 'black'};
+      box-shadow: 0 0 0 0.2rem #99F6E4;
+      border-color: #14B8A6;
       ::before {
         transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);
         transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1);
@@ -104,6 +106,8 @@ export const Container = styled('div')`
   align-items: center;
   justify-content: center;
   position: relative;
+  border-radius: 5px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
   svg {
     margin: clamp(7px, .4vw, 12px);
@@ -123,7 +127,6 @@ export const Container = styled('div')`
     pointer-events: auto;
     cursor: pointer;
     background-color: ${(props) => props.backgroundColor || 'black'};
-
     border: none;
     margin: 0;
     font-family: inherit;

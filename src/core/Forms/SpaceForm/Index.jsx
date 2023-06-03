@@ -5,31 +5,29 @@ import { Formik, Field } from 'formik'
 import { Collapse, Fade } from 'react-bootstrap'
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { Button } from 'primereact/button'
 import useHandleSubmit from './hooks/useHandleSubmit'
 import useConfigFormErrors from '../../util/form_helpers/hooks/useConfigFormErrors'
 
 import { DownArrowCircleSvg } from '../../../svgs/svgs'
 import Input from '../../CommonComponents/Form/Input3/Index'
-import Select from '../../CommonComponents/Form/Select/Index'
 import ExpandButton from '../../CommonComponents/Buttons/ExpandButton/Index'
-import UploadMediaContainer from '../components/UploadMedia/Index'
 
 import ThemeTooltip from '../../CommonComponents/Tooltip/Index'
 
 import LexicalEditor from '../../CommonComponents/Lexical/App.tsx'
 
 import {
-  FormContainer, InputsContainer, Container, Left, SectionDescription, FlexDivLink,
+  FormContainer, InputsContainer, Container, Left, SectionDescription,
   Line, Arrow, FlexDiv, Footer,
 } from './Style'
 
 import { INIT_SPACE_FORM_VALUES } from '../../util/form_helpers/init_form_values'
 import useGetLinkMetaDataOnBlur from '../hooks/useGetLinkMetaDataOnBlur'
-import EmbedDropdown from '../components/EmbedDropdown/Index'
 
 import { LexicalFormContext } from './LexicalFormContext'
-import DisplayMedia from '../components/DisplayMedia/Index'
-import SearchableSelect from '../../CommonComponents/Form/SearchableSelect/Index'
+import FormikController from '../Formik/FormikController/Index'
+import { useGetEnumsQueryState } from '../../../api/services/enums.ts'
 
 const VALIDATIONS = {
   title: { REQUIRED: true },
@@ -39,8 +37,6 @@ const VALIDATIONS = {
 
 function CreateSpaceForm({ closeModal }) {
   const [open, setOpen] = useState(false)
-  const [imgFile, setImgFile] = useState(null)
-  const [videoFile, setVideoFile] = useState(null)
 
   const [rotate, setRotate] = useState(0)
 
@@ -50,6 +46,7 @@ function CreateSpaceForm({ closeModal }) {
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
 
   const handleSubmit = useHandleSubmit(externalContentUrl?.data, closeModal, editor)
+  const { data: enums } = useGetEnumsQueryState()
 
   const contextValues = useMemo(() => ({
     setContentUrl,
@@ -62,7 +59,7 @@ function CreateSpaceForm({ closeModal }) {
         validate={validator}
         onSubmit={((values, params) => handleSubmit(values, params, externalContentUrl))}
       >
-        {({ isSubmitting, setFieldValue, setFieldTouched }) => (
+        {({ isSubmitting, setFieldTouched, ...rest }) => (
           <FormContainer>
             <InputsContainer>
               <Left>
@@ -73,52 +70,25 @@ function CreateSpaceForm({ closeModal }) {
                     tooltipText="Provide information about the space you would like to discuss"
                   />
                 </FlexDiv>
-                <Field type="text" name="title" label="Title*" component={Input} placeholder="Enter A Space Title" />
                 <Line />
 
-                <Field
+                <FormikController
+                  control="input"
+                  label="Title*"
+                  name="title"
                   type="text"
-                  name="category"
-                  label="Category"
-                  component={SearchableSelect}
-                  setFieldValue={setFieldValue}
-                  setFieldTouched={setFieldTouched}
-                  placeholder="Select A Category"
+                  {...rest}
                 />
                 <Line />
 
-                {/* <FlexDiv>
-                  <SectionDescription> Add your own media content </SectionDescription>
-                  <ThemeTooltip
-                    tooltipHeader="User Provided Content"
-                    tooltipText="This could be an image, graphic, or video pertaining to the space you would like to discuss"
-                  />
-                </FlexDiv> */}
-                {/* <FlexDiv direction="column">
-                  <UploadMediaContainer
-                    setFieldValue={setFieldValue}
-                    imgFile={imgFile}
-                    videoFile={videoFile}
-                    setImgFile={setImgFile}
-                    setVideoFile={setVideoFile}
-                  />
-                  <DisplayMedia imgFile={imgFile} videoFile={videoFile} />
-                </FlexDiv>
+                <FormikController
+                  control="select"
+                  name="category"
+                  placeholder="Select A Category"
+                  enums={enums}
+                  {...rest}
+                />
                 <Line />
-
-                <FlexDiv>
-                  <SectionDescription>
-                    Link to what you want to discuss here...
-                  </SectionDescription>
-                  <ThemeTooltip
-                    tooltipHeader="Discussed Content"
-                    tooltipText="Add a link to the external content you would like to discuss (
-                        e.g a YouTube video, Tweet, publication, or anything else). Use this if the content you are linking is the main subject of the space"
-                  />
-                </FlexDiv>
-                <FlexDivLink className="toolbar" id="embed-toolbar">
-                  <EmbedDropdown setContentUrl={setContentUrl} />
-                </FlexDivLink> */}
               </Left>
             </InputsContainer>
             {/* <Line /> */}
@@ -158,21 +128,22 @@ function CreateSpaceForm({ closeModal }) {
               </Collapse>
             </InputsContainer>
             <Footer>
-              <ExpandButton
-                type="submit"
+              <Button
+                type="button"
                 bgColor="var(--m-primary-btn-color)"
                 disabled={isSubmitting}
                 onClick={closeModal}
-              >
-                Cancel
-              </ExpandButton>
-              <ExpandButton
+                label="Cancel"
+              />
+
+              <Button
                 type="submit"
                 bgColor="var(--m-primary-btn-color)"
                 disabled={isSubmitting}
-              >
-                Submit
-              </ExpandButton>
+                label="Submit"
+                className="m-2"
+              />
+
             </Footer>
           </FormContainer>
         )}

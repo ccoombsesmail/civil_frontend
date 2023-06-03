@@ -5,6 +5,7 @@ export const Label = styled('label')`
   display: flex;
   flex-direction: column;
   width: 10%;
+  margin-right: 30px;
   img {
     width: 100%;
     height: auto;

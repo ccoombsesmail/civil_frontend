@@ -22,6 +22,9 @@ module.exports = {
     semi: [2, 'never'],
     'import/prefer-default-export': 'off',
     'max-len': ['error', { code: 180 }],
+    'object-curly-spacing': 'off',
+    'linebreak-style': 0,
+    'react/jsx-props-no-spreading': 'off',
   },
 
 }

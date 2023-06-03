@@ -5,7 +5,7 @@ import IconButton from '../../../IconButton/Index'
 import LinkSection from '../../../LinkSection/Index'
 import ActionToolbar from '../../../ActionToolbars/SpaceToolbar/Index'
 import { Description, LinkSectionContainer } from './Style'
-import Editor from '../../../Lexical/ReadOnlyEditor'
+import Editor from '../../../Lexical/ReadOnlyEditor.tsx'
 
 function CardDetails({
   showLinks = true,
@@ -13,7 +13,7 @@ function CardDetails({
   discussion,
   user,
   hideCommentButton,
-  currentPage
+  currentPage,
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const expandIcon = isOpen ? <UpArrowSvg /> : <DownArrowSvg />

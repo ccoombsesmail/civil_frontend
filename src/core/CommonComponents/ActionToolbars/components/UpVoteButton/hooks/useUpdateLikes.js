@@ -1,21 +1,21 @@
-import { useCallback, useContext } from "react";
-import { useUpdateSpaceLikesMutation } from "../../../../../../api/services/spaces.ts";
+import { useCallback, useContext } from 'react'
+import { useUpdateSpaceLikesMutation } from '../../../../../../api/services/spaces.ts'
 
 import {
   SPACE,
   COMMENT,
   TRIBUNAL_COMMENT,
-} from "../../../../../../enums/content_type";
-import { calculateLikeValueToAdd } from "../../../utils/calculateLikeValueToAdd";
-import { useUpdateCommentLikesMutation } from "../../../../../../api/services/comments.ts";
-import { useUpdateTribunalCommentLikesMutation } from "../../../../../../api/services/tribunal_comments.ts";
-import useDetectCurrentPage from "../../../../../hooks/routing/useDetectCurrentPage";
-import { ParentCommentContext } from "../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext";
+} from '../../../../../../enums/content_type'
+import { calculateLikeValueToAdd } from '../../../utils/calculateLikeValueToAdd'
+import { useUpdateCommentLikesMutation } from '../../../../../../api/services/comments.ts'
+import { useUpdateTribunalCommentLikesMutation } from '../../../../../../api/services/tribunal_comments.ts'
+import useDetectCurrentPage from '../../../../../hooks/routing/useDetectCurrentPage.ts'
+import { ParentCommentContext } from '../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
 import {
   LikedState,
   NeutralState,
-} from "../../../../../../enums/like_state.js";
-import { SpaceItemContext } from "../../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.jsx";
+} from '../../../../../../enums/like_state'
+import { SpaceItemContext } from '../../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.tsx'
 
 export default (content, user, contentType, currentPageSpace) => {
   const {
@@ -26,14 +26,14 @@ export default (content, user, contentType, currentPageSpace) => {
     rootOfCommentReplyThreadId,
     commentType,
     reportedContentId,
-  } = useContext(ParentCommentContext) || {};
+  } = useContext(ParentCommentContext) || {}
 
-  const { updateFollowedSpacesQuery } = useContext(SpaceItemContext) || {};
+  const { updateFollowedSpacesQuery } = useContext(SpaceItemContext) || {}
 
-  const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation();
-  const [updateLikes] = useUpdateSpaceLikesMutation();
-  const [updateCommentLikes] = useUpdateCommentLikesMutation();
-  const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage();
+  const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation()
+  const [updateLikes] = useUpdateSpaceLikesMutation()
+  const [updateCommentLikes] = useUpdateCommentLikesMutation()
+  const { isOnDiscussionsPage, isOnTribunalPage } = useDetectCurrentPage()
   return useCallback(async () => {
     const likeData = {
       id: content?.id,
@@ -41,7 +41,7 @@ export default (content, user, contentType, currentPageSpace) => {
       createdByUserId: content.createdByUserId,
       updateLikeValue: calculateLikeValueToAdd(
         content.likeState,
-        content.likeState === LikedState ? NeutralState : LikedState
+        content.likeState === LikedState ? NeutralState : LikedState,
       ),
       updateGetSpaceQuery: isOnDiscussionsPage || isOnTribunalPage,
       isReplies,
@@ -55,20 +55,20 @@ export default (content, user, contentType, currentPageSpace) => {
       likeAction: content.likeState === LikedState ? NeutralState : LikedState,
       commentType,
       reportedContentId,
-      updateFollowedSpacesQuery
-    };
+      updateFollowedSpacesQuery,
+    }
     switch (contentType) {
       case SPACE:
-        await updateLikes(likeData);
-        break;
+        await updateLikes(likeData)
+        break
       case COMMENT:
-        await updateCommentLikes(likeData);
-        break;
+        await updateCommentLikes(likeData)
+        break
       case TRIBUNAL_COMMENT:
-        await updateTribunalCommentLikes(likeData);
-        break;
+        await updateTribunalCommentLikes(likeData)
+        break
       default:
-        break;
+        break
     }
-  }, [content, contentType]);
-};
+  }, [content, contentType])
+}

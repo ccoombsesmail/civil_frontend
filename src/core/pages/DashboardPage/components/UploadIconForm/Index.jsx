@@ -5,6 +5,7 @@ import { Formik, Field } from 'formik'
 import ImageCheckbox from '../ImageCheckbox/Index'
 import UploadIconInput from '../UploadIconInput/Index'
 import Button from '../../../../CommonComponents/Button/Index'
+import Dropzone from '../../../../CommonComponents/Dropzone/Dropzone'
 
 import sessionActions from '../../../../../redux/actions/session/index'
 import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
@@ -65,7 +66,7 @@ function UploadIconForm({ closeModal }) {
         {({ isSubmitting, setFieldValue }) => (
           <FormContainer>
             <FlexDiv>
-              <Field
+              {/* <Field
                 type="file"
                 name="fileName"
                 userIcon={user?.iconSrc}
@@ -75,7 +76,8 @@ function UploadIconForm({ closeModal }) {
               />
               <span>
                 Upload A Profile Picture
-              </span>
+              </span> */}
+              <Dropzone />
             </FlexDiv>
             <h2>
               Or Choose An Avatar

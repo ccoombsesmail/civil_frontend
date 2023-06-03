@@ -1,3 +1,5 @@
+import { LikeAction, ReportStatus, UserVerificationType } from "../enums/enums";
+
 type UUID = string
 type ZonedDateTime = string
 type SpaceCategories = string

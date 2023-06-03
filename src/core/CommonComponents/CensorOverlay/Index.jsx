@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { WarningSvg, ScalesSvg } from '../../../svgs/svgs'
-import { ThemeButton2 } from '../Button/Index'
 import ExpandButton from '../Buttons/ExpandButton/Index'
 
 import {
@@ -34,15 +33,16 @@ function CensorOverlay({
         </div>
       </Warning>
       { showNavigationToTribunal ? (
-        <ExpandButton
-          width="auto"
-          bgColor="var(--m-primary-btn-color)"
-          onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}
-        >
-          <ScalesSvg />
-          See Ongoing Review Process
-          <ScalesSvg />
-        </ExpandButton>
+        <></>
+        // <ExpandButton
+        //   width="auto"
+        //   bgColor="var(--m-primary-btn-color)"
+        //   onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}
+        // >
+        //   <ScalesSvg />
+        //   See Ongoing Review Process
+        //   <ScalesSvg />
+        // </ExpandButton>
       ) : <span />}
 
     </MessageContainer>

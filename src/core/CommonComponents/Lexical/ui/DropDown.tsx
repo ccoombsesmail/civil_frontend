@@ -15,10 +15,10 @@ import {
   useState,
 } from 'react';
 import * as React from 'react';
-import {createPortal} from 'react-dom';
 
 type DropDownContextType = {
   registerItem: (ref: React.RefObject<HTMLButtonElement>) => void;
+  onClose: () => void
 };
 
 const DropDownContext = React.createContext<DropDownContextType | null>(null);
@@ -44,7 +44,13 @@ export function DropDownItem({
     throw new Error('DropDownItem must be used within a DropDown');
   }
 
-  const {registerItem} = dropDownContext;
+  const {registerItem, onClose } = dropDownContext;
+
+  const handleOnClick = useCallback((e) => {
+    console.log("ere")
+    onClick(e)
+    onClose()
+  }, [onClose, onClick])
 
   useEffect(() => {
     if (ref && ref.current) {
@@ -56,7 +62,7 @@ export function DropDownItem({
     <button
       disabled={disabled}
       className={className}
-      onClick={ disabled ? (e) => e.stopPropagation(): onClick}
+      onClick={ disabled ? (e) => e.stopPropagation() : handleOnClick}
       ref={ref}
       title={title}
       type="button">
@@ -115,8 +121,9 @@ function DropDownItems({
   const contextValue = useMemo(
     () => ({
       registerItem,
+      onClose
     }),
-    [registerItem],
+    [registerItem, onClose],
   );
 
   useEffect(() => {
@@ -127,7 +134,6 @@ function DropDownItems({
     if (highlightedItem && highlightedItem.current) {
       highlightedItem.current.focus();
     }
-    console.log(dropDownRef)
   }, [items, highlightedItem, dropDownRef]);
 
   return (
@@ -178,32 +184,16 @@ export default function DropDown({
     const button1Pos = button1Rect.left - headerRect.left;
 
     setDropdownLeft(button1Pos)
-    if (button !== null && showDropDown) {
-      const handle = (event: MouseEvent) => {
-        const target = event.target;
-        console.log(target)
-        console.log(stopCloseOnClickSelf)
-        if (true) {
-          if (
-            dropDownRef.current &&
-            dropDownRef.current.contains(target as Node)
-          )
-            return;
-        }
-        if (!button.contains(target as Node)) {
-          setShowDropDown(false);
-        }
-      };
-      document.getElementsByClassName('Modal__overlay')[0].addEventListener('click', handle);
-
-      return () => {
-        document.getElementsByClassName('Modal__overlay')[0].removeEventListener('click', handle);
-      };
-    }
   }, [dropDownRef, buttonRef, showDropDown, stopCloseOnClickSelf]);
 
   return (
     <>
+    <div 
+    id='toolbar-overlay' 
+    style={{display: showDropDown ? 'block' : 'none', zIndex: 9999999999}} 
+    className='absolute top-0 bottom-0 left-0 right-0' 
+    onClick={() => setShowDropDown(false)}
+    />
       <button
         type='button'
         disabled={disabled}
@@ -223,14 +213,6 @@ export default function DropDown({
             {children}
       </DropDownItems>
     }   
-
-      {/* {showDropDown &&
-        createPortal(
-          <DropDownItems dropDownRef={dropDownRef} onClose={handleClose}>
-            {children}
-          </DropDownItems>,
-          document.getElementById(anchorId),
-        )} */}
     </>
   );
 }
@@ -311,14 +293,6 @@ export function DropDownFromExternal({
             {children}
       </DropDownItems>
     }   
-
-      {/* {showDropDown &&
-        createPortal(
-          <DropDownItems dropDownRef={dropDownRef} onClose={handleClose}>
-            {children}
-          </DropDownItems>,
-          document.getElementById(anchorId),
-        )} */}
     </>
   );
 }

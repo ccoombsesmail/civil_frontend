@@ -6,26 +6,24 @@ import useBindDispatch from '../../../hooks/redux/useBindDispatch'
 
 import checkLinkType from '../../hooks/checkLinkType'
 import { useCreateDiscussionMutation } from '../../../../api/services/discussions.ts'
-import useGetLexicalTextContent from '../../hooks/useGetLexicalTextContent'
 
-export default (metaData, spaceId, closeModal, editor) => {
+export default (linkMetaData, spaceId, closeModal, editor, editorTextContent) => {
   const { uploadSpaceMedia } = useBindDispatch(spaceActions)
   const [createDiscussion] = useCreateDiscussionMutation()
-  const editorTextContent = useGetLexicalTextContent(editor)
 
-  return useCallback((values, { setSubmitting, resetForm }, content, externalContentUrl) => {
+  return useCallback((values, { setSubmitting, resetForm }) => {
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
-    const linkType = checkLinkType(externalContentUrl?.url)
+    const linkType = checkLinkType(linkMetaData?.url)
     const data = {
       ...values,
       editorState: JSON.stringify(editor.getEditorState()),
       evidenceLinks: eLinks,
       spaceId,
-      externalContentData: !externalContentUrl ? null : {
+      externalContentData: !linkMetaData ? null : {
         linkType,
-        embedId: externalContentUrl?.id || null,
-        externalContentUrl: externalContentUrl.url,
-        thumbImgUrl: metaData?.ogImage?.url || null,
+        embedId: linkMetaData?.embedId || null,
+        externalContentUrl: linkMetaData.url,
+        thumbImgUrl: linkMetaData?.ogImage?.url || null,
       },
       editorTextContent: editorTextContent.replace(/\n/g, ' '),
 
@@ -54,5 +52,5 @@ export default (metaData, spaceId, closeModal, editor) => {
     setSubmitting(false)
     resetForm({})
     closeModal()
-  }, [metaData, spaceId, editor, editorTextContent])
+  }, [linkMetaData, spaceId, editor, editorTextContent])
 }
