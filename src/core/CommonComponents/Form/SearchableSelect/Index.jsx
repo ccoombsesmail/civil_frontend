@@ -1,11 +1,10 @@
 // SearchableSelect.js
-import React, { useCallback } from 'react';
-import SelectSearch from 'react-select-search';
+import React, { useCallback } from 'react'
+import SelectSearch from 'react-select-search'
 import { useGetEnumsQueryState } from '../../../../api/services/enums.ts'
 import 'react-select-search/style.css'
 
-import styled from 'styled-components';
-
+import styled from 'styled-components'
 
 const Container = styled('div')`
   position: relative;
@@ -18,23 +17,24 @@ const Container = styled('div')`
 
 `
 
-const SearchableSelect = ({  width, field, form, placeholder, setFieldValue, setFieldTouched, value, ...props }) => {
+function SearchableSelect({
+  width, field, form, placeholder, setFieldValue, setFieldTouched, value, ...props
+}) {
   const { data: enums, isUninitialized } = useGetEnumsQueryState()
   const onChange = useCallback((e, setField) => {
-    console.log(e)
     setFieldValue(field.name, e)
   }, [])
   return (
     <Container>
-    <SelectSearch
-      options={enums}
-      value={value}
-      onChange={onChange}
-      search
-      placeholder={placeholder}
-    />
+      <SelectSearch
+        options={enums}
+        value={value}
+        onChange={onChange}
+        search
+        placeholder={placeholder}
+      />
     </Container>
-  );
-};
+  )
+}
 
-export default SearchableSelect;
+export default SearchableSelect

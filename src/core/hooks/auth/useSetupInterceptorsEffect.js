@@ -49,11 +49,6 @@ export default () => {
           req.headers['X-JWT-TYPE'] = 'CIVIC-DID'
           req.headers.Authorization = `Bearer ${civicToken}`
         }
-        // if (!token) {
-        //   console.log(req)
-        //   console.log("cancelling...")
-        //   throw new axios.Cancel('Operation canceled by the user.')
-        // }
         return req
       },
       (error) => Promise.reject(error),

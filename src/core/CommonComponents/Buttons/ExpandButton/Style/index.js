@@ -81,7 +81,7 @@ export const StyledButton = styled('button')`
       transform: scale3d(1, 1, 1);
       border: 1px solid ${(props) => props.backgroundColor || 'black'};
       box-shadow: 0 0 0 0.2rem #99F6E4;
-      border-color: #14B8A6;
+      border: none;
       ::before {
         transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);
         transform: translate3d(-50%, -50%, 0) scale3d(1, 1, 1);

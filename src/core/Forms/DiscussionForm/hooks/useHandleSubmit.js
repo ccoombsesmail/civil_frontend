@@ -14,6 +14,9 @@ export default (linkMetaData, spaceId, closeModal, editor, editorTextContent) =>
   return useCallback((values, { setSubmitting, resetForm }) => {
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
     const linkType = checkLinkType(linkMetaData?.url)
+    const editorShell = document.getElementById('discussion-form-container').getElementsByClassName('editor-shell')[0]
+    const style = window.getComputedStyle(editorShell)
+    const { height } = style
     const data = {
       ...values,
       editorState: JSON.stringify(editor.getEditorState()),
@@ -26,7 +29,7 @@ export default (linkMetaData, spaceId, closeModal, editor, editorTextContent) =>
         thumbImgUrl: linkMetaData?.ogImage?.url || null,
       },
       editorTextContent: editorTextContent.replace(/\n/g, ' '),
-
+      contentHeight: parseFloat(height),
     }
     if (values.file instanceof File) {
       const [fileType, fileFormat] = values.file.type.split('/')

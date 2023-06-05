@@ -17,7 +17,7 @@ function TooltipComponent({ idx, linkText, link }) {
       )}
     >
       <Link key={String(idx)} href={link} target="_blank">
-        {linkText[1]}
+        {linkText}
       </Link>
     </OverlayTrigger>
   )
@@ -26,13 +26,10 @@ function TooltipComponent({ idx, linkText, link }) {
 function SupplementalLinks({ links }) {
   return (
     <Container>
-      {links?.map((link, idx) => {
-        const linkText = link.match(domainExtractor)
-        return (
-          <TooltipComponent key={String(idx)} linkText={linkText} idx={idx} link={link} />
+      {links?.map((link, idx) => (
+        <TooltipComponent key={String(idx)} linkText={link} idx={idx} link={link} />
 
-        )
-      })}
+      ))}
     </Container>
   )
 }

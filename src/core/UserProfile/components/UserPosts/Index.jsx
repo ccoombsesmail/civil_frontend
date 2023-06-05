@@ -19,10 +19,10 @@ import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 function UserPosts({ profileUserId, user }) {
   const { currentUser } = useGetCurrentUser()
   const [activeKey, setActiveKey] = useState('0')
-  const { data: spaces, isLoading } = useGetUserSpacesQuery(profileUserId, {
+  const { data: spaces } = useGetUserSpacesQuery(profileUserId, {
     skip: !profileUserId,
   })
-  console.log(profileUserId)
+
   const [getUserDiscussions, { data: discussions, isLoading: isDiscussionsLoading }] = useLazyGetUserDiscussionsQuery()
   const [getUserComments, { data: comments, isLoading: isCommentsLoading }] = useLazyGetUserCommentsQuery()
   return (

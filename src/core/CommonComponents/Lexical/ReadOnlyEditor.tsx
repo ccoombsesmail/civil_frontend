@@ -18,7 +18,6 @@ import Placeholder from './ui/Placeholder';
 export default function ReadOnlyEditor({ className }): JSX.Element {
   const placeholder = <Placeholder>{"Loading..."}</Placeholder>;
   const [editor] = useLexicalComposerContext()
-
   React.useEffect(() => {
     setTimeout(() => {
       editor.setEditable(false)
@@ -33,7 +32,7 @@ export default function ReadOnlyEditor({ className }): JSX.Element {
               contentEditable={
                 <div className="editor-scroller">
                   <div className="editor">
-                    <ContentEditable readOnly={false} />
+                    <ContentEditable readOnly={true} />
                   </div>
                 </div>
               }

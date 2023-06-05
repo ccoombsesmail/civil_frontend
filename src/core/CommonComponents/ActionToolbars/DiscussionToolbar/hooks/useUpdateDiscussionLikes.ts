@@ -3,25 +3,29 @@ import { useUpdateDiscussionLikesMutation } from "../../../../../api/services/di
 
 import { calculateLikeValueToAdd } from "../../utils/calculateLikeValueToAdd";
 import useDetectCurrentPage from "../../../../hooks/routing/useDetectCurrentPage";
-import { LikedState, NeutralState } from "../../../../../enums/like_state.js";
-import { Space } from "../../../../../types/spaces/space";
+import { LikedState, NeutralState, DislikedState } from "../../../../../enums/like_state.js";
 import { Discussion } from "../../../../../types/discussions/discussion";
 import { DiscussionItemContex, DiscussionItemContextValue } from "../../../../pages/DiscussionsPage/components/DiscussionsFeed/components/CardFeedItem/DiscussionItemContext";
 
-export default (content: Discussion) => {
+export default (content: Discussion, action: 'upvote' | 'downvote', updateGetDiscussionQuery: boolean) => {
   const { id, createdByUserId, likeState } = content;
-  const { currentPage, spaceId } = useContext<DiscussionItemContextValue>(DiscussionItemContex);
+  const { currentPage, spaceId } = useContext<DiscussionItemContextValue>(DiscussionItemContex) || {};
 
-  const [updateLikes] = useUpdateDiscussionLikesMutation();
+  const [updateLikes, { isLoading }] = useUpdateDiscussionLikesMutation();
   const { isOnDiscussionsPage } = useDetectCurrentPage();
   
-  const newLikeState = likeState === LikedState ? NeutralState : LikedState;
+  let newLikeState;
+  if (action === 'upvote') {
+    newLikeState = likeState === LikedState ? NeutralState : LikedState;
+  } else if (action === 'downvote') {
+    newLikeState = likeState === DislikedState ? NeutralState : DislikedState;
+  }
 
   const prepareLikeData = () => ({
     id: id,
     createdByUserId: createdByUserId,
     updateLikeValue: calculateLikeValueToAdd(likeState, newLikeState),
-    updateGetDiscussionQuery: isOnDiscussionsPage,
+    updateGetDiscussionQuery: updateGetDiscussionQuery,
     currentPage,
     newLikeState,
     likeAction: newLikeState,
@@ -34,5 +38,5 @@ export default (content: Discussion) => {
 
   }, [prepareLikeData]);
 
-  return handleUpdateLikes;
+  return { handleUpdateLikes, isLoading};
 };

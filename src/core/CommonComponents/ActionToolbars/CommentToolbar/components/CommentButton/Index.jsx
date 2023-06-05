@@ -1,33 +1,31 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Dialog } from 'primereact/dialog'
+
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import IconButton from '../../../../IconButton/Index'
 import { CommentSvg } from '../../../../../../svgs/svgs'
-import useModal from '../../../../Lexical/hooks/useModal.tsx'
 import CreateCommentForm from '../../../../../Forms/CommentForm/Index'
 import useGetCommentState from './hooks/useGetCommentState'
 import { initialConfig } from '../../../../Lexical/App.tsx'
 
-const CommentButton = ({ comment }) => {
+function CommentButton({ comment }) {
   const { contentId, spaceId, commentId } = useParams()
-  const [modal, showModal] = useModal()
-  const getFommentFormState = useGetCommentState(comment, contentId, spaceId, commentId)
-  const onClick = useCallback(() => {
-    const commentFormState = getFommentFormState()
-    showModal('Write A Reply', (onClose) => (
-      <CreateCommentForm
-        closeModal={onClose}
-        commentFormState={commentFormState}
-      />
-    ))
-  }, [getFommentFormState])
+  const [visible, setVisible] = useState(false)
+  const commentFormState = useGetCommentState(comment, contentId, spaceId, commentId)
 
   return (
     <>
       <LexicalComposer initialConfig={initialConfig}>
-        {modal}
+        <Dialog header="Write A Reply" visible={visible} onHide={() => setVisible(false)}>
+          <CreateCommentForm
+            closeModal={() => setVisible(false)}
+            commentFormState={commentFormState}
+            title=""
+          />
+        </Dialog>
       </LexicalComposer>
-      <IconButton icon={<CommentSvg />} onClick={onClick} />
+      <IconButton icon={<CommentSvg />} onClick={() => setVisible(true)} />
 
     </>
   )

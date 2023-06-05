@@ -9,25 +9,28 @@ import OpposingViewsButton from './components/OpposingViewsButton/Index'
 import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
-import { SPACE } from '../../../../enums/content_type'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
 import useUpdateDiscussionLikes from './hooks/useUpdateDiscussionLikes.ts'
 
 function DiscussionActionToolbar({
-  likes, discussion, user, hideCommentButton, currentPage,
+  discussion, updateGetDiscussionQuery,
 }) {
+  const { likes } = discussion
   const { spaceId, discussionId } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
-  const updateDiscussionLikes = useUpdateDiscussionLikes(discussion)
+  const { handleUpdateLikes: updateDiscussionLikesUpvote, isLoading: isUpvoteLoading} = useUpdateDiscussionLikes(discussion, 'upvote', updateGetDiscussionQuery)
+  const { handleUpdateLikes: updateDiscussionLikesDownvote, isLoading: isDonwvoteLoading} = useUpdateDiscussionLikes(discussion, 'downvote', updateGetDiscussionQuery)
+
   return (
     <Container>
       <Left>
-        <UpVoteButton updateLikes={updateDiscussionLikes} content={discussion} user={user} contentType={SPACE} currentPage={currentPage} />
+        <UpVoteButton content={discussion} updateLikes={updateDiscussionLikesUpvote} disabled={isUpvoteLoading} />
         <span>
           {likes || 0}
         </span>
-        <DownVoteButton content={discussion} user={user} contentType={SPACE} currentPage={currentPage} />
-        { hideCommentButton ? null : <CommentButton discussion={discussion} />}
+
+        <DownVoteButton content={discussion} updateLikes={updateDiscussionLikesDownvote} disabled={isDonwvoteLoading} />
+        <CommentButton discussion={discussion} />
       </Left>
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }

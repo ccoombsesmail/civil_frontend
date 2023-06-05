@@ -1,7 +1,7 @@
-import { useCallback } from 'react'
+import { useMemo } from 'react'
 
 import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
-import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser.js'
+import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
 export default (discussionId) => {
   const { currentUser } = useGetCurrentUser()
@@ -10,7 +10,7 @@ export default (discussionId) => {
     skip: !discussionId || !currentUser,
   })
 
-  return useCallback(() => {
+  return useMemo(() => {
     if (isUninitialized || isLoading || discussion?.title === 'General') return null
     const replyingToContent = discussion?.editorState
     return {

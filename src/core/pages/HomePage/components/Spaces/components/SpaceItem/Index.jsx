@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo, forwardRef } from 'react'
+import React, { useMemo } from 'react'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
@@ -10,9 +10,10 @@ import Card from '../../../../../../CommonComponents/SpaceCard/Index'
 
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import useGoToDiscussions from '../../../../../../hooks/routing/useGoToDiscussions'
-import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme'
-import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes'
+import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
+import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
+import SpaceActionToolbar from '../../../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 
 function SpaceItem({
   space, user, hideCommentButton, id, currentPage,
@@ -83,7 +84,16 @@ function SpaceItem({
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <Card {...commonProps} id={id}>
+      <Card
+        {...commonProps}
+        id={id}
+        CardToolbar={(
+          <SpaceActionToolbar
+            space={space}
+            hideCommentButton
+          />
+    )}
+      >
         {cardbody}
       </Card>
     </LexicalComposer>

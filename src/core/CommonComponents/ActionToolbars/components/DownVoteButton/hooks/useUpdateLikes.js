@@ -17,7 +17,7 @@ import {
 } from '../../../../../../enums/like_state'
 import { SpaceItemContext } from '../../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.tsx'
 
-export default (content, user, contentType, currentPageSpace) => {
+export default (content, contentType, currentPageSpace) => {
   const {
     isReplies,
     isFocusedComment,

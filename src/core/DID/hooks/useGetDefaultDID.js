@@ -14,7 +14,6 @@ export default () => useCallback(async () => {
     store.close()
     return did
   } catch {
-    console.log('No DID')
     return null
   }
 }, [])

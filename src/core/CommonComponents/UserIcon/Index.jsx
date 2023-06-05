@@ -2,7 +2,7 @@ import React from 'react'
 import useGoToUserProfile from '../../hooks/routing/useGoToUserProfile'
 import { Thumb } from './Style/Index'
 
-const UserIcon = ({ width, iconSrc, userId }) => {
+function UserIcon({ width, iconSrc, userId }) {
   const goToUserProfile = useGoToUserProfile(userId)
   return (
     <Thumb
@@ -10,6 +10,9 @@ const UserIcon = ({ width, iconSrc, userId }) => {
       src={iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'}
       onClick={goToUserProfile}
       alt=""
+      style={{
+        width,
+      }}
     />
   )
 }

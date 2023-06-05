@@ -7,13 +7,11 @@ export default (spaceData, commentData, contentId) => {
   return useCallback(() => {
     if (!spaceData && !commentData) return null
     const {
-      createdByUsername, createdByIconSrc, createdAt, editorState, id
+      createdByUsername, createdByIconSrc, createdAt, editorState, id,
     } = spaceData || commentData
     const {
-      createdByUsername: createdByUsernameComment, editorState: commentEditorState, id: commentId
+      createdByUsername: createdByUsernameComment, editorState: commentEditorState
     } = commentData || {}
-
-    console.log(commentData)
 
     return {
       ...spaceData,

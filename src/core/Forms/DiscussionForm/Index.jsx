@@ -13,11 +13,9 @@ import useConfigFormErrors from '../../util/form_helpers/hooks/useConfigFormErro
 import { DownArrowCircleSvg } from '../../../svgs/svgs'
 import UploadMediaContainer from '../components/UploadMedia/Index'
 
-
 import LexicalEditor from '../../CommonComponents/Lexical/App.tsx'
 
 import { INIT_SPACE_FORM_VALUES } from '../../util/form_helpers/init_form_values'
-import useGetLinkMetaDataOnBlur from '../hooks/useGetLinkMetaDataOnBlur'
 import EmbedDropdown from '../components/EmbedDropdown/Index'
 
 import { LexicalFormContext } from '../SpaceForm/LexicalFormContext'
@@ -56,7 +54,7 @@ function CreateDiscussionForm({ closeModal }) {
   const handleSubmit = useHandleSubmit(linkMetadata, spaceId, closeModal, editor, editorTextContent)
 
   return (
-    <Container>
+    <Container id="discussion-form-container">
       <Formik
         initialValues={INIT_SPACE_FORM_VALUES}
         validate={validator}

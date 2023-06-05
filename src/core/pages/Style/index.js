@@ -37,6 +37,11 @@ export const HomePageGrid = styled('div')`
   height: 100vh; */
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+
+  @media screen and (max-width: 769px) {
+    grid-template-columns: 1fr;
+
+  }
 `
 
 export const DiscussionsGrid = styled('div')`

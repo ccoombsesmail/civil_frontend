@@ -1,25 +1,18 @@
 /* eslint-disable react/jsx-curly-newline */
 import React, { useState, useMemo } from 'react'
 
-import { Formik, Field } from 'formik'
-import { Collapse, Fade } from 'react-bootstrap'
+import { Formik } from 'formik'
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { Button } from 'primereact/button'
 import useHandleSubmit from './hooks/useHandleSubmit'
 import useConfigFormErrors from '../../util/form_helpers/hooks/useConfigFormErrors'
 
-import { DownArrowCircleSvg } from '../../../svgs/svgs'
-import Input from '../../CommonComponents/Form/Input3/Index'
-import ExpandButton from '../../CommonComponents/Buttons/ExpandButton/Index'
-
-import ThemeTooltip from '../../CommonComponents/Tooltip/Index'
-
 import LexicalEditor from '../../CommonComponents/Lexical/App.tsx'
 
 import {
   FormContainer, InputsContainer, Container, Left, SectionDescription,
-  Line, Arrow, FlexDiv, Footer,
+  Line, FlexDiv, Footer,
 } from './Style'
 
 import { INIT_SPACE_FORM_VALUES } from '../../util/form_helpers/init_form_values'
@@ -28,18 +21,16 @@ import useGetLinkMetaDataOnBlur from '../hooks/useGetLinkMetaDataOnBlur'
 import { LexicalFormContext } from './LexicalFormContext'
 import FormikController from '../Formik/FormikController/Index'
 import { useGetEnumsQueryState } from '../../../api/services/enums.ts'
+import Overlay from '../../CommonComponents/Overlay/Index'
+import Expandable from '../../CommonComponents/Expandable/Expandable'
 
 const VALIDATIONS = {
   title: { REQUIRED: true },
-  // summary: { REQUIRED: true, MIN_LENGTH: 5 },
   category: { REQUIRED: true },
 }
 
 function CreateSpaceForm({ closeModal }) {
   const [open, setOpen] = useState(false)
-
-  const [rotate, setRotate] = useState(0)
-
   const [editor] = useLexicalComposerContext()
 
   const validator = useConfigFormErrors(VALIDATIONS)
@@ -53,7 +44,7 @@ function CreateSpaceForm({ closeModal }) {
   }), [setContentUrl])
 
   return (
-    <Container>
+    <Container id="space-form-container">
       <Formik
         initialValues={INIT_SPACE_FORM_VALUES}
         validate={validator}
@@ -63,14 +54,13 @@ function CreateSpaceForm({ closeModal }) {
           <FormContainer>
             <InputsContainer>
               <Left>
-                <FlexDiv>
-                  <SectionDescription> Space Description </SectionDescription>
-                  <ThemeTooltip
-                    tooltipHeader="Space Description"
-                    tooltipText="Provide information about the space you would like to discuss"
-                  />
-                </FlexDiv>
-                <Line />
+                <Overlay
+                  header="Space Title"
+                  body="Enter A Title For The Space You Would Like To Create"
+                  target="space_title_overlay"
+                >
+                  <SectionDescription> Space Title </SectionDescription>
+                </Overlay>
 
                 <FormikController
                   control="input"
@@ -91,46 +81,68 @@ function CreateSpaceForm({ closeModal }) {
                 <Line />
               </Left>
             </InputsContainer>
-            {/* <Line /> */}
+            <Overlay
+              header="Space Description"
+              body="Enter Additional Details About The Space You Are Creating. Be As Specific As Possible"
+              target="space_description_overlay"
+            >
+              <SectionDescription> Space Description </SectionDescription>
+            </Overlay>
+
             <LexicalFormContext.Provider value={contextValues}>
               <div id="insert-embed-node" />
               <LexicalEditor />
             </LexicalFormContext.Provider>
-
-            <Arrow
-              rotate={rotate}
+            <Overlay
+              header="Supplemental Information"
+              body="Provide links to additional reading or evidence etc..."
+              target="space_links_overlay"
+            >
+              <SectionDescription> Enter Links To Supplemental Evidence </SectionDescription>
+            </Overlay>
+            <Button
+              type="button"
+              className="border-none w-3 flex justify-content-center"
+              severity="secondary"
+              text
+              raised
               onClick={() => {
                 setOpen(!open)
-                setRotate(rotate + (open ? -180 : 180))
               }}
             >
-              <DownArrowCircleSvg />
-            </Arrow>
-            <Fade in={!open}>
-              <div>
-                References
-              </div>
-            </Fade>
-            <InputsContainer>
-              <Collapse in={open}>
-                <div style={{ whiteSpace: 'nowrap', width: '100%' }}>
-                  <FlexDiv>
-                    <h2> Enter Links To Supplemental Evidence </h2>
-                    <ThemeTooltip
-                      tooltipText="Provide links to additional reading or evidence etc..."
-                      tooltipHeader="Supplemental Information"
-                    />
-                  </FlexDiv>
-                  <Field type="url" name="Evidence Link 1" component={Input} width="100%" label="Link To Evidence" />
-                  <Field type="url" name="Evidence Link 2" component={Input} width="100%" label="Link To Evidence" />
-                  <Field type="url" name="Evidence Link 3" component={Input} width="100%" label="Link To Evidence" />
-                </div>
-              </Collapse>
-            </InputsContainer>
+              <i
+                className={`chevron-down transition-transform transition-duration-500 bg-no-repeat h-1rem w-1rem ${open ? 'rotate-180' : ''}`}
+              />
+            </Button>
+
+            <Expandable isOpen={open}>
+              <FlexDiv direction="column" className="p-3">
+                <FormikController
+                  control="input"
+                  label="Link To Evidence"
+                  name="Evidence Link 1"
+                  type="url"
+                  {...rest}
+                />
+                <FormikController
+                  control="input"
+                  label="Link To Evidence"
+                  name="Evidence Link 2"
+                  type="url"
+                  {...rest}
+                />
+                <FormikController
+                  control="input"
+                  label="Link To Evidence"
+                  name="Evidence Link 3"
+                  type="url"
+                  {...rest}
+                />
+              </FlexDiv>
+            </Expandable>
             <Footer>
               <Button
                 type="button"
-                bgColor="var(--m-primary-btn-color)"
                 disabled={isSubmitting}
                 onClick={closeModal}
                 label="Cancel"
@@ -138,7 +150,6 @@ function CreateSpaceForm({ closeModal }) {
 
               <Button
                 type="submit"
-                bgColor="var(--m-primary-btn-color)"
                 disabled={isSubmitting}
                 label="Submit"
                 className="m-2"

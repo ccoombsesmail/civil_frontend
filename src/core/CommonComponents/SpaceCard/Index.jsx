@@ -1,33 +1,29 @@
 import React, {
-  useRef, useEffect, useState, useMemo, forwardRef,
+  useState, useMemo,
 } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Card } from 'primereact/card'
+import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace'
 import { UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
 import CensorOverlay from '../CensorOverlay/Index'
 import { getTimeSince } from '../../../generic/string/dateFormatter'
-import { Card } from 'primereact/card'
 
 import {
-  Container,
   Body,
   Description,
-  VideoDescriptionContainer,
 } from './Style'
 import { SPACE } from '../../../enums/content_type'
-import CardDetails from './components/CardDetails/Index'
-import { Title } from '../UserInfoHeader/Style'
+import Editor from '../Lexical/ReadOnlyEditor.tsx'
+import LinkSection from '../LinkSection/Index'
 
 function PostCard({
   children,
   onClick,
-  listCard,
   space,
   discussion,
-  user,
   showLinks,
-  hideCommentButton,
-  currentPage,
+  CardToolbar,
 }) {
   const { pathname } = useLocation()
   const {
@@ -37,22 +33,28 @@ function PostCard({
   const onContainerClick = useMemo(() => (shouldBlur ? () => null : onClick), [shouldBlur])
 
   return (
-    <Container
+    <Card
       onClick={onContainerClick}
-      listCard={listCard}
-      shouldBlur={shouldBlur}
+      title={title}
+      className="relative sm:w-full md:w-full"
+      header={(
+        <UserInfoHeader
+          iconSrc={createdByIconSrc}
+          time={getTimeSince(createdAt)}
+          username={createdByUsername}
+          userId={createdByUserId}
+          userTag={createdByTag}
+          spaceCreatorIsDidUser={spaceCreatorIsDidUser}
+          userVerificationType={userVerificationType}
+          space={space}
+          category={category}
+        />
+    )}
+      footer={(
+        CardToolbar
+      )}
     >
-      <UserInfoHeader
-        iconSrc={createdByIconSrc}
-        time={getTimeSince(createdAt)}
-        username={createdByUsername}
-        userId={createdByUserId}
-        userTag={createdByTag}
-        spaceCreatorIsDidUser={spaceCreatorIsDidUser}
-        userVerificationType={userVerificationType}
-        space={space}
-        category={category}
-      />
+
       { shouldBlur && (
       <CensorOverlay
         setShouldBlur={setShouldBlur}
@@ -62,20 +64,27 @@ function PostCard({
       />
       )}
       <Body shouldBlur={shouldBlur}>
-        <Title>
-          {title}
-        </Title>
         {children}
-        <CardDetails
-          space={space}
-          discussion={discussion}
-          user={user}
-          showLinks={showLinks}
-          hideCommentButton={hideCommentButton}
-          currentPage={currentPage}
-        />
+        <Description onClick={(e) => e.stopPropagation()}>
+          <Editor />
+        </Description>
+        {showLinks
+        && (
+          <Inplace
+            onClick={(e) => e.stopPropagation()}
+            className="m-3"
+          >
+            <InplaceDisplay>
+              <i className="chevron-down transition-transform transition-duration-500 bg-no-repeat h-1rem w-1rem mr-2" />
+              References
+            </InplaceDisplay>
+            <InplaceContent>
+              <LinkSection space={space} showLinks={showLinks} />
+            </InplaceContent>
+          </Inplace>
+        )}
       </Body>
-    </Container>
+    </Card>
   )
 }
 

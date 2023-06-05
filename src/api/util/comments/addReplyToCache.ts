@@ -108,7 +108,6 @@ export default async function addReplyToCache(
 
   const { id, isFocusedComment, isReplies, rootId } = arg
   const addedComment = await cacheDataLoaded;
-  console.log(addedComment)
   if (isFocusedComment) {
     await addDirectReplyToGetAllCommentRepliesCache(id, dispatch, addedComment)
   } else if (isReplies) {

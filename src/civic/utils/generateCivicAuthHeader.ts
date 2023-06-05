@@ -59,7 +59,6 @@ export const createCivicAuthToken = async (
     return `${pk}.${msg}.${sig}`;
   } catch(e) {
     console.error(e)
-    console.log("craPPPPP")
   }
  
 };

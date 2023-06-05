@@ -6,13 +6,14 @@ import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 import { ParentCommentContext } from '../../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
 
 export default (comment) => {
-  const { isReplies, isFocusedComment, commentId, currentPage, rootOfCommentReplyThreadId, reportedContentId, commentType } = useContext(ParentCommentContext) || {}
+  const {
+    isReplies, isFocusedComment, currentPage, rootOfCommentReplyThreadId, reportedContentId, commentType 
+  } = useContext(ParentCommentContext) || {}
   const { pathname } = useLocation()
   const { currentUser } = useGetCurrentUser()
   const [updateCommentCivility] = useUpdateCommentCivilityMutation()
   const [updateTribunalCommentCivility] = useUpdateTribunalCommentCivilityMutation()
 
-  console.log(rootOfCommentReplyThreadId)
   return useCallback((e) => {
     const isTribunal = pathname.includes('tribunal')
     const data = {

@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react'
+import { useMemo, useContext } from 'react'
 import {
   useGetAllCommentsQuery,
   useGetAllCommentRepliesQuery,
@@ -49,7 +49,7 @@ export default (commentData, contentId, spaceId, commentId) => {
   })
 
   const { createdByUsername, createdByIconSrc, createdAt } = commentData || {}
-  return useCallback(() => {
+  return useMemo(() => {
     const rootComment = comments?.find((c) => c.data.id === rootId)
 
     const tribunalRootComment = tribunalComments?.find(
@@ -74,7 +74,6 @@ export default (commentData, contentId, spaceId, commentId) => {
         || commentReplyRootComment || { data: focusedComment },
       commentData.id,
     )
-    console.log(commentData)
     return {
       ...commentData,
       contentId: commentData.discussionId || contentId,

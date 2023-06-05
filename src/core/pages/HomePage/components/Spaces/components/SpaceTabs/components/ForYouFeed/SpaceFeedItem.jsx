@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React from 'react'
+import React, { memo } from 'react'
 import { useGetAllSpacesQuery } from '../../../../../../../../../api/services/spaces.ts'
-import { CircleLoading } from '../../../../../../../../../svgs/spinners/CircleLoading'
 import SpaceItem from '../../../SpaceItem/Index'
 import useGetCurrentUser from '../../../../../../../../App/hooks/useGetCurrentUser'
 import { SpaceItemContext } from '../../../SpaceItem/SpaceItemContex.tsx'
+import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
 
 function SpaceFeedItem({ index, style }) {
   const { data, isLoading, isUninitialized } = useGetAllSpacesQuery(Math.floor(index / 5))
   const { currentUser } = useGetCurrentUser()
   let content
   if (isLoading || isUninitialized || !data) {
-    content = <CircleLoading size={60} />
+    content = <CardLoader />
   } else {
     const space = data[index % 5]
     content = space ? (
@@ -22,6 +22,7 @@ function SpaceFeedItem({ index, style }) {
           space={space}
           user={currentUser}
           currentPage={Math.floor(index / 5)}
+          hideCommentButton
         />
       </SpaceItemContext.Provider>
 
@@ -30,4 +31,4 @@ function SpaceFeedItem({ index, style }) {
   return <div style={style}>{content}</div>
 }
 
-export default SpaceFeedItem
+export default memo(SpaceFeedItem)

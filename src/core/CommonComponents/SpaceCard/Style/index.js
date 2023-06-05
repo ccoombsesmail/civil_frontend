@@ -73,7 +73,6 @@ export const Description = styled('p')`
   justify-content: flex-start;
   background-color: white;
   color: black;
-  font-weight: bold;
   @media only screen and (max-width: 600px) {
     font-size: 5vw;
 

@@ -3,7 +3,6 @@ import React, { useMemo, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
-import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
 import { VideoPlayer } from '../../../../../HomePage/components/Spaces/components/SpaceItem/Style'
@@ -15,13 +14,13 @@ import { uuidRegEx } from '../../../../../../../generic/regex/uuid'
 import LineWithOverlayText from '../../../LineWithTextOverlay/Index'
 import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
 import useInitLexicalConfig from '../../../../../../hooks/lexical/useInitLexicalConfig'
+import DiscussionActionToolbar from '../../../../../../CommonComponents/ActionToolbars/DiscussionToolbar/Index'
 
 function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitialized }) {
   const { pathname } = useLocation()
   const discussionId = pathname.match(uuidRegEx)?.[1]
   const { currentUser } = useGetCurrentUser()
   const [editorState, setEditorState] = useState(discussion.editorState)
-
 
   const commonProps = useMemo(() => ({
     space: null, user: currentUser, showLinks: true, discussion,
@@ -35,9 +34,7 @@ function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitial
     return () => {
       setEditorState(null)
     }
-
   }, [editorState, discussion])
-
 
   const initLexicalConfig = useInitLexicalConfig(editorState, `Civil-Discussion-Card-${discussionId}`, false, discussion)
 
@@ -88,7 +85,15 @@ function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitial
       </LineWithOverlayText>
 
       <LexicalComposer initialConfig={{...initLexicalConfig}}>
-        <Card {...commonProps}>
+        <Card
+          {...commonProps}
+          CardToolbar={(
+            <DiscussionActionToolbar
+              discussion={discussion}
+              updateGetDiscussionQuery
+            />
+        )}
+        >
           {content}
         </Card>
       </LexicalComposer>
@@ -98,4 +103,3 @@ function DiscussionCard({ discussion, isDiscussionLoading, isDiscussionUninitial
 }
 
 export default DiscussionCard
-

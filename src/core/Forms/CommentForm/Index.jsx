@@ -6,25 +6,26 @@ import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { Button } from 'primereact/button'
 import UserInfoHeader from '../../CommonComponents/UserInfoHeader/Index'
-import AnimatedCheckmark from '../../CommonComponents/AnimatedCheckmark/Index'
+// import AnimatedCheckmark from '../../CommonComponents/AnimatedCheckmark/Index'
 import PlaygroundEditorTheme from '../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
 import PlaygroundNodes from '../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
 
 import useHandleSubmit from './hooks/useHandleSubmit'
 
 import { getTimeSince } from '../../../generic/string/dateFormatter'
-import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
+// import { checkToxicity } from '../../../api/v1/comments/comments_api_util'
 import ReadOnlyEditor from '../../CommonComponents/Lexical/ReadOnlyEditor.tsx'
 
 import {
-  EditorsWrapper, ToxicityControls,
+  EditorsWrapper,
+  // ToxicityControls
 } from './Style'
 import {
   Line, Footer, Container, FormContainer,
 } from '../SpaceForm/Style'
 import LexicalEditor from './components/LexicalEditor/Index'
 
-function CreateCommentForm({ closeModal, commentFormState }) {
+function CreateCommentForm({ closeModal, commentFormState, title }) {
   const [richTextEditorData, setRichTextEditorData] = useState({
     lexicalContent: '',
     editorTextContent: '',
@@ -45,12 +46,10 @@ function CreateCommentForm({ closeModal, commentFormState }) {
     return () => removeUpdateListener()
   }, [])
 
-  const [toxicityScore, setToxicityScore] = useState(null)
+  // const [toxicityScore, setToxicityScore] = useState(null)
   const {
     lexicalRawContent, createdByIconSrc, createdByUsername, time, createdByTag,
   } = commentFormState
-
-  console.log(commentFormState)
 
   const handleSubmit = useHandleSubmit(commentFormState, richTextEditorData, closeModal)
   const initialConfigReadOnly = {
@@ -91,6 +90,9 @@ function CreateCommentForm({ closeModal, commentFormState }) {
             />
 
             <EditorsWrapper>
+              <div className="p-card-title">
+                {title}
+              </div>
               <LexicalComposer initialConfig={initialConfigReadOnly}>
                 <ReadOnlyEditor />
               </LexicalComposer>
@@ -98,7 +100,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
               <LexicalEditor setRichTextEditorData={setRichTextEditorData} />
             </EditorsWrapper>
             <Footer>
-              <ToxicityControls>
+              {/* <ToxicityControls>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button
@@ -113,7 +115,7 @@ function CreateCommentForm({ closeModal, commentFormState }) {
                   </div>
                   <p>{ toxicityScore && `Your toxicity score is ${toxicityScore}`}</p>
                 </div>
-              </ToxicityControls>
+              </ToxicityControls> */}
               <Button type="submit" disabled={isSubmitting}>
                 Submit
               </Button>

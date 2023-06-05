@@ -10,20 +10,17 @@ import TabContent from '../../../../CommonComponents/NonBootstrapTabs/components
 import TabNavItem from '../../../../CommonComponents/NonBootstrapTabs/components/TabNavItem/Index'
 import DiscussionsFeed from '../DiscussionsFeed/Index'
 
-
 function DiscussionsTable() {
   const [key, setKey] = useState(1)
   return (
-      <Container>
-        <TableHeader>
-          <h1>
-            <>
-              <span>Discussions</span>
-            </>
-          </h1>
-        </TableHeader>
-        
-        <TabNav>
+    <Container>
+      <TableHeader>
+        <h1>
+          <span>Discussions</span>
+        </h1>
+      </TableHeader>
+
+      <TabNav>
         <TabNavItem
           onClick={() => setKey(0)}
           title="Table View"
@@ -38,11 +35,10 @@ function DiscussionsTable() {
           activeTab={key}
           setActiveTab={setKey}
         />
-         </TabNav>
-     
-    
+      </TabNav>
+
       <TabContent id={0} activeTab={key}>
-      <Table>
+        <Table>
           <div>
             <ColHeader gridTemplateCols="1fr 2fr 1fr">
               <ColItem> Created By </ColItem>
@@ -50,15 +46,15 @@ function DiscussionsTable() {
               <ColItem> Comments </ColItem>
             </ColHeader>
           </div>
-        
-        <DiscussionsFeed feedType="Table" />
-      </Table>
+
+          <DiscussionsFeed feedType="Table" />
+        </Table>
       </TabContent>
-      <TabContent id={1} activeTab={key}>
+      <TabContent id={1} activeTab={key} styles="pb-8">
         <DiscussionsFeed feedType="asdf" />
       </TabContent>
 
-      </Container>
+    </Container>
   )
 }
 

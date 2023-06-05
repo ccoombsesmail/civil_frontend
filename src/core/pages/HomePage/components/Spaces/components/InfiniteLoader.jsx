@@ -18,14 +18,14 @@ function ExampleWrapper({
     const item = items[index]
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 1000
+        return 500 + item.contentHeight
       case Web:
-        return 1000
+        return 500 + item.contentHeight
       case Twitter:
-        return 1200
+        return 600 + item.contentHeight
       default:
-        if (item?.editorState.includes('image')) return 1000
-        return 500
+        if (item?.editorState.includes('image')) return 500 + item.contentHeight
+        return 500 + item.contentHeight
     }
   }, [items])
 
@@ -41,7 +41,7 @@ function ExampleWrapper({
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
       loadMoreItems={loadMoreItems}
-      threshold={4}
+      threshold={3}
     >
       {({ onItemsRendered, ref }) => (
         <List

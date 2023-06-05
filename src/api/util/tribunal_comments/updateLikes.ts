@@ -22,10 +22,6 @@ export default async function onUpdateLikesQueryStartedTribunal({
 },
 { dispatch, queryFulfilled }) {
   let patchResult;
-  console.log(rootId)
-  console.log(commentType)
-  console.log(reportedContentId)
-  
   patchResult = dispatch(
     tribunalCommentsApi.util.updateQueryData(
       "getAllTribunalComments",
@@ -34,9 +30,6 @@ export default async function onUpdateLikesQueryStartedTribunal({
         let comment;
         const newDraft = createDraft(draft);
         const rootComment = newDraft.find((c) => c.data.id === rootId);
-        console.log(rootComment)
-        console.log(commentType)
-        console.log(reportedContentId)
         if (!parentId) {
           comment = newDraft.find((c) => c.data.id === id);
           comment.data.likeState = newLikeState;

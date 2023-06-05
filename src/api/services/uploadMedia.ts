@@ -5,7 +5,6 @@ export const uploadMediaApi = emptyMiscServiceSplitApi.injectEndpoints({
   endpoints: (builder) => ({
     uploadSpaceMedia: builder.mutation<any, any>({
       query: (data) => {
-        console.log(data)
         return ({ 
         url: `/spaces/upload-media`, 
         method: 'POST',

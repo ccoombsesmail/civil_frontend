@@ -9,25 +9,27 @@ import OpposingViewsButton from './components/OpposingViewsButton/Index'
 import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
-import { SPACE } from '../../../../enums/content_type'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
 import useUpdateSpaceLikes from './hooks/useUpdateSpaceLikes.ts'
 
 function SpaceActionToolbar({
-  likes, space, user, hideCommentButton, discussion, currentPage,
+  space, hideCommentButton,
 }) {
+  const { likes } = space
   const { spaceId, discussionId } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
-  const updateSpaceLikes = useUpdateSpaceLikes(space)
+  const {handleUpdateLikes: updateSpaceLikesUpvote, isLoading: isUpvoteLoading} = useUpdateSpaceLikes(space, 'upvote')
+  const {handleUpdateLikes: updateSpaceLikesDownvote, isLoading: isDownvoteLoading} = useUpdateSpaceLikes(space, 'downvote')
+
   return (
     <Container>
       <Left>
-        <UpVoteButton updateLikes={updateSpaceLikes} content={space} user={user} contentType={SPACE} currentPage={currentPage} />
+        <UpVoteButton updateLikes={updateSpaceLikesUpvote} content={space} action="upvote" disabled={isUpvoteLoading} />
         <span>
           {likes || 0}
         </span>
-        <DownVoteButton content={space} user={user} contentType={SPACE} currentPage={currentPage} />
-        { hideCommentButton ? null : <CommentButton discussion={discussion} space={space} />}
+        <DownVoteButton content={space} updateLikes={updateSpaceLikesDownvote} action="downvote" disabled={isDownvoteLoading} />
+        { hideCommentButton ? null : <CommentButton space={space} />}
       </Left>
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }

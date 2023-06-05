@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react'
+import { useParams } from 'react-router-dom'
 import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions.ts'
 
 import InfiniteLoader from './DiscussionsInfiniteLoader'
-import TableFeedItem from "./components/TableFeedItem/TableFeedItem.jsx";
-import CardFeedItem from "./components/CardFeedItem/CardFeedItem.jsx";
+import TableFeedItem from './components/TableFeedItem/TableFeedItem'
+import CardFeedItem from './components/CardFeedItem/CardFeedItem'
 
-import useGetCurrentUser from "../../../../App/hooks/useGetCurrentUser.js";
-import { useParams } from "react-router-dom";
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
 const ITEMS_PER_PAGE = 10
 
@@ -30,21 +30,21 @@ function DiscussionsFeed({ feedType }) {
     Promise.resolve(setCurrentPage((prevPage) => prevPage + 1))
   }, [])
 
-
   return (
-    
+
     (isCurrentUninitialized || isLoadingCurrent || allData.length === 0) ? null : (
-        <InfiniteLoader
-          hasNextPage={discussions.length >= ITEMS_PER_PAGE}
-          isNextPageLoading={isLoadingCurrent}
-          items={allData}
-          loadNextPage={fetchMore}
-          currentPage={currentPage}
-          Item={feedType === "Table" ? TableFeedItem : CardFeedItem}
-        />
-        )
-    
-  );
+      <InfiniteLoader
+        hasNextPage={discussions.length >= ITEMS_PER_PAGE}
+        isNextPageLoading={isLoadingCurrent}
+        items={allData}
+        loadNextPage={fetchMore}
+        currentPage={currentPage}
+        Item={feedType === 'Table' ? TableFeedItem : CardFeedItem}
+        feedType={feedType}
+      />
+    )
+
+  )
 }
 
-export default DiscussionsFeed;
+export default DiscussionsFeed

@@ -3,9 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { CardContainer } from '../../../../Style'
 import { useGetAllSpacesQuery } from '../../../../../../../../../api/services/spaces.ts'
 import InfiniteLoader from '../../../InfiniteLoader'
-import { CircleLoading } from '../../../../../../../../../svgs/spinners/CircleLoading'
 import useGetCurrentUser from '../../../../../../../../App/hooks/useGetCurrentUser'
 import SpaceFeedItem from './SpaceFeedItem'
+import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
 
 function ForYouFeed() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -32,7 +32,7 @@ function ForYouFeed() {
 
   return (
     <>
-      { (isLoadingCurrent || allData.length === 0) ? <CircleLoading size={60} /> : (
+      { (isLoadingCurrent || allData.length === 0) ? <CardLoader /> : (
         <CardContainer>
           <InfiniteLoader
             hasNextPage

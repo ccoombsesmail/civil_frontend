@@ -1,9 +1,11 @@
 import React from 'react'
 import { TabContentContainer } from '../../Style'
 
-function TabContent({ id, activeTab, children }) {
+function TabContent({
+  id, activeTab, children, styles,
+}) {
   return activeTab === id ? (
-    <TabContentContainer className="TabContent">
+    <TabContentContainer className={`TabContent ${styles}`}>
       { children }
     </TabContentContainer>
   )

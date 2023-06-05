@@ -8,7 +8,7 @@
 
 import * as React from 'react';
 
-import {SettingsContext, useSettings} from './context/SettingsContext';
+import {SettingsContext} from './context/SettingsContext';
 import {SharedAutocompleteContext} from './context/SharedAutocompleteContext';
 import {SharedHistoryContext} from './context/SharedHistoryContext';
 import Editor from './Editor';

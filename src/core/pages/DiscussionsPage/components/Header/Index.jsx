@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { Tooltip, OverlayTrigger } from 'react-bootstrap'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { TweetComponent } from '../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
@@ -23,27 +22,15 @@ import DiscussionCard from './components/DiscussionCard/Index'
 import { uuidRegEx } from '../../../../../generic/regex/uuid'
 import UserUploadedMedia from '../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
 import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
-
-function TooltipComponent({ text, title, reference }) {
-  return (
-    <OverlayTrigger
-      placement="top"
-      overlay={(
-        <Tooltip>
-          <strong>{title}</strong>
-        </Tooltip>
-      )}
-    >
-      <span onClick={() => reference?.current?.scrollIntoView()}>{text}</span>
-    </OverlayTrigger>
-  )
-}
+import SpaceActionToolbar from '../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
+import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs'
 
 function Header() {
   let content = null
   const { spaceId } = useParams()
   const { pathname } = useLocation()
   const discussionId = pathname.match(uuidRegEx)?.[1]
+
   const { currentUser } = useGetCurrentUser()
   const { data: space, isLoading: isSpaceLoading, isUninitialized: isSpaceUninitialized } = useGetSpaceQuery(spaceId, {
     skip: !currentUser || !spaceId,
@@ -56,8 +43,6 @@ function Header() {
   const commonProps = useMemo(() => ({
     space, user: currentUser, showLinks: true, hideCommentButton: Boolean(discussionId) && (discussion?.title && discussion.title !== 'General'),
   }), [space, currentUser, discussionId, discussion])
-
-  const spaceRef = useRef(null)
 
   const linkType = space?.externalContentData?.linkType
   const initLexicalConfig = useInitLexicalConfig(space?.editorState, 'Civil-Space-Card__Discussions', false)
@@ -103,16 +88,24 @@ function Header() {
 
   return (
     <Container>
-      <h1 className="text-focus-in">
+      <BreadCrumbs />
+      {/* <h1 className="text-focus-in">
         <>
           {'We\'re Talking About This'}
           {' '}
           <TooltipComponent text="Space" title={space?.title} reference={spaceRef} />
         </>
-      </h1>
+      </h1> */}
       <div style={{ width: '100%' }}>
         <LexicalComposer initialConfig={initLexicalConfig}>
-          <Card {...commonProps}>
+          <Card
+            {...commonProps}
+            CardToolbar={(
+              <SpaceActionToolbar
+                space={space}
+              />
+            )}
+          >
             {content}
           </Card>
         </LexicalComposer>
@@ -121,7 +114,18 @@ function Header() {
         width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative',
       }}
       >
-        {discussion && discussionId ? <DiscussionCard key={discussionId} discussion={discussion} isDiscussionLoading={isDiscussionLoading} isDiscussionUninitialized={isDiscussionUninitialized} /> : null}
+        {
+        discussion && discussionId
+          ? (
+            <DiscussionCard
+              key={discussionId}
+              discussion={discussion}
+              isDiscussionLoading={isDiscussionLoading}
+              isDiscussionUninitialized={isDiscussionUninitialized}
+            />
+          )
+          : null
+        }
       </div>
     </Container>
 

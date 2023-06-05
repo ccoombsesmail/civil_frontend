@@ -5,6 +5,7 @@ import { Console } from 'console';
 import { Recipe } from '@reduxjs/toolkit/dist/query/core/buildThunks';
 import { enumsApi } from './enums';
 import { emptySplitApi } from './base';
+import { current } from '@reduxjs/toolkit';
 
 export enum SpaceCategories {
   Technology,
@@ -32,14 +33,9 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllDiscussions: builder.query<any, any>({
       query: ({ spaceId, currentPage }) => ({ url: `/discussions?spaceId=${spaceId}&skip=${currentPage*10}`, method: 'GET' }),
-      providesTags: (result) =>
-      result ? 
-          [
-            ...result.map(({ id }) => ({ type: 'Discussion', id } as const)),
-            { type: 'Discussion', id: 'LIST' },
-          ]
-        : 
-          [{ type: 'Discussion', id: 'LIST' }],
+      providesTags: (result, error, arg) => {
+        return [{type: "DiscussionPage", id: arg.toString()}]
+      }
     }),
     getUserDiscussions: builder.query<any, any>({
       query: (userId) => ({ url: `/discussions/user/${userId}`, method: "GET" }),

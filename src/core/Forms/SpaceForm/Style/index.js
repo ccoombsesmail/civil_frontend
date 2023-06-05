@@ -91,6 +91,12 @@ export const FormContainer = styled(Form)`
     aspect-ratio: 16 / 9;
   }
  
+  .p-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
 `
 
 export const Arrow = styled('span')`

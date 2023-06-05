@@ -8,7 +8,7 @@ export const Container = styled('div')`
   flex-direction: column;
   align-items: center;
   width: 50vw;
-  padding-top: 5em;
+  padding-top: 1em;
   z-index: 99;
   background-color: #F7F7F7;
   background-color: white;
@@ -17,13 +17,10 @@ export const Container = styled('div')`
 
   h1 {
     text-align: center;
-    /* text-decoration: underline; */
     letter-spacing: .2em;
     margin: clamp(20px, 3vw, 40px) 0;
-    /* font-weight: bold; */
   }
   span {
-    /* font-weight: bold; */
     cursor: pointer;
   }
 
@@ -62,8 +59,6 @@ export const SpaceSummaryContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* height: ${(props) => (`${props.height}px`)}; */
-  /* width: 40vw;   */
   margin: 2em;
   border-radius: .5em;
   box-shadow:  -5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff;

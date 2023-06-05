@@ -13,8 +13,8 @@ function Spaces() {
   const { currentUser } = useGetCurrentUser()
 
   return (
-    <Container>
-      <BorderContainer>
+    <Container className="sm:w-full md:w-full">
+      <BorderContainer className="sm:w-full  md:w-full">
         <Header user={currentUser} openModal={openModal} />
         <SpaceTabs />
 

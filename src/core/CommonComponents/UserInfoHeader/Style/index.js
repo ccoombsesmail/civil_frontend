@@ -6,8 +6,6 @@ export const Separator = styled('span')`
   height: 80%;
 `
 
-
-
 export const Right = styled('div')`
   flex-basis: 35%;
   display: flex;
@@ -34,6 +32,9 @@ export const Left = styled('div')`
   background-color: white;
   height: 100%;
   padding-top: 10px;
+  :hover {
+    background-color: lightgray;
+  }
   button {
     margin: 5px 10px;
   }
@@ -61,8 +62,12 @@ export const Header = styled('div')`
   transition: height 0.3s ease-in-out;
   height: 80px;
   border-bottom: 1px solid lightgray;
+  cursor: pointer;
   :hover {
-    /* height: 90px; */
+    background-color: lightgray;
+    ${Left} {
+      background-color: lightgray;
+    }
   }
 
   h2 {
@@ -70,21 +75,18 @@ export const Header = styled('div')`
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;
-    font-size: 1vw;
-    @media only screen and (max-width: 800px) {
+    font-size: clamp(12px, 1vw, 20px);
+    /* @media only screen and (max-width: 800px) {
       font-size: 3.4vw;
-    }
+    } */
   }
   h3 {
     text-decoration: underline;
-    font-size: .8vw;
+    font-size: clamp(10px, .8vw, 20px);
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     font-weight: bold;
     color: gray;
-    @media only screen and (max-width: 800px) {
-      font-size: 3vw;
-    }
     :hover {
       color: var(--m-primary-btn-color);
     }
@@ -156,6 +158,4 @@ export const Title = styled.span`
    font-family: 'Nunito Sans', sans-serif;
 ;
 
-`;
-
-
+`

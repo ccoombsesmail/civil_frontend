@@ -1,9 +1,9 @@
-import { useCallback } from 'react'
+import { useMemo } from 'react'
 
 import { useGetSpaceQuery } from '../../../../../../../api/services/spaces.ts'
 import { useGetGeneralDiscussionIdQuery } from '../../../../../../../api/services/discussions.ts'
 
-import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser.js'
+import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
 export default (spaceId) => {
   const { currentUser } = useGetCurrentUser()
@@ -16,7 +16,7 @@ export default (spaceId) => {
     skip: !spaceId || !currentUser,
   })
 
-  return useCallback(() => {
+  return useMemo(() => {
     if (isSpaceLoading || isSpaceUninit || isIdLoading || isIdUninit) return null
     return {
       discussionId: genDiscussionId.id,

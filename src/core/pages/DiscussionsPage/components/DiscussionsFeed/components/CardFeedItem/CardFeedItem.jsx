@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo, forwardRef } from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
@@ -18,10 +19,13 @@ import { VideoPlayer } from '../../../../../HomePage/components/Spaces/component
 import { useGetAllDiscussionsQuery } from '../../../../../../../api/services/discussions.ts'
 import { DiscussionItemContex } from './DiscussionItemContext.ts'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
+import DiscussionActionToolbar from '../../../../../../CommonComponents/ActionToolbars/DiscussionToolbar/Index'
+import useGoToCommentThread from '../../../../../../hooks/routing/useGoToCommentThread'
 
 function DiscussionItem({
-  discussion, user, hideCommentButton, id, currentPage,
+  discussion, id,
 }) {
+  const { spaceId } = useParams()
   const initialConfig = {
     editorState: discussion?.editorState,
     namespace: `Civil-${discussion?.title}`,
@@ -33,16 +37,17 @@ function DiscussionItem({
     theme: PlaygroundEditorTheme,
   }
 
+  const goToCommentThread = useGoToCommentThread(spaceId, discussion.id)
+
   const commonProps = useMemo(
     () => ({
       space: null,
       discussion,
-      user,
       showLinks: false,
-      hideCommentButton,
-      currentPage,
+      hideCommentButton: false,
+      onClick: goToCommentThread,
     }),
-    [discussion, user, currentPage],
+    [discussion],
   )
 
   const linkType = discussion?.externalContentData?.linkType
@@ -87,7 +92,15 @@ function DiscussionItem({
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <Card {...commonProps} id={id}>
+      <Card
+        {...commonProps}
+        id={id}
+        CardToolbar={(
+          <DiscussionActionToolbar
+            discussion={discussion}
+          />
+      )}
+      >
         {cardbody}
       </Card>
     </LexicalComposer>

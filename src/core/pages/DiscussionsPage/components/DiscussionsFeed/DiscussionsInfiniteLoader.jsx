@@ -4,41 +4,38 @@ import { VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import { Web, YouTube, Twitter } from '../../../../../enums/link_type'
 
-
-
 function DiscussionsInfiniteLoader({
   hasNextPage,
   isNextPageLoading,
   items,
   loadNextPage,
-  Item
+  Item,
+  feedType,
 }) {
   const itemCount = hasNextPage ? items.length : items.length
-  const infiniteLoaderRef = useRef(null);
+  const infiniteLoaderRef = useRef(null)
 
   const getItemSize = useCallback((index) => {
+    if (feedType === 'Table') return 100
     const item = items[index]
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 1000
+        return 80 + 40 + 500 + 150 + item.contentHeight
       case Web:
-        return 1000;
+        return 900 + item.contentHeight
       case Twitter:
-        return 1200;
+        return 1200 + item.contentHeight
       default:
-        console.log(item)
-        if (item?.editorState.includes("image")) return 1000
-        return 1000
+        if (item?.editorState.includes('image')) return 500 + item.contentHeight
+        return 400 + item.contentHeight
     }
   }, [items])
 
   const loadMoreItems = useCallback(() => {
-    if(!isNextPageLoading) loadNextPage()
+    if (!isNextPageLoading) loadNextPage()
   }, [isNextPageLoading])
-  
-  const isItemLoaded = useCallback((index) => {
-    return index < items.length-1
-  }, [items.length])
+
+  const isItemLoaded = useCallback((index) => index < items.length - 1, [items.length])
 
   return (
     <InfiniteLoader
@@ -46,12 +43,12 @@ function DiscussionsInfiniteLoader({
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
       loadMoreItems={loadMoreItems}
-      threshold={4}
+      threshold={3}
     >
       {({ onItemsRendered, ref }) => (
         <List
           className="List"
-          height={800}
+          height={1600}
           itemCount={itemCount}
           itemSize={getItemSize}
           onItemsRendered={onItemsRendered}

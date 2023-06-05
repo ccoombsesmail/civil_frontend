@@ -59,7 +59,6 @@ export const ColumnContainer = styled('section')`
 
 `
 
-
 export const ListContainer = styled('ul')`
   display: flex;
   flex-direction: column;
@@ -73,7 +72,7 @@ export const ListContainer = styled('ul')`
   z-index: 99;
   opacity: .99;
   width: clamp(700px, 50vw, 1200px);
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   border-color: rgba(200,200,200,0.25);
 
   @media (max-width: 700px) {

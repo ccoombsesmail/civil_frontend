@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const Container = styled('div')`
   width: calc(100vw - var(--sidebar-width));
   display: flex;
-  /* padding-top: 5em; */
   margin-left: var(--sidebar-width);
 
   .tab-content {

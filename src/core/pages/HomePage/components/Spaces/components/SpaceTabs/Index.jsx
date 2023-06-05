@@ -4,7 +4,7 @@ import TabContent from '../../../../../../CommonComponents/NonBootstrapTabs/comp
 import {
   TabNav,
 } from '../../../../../../CommonComponents/NonBootstrapTabs/Style'
-import PrimeFeed from './components/PrimeFeed/PrimeFeed'
+import PrimeFeed from './components/ForYouFeed/Index'
 import FollowedSpacesFeed from './components/FollowedSpacesFeed/Index'
 
 function SpaceTabs() {

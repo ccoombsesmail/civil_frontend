@@ -37,8 +37,8 @@ export default function LazyDemo() {
     })
 
     return (
-      <div className={className}>
-        <SpaceFeedItem item={item} index={options.index} style={{ height: `${options.props.itemSize}px`, width: '98%' }} />
+      <div className="flex align-items-center p-2">
+        <SpaceFeedItem item={item} index={options.index} style={{ height: `${600 + 80 + 65 + 200}px`, width: '100%' }} />
       </div>
     )
   }
@@ -62,18 +62,18 @@ export default function LazyDemo() {
   )
 
   return (
-    <div className="card flex justify-content-center">
+    <div className="card flex justify-content-center w-full">
       <VirtualScroller
         items={allData}
-        itemSize={500}
+        itemSize={1000}
         itemTemplate={itemTemplate}
         lazy
         onLazyLoad={onLazyLoad}
         loadingTemplate={loadingTemplate}
         showLoader
         loading={isLoadingCurrent || isFetchingCurrent || isCurrentUninitialized}
-        className="border-1 surface-border border-round"
-        style={{ width: '50vw', height: '700px' }}
+        className="border-1 surface-border border-round w-full"
+        style={{ width: '50vw', height: '100vh' }}
       />
     </div>
   )

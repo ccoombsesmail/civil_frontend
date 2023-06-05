@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import useCategorizeComments from '../hooks/useCategorizeComments'
@@ -44,10 +44,10 @@ function CommentThread() {
       <ParentComment spaceId={spaceId} commentId={commentId} isFocusedComment />
       <ThreadContainer>
         <ColumnContainer>
-         {
-         isCommentsLoading ? <CircleLoading size={30} /> : <CommentColumn comments={allComments} commentSentiment="All" color="white" spaceId={spaceId} isReplies />
-        }
-        
+          {
+          isCommentsLoading ? <CircleLoading size={30} /> : <CommentColumn comments={allComments} commentSentiment="All" color="white" spaceId={spaceId} isReplies />
+          }
+
         </ColumnContainer>
       </ThreadContainer>
     </Container>
