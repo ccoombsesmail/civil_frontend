@@ -12,6 +12,16 @@ export const usersApi = emptySplitApi.injectEndpoints({
       query: (userId) => ({ url: `/users?userId=${userId}`, method: "GET" }),
       providesTags: ["User"],
     }),
+    updateUserIcon: builder.mutation<any, any>({
+      query: (body) => {
+        return {
+          url: `/users`,
+          method: "PUT",
+          data: body,
+        };
+      },
+      invalidatesTags: [{ type: "Session" }],
+    }),
     updateUserBioInformation: builder.mutation<any, any>({
       query: (body) => {
         return {
@@ -47,5 +57,6 @@ export const {
   useGetUserQuery,
   useUpdateUserBioInformationMutation,
   useLazyCheckIfTagExistsQuery,
-  useCreateUserTagMutation
+  useCreateUserTagMutation,
+  useUpdateUserIconMutation
 } = usersApi;

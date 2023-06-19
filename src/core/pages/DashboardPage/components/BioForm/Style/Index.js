@@ -4,11 +4,12 @@ export const OuterContainer = styled('div')`
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-bottom: 20vh;
 
 `
 
 export const Container = styled('div')`
-  width: 60vw;
+  width: clamp(400px, 60vw, 1000px);
   padding: 3em 2em;
   /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); */
   box-shadow: rgba(0, 0, 0, 0.16) 0px 24px 48px;

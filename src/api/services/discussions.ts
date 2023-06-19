@@ -32,10 +32,19 @@ export interface Discussion {
 export const discussionsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllDiscussions: builder.query<any, any>({
-      query: ({ spaceId, currentPage }) => ({ url: `/discussions?spaceId=${spaceId}&skip=${currentPage*10}`, method: 'GET' }),
+      query: ({ spaceId, currentPage }) => ({ url: `/discussions/space-discussions?spaceId=${spaceId}&skip=${currentPage*10}`, method: 'GET' }),
       providesTags: (result, error, arg) => {
         return [{type: "DiscussionPage", id: arg.toString()}]
       }
+    }),
+    getPopularDiscussions: builder.query<any, any>({
+      query: ({ currentPage }) => ({ url: `/discussions/popular-discussions?skip=${currentPage*10}`, method: 'GET' }),
+      // providesTags: (result, error, arg) => {
+      //   return [{type: "DiscussionPage", id: arg.toString()}]
+      // }
+    }),
+    getSimilarDiscussions: builder.query<any, any>({
+      query: (discussionId) => ({ url: `/discussions/similar-discussions/${discussionId}`, method: "GET" }),
     }),
     getUserDiscussions: builder.query<any, any>({
       query: (userId) => ({ url: `/discussions/user/${userId}`, method: "GET" }),
@@ -48,7 +57,7 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
           : [{ type: "Discussion", id: "LIST" }],
     }),
     getDiscussion: builder.query<any, any>({
-      query: (discussionId) => ({ url: `/discussions/${discussionId}`, method: 'GET' }),
+      query: (discussionId) => ({ url: `/discussions/get-one/${discussionId}`, method: 'GET' }),
       // providesTags: (result) => [{ type: 'Spaces', id: 'LIST' }],
     }),
     getGeneralDiscussionId: builder.query<any, any>({
@@ -122,5 +131,7 @@ export const {
   useGetGeneralDiscussionIdQuery,
   useGetUserDiscussionsQuery,
   useLazyGetUserDiscussionsQuery,
-  useUpdateDiscussionLikesMutation
+  useUpdateDiscussionLikesMutation,
+  useGetSimilarDiscussionsQuery,
+  useGetPopularDiscussionsQuery
   } = discussionsApi

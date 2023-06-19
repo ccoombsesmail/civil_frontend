@@ -18,7 +18,7 @@ export const TableHeader = styled('header')`
     height: clamp(175px, 15vh, 600px);
     background-image: linear-gradient(to right, var(--m-primary-background-color), #83af9b);
     background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6) !important;
-
+    background-image: linear-gradient(circle, #14b8ab, #61c9d9, #a7d8f2, #dde9fb, #ffffff) !important;
     color: #fff;
     position: relative;
     overflow: hidden;
@@ -42,21 +42,10 @@ export const TableHeader = styled('header')`
         display: block;
         font-size: clamp(18px, 1.6vw, 30px);
         color: white;
-
-      }
-      
-      span:first-child {
         font-weight: 700;
         letter-spacing: 6.5px;
       }
       
-      span:last-child {
-        font-weight: 500;
-        letter-spacing: 3.55px;
-        opacity: .85;
-        transform: translateY(-2px);
- 
-      }
     }
 
     @media only screen and (max-width: 1250px) {
@@ -64,4 +53,3 @@ export const TableHeader = styled('header')`
     }
     
 `
-

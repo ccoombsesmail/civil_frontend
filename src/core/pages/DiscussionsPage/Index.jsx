@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   Container, MainContent, HeaderContainer,
@@ -16,29 +16,30 @@ import Recommendations from '../RightSection/components/Recommendations/Index'
 
 function Discussions() {
   const { spaceId, commentId } = useParams()
+  const [isOpen, setIsOpen] = useState(true)
+
   return (
-    <Container>
-      <DiscussionsGrid>
+    <Container isOpen={isOpen}>
+      <DiscussionsGrid isOpen={isOpen}>
         <Left>
-          <UserInformationDisplay />
+        { isOpen ? <UserInformationDisplay isOpen={isOpen} /> : null }
         </Left>
         <Middle>
           <MainContent>
             <HeaderContainer>
-              <Header />
+              <Header isOpen={isOpen} setIsOpen={setIsOpen} />
               { commentId ? (
                 <ParentComment spaceId={spaceId} commentId={commentId} />
               ) : null}
             </HeaderContainer>
-
+             <DiscussionsRouter /> 
           </MainContent>
         </Middle>
-        {document.documentElement.clientWidth <= 1250 ? <DiscussionsRouter /> : null }
         <Right>
           <Recommendations />
         </Right>
       </DiscussionsGrid>
-      {document.documentElement.clientWidth > 1250 ? <DiscussionsRouter /> : null }
+      {/* {document.documentElement.clientWidth > 1250 ? <DiscussionsRouter /> : null } */}
     </Container>
 
   )

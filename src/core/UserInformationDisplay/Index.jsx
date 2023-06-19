@@ -18,7 +18,7 @@ import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 import useReplaceDisconnectButtonEffect from '../../civic/hooks/useReplaceDisconnectButtonEffect'
 import { CivicArrow } from '../../svgs/svgs'
 
-function UserInformationDisplay() {
+function UserInformationDisplay({ setIsOpen, isOpen }) {
   const { currentUser } = useGetCurrentUser()
   const {
     // signedInViaClerk,
@@ -50,22 +50,22 @@ function UserInformationDisplay() {
   }, [currentUser])
 
   return (
-    <Container>
+    <Container className="animation-duration-3000 animate-width">
       <Icon className="img" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} alt="" />
-      <h1>
+      <h1 className="text-2xl">
         {longUsernameDisplay(user.username)}
       </h1>
-      <h2>{user.tag ? `@${user.tag}` : ''}</h2>
+      <h2 className="text-lg">{user.tag ? `@${user.tag}` : ''}</h2>
       <div className="social">
-        <h3>
+        <h3 className="text-xl">
           {user.numFollowers}
           <small>followers</small>
         </h3>
-        <h3>
+        <h3 className="text-xl">
           {user.numFollowed}
           <small>following</small>
         </h3>
-        <h3>
+        <h3 className="text-xl">
           {user.numPosts}
           <small>posts</small>
         </h3>

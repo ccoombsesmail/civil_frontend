@@ -1,45 +1,55 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { Tab } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
-import { ThemeTab } from '../../../../CommonComponents/Tabs/Style'
-import { TabContainer } from './Style'
-import recsActionCreators from '../../../../../redux/actions/recs/index'
-import oppRecsActionCreators from '../../../../../redux/actions/opposing_recs/index'
+import { useLocation, useParams } from 'react-router-dom'
+import { TabView, TabPanel } from 'primereact/tabview'
+import { ScrollPanel } from 'primereact/scrollpanel'
 
-import useBindDispatch from '../../../../hooks/redux/useBindDispatch'
 import RecommendationsList from '../../../../RecommendationsList/Index'
+import { useGetSimilarSpacesQuery } from '../../../../../api/services/spaces.ts'
+import { useGetSimilarDiscussionsQuery } from '../../../../../api/services/discussions.ts'
+import DiscussionRecItem from '../../../../RecommendationsList/components/DiscussionRecItem/Index'
+import SpaceRecItem from '../../../../RecommendationsList/components/RecItem/Index'
+
+const uuidRegEx = /\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b/g
 
 function Recommendations() {
-  const [key, setKey] = useState('recs')
   const { spaceId } = useParams()
-  const { getAllRecs, getAllOpposingRecs } = useBindDispatch(
-    recsActionCreators,
-    oppRecsActionCreators,
-  )
-  useEffect(() => {
-    getAllOpposingRecs(spaceId)
-    getAllRecs(spaceId)
-  }, [spaceId])
+  const { pathname } = useLocation()
+  const [id1, discussionId] = pathname.match(uuidRegEx)
 
-  const recs = useSelector((s) => s.recommendations.recs)
+  const { data } = useGetSimilarSpacesQuery(spaceId)
+  const { data: similarDiscussions } = useGetSimilarDiscussionsQuery(discussionId, {
+    skip: !discussionId,
+  })
+  console.log(similarDiscussions)
   const opposingRecs = useSelector((s) => s.recommendations.opposingRecs)
   return (
-    <TabContainer>
-      <ThemeTab
-        activeKey={key}
-        onSelect={(k) => setKey(k)}
+    <TabView
+      scrollable
+      className="pb-5 rec-tabs tabview"
+      pt={{
+        panelContainer: {
+          className: 'p-0',
+        },
+      }}
+    >
+      <TabPanel
+        header="Similar Spaces"
       >
-        <Tab eventKey="recs" title="Similar Content">
-          <RecommendationsList recs={recs} />
-        </Tab>
-        <Tab eventKey="opposingRecs" title="Opposing Views">
-          <RecommendationsList recs={opposingRecs} />
-        </Tab>
-      </ThemeTab>
-
-    </TabContainer>
+        <ScrollPanel style={{ width: '100%', height: '100vh' }} className="custombar1">
+          <RecommendationsList recs={data} RecItem={SpaceRecItem} />
+        </ScrollPanel>
+      </TabPanel>
+      <TabPanel header="Similar Discussions">
+        <ScrollPanel style={{ width: '100%', height: '100vh' }} className="custombar1">
+          <RecommendationsList recs={similarDiscussions} RecItem={DiscussionRecItem} />
+        </ScrollPanel>
+      </TabPanel>
+      <TabPanel header="Opposing Views">
+        <RecommendationsList recs={opposingRecs} />
+      </TabPanel>
+    </TabView>
   )
 }
 

@@ -4,7 +4,8 @@ export const ThreadContainer = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70vw;
+  /* width: 70vw; */
+  width: 50vw;
   @media (max-width: 600px) {
     width: 100vw;
     }

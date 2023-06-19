@@ -1,25 +1,17 @@
 import { toast } from 'react-toastify'
+import { createDraft, finishDraft } from 'immer'
 import {
-  ADD_SESSION_DATA_CLERK, ADD_SESSION_DATA_BACKEND, LOG_OUT, UPDATE_SESSION, ADD_SESSION_DATA_DID,
+  ADD_SESSION_DATA_CLERK, UPDATE_SESSION, ADD_SESSION_DATA_DID,
 } from '../../reducers/sessionReducer'
 import * as SessionApiUtil from '../../../api/v1/session/session_api_util'
-import * as UsersApiUtil from '../../../api/v1/users/users_api_util'
 import { errorFormatter } from '../../utils/errorFormatter'
-import { OPEN_MODAL } from '../../reducers/ui_reducer'
+
+import { sessionApi } from '../../../api/services/session.ts'
 
 export const CREATE_TAG_FORM = 'CREATE_TAG_FORM'
 
-const logoutActionCreator = () => ({
-  type: LOG_OUT,
-})
-
 export const addUserActionCreatorClerk = (userData) => ({
   type: ADD_SESSION_DATA_CLERK,
-  payload: userData,
-})
-
-const addUserActionCreatorBackend = (userData) => ({
-  type: ADD_SESSION_DATA_BACKEND,
   payload: userData,
 })
 
@@ -33,40 +25,6 @@ export const updateSessionActionCreator = (data) => ({
   payload: data,
 })
 
-export const signIn = (userData) => (dispatch) => SessionApiUtil.signIn(userData)
-  .then((res) => dispatch(addUserActionCreatorBackend(JSON.parse(res.data).token)))
-  .catch((error) => toast.error(errorFormatter(error)))
-
-export const getCurrentUser = (userId, didUser = false) => (dispatch) => {
-  toast.promise(
-    UsersApiUtil.getUser(userId),
-    {
-      pending: 'Fetching User Data',
-      success: 'Success!',
-      error: {
-        render({ data: errorData }) {
-          const { response } = errorData
-          const { data: responseData } = response
-          return `${responseData.msg} 🤯 `
-        },
-      },
-    },
-  ).then((res) => {
-    if (!res.data.tag) {
-      dispatch({
-        type: OPEN_MODAL,
-        payload: { modalType: CREATE_TAG_FORM, modalProps: { userId } },
-      })
-    }
-    return dispatch(didUser ? addSessionDataDID(res.data) : addUserActionCreatorBackend(res.data))
-  })
-    .catch((error) => toast.error(errorFormatter(error)))
-}
-
-export const logout = () => (dispatch) => {
-  dispatch(logoutActionCreator())
-}
-
 export const addDIDSession = (didData) => (dispatch) => {
   dispatch(addSessionDataDID(didData))
 }
@@ -76,13 +34,17 @@ export const updateUserIcon = (userData) => (dispatch) => SessionApiUtil.updateU
   .catch((error) => toast.error(errorFormatter(error)))
 
 const uploadUserIcon = (dta, username) => (dispatch) => SessionApiUtil.uploadUserIcon(dta, username)
-  .then((res) => dispatch(updateSessionActionCreator(res.data)))
-  .catch((error) => toast.error(errorFormatter(error)))
+  .then((res) => {
+    dispatch(
+      sessionApi.util.updateQueryData('getCurrentUser', username, (draft) => {
+        const newDraft = createDraft(draft)
+        newDraft.iconSrc = `${res.data.icon_src}?t=${Date.now()}`
+        return finishDraft(newDraft)
+      }),
+    )
+  })
 
 export default {
-  logout,
-  getCurrentUser,
-  signIn,
   updateUserIcon,
   uploadUserIcon,
   addDIDSession,

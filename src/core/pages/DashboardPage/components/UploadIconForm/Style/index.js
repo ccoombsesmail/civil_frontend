@@ -29,6 +29,7 @@ export const FlexDiv = styled('div')`
 `
 
 export const Container = styled('div')`
+  width: clamp(380px, 70vw, 1200px);
   h1 {
     width: 100%;
     margin: 0;
@@ -41,6 +42,6 @@ export const Container = styled('div')`
 export const ButtonContainer = styled('div')`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 10px;
 `

@@ -1,8 +1,8 @@
 import { Field } from 'formik'
 import React, { useState, useCallback } from 'react'
-import Input3 from '../../../CommonComponents/Form/Input3/Index'
 import { FieldContainer, NamesContainer } from './Style/Index'
 import UploadIconInput from '../../../pages/DashboardPage/components/UploadIconInput/Index'
+import FormikController from '../../../Forms/Formik/FormikController/Index'
 
 function BasicInformation({ setFieldValue }) {
   const [file, setFile] = useState(null)
@@ -25,32 +25,25 @@ function BasicInformation({ setFieldValue }) {
         </span>
       </div>
       <NamesContainer>
-        <Field
+        <FormikController
+          control="input"
+          label="Title*"
+          name="title"
           type="text"
-          name="firstName"
-          label="First Name"
-          component={Input3}
-          width="85%"
-          isDIDForm
         />
-        <Field
+        <FormikController
+          control="input"
+          label="Title*"
+          name="title"
           type="text"
-          name="lastName"
-          component={Input3}
-          width="85%"
-          placeholder="Last Name"
-          label="Last Name"
-          isDIDForm
         />
       </NamesContainer>
       <NamesContainer>
-        <Field
+        <FormikController
+          control="input"
+          label="Title*"
+          name="title"
           type="text"
-          name="username"
-          component={Input3}
-          width="100%"
-          label="Username*"
-          isDIDForm
         />
       </NamesContainer>
 

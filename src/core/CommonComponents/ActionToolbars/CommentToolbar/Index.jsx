@@ -8,34 +8,36 @@ import CivilityButton from './components/CivilityButton/Index'
 import TribunalButton from '../components/TribunalButton/Index'
 
 import { Container, Left, Right } from '../Style/index'
-import { COMMENT, TRIBUNAL_COMMENT } from '../../../../enums/content_type'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
+import useUpdateCommentLikes from './hooks/useUpdateCommentLikes.ts'
 
 function CommentActionToolbar({
-  likes, comment, user,
+  comment,
 }) {
+  console.log(comment)
+  const { likes } = comment
   const {
     spaceId, discussionId, contentId, ...params
   } = useParams()
-  const isTribunalComment = comment.commentType
   const { isOnTribunalPage } = useDetectCurrentPage()
+
+  const {handleUpdateLikes: updateCommentLikesUpvote, isLoading: isUpvoteLoading} = useUpdateCommentLikes(comment, 'upvote')
+  const {handleUpdateLikes: updateCommentLikesDownvote, isLoading: isDownvoteLoading} = useUpdateCommentLikes(comment, 'downvote')
   return (
     <Container>
       <Left>
         <UpVoteButton
           content={comment}
-          user={user}
-          contentType={isTribunalComment ? TRIBUNAL_COMMENT : COMMENT}
-          disabled={isOnTribunalPage && contentId === comment?.id}
+          disabled={(isOnTribunalPage && contentId === comment?.id) || isUpvoteLoading}
+          updateLikes={updateCommentLikesUpvote}
         />
         <span>
           {likes || 0}
         </span>
         <DownVoteButton
           content={comment}
-          user={user}
-          contentType={isTribunalComment ? TRIBUNAL_COMMENT : COMMENT}
-          disabled={isOnTribunalPage && contentId === comment?.id}
+          disabled={(isOnTribunalPage && contentId === comment?.id) || isDownvoteLoading}
+          updateLikes={updateCommentLikesDownvote}
         />
         { params['*'] && <CommentButton comment={comment} />}
         { (isOnTribunalPage && contentId === comment?.id) ? null : (

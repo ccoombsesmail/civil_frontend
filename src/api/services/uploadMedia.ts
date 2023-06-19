@@ -14,9 +14,26 @@ export const uploadMediaApi = emptyMiscServiceSplitApi.injectEndpoints({
         }
       }
       )},
+    }),
+    uploadUserIcon: builder.mutation<any, any>({
+      query: ({ fileData, userId}) => {
+        return ({
+        url: `/users/uploadIcon`, 
+        method: 'POST',
+        body: fileData,
+        headers: {
+          post: {
+            'Content-Type': 'multipart/form-data'
+          },
+          common: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      }
+      )},
     })
   }),
 })
 
-export const { useUploadSpaceMediaMutation } = uploadMediaApi
+export const { useUploadSpaceMediaMutation, useUploadUserIconMutation } = uploadMediaApi
 

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Button } from 'primereact/button'
 import { WarningSvg, ScalesSvg } from '../../../svgs/svgs'
-import ExpandButton from '../Buttons/ExpandButton/Index'
 
 import {
   Message,
@@ -13,7 +13,6 @@ function CensorOverlay({
   setShouldBlur, contentId, contentType, showNavigationToTribunal,
 }) {
   const navigate = useNavigate()
-  const { pathname } = useLocation()
   return (
     <MessageContainer
       onClick={(e) => {
@@ -33,16 +32,14 @@ function CensorOverlay({
         </div>
       </Warning>
       { showNavigationToTribunal ? (
-        <></>
-        // <ExpandButton
-        //   width="auto"
-        //   bgColor="var(--m-primary-btn-color)"
-        //   onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}
-        // >
-        //   <ScalesSvg />
-        //   See Ongoing Review Process
-        //   <ScalesSvg />
-        // </ExpandButton>
+        <Button
+          className="font-bold"
+          onClick={() => navigate(`/tribunal/${contentType}/${contentId}`)}
+        >
+          <ScalesSvg />
+          See Ongoing Review Process
+          <ScalesSvg />
+        </Button>
       ) : <span />}
 
     </MessageContainer>

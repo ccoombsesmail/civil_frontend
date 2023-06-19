@@ -45,7 +45,9 @@ function CommentThread() {
       <ThreadContainer>
         <ColumnContainer>
           {
-          isCommentsLoading ? <CircleLoading size={30} /> : <CommentColumn comments={allComments} commentSentiment="All" color="white" spaceId={spaceId} isReplies />
+          isCommentsLoading
+            ? <CircleLoading size={30} />
+            : <CommentColumn comments={allComments} commentSentiment="All" color="white" spaceId={spaceId} isReplies focusedCommentId={commentId} />
           }
 
         </ColumnContainer>

@@ -5,17 +5,8 @@ import React, {
 } from 'react'
 import { useParams } from 'react-router-dom'
 
-import useCategorizeComments from '../hooks/useCategorizeComments'
-import {
-  TabNav,
-  Glider,
-} from '../../../../CommonComponents/NonBootstrapTabs/Style'
-import TabContent from '../../../../CommonComponents/NonBootstrapTabs/components/TabContent/Index'
-import TabNavItem from '../../../../CommonComponents/NonBootstrapTabs/components/TabNavItem/Index'
-import CommentColumn from '../CommentColumn/Index'
 import { ColumnContainer, ThreadContainer, ListContainer } from './Style/index'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import { useGetDiscussionQuery } from '../../../../../api/services/discussions.ts'
 import { useGetAllCommentsQuery } from '../../../../../api/services/comments.ts'
 import InfiniteLoader from './InfiniteLoader'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
@@ -24,18 +15,9 @@ const ITEMS_PER_PAGE = 10
 
 function DiscussionThread() {
   const { spaceId, discussionId } = useParams()
-  const [key, setKey] = useState(0)
   const { currentUser } = useGetCurrentUser()
   const [currentPage, setCurrentPage] = useState(0)
   const [allData, setAllData] = useState([])
-
-  const {
-    data: discussion,
-    isLoading: isDiscussionLoading,
-    isUninitialized: isDiscussionUninitialized,
-  } = useGetDiscussionQuery(discussionId, {
-    skip: !currentUser || !discussionId,
-  })
 
   const {
     data: comments,
@@ -47,14 +29,6 @@ function DiscussionThread() {
       skip: !currentUser || !discussionId,
     },
   )
-
-  const categorizedComments = useCategorizeComments(comments)
-  const {
-    POSITIVE: positiveComments,
-    NEUTRAL: neutralComments,
-    NEGATIVE: negativeComments,
-    all: allComments,
-  } = categorizedComments || {}
 
   useEffect(() => {
     if (comments) {
@@ -68,16 +42,6 @@ function DiscussionThread() {
 
   return (
     <ThreadContainer>
-      {/* <TabNav>
-        <TabNavItem title="All" id={0} activeTab={key} setActiveTab={setKey} contentCount={comments?.length} />
-        <TabNavItem title="Positive" id={1} activeTab={key} setActiveTab={setKey} contentCount={positiveComments?.length} />
-        <TabNavItem title="Neutral" id={2} activeTab={key} setActiveTab={setKey} contentCount={neutralComments?.length} />
-        <TabNavItem title="Negative" id={3} activeTab={key} setActiveTab={setKey} contentCount={negativeComments?.length} />
-
-        <Glider className="glider" />
-      </TabNav> */}
-
-      {/* <TabContent id={0} activeTab={key}> */}
       <ColumnContainer>
         <ListContainer>
           <h1>Comments</h1>

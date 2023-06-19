@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
   transition: all .5s;
 }
 .List {
-  background-color: white;
+  background-color: rgb(248, 249, 250);
 }
 
 .List::-webkit-scrollbar-track
@@ -544,19 +544,58 @@ blockquote {
 
   }
 
+  .p-tabview-panels {
+    display: flex;
+    justify-content: center;
+  }
+
   .p-virtualscroller-content::-webkit-scrollbar-thumb {
     display: none;
   }
   /* width */
-::-webkit-scrollbar {
-  display: none;
-}
+
+
+ .p-scrollpanel-bar-y {
+   background: var(--primary-color) !important;
+ }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   .yt-lite {
     width: 90%;
     border-radius: 10px;
   }
 
+
+  .rec-item-thumbnail {
+    max-width: 90%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .tabview {
+    width: 100%;
+    @media screen and (max-width: 1250px) {
+      max-width: 100%;
+      width: 100%;
+  
+    }
+    max-width: 25vw;
+  }
+  .p-button.p-button-icon-only {
+
+    @media screen and (max-width: 576px) {
+      width: 2.2rem;
+      height: 2.2rem !important;
+  
+    }
+  }
+
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none;
+  }
   .p-inplace-display {
     display: flex;
     align-items: center;
@@ -577,7 +616,7 @@ blockquote {
   }
 
   .p-tooltip-text {
-    padding: 0 !important;
+    /* padding: 0 !important; */
   }
 
   .p-float-label input:focus ~ label {
@@ -588,10 +627,10 @@ blockquote {
     border-bottom: 1px solid lightgray !important;
   }
   .p-dialog-mask {
-    z-index: 9999999999999999 !important;
+    z-index: 9999999999 !important;
   }
   .p-dropdown-panel {
-    z-index: 999999999999999 !important;
+    z-index: 999999999 !important;
     margin-top: 2px !important;
   }
 
@@ -744,7 +783,7 @@ blockquote {
   /*********************************  Toastify related stuff  ******************************** */
 
   .toasty {
-    z-index: 99999999999;
+    z-index: 9999999999999999999 !important;
     width: auto;
     min-width: 300px;
     div {

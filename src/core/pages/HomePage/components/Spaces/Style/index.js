@@ -1,39 +1,5 @@
 import styled from 'styled-components'
 
-export const Container = styled('div')`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 9999;
-  height: 100%;
-  margin-top: 10px;
-`
-
-export const BorderContainer = styled('div')`
-  width: 50vw;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid rgba(200,200,200,0.25);
-  border-top: none;
-  z-index: 9999;
-  background-color: white;
-  box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
-  border-radius: 1rem;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-
-  @media only screen and (max-width: 800px) {
-     width: 80vw;
-  }
-
-  @media only screen and (max-width: 600px) {
-     width: 100vw;
-  }
-
-`
-
 export const SpacesHeader = styled('p')` 
   display: flex;
   flex-direction: column;

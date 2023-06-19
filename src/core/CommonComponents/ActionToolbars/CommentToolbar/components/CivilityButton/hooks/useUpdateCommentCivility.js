@@ -3,12 +3,17 @@ import { useLocation } from 'react-router-dom'
 import { useUpdateCommentCivilityMutation } from '../../../../../../../api/services/comments.ts'
 import { useUpdateTribunalCommentCivilityMutation } from '../../../../../../../api/services/tribunal_comments.ts'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
-import { ParentCommentContext } from '../../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
+import { ParentCommentContext } from '../../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
 
 export default (comment) => {
   const {
-    isReplies, isFocusedComment, currentPage, rootOfCommentReplyThreadId, reportedContentId, commentType 
+    id, createdByUserId, rootId, parentId, discussionId,
+  } = comment || {}
+
+  const {
+    isReplies, isFocusedComment, currentPage, rootOfCommentReplyThreadId, reportedContentId, commentType, focusedCommentId,
   } = useContext(ParentCommentContext) || {}
+
   const { pathname } = useLocation()
   const { currentUser } = useGetCurrentUser()
   const [updateCommentCivility] = useUpdateCommentCivilityMutation()
@@ -17,19 +22,23 @@ export default (comment) => {
   return useCallback((e) => {
     const isTribunal = pathname.includes('tribunal')
     const data = {
+      id,
+      commentId: id,
+      discussionId,
+      parentId,
+      rootId,
+      createdByUserId,
       givingUserId: currentUser.id,
       receivingUserId: comment.createdByUserId,
       value: Number(e.currentTarget.value),
-      ...comment,
       isFocusedComment,
       isReplies,
       currentPage,
       rootOfCommentReplyThreadId,
       reportedContentId,
       commentType,
-      commentId: comment.id,
-      rootId: rootOfCommentReplyThreadId
+      focusedCommentId,
     }
     return isTribunal ? updateTribunalCommentCivility(data) : updateCommentCivility(data)
-  }, [comment.civil])
+  }, [comment])
 }

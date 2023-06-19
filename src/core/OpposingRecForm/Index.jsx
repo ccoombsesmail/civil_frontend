@@ -17,10 +17,8 @@ import {
 } from './Style'
 import ThemeTooltip from '../CommonComponents/Tooltip/Index'
 
-const OpposingRecForm = ({ spaceId, subSpaceId }) => {
-  const { createOpposingRec, closeModal } = useBindDispatch(
-    uiActions, opposingRecsActions,
-  )
+function OpposingRecForm({ spaceId, subSpaceId }) {
+  const { createOpposingRec, closeModal } = useBindDispatch(uiActions, opposingRecsActions)
 
   return (
 

@@ -4,6 +4,7 @@
 import React, { useMemo } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { Button } from 'primereact/button'
 import { TweetComponent } from '../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import LinkMetaData from '../../../../Forms/components/LinkMetaData/Index'
 
@@ -25,7 +26,7 @@ import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig
 import SpaceActionToolbar from '../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs'
 
-function Header() {
+function Header({ isOpen, setIsOpen }) {
   let content = null
   const { spaceId } = useParams()
   const { pathname } = useLocation()
@@ -88,6 +89,12 @@ function Header() {
 
   return (
     <Container>
+      <Button
+        size="small"
+        icon={`pi ${isOpen ? 'pi-arrow-left' : 'pi-arrow-right'}`}
+        onClick={() => setIsOpen(!isOpen)}
+        className="absolute left-0 top-0 -translate-x-100 focus:shadow-none"
+      />
       <BreadCrumbs />
       {/* <h1 className="text-focus-in">
         <>

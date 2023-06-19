@@ -66,6 +66,9 @@ export const spacesApi = emptySplitApi.injectEndpoints({
             ]
           : [{ type: "Space", id: "LIST" }],
     }),
+    getSimilarSpaces: builder.query<any, any>({
+      query: (spaceId) => ({ url: `/spaces/similar-spaces/${spaceId}`, method: "GET" }),
+    }),
     createSpace: builder.mutation<Space, Partial<Space>>({
       query: (body) => {
         return {
@@ -152,5 +155,6 @@ export const {
   useUpdateSpaceLikesMutation,
   useGetUserSpacesQuery,
   useLazyGetAllFollowedSpacesQuery,
-  useGetAllFollowedSpacesQuery  
+  useGetAllFollowedSpacesQuery,
+  useGetSimilarSpacesQuery  
 } = spacesApi;

@@ -22,12 +22,11 @@ import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 import DiscussionActionToolbar from '../../../../../../CommonComponents/ActionToolbars/DiscussionToolbar/Index'
 import useGoToCommentThread from '../../../../../../hooks/routing/useGoToCommentThread'
 
-function DiscussionItem({
+export function DiscussionItem({
   discussion, id,
 }) {
-  const { spaceId } = useParams()
   const initialConfig = {
-    editorState: discussion?.editorState,
+    editorState: discussion?.title === 'General' ? null : discussion?.editorState,
     namespace: `Civil-${discussion?.title}`,
     nodes: [...PlaygroundNodes],
     onError: (error) => {
@@ -37,7 +36,7 @@ function DiscussionItem({
     theme: PlaygroundEditorTheme,
   }
 
-  const goToCommentThread = useGoToCommentThread(spaceId, discussion.id)
+  const goToCommentThread = useGoToCommentThread(discussion.spaceId, discussion.id)
 
   const commonProps = useMemo(
     () => ({
@@ -117,7 +116,7 @@ function DiscussionsFeedItem({ index, style }) {
     content = <CircleLoading size={60} />
   } else {
     const discussion = data[index % 10]
-    content = discussion && discussion.title !== 'General' ? (
+    content = discussion ? (
       <DiscussionItemContex.Provider value={{currentPage: Math.floor(index / 5), spaceId}}>
         <DiscussionItem
           style={style}

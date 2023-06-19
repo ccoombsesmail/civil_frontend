@@ -61,17 +61,21 @@ const addDirectReplyToGetAllCommentRepliesCache = async (commentId, dispatch, ad
 }
 
 
-const addReplyToGetAllCommentRepliesCache = async ({ id, rootId, parentId, rootOfCommentReplyThreadId}, dispatch, addedComment) => {
+const addReplyToGetAllCommentRepliesCache = async ({ id, rootId, parentId, rootOfCommentReplyThreadId, focusedCommentId}, dispatch, addedComment) => {
+  console.log(id)
+  console.log(focusedCommentId)
+  console.log(rootOfCommentReplyThreadId)
+
   return dispatch(
     commentsApi.util.updateQueryData(
-      "getAllCommentReplies", rootId,
+      "getAllCommentReplies", focusedCommentId,
       (draft) => {
         if (draft) {
           const newDraft = createDraft(draft);
           const rootComment = newDraft.replies.find(
             (c) => c.data.id === rootOfCommentReplyThreadId
           );
-          if (parentId === rootId) {
+          if (parentId === focusedCommentId) {
             rootComment.children.push({
                 data: addedComment.data,
                 children: [],

@@ -1,21 +1,18 @@
-import React, { memo, useMemo, useCallback } from 'react'
+import React, {
+  memo, useMemo, useState,
+} from 'react'
+import { Dialog } from 'primereact/dialog'
+import { Message } from 'primereact/message'
 import { Gavel2, CastBallotSvg } from '../../../../svgs/svgs'
-import ThemeButton from '../../../CommonComponents/Button/Index'
-import useModal from '../../../CommonComponents/Lexical/hooks/useModal.tsx'
 import VoteForm from '../../../Forms/VoteForm/Index'
 
 import {
-  VotingContainer, VotesAgainst, VotesFor, MiddleSection, VerdictContainer, VotesContainer, CoolText
+  VotingContainer, VotesAgainst, VotesFor, MiddleSection, VotesContainer,
 } from './Style'
 import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 
 function VotingBox({ contentId, reportStats, isFetching }) {
-  const [modal, showModal] = useModal()
-  const onClick = useCallback(() => {
-    showModal('Cast Your Vote', (onClose) => (
-      <VoteForm closeModal={onClose} contentId={contentId} />
-    ))
-  }, [])
+  const [visible, setVisible] = useState(false)
 
   const votingTimeUp = (+new Date(reportStats?.reportPeriodEnd) - +new Date()) <= 0
   const hasAlreadyVoted = useMemo(
@@ -23,49 +20,77 @@ function VotingBox({ contentId, reportStats, isFetching }) {
     [reportStats.voteAgainst, reportStats.voteFor],
   )
 
-  const verdict = useMemo(() => {
-    if (reportStats.numVotesFor > reportStats.numVotesAgainst) return 'Violation'
-    return 'No Violation'
+  const { isPassing, isViolation} = useMemo(() => {
+    if (reportStats.numVotesFor > reportStats.numVotesAgainst) return { isViolation: true }
+    if (reportStats.numVotesFor < reportStats.numVotesAgainst) return { isPassing: true }
+    return {}
   }, [reportStats.numVotesAgainst, reportStats.numVotesFor])
+  const content = (
+    <div className="flex align-items-center">
+      <Gavel2 />
+      <div className="m-2">
+        {
+         isViolation && 'Content Has Been Deemed To Have Violated Community Guidlines By A Jury Of Peers'
+        }
+        {
+          isPassing && 'Content Has Been Deemed To Have NOT violated Community Guidlines By A Jury Of Peers'
+        }
+
+      </div>
+      <Gavel2 />
+    </div>
+  )
 
   return (
     <VotingContainer>
-      {modal}
-      <MiddleSection verdict={verdict}>
-        { (votingTimeUp && !isFetching) && (
-        <VerdictContainer>
-          <CoolText>
-            {/* <Gavel2 /> */}
-            VERDICT
-            {/* <Gavel2 /> */}
-          </CoolText>
-          <CoolText>
-          <Gavel2 />
-            ↓
-          <Gavel2 />
-
-          </CoolText>
-          <CoolText verdict={verdict}>
-            {verdict}
-          </CoolText>
-
-        </VerdictContainer>
+      <Dialog header="Cast Your Vote" visible={visible} onHide={() => setVisible(false)}>
+        <VoteForm
+          contentId={contentId}
+          closeModal={() => setVisible(false)}
+        />
+      </Dialog>
+      <MiddleSection verdict={isViolation}>
+        { (votingTimeUp && !isFetching && isViolation) && (
+          <Message
+            style={{
+              border: '1px solid red',
+              borderWidth: '0 6px 0 6px',
+              color: 'black',
+            }}
+            className="w-full justify-content-center m-3"
+            severity="error"
+            content={content}
+          />
         )}
+
+        { (votingTimeUp && !isFetching && isPassing) && (
+        <Message
+          style={{
+            border: '1px solid green',
+            borderWidth: '0 6px 0 6px',
+            color: 'black',
+          }}
+          className="w-full justify-content-center m-3"
+          severity="success"
+          content={content}
+        />
+        )}
+
         { !votingTimeUp && <CastBallotSvg /> }
         {(reportStats && !votingTimeUp) && (
-        <ExpandButton onClick={onClick}>
+        <ExpandButton onClick={() => setVisible(true)}>
           {hasAlreadyVoted ? 'Change Your Vote' : 'Cast Your Vote'}
         </ExpandButton>
         )}
       </MiddleSection>
       <VotesContainer>
-        <VotesFor>
+        <VotesFor isViolation={isViolation}>
           Violation Votes
           <span>
             {reportStats && (reportStats.numVotesFor ?? '?')}
           </span>
         </VotesFor>
-        <VotesAgainst>
+        <VotesAgainst isPassing={isPassing}>
           No Violation Votes
           <span>
             {reportStats && (reportStats.numVotesAgainst ?? '?')}

@@ -1,13 +1,16 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react'
-import RecItem from './components/RecItem/Index'
 
 import { RecListContainer } from './Style'
 
-function RecommendationsList({ recs }) {
+function RecommendationsList({ recs, RecItem }) {
   return (
     <RecListContainer>
       {
-        recs.map((rec, idx) => <RecItem key={String(idx)} rec={rec} />)
+      recs?.length === 0 ? <h3>Nothing Here</h3> : null
+      }
+      {
+        recs?.map((rec, idx) => <RecItem key={String(idx)} rec={rec} />)
       }
     </RecListContainer>
   )

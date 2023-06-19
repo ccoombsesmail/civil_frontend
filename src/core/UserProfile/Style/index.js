@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import styled from 'styled-components'
-import { Nav } from 'react-bootstrap'
 
 export const Container = styled('div')`
   width: calc(100%);
@@ -32,79 +31,6 @@ export const HeaderContainer = styled('div')`
   display: flex;
   width: 100%;
   align-items: flex-end;
-  border-bottom: 1px solid gray;
-
-`
-
-export const StyledNav = styled(Nav)`
-
-  --nav-tab-width: 6vw; 
-  --nav-tab-width-mobile: 17vw; 
-
-  position: relative;
-  transition: all 1s;
-
-  // first-child not working for some reason
-  div:nth-child(2) {
-    border-top-left-radius:5px;
-  }
-  .nav-item:last-child {
-    border-top-right-radius: 5px;
-  }
-
-  .nav-item {
-    width: var(--nav-tab-width);
-    background-color: ${(props) => props.backgroundColor || 'transparent'};
-  }
-
-  .line {
-    transition: transform .6s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    position: absolute;
-    bottom: 0;
-    height: 3.5px;
-    border-radius: 1px;
-    width: var(--nav-tab-width);
-    background-color: #87C232;
-    transform: ${({ activeKey }) => `translateX(${activeKey * 6}vw)`};
-  }
-  .nav-link {
-    color: gray;
-    font-weight: bold;
-    font-size: 1vw;
-    display: flex;
-    justify-content: center;
-  }
-  @media (max-width: 1250px) {
-    .nav-item {
-      width: var(--nav-tab-width-mobile);
-    }
-    .line {
-      width: var(--nav-tab-width-mobile);
-      transform: ${({ activeKey }) => `translateX(${activeKey * 17}vw)`};
-
-    }
-    .nav-link {
-      font-size: 2vw;
-    }
-
-  }
-
-  @media (max-width: 700px) {
-    .nav-item {
-      width: var(--nav-tab-width-mobile);
-    }
-    .line {
-      width: var(--nav-tab-width-mobile);
-      transform: ${({ activeKey }) => `translateX(${activeKey * 17}vw)`};
-      height: 2.5px;
-
-    }
-    .nav-link {
-      font-size: 2.5vw;
-    }
-
-  }
-
 
 `
 
@@ -140,11 +66,9 @@ export const Content = styled('section')`
 `
 
 export const Middle = styled('div')` 
-  width: 60vw;
+  width: 80vw;
   @media (max-width: 800px) {
-
     width: 100%;
-
  }
   
 `

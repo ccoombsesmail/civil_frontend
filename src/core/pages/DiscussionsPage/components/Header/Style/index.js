@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 import { LongDownArrow } from '../../../../../../svgs/svgs'
 
-export const Container = styled('div')` 
+export const Container = styled('div')`
+  position: relative ;
   display: flex;
   border: 1px solid rgba(200,200,200,0.25);
   border-bottom: none ;
   flex-direction: column;
   align-items: center;
-  width: 50vw;
+  width: 100%;
   padding-top: 1em;
   z-index: 99;
   background-color: #F7F7F7;

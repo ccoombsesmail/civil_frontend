@@ -38,6 +38,22 @@ export const MessageContainer = styled('div')`
     border-radius: 0;
   }
 
+  path {
+    fill: white !important;
+  }
+
+  svg {
+    margin: 5px;
+  }
+  
+  button:hover {
+    path {
+    fill: black !important;
+  }
+
+    color: black !important;
+  }
+
 `
 
 export const Message = styled('h3')`

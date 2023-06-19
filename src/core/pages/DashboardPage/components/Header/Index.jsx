@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useState } from 'react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { Dialog } from 'primereact/dialog'
 import ProgressBar from '../../../../CommonComponents/ProgressBar2/Index'
 
 import {
@@ -7,32 +8,25 @@ import {
 } from './Style'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
-import useModal from '../../../../CommonComponents/Lexical/hooks/useModal.tsx'
 import UploadIconForm from '../UploadIconForm/Index'
 import { EditIcon, SolanaIcon } from '../../../../../svgs/svgs'
-import ExpandButton from '../../../../CommonComponents/Buttons/ExpandButton/Index'
 
 function Header() {
-  const [modal, showModal] = useModal()
-  const onClick = useCallback(() => {
-    showModal('Change Profile Icon', (onClose) => (
-      <UploadIconForm closeModal={onClose} />
-    ))
-  }, [])
+  const [visible, setVisible] = useState(false)
   const { currentUser: user } = useGetCurrentUser()
-
   return (
     <Container>
-      {modal}
+      <Dialog header="Change Profile Icon" visible={visible} onHide={() => setVisible(false)}>
+        <UploadIconForm closeModal={() => setVisible(false)} />
+      </Dialog>
       <UserIconEditContainer>
-        <EditIcon onClick={onClick} />
-        <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} onClick={onClick} alt="" />
+        <EditIcon onClick={() => setVisible(true)} />
+        <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} onClick={() => setVisible(true)} alt="" />
         <h1>{longUsernameDisplay(user?.username)}</h1>
 
       </UserIconEditContainer>
       <WalletContainer>
         <WalletMultiButton />
-        {/* <ExpandButton icon={<SolanaIcon />}> Manage Wallet </ExpandButton> */}
         {
          JSON.parse(localStorage.getItem('walletName')) === 'Torus' ? (
            <div className="wallet-adapter-dropdown">

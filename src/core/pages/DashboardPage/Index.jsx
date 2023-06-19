@@ -1,5 +1,4 @@
 import React, { useEffect, Suspense } from 'react'
-// import { UserProfile } from '@clerk/clerk-react'
 
 import { Container, CivicPassesContainer } from './Style'
 
@@ -19,16 +18,6 @@ function Dashboard() {
       <Container>
         <Header />
         <Line />
-        {/* <UserProfile
-          appearance={{
-            variables: {
-              fontSize: '1.2vw',
-              fontSmoothing: 'antialiased',
-              fontWeight: 900,
-              fontFamily: 'Source Sans Pro, sans-serif',
-            },
-          }}
-        /> */}
         <CivicPassesContainer>
           <b>Civic Passes</b>
           <CaptchaGatewayDesktop />

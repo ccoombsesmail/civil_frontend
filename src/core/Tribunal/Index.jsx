@@ -25,7 +25,7 @@ import Timer from "./components/Timer/Index";
 import { CircleLoading } from "../../svgs/spinners/CircleLoading";
 import { useGetCommentQuery } from "../../api/services/comments.ts";
 import { BgImage } from "../pages/Style";
-import WhatDoYouThink from "./components/WhatDoYouThink/Index";
+import WhatDoYouThink from "./components/WhatDoYouThink/WhatDoYouThink";
 
 function Tribunal() {
   const { contentId, contentType } = useParams();
@@ -68,12 +68,12 @@ function Tribunal() {
           user={currentUser}
           hideCommentButton
         />
-      );
+      )
     }
     if (commentLoaded) {
       return <Comment commentData={{ ...comment, isReportedComment: true}} replies={[]} isReportedComment />;
     }
-    return null;
+    return null
   }, [space, comment, commentLoaded, spaceLoaded, contentId, currentUser]);
 
   return (

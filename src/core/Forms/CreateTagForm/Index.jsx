@@ -1,12 +1,11 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/no-unescaped-entities */
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useEffect, useState} from 'react'
+import { Button } from 'primereact/button'
 
-import { Formik, Field } from 'formik'
+import { Formik } from 'formik'
 
-import Input3 from '../../CommonComponents/Form/Input3/Index'
-import useModal from '../../CommonComponents/Lexical/hooks/useModal.tsx'
-
+import { Dialog } from 'primereact/dialog'
 import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 
 import {
@@ -15,26 +14,22 @@ import {
 import useCheckIfTagExistsOnKeyPress from './hooks/useCheckIfTagExistsOnKeyPress'
 import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 import { Footer } from '../SpaceForm/Style'
+import FormikController from '../Formik/FormikController/Index'
 
 function CreateTagModal() {
   const { currentUser } = useGetCurrentUser()
-  const [modal, showModal] = useModal()
-  const openModal = useCallback((userId) => {
-    showModal('Why Are You Reporting This Content?', (onClose) => (
-      <CreateTagForm closeModal={onClose} userId={userId} />
-    ))
-  }, [])
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     if (currentUser && !currentUser.tag) {
-      openModal(currentUser.userId)
+      setVisible(true)
     }
   }, [currentUser])
 
   return (
-    <>
-      { modal }
-    </>
+    <Dialog header="Create Tag" visible={visible} onHide={() => setVisible(false)}>
+      <CreateTagForm closeModal={() => setVisible(false)} userId={currentUser?.userId} />
+    </Dialog>
   )
 }
 
@@ -57,7 +52,7 @@ function CreateTagForm({ userId, closeModal }) {
         }}
         onSubmit={handleOnSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, ...rest }) => (
           <FormContainer>
             <InputContainer>
               <p>
@@ -65,12 +60,23 @@ function CreateTagForm({ userId, closeModal }) {
                 The tag you create is unique accross the Civil platform,
                 and can be used to "mention" you via "@"
               </p>
-              <Field name="tag" label="Enter Tag" component={Input3} width="50%" onKeyUp={checkIfTagExistsOnKeyPress} validInput={isValid} />
+              <FormikController
+                control="input"
+                label="Tag*"
+                name="tag"
+                type="text"
+                onKeyDown={checkIfTagExistsOnKeyPress}
+                {...rest}
+              />
             </InputContainer>
             <Footer>
-              {/* <Button type="submit" disabled={isSubmitting}>
+              <Button
+                onKeyUp={checkIfTagExistsOnKeyPress}
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Submit
-              </Button> */}
+              </Button>
             </Footer>
           </FormContainer>
         )}

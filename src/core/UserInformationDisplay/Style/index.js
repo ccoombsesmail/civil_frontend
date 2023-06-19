@@ -78,7 +78,7 @@ export const Container = styled('div')`
   text-align: center;
   margin: 1px;
   padding-top: 80px;
-  margin-top: 20px;
+  margin-top: 50px;
   background: white
     url("https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png");
   background-repeat: repeat no-repeat;

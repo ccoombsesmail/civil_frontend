@@ -2,7 +2,7 @@ import React, { memo, useState, useCallback } from 'react'
 
 import { Formik, Field } from 'formik'
 
-import Button from '../../CommonComponents/Button/Index'
+import { Button } from 'primereact/button'
 import { Checkbox } from '../../CommonComponents/Form/Checkbox/Index'
 
 import {

@@ -11,11 +11,11 @@ import Comment from '../Comment/Index'
 
 class CommentCache {
   constructor() {
-    this.sizes = {};
+    this.sizes = {}
   }
 
   get(index) {
-    return this.sizes[index] || 0;
+    return this.sizes[index] || 0
   }
 
   resetCacheAtIndex(index) {
@@ -27,10 +27,10 @@ class CommentCache {
     if (this.sizes[index]) {
       if (isRemoving) {
         this.sizes[index] -= size
-      } else this.sizes[index] += size;
+      } else this.sizes[index] += size
     } else {
-      this.sizes[index] = size;
-    }    
+      this.sizes[index] = size
+    }
   }
 }
 
@@ -40,25 +40,24 @@ export default function ExampleWrapper({
   items,
   loadNextPage,
   discussionId,
-  spaceId
+  spaceId,
 }) {
-  const commentCache = new CommentCache();
+  const commentCache = new CommentCache()
   const itemCount = hasNextPage ? items.length + 1 : items.length
   const { currentUser } = useGetCurrentUser()
-  const infiniteLoaderRef = useRef(null);
+  const infiniteLoaderRef = useRef(null)
 
   const onReplyToggle = useCallback(
     (index, newSize, isRemoving) => {
-      commentCache.set(index, newSize, isRemoving);
-      infiniteLoaderRef.current.resetAfterIndex(index);
+      commentCache.set(index, newSize, isRemoving)
+      infiniteLoaderRef.current.resetAfterIndex(index)
     },
-    [infiniteLoaderRef, commentCache]
-  );
+    [infiniteLoaderRef, commentCache],
+  )
 
   const resetCacheAtIndex = useCallback((index) => {
-      commentCache.resetCacheAtIndex(index)
-      infiniteLoaderRef.current?.resetAfterIndex(index);
-
+    commentCache.resetCacheAtIndex(index)
+    infiniteLoaderRef.current?.resetAfterIndex(index)
   }, [commentCache])
 
   const getContextValue = useCallback((comment, currentPage, index) => ({
@@ -69,18 +68,14 @@ export default function ExampleWrapper({
     index,
     onReplyToggle,
     resetCacheAtIndex,
-    rootOfCommentReplyThreadId: comment.data?.id
+    rootOfCommentReplyThreadId: comment.data?.id,
   }), [spaceId, onReplyToggle])
-
-
-
 
   const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index) => !hasNextPage || index < items.length
   function Item({ index, style }) {
-
     const currentPage = Math.floor(index / 10)
     const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllCommentsQuery({discussionId, currentPage}, {
       skip: !currentUser,
@@ -89,23 +84,25 @@ export default function ExampleWrapper({
     if (isLoadingCurrent || isUninitialized || !data) {
       content = <div>Loading...</div>
     } else {
-      const comment = data[index%10]
+      const comment = data[index % 10]
       if (comment) {
         const value = getContextValue(comment, currentPage, index)
-        content = ( <ErrorBoundary>
-          <ParentCommentContext.Provider
-            key={comment.data?.id || String(idx)}
-            value={value}
-          >
-            <Comment
+        content = (
+          <ErrorBoundary>
+            <ParentCommentContext.Provider
               key={comment.data?.id || String(idx)}
-              onReplyToggle={onReplyToggle}
-              level={0}
-              commentData={comment.data}
-              replies={comment.children}
-            />
-          </ParentCommentContext.Provider>
-        </ErrorBoundary>)
+              value={value}
+            >
+              <Comment
+                key={comment.data?.id || String(idx)}
+                onReplyToggle={onReplyToggle}
+                level={0}
+                commentData={comment.data}
+                replies={comment.children}
+              />
+            </ParentCommentContext.Provider>
+          </ErrorBoundary>
+        )
       } else {
         content = null
       }
@@ -114,11 +111,11 @@ export default function ExampleWrapper({
     return <div style={style}>{content}</div>
   }
 
-  const getItemSize = (index) => commentCache.get(index) ? commentCache.get(index) * 400 + 400 : 400 // Default height
+  const getItemSize = (index) => (commentCache.get(index) ? commentCache.get(index) * 400 + 400 : 400) // Default height
 
   return (
     <InfiniteLoader
-     
+
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
       loadMoreItems={loadMoreItems}

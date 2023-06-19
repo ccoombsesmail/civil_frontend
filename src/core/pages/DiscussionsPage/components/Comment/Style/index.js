@@ -8,7 +8,6 @@ export const OuterContainer = styled('div')`
   display: flex;
   justify-content: center;
 
-
 `
 export const CommentContainer = styled('li')`
   width: ${(props) => (props.isFocusedComment ? '95%' : '100%')};

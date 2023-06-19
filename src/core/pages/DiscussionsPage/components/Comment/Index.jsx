@@ -1,71 +1,62 @@
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-cycle */
 import React, {
-  useState, memo, useEffect, useRef
+  useState, memo, useEffect, useRef,
 } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-import Collapse from 'react-bootstrap/Collapse'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { UpArrowSvg, DownArrowSvg } from '../../../../../svgs/svgs'
 
 import IconButton from '../../../../CommonComponents/IconButton/Index'
 import CensorOverlay from '../../../../CommonComponents/CensorOverlay/Index'
 
-import ActionToolbar from '../../../../CommonComponents/ActionToolbars/CommentToolbar/Index'
 import {
-  CommentContainer, Header, Username, Date, Body, Footer,
-  Thumb, ExpandButton, EvidenceSection, UserInfoContainer, OuterContainer,
+  CommentContainer, Body, ExpandButton, OuterContainer,
 } from './Style'
 
-import { getTimeSince } from '../../../../../generic/string/dateFormatter'
-
-import ThemeTooltip from '../../../../CommonComponents/Tooltip/Index'
 import { UNDER_REVIEW } from '../../../../../enums/report_status'
 import { COMMENT } from '../../../../../enums/content_type'
-import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 import ReadOnlyEditor from '../../../../CommonComponents/Lexical/ReadOnlyEditor.tsx'
-import { ParentCommentContext } from '../CommentColumn/ParentCommentContext'
+import { ParentCommentContext } from '../CommentColumn/ParentCommentContext.tsx'
 import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
-import useDetectCurrentPage from '../../../../hooks/routing/useDetectCurrentPage'
-
+import useDetectCurrentPage from '../../../../hooks/routing/useDetectCurrentPage.ts'
+import CardFooter from './components/CommentFooter/CommentFooter'
+import CommentHeader from './components/CommentHeader/CommentHeader'
 
 const COLORS = ['#e6eef9', '#d6dee9', '#c6cee8', '#b6bee8', '#a6aee7', '#969ee7', '#868ee6', '#767ee6', '#666ee5', '#565ee5']
 
 function Comment({
-  commentData, replies, commentRef, level, isFocusedComment, parentCollapse
+  commentData, replies, level, isFocusedComment, parentCollapse,
 }) {
   if (!commentData) return null
 
   const { isOnTribunalPage } = useDetectCurrentPage()
   const repliesRef = useRef({
     isFirstRender: true,
-    numReplies: replies.length
-  });
+    numReplies: replies.length,
+  })
 
-  const { spaceId, index, onReplyToggle, resetCacheAtIndex, isReplies } = React.useContext(ParentCommentContext) || {}
-  const navigate = useNavigate()
+  const {
+    spaceId, index, onReplyToggle, resetCacheAtIndex, isReplies,
+  } = React.useContext(ParentCommentContext) || {}
   const { pathname } = useLocation()
   const [shouldBlur, setShouldBlur] = useState(commentData?.reportStatus === UNDER_REVIEW || commentData?.toxicityStatus === 'TOXIC')
-  const { currentUser } = useGetCurrentUser()
-  const mins = getTimeSince(commentData.createdAt)
   const initLexicalConfig = useInitLexicalConfig(commentData?.editorState, 'Civil-Comment', false)
 
   // Add a new state to keep track of the local toggle status
-  const [localToggle, setLocalToggle] = useState(false);
-  const [globalCollapse, setGlobalCollapse] = useState(false);
+  const [localToggle, setLocalToggle] = useState(false)
+  const [globalCollapse, setGlobalCollapse] = useState(false)
 
   useEffect(() => {
-
     if (isReplies || isOnTribunalPage) return
     if (repliesRef.current && repliesRef.current.isFirstRender) {
-      repliesRef.current.isFirstRender = false;
+      repliesRef.current.isFirstRender = false
     } else if (repliesRef.current && !repliesRef.current.isFirstRender) {
       if (repliesRef.current.numReplies !== replies.length && localToggle) {
         onReplyToggle(index, 1, false)
       }
     }
-    
   }, [replies])
 
   useEffect(() => {
@@ -73,7 +64,7 @@ function Comment({
 
     if (parentCollapse) {
       if (localToggle) onReplyToggle(index, replies.length, true)
-      setLocalToggle(false);
+      setLocalToggle(false)
       setGlobalCollapse(true)
     }
 
@@ -81,26 +72,21 @@ function Comment({
       if (isReplies || isOnTribunalPage) return
       if (commentData.parentId === null) {
         setGlobalCollapse(true)
-        if ( typeof resetCacheAtIndex == 'function') resetCacheAtIndex(index)
+        if (typeof resetCacheAtIndex === 'function') resetCacheAtIndex(index)
       }
     }
-  }, [parentCollapse]);
+  }, [parentCollapse])
+
   const expandIcon = localToggle ? <UpArrowSvg /> : <DownArrowSvg />
   return (
     <OuterContainer>
-      <CommentContainer hideBorder={level === 0} color={COLORS[level]} isFocusedComment={isFocusedComment}>
-        <Header onClick={() => navigate(`/home/spaces/${spaceId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
-          <UserInfoContainer>
-            <Thumb src={commentData.createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} />
-            <ThemeTooltip
-              tooltipHeader="Experience"
-              tooltipText={commentData.createdByExperience}
-            />
-          </UserInfoContainer>
-          <Username>{longUsernameDisplay(commentData.createdByUsername)}</Username>
-          <Date>{`${mins}`}</Date>
-        </Header>
-        <Body shouldBlur={shouldBlur} onClick={() => navigate(`/home/spaces/${spaceId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}>
+      <CommentContainer hideBorder={level === 0 || isFocusedComment} color={COLORS[level]} isFocusedComment={isFocusedComment}>
+        <CommentHeader
+          commentData={commentData}
+          spaceId={spaceId}
+        />
+
+        <Body shouldBlur={shouldBlur}>
           <LexicalComposer initialConfig={initLexicalConfig}>
             <ReadOnlyEditor />
           </LexicalComposer>
@@ -110,19 +96,18 @@ function Comment({
             <IconButton
               icon={expandIcon}
               onClick={() => {
-                if (isReplies  || isOnTribunalPage)  {
+                if (isReplies || isOnTribunalPage) {
                   setLocalToggle(!localToggle)
                   return
                 }
-                let newSize
                 if (localToggle) onReplyToggle(index, replies.length, true)
-                else newSize = onReplyToggle(index, replies.length, false)
+                else onReplyToggle(index, replies.length, false)
                 setLocalToggle(!localToggle)
 
                 if (localToggle) {
-                  setGlobalCollapse(true);
+                  setGlobalCollapse(true)
                 } else {
-                  setGlobalCollapse(false);
+                  setGlobalCollapse(false)
                 }
               }}
             >
@@ -131,29 +116,15 @@ function Comment({
           </ExpandButton>
           )}
         </Body>
-        <Footer shouldBlur={shouldBlur}>
-          <ActionToolbar
-            likes={commentData?.likes}
-            comment={commentData}
-            user={currentUser}
-          />
-          <Collapse in={localToggle}>
-            <EvidenceSection>
-              {
-              replies.map((reply, idx) => (
-                <Comment
-                  key={commentData.id + String(idx)}
-                  commentData={reply.data}
-                  replies={reply.children}
-                  level={level + 1}
-                  parentCollapse={globalCollapse}
-                />
-              ))
 
-              }
-            </EvidenceSection>
-          </Collapse>
-        </Footer>
+        <CardFooter
+          commentData={commentData}
+          shouldBlur={shouldBlur}
+          localToggle={localToggle}
+          replies={replies}
+          globalCollapse={globalCollapse}
+          level={level}
+        />
 
       </CommentContainer>
       { shouldBlur && (

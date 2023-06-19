@@ -39,6 +39,7 @@ const axiosBaseQuery = (
     return { data: result.data };
   } catch (axiosError) {
     let err = axiosError as AxiosError;
+    console.log(err)
     console.log(err.response)
     toast.error(
       () => (
@@ -90,7 +91,6 @@ export default () => {
           return req;
         }
         console.log("INTERCEPTING!!!!", req.url);
-
         const civicToken = await getCivicAuthHeader();
         const defaultDID = await getDefaultDID();
         let token = null;

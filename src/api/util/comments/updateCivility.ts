@@ -16,6 +16,7 @@ export default async function onUpdateCivilityQueryStarted(
     isReplies,
     isFocusedComment,
     rootOfCommentReplyThreadId,
+    focusedCommentId,
     ...patch
   },
   { dispatch, queryFulfilled }
@@ -39,14 +40,22 @@ export default async function onUpdateCivilityQueryStarted(
     patchResult = dispatch(
       commentsApi.util.updateQueryData(
         "getAllCommentReplies",
-        rootId,
+        focusedCommentId,
         (draft) => {
+          console.log(isReplies)
+          console.log(rootId)
+          console.log(rootOfCommentReplyThreadId)
+          console.log(parentId)
+          console.log(id)
+          console.log(commentId)
+          console.log(focusedCommentId)
+
           const newDraft = createDraft(draft);
           const rootComment = newDraft.replies.find(
-            (c) => c.data.id === commentId
+            (c) => c.data.id === rootOfCommentReplyThreadId
           );
           let comment;
-          if (parentId === rootId) {
+          if (parentId === focusedCommentId) {
             rootComment.data.civility = patch.value;
             return finishDraft(newDraft);
           }

@@ -18,16 +18,18 @@ function DiscussionsInfiniteLoader({
   const getItemSize = useCallback((index) => {
     if (feedType === 'Table') return 100
     const item = items[index]
+    if (item.title === 'General') return 450
+    const calcHeight = item.contentHeight || 500
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 80 + 40 + 500 + 150 + item.contentHeight
+        return 80 + 40 + 500 + 150 + calcHeight
       case Web:
-        return 900 + item.contentHeight
+        return 900 + calcHeight
       case Twitter:
-        return 1200 + item.contentHeight
+        return 1200 + calcHeight
       default:
-        if (item?.editorState.includes('image')) return 500 + item.contentHeight
-        return 400 + item.contentHeight
+        if (item?.editorState.includes('image')) return 500 + calcHeight
+        return 400 + calcHeight
     }
   }, [items])
 

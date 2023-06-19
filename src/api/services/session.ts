@@ -5,6 +5,7 @@ import { showLoadingSpinner, hideLoadingSpinner } from '../../redux/actions/ui'
 interface UserData {
   userId: string 
   username: string,
+  iconSrc: string
 
 
 }
@@ -18,21 +19,6 @@ export const sessionApi = emptySplitApi.injectEndpoints({
       async onQueryStarted(_, {dispatch, queryFulfilled}) {
         dispatch(showLoadingSpinner())
         queryFulfilled.finally(() => dispatch(hideLoadingSpinner()))
-        // toast.promise(
-        //   queryFulfilled,
-        //   {
-        //     pending: 'Fetching Session Data...',
-        //     success: 'Session Successfully Loaded',
-        //     error: {
-        //       render({ data: errorData }) {
-        //         console.log(errorData)
-        //         const { error } = errorData
-        //         const { data: responseData } = error
-        //         return `${responseData.userMsg} 🤯 `
-        //       },
-        //     },
-        //   },
-        // )
       }
     
     }),

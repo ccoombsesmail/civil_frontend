@@ -1,18 +1,19 @@
-import React from 'react'
-import Spaces from './components/Spaces/SpacesFeed'
+import React, { useState } from 'react'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
   Left, Middle, Right, HomePageGrid,
 } from '../Style'
+import HomePageFeeds from './components/HomePageFeeds/HomePageFeeds'
 
 function HomePage() {
+  const [isOpen, setIsOpen] = useState(true)
   return (
-    <HomePageGrid>
+    <HomePageGrid isOpen={isOpen}>
       <Left>
-        <UserInformationDisplay />
+        { isOpen ? <UserInformationDisplay /> : null }
       </Left>
       <Middle>
-        <Spaces />
+        <HomePageFeeds isOpen={isOpen} setIsOpen={setIsOpen} />
       </Middle>
       <Right>
         <span>.</span>

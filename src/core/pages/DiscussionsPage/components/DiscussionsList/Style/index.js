@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const Container = styled('section')`
 
-  width: 70vw;
+  width: 50vw;
   /* padding-bottom: 20vh; */
   display: flex;
   flex-direction: column;

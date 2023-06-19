@@ -34,6 +34,7 @@ export default (commentData, contentId, spaceId, commentId) => {
     rootOfCommentReplyThreadId,
     isReplies,
     commentType,
+    focusedCommentId,
   } = useContext(ParentCommentContext) || {}
 
   const { data: comments } = useGetAllCommentsQuery({ discussionId: commentData.discussionId, currentPage }, {
@@ -92,6 +93,7 @@ export default (commentData, contentId, spaceId, commentId) => {
       rootOfCommentReplyThreadId,
       isReplies,
       commentType,
+      focusedCommentId,
     }
   }, [currentUser, commentData, contentId, commentId, commentType])
 }

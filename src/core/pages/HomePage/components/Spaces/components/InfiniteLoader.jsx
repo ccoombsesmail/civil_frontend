@@ -16,16 +16,17 @@ function ExampleWrapper({
 
   const getItemSize = useCallback((index) => {
     const item = items[index]
+    const itemHeight = Number.isNaN(item.contentHeight) || !item.contentHeight ? 500 : item.contentHeight
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 500 + item.contentHeight
+        return 500 + itemHeight
       case Web:
-        return 500 + item.contentHeight
+        return 500 + itemHeight
       case Twitter:
-        return 600 + item.contentHeight
+        return 600 + itemHeight
       default:
-        if (item?.editorState.includes('image')) return 500 + item.contentHeight
-        return 500 + item.contentHeight
+        if (item?.editorState.includes('image')) return 500 + itemHeight
+        return 500 + itemHeight
     }
   }, [items])
 
@@ -46,7 +47,7 @@ function ExampleWrapper({
       {({ onItemsRendered, ref }) => (
         <List
           className="List"
-          height={800}
+          height={1600}
           itemCount={itemCount}
           itemSize={getItemSize}
           onItemsRendered={onItemsRendered}

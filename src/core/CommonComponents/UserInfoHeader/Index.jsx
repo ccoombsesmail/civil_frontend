@@ -19,14 +19,14 @@ export function RobotIcon() {
 }
 
 function UserInfoHeader({
-  time, username, userId, iconSrc, category, userTag, userVerificationType, space,
+  time, username, userId, iconSrc, category, userTag, userVerificationType, space, onClick = () => null,
 }) {
   const usernameDisplay = userId?.startsWith('did') ? `${username.substring(0, 12)}` : username
   const captchaVerified = userVerificationType === FACE_ID_AND_CAPTCHA_VERIFIED || userVerificationType === CAPTCHA_VERIFIED
   const faceIdVerified = userVerificationType === FACE_ID_AND_CAPTCHA_VERIFIED || userVerificationType === FACE_ID_VERIFIED
 
   return (
-    <Header>
+    <Header onClick={onClick}>
       <Left>
         <UserIcon userId={userId} iconSrc={iconSrc} width="3vw" />
         <UsernameAndTag

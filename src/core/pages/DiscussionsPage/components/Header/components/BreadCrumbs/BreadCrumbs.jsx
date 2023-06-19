@@ -29,7 +29,7 @@ function BreadCrumbs() {
         },
         {
           onClick: () => navigate(`/home/spaces/${spaceId}/discussions/${discussionId}`),
-          label: 'Discussion',
+          label: 'Discussion Thread',
           template: iconItemTemplate,
         },
       ]
@@ -42,7 +42,7 @@ function BreadCrumbs() {
         },
         {
           onClick: () => navigate(`/home/spaces/${spaceId}/discussions/${discussionId}`),
-          label: 'Discussion',
+          label: 'Discussion Thread',
           template: iconItemTemplate,
         }, {
           onClick: () => navigate(`/home/spaces/${spaceId}/discussions/${discussionId}/comments/${commentId}`),

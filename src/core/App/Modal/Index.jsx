@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 import React, { Suspense } from 'react'
-import StrapModal from 'react-bootstrap/Modal'
 import { useSelector } from 'react-redux'
 import { ModalWrapper } from './Style/index'
 
@@ -29,10 +28,8 @@ export const SPACE_VOTE_FORM = 'SPACE_VOTE_FORM'
 
 export const REPLY_FROM_SPACE = 'REPLY_FROM_SPACE' // when replying directly to a space
 
-function Modal({ closeModal }) {
+function Modal() {
   const { modalType, modalProps } = useSelector((s) => s.ui)
-
-  const isOpen = useSelector((s) => s.ui.modalOpen)
 
   let component
   switch (modalType) {
@@ -56,13 +53,11 @@ function Modal({ closeModal }) {
   }
 
   return (
-    <StrapModal contentClassName="react-strap-modal" show={isOpen} onHide={closeModal} container={document.getElementById('main-container')}>
-      <ModalWrapper>
-        <Suspense fallback={<CircleLoading size="20vw" />}>
-          {component}
-        </Suspense>
-      </ModalWrapper>
-    </StrapModal>
+    <ModalWrapper>
+      <Suspense fallback={<CircleLoading size="20vw" />}>
+        {component}
+      </Suspense>
+    </ModalWrapper>
   )
 }
 

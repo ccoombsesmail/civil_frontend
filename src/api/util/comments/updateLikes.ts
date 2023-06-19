@@ -15,10 +15,14 @@ export default async function onUpdateLikesQueryStarted({
   isReplies,
   rootOfCommentReplyThreadId,
   newLikeState,
+  focusedCommentId,
   ...patch
 },
 { dispatch, queryFulfilled }) {
   let patchResult;
+  console.log(rootOfCommentReplyThreadId)
+  console.log(isReplies)
+  console.log(focusedCommentId)
   if (isFocusedComment) {
     patchResult = dispatch(
       commentsApi.util.updateQueryData(
@@ -38,13 +42,13 @@ export default async function onUpdateLikesQueryStarted({
     patchResult = dispatch(
       commentsApi.util.updateQueryData(
         "getAllCommentReplies",
-        rootId,
+        focusedCommentId,
         (draft) => {
           const newDraft = createDraft(draft);
           const rootComment = newDraft.replies.find(
-            (c) => c.data.id === commentId
+            (c) => c.data.id === rootOfCommentReplyThreadId
           );
-          if (parentId === rootId) {
+          if (parentId === focusedCommentId) {
             rootComment.data.likeState = newLikeState;
             rootComment.data.likes += updateLikeValue;
             return finishDraft(newDraft);

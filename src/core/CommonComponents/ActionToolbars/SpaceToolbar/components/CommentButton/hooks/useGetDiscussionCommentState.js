@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
-import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser.js'
+import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
 export default (discussionId) => {
   const { currentUser } = useGetCurrentUser()

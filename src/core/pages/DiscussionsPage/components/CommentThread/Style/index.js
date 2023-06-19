@@ -41,16 +41,7 @@ export const Container = styled('div')`
 export const ColumnContainer = styled('section')`
   display: flex;
   justify-content: space-evenly;
-  /* border-top: 1px solid gray; */
+  padding-bottom: 20vh;
   width: 100%;
-
-  ul:first-child {
-    /* border-right: .1px dashed rgb(48,48,50); */
-  }
-
-   ul:last-child {
-    /* border-left: .1px solid rgb(48,48,50); */
-  }
-
 
 `

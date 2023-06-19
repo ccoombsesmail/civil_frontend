@@ -1,22 +1,22 @@
-import { useCallback, useContext } from "react";
-import { toast } from "react-toastify";
+import { useCallback } from 'react'
+import { toast } from 'react-toastify'
 
-import { checkToxicity } from "../../../../api/v1/comments/comments_api_util";
-import delay from "../../../../generic/delay";
-import useDetectCurrentPage from "../../../hooks/routing/useDetectCurrentPage";
-import { useCreateCommentMutation } from "../../../../api/services/comments.ts";
-import { useCreateTribunalCommentMutation } from "../../../../api/services/tribunal_comments.ts";
-import useGetCurrentUser from "../../../App/hooks/useGetCurrentUser";
-import { ParentCommentContext } from "../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext";
-import { filterObject } from "../../../../generic/object/filterObjectKeys";
+import { checkToxicity } from '../../../../api/v1/comments/comments_api_util'
+import delay from '../../../../generic/delay'
+import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
+import { useCreateCommentMutation } from '../../../../api/services/comments.ts'
+import { useCreateTribunalCommentMutation } from '../../../../api/services/tribunal_comments.ts'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
+import { ParentCommentContext } from '../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
+import { filterObject } from '../../../../generic/object/filterObjectKeys'
 
-import { TribunalCommentKeys } from "../../../../types/tribunal/tribunal_comments_reply";
+import { TribunalCommentKeys } from '../../../../types/tribunal/tribunal_comments_reply'
 
 export default (commentFormState, richTextEditorData, closeModal) => {
-  const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage();
-  const [createComment] = useCreateCommentMutation();
-  const [createTribunalComment] = useCreateTribunalCommentMutation();
-  const { currentUser } = useGetCurrentUser();
+  const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()
+  const [createComment] = useCreateCommentMutation()
+  const [createTribunalComment] = useCreateTribunalCommentMutation()
+  const { currentUser } = useGetCurrentUser()
   const {
     parentId,
     rootId,
@@ -29,7 +29,8 @@ export default (commentFormState, richTextEditorData, closeModal) => {
     rootOfCommentReplyThreadId,
     isReplies,
     isReportedComment,
-  } = commentFormState;
+    focusedCommentId,
+  } = commentFormState
 
   return useCallback(
     (values, { setSubmitting, resetForm }) => {
@@ -40,25 +41,24 @@ export default (commentFormState, richTextEditorData, closeModal) => {
             checkToxicity({ content: richTextEditorData.lexicalContent }),
           ]),
           {
-            pending: "Analyzing Comment...",
+            pending: 'Analyzing Comment...',
             success: {
               render({ data }) {
-                const toxicityScore = data[1].data.SEVERE_TOXICITY;
-                if (toxicityScore < 0.6) return "Thanks For Being Civil!";
-                if (toxicityScore >= 0.6 && toxicityScore <= 0.9)
-                  return "Thanks for being semi-civil. Maybe say things a bit nicer";
-                return "You are being toxic :( \n Your comment will be flagged";
+                const toxicityScore = data[1].data.SEVERE_TOXICITY
+                if (toxicityScore < 0.6) return 'Thanks For Being Civil!'
+                if (toxicityScore >= 0.6 && toxicityScore <= 0.9) { return 'Thanks for being semi-civil. Maybe say things a bit nicer' }
+                return 'You are being toxic :( \n Your comment will be flagged'
               },
-              icon: "🟢",
+              icon: '🟢',
             },
-            error: "Promise rejected 🤯",
-          }
+            error: 'Promise rejected 🤯',
+          },
         )
         .then((data) => {
-          const toxicityScore = data[1].data.TOXICITY;
-          let toxicityStatus;
-          if (toxicityScore < 0.6) toxicityStatus = "NOT_TOXIC";
-          if (toxicityScore > 0.9) toxicityStatus = "TOXIC";
+          const toxicityScore = data[1].data.TOXICITY
+          let toxicityStatus
+          if (toxicityScore < 0.6) toxicityStatus = 'NOT_TOXIC'
+          if (toxicityScore > 0.9) toxicityStatus = 'TOXIC'
           const comment = {
             ...values,
             editorState: richTextEditorData.lexicalContent,
@@ -73,19 +73,20 @@ export default (commentFormState, richTextEditorData, closeModal) => {
             toxicityStatus,
             currentPage,
             isFocusedComment,
-            id: null,
+            id,
             rootOfCommentReplyThreadId,
             isReplies,
-          };
+            focusedCommentId,
+          }
           return isTribunalComment
             ? createTribunalComment(filterObject(comment, TribunalCommentKeys))
-            : createComment(comment);
-        });
+            : createComment(comment)
+        })
 
-      setSubmitting(false);
-      resetForm({});
-      closeModal();
+      setSubmitting(false)
+      resetForm({})
+      closeModal()
     },
-    [commentFormState, richTextEditorData, contentId]
-  );
-};
+    [commentFormState, richTextEditorData, contentId],
+  )
+}
