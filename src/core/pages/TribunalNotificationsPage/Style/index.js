@@ -6,7 +6,7 @@ export const BorderContainer = styled('div')`
   z-index: 9999;
   background-color: white;
   min-height: calc(100vh - var(--nav-size));
-  width: 50vw;
+  /* width: 50vw; */
   @media (max-width: 1250px) {
     width: 100vw;
   }
@@ -24,6 +24,22 @@ export const NotificationList = styled('ul')`
   background-color: white;
 
 `
+
+export const GridContainer = styled('div')`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding-bottom: 10vw; */
+
+ @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    width: 100vw;
+    margin-left: 0;
+  }
+`
+
 
 export const Container = styled('div')`
   position: relative;

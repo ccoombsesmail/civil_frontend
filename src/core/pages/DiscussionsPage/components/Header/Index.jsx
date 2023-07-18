@@ -93,7 +93,7 @@ function Header({ isOpen, setIsOpen }) {
         size="small"
         icon={`pi ${isOpen ? 'pi-arrow-left' : 'pi-arrow-right'}`}
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute left-0 top-0 -translate-x-100 focus:shadow-none"
+        className="absolute left-0 top-0 -translate-x-100 focus:shadow-none  border-noround-right"
       />
       <BreadCrumbs />
       {/* <h1 className="text-focus-in">

@@ -12,6 +12,7 @@ function PrimeSelect(props) {
     code: o.value,
   }))
 
+
   const isFormFieldInvalid = () => !!(formik.errors[name])
 
   const getFormErrorMessage = () => (isFormFieldInvalid(name) ? (
@@ -24,7 +25,7 @@ function PrimeSelect(props) {
         showClear
         inputId={name}
         name={name}
-        value={formik.values.category}
+        value={formik.values.category || null}
         options={options}
         optionLabel="name"
         placeholder={placeholder}

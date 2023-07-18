@@ -136,17 +136,13 @@ export const Icon = styled('img')`
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  overflow: hidden;
   border: 10px solid white;
   transition: all 500ms ease-in-out;
 
   :hover {
-    height: 100px;
-    width: 100px;
     margin: 2rem;
   }
   @media (max-width: 600px) {
-
     :hover {
       height: 158px;
       width: 158px;

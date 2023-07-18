@@ -51,7 +51,7 @@ function UserInformationDisplay({ setIsOpen, isOpen }) {
 
   return (
     <Container className="animation-duration-3000 animate-width">
-      <Icon className="img" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} alt="" />
+      <Icon className="img animation-duration-1000 fadeinright" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} alt="" />
       <h1 className="text-2xl">
         {longUsernameDisplay(user.username)}
       </h1>

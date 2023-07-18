@@ -1,7 +1,11 @@
-import React, { useState, useMemo } from 'react'
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState, useMemo, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Card } from 'primereact/card'
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace'
+import { Button } from 'primereact/button'
 import { UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
 import CensorOverlay from '../CensorOverlay/Index'
@@ -12,6 +16,7 @@ import { SPACE } from '../../../enums/content_type'
 import Editor from '../Lexical/ReadOnlyEditor.tsx'
 import LinkSection from '../LinkSection/Index'
 import { truncateAtIndex } from '../../../generic/string/truncateAtIndex'
+import useGoToSpace from '../../hooks/routing/useGoToSpace'
 
 function PostCard({
   children,
@@ -36,8 +41,16 @@ function PostCard({
     category,
     spaceTitle,
     spaceCategory,
+    spaceId,
   } = space || discussion || {}
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
+  const goToSpace = useGoToSpace(spaceId)
+
+  const spaceHeaderClickHandler = useCallback((e) => {
+    goToSpace()
+    e.stopPropagation()
+  }, [])
+
   const onContainerClick = useMemo(
     () => (shouldBlur ? () => null : onClick),
     [shouldBlur],
@@ -47,22 +60,25 @@ function PostCard({
     <>
       { spaceTitle
       && (
-      <div className="surface-ground border-bottom-1 text-base w-full flex align-items-center">
-        <b className="font-semibold ml-2">
-          Space:
-        </b>
-        <span className="font-normal text-700 ml-1">
-          {truncateAtIndex(spaceTitle, 50)}
-        </span>
-        <span className="text-base ml-2">
+      <div className="flex align-items-center" onClick={(e) => e.stopPropagation()}>
+        <h5 className="text-base mb-0 ml-2">Space</h5>
+        <b className="mx-2">→</b>
+        <Button
+          link
+          onClick={spaceHeaderClickHandler}
+          label={`${truncateAtIndex(spaceTitle, 50)}`}
+          className="p-0 text-primary-400"
+        />
+        <b className="text-base ml-auto mr-2 font-semibold" onClick={(e) => e.stopPropagation()}>
+          {' '}
           ·
-        </span>
-        <span className="block font-normal text-700 ml-1">
+          {' '}
           {spaceCategory}
-        </span>
+          {' '}
+        </b>
       </div>
       )}
-      <h1 className="p-card-title mt-2 ml-2">
+      <h1 onClick={(e) => e.stopPropagation()} className="p-card-title mt-2 ml-2">
         {title}
       </h1>
     </>

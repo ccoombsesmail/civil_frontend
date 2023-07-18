@@ -1,18 +1,22 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { memo } from 'react'
-import UserIcon from '../../../../../CommonComponents/UserIcon/Index'
+import { Avatar } from 'primereact/avatar'
 import { Row, RowItem } from '../../../../../CommonComponents/AppTable/Style'
 import UsernameAndTag from '../../../../../CommonComponents/UsernameAndTag/Index'
 import ItemMenu from '../../../../../CommonComponents/ItemMenu/Index'
+import { truncateAtIndex } from '../../../../../../generic/string/truncateAtIndex'
+import useGoToUserProfile from '../../../../../hooks/routing/useGoToUserProfile'
+import { DEFAULT_PROFILE_IMAGE } from '../../../../../../theme/constants'
 
 function UserItem({
   userId, iconSrc, username, userTag, bio,
 }) {
+  const goToUserProfile = useGoToUserProfile(userId)
   return (
     <tbody>
       <Row gridTemplateCols="1fr 1fr 1fr">
         <RowItem alignItems="flex-start">
-          <UserIcon width="3vw" userId={userId} iconSrc={iconSrc} />
+          <Avatar shape="circle" image={iconSrc || DEFAULT_PROFILE_IMAGE} onClick={goToUserProfile} size="xlarge" />
           <UsernameAndTag
             userId={userId}
             usernameDisplay={username}
@@ -21,8 +25,7 @@ function UserItem({
         </RowItem>
 
         <RowItem>
-          {/* { isCurrentUserProfile ? <ExpandButton onClick={followClickHandler} width="clamp(120px, 10vw, 300px)">Unfollow</ExpandButton> : null } */}
-          {bio}
+          {`${truncateAtIndex(bio, 80)}...`}
         </RowItem>
         <RowItem alignItems="flex-end">
           <ItemMenu

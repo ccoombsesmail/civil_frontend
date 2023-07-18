@@ -16,7 +16,7 @@ function PopularDiscussionsFeedItem({ index, style }) {
   } else {
     const discussion = data[index % 10]
     content = discussion ? (
-      <DiscussionItemContex.Provider value={{currentPage: Math.floor(index / 5), spaceId: discussion.spaceId}}>
+      <DiscussionItemContex.Provider value={{currentPage: Math.floor(index / 10), spaceId: discussion.spaceId, isPopularDiscussion: true}}>
         <DiscussionItem
           style={style}
           key={discussion.id}

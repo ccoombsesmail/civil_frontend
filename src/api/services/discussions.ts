@@ -90,7 +90,7 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
         };
       },
       async onQueryStarted(
-        { id, spaceId, updateLikeValue, updateGetDiscussionQuery, currentPage, newLikeState, ...patch },
+        { id, spaceId, updateLikeValue, updateGetDiscussionQuery, currentPage, newLikeState, isPopularDiscussion, ...patch },
         { dispatch, queryFulfilled }
       ) {
         let patchResult;
@@ -102,8 +102,21 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
                 draft.likes += updateLikeValue;
               }
             })
-          );
-        } else {
+          ); 
+        } else if (isPopularDiscussion) {
+          patchResult = dispatch(
+            discussionsApi.util.updateQueryData("getPopularDiscussions", { currentPage }, (draft) => {
+              const index = draft.findIndex((t) => t.id === id)
+              if (index !== -1) {
+                draft[index].likeState = newLikeState;
+                draft[index].likes += updateLikeValue;
+              }
+            })
+          )
+
+        }
+
+        else {
           patchResult = dispatch(
             discussionsApi.util.updateQueryData("getAllDiscussions", {spaceId, currentPage}, (draft) => {
               const index = draft.findIndex((t) => t.id === id)

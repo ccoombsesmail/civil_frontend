@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
 .List div div {
   transition: all .5s;
 }
+
+.List > div > div:last-child {
+  padding-bottom: 200vh;
+}
 .List {
   background-color: rgb(248, 249, 250);
 }
@@ -57,6 +61,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: 600;
@@ -64,6 +69,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 48px;
     padding: 0 24px;
     border-radius: 4px;
+    width: 15rem;
 }
 
 .wallet-adapter-button-trigger {
@@ -549,6 +555,11 @@ blockquote {
     justify-content: center;
   }
 
+  .p-tabview-panel {
+    width: 100%;
+
+  }
+
   .p-virtualscroller-content::-webkit-scrollbar-thumb {
     display: none;
   }
@@ -630,7 +641,7 @@ blockquote {
     z-index: 9999999999 !important;
   }
   .p-dropdown-panel {
-    z-index: 999999999 !important;
+    z-index: 99999999999 !important;
     margin-top: 2px !important;
   }
 

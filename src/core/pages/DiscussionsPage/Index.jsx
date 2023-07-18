@@ -22,7 +22,7 @@ function Discussions() {
     <Container isOpen={isOpen}>
       <DiscussionsGrid isOpen={isOpen}>
         <Left>
-        { isOpen ? <UserInformationDisplay isOpen={isOpen} /> : null }
+          { isOpen ? <UserInformationDisplay isOpen={isOpen} /> : null }
         </Left>
         <Middle>
           <MainContent>
@@ -32,7 +32,7 @@ function Discussions() {
                 <ParentComment spaceId={spaceId} commentId={commentId} />
               ) : null}
             </HeaderContainer>
-             <DiscussionsRouter /> 
+            <DiscussionsRouter />
           </MainContent>
         </Middle>
         <Right>

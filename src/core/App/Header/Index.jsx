@@ -2,12 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 // import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
 
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { Button } from 'primereact/button'
 import {
   StyledHeader, ButtonsContainer, CivilIcon, NavContainer, Divider, MobileContainer, WalletPassesContainer,
 } from './Style'
 import { NavDropdownToggle, DropdownMenu } from '../../DropdownNav/Index'
-import IconButton from '../../CommonComponents/IconButton/Index'
 import HeaderNavItem from './components/HeaderNavItem/Index'
 import { UserSettingsSvg, NotificationSvg, Gavel2 } from '../../../svgs/svgs'
 import useSessionType from '../../hooks/permissions/useSessionType'
@@ -72,9 +71,13 @@ function Header() {
   return (
     <StyledHeader>
       <ButtonsContainer>
-        <IconButton hideTextMobile icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />} onClick={() => navigate('/home/spaces')}>
-          Civil
-        </IconButton>
+        <Button
+          hideTextMobile
+          text
+          icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />}
+          onClick={() => navigate('/home/spaces')}
+          className="w-8rem p-0 border-none focus:shadow-none hover:bg-white"
+        />
       </ButtonsContainer>
       <SearchBar />
       <NavContainer>

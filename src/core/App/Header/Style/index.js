@@ -37,6 +37,15 @@ export const ButtonsContainer = styled('div')`
   @media only screen and (max-width: 600px) {
     flex: 11%;
   }
+
+  img {
+    height: var(--nav-size);
+    width: auto;
+
+  }
+  img:hover {
+    filter: drop-shadow(0 0 0.75rem var(--primary-200));
+  }  
 `
 
 export const ProfileIcon = styled('img')`

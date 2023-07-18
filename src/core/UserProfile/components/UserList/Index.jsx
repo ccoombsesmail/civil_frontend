@@ -10,6 +10,7 @@ import { Table, ColHeader, ColItem } from '../../../CommonComponents/AppTable/St
 function UserList({
   users, isLoading, isUninitialized, listTitle,
 }) {
+  console.log(users)
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="30vw" />
   return (
@@ -22,7 +23,7 @@ function UserList({
         </ColHeader>
       </thead>
       {
-        users?.length ? users.map((user) => (
+        users?.length !== 0 ? users.map((user) => (
           <UserItem {...user} time={getTimeSince(user.createdAt)} />
         )) : <h1>Nothing here...</h1>
       }

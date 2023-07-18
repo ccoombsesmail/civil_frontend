@@ -66,6 +66,10 @@ export const ActionMenuItem = styled('li')`
   margin: 0 !important;
   color: black;
   transition: none;
+
+  svg {
+    margin-right: 1em;
+  }
   :hover {
     background-color: var(--m-btn-hover-color);
 

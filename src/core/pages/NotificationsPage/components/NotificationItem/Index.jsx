@@ -10,6 +10,7 @@ import SpaceLikeNotification from '../SpaceLikeNotification/Index'
 
 function NotificationItem({ notification }) {
   let ItemComponent
+  console.log(notification.eventType)
   switch (notification.eventType) {
     case NewFollower:
       ItemComponent = FollowNotifcation

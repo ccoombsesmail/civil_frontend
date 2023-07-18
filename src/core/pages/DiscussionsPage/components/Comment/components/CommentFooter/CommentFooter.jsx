@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import React from 'react'
+import React, { memo } from 'react'
 import { Footer } from '../../Style'
 import Expandable from '../../../../../../CommonComponents/Expandable/Expandable'
 import CommentActionToolbar from '../../../../../../CommonComponents/ActionToolbars/CommentToolbar/Index'
@@ -39,4 +39,4 @@ function CommentFooter({
   )
 }
 
-export default CommentFooter
+export default memo(CommentFooter)

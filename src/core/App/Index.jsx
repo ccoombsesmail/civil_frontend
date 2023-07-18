@@ -23,7 +23,6 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import GlobalStyle from '../../theme/styles'
 
 import Header from './Header/Index'
-import CreateTagModal from '../Forms/CreateTagForm/Index'
 import LoadingSpinner from './LoadingSpinner/Index'
 import { MainContainer, Content, Wrapper } from './Style'
 import LoadingBridgeWithSpinner from './LoadingBridge/Index'
@@ -73,67 +72,64 @@ function App() {
               {({ userId }) => (
                 <UserContext.Provider value={userId}>
                   <Header />
-
                   <MainContainer>
                     <ErrorBoundary>
+                      <Content id="main-scroll">
+                        { pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate') ? null : <BgImage /> }
+                        <Routes>
+                          <Route
+                            path="/dashboard"
+                            element={(
+                              <Suspense fallback={<LoadingPage />}>
+                                <Dashboard />
+                              </Suspense>
+                          )}
+                          />
+                          <Route
+                            path="/authenticate/*"
+                            element={(
+                              <Suspense fallback={<LoadingPage />}>
+                                <AuthFlow />
+                              </Suspense>
+                          )}
+                          />
+                          <Route
+                            path="/user/:userId"
+                            element={(
+                              <Suspense fallback={<LoadingPage />}>
+                                <UserProfile />
+                              </Suspense>
+                          )}
+                          />
+                          <Route
+                            path="/tribunal/:contentType/:contentId"
+                            element={(
+                              <Suspense fallback={<LoadingPage />}>
+                                <Tribunal />
+                              </Suspense>
+                          )}
+                          />
+                          <Route
+                            path="/home/*"
+                            element={(
+                              <Suspense fallback={<LoadingPage />}>
+                                <MainContent userId={userId} />
+                              </Suspense>
+                          )}
+                          />
+                          <Route
+                            path="/"
+                            element={<Navigate replace to="/home/spaces" />}
+                          />
+                        </Routes>
+                      </Content>
 
-                    <CreateTagModal />
-                    <Content id="main-scroll">
-                      { pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate') ? null : <BgImage /> }
-                      <Routes>
-                        <Route
-                          path="/dashboard"
-                          element={(
-                            <Suspense fallback={<LoadingPage />}>
-                              <Dashboard />
-                            </Suspense>
-                          )}
-                        />
-                        <Route
-                          path="/authenticate/*"
-                          element={(
-                            <Suspense fallback={<LoadingPage />}>
-                              <AuthFlow />
-                            </Suspense>
-                          )}
-                        />
-                        <Route
-                          path="/user/:userId"
-                          element={(
-                            <Suspense fallback={<LoadingPage />}>
-                              <UserProfile />
-                            </Suspense>
-                          )}
-                        />
-                        <Route
-                          path="/tribunal/:contentType/:contentId"
-                          element={(
-                            <Suspense fallback={<LoadingPage />}>
-                              <Tribunal />
-                            </Suspense>
-                          )}
-                        />
-                        <Route
-                          path="/home/*"
-                          element={(
-                            <Suspense fallback={<LoadingPage />}>
-                              <MainContent userId={userId} />
-                            </Suspense>
-                          )}
-                        />
-                        <Route
-                          path="/"
-                          element={<Navigate replace to="/home/spaces" />}
-                        />
-                      </Routes>
-                    </Content>
-
-                    <ToastContainer
-                      autoClose={2000}
-                      className="toasty"
-                      transition={elitpicIn}
-                      limit={2}
-                    />
+                      <ToastContainer
+                        autoClose={2000}
+                        className="toasty"
+                        transition={elitpicIn}
+                        limit={2}
+                      />
                     </ErrorBoundary>
 
                   </MainContainer>

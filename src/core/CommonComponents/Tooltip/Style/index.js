@@ -16,7 +16,7 @@ export const LightButton = styled(Button)`
   :hover {
     background-color: ${({ bgcolor }) => bgcolor || 'transparent'};
     /* filter: brightness(.9); */
-    transform: ${props => props.grow === "true" ? 'scale(1.7)' : 'scale(1)'};
+    transform: ${props => props.grow === "true" ? 'scale(1.25)' : 'scale(1)'};
     
   }
 `

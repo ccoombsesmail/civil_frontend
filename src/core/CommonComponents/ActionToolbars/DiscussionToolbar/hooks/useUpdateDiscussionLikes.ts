@@ -9,7 +9,7 @@ import { DiscussionItemContex, DiscussionItemContextValue } from "../../../../pa
 
 export default (content: Discussion, action: 'upvote' | 'downvote', updateGetDiscussionQuery: boolean) => {
   const { id, createdByUserId, likeState } = content;
-  const { currentPage, spaceId } = useContext<DiscussionItemContextValue>(DiscussionItemContex) || {};
+  const { currentPage, spaceId, isPopularDiscussion } = useContext<DiscussionItemContextValue>(DiscussionItemContex) || {};
 
   const [updateLikes, { isLoading }] = useUpdateDiscussionLikesMutation();
   const { isOnDiscussionsPage } = useDetectCurrentPage();
@@ -29,7 +29,8 @@ export default (content: Discussion, action: 'upvote' | 'downvote', updateGetDis
     currentPage,
     newLikeState,
     likeAction: newLikeState,
-    spaceId
+    spaceId,
+    isPopularDiscussion
   });
 
   const handleUpdateLikes = useCallback(async () => {

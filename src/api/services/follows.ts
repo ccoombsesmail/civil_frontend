@@ -49,4 +49,4 @@ export const followsApi = emptySplitApi.injectEndpoints({
   })
 })
 
-export const { useGetAllFollowedQuery, useLazyGetAllFollowersQuery, useAddNewFollowMutation, useRemoveFollowMutation} = followsApi
+export const { useGetAllFollowedQuery, useLazyGetAllFollowersQuery, useGetAllFollowersQuery, useAddNewFollowMutation, useRemoveFollowMutation} = followsApi

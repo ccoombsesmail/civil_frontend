@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { TabView, TabPanel } from 'primereact/tabview'
@@ -11,7 +11,7 @@ import UserList from './components/UserList/Index'
 import FollowButton from './components/FollowButton/Index'
 import UsernameAndTag from '../CommonComponents/UsernameAndTag/Index'
 import { useGetUserQuery } from '../../api/services/users.ts'
-import { useGetAllFollowedQuery, useLazyGetAllFollowersQuery } from '../../api/services/follows.ts'
+import { useGetAllFollowedQuery, useGetAllFollowersQuery } from '../../api/services/follows.ts'
 
 import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../svgs/spinners/CircleLoading'
@@ -20,6 +20,7 @@ import ProgressBar from '../CommonComponents/ProgressBar2/Index'
 
 function UserProfile() {
   const { userId: profileUserId } = useParams()
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const { currentUser, isLoading: isCurrentUserLoading, isUninitialized: isCurrentUserUninitialized } = useGetCurrentUser()
   const {
@@ -31,8 +32,11 @@ function UserProfile() {
   const { data: followed, isLoading: isFollowedLoading, isUninitialized: isFollowedUninitialized } = useGetAllFollowedQuery(user?.userId, {
     skip: !currentUser || !user,
   })
-  const [getAllFollowers, { data: followers, isLoading: isFollowersLoading, isUninitialized: isFollowersUninitialized }] = useLazyGetAllFollowersQuery()
+  const { data: followers, isLoading: isFollowersLoading, isUninitialized: isFollowersUninitialized } = useGetAllFollowersQuery(user?.userId, {
+    skip: !currentUser || activeIndex !== 1,
+  })
 
+  console.log(followers)
   if (isCurrentUserUninitialized || isUninitialized) return null
   if (isCurrentUserLoading || isLoading) return <CircleLoading size="20vw" />
 
@@ -59,7 +63,7 @@ function UserProfile() {
       </HeaderContainer>
       <Content>
         <Middle>
-          <TabView className="w-full">
+          <TabView className="w-full" onTabChange={(e) => setActiveIndex(e.index)} activeIndex={activeIndex}>
             <TabPanel header="Following">
               <UserList
                 users={followed}
@@ -69,7 +73,7 @@ function UserProfile() {
                 isCurrentUserProfile={isCurrentUserProfile}
               />
             </TabPanel>
-            <TabPanel header="Followers" onClick={getAllFollowers}>
+            <TabPanel header="Followers">
               <UserList
                 users={followers}
                 isLoading={isFollowersLoading}
@@ -87,9 +91,10 @@ function UserProfile() {
                 <h1>Experience</h1>
                 <Experience>
                   {user?.experience}
-                  <ProgressBar userLevelData={user?.userLevelData} />
                 </Experience>
               </ExperienceContainer>
+              <ProgressBar userLevelData={user?.userLevelData} />
+
             </TabPanel>
           </TabView>
 

@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button } from 'primereact/button'
+
 import { useGetAllNotificationsQueryState } from '../../../api/services/notifications.ts'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
-  Middle, Left, Right, HomePageGrid,
+  Middle, Left, Right, DiscussionsGrid,
 } from '../Style'
 import NotificationItem from './components/NotificationItem/Index'
 import {
-  BorderContainer, NotificationList, Container, Header,
+  BorderContainer, NotificationList, Container, Header, GridContainer,
 } from './Style'
 import { Table, ColHeader, ColItem } from '../../CommonComponents/AppTable/Style'
 
@@ -16,46 +18,55 @@ function TribunalNotifications() {
   const { currentUser } = useGetCurrentUser()
   const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser?.userId)
   const { tribunalNotifications } = notifications || {}
+  const [isOpen, setIsOpen] = useState(true)
   return (
-    <HomePageGrid>
-      <Left>
-        <UserInformationDisplay />
-      </Left>
-      <Middle>
+    <GridContainer isOpen={isOpen}>
+      <DiscussionsGrid isOpen={isOpen}>
+        <Left>
+          { isOpen ? <UserInformationDisplay isOpen={isOpen} /> : null }
+        </Left>
+        <Middle>
 
-        <Container id="notifications-container">
+          <Container id="notifications-container">
 
-          <BorderContainer>
-            <Header>
-              <p>
-                Recent Notifications
-              </p>
-            </Header>
-            <Table>
-              <thead>
-                <ColHeader gridTemplateCols="1fr 1fr 3fr 1fr">
-                  <ColItem> From</ColItem>
-                  <ColItem> Action</ColItem>
-                  <ColItem> Description </ColItem>
-                  <ColItem>  </ColItem>
-                </ColHeader>
-              </thead>
-              { isUninitialized ? null : (
-                <NotificationList>
-                  {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
-                    <NotificationItem key={notification.id} notification={notification} />
-                  ))}
-                </NotificationList>
-              )}
-            </Table>
+            <BorderContainer>
+              <Button
+                size="small"
+                icon={`pi ${isOpen ? 'pi-arrow-left' : 'pi-arrow-right'}`}
+                onClick={() => setIsOpen(!isOpen)}
+                className="absolute left-0 top-0 -translate-x-100 focus:shadow-none border-noround-right"
+              />
+              <Header>
+                <p>
+                  Recent Notifications
+                </p>
+              </Header>
+              <Table>
+                <thead>
+                  <ColHeader gridTemplateCols="1fr 1fr 3fr 1fr">
+                    <ColItem> From</ColItem>
+                    <ColItem> Action</ColItem>
+                    <ColItem> Description </ColItem>
+                    <ColItem>  </ColItem>
+                  </ColHeader>
+                </thead>
+                { isUninitialized ? null : (
+                  <NotificationList>
+                    {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
+                      <NotificationItem key={notification.id} notification={notification} />
+                    ))}
+                  </NotificationList>
+                )}
+              </Table>
 
-          </BorderContainer>
-        </Container>
-      </Middle>
-      <Right>
-        <span>.</span>
-      </Right>
-    </HomePageGrid>
+            </BorderContainer>
+          </Container>
+        </Middle>
+        <Right>
+          <span>.</span>
+        </Right>
+      </DiscussionsGrid>
+    </GridContainer>
   )
 }
 

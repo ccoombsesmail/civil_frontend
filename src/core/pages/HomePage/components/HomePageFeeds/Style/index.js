@@ -22,6 +22,8 @@ export const BorderContainer = styled('div')`
   border-radius: 1rem;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  height: 100%;
+  overflow: scroll;
 
   @media only screen and (max-width: 800px) {
      width: 80vw;
