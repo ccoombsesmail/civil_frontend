@@ -30,7 +30,7 @@ export const spaceFollowsApi = emptySplitApi.injectEndpoints({
       }
     }),
     removeSpaceFollow: builder.mutation<any, any>({
-      query: ({ followedSpaceId }) => {
+      query: ({ id: followedSpaceId }) => {
         return ({ 
         url: `/space-follows?followedSpaceId=${followedSpaceId}`, 
         method: 'DELETE',

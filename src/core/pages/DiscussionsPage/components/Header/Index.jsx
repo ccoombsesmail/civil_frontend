@@ -25,6 +25,7 @@ import UserUploadedMedia from '../../../../CommonComponents/SpaceCard/components
 import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
 import SpaceActionToolbar from '../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs'
+import { SpaceItemContext } from '../../../HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.tsx'
 
 function Header({ isOpen, setIsOpen }) {
   let content = null
@@ -56,7 +57,6 @@ function Header({ isOpen, setIsOpen }) {
       <VideoPlayer
         loading="lazy"
         src={`https://www.youtube.com/embed/${space.externalContentData?.embedId}`}
-        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="YouTube video"
@@ -96,25 +96,20 @@ function Header({ isOpen, setIsOpen }) {
         className="absolute left-0 top-0 -translate-x-100 focus:shadow-none  border-noround-right"
       />
       <BreadCrumbs />
-      {/* <h1 className="text-focus-in">
-        <>
-          {'We\'re Talking About This'}
-          {' '}
-          <TooltipComponent text="Space" title={space?.title} reference={spaceRef} />
-        </>
-      </h1> */}
       <div style={{ width: '100%' }}>
         <LexicalComposer initialConfig={initLexicalConfig}>
-          <Card
-            {...commonProps}
-            CardToolbar={(
-              <SpaceActionToolbar
-                space={space}
-              />
+          <SpaceItemContext.Provider value={{ updateFocusedSpaceQuery: true}}>
+            <Card
+              {...commonProps}
+              CardToolbar={(
+                <SpaceActionToolbar
+                  space={space}
+                />
             )}
-          >
-            {content}
-          </Card>
+            >
+              {content}
+            </Card>
+          </SpaceItemContext.Provider>
         </LexicalComposer>
       </div>
       <div style={{
