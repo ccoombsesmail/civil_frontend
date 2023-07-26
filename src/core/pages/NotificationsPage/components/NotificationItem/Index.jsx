@@ -7,10 +7,11 @@ import FollowNotifcation from '../FollowNotification/Index'
 import CommentCivilityNotifcation from '../CommentCivilityNotification/Index'
 import CommentLikeNotification from '../LikeNotification/Index'
 import SpaceLikeNotification from '../SpaceLikeNotification/Index'
+import { ErrorMessage } from '../../../../../api/util/ErrorMessage'
 
 function NotificationItem({ notification }) {
+  let error = false
   let ItemComponent
-  console.log(notification.eventType)
   switch (notification.eventType) {
     case NewFollower:
       ItemComponent = FollowNotifcation
@@ -25,8 +26,11 @@ function NotificationItem({ notification }) {
       ItemComponent = SpaceLikeNotification
       break
     default:
+      error = true
       break
   }
+
+  if (error) return null
   return (
     <ItemComponent notification={notification} />
   )

@@ -3,9 +3,9 @@ import React, {
 } from 'react'
 import { Overlay, Popover } from 'react-bootstrap'
 
-const PopoverStickOnHover = ({
+function PopoverStickOnHover({
   delay, onMouseEnter, children, component, placement, showPopover, setShowPopover,
-}) => {
+}) {
   const childNode = useRef(null)
   let setTimeoutConst = null
 

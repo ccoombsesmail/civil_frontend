@@ -2,9 +2,9 @@
 import React from 'react'
 import { Input, Label } from './Style/Index'
 
-export const Checkbox = ({
+export function Checkbox({
   width, field, form, showCheckmark, type, ...props
-}) => {
+}) {
   const metaData = form.getFieldMeta(field.name)
   const showError = metaData.error && metaData.touched
   return (

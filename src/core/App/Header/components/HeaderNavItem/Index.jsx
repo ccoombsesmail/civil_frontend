@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { Badge } from 'primereact/badge'
-import { ItemButton, NotificationMark, IconContainer } from './Style'
+import { ItemButton, IconContainer } from './Style'
 
 function HeaderNavItem({
   Icon, numUnreadNotifications, onClick, tribunal,
@@ -11,7 +11,6 @@ function HeaderNavItem({
         {
         Boolean(numUnreadNotifications) && (
           <Badge value={numUnreadNotifications} severity={tribunal ? '' : 'danger'} />
-        // <NotificationMark tribunal={tribunal}>{numUnreadNotifications}</NotificationMark>
         )
         }
         <Icon />

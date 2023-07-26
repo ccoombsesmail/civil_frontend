@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { BlockUI } from 'primereact/blockui'
 import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
@@ -25,6 +26,7 @@ import useGoToCommentThread from '../../../../../../hooks/routing/useGoToComment
 export function DiscussionItem({
   discussion, id,
 }) {
+  const [blocked, setBlocked] = useState(discussion.reportStatus === 'UNDER_REVIEW')
   const initialConfig = {
     editorState: discussion?.title === 'General' ? null : discussion?.editorState,
     namespace: `Civil-${discussion?.title}`,
@@ -91,17 +93,21 @@ export function DiscussionItem({
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <Card
-        {...commonProps}
-        id={id}
-        CardToolbar={(
-          <DiscussionActionToolbar
-            discussion={discussion}
-          />
+      <BlockUI blocked={blocked}>
+        <Card
+          {...commonProps}
+          id={id}
+          setBlocked={setBlocked}
+          CardToolbar={(
+            <DiscussionActionToolbar
+              discussion={discussion}
+            />
       )}
-      >
-        {cardbody}
-      </Card>
+        >
+          {cardbody}
+        </Card>
+      </BlockUI>
+
     </LexicalComposer>
 
   )

@@ -11,6 +11,8 @@ import { longUsernameDisplay } from '../../../../../generic/string/longUsernameD
 import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 
 function SpaceLikeNotification({ notification }) {
+  console.log(notification)
+
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
     givingUserTag, spaceId,

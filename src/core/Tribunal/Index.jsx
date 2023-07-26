@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-import React, { memo, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import React, { memo, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
 
 import {
   OuterContainer,
@@ -10,26 +10,28 @@ import {
   StyledScalesSvg,
   ReportStatsContainer,
   ReportStatItem,
-} from "./Style/index";
+} from './Style/index'
 
-import TribunalComments from "./components/TribunalComments/Index";
-import VotingBox from "./components/VotingBox/Index";
+import TribunalComments from './components/TribunalComments/Index'
+import VotingBox from './components/VotingBox/Index'
 
-import Comment from "../pages/DiscussionsPage/components/Comment/Index";
-import { COMMENT, SPACE } from "../../enums/content_type";
-import SpaceItem from "../pages/HomePage/components/Spaces/components/SpaceItem/Index";
-import { useGetReportQuery } from "../../api/services/reports.ts";
-import useGetCurrentUser from "../App/hooks/useGetCurrentUser";
-import { useGetSpaceQuery } from "../../api/services/spaces.ts";
-import Timer from "./components/Timer/Index";
-import { CircleLoading } from "../../svgs/spinners/CircleLoading";
-import { useGetCommentQuery } from "../../api/services/comments.ts";
-import { BgImage } from "../pages/Style";
-import WhatDoYouThink from "./components/WhatDoYouThink/WhatDoYouThink";
+import Comment from '../pages/DiscussionsPage/components/Comment/Index'
+import { COMMENT, DISCUSSION, SPACE } from '../../enums/content_type'
+import SpaceItem from '../pages/HomePage/components/Spaces/components/SpaceItem/Index'
+import { useGetReportQuery } from '../../api/services/reports.ts'
+import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
+import { useGetSpaceQuery } from '../../api/services/spaces.ts'
+import Timer from './components/Timer/Index'
+import { CircleLoading } from '../../svgs/spinners/CircleLoading'
+import { useGetCommentQuery } from '../../api/services/comments.ts'
+import { BgImage } from '../pages/Style'
+import WhatDoYouThink from './components/WhatDoYouThink/WhatDoYouThink'
+import { useGetDiscussionQuery } from '../../api/services/discussions'
+import { DiscussionItem } from '../pages/DiscussionsPage/components/DiscussionsFeed/components/CardFeedItem/CardFeedItem'
 
 function Tribunal() {
-  const { contentId, contentType } = useParams();
-  const { currentUser } = useGetCurrentUser();
+  const { contentId, contentType } = useParams()
+  const { currentUser } = useGetCurrentUser()
   const {
     data: space,
     isLoading: isSpaceLoading,
@@ -37,7 +39,17 @@ function Tribunal() {
     isSuccess: spaceLoaded,
   } = useGetSpaceQuery(contentId, {
     skip: !contentId || !currentUser || contentType !== SPACE,
-  });
+  })
+
+  const {
+    data: discussion,
+    isLoading: isDiscussionLoading,
+    isUninitialized: isDiscussionUninitialized,
+    isSuccess: discussionLoaded,
+  } = useGetDiscussionQuery(contentId, {
+    skip: !contentId || !currentUser || contentType !== DISCUSSION,
+  })
+  console.log(discussion)
 
   const {
     data: comment,
@@ -46,10 +58,8 @@ function Tribunal() {
     isSuccess: commentLoaded,
   } = useGetCommentQuery(contentId, {
     skip: !contentId || !currentUser || contentType !== COMMENT,
-  });
+  })
 
-
-  
   const {
     data: reportStats,
     isLoading: isReportStatsLoading,
@@ -57,7 +67,7 @@ function Tribunal() {
     isSuccess,
     isFetching,
     refetch,
-  } = useGetReportQuery(contentId, { skip: !contentId || !currentUser });
+  } = useGetReportQuery(contentId, { skip: !contentId || !currentUser })
 
   const Content = useMemo(() => {
     if (spaceLoaded) {
@@ -71,10 +81,13 @@ function Tribunal() {
       )
     }
     if (commentLoaded) {
-      return <Comment commentData={{ ...comment, isReportedComment: true}} replies={[]} isReportedComment />;
+      return <Comment commentData={{ ...comment, isReportedComment: true}} replies={[]} isReportedComment />
+    }
+    if (discussionLoaded) {
+      return <DiscussionItem discussion={discussion} id={discussion.id} isReportedComment />
     }
     return null
-  }, [space, comment, commentLoaded, spaceLoaded, contentId, currentUser]);
+  }, [space, comment, discussion, commentLoaded, spaceLoaded, contentId, currentUser])
 
   return (
     <OuterContainer id="tribunal-container">
@@ -117,10 +130,10 @@ function Tribunal() {
           </ReportStatItem>
         </ReportStatsContainer>
       )}
-      <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} space={space} />
+      <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} space={space} discussion={discussion} />
       <TribunalComments contentId={contentId} />
     </OuterContainer>
-  );
+  )
 }
 
-export default memo(Tribunal);
+export default memo(Tribunal)

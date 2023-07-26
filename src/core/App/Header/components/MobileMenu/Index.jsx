@@ -3,17 +3,17 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { Container, NotificationMarkMenu, PassesOuterContainer } from './Style/index'
 import {
   UserSettingsSvg,
   NotificationSvg,
   Gavel2,
 } from '../../../../../svgs/svgs'
-import { IconContainer, NotificationMark } from '../HeaderNavItem/Style'
+import { IconContainer } from '../HeaderNavItem/Style'
 import { Line } from '../../../../CommonComponents/Line'
 import { PassesContainer } from '../../../../UserInformationDisplay/Style'
 import { CaptchaGatewayDesktop } from '../../../../../civic/components/CaptchGateway/CaptchaGateway'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 function MobileMenu({
   numUnreadUserNotifications,
@@ -49,7 +49,8 @@ function MobileMenu({
         <li>
           <IconContainer>
             {Boolean(numUnreadUserNotifications) && (
-              <NotificationMark>{numUnreadUserNotifications}</NotificationMark>
+              <>sfd</>
+              // <NotificationMark>{numUnreadUserNotifications}</NotificationMark>
             )}
             <NotificationSvg />
 
@@ -59,9 +60,10 @@ function MobileMenu({
         <li>
           <IconContainer>
             {Boolean(numUnreadTribunalNotifications) && (
-              <NotificationMark>
-                {numUnreadTribunalNotifications}
-              </NotificationMark>
+              <>asdf</>
+              // <NotificationMark>
+              //   {numUnreadTribunalNotifications}
+              // </NotificationMark>
             )}
             <Gavel2 />
           </IconContainer>

@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
-export default (spaceData, commentData, contentId) => {
+export default (spaceData, commentData, discussionData, contentId) => {
   const { currentUser } = useGetCurrentUser()
 
   return useMemo(() => {
-    if (!spaceData && !commentData) return null
+    if (!spaceData && !commentData && !discussionData) return null
     const {
       createdByUsername, createdByIconSrc, createdAt, editorState, id,
-    } = spaceData || commentData
+    } = spaceData || discussionData || commentData
     const {
       createdByUsername: createdByUsernameComment, editorState: commentEditorState,
     } = commentData || {}
@@ -16,9 +16,10 @@ export default (spaceData, commentData, contentId) => {
     return {
       ...spaceData,
       ...commentData,
+      ...discussionData,
       contentId,
       discussionId: null,
-      spaceId: spaceData?.id || id,
+      spaceId: discussionData?.spaceId || spaceData?.id || id,
       createdByIconSrc,
       username: currentUser?.username,
       createdBy: createdByUsername || createdByUsernameComment,
@@ -27,5 +28,5 @@ export default (spaceData, commentData, contentId) => {
       parentId: null,
       rootId: null,
     }
-  }, [currentUser, commentData, spaceData, contentId])
+  }, [currentUser, commentData, spaceData, discussionData, contentId])
 }

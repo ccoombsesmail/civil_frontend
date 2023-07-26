@@ -46,7 +46,6 @@ function CreateCommentForm({ closeModal, commentFormState, title }) {
     return () => removeUpdateListener()
   }, [])
 
-  // const [toxicityScore, setToxicityScore] = useState(null)
   const {
     lexicalRawContent, createdByIconSrc, createdByUsername, time, createdByTag,
   } = commentFormState

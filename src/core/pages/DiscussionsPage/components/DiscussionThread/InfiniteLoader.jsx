@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useRef, useCallback } from 'react'
 import { VariableSizeList as List } from 'react-window'
@@ -5,7 +6,7 @@ import InfiniteLoader from 'react-window-infinite-loader'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { useGetAllCommentsQuery } from '../../../../../api/services/comments.ts'
 import ErrorBoundary from '../../../../CommonComponents/ErrorBoundry/Index'
-import { ParentCommentContext } from '../CommentColumn/ParentCommentContext'
+import { ParentCommentContext } from '../CommentColumn/ParentCommentContext.tsx'
 import Comment from '../Comment/Index'
 // Render an item or a loading indicator.
 
@@ -90,11 +91,11 @@ export default function ExampleWrapper({
         content = (
           <ErrorBoundary>
             <ParentCommentContext.Provider
-              key={comment.data?.id || String(idx)}
+              key={comment.data?.id || String(index)}
               value={value}
             >
               <Comment
-                key={comment.data?.id || String(idx)}
+                key={comment.data?.id || String(index)}
                 onReplyToggle={onReplyToggle}
                 level={0}
                 commentData={comment.data}
@@ -115,7 +116,6 @@ export default function ExampleWrapper({
 
   return (
     <InfiniteLoader
-
       isItemLoaded={isItemLoaded}
       itemCount={itemCount}
       loadMoreItems={loadMoreItems}

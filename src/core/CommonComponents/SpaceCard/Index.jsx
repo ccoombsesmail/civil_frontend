@@ -12,7 +12,7 @@ import CensorOverlay from '../CensorOverlay/Index'
 import { getTimeSince } from '../../../generic/string/dateFormatter'
 
 import { Body, Description } from './Style'
-import { SPACE } from '../../../enums/content_type'
+import { DISCUSSION, SPACE } from '../../../enums/content_type'
 import Editor from '../Lexical/ReadOnlyEditor.tsx'
 import LinkSection from '../LinkSection/Index'
 import { truncateAtIndex } from '../../../generic/string/truncateAtIndex'
@@ -25,6 +25,7 @@ function PostCard({
   discussion,
   showLinks,
   CardToolbar,
+  setBlocked,
 }) {
   const { pathname } = useLocation()
   const {
@@ -112,8 +113,9 @@ function PostCard({
       {shouldBlur && (
         <CensorOverlay
           setShouldBlur={setShouldBlur}
+          setBlocked={setBlocked}
           contentId={id}
-          contentType={SPACE}
+          contentType={space ? SPACE : DISCUSSION}
           showNavigationToTribunal={
             reportStatus === UNDER_REVIEW && !pathname.includes('tribunal')
           }

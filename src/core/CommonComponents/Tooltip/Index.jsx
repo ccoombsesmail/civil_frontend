@@ -2,12 +2,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
-// import { BiInfoCircle } from 'react-icons/bi'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { InfoIconSvg } from '../../../svgs/svgs'
 import { LightButton, TooltipContent } from './Style/index'
 
-export const TooltipPopover = React.forwardRef(({
+const TooltipPopover = React.forwardRef(({
   onClick, tooltipHeader, tooltipText, ...rest
 }, ref) => (
   <Popover ref={ref} id="popover" {...rest}>
@@ -21,7 +20,7 @@ export const TooltipPopover = React.forwardRef(({
 ))
 
 function ThemeTooltip({
-  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false
+  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false,
 }) {
   const popover = (
     <TooltipPopover

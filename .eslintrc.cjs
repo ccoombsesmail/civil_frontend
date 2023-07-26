@@ -25,6 +25,7 @@ module.exports = {
     'object-curly-spacing': 'off',
     'linebreak-style': 0,
     'react/jsx-props-no-spreading': 'off',
+    'import/no-unused-modules': [1, {unusedExports: true}],
   },
 
 }

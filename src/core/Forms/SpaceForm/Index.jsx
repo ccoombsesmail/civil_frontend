@@ -43,6 +43,9 @@ function CreateSpaceForm({ closeModal }) {
     setContentUrl,
   }), [setContentUrl])
 
+  console.log(open)
+  console.log(externalContentUrl)
+
   return (
     <Container id="space-form-container">
       <Formik

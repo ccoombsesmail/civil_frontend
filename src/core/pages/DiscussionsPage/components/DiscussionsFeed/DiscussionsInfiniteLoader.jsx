@@ -22,7 +22,7 @@ function DiscussionsInfiniteLoader({
     const calcHeight = item.contentHeight || 500
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 80 + 40 + 500 + 150 + calcHeight
+        return 80 + 40 + 600 + 150 + calcHeight
       case Web:
         return 900 + calcHeight
       case Twitter:

@@ -10,7 +10,7 @@ import {
 } from './Style'
 
 function CensorOverlay({
-  setShouldBlur, contentId, contentType, showNavigationToTribunal,
+  setShouldBlur, contentId, contentType, showNavigationToTribunal, setBlocked,
 }) {
   const navigate = useNavigate()
   return (
@@ -18,6 +18,7 @@ function CensorOverlay({
       onClick={(e) => {
         e.stopPropagation()
         setShouldBlur((prev) => !prev)
+        setBlocked((prev) => !prev)
       }}
       contentType={contentType}
     >

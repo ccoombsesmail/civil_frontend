@@ -9,9 +9,10 @@ import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 import { initialConfig } from '../../../CommonComponents/Lexical/App.tsx'
 import { WhatDoYouThinkContainer } from './Style'
 
-function WhatDoYouThink({ space, comment }) {
+function WhatDoYouThink({ space, comment, discussion }) {
   const { contentId } = useParams()
-  const commentFormState = useGetCommentState(space, comment, contentId)
+  const commentFormState = useGetCommentState(space, comment, discussion, contentId)
+  console.log(commentFormState)
   const [visible, setVisible] = useState(false)
 
   return (
