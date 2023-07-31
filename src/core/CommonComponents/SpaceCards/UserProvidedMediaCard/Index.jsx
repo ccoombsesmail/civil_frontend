@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
-import Card from '../../SpaceCard/Index'
-import CardDetails from '../../SpaceCard/components/CardDetails/Index'
+import Card from '../../PostCard/Index'
+import CardDetails from '../../PostCard/components/CardDetails/Index'
 
 import useSetInnerHtml from '../../../hooks/useSetInnerHtml'
 import useGoToDiscussion from '../../../hooks/routing/useGoToDiscussions'

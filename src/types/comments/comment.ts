@@ -19,4 +19,6 @@ export interface Comment {
   createdByExperience: string | null;
   reportStatus: string;
   toxicityStatus: string | null;
+  reportedContentId: string 
+  commentType: string
 }

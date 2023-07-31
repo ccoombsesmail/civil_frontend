@@ -12,17 +12,17 @@ import useHandleOnSubmit from './hooks/useHandleOnSubmit'
 import { Footer } from '../SpaceForm/Style'
 
 function VoteForm({ contentId, closeModal }) {
-  const [voteForSelected, setVoteForSelected] = useState(false)
-  const [voteAgainstSelected, setVoteAgainstSelected] = useState(false)
-  const handleOnSubmit = useHandleOnSubmit(contentId, voteForSelected, voteAgainstSelected, closeModal)
-  const onClickVoteFor = useCallback(() => {
-    setVoteForSelected((prev) => !prev)
-    setVoteAgainstSelected(false)
+  const [voteToStrikeSelected, setVoteToStrikeSelected] = useState(false)
+  const [voteToAcquitSelected, setVoteToAcquitSelected] = useState(false)
+  const handleOnSubmit = useHandleOnSubmit(contentId, voteToStrikeSelected, voteToAcquitSelected, closeModal)
+  const onClickVoteToStrike = useCallback(() => {
+    setVoteToStrikeSelected((prev) => !prev)
+    setVoteToAcquitSelected(false)
   }, [])
 
-  const onClickVoteAgainst = useCallback(() => {
-    setVoteAgainstSelected((prev) => !prev)
-    setVoteForSelected(false)
+  const onClickVoteToAcquit = useCallback(() => {
+    setVoteToAcquitSelected((prev) => !prev)
+    setVoteToStrikeSelected(false)
   }, [])
 
   return (
@@ -46,13 +46,13 @@ function VoteForm({ contentId, closeModal }) {
                   Vote To Indicate This Content Has Violated
                   Community Guidlines And Should Be Removed
                 </ItemDescription>
-                <Field name="voteAgainst" checked={voteAgainstSelected} onClick={onClickVoteAgainst} showCheckmark={false} component={Checkbox} />
+                <Field name="voteToStrike" checked={voteToStrikeSelected} onClick={onClickVoteToStrike} showCheckmark={false} component={Checkbox} />
               </Item>
               <Item>
                 <ItemDescription>
                   Vote To Indicate This Content Has Not Violated Community Guidlines
                 </ItemDescription>
-                <Field name="voteFor" checked={voteForSelected} onClick={onClickVoteFor} showCheckmark={false} component={Checkbox} />
+                <Field name="voteToAcquit" checked={voteToAcquitSelected} onClick={onClickVoteToAcquit} showCheckmark={false} component={Checkbox} />
               </Item>
             </ItemList>
             <Footer>

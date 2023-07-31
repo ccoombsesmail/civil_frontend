@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 import { Card } from 'primereact/card'
 import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace'
 import { Button } from 'primereact/button'
-import { UNDER_REVIEW } from '../../../enums/report_status'
+import { MARKED, REMOVED, UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
 import CensorOverlay from '../CensorOverlay/Index'
 import { getTimeSince } from '../../../generic/string/dateFormatter'
@@ -17,6 +17,7 @@ import Editor from '../Lexical/ReadOnlyEditor.tsx'
 import LinkSection from '../LinkSection/Index'
 import { truncateAtIndex } from '../../../generic/string/truncateAtIndex'
 import useGoToSpace from '../../hooks/routing/useGoToSpace'
+import ModerationOverlay from './components/ModerationOverlay/ModerationOverlay'
 
 function PostCard({
   children,
@@ -44,7 +45,7 @@ function PostCard({
     spaceCategory,
     spaceId,
   } = space || discussion || {}
-  const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW)
+  const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW || reportStatus === REMOVED || reportStatus === MARKED)
   const goToSpace = useGoToSpace(spaceId)
 
   const spaceHeaderClickHandler = useCallback((e) => {
@@ -61,7 +62,7 @@ function PostCard({
     <>
       { spaceTitle
       && (
-      <div className="flex align-items-center" onClick={(e) => e.stopPropagation()}>
+      <div className={`flex align-items-center ${reportStatus === 'REMOVED' ? 'pb-3' : ''}`} onClick={(e) => e.stopPropagation()}>
         <h5 className="text-base mb-0 ml-2">Space</h5>
         <b className="mx-2">→</b>
         <Button
@@ -92,7 +93,7 @@ function PostCard({
       className="relative sm:w-full md:w-full border-noround-top"
       pt={{
         body: {
-          className: 'p-0',
+          className: `${reportStatus === 'REMOVED' ? 'pb-4 px-0' : 'p-0'}`,
         },
       }}
       header={(
@@ -105,23 +106,25 @@ function PostCard({
           spaceCreatorIsDidUser={spaceCreatorIsDidUser}
           userVerificationType={userVerificationType}
           space={space}
+          discussion={discussion}
           category={category}
         />
       )}
-      footer={CardToolbar}
+      footer={reportStatus === 'REMOVED' ? null : CardToolbar}
     >
-      {shouldBlur && (
-        <CensorOverlay
+      {(shouldBlur) && (
+        <ModerationOverlay
           setShouldBlur={setShouldBlur}
           setBlocked={setBlocked}
           contentId={id}
           contentType={space ? SPACE : DISCUSSION}
+          reportStatus={reportStatus}
           showNavigationToTribunal={
             reportStatus === UNDER_REVIEW && !pathname.includes('tribunal')
           }
         />
       )}
-      <Body shouldBlur={shouldBlur}>
+      <Body shouldBlur={shouldBlur} hidden={reportStatus === 'REMOVED'}>
         {children}
         <Description onClick={(e) => e.stopPropagation()}>
           {title === 'General' ? null : <Editor />}
@@ -139,7 +142,6 @@ function PostCard({
         )}
       </Body>
     </Card>
-
   )
 }
 

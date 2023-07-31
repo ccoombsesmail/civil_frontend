@@ -14,15 +14,14 @@ import useUpdateCommentLikes from './hooks/useUpdateCommentLikes.ts'
 function CommentActionToolbar({
   comment,
 }) {
-  console.log(comment)
   const { likes } = comment
   const {
     spaceId, discussionId, contentId, ...params
   } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
 
-  const {handleUpdateLikes: updateCommentLikesUpvote, isLoading: isUpvoteLoading} = useUpdateCommentLikes(comment, 'upvote')
-  const {handleUpdateLikes: updateCommentLikesDownvote, isLoading: isDownvoteLoading} = useUpdateCommentLikes(comment, 'downvote')
+  const {handleUpdateLikes: updateCommentLikesUpvote, isLoading: isUpvoteLoading} = useUpdateCommentLikes(comment, 'upvote', isOnTribunalPage)
+  const {handleUpdateLikes: updateCommentLikesDownvote, isLoading: isDownvoteLoading} = useUpdateCommentLikes(comment, 'downvote', isOnTribunalPage)
   return (
     <Container>
       <Left>

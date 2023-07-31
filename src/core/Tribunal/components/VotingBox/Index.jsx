@@ -13,18 +13,18 @@ import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 
 function VotingBox({ contentId, reportStats, isFetching }) {
   const [visible, setVisible] = useState(false)
-
+  console.log(reportStats)
   const votingTimeUp = (+new Date(reportStats?.reportPeriodEnd) - +new Date()) <= 0
   const hasAlreadyVoted = useMemo(
-    () => (reportStats.voteAgainst || reportStats.voteFor),
-    [reportStats.voteAgainst, reportStats.voteFor],
+    () => (reportStats.votedToStrike || reportStats.votedToAcquit),
+    [reportStats.votedToStrike, reportStats.votedToAcquit],
   )
 
   const { isPassing, isViolation} = useMemo(() => {
-    if (reportStats.numVotesFor > reportStats.numVotesAgainst) return { isViolation: true }
-    if (reportStats.numVotesFor < reportStats.numVotesAgainst) return { isPassing: true }
+    if (reportStats.numVotesToStrike >= reportStats.numVotesToAcquit) return { isViolation: true }
+    if (reportStats.numVotesToStrike < reportStats.numVotesToAcquit) return { isPassing: true }
     return {}
-  }, [reportStats.numVotesAgainst, reportStats.numVotesFor])
+  }, [reportStats.numVotesToStrike, reportStats.numVotesToAcquit])
   const content = (
     <div className="flex align-items-center">
       <Gavel2 />
@@ -87,13 +87,13 @@ function VotingBox({ contentId, reportStats, isFetching }) {
         <VotesFor isViolation={isViolation}>
           Violation Votes
           <span>
-            {reportStats && (reportStats.numVotesFor ?? '?')}
+            {reportStats && (reportStats.numVotesToStrike ?? '?')}
           </span>
         </VotesFor>
         <VotesAgainst isPassing={isPassing}>
           No Violation Votes
           <span>
-            {reportStats && (reportStats.numVotesAgainst ?? '?')}
+            {reportStats && (reportStats.numVotesToAcquit ?? '?')}
           </span>
         </VotesAgainst>
       </VotesContainer>

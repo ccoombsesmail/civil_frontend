@@ -52,7 +52,7 @@ export const StyledPillarSvg = styled(PillarSvg)`
 export const InnerContainer = styled('div')`
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 50vw;
   /* align-items: center; */
   @media (max-width: 1200px) {

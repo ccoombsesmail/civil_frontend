@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { TabView, TabPanel } from 'primereact/tabview'
 
-import PrimeFeed from './components/ForYouFeed/Index'
 import FollowedSpacesFeed from './components/FollowedSpacesFeed/Index'
 import PopularDiscussionsFeed from './components/PopularDiscussionsFeed/PopularDiscussionsFeed'
+import FollowedDiscussionsFeed from './components/FollowedDiscussionsFeed/Index'
 
-function SpaceTabs() {
+function FeedTabs() {
   return (
     <TabView
       className="w-full"
       pt={{
         panelContainer: {
           className: 'p-0',
+        },
+        navContainer: {
+          className: 'mb-4',
         },
       }}
     >
@@ -25,7 +28,7 @@ function SpaceTabs() {
       >
         <PopularDiscussionsFeed />
       </TabPanel>
-      <TabPanel
+      {/* <TabPanel
         header="For You"
         pt={{
           content: {
@@ -34,7 +37,7 @@ function SpaceTabs() {
         }}
       >
         <PrimeFeed />
-      </TabPanel>
+      </TabPanel> */}
       <TabPanel
         header="Followed Spaces"
         pt={{
@@ -45,8 +48,19 @@ function SpaceTabs() {
       >
         <FollowedSpacesFeed />
       </TabPanel>
+
+      <TabPanel
+        header="Followed Discussions"
+        pt={{
+          content: {
+            className: 'w-full',
+          },
+        }}
+      >
+        <FollowedDiscussionsFeed />
+      </TabPanel>
     </TabView>
   )
 }
 
-export default SpaceTabs
+export default memo(FeedTabs)

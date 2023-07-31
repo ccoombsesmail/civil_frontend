@@ -33,5 +33,6 @@ export interface Discussion {
   negativeComments: number;
   totalCommentsAndReplies: number;
   likeState: LikeAction;
+  isFollowing: boolean
 
 }

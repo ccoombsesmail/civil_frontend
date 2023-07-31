@@ -26,7 +26,7 @@ import { CircleLoading } from '../../svgs/spinners/CircleLoading'
 import { useGetCommentQuery } from '../../api/services/comments.ts'
 import { BgImage } from '../pages/Style'
 import WhatDoYouThink from './components/WhatDoYouThink/WhatDoYouThink'
-import { useGetDiscussionQuery } from '../../api/services/discussions'
+import { useGetDiscussionQuery } from '../../api/services/discussions.ts'
 import { DiscussionItem } from '../pages/DiscussionsPage/components/DiscussionsFeed/components/CardFeedItem/CardFeedItem'
 
 function Tribunal() {
@@ -49,7 +49,6 @@ function Tribunal() {
   } = useGetDiscussionQuery(contentId, {
     skip: !contentId || !currentUser || contentType !== DISCUSSION,
   })
-  console.log(discussion)
 
   const {
     data: comment,
@@ -89,6 +88,8 @@ function Tribunal() {
     return null
   }, [space, comment, discussion, commentLoaded, spaceLoaded, contentId, currentUser])
 
+  const isContentLoading = isCommentLoading || isDiscussionLoading || isSpaceLoading
+
   return (
     <OuterContainer id="tribunal-container">
       <BgImage />
@@ -108,7 +109,9 @@ function Tribunal() {
       ) : (
         <Timer reportStats={reportStats} refetch={refetch} />
       )}
-      <InnerContainer>{Content}</InnerContainer>
+      <InnerContainer>
+        { isContentLoading ? <CircleLoading size="10vw" /> : Content}
+      </InnerContainer>
       {isSuccess && (
         <VotingBox contentId={contentId} reportStats={reportStats} isFetching={isFetching} />
       )}
@@ -131,7 +134,7 @@ function Tribunal() {
         </ReportStatsContainer>
       )}
       <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} space={space} discussion={discussion} />
-      <TribunalComments contentId={contentId} />
+      <TribunalComments contentId={contentId} reportStats={reportStats} />
     </OuterContainer>
   )
 }

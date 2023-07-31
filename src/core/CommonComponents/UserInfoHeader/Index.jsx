@@ -10,16 +10,16 @@ import ThemeTooltip from '../Tooltip/Index'
 import UsernameAndTag from '../UsernameAndTag/Index'
 import { CAPTCHA_VERIFIED, FACE_ID_VERIFIED, FACE_ID_AND_CAPTCHA_VERIFIED } from '../../../enums/UserVerifcationType'
 import { longUsernameDisplay } from '../../../generic/string/longUsernameDisplay'
-import WatchButton from './components/WatchButton/Index'
+import { WatchButtonSpace, WatchButtonDiscussion} from './components/WatchButton/Index'
 
-export function RobotIcon() {
+function RobotIcon() {
   return (
     <img src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg" alt="" />
   )
 }
 
 function UserInfoHeader({
-  time, username, userId, iconSrc, category, userTag, userVerificationType, space, onClick = () => null,
+  time, username, userId, iconSrc, category, userTag, userVerificationType, space, discussion, onClick = () => null,
 }) {
   const usernameDisplay = userId?.startsWith('did') ? `${username.substring(0, 12)}` : username
   const captchaVerified = userVerificationType === FACE_ID_AND_CAPTCHA_VERIFIED || userVerificationType === CAPTCHA_VERIFIED
@@ -58,7 +58,9 @@ function UserInfoHeader({
 
       </Left>
       <Right>
-        { space ? <WatchButton space={space} /> : null }
+        { space ? <WatchButtonSpace space={space} /> : null }
+        { discussion ? <WatchButtonDiscussion discussion={discussion} /> : null }
+
         <CategoryAndTime>
           <span>
             {category}

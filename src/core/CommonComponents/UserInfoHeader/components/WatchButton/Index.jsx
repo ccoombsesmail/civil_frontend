@@ -1,16 +1,18 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { memo } from 'react'
-import { WatchIcon } from './Style'
-import useAddRemoveSpaceFollow from './hooks/useAddRemoveSpaceFollow'
+import { Button } from 'primereact/button'
+import useAddRemoveSpaceFollow from './hooks/useAddRemoveSpaceFollow.tsx'
+import useAddRemoveDiscussionFollow from './hooks/useAddRemoveDiscussionFollow.tsx'
 
-function WatchButton({ space }) {
+export function WatchButtonSpace({ space }) {
   const { onFollowBtnClick, isLoading } = useAddRemoveSpaceFollow(space)
   return (
     <>
       {
       space.isFollowing ? (
-        <WatchIcon onClick={onFollowBtnClick} src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/monitor-icon-slash.png" alt="" />
+        <Button rounded text icon="pi pi-bookmark-fill" className="m-1 focus:shadow-none" aria-label="Bookmark" style={{ fontSize: '2rem' }} onClick={onFollowBtnClick} />
       ) : (
-        <WatchIcon onClick={onFollowBtnClick} src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/monitor-icon.png" alt="" />
+        <Button rounded text icon="pi pi-bookmark" className="m-1 focus:shadow-none" aria-label="Bookmark" style={{ fontSize: '2rem' }} onClick={onFollowBtnClick} />
       )
     }
 
@@ -19,4 +21,19 @@ function WatchButton({ space }) {
   )
 }
 
-export default memo(WatchButton)
+export function WatchButtonDiscussion({ discussion }) {
+  const { onFollowBtnClick, isLoading } = useAddRemoveDiscussionFollow(discussion)
+  return (
+    <>
+      {
+      discussion.isFollowing ? (
+        <Button rounded text icon="pi pi-bookmark-fill" className="m-1 focus:shadow-none" aria-label="Bookmark" style={{ fontSize: '2rem' }} onClick={onFollowBtnClick} />
+      ) : (
+        <Button rounded text icon="pi pi-bookmark" className="m-1 focus:shadow-none" aria-label="Bookmark" style={{ fontSize: '2rem' }} onClick={onFollowBtnClick} />
+      )
+    }
+
+    </>
+
+  )
+}

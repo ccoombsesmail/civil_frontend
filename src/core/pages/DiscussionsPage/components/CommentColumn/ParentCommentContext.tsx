@@ -10,7 +10,8 @@ export interface ParentCommentContextValue {
   resetCacheAtIndex: number;
   rootOfCommentReplyThreadId: string;
   isFocusedComment: boolean,
-  focusedCommentId: string
+  focusedCommentId: string,
+  commentType: string
 }
 
 export const ParentCommentContext = React.createContext(null)

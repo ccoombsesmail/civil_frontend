@@ -8,11 +8,11 @@ import { VideoPlayer } from './Style'
 import { TweetComponent } from '../Lexical/nodes/TweetNode.tsx'
 import PlaygroundNodes from '../Lexical/nodes/PlaygroundNodes.ts'
 import PlaygroundEditorTheme from '../Lexical/themes/PlaygroundEditorTheme.ts'
-import Card from '../SpaceCard/Index'
+import Card from '../PostCard/Index'
 
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 import LinkMetaData from '../../Forms/components/LinkMetaData/Index'
-import UserUploadedMedia from '../SpaceCard/components/UserUploadedMedia/Index'
+import UserUploadedMedia from '../PostCard/components/UserUploadedMedia/Index'
 
 function DiscussionItem({ discussion, currentUser }) {
   const commonProps = useMemo(() => ({

@@ -18,6 +18,7 @@ function DiscussionsInfiniteLoader({
   const getItemSize = useCallback((index) => {
     if (feedType === 'Table') return 100
     const item = items[index]
+    if (item.reportStatus === 'REMOVED') return 300
     if (item.title === 'General') return 450
     const calcHeight = item.contentHeight || 500
     switch (item?.externalContentData?.linkType) {

@@ -4,7 +4,7 @@ import { Button } from 'primereact/button'
 import Header from './components/Header/Index'
 import { Container, BorderContainer } from './Style'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import SpaceTabs from './components/SpaceTabs/Index'
+import FeedTabs from './components/FeedTabs/Index'
 
 function HomePageFeeds({ setIsOpen, isOpen }) {
   const { currentUser } = useGetCurrentUser()
@@ -19,8 +19,7 @@ function HomePageFeeds({ setIsOpen, isOpen }) {
           className="absolute left-0 top-0 -translate-x-100 focus:shadow-none  border-noround-right"
         />
         <Header user={currentUser} />
-        {/* Should be FeedTabs */}
-        <SpaceTabs />
+        <FeedTabs />
       </BorderContainer>
     </Container>
   )

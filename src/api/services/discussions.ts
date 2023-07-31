@@ -37,6 +37,16 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
         return [{type: "DiscussionPage", id: arg.toString()}]
       }
     }),
+    getAllFollowedDiscussions: builder.query<any, any>({
+      query: () => ({ url: `/discussions-followed`, method: 'GET' }),
+      providesTags: (result) =>
+      result ? 
+          [
+            ...result.map(({ userId }) => ({ type: 'Discussion', id: userId } as const)),
+          ]
+        : 
+          [{ type: 'Discussion', id: 'LIST' }],
+    }),
     getPopularDiscussions: builder.query<any, any>({
       query: ({ currentPage }) => ({ url: `/discussions/popular-discussions?skip=${currentPage*10}`, method: 'GET' }),
       // providesTags: (result, error, arg) => {
@@ -146,5 +156,6 @@ export const {
   useLazyGetUserDiscussionsQuery,
   useUpdateDiscussionLikesMutation,
   useGetSimilarDiscussionsQuery,
-  useGetPopularDiscussionsQuery
+  useGetPopularDiscussionsQuery,
+  useGetAllFollowedDiscussionsQuery
   } = discussionsApi

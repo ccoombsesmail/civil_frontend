@@ -11,7 +11,6 @@ export default async function onUpdateLikesQueryStarted({
   discussionId,
   isFocusedComment,
   updateLikeValue,
-  updateGetSpaceQuery,
   isReplies,
   rootOfCommentReplyThreadId,
   newLikeState,
@@ -20,9 +19,6 @@ export default async function onUpdateLikesQueryStarted({
 },
 { dispatch, queryFulfilled }) {
   let patchResult;
-  console.log(rootOfCommentReplyThreadId)
-  console.log(isReplies)
-  console.log(focusedCommentId)
   if (isFocusedComment) {
     patchResult = dispatch(
       commentsApi.util.updateQueryData(

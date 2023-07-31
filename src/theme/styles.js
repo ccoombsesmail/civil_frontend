@@ -595,8 +595,8 @@ blockquote {
     max-width: 25vw;
   }
 
-  .p-blockui-container .p-component-overlay ~ * {
-    filter: blur(70px); /* Adjust the blur radius to control the effect */
+  .p-blockui-container {
+    width: 100%;
   }
   .p-button.p-button-icon-only {
 

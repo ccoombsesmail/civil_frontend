@@ -4,15 +4,18 @@ import { calculateLikeValueToAdd } from "../../utils/calculateLikeValueToAdd";
 import { LikedState, NeutralState, DislikedState } from "../../../../../enums/like_state";
 import { Comment } from "../../../../../types/comments/comment";
 import { useUpdateCommentLikesMutation } from "../../../../../api/services/comments";
+import { useUpdateTribunalCommentLikesMutation } from "../../../../../api/services/tribunal_comments";
 
 import { ParentCommentContext, ParentCommentContextValue } from '../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
 
-export default (content: Comment,  action: 'upvote' | 'downvote') => {
-  const { id, createdByUserId, likeState, rootId, parentId, discussionId } = content || {};
-  const { currentPage, rootOfCommentReplyThreadId, isReplies, isFocusedComment, focusedCommentId } = useContext<ParentCommentContextValue>(ParentCommentContext) || {};
+export default (content: Comment,  action: 'upvote' | 'downvote', isTribunalComment) => {
+  console.log(content)
+  const { id, createdByUserId, likeState, rootId, parentId, discussionId, reportedContentId } = content || {};
+  const { currentPage, rootOfCommentReplyThreadId, isReplies, isFocusedComment, focusedCommentId, commentType } = useContext<ParentCommentContextValue>(ParentCommentContext) || {};
   
   const [updateLikes, { isLoading }] = useUpdateCommentLikesMutation();
-  
+  const [updateTribunalLikes, { isLoading: isTribunalLoading }] = useUpdateTribunalCommentLikesMutation();
+
   let newLikeState;
   if (action === 'upvote') {
     newLikeState = likeState === LikedState ? NeutralState : LikedState;
@@ -33,16 +36,22 @@ export default (content: Comment,  action: 'upvote' | 'downvote') => {
     isReplies,
     isFocusedComment,
     likeAction: newLikeState,
-    focusedCommentId
+    focusedCommentId,
+    reportedContentId, 
+    commentType
   });
 
 
   const handleUpdateLikes = useCallback(async () => {
     const likeData = prepareLikeData();
 
-    await updateLikes(likeData);
+    if (isTribunalComment) {
+      await updateTribunalLikes(likeData)
+    } else {
+      await updateLikes(likeData);
+    }
 
-  }, [prepareLikeData]);
+  }, [prepareLikeData, isTribunalComment]);
 
-  return { handleUpdateLikes, isLoading};
+  return { handleUpdateLikes, isLoading: isLoading || isTribunalLoading};
 };

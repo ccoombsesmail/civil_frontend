@@ -9,12 +9,12 @@ import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
-import Card from '../../../../../../CommonComponents/SpaceCard/Index'
+import Card from '../../../../../../CommonComponents/PostCard/Index'
 
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
-import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
+import UserUploadedMedia from '../../../../../../CommonComponents/PostCard/components/UserUploadedMedia/Index'
 import { VideoPlayer } from '../../../../../HomePage/components/Spaces/components/SpaceItem/Style'
 
 import { useGetAllDiscussionsQuery } from '../../../../../../../api/services/discussions.ts'
@@ -26,7 +26,7 @@ import useGoToCommentThread from '../../../../../../hooks/routing/useGoToComment
 export function DiscussionItem({
   discussion, id,
 }) {
-  const [blocked, setBlocked] = useState(discussion.reportStatus === 'UNDER_REVIEW')
+  const [blocked, setBlocked] = useState(discussion.reportStatus === 'UNDER_REVIEW' || discussion.reportStatus === 'MARKED' || discussion.reportStatus === 'REMOVED')
   const initialConfig = {
     editorState: discussion?.title === 'General' ? null : discussion?.editorState,
     namespace: `Civil-${discussion?.title}`,
@@ -92,7 +92,8 @@ export function DiscussionItem({
   }
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
+    <LexicalComposer className="relative" initialConfig={initialConfig}>
+
       <BlockUI blocked={blocked}>
         <Card
           {...commonProps}
@@ -106,6 +107,7 @@ export function DiscussionItem({
         >
           {cardbody}
         </Card>
+
       </BlockUI>
 
     </LexicalComposer>

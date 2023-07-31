@@ -16,6 +16,7 @@ function ExampleWrapper({
 
   const getItemSize = useCallback((index) => {
     const item = items[index]
+    if (item.reportStatus === 'REMOVED') return 350
     const itemHeight = Number.isNaN(item.contentHeight) || !item.contentHeight ? 500 : item.contentHeight
     switch (item?.externalContentData?.linkType) {
       case YouTube:

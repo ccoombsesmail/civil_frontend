@@ -5,16 +5,6 @@ import { spacesApi } from './spaces'
 import { onAddSpaceFollowQueryStarted, onRemoveSpaceFollowQueryStarted } from '../util/space_follows/onUpdateSpaceFollowQueryStarted'
 export const spaceFollowsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    // getAllFollowers: builder.query<any, any>({
-    //   query: (userId) => ({ url: `/follows/followers/${userId}`, method: 'GET' }),
-    //   providesTags: (result) =>
-    //   result ? 
-    //       [
-    //         ...result.map(({ userId }) => ({ type: 'Follow', id: userId } as const)),
-    //       ]
-    //     : 
-    //       [{ type: 'Follow', id: 'LIST' }],
-    // }),
     addNewSpaceFollow: builder.mutation<any, any>({
       query: (body) => {
         return ({ 

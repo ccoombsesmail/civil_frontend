@@ -6,13 +6,13 @@ import LinkMetaData from '../../../../../../Forms/components/LinkMetaData/Index'
 import { VideoPlayer } from './Style'
 import { TweetComponent } from '../../../../../../CommonComponents/Lexical/nodes/TweetNode.tsx'
 import { Twitter, Web, YouTube } from '../../../../../../../enums/link_type'
-import Card from '../../../../../../CommonComponents/SpaceCard/Index'
+import Card from '../../../../../../CommonComponents/PostCard/Index'
 
 import { CircleLoading } from '../../../../../../../svgs/spinners/CircleLoading'
 import useGoToDiscussions from '../../../../../../hooks/routing/useGoToDiscussions'
 import PlaygroundEditorTheme from '../../../../../../CommonComponents/Lexical/themes/PlaygroundEditorTheme.ts'
 import PlaygroundNodes from '../../../../../../CommonComponents/Lexical/nodes/PlaygroundNodes.ts'
-import UserUploadedMedia from '../../../../../../CommonComponents/SpaceCard/components/UserUploadedMedia/Index'
+import UserUploadedMedia from '../../../../../../CommonComponents/PostCard/components/UserUploadedMedia/Index'
 import SpaceActionToolbar from '../../../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 
 function SpaceItem({
