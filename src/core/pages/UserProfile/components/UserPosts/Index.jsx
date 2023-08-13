@@ -4,23 +4,19 @@
 import React, { useCallback, useState } from 'react'
 import { TabView, TabPanel } from 'primereact/tabview'
 
-import { useGetUserSpacesQuery } from '../../../../api/services/spaces.ts'
-import { useLazyGetUserDiscussionsQuery } from '../../../../api/services/discussions.ts'
-import { useLazyGetUserCommentsQuery } from '../../../../api/services/comments.ts'
+import { useLazyGetUserDiscussionsQuery } from '../../../../../api/services/discussions.ts'
+import { useLazyGetUserCommentsQuery } from '../../../../../api/services/comments.ts'
 
 import { Container } from './Style'
-import SpaceItem from '../../../pages/HomePage/components/Spaces/components/SpaceItem/Index'
-import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
-import DiscussionItem from '../../../CommonComponents/DiscussionItem/Index'
-import Comment from '../../../pages/DiscussionsPage/components/Comment/Index'
-import { ParentCommentContext } from '../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
-import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
+import DiscussionItem from '../../../../CommonComponents/DiscussionItem/Index'
+import Comment from '../../../DiscussionsPage/components/Comment/Index'
+import { ParentCommentContext } from '../../../DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
+import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
+import UserSpacesFeed from './UserPostFeeds/UserSpacesFeed'
 
-function UserPosts({ profileUserId, user }) {
+function UserPosts({ profileUserId }) {
   const { currentUser } = useGetCurrentUser()
-  const { data: spaces } = useGetUserSpacesQuery(profileUserId, {
-    skip: !profileUserId,
-  })
   const [activeIndex, setActiveIndex] = useState(0)
 
   const [getUserDiscussions, { data: discussions, isLoading: isDiscussionsLoading }] = useLazyGetUserDiscussionsQuery()
@@ -51,7 +47,7 @@ function UserPosts({ profileUserId, user }) {
             },
           }}
         >
-          {spaces?.map((space) => <SpaceItem space={space} user={user} hideCommentButton />)}
+          <UserSpacesFeed profileUserId={profileUserId} />
         </TabPanel>
         <TabPanel
           header="Discussions"

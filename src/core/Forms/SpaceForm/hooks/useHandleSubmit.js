@@ -1,17 +1,34 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useCreateSpaceMutation } from '../../../../api/services/spaces.ts'
-import { uploadSpaceMedia } from '../../../../api/v1/spaces/spaces_api_util'
+import { uploadSpaceMedia as uploadSpaceMedia2 } from '../../../../api/v1/spaces/spaces_api_util'
 
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 
 import useGetLexicalTextContent from '../../hooks/useGetLexicalTextContent'
 import useUploadRichTextImages from './useUploadRichTextImages.ts'
+import { uploadFileToAws } from '../../../../api/v1/file_upload/file_upload_api'
 
-export default (metaData, closeModal, editor) => {
+const createSpacePromise = (createSpace, data) => toast.promise(
+  createSpace(data),
+  {
+    pending: 'Creating Space...',
+    success: 'Space Successfully Created!',
+    error: {
+      render({ data: errorData }) {
+        const { response } = errorData
+        const { data: responseData } = response
+        return `${responseData.msg} 🤯 `
+      },
+    },
+  },
+)
+
+export default (metaData, closeModal, editor, imageData) => {
   const [createSpace, { isLoading }] = useCreateSpaceMutation()
+
   const { currentUser } = useGetCurrentUser()
-  const uploadRichTextImages = useUploadRichTextImages(uploadSpaceMedia)
+  const uploadRichTextImages = useUploadRichTextImages(uploadSpaceMedia2)
   const editorTextContent = useGetLexicalTextContent(editor)
   return useCallback(async (values, { setSubmitting, resetForm }) => {
     if (isLoading) return
@@ -31,23 +48,17 @@ export default (metaData, closeModal, editor) => {
       contentHeight: parseFloat(height),
     }
 
-    toast.promise(
-      createSpace(data),
-      {
-        pending: 'Creating Space...',
-        success: 'Space Successfully Created!',
-        error: {
-          render({ data: errorData }) {
-            const { response } = errorData
-            const { data: responseData } = response
-            return `${responseData.msg} 🤯 `
-          },
-        },
-      },
-    )
+    if (imageData) {
+      const { imgFileForm, fileType, fileFormat } = imageData
+      uploadFileToAws(imgFileForm, fileType, fileFormat, 'space').then((res) => {
+        createSpacePromise(createSpace, {...data, userUploadedImageUrl: res.data.imageUrl})
+      })
+    } else {
+      createSpacePromise(createSpace, data)
+    }
 
     setSubmitting(false)
     resetForm({})
     closeModal()
-  }, [metaData, editor, editorTextContent])
+  }, [metaData, editor, editorTextContent, imageData])
 }

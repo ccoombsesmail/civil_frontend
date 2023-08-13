@@ -22,7 +22,7 @@ export const discussionFollowsApi = emptySplitApi.injectEndpoints({
     removeDiscussionFollow: builder.mutation<any, any>({
       query: ({ id: followedDiscussionId }) => {
         return ({ 
-        url: `/discussion-follows?followedSpaceId=${followedDiscussionId}`, 
+        url: `/discussion-follows?followedDiscussionId=${followedDiscussionId}`, 
         method: 'DELETE',
       }
       )},

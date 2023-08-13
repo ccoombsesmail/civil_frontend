@@ -1,17 +1,29 @@
 import { useCallback } from 'react'
 import { toast } from 'react-toastify'
-import spaceActions from '../../../../redux/actions/spaces/index'
-
-import useBindDispatch from '../../../hooks/redux/useBindDispatch'
+import { uploadFileToAws } from '../../../../api/v1/file_upload/file_upload_api'
 
 import checkLinkType from '../../hooks/checkLinkType'
 import { useCreateDiscussionMutation } from '../../../../api/services/discussions.ts'
 
+const createDiscussionPromise = (createDiscussion, data) => toast.promise(
+  createDiscussion(data),
+  {
+    pending: 'Creating New Discussion...',
+    success: 'Discussion Successfully Started!',
+    error: {
+      render({ data: errorData }) {
+        const { response } = errorData
+        const { data: responseData } = response
+        return `${responseData.msg} 🤯 `
+      },
+    },
+  },
+)
+
 export default (linkMetaData, spaceId, closeModal, editor, editorTextContent) => {
-  const { uploadSpaceMedia } = useBindDispatch(spaceActions)
   const [createDiscussion] = useCreateDiscussionMutation()
 
-  return useCallback((values, { setSubmitting, resetForm }) => {
+  return useCallback(async (values, { setSubmitting, resetForm }) => {
     const eLinks = Object.entries(values).map(([k, v]) => (k.includes('Evidence') ? v : null)).filter(Boolean)
     const linkType = checkLinkType(linkMetaData?.url)
     const editorShell = document.getElementById('discussion-form-container').getElementsByClassName('editor-shell')[0]
@@ -35,22 +47,11 @@ export default (linkMetaData, spaceId, closeModal, editor, editorTextContent) =>
       const [fileType, fileFormat] = values.file.type.split('/')
       const formData = new FormData()
       formData.append('image', values.file)
-      uploadSpaceMedia(formData, fileType, fileFormat, data)
+      uploadFileToAws(formData, fileType, fileFormat, 'discussion').then((res) => {
+        createDiscussionPromise(createDiscussion, {...data, userUploadedImageUrl: res.data.imageUrl })
+      })
     } else {
-      toast.promise(
-        createDiscussion(data),
-        {
-          pending: 'Creating New Discussion...',
-          success: 'Discussion Successfully Started!',
-          error: {
-            render({ data: errorData }) {
-              const { response } = errorData
-              const { data: responseData } = response
-              return `${responseData.msg} 🤯 `
-            },
-          },
-        },
-      )
+      createDiscussionPromise(createDiscussion, data)
     }
     setSubmitting(false)
     resetForm({})

@@ -13,7 +13,7 @@ import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts
 import useUpdateSpaceLikes from './hooks/useUpdateSpaceLikes.ts'
 
 function SpaceActionToolbar({
-  space, hideCommentButton,
+  hideCommentButton, space,
 }) {
   const { likes } = space
   const { spaceId, discussionId } = useParams()

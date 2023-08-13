@@ -23,6 +23,7 @@ import FormikController from '../Formik/FormikController/Index'
 import { useGetEnumsQueryState } from '../../../api/services/enums.ts'
 import Overlay from '../../CommonComponents/Overlay/Index'
 import Expandable from '../../CommonComponents/Expandable/Expandable'
+import Dropzone from '../../CommonComponents/Dropzone/Dropzone.tsx'
 
 const VALIDATIONS = {
   title: { REQUIRED: true },
@@ -32,19 +33,17 @@ const VALIDATIONS = {
 function CreateSpaceForm({ closeModal }) {
   const [open, setOpen] = useState(false)
   const [editor] = useLexicalComposerContext()
+  const [imageData, setImageData] = useState(null)
 
   const validator = useConfigFormErrors(VALIDATIONS)
   const { externalContentUrl, setContentUrl } = useGetLinkMetaDataOnBlur()
 
-  const handleSubmit = useHandleSubmit(externalContentUrl?.data, closeModal, editor)
+  const handleSubmit = useHandleSubmit(externalContentUrl?.data, closeModal, editor, imageData)
   const { data: enums } = useGetEnumsQueryState()
 
   const contextValues = useMemo(() => ({
     setContentUrl,
   }), [setContentUrl])
-
-  console.log(open)
-  console.log(externalContentUrl)
 
   return (
     <Container id="space-form-container">
@@ -82,6 +81,7 @@ function CreateSpaceForm({ closeModal }) {
                   {...rest}
                 />
                 <Line />
+                <Dropzone setImageData={setImageData} />
               </Left>
             </InputsContainer>
             <Overlay

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { CardContainer } from '../../../../Style'
 import { useGetAllFollowedDiscussionsQuery } from '../../../../../../../../../api/services/discussions.ts'
 import InfiniteLoader from '../../../../../Spaces/components/InfiniteLoader'
-import PopularDiscussionsFeedItem from '../PopularDiscussionsFeed/PopularDiscussionsFeedItem'
+import FollowedDiscussionsFeedItem from './FollowedDiscussionsFeedItem'
 import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
 
 function FollowedDiscussionsFeed() {
@@ -34,7 +34,7 @@ function FollowedDiscussionsFeed() {
             items={allData}
             loadNextPage={fetchMore}
             currentPage={currentPage}
-            Item={PopularDiscussionsFeedItem}
+            Item={FollowedDiscussionsFeedItem}
           />
         </CardContainer>
       )}

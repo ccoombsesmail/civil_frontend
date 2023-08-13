@@ -4,12 +4,12 @@ import { useUpdateSpaceLikesMutation } from "../../../../../api/services/spaces"
 import { calculateLikeValueToAdd } from "../../utils/calculateLikeValueToAdd";
 import useDetectCurrentPage from "../../../../hooks/routing/useDetectCurrentPage";
 import { LikedState, NeutralState, DislikedState } from "../../../../../enums/like_state";
-import { SpaceItemContext, SpaceItemContextValue } from "../../../../pages/HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.jsx";
 import { Space } from "../../../../../types/spaces/space";
+import { SpaceItemContextValue, SpaceItemContext } from "../../../InfiniteLoaders/ContentItems/SpaceItem/SpaceItemContext";
 
 export default (content: Space,  action: 'upvote' | 'downvote') => {
   const { id, createdByUserId, likeState } = content || {};
-  const { updateFollowedSpacesQuery, currentPage } = useContext<SpaceItemContextValue>(SpaceItemContext) || {};
+  const { updateFollowedSpacesQuery, updateUserSpacesQuery, currentlyViewedProfileUserId, currentPage } = useContext<SpaceItemContextValue>(SpaceItemContext) || {};
 
   const [updateLikes, { isLoading }] = useUpdateSpaceLikesMutation();
   const { isOnDiscussionsPage } = useDetectCurrentPage();
@@ -29,7 +29,9 @@ export default (content: Space,  action: 'upvote' | 'downvote') => {
     currentPage,
     newLikeState,
     likeAction: newLikeState,
-    updateFollowedSpacesQuery
+    updateFollowedSpacesQuery,
+    updateUserSpacesQuery,
+    currentlyViewedProfileUserId
   });
 
 

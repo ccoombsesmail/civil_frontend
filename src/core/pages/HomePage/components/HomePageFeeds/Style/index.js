@@ -11,6 +11,7 @@ export const Container = styled('div')`
 
 export const BorderContainer = styled('div')`
   width: 50vw;
+  max-width: 50vw;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -27,10 +28,14 @@ export const BorderContainer = styled('div')`
 
   @media only screen and (max-width: 800px) {
      width: 80vw;
+     max-width: 80vw;
+
   }
 
   @media only screen and (max-width: 600px) {
      width: 100vw;
+     max-width: 100vw;
+
   }
 
 `

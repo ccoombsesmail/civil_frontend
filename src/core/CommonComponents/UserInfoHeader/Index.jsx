@@ -60,12 +60,11 @@ function UserInfoHeader({
       <Right>
         { space ? <WatchButtonSpace space={space} /> : null }
         { discussion ? <WatchButtonDiscussion discussion={discussion} /> : null }
-
         <CategoryAndTime>
           <span>
             {category}
           </span>
-          <b>·</b>
+          <b>•</b>
           <time>
             {time}
             {' '}

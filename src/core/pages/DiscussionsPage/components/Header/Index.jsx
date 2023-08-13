@@ -26,6 +26,7 @@ import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig
 import SpaceActionToolbar from '../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs'
 import { SpaceItemContext } from '../../../HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.tsx'
+import { DiscussionItemContex } from '../DiscussionsFeed/components/CardFeedItem/DiscussionItemContext.ts'
 
 function Header({ isOpen, setIsOpen }) {
   let content = null
@@ -46,12 +47,21 @@ function Header({ isOpen, setIsOpen }) {
     space, user: currentUser, showLinks: true, hideCommentButton: Boolean(discussionId) && (discussion?.title && discussion.title !== 'General'),
   }), [space, currentUser, discussionId, discussion])
 
+  const spaceContextValue = useMemo(() => ({
+    updateFocusedSpaceQuery: true,
+  }), [])
+
+  const discussionContextValue = useMemo(() => ({
+    spaceId: discussion?.spaceId, updateFocusedDiscussionQuery: true,
+  }), [discussion])
+
   const linkType = space?.externalContentData?.linkType
   const initLexicalConfig = useInitLexicalConfig(space?.editorState, 'Civil-Space-Card__Discussions', false)
 
   if (isSpaceUninitialized) return null
   if (isSpaceLoading) return <CircleLoading size="20vw" />
 
+  console.log(space)
   if (linkType === YouTube) {
     content = (
       <VideoPlayer
@@ -76,10 +86,9 @@ function Header({ isOpen, setIsOpen }) {
     )
   } else if (linkType === Web) {
     content = <LinkMetaData url={space.externalContentData?.externalContentUrl} />
-  } else if (space?.createdByVodUrl || space?.createdByImageUrl) {
+  } else if (space.userUploadedImageUrl) {
     content = (
       <UserUploadedMedia
-        videoFile={space.userUploadedVodUrl}
         imgFile={space.userUploadedImageUrl}
       />
     )
@@ -98,7 +107,7 @@ function Header({ isOpen, setIsOpen }) {
       <BreadCrumbs />
       <div style={{ width: '100%' }}>
         <LexicalComposer initialConfig={initLexicalConfig}>
-          <SpaceItemContext.Provider value={{ updateFocusedSpaceQuery: true}}>
+          <SpaceItemContext.Provider value={spaceContextValue}>
             <Card
               {...commonProps}
               CardToolbar={(
@@ -119,12 +128,15 @@ function Header({ isOpen, setIsOpen }) {
         {
         discussion && discussionId
           ? (
-            <DiscussionCard
-              key={discussionId}
-              discussion={discussion}
-              isDiscussionLoading={isDiscussionLoading}
-              isDiscussionUninitialized={isDiscussionUninitialized}
-            />
+
+            <DiscussionItemContex.Provider value={discussionContextValue}>
+              <DiscussionCard
+                key={discussionId}
+                discussion={discussion}
+                isDiscussionLoading={isDiscussionLoading}
+                isDiscussionUninitialized={isDiscussionUninitialized}
+              />
+            </DiscussionItemContex.Provider>
           )
           : null
         }

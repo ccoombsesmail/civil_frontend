@@ -5,7 +5,7 @@ import {
 import {
   ActionMenuItem,
 } from '../Style/index'
-import useFollowClickHandler from '../../../UserProfile/hooks/useFollowClickHandler'
+import useFollowClickHandler from '../../../pages/UserProfile/hooks/useFollowClickHandler'
 
 function FollowsItemSet({ userId, username }) {
   const followClickHandler = useFollowClickHandler(userId, true)

@@ -39,6 +39,7 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
     }),
     getAllFollowedDiscussions: builder.query<any, any>({
       query: () => ({ url: `/discussions-followed`, method: 'GET' }),
+      // keepUnusedDataFor: 5,
       providesTags: (result) =>
       result ? 
           [
@@ -118,6 +119,7 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
             discussionsApi.util.updateQueryData("getPopularDiscussions", { currentPage }, (draft) => {
               const index = draft.findIndex((t) => t.id === id)
               if (index !== -1) {
+                console.log(current(draft[index]))
                 draft[index].likeState = newLikeState;
                 draft[index].likes += updateLikeValue;
               }

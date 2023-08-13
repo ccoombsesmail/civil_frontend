@@ -35,7 +35,7 @@ const Dashboard = React.lazy(() => import('../pages/DashboardPage/Index'))
 
 const Tribunal = React.lazy(() => import('../Tribunal/Index'))
 
-const UserProfile = React.lazy(() => import('../UserProfile/Index'))
+const UserProfile = React.lazy(() => import('../pages/UserProfile/Index'))
 
 const AuthFlow = React.lazy(() => import('../AuthFlow/Index'))
 

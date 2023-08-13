@@ -17,17 +17,18 @@ function ExampleWrapper({
   const getItemSize = useCallback((index) => {
     const item = items[index]
     if (item.reportStatus === 'REMOVED') return 350
-    const itemHeight = Number.isNaN(item.contentHeight) || !item.contentHeight ? 500 : item.contentHeight
+    const itemHeight = Number.isNaN(item.contentHeight) || !item.contentHeight ? 200 : item.contentHeight
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 500 + itemHeight
+        return 800 + itemHeight
       case Web:
         return 500 + itemHeight
       case Twitter:
         return 600 + itemHeight
       default:
         if (item?.editorState.includes('image')) return 500 + itemHeight
-        return 500 + itemHeight
+        if (item.userUploadedImageUrl) return 700 + itemHeight
+        return 400 + itemHeight
     }
   }, [items])
 
@@ -47,7 +48,7 @@ function ExampleWrapper({
     >
       {({ onItemsRendered, ref }) => (
         <List
-          className="List"
+          className="grid-container"
           height={1600}
           itemCount={itemCount}
           itemSize={getItemSize}

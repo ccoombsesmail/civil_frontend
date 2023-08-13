@@ -8,7 +8,6 @@ import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace'
 import { Button } from 'primereact/button'
 import { MARKED, REMOVED, UNDER_REVIEW } from '../../../enums/report_status'
 import UserInfoHeader from '../UserInfoHeader/Index'
-import CensorOverlay from '../CensorOverlay/Index'
 import { getTimeSince } from '../../../generic/string/dateFormatter'
 
 import { Body, Description } from './Style'
@@ -44,6 +43,9 @@ function PostCard({
     spaceTitle,
     spaceCategory,
     spaceId,
+    discussionCount,
+    commentCount,
+    likeState,
   } = space || discussion || {}
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW || reportStatus === REMOVED || reportStatus === MARKED)
   const goToSpace = useGoToSpace(spaceId)
@@ -86,6 +88,26 @@ function PostCard({
     </>
   )
 
+  const footerTemplate = useMemo(() => (reportStatus === 'REMOVED' ? null : (
+    <>
+      {CardToolbar}
+
+      <div className="w-full px-3 pb-1 text-sm text-600 flex justify-content-end">
+        <span>
+          {discussionCount}
+          {' '}
+          discussions
+        </span>
+        <b className="mx-2">•</b>
+        <span>
+          {commentCount}
+          {' '}
+          comments
+        </span>
+      </div>
+    </>
+  )), [discussionCount, commentCount, likeState])
+
   return (
     <Card
       onClick={onContainerClick}
@@ -110,7 +132,7 @@ function PostCard({
           category={category}
         />
       )}
-      footer={reportStatus === 'REMOVED' ? null : CardToolbar}
+      footer={footerTemplate}
     >
       {(shouldBlur) && (
         <ModerationOverlay

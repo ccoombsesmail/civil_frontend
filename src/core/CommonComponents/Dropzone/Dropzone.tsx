@@ -7,11 +7,12 @@ import { Tooltip } from 'primereact/tooltip'
 import { Tag } from 'primereact/tag'
 import { Avatar } from 'primereact/avatar'
 import { ProgressSpinner } from 'primereact/progressspinner'
-import { useGetCurrentUserQuery } from '../../../api/services/session'
 import { useWindowSize } from '../../hooks/responsive/useGetWindowSize'
 import { longUsernameDisplay } from '../../../generic/string/longUsernameDisplay'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 
-export default function Dropzone({ user, uploadUserIcon, closeModal }) {
+export default function Dropzone({ uploadUserIcon, setImageData, closeModal }) {
+  const { currentUser: user } = useGetCurrentUser()
   const toast = useRef(null)
   const [totalSize, setTotalSize] = useState(0)
   const fileUploadRef = useRef(null)
@@ -67,11 +68,27 @@ export default function Dropzone({ user, uploadUserIcon, closeModal }) {
     let totalUploadSize = totalSize
     const {files} = e
     setFileUrl(files[0].objectURL)
-    console.log(files)
     Object.keys(files).forEach((key) => {
       totalUploadSize += files[key].size || 0
     })
 
+
+    const fileObject = e.files[0]
+
+    if (!fileObject.type.includes('image')) {
+      toast.current.show({ severity: 'error', summary: 'Incorrect File Type', detail: 'Only Image Types Are Supported' })
+      return
+    }
+    const formData = new FormData()
+    formData.append('image', fileObject)
+
+    const [fileType, fileFormat] = fileObject.type.split('/')
+    console.log(fileObject)
+    setImageData({
+      imgFileForm: formData, 
+      fileType,
+      fileFormat
+    })
     setTotalSize(totalUploadSize)
   }
 
@@ -167,8 +184,6 @@ export default function Dropzone({ user, uploadUserIcon, closeModal }) {
           },
         }}
       />
-      {/* <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" /> */}
-      {/* <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" /> */}
 
       <FileUpload
         // disabled={fileSelected}
@@ -188,7 +203,7 @@ export default function Dropzone({ user, uploadUserIcon, closeModal }) {
         uploadOptions={uploadOptions}
         cancelOptions={cancelOptions}
         customUpload
-        uploadHandler={uploadHandler}
+        uploadHandler={e => typeof uploadUserIcon === 'function' ? uploadHandler(e) : () => console.log("No Upload Handler Provided")}
         style={{
           width: '100%',
         }}

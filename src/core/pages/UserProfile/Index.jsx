@@ -9,14 +9,14 @@ import {
 } from './Style/index'
 import UserList from './components/UserList/Index'
 import FollowButton from './components/FollowButton/Index'
-import UsernameAndTag from '../CommonComponents/UsernameAndTag/Index'
-import { useGetUserQuery } from '../../api/services/users.ts'
-import { useGetAllFollowedQuery, useGetAllFollowersQuery } from '../../api/services/follows.ts'
+import UsernameAndTag from '../../CommonComponents/UsernameAndTag/Index'
+import { useGetUserQuery } from '../../../api/services/users.ts'
+import { useGetAllFollowedQuery, useGetAllFollowersQuery } from '../../../api/services/follows.ts'
 
-import useGetCurrentUser from '../App/hooks/useGetCurrentUser'
-import { CircleLoading } from '../../svgs/spinners/CircleLoading'
+import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
+import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 import UserPosts from './components/UserPosts/Index'
-import ProgressBar from '../CommonComponents/ProgressBar2/Index'
+import ProgressBar from '../../CommonComponents/ProgressBar2/Index'
 
 function UserProfile() {
   const { userId: profileUserId } = useParams()
@@ -36,7 +36,6 @@ function UserProfile() {
     skip: !currentUser || activeIndex !== 1,
   })
 
-  console.log(followers)
   if (isCurrentUserUninitialized || isUninitialized) return null
   if (isCurrentUserLoading || isLoading) return <CircleLoading size="20vw" />
 

@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { CardContainer } from '../../../../Style'
 import { useGetAllFollowedSpacesQuery } from '../../../../../../../../../api/services/spaces.ts'
-import InfiniteLoader from '../../../../../Spaces/components/InfiniteLoader'
-import FollowedSpaceItem from './FollowedSpaceItem'
 import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
+import InfiniteListLoader from '../../../../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
+import FollowedSpaceListItem from '../../../../../../../../CommonComponents/InfiniteLoaders/ListItems/FollowedSpaceListItem'
 
 function FollowedSpacesFeed() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -28,13 +28,13 @@ function FollowedSpacesFeed() {
     <>
       { (isUninitialized || isLoadingFollowedSpaces || allData.length === 0) ? <CardLoader /> : (
         <CardContainer>
-          <InfiniteLoader
+          <InfiniteListLoader
             hasNextPage
             isNextPageLoading={isLoadingFollowedSpaces || isFetching}
             items={allData}
             loadNextPage={fetchMore}
             currentPage={currentPage}
-            Item={FollowedSpaceItem}
+            Item={FollowedSpaceListItem}
           />
         </CardContainer>
       )}

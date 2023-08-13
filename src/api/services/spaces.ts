@@ -1,4 +1,5 @@
 import { closeModal } from "../../redux/actions/ui/index.js";
+import { onUpdateSpacesLikesQueryStarted } from "../util/spaces/onUpdateSpaceLikesQueryStarted.js";
 import { emptySplitApi } from "./base.js";
 import { current } from "@reduxjs/toolkit";
 
@@ -43,7 +44,7 @@ export const spacesApi = emptySplitApi.injectEndpoints({
       }
     }),
     getAllFollowedSpaces: builder.query<any, any>({
-      query: () => ({ url: `/spaces-followed`, method: 'GET' }),
+      query: (currentPage) => ({ url: `/spaces-followed?skip=${currentPage*5}`, method: 'GET' }),
       providesTags: (result) =>
       result ? 
           [
@@ -57,14 +58,14 @@ export const spacesApi = emptySplitApi.injectEndpoints({
       // providesTags: (result) => [{ type: 'Spaces', id: 'LIST' }],
     }),
     getUserSpaces: builder.query<any, any>({
-      query: (userId) => ({ url: `/spaces/user/${userId}`, method: "GET" }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Space", id } as const)),
-              { type: "Space", id: "LIST" },
-            ]
-          : [{ type: "Space", id: "LIST" }],
+      query: ({ userId, currentPage}) => ({ url: `/spaces/user/${userId}?skip=${currentPage*5}`, method: "GET" }),
+      // providesTags: (result) =>
+      //   result
+      //     ? [
+      //         ...result.map(({ id }) => ({ type: "Space", id } as const)),
+      //         { type: "Space", id: "LIST" },
+      //       ]
+      //     : [{ type: "Space", id: "LIST" }],
     }),
     getSimilarSpaces: builder.query<any, any>({
       query: (spaceId) => ({ url: `/spaces/similar-spaces/${spaceId}`, method: "GET" }),
@@ -101,53 +102,16 @@ export const spacesApi = emptySplitApi.injectEndpoints({
           data: body,
         };
       },
-      async onQueryStarted(
-        { id, updateLikeValue, updateGetSpaceQuery, updateFollowedSpacesQuery, currentPage, newLikeState, ...patch },
-        { dispatch, queryFulfilled }
-      ) {
-        let patchResult;
-        if (updateGetSpaceQuery) {
-          patchResult = dispatch(
-            spacesApi.util.updateQueryData("getSpace", id, (draft) => {
-              if (id) {
-                draft.likeState = newLikeState;
-                draft.likes += updateLikeValue;
-              }
-            })
-          );
-        } else if (updateFollowedSpacesQuery) {
-          patchResult = dispatch(
-            spacesApi.util.updateQueryData("getAllFollowedSpaces", undefined, (draft) => {
-              const index = draft.findIndex((t) => t.id === id)
-              if (index !== -1) {
-                draft[index].likeState = newLikeState;
-                draft[index].likes += updateLikeValue;
-              }
-            })
-          )
-        } else {
-          patchResult = dispatch(
-            spacesApi.util.updateQueryData("getAllSpaces", currentPage, (draft) => {
-              const index = draft.findIndex((t) => t.id === id)
-              if (index !== -1) {
-                draft[index].likeState = newLikeState;
-                draft[index].likes += updateLikeValue;
-              }
-            })
-          )
-        }
-
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
+      async onQueryStarted(args, helpers) {
+        await onUpdateSpacesLikesQueryStarted(args, helpers)
       },
     }),
   }),
 });
 
 spacesApi.endpoints.getAllSpaces.initiate
+spacesApi.endpoints.getUserSpaces.initiate
+
 export const {
   useGetAllSpacesQuery,
   useCreateSpaceMutation,
@@ -158,3 +122,6 @@ export const {
   useGetAllFollowedSpacesQuery,
   useGetSimilarSpacesQuery  
 } = spacesApi;
+
+
+export const useGetUserSpacesQueryState = spacesApi.endpoints.getUserSpaces.useQueryState

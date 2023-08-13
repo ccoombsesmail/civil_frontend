@@ -2,15 +2,14 @@
 import React from 'react'
 
 import UserItem from './components/UserItem/Index'
-import { getTimeSince } from '../../../../generic/string/dateFormatter'
+import { getTimeSince } from '../../../../../generic/string/dateFormatter'
 
-import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
-import { Table, ColHeader, ColItem } from '../../../CommonComponents/AppTable/Style'
+import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
+import { Table, ColHeader, ColItem } from '../../../../CommonComponents/AppTable/Style'
 
 function UserList({
   users, isLoading, isUninitialized, listTitle,
 }) {
-  console.log(users)
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="30vw" />
   return (

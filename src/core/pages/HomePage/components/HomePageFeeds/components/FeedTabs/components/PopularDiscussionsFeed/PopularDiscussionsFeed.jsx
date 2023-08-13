@@ -2,10 +2,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { CardContainer } from '../../../../Style'
 import { useGetPopularDiscussionsQuery } from '../../../../../../../../../api/services/discussions.ts'
-import InfiniteLoader from '../../../../../../../DiscussionsPage/components/DiscussionsFeed/DiscussionsInfiniteLoader'
 import useGetCurrentUser from '../../../../../../../../App/hooks/useGetCurrentUser'
 import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
 import PopularDiscussionsFeedItem from './PopularDiscussionsFeedItem'
+import InfiniteLoader from '../../../../../Spaces/components/InfiniteLoader'
 
 function PopularDiscussionsFeed() {
   const [currentPage, setCurrentPage] = useState(0)

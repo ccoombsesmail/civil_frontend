@@ -4,6 +4,7 @@ import { TabView, TabPanel } from 'primereact/tabview'
 import FollowedSpacesFeed from './components/FollowedSpacesFeed/Index'
 import PopularDiscussionsFeed from './components/PopularDiscussionsFeed/PopularDiscussionsFeed'
 import FollowedDiscussionsFeed from './components/FollowedDiscussionsFeed/Index'
+import TrendingSpaces from './components/TrendingSpaces/TrendingSpaces'
 
 function FeedTabs() {
   return (
@@ -28,16 +29,16 @@ function FeedTabs() {
       >
         <PopularDiscussionsFeed />
       </TabPanel>
-      {/* <TabPanel
-        header="For You"
+      <TabPanel
+        header="Trending Spaces"
         pt={{
           content: {
             className: 'w-full',
           },
         }}
       >
-        <PrimeFeed />
-      </TabPanel> */}
+        <TrendingSpaces />
+      </TabPanel>
       <TabPanel
         header="Followed Spaces"
         pt={{

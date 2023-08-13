@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { memo } from 'react'
 import { Avatar } from 'primereact/avatar'
-import { Row, RowItem } from '../../../../../CommonComponents/AppTable/Style'
-import UsernameAndTag from '../../../../../CommonComponents/UsernameAndTag/Index'
-import ItemMenu from '../../../../../CommonComponents/ItemMenu/Index'
-import { truncateAtIndex } from '../../../../../../generic/string/truncateAtIndex'
-import useGoToUserProfile from '../../../../../hooks/routing/useGoToUserProfile'
-import { DEFAULT_PROFILE_IMAGE } from '../../../../../../theme/constants'
+import { Row, RowItem } from '../../../../../../CommonComponents/AppTable/Style'
+import UsernameAndTag from '../../../../../../CommonComponents/UsernameAndTag/Index'
+import ItemMenu from '../../../../../../CommonComponents/ItemMenu/Index'
+import { truncateAtIndex } from '../../../../../../../generic/string/truncateAtIndex'
+import useGoToUserProfile from '../../../../../../hooks/routing/useGoToUserProfile'
+import { DEFAULT_PROFILE_IMAGE } from '../../../../../../../theme/constants'
 
 function UserItem({
   userId, iconSrc, username, userTag, bio,

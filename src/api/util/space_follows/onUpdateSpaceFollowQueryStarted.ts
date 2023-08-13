@@ -1,6 +1,7 @@
 import { current } from "@reduxjs/toolkit";
 import { spacesApi } from "../../services/spaces";
 import { Method } from "axios";
+import { createDraft, finishDraft } from "immer";
 
 export interface AddRemoveSpaceQueryParams {
   id: string;
@@ -29,26 +30,32 @@ export const onAddSpaceFollowQueryStarted = async (
         "getAllFollowedSpaces",
         undefined,
         (draft) => {
-          const index = draft.findIndex((t) => t.id === id);
+          const newDraft = createDraft(draft);
+          const index = newDraft.findIndex((t) => t.id === id);
           if (index !== -1) {
-            draft[index].isFollowing = true;
+            newDraft[index].isFollowing = true;
           }
+          return finishDraft(newDraft);
         }
       )
     );
   } else if (updateFocusedSpaceQuery) {
     patchResult = dispatch(
       spacesApi.util.updateQueryData("getSpace", id, (draft) => {
-        draft.isFollowing = true;
+        const newDraft = createDraft(draft);
+        newDraft.isFollowing = true;
+        return finishDraft(newDraft);
       })
     );
   } else {
     patchResult = dispatch(
       spacesApi.util.updateQueryData("getAllSpaces", currentPage, (draft) => {
-        const index = draft.findIndex((t) => t.id === id);
+        const newDraft = createDraft(draft);
+        const index = newDraft.findIndex((t) => t.id === id);
         if (index !== -1) {
-          draft[index].isFollowing = true;
+          newDraft[index].isFollowing = true;
         }
+        return finishDraft(newDraft);
       })
     );
   }

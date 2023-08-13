@@ -3,8 +3,28 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
 
 
+.tag {
+  
+  text-decoration: underline;
+  font-size: clamp(10px, .8vw, 18px);
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
+  font-weight: bold;
+  color: gray;
+  cursor: pointer;
+  text-underline-offset: 2px;
+  :hover {
+    color: var(--m-primary-btn-color);
+  }
+
+}
+
 .List div div {
   transition: all .5s;
+
+}
+.List div {
+
 }
 
 .List > div > div:last-child {
@@ -499,7 +519,7 @@ blockquote {
     --bg:  white;
     --bg-accent: #484a4f;
     --text-color: #dadce1;
-    --nav-size: 7vh;
+    --nav-size: 65px;
     --border: 1px solid #474a4d;
     --border-radius: 8px;
     --speed: .5s; 
@@ -607,6 +627,13 @@ blockquote {
     }
   }
 
+  .grid-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* This will create a responsive grid */
+    gap: 16px; /* Space between the cards */
+    padding: 16px;
+}
 
   .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
     box-shadow: none;

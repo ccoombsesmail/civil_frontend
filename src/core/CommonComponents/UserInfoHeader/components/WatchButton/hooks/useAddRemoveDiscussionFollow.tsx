@@ -12,6 +12,7 @@ export default (discussion: Discussion) => {
   // updateFollowedSpacesQuery is a flag so that RTK knows which cache to update (in this case if true, getAllFollowedSpaces query)
   // updateFocusedSpaceQuery is a flag so that RTK knows it should update the focused space (i.e the view page for a given space)
   const { currentPage, updateFollowedDiscussionsQuery, updateFocusedDiscussionQuery, isPopularDiscussion } = React.useContext<DiscussionItemContextValue>(DiscussionItemContex) || {}
+  
   const [addNewFollow, { isLoading: isAddLoading }] = useAddNewDiscussionFollowMutation()
   const [removeFollow, { isLoading: isRemovingLoading }] = useRemoveDiscussionFollowMutation()
 

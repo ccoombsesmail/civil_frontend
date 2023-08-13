@@ -83,7 +83,7 @@ export default defineConfig(({ mode }) => {
 
     resolve: {
       alias: {
-        process: "process/browser",
+        // process: "process/browser",
         stream: "stream-browserify",
         zlib: "browserify-zlib",
         util: "util",
