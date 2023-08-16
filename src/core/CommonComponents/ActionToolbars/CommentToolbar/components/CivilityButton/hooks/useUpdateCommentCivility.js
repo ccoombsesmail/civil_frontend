@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useUpdateCommentCivilityMutation } from '../../../../../../../api/services/comments.ts'
 import { useUpdateTribunalCommentCivilityMutation } from '../../../../../../../api/services/tribunal_comments.ts'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
-import { ParentCommentContext } from '../../../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
+import { ParentCommentContext } from '../../../../../InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
 
 export default (comment) => {
   const {

@@ -28,13 +28,12 @@ export const MessageContainer = styled('div')`
   transform: translate(-50%, -50%);
   background: var(--m-form-color);
   background-color: white;
-  width: 90%;
   border-radius: .5em;
   padding: 20px 10px;
   cursor: pointer;
   min-height: 200px;
   /* height: ${(props) => (props.contentType === COMMENT ? 'clamp(0px, 60%, 200px)' : 'clamp(200px, 60%, 400px)')}; */
-  width: clamp(330px, 100%, 800px);
+  width: clamp(330px, 100%, 900px);
   @media only screen and (max-width: 600px) {
     border-radius: 0;
   }

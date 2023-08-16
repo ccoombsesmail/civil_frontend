@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 
 import {
   FlexDiv, OGUrl, OGTitle, OGDescription, OGImage, LinkWrapper, Container,
@@ -30,7 +30,7 @@ function LinkMetaData({ url, setLinkMetadata }) {
             <FlexDiv>
               <OGTitle>{metaData.ogTitle || metaData.ogSiteName}</OGTitle>
               <OGUrl>{metaData.ogUrl}</OGUrl>
-              <OGImage src={metaData.ogImage?.url || metaData.favicon || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/Wavy-C_Bus-02_Single-11.jpg'} alt="" />
+              <OGImage src={metaData.ogImage?.url || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/Wavy-C_Bus-02_Single-11.jpg'} alt="" />
               <Line />
               <OGDescription>{metaData.ogDescription}</OGDescription>
             </FlexDiv>
@@ -39,4 +39,4 @@ function LinkMetaData({ url, setLinkMetadata }) {
     </Container>
   )
 }
-export default LinkMetaData
+export default memo(LinkMetaData)

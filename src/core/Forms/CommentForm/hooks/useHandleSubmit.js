@@ -7,10 +7,10 @@ import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts
 import { useCreateCommentMutation } from '../../../../api/services/comments.ts'
 import { useCreateTribunalCommentMutation } from '../../../../api/services/tribunal_comments.ts'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
-import { ParentCommentContext } from '../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
 import { filterObject } from '../../../../generic/object/filterObjectKeys'
 
-import { TribunalCommentKeys } from '../../../../types/tribunal/tribunal_comments_reply'
+import { TribunalCommentKeys } from '../../../../types/tribunal/tribunal_comments_reply.ts'
+import { ParentCommentContext } from '../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
 
 export default (commentFormState, richTextEditorData, closeModal) => {
   const { isOnTribunalPage: isTribunalComment } = useDetectCurrentPage()

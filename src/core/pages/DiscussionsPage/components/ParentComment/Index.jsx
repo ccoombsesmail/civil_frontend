@@ -1,11 +1,11 @@
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useGetAllCommentRepliesQuery } from '../../../../../api/services/comments.ts'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
-import Comment from '../Comment/Index'
-import { ParentCommentContext } from '../CommentColumn/ParentCommentContext'
 import LineWithOverlayText from '../LineWithTextOverlay/Index'
+import CommentItem from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/CommentItem'
+import { ParentCommentContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
 
 function ParentComment({ spaceId, commentId }) {
   const { currentUser } = useGetCurrentUser()
@@ -30,7 +30,7 @@ function ParentComment({ spaceId, commentId }) {
       <ParentCommentContext.Provider
         value={contextValue}
       >
-        <Comment commentData={commentData.comment} replies={[]} isFocusedComment />
+        <CommentItem commentData={commentData.comment} replies={[]} isFocusedComment />
       </ParentCommentContext.Provider>
     </>
 

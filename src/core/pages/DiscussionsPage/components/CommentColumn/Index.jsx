@@ -2,9 +2,9 @@
 import React, { useCallback } from 'react'
 import ErrorBoundary from '../../../../CommonComponents/ErrorBoundry/Index'
 
-import Comment from '../Comment/Index'
-import { ParentCommentContext } from './ParentCommentContext.tsx'
 import { Container } from './Style'
+import CommentItem from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/CommentItem'
+import { ParentCommentContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
 
 function CommentColumn({
   numComments, comments, commentSentiment, color, spaceId, isReplies, commentType, reportedContentId, focusedCommentId,
@@ -45,7 +45,7 @@ function CommentColumn({
                     key={comment.data?.id || String(idx)}
                     value={value}
                   >
-                    <Comment
+                    <CommentItem
                       key={comment.data?.id || String(idx)}
                       level={0}
                       commentData={comment.data}

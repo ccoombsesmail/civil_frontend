@@ -13,19 +13,21 @@ export const LinkWrapper = styled('a')`
 `
 
 export const FlexDiv = styled('div')`
-  max-height: 500px;
-  overflow: scroll; 
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: .5vw auto;
-  width: 85%;
   box-shadow: 5px 5px 5px -3px #aaaaaa;
   border-radius: 1vw;
   border: 1px solid rgb(207, 217, 222);
-  padding: 1em;
+  aspect-ratio: 9 / 9;
+  max-height: 500px;
+  transition: all 1s;
+
   :hover {
     opacity: .8;
+    transform: scale(1.01);
   }
   ::-webkit-scrollbar {
     display: none;
@@ -33,10 +35,21 @@ export const FlexDiv = styled('div')`
 `
 export const OGImage = styled('img')` 
   border-radius: 1vw;
+  object-fit: cover;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100% !important;
+  transform: translate(-50%);
+  height: 100%;
+
+
 
 `
 
-export const OGUrl = styled('span')` 
+export const OGUrl = styled('span')`
+  z-index: 999999;
   color: gray;
   font-size: 1vw;
   white-space: pre-wrap;  
@@ -49,6 +62,7 @@ export const OGUrl = styled('span')`
 `
 
 export const OGTitle = styled('h3')`
+  z-index: 999999;
  font-size: 1vw;
  margin: .6vw 0 .1vw 0;
  color: gray;

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {
-  memo, useCallback, useEffect, useState, useRef, createContext,
+  memo, useCallback, useEffect, useState, useRef, createContext, useMemo,
 } from 'react'
 import { VariableSizeGrid as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
@@ -32,7 +32,6 @@ function InfinitGridLoader({
     const itemHeight = Number.isNaN(item.contentHeight) || !item.contentHeight ? 200 : item.contentHeight
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        console.log(500 + itemHeight)
         return 800 + itemHeight
       case Web:
         return 500 + itemHeight
@@ -65,16 +64,16 @@ function InfinitGridLoader({
     }
   }, [width])
 
+  const colNumberContextValue = useMemo(() => ({ colNumber: getColumnCount(width) }), [width])
   return (
-    <ColumnNumberContext.Provider value={{ colNumber: getColumnCount(width) }}>
+    <ColumnNumberContext.Provider value={colNumberContextValue}>
 
       <InfiniteLoader
-          // ref={infiniteLoaderRef}
         isItemLoaded={isItemLoaded}
         itemCount={itemCount}
         loadMoreItems={loadMoreItems}
       >
-        {({ onItemsRendered, ref }) => (
+        {() => (
           <List
             className="List"
             columnWidth={calcColWidth}
@@ -83,14 +82,6 @@ function InfinitGridLoader({
             height={1000}
             rowCount={width / getColumnCount(width)}
             itemSize={getItemSize}
-            // onItemsRendered={(gridProps) => {
-            //   onItemsRendered({
-            //   // Map react-window grid properties back to InfiniteLoader
-            //   // This ensures InfiniteLoader knows when to load more data
-            //     visibleStartIndex: gridProps.visibleRowStartIndex * getColumnCount(width) + gridProps.visibleColumnStartIndex,
-            //     visibleStopIndex: gridProps.visibleRowStopIndex * getColumnCount(width) + gridProps.visibleColumnStopIndex,
-            //   })
-            // }}
             ref={gridRef}
             width={width || 500}
           >

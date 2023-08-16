@@ -9,20 +9,28 @@ import { initialConfig } from '../../../../Lexical/App.tsx'
 
 function CommentButton({ discussion }) {
   const [visible, setVisible] = useState(false)
-  const discussionCommentFormState = useGetDiscussionCommentState(discussion?.id)
+  // const [trigger, { data, isUninitialized, isLoading }] = useLazyGetDiscussionQuery()
 
+  const commentState = useGetDiscussionCommentState(discussion)
   return (
     <>
       <LexicalComposer initialConfig={initialConfig}>
         <Dialog header="Create Comment" visible={visible} onHide={() => setVisible(false)}>
+
           <CreateCommentForm
             closeModal={() => setVisible(false)}
-            commentFormState={discussionCommentFormState}
+            commentFormState={commentState}
             title={discussion?.title}
           />
+
         </Dialog>
       </LexicalComposer>
-      <IconButton icon={<CommentSvg />} onClick={() => setVisible(true)} />
+      <IconButton
+        icon={<CommentSvg />}
+        onClick={() => {
+          setVisible(true)
+        }}
+      />
     </>
   )
 }

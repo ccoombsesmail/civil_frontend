@@ -9,6 +9,7 @@ export const OuterContainer = styled('div')`
   justify-content: center;
 
 `
+
 export const CommentContainer = styled('li')`
   width: ${(props) => (props.isFocusedComment ? '95%' : '100%')};
   outline: none;
@@ -25,6 +26,7 @@ export const CommentContainer = styled('li')`
   border: 1px solid lightgray;
   box-shadow: ${(props) => (props.isFocusedComment ? '-5px -5px 10px #5a5a5a, 5px 5px 10px #ffffff' : 'none')};
   border-left-color: ${({ color }) => color};
+  margin: auto;
 
 
 

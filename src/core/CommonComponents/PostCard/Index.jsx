@@ -93,14 +93,20 @@ function PostCard({
       {CardToolbar}
 
       <div className="w-full px-3 pb-1 text-sm text-600 flex justify-content-end">
+        { space ? (
+          <>
+            <span>
+              {discussionCount || 0}
+              {' '}
+              discussions
+            </span>
+            <b className="mx-2">•</b>
+
+          </>
+        ) : null}
+
         <span>
-          {discussionCount}
-          {' '}
-          discussions
-        </span>
-        <b className="mx-2">•</b>
-        <span>
-          {commentCount}
+          {commentCount || 0}
           {' '}
           comments
         </span>

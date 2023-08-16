@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions.ts'
+import { useGetAllSpaceDiscussionsQuery } from '../../../../../api/services/discussions.ts'
 
 import InfiniteLoader from './DiscussionsInfiniteLoader'
 import TableFeedItem from './components/TableFeedItem/TableFeedItem'
@@ -8,7 +8,7 @@ import CardFeedItem from './components/CardFeedItem/CardFeedItem'
 
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
-const ITEMS_PER_PAGE = 10
+const ITEMS_PER_PAGE = 5
 
 function DiscussionsFeed({ feedType }) {
   const { currentUser } = useGetCurrentUser()
@@ -16,7 +16,7 @@ function DiscussionsFeed({ feedType }) {
   const [allData, setAllData] = useState([])
   const { spaceId } = useParams()
 
-  const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllDiscussionsQuery({spaceId, currentPage }, {
+  const { data: discussions, isLoading: isLoadingCurrent, isUninitialized: isCurrentUninitialized } = useGetAllSpaceDiscussionsQuery({spaceId, currentPage }, {
     skip: !currentUser,
   })
 

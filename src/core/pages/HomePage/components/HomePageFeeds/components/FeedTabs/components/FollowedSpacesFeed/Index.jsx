@@ -12,7 +12,7 @@ function FollowedSpacesFeed() {
   const
     {
       data: followedSpaces, isLoading: isLoadingFollowedSpaces, isUninitialized, isFetching,
-    } = useGetAllFollowedSpacesQuery()
+    } = useGetAllFollowedSpacesQuery(currentPage)
 
   useEffect(() => {
     if (followedSpaces) {

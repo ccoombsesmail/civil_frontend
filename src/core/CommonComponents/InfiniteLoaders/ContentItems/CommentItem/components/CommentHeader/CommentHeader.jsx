@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import UserInfoHeader from '../../../../../../CommonComponents/UserInfoHeader/Index'
+import UserInfoHeader from '../../../../../UserInfoHeader/Index'
 import { longUsernameDisplay } from '../../../../../../../generic/string/longUsernameDisplay'
 import { getTimeSince } from '../../../../../../../generic/string/dateFormatter'
 

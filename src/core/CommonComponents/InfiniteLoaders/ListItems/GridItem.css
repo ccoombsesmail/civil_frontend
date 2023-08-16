@@ -1,0 +1,54 @@
+.p-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+.p-card-body {
+  position: relative;
+}
+
+.thumbnail-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  aspect-ratio: 16 / 9;
+
+}
+
+.grid-item-header {
+  transition: all 1s;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100% !important;
+  transform: translate(-50%);
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.grid-item-header:hover {
+  scale: 1.03;
+  transition: all 1s;
+}
+
+.p-card-title {
+  font-size: 1rem !important;
+}
+
+.space-meta-data {
+  position: absolute;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  font-weight: 400;
+  bottom: 0;
+  left: 10px;
+
+}
+.space-card-time {
+  position: absolute;
+  right: 15px
+}

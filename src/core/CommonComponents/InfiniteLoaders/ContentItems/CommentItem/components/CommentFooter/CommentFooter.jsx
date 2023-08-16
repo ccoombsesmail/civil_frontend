@@ -1,10 +1,10 @@
 /* eslint-disable import/no-cycle */
 import React, { memo } from 'react'
 import { Footer } from '../../Style'
-import Expandable from '../../../../../../CommonComponents/Expandable/Expandable'
-import CommentActionToolbar from '../../../../../../CommonComponents/ActionToolbars/CommentToolbar/Index'
+import Expandable from '../../../../../Expandable/Expandable'
+import CommentActionToolbar from '../../../../../ActionToolbars/CommentToolbar/Index'
 import { EvidenceSection } from './Style'
-import Comment from '../../Index'
+import CommentItem from '../../CommentItem'
 
 function CommentFooter({
   commentData,
@@ -23,7 +23,7 @@ function CommentFooter({
         <EvidenceSection>
           {
         replies.map((reply, idx) => (
-          <Comment
+          <CommentItem
             key={commentData.id + String(idx)}
             commentData={reply.data}
             replies={reply.children}

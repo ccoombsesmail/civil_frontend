@@ -4,8 +4,8 @@ import { CardContainer } from '../../../../Style'
 import { useGetPopularDiscussionsQuery } from '../../../../../../../../../api/services/discussions.ts'
 import useGetCurrentUser from '../../../../../../../../App/hooks/useGetCurrentUser'
 import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
-import PopularDiscussionsFeedItem from './PopularDiscussionsFeedItem'
-import InfiniteLoader from '../../../../../Spaces/components/InfiniteLoader'
+import PopularDiscussionsListItem from '../../../../../../../../CommonComponents/InfiniteLoaders/ListItems/PopularDiscussionsListItem'
+import InfiniteListLoader from '../../../../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
 
 function PopularDiscussionsFeed() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -14,7 +14,7 @@ function PopularDiscussionsFeed() {
 
   const {
     data: currentDiscussions, isLoading: isLoadingCurrent, isFetching: isFetchingCurrent, isUninitialized: isCurrentUninitialized,
-  } = useGetPopularDiscussionsQuery({currentPage}, {
+  } = useGetPopularDiscussionsQuery(currentPage, {
     skip: !currentUser,
   })
 
@@ -34,14 +34,13 @@ function PopularDiscussionsFeed() {
     <>
       { (isLoadingCurrent || allData.length === 0) ? <CardLoader /> : (
         <CardContainer>
-          <InfiniteLoader
+          <InfiniteListLoader
             hasNextPage
             isNextPageLoading={isLoadingCurrent || isFetchingCurrent}
             items={allData}
             loadNextPage={fetchMore}
             currentPage={currentPage}
-            Item={PopularDiscussionsFeedItem}
-            feedType="feedType"
+            Item={PopularDiscussionsListItem}
           />
         </CardContainer>
       )}

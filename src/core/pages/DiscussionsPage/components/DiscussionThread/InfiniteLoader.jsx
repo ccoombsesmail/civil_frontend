@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useState } from 'react'
 import { VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { useGetAllCommentsQuery } from '../../../../../api/services/comments.ts'
 import ErrorBoundary from '../../../../CommonComponents/ErrorBoundry/Index'
-import { ParentCommentContext } from '../CommentColumn/ParentCommentContext.tsx'
-import Comment from '../Comment/Index'
+import CommentItem from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/CommentItem'
+import { ParentCommentContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
+
 // Render an item or a loading indicator.
 
 class CommentCache {
@@ -94,7 +95,8 @@ export default function ExampleWrapper({
               key={comment.data?.id || String(index)}
               value={value}
             >
-              <Comment
+
+              <CommentItem
                 key={comment.data?.id || String(index)}
                 onReplyToggle={onReplyToggle}
                 level={0}
@@ -128,7 +130,6 @@ export default function ExampleWrapper({
           itemCount={itemCount}
           itemSize={getItemSize}
           onItemsRendered={onItemsRendered}
-          width="clamp(700px, 50vw, 1200px)"
         >
           {Item}
         </List>

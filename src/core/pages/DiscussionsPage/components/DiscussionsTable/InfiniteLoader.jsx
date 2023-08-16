@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import { VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import { useGetAllDiscussionsQuery } from '../../../../../api/services/discussions'
+import { useGetAllSpaceDiscussionsQuery } from '../../../../../api/services/discussions.ts'
 import DiscussionsItem from './DiscussionItem/Index'
 
 // Render an item or a loading indicator.
@@ -40,7 +40,7 @@ export default function ExampleWrapper({
   const isItemLoaded = (index) => !hasNextPage || index < items.length
 
   function Item({ index, style }) {
-    const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10) }, {
+    const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllSpaceDiscussionsQuery({ spaceId, currentPage: Math.floor(index / 10) }, {
       skip: !currentUser,
     })
 

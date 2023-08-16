@@ -5,8 +5,9 @@ import { LikedState, NeutralState, DislikedState } from "../../../../../enums/li
 import { Comment } from "../../../../../types/comments/comment";
 import { useUpdateCommentLikesMutation } from "../../../../../api/services/comments";
 import { useUpdateTribunalCommentLikesMutation } from "../../../../../api/services/tribunal_comments";
+import { ParentCommentContext, ParentCommentContextValue } from "../../../InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext";
 
-import { ParentCommentContext, ParentCommentContextValue } from '../../../../pages/DiscussionsPage/components/CommentColumn/ParentCommentContext'
+
 
 export default (content: Comment,  action: 'upvote' | 'downvote', isTribunalComment) => {
   console.log(content)

@@ -25,8 +25,8 @@ import UserUploadedMedia from '../../../../CommonComponents/PostCard/components/
 import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
 import SpaceActionToolbar from '../../../../CommonComponents/ActionToolbars/SpaceToolbar/Index'
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs'
-import { SpaceItemContext } from '../../../HomePage/components/Spaces/components/SpaceItem/SpaceItemContex.tsx'
-import { DiscussionItemContex } from '../DiscussionsFeed/components/CardFeedItem/DiscussionItemContext.ts'
+import { SpaceItemContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/SpaceItem/SpaceItemContext.tsx'
+import { DiscussionItemContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/DiscussionItem/DiscussionItemContext.tsx'
 
 function Header({ isOpen, setIsOpen }) {
   let content = null
@@ -61,7 +61,6 @@ function Header({ isOpen, setIsOpen }) {
   if (isSpaceUninitialized) return null
   if (isSpaceLoading) return <CircleLoading size="20vw" />
 
-  console.log(space)
   if (linkType === YouTube) {
     content = (
       <VideoPlayer
@@ -129,14 +128,14 @@ function Header({ isOpen, setIsOpen }) {
         discussion && discussionId
           ? (
 
-            <DiscussionItemContex.Provider value={discussionContextValue}>
+            <DiscussionItemContext.Provider value={discussionContextValue}>
               <DiscussionCard
                 key={discussionId}
                 discussion={discussion}
                 isDiscussionLoading={isDiscussionLoading}
                 isDiscussionUninitialized={isDiscussionUninitialized}
               />
-            </DiscussionItemContex.Provider>
+            </DiscussionItemContext.Provider>
           )
           : null
         }

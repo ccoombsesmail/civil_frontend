@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
 }
 .List {
   background-color: rgb(248, 249, 250);
+  width: 100%;
 }
 
 .List::-webkit-scrollbar-track
@@ -573,12 +574,15 @@ blockquote {
   .p-tabview-panels {
     display: flex;
     justify-content: center;
+    padding: 0 !important;
+
   }
 
   .p-tabview-panel {
     width: 100%;
-
   }
+
+  
 
   .p-virtualscroller-content::-webkit-scrollbar-thumb {
     display: none;

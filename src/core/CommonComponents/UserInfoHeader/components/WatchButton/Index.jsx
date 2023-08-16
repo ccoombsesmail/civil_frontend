@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { memo } from 'react'
+import React from 'react'
 import { Button } from 'primereact/button'
 import useAddRemoveSpaceFollow from './hooks/useAddRemoveSpaceFollow.tsx'
 import useAddRemoveDiscussionFollow from './hooks/useAddRemoveDiscussionFollow.tsx'
 
 export function WatchButtonSpace({ space }) {
-  const { onFollowBtnClick, isLoading } = useAddRemoveSpaceFollow(space)
+  const { onFollowBtnClick } = useAddRemoveSpaceFollow(space)
   return (
     <>
       {
@@ -22,7 +22,7 @@ export function WatchButtonSpace({ space }) {
 }
 
 export function WatchButtonDiscussion({ discussion }) {
-  const { onFollowBtnClick, isLoading } = useAddRemoveDiscussionFollow(discussion)
+  const { onFollowBtnClick } = useAddRemoveDiscussionFollow(discussion)
   return (
     <>
       {

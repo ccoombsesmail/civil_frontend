@@ -8,6 +8,8 @@ export interface AddRemoveSpaceQueryParams {
   currentPage?: number;
   updateFollowedSpacesQuery?: boolean;
   updateFocusedSpaceQuery?: boolean;
+  updateUserSpacesQuery?: boolean,
+  currentlyViewedProfileUserId?: string,
   patch?: object;
 }
 
@@ -19,6 +21,8 @@ export const onAddSpaceFollowQueryStarted = async (
     currentPage,
     updateFollowedSpacesQuery,
     updateFocusedSpaceQuery,
+    updateUserSpacesQuery,
+    currentlyViewedProfileUserId,
     ...patch
   }: AddRemoveSpaceQueryParams,
   { dispatch, queryFulfilled }: any
@@ -28,7 +32,7 @@ export const onAddSpaceFollowQueryStarted = async (
     patchResult = dispatch(
       spacesApi.util.updateQueryData(
         "getAllFollowedSpaces",
-        undefined,
+        currentPage,
         (draft) => {
           const newDraft = createDraft(draft);
           const index = newDraft.findIndex((t) => t.id === id);
@@ -47,6 +51,16 @@ export const onAddSpaceFollowQueryStarted = async (
         return finishDraft(newDraft);
       })
     );
+  } else if (updateUserSpacesQuery) {
+    patchResult = dispatch(
+      spacesApi.util.updateQueryData("getUserSpaces", {userId: currentlyViewedProfileUserId, currentPage}, (draft) => {
+        const index = draft.findIndex((t) => t.id === id);
+        if (index !== -1) {
+          draft[index].isFollowing = true;
+        }
+      })
+    );
+    
   } else {
     patchResult = dispatch(
       spacesApi.util.updateQueryData("getAllSpaces", currentPage, (draft) => {
@@ -72,6 +86,8 @@ export const onRemoveSpaceFollowQueryStarted = async (
     currentPage,
     updateFollowedSpacesQuery,
     updateFocusedSpaceQuery,
+    updateUserSpacesQuery,
+    currentlyViewedProfileUserId,
     ...patch
   }: AddRemoveSpaceQueryParams,
   { dispatch, queryFulfilled }: any
@@ -81,7 +97,7 @@ export const onRemoveSpaceFollowQueryStarted = async (
     patchResult = dispatch(
       spacesApi.util.updateQueryData(
         "getAllFollowedSpaces",
-        undefined,
+        currentPage,
         (draft) => {
           const index = draft.findIndex((t) => t.id === id);
           if (index !== -1) {
@@ -97,6 +113,16 @@ export const onRemoveSpaceFollowQueryStarted = async (
         draft.isFollowing = false;
       })
     );
+  } else if (updateUserSpacesQuery) {
+    patchResult = dispatch(
+      spacesApi.util.updateQueryData("getUserSpaces", {userId: currentlyViewedProfileUserId, currentPage}, (draft) => {
+        const index = draft.findIndex((t) => t.id === id);
+        if (index !== -1) {
+          draft[index].isFollowing = false;
+        }
+      })
+    );
+    
   } else {
     patchResult = dispatch(
       spacesApi.util.updateQueryData("getAllSpaces", currentPage, (draft) => {

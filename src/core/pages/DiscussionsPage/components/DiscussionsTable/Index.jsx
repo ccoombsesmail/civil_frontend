@@ -5,8 +5,8 @@ import { TabView, TabPanel } from 'primereact/tabview'
 import {
   Container, TableHeader,
 } from './Style'
-import { Table, ColHeader, ColItem } from '../../../../CommonComponents/AppTable/Style'
-import DiscussionsFeed from '../DiscussionsFeed/Index'
+import DiscussionGridFeed from '../DiscussionsFeed/components/GridFeed/GridFeed'
+import SpaceDiscussionsCardFeed from '../DiscussionsFeed/components/SpaceDiscussionsCardFeed/SpaceDiscussionsCardFeed'
 
 function DiscussionsTable() {
   const panelClassName = (parent, index) => {
@@ -30,7 +30,7 @@ function DiscussionsTable() {
         }}
       >
         <TabPanel
-          header="Table View"
+          header="Grid View"
           pt={{
             headerAction: ({ parent }) => ({
               className: panelClassName(parent, 0),
@@ -40,18 +40,7 @@ function DiscussionsTable() {
             },
           }}
         >
-          <Table>
-            <div>
-              <ColHeader gridTemplateCols="1fr 2fr 1fr">
-                <ColItem> Created By </ColItem>
-                <ColItem> Title </ColItem>
-                <ColItem> Comments </ColItem>
-              </ColHeader>
-            </div>
-
-            <DiscussionsFeed feedType="Table" />
-          </Table>
-
+          <DiscussionGridFeed />
         </TabPanel>
 
         <TabPanel
@@ -63,7 +52,7 @@ function DiscussionsTable() {
           }}
         >
 
-          <DiscussionsFeed feedType="asdf" />
+          <SpaceDiscussionsCardFeed />
 
         </TabPanel>
 

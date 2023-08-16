@@ -8,8 +8,13 @@ export interface AddRemoveDiscussionQueryParams {
   currentPage?: number;
   updateFollowedDiscussionsQuery?: boolean;
   updateFocusedDiscussionQuery?: boolean;
+  updatePopularDiscussionsQuery?: boolean,
+  updateSpaceDiscussionsQuery?: boolean,
+  updateUserDiscussionsQuery?: boolean,
   isPopularDiscussion?: boolean,
+  currentlyViewedProfileUserId?: string,
   patch?: object;
+  spaceId?: string
 }
 
 
@@ -20,17 +25,25 @@ export const onAddDiscussionFollowQueryStarted = async (
     currentPage,
     updateFollowedDiscussionsQuery,
     updateFocusedDiscussionQuery,
+    updatePopularDiscussionsQuery,
+    updateSpaceDiscussionsQuery,
+    updateUserDiscussionsQuery,
+    currentlyViewedProfileUserId,
     isPopularDiscussion,
+    spaceId,
     ...patch
   }: AddRemoveDiscussionQueryParams,
   { dispatch, queryFulfilled }: any
 ): Promise<void> => {
+
   let patchResult;
   if (updateFollowedDiscussionsQuery) {
+    console.log(updateFollowedDiscussionsQuery)
+    console.log(currentPage)
     patchResult = dispatch(
       discussionsApi.util.updateQueryData(
         "getAllFollowedDiscussions",
-        undefined,
+        currentPage,
         (draft) => {
           const newDraft = createDraft(draft);
           const index = newDraft.findIndex((t) => t.id === id);
@@ -50,7 +63,42 @@ export const onAddDiscussionFollowQueryStarted = async (
 
       })
     );
-  } else {
+  } else if (updatePopularDiscussionsQuery) {
+    patchResult = dispatch(
+      discussionsApi.util.updateQueryData("getPopularDiscussions", currentPage, (draft) => {
+        const newDraft = createDraft(draft);
+        const index = newDraft.findIndex((t) => t.id === id);
+        if (index !== -1) {
+          newDraft[index].isFollowing = true;
+        }
+        return finishDraft(newDraft);
+
+      })
+    );
+  } else if (updateSpaceDiscussionsQuery) {
+    patchResult = dispatch(
+      discussionsApi.util.updateQueryData("getAllSpaceDiscussions", { spaceId, currentPage}, (draft) => {
+        const newDraft = createDraft(draft);
+        const index = newDraft.findIndex((t) => t.id === id);
+        if (index !== -1) {
+          newDraft[index].isFollowing = true;
+        }
+        return finishDraft(newDraft);
+      })
+    );
+  } else if (updateUserDiscussionsQuery) {
+    patchResult = dispatch(
+      discussionsApi.util.updateQueryData("getUserDiscussions", { userId: currentlyViewedProfileUserId, currentPage}, (draft) => {
+        const newDraft = createDraft(draft);
+        const index = newDraft.findIndex((t) => t.id === id);
+        if (index !== -1) {
+          newDraft[index].isFollowing = true;
+        }
+        return finishDraft(newDraft);
+      })
+    );
+  }
+   else {
     patchResult = dispatch(
       discussionsApi.util.updateQueryData("getPopularDiscussions", {currentPage}, (draft) => {
         const newDraft = createDraft(draft);
@@ -75,17 +123,24 @@ export const onRemoveDiscussionFollowQueryStarted = async (
     currentPage,
     updateFollowedDiscussionsQuery,
     updateFocusedDiscussionQuery,
+    updatePopularDiscussionsQuery,
+    updateSpaceDiscussionsQuery,
+    updateUserDiscussionsQuery,
+    currentlyViewedProfileUserId,
     isPopularDiscussion,
+    spaceId,
     ...patch
   }: AddRemoveDiscussionQueryParams,
   { dispatch, queryFulfilled }: any
 ): Promise<void> => {
 let patchResult;
 if (updateFollowedDiscussionsQuery) {
+  console.log(updateFollowedDiscussionsQuery)
+  console.log(currentPage)
   patchResult = dispatch(
     discussionsApi.util.updateQueryData(
       "getAllFollowedDiscussions",
-      undefined,
+      currentPage,
       (draft) => {
         const index = draft.findIndex((t) => t.id === id);
         if (index !== -1) {
@@ -100,16 +155,44 @@ if (updateFollowedDiscussionsQuery) {
       draft.isFollowing = false;
     })
   );
+} else if (updatePopularDiscussionsQuery) {
+  patchResult = dispatch(
+    discussionsApi.util.updateQueryData("getPopularDiscussions", currentPage, (draft) => {
+      const newDraft = createDraft(draft);
+      const index = newDraft.findIndex((t) => t.id === id);
+      if (index !== -1) {
+        newDraft[index].isFollowing = false;
+      }
+      return finishDraft(newDraft);
+    })
+  );
+} else if (updateSpaceDiscussionsQuery) {
+  patchResult = dispatch(
+    discussionsApi.util.updateQueryData("getAllSpaceDiscussions", { spaceId, currentPage}, (draft) => {
+      const newDraft = createDraft(draft);
+      const index = newDraft.findIndex((t) => t.id === id);
+      if (index !== -1) {
+        newDraft[index].isFollowing = false;
+      }
+      return finishDraft(newDraft);
+    })
+  );
+} else if (updateUserDiscussionsQuery) {
+  patchResult = dispatch(
+    discussionsApi.util.updateQueryData("getUserDiscussions", { userId: currentlyViewedProfileUserId, currentPage}, (draft) => {
+      const newDraft = createDraft(draft);
+      const index = newDraft.findIndex((t) => t.id === id);
+      if (index !== -1) {
+        newDraft[index].isFollowing = false;
+      }
+      return finishDraft(newDraft);
+    })
+  );
 } else {
-  console.log("HEREERERE")
   patchResult = dispatch(
     discussionsApi.util.updateQueryData("getPopularDiscussions", {currentPage}, (draft) => {
       const index = draft.findIndex((t) => t.id === id);
-      console.log(current(draft))
-
-      console.log(index)
       if (index !== -1) {
-        console.log(current(draft[index]))
         draft[index].isFollowing = false;
       }
     })

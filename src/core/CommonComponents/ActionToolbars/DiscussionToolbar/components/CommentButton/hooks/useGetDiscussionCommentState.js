@@ -1,21 +1,20 @@
 import { useMemo } from 'react'
 
-import { useGetDiscussionQuery } from '../../../../../../../api/services/discussions.ts'
 import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
-export default (discussionId) => {
+export default (discussion) => {
   const { currentUser } = useGetCurrentUser()
 
-  const { data: discussion, isUninitialized, isLoading } = useGetDiscussionQuery(discussionId, {
-    skip: !discussionId || !currentUser,
-  })
+  // const { data: discussion, isUninitialized, isLoading } = useLazyGetDiscussionQuery(discussionId, {
+  //   skip: !discussionId || !currentUser,
+  // })
 
   return useMemo(() => {
-    if (isUninitialized || isLoading || discussion?.title === 'General') return null
+    // if (isUninitialized || isLoading || discussion?.title === 'General') return null
     const replyingToContent = discussion?.editorState
     return {
-      discussionId,
-      contentId: discussionId,
+      discussionId: discussion.id,
+      contentId: discussion.id,
       spaceId: discussion.spaceId,
       createdByIconSrc: discussion?.createdByIconSrc,
       username: currentUser?.username,
@@ -25,5 +24,5 @@ export default (discussionId) => {
       parentId: null,
       rootId: null,
     }
-  }, [discussion, currentUser, discussionId, isUninitialized])
+  }, [discussion, currentUser, discussion])
 }

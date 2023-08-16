@@ -1,8 +1,12 @@
 /* eslint-disable max-len */
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { TabView, TabPanel } from 'primereact/tabview'
+import {
+  findGatewayToken,
+} from '@identity.com/solana-gateway-ts'
+import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
   Banner, Container, HeaderContainer, Content, UserIcon, TabsIconContainer, Bio,
   Middle, Experience, ExperienceContainer, FlexDiv, FullWidthDiv,
@@ -17,10 +21,43 @@ import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
 import UserPosts from './components/UserPosts/Index'
 import ProgressBar from '../../CommonComponents/ProgressBar2/Index'
+import { userJoinedDate } from '../../../generic/time/userJoinedDate'
+import { LightButton } from '../../CommonComponents/Tooltip/Style'
+import { AuthenticationSvg } from '../../../svgs/svgs'
+
+function RobotIcon() {
+  return (
+    <img src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg" alt="" />
+  )
+}
+
+const captchaNetworkKey = new PublicKey('ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6')
+const uniquenessNetworkKey = new PublicKey('uniqobk8oGh4XBLMqM68K8M2zNu3CdYX7q5go7whQiv')
 
 function UserProfile() {
+  const [passes, setPasses] = useState({
+    CAPTCHA_PASS_ACTIVE: false,
+    UNQIUENESS_PASS_ACTIVE: false,
+
+  })
   const { userId: profileUserId } = useParams()
   const [activeIndex, setActiveIndex] = useState(0)
+  const connection = new Connection(clusterApiUrl('devnet'), 'processed')
+
+  useEffect(() => {
+    const getGatwayTokens = async () => {
+      const gatewayTokenCaptcha = await findGatewayToken(connection, new PublicKey(profileUserId), captchaNetworkKey)
+      const gatewayTokenUniqueness = await findGatewayToken(connection, new PublicKey(profileUserId), uniquenessNetworkKey)
+
+      setPasses({
+        CAPTCHA_PASS_ACTIVE: gatewayTokenCaptcha.state === 'ACTIVE',
+        UNQIUENESS_PASS_ACTIVE: gatewayTokenUniqueness.state === 'ACTIVE',
+
+      })
+    }
+
+    getGatwayTokens()
+  }, [connection, profileUserId])
 
   const { currentUser, isLoading: isCurrentUserLoading, isUninitialized: isCurrentUserUninitialized } = useGetCurrentUser()
   const {
@@ -48,11 +85,25 @@ function UserProfile() {
         <TabsIconContainer>
           <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} />
           <FlexDiv>
-            <UsernameAndTag
-              usernameDisplay={user?.username}
-              userId={profileUserId}
-              userTag={user?.tag}
-            />
+            <div className="flex-column">
+              <UsernameAndTag
+                usernameDisplay={user?.username}
+                userId={profileUserId}
+                userTag={user?.tag}
+              />
+              <span className="text-sm text-color-secondary">
+                {userJoinedDate(user.createdAt)}
+              </span>
+              <div className="flex">
+                <LightButton className="mr-2" variant="light" bgcolor={passes.CAPTCHA_PASS_ACTIVE ? 'var(--m-civic-theme-main-color)' : 'lightgray'}>
+                  <RobotIcon />
+                </LightButton>
+                <LightButton variant="light" bgcolor={passes.UNQIUENESS_PASS_ACTIVE ? 'var(--m-civic-theme-main-color)' : 'lightgray'}>
+                  <AuthenticationSvg />
+                </LightButton>
+
+              </div>
+            </div>
             <Bio>{user?.bio}</Bio>
           </FlexDiv>
           { isCurrentUserProfile ? null : <FollowButton isUserLoading={isLoading} isUserFetching={isFetching} user={user} profileUserId={profileUserId} /> }
@@ -63,6 +114,10 @@ function UserProfile() {
       <Content>
         <Middle>
           <TabView className="w-full" onTabChange={(e) => setActiveIndex(e.index)} activeIndex={activeIndex}>
+            <TabPanel header="Posts">
+              <UserPosts usernameDisplay={user?.username} profileUserId={profileUserId} user={currentUser} />
+            </TabPanel>
+
             <TabPanel header="Following">
               <UserList
                 users={followed}
@@ -80,9 +135,6 @@ function UserProfile() {
                 listTitle="Followers"
                 isCurrentUserProfile={isCurrentUserProfile}
               />
-            </TabPanel>
-            <TabPanel header="Posts">
-              <UserPosts profileUserId={profileUserId} user={currentUser} />
             </TabPanel>
 
             <TabPanel header="About">

@@ -4,35 +4,33 @@
 import React, { useCallback, useState } from 'react'
 import { TabView, TabPanel } from 'primereact/tabview'
 
-import { useLazyGetUserDiscussionsQuery } from '../../../../../api/services/discussions.ts'
 import { useLazyGetUserCommentsQuery } from '../../../../../api/services/comments.ts'
 
 import { Container } from './Style'
-import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
-import DiscussionItem from '../../../../CommonComponents/DiscussionItem/Index'
-import Comment from '../../../DiscussionsPage/components/Comment/Index'
-import { ParentCommentContext } from '../../../DiscussionsPage/components/CommentColumn/ParentCommentContext.tsx'
+
+import CommentItem from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/CommentItem'
+import { ParentCommentContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
+
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import UserSpacesFeed from './UserPostFeeds/UserSpacesFeed'
+import UserDiscussionsFeed from './UserPostFeeds/UserDiscussionsFeed'
+import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 
-function UserPosts({ profileUserId }) {
-  const { currentUser } = useGetCurrentUser()
+function UserPosts({ profileUserId, usernameDisplay }) {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const [getUserDiscussions, { data: discussions, isLoading: isDiscussionsLoading }] = useLazyGetUserDiscussionsQuery()
   const [getUserComments, { data: comments, isLoading: isCommentsLoading }] = useLazyGetUserCommentsQuery()
 
   const onTabChange = useCallback((e) => {
-    if (e.index === 1) {
-      getUserDiscussions(profileUserId)
-    } else if (e.index === 2) {
+    if (e.index === 2) {
       getUserComments(profileUserId)
     }
     setActiveIndex(e.index)
-  }, [getUserDiscussions, getUserComments])
+  }, [getUserComments])
 
   return (
     <Container>
+      <h1>{`${longUsernameDisplay(usernameDisplay)}'s Activity`}</h1>
       <div className="line" />
       <TabView
         activeIndex={activeIndex}
@@ -57,11 +55,7 @@ function UserPosts({ profileUserId }) {
             },
           }}
         >
-          {
-            isDiscussionsLoading
-              ? <CircleLoading size="20vw" /> : discussions?.map((discussion) => <DiscussionItem discussion={discussion} user={currentUser} hideCommentButton />)
-          }
-
+          <UserDiscussionsFeed profileUserId={profileUserId} />
         </TabPanel>
         <TabPanel
           header="Comments"
@@ -81,7 +75,7 @@ function UserPosts({ profileUserId }) {
                   isReplies: false,
                 }}
               >
-                <Comment
+                <CommentItem
                   key={comment.data?.id || String(idx)}
                   level={0}
                   commentData={comment.data}

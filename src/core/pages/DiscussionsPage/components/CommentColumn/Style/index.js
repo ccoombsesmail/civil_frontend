@@ -13,7 +13,7 @@ export const Container = styled('ul')`
 
   z-index: 99;
   opacity: .99;
-  width: clamp(700px, 50vw, 1200px);
+  width: 100%;
   border: 1px solid lightgray;
   border-color: rgba(200,200,200,0.25);
 

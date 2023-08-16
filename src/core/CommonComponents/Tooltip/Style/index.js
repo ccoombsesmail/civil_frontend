@@ -19,6 +19,11 @@ export const LightButton = styled(Button)`
     transform: ${(props) => (props.grow === 'true' ? 'scale(1.25)' : 'scale(1)')};
     
   }
+
+  path {
+    color: white !important;
+    fill: white !important;
+  }
 `
 
 export const TooltipContent = styled('div')`

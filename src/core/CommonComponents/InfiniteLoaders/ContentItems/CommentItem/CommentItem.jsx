@@ -6,30 +6,33 @@ import React, {
 import { useLocation } from 'react-router-dom'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
+import { BlockUI } from 'primereact/blockui'
 import { UpArrowSvg, DownArrowSvg } from '../../../../../svgs/svgs'
 
-import IconButton from '../../../../CommonComponents/IconButton/Index'
-import CensorOverlay from '../../../../CommonComponents/CensorOverlay/Index'
+import IconButton from '../../../IconButton/Index'
 
 import {
-  CommentContainer, Body, ExpandButton, OuterContainer,
+  CommentContainer, Body, ExpandButton,
 } from './Style'
 
 import { UNDER_REVIEW } from '../../../../../enums/report_status'
 import { COMMENT } from '../../../../../enums/content_type'
-import ReadOnlyEditor from '../../../../CommonComponents/Lexical/ReadOnlyEditor.tsx'
-import { ParentCommentContext } from '../CommentColumn/ParentCommentContext.tsx'
-import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
-import useDetectCurrentPage from '../../../../hooks/routing/useDetectCurrentPage.ts'
+import ReadOnlyEditor from '../../../Lexical/ReadOnlyEditor.tsx'
+import { ParentCommentContext } from './ParentCommentContext.tsx'
+
 import CardFooter from './components/CommentFooter/CommentFooter'
 import CommentHeader from './components/CommentHeader/CommentHeader'
+import useDetectCurrentPage from '../../../../hooks/routing/useDetectCurrentPage.ts'
+import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
+import ModerationOverlay from '../../../PostCard/components/ModerationOverlay/ModerationOverlay'
 
 const COLORS = ['#e6eef9', '#d6dee9', '#c6cee8', '#b6bee8', '#a6aee7', '#969ee7', '#868ee6', '#767ee6', '#666ee5', '#565ee5']
 
-function Comment({
+function CommentItem({
   commentData, replies, level, isFocusedComment, parentCollapse,
 }) {
   if (!commentData) return null
+  const [blocked, setBlocked] = useState(commentData.reportStatus === 'UNDER_REVIEW' || commentData.reportStatus === 'MARKED' || commentData.reportStatus === 'REMOVED')
 
   const { isOnTribunalPage } = useDetectCurrentPage()
   const repliesRef = useRef({
@@ -79,7 +82,8 @@ function Comment({
 
   const expandIcon = localToggle ? <UpArrowSvg /> : <DownArrowSvg />
   return (
-    <OuterContainer>
+    <BlockUI blocked={blocked}>
+      {/* <OuterContainer> */}
       <CommentContainer hideBorder={level === 0 || isFocusedComment} color={COLORS[level]} isFocusedComment={isFocusedComment}>
         <CommentHeader
           commentData={commentData}
@@ -127,17 +131,21 @@ function Comment({
         />
 
       </CommentContainer>
-      { shouldBlur && (
-      <CensorOverlay
-        setShouldBlur={setShouldBlur}
-        contentId={commentData?.id}
-        contentType={COMMENT}
-        showNavigationToTribunal={commentData?.reportStatus === UNDER_REVIEW && !pathname.includes('tribunal')}
-      />
+      {(shouldBlur) && (
+        <ModerationOverlay
+          setShouldBlur={setShouldBlur}
+          setBlocked={setBlocked}
+          contentId={commentData.id}
+          contentType={COMMENT}
+          reportStatus={commentData.reportStatus}
+          showNavigationToTribunal={
+            commentData.reportStatus === UNDER_REVIEW && !pathname.includes('tribunal')
+          }
+        />
       )}
-    </OuterContainer>
-
+      {/* </OuterContainer> */}
+    </BlockUI>
   )
 }
 
-export default memo(Comment)
+export default memo(CommentItem)

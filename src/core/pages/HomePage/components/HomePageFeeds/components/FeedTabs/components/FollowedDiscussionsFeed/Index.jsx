@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { CardContainer } from '../../../../Style'
 import { useGetAllFollowedDiscussionsQuery } from '../../../../../../../../../api/services/discussions.ts'
-import InfiniteLoader from '../../../../../Spaces/components/InfiniteLoader'
-import FollowedDiscussionsFeedItem from './FollowedDiscussionsFeedItem'
 import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
+import FollowedDiscussionsListItem from '../../../../../../../../CommonComponents/InfiniteLoaders/ListItems/FollowedDiscussionListItem'
+import InfiniteListLoader from '../../../../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
 
 function FollowedDiscussionsFeed() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -12,7 +12,7 @@ function FollowedDiscussionsFeed() {
   const
     {
       data: followedDiscussions, isLoading: isLoadingFollowedDiscussions, isUninitialized, isFetching,
-    } = useGetAllFollowedDiscussionsQuery()
+    } = useGetAllFollowedDiscussionsQuery(currentPage)
 
   useEffect(() => {
     if (followedDiscussions) {
@@ -28,13 +28,13 @@ function FollowedDiscussionsFeed() {
     <>
       { (isUninitialized || isLoadingFollowedDiscussions || allData.length === 0) ? <CardLoader /> : (
         <CardContainer>
-          <InfiniteLoader
+          <InfiniteListLoader
             hasNextPage
             isNextPageLoading={isLoadingFollowedDiscussions || isFetching}
             items={allData}
             loadNextPage={fetchMore}
             currentPage={currentPage}
-            Item={FollowedDiscussionsFeedItem}
+            Item={FollowedDiscussionsListItem}
           />
         </CardContainer>
       )}

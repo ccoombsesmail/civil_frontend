@@ -1,15 +1,17 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react'
 
-import { useGetAllFollowedDiscussionsQuery } from '../../../../api/services/discussions.ts'
+import { useParams } from 'react-router-dom'
+import { useGetAllSpaceDiscussionsQuery } from '../../../../api/services/discussions.ts'
 import { CircleLoading } from '../../../../svgs/spinners/CircleLoading'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
-import { DiscussionItem } from '../ContentItems/DiscussionItem/DiscussionItem'
 import { DiscussionItemContext } from '../ContentItems/DiscussionItem/DiscussionItemContext.tsx'
+import { DiscussionItem } from '../ContentItems/DiscussionItem/DiscussionItem'
 
-function FollowedDiscussionsListItem({ index, style }) {
+function SpaceDiscussionListItem({ index, style }) {
   const currentPage = Math.floor(index / 5)
-  const { data, isLoading, isUninitialized } = useGetAllFollowedDiscussionsQuery(currentPage)
+  const { spaceId } = useParams()
+  const { data, isLoading, isUninitialized } = useGetAllSpaceDiscussionsQuery({ spaceId, currentPage})
   const { currentUser } = useGetCurrentUser()
   let content
   if (isLoading || isUninitialized || !data) {
@@ -17,7 +19,7 @@ function FollowedDiscussionsListItem({ index, style }) {
   } else {
     const discussion = data[index % 5]
     content = discussion ? (
-      <DiscussionItemContext.Provider value={{currentPage, spaceId: discussion.spaceId, updateFollowedDiscussionsQuery: true}}>
+      <DiscussionItemContext.Provider value={{ currentPage, updateSpaceDiscussionsQuery: true }}>
         <DiscussionItem
           style={style}
           key={discussion.id}
@@ -26,9 +28,10 @@ function FollowedDiscussionsListItem({ index, style }) {
           currentPage={currentPage}
         />
       </DiscussionItemContext.Provider>
+
     ) : null
   }
   return <div style={style}>{content}</div>
 }
 
-export default FollowedDiscussionsListItem
+export default SpaceDiscussionListItem
