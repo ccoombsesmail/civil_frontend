@@ -6,12 +6,12 @@ export const ButtonBackground = styled('div')`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.backgroundColor || 'black'};
+  background-color: ${(props) => props.backgroundColor || 'var(--primary-color)'};
   border-radius: 5px;
   overflow: hidden;
   transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);
-  background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6);
-  background-image: ${(props) => (props.civicButton && 'none !important')};
+  /* background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6); */
+  /* background-image: ${(props) => (props.civicButton && 'none !important')}; */
   /* background-image: linear-gradient(90deg, rgba(33,183,183,1) 0%, var(--m-primary-background-color) 100%); */
   ::before,
   ::after {

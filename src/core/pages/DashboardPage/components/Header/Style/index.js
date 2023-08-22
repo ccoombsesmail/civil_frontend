@@ -77,6 +77,7 @@ export const UserIconEditContainer = styled('div')`
   position: relative;
   display: flex;
   align-items: center;
+  flex-direction: column;
   margin: 2vw;
   svg {
     :hover {

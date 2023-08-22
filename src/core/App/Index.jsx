@@ -58,6 +58,7 @@ function App() {
     ],
     [network],
   )
+  const dontShowBgImage = pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate')
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider
@@ -75,7 +76,7 @@ function App() {
                   <MainContainer>
                     <ErrorBoundary>
                       <Content id="main-scroll">
-                        { pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate') ? null : <BgImage /> }
+                        { dontShowBgImage ? null : <BgImage /> }
                         <Routes>
                           <Route
                             path="/dashboard"

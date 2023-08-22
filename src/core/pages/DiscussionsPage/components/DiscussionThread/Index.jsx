@@ -8,8 +8,9 @@ import { useParams } from 'react-router-dom'
 import { ColumnContainer, ThreadContainer, ListContainer } from './Style/index'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import { useGetAllCommentsQuery } from '../../../../../api/services/comments.ts'
-import InfiniteLoader from './InfiniteLoader'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
+import InfiniteCommentLoader from '../../../../CommonComponents/InfiniteLoaders/InfiniteCommentLoader'
+import DiscussionCommentsListItem from '../../../../CommonComponents/InfiniteLoaders/ListItems/DiscussionCommentsListItem'
 
 const ITEMS_PER_PAGE = 10
 
@@ -54,7 +55,7 @@ function DiscussionThread() {
               No Comments
             </div>
           ) : (
-            <InfiniteLoader
+            <InfiniteCommentLoader
               hasNextPage
               isNextPageLoading={isLoadingCurrent}
               items={allData}
@@ -62,6 +63,7 @@ function DiscussionThread() {
               currentPage={currentPage}
               discussionId={discussionId}
               spaceId={spaceId}
+              Item={DiscussionCommentsListItem}
             />
           )}
         </ListContainer>

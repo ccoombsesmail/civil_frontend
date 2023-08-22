@@ -11,6 +11,7 @@ import TribunalButton from '../components/TribunalButton/Index'
 import { Container, Left, Right } from '../Style/index'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
 import useUpdateDiscussionLikes from './hooks/useUpdateDiscussionLikes.ts'
+import { DISCUSSION } from '../../../../enums/content_type'
 
 function DiscussionActionToolbar({
   discussion, updateGetDiscussionQuery,
@@ -34,7 +35,7 @@ function DiscussionActionToolbar({
       </Left>
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }
-        {!isOnTribunalPage && <TribunalButton contentId={discussion?.id} /> }
+        {!isOnTribunalPage && <TribunalButton contentId={discussion?.id} contentType={DISCUSSION} /> }
       </Right>
     </Container>
   )

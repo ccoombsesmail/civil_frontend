@@ -5,7 +5,7 @@ import { ScalesSvg, CommunityCourtSvg } from '../../../../../svgs/svgs'
 import { Menu, Container, Item } from './Style'
 import ReportForm from '../../../../Forms/ReportForm/Index'
 
-function TribunalButton({ contentId }) {
+function TribunalButton({ contentId, contentType }) {
   const [isOpen, setIsOpen] = useState(false)
   const [visible, setVisible] = useState(false)
 
@@ -16,7 +16,7 @@ function TribunalButton({ contentId }) {
   return (
     <Container onClick={(e) => e.stopPropagation()}>
       <Dialog header="Report Content" visible={visible} onHide={() => setVisible(false)}>
-        <ReportForm closeModal={() => setVisible(false)} contentId={contentId} />
+        <ReportForm closeModal={() => setVisible(false)} contentId={contentId} contentType={contentType} />
       </Dialog>
       <Menu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <Item onClick={onCourtClick}>

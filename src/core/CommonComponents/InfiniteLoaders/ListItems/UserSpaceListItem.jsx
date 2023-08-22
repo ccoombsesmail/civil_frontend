@@ -10,14 +10,16 @@ import { SpaceItemContext } from '../ContentItems/SpaceItem/SpaceItemContext.tsx
 function UserSpaceListItem({ index, style }) {
   const currentPage = Math.floor(index / 5)
   const { userId: currentlyViewedProfileUserId } = useParams()
-
-  const { data, isLoading, isUninitialized } = useGetUserSpacesQueryState({ userId: currentlyViewedProfileUserId, currentPage})
   const { currentUser } = useGetCurrentUser()
+
+  const userId = currentlyViewedProfileUserId || currentUser.userId
+
+  const { data, isLoading, isUninitialized } = useGetUserSpacesQueryState({ userId, currentPage})
   const contextValue = useMemo(() => ({
     currentPage,
-    currentlyViewedProfileUserId,
+    currentlyViewedProfileUserId: userId,
     updateUserSpacesQuery: true,
-  }), [currentPage, currentlyViewedProfileUserId])
+  }), [currentPage, userId])
 
   let content
   if (isLoading || isUninitialized || !data) {

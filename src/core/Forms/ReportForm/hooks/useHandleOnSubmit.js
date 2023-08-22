@@ -2,15 +2,18 @@ import { useCallback } from 'react'
 import { toast } from 'react-toastify'
 import { useCreateReportMutation } from '../../../../api/services/reports.ts'
 
-export default (contentId, closeModal) => {
+export default (contentId, contentType, closeModal) => {
   const [createReport, {}] = useCreateReportMutation()
   return useCallback((values, { setSubmitting, resetForm }) => {
     const data = {
       contentId,
-      toxic: values.toxic || null,
-      personalAttack: values.personalAttack || null,
-      spam: values.spam || null,
+      contentType,
+      reportCause: null,
     }
+
+    const causeKey = Object.keys(values).find((key) => values[key] === true)
+    data.reportCause = causeKey
+
     toast.promise(
       createReport(data),
       {
@@ -32,5 +35,5 @@ export default (contentId, closeModal) => {
     closeModal()
     setSubmitting(false)
     resetForm({})
-  }, [contentId, closeModal])
+  }, [contentId, contentType, closeModal])
 }

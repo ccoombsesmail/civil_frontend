@@ -1,4 +1,4 @@
-export function userJoinedDate(createdAt) {
+export function userJoinedDate(createdAt, withPrefix = true) {
   // Parse the input date string into a Date object
   const date = new Date(createdAt)
 
@@ -26,5 +26,5 @@ export function userJoinedDate(createdAt) {
   }
 
   // Combine the formatted parts into the final string
-  return `Joined ${month}, ${day}${getOrdinalSuffix(day)} ${year}`
+  return `${withPrefix ? 'Joined ' : ''}${month}, ${day}${getOrdinalSuffix(day)} ${year}`
 }

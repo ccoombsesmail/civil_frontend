@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import { TabView, TabPanel } from 'primereact/tabview'
 
-import FollowedSpacesFeed from './components/FollowedSpacesFeed/Index'
 import PopularDiscussionsFeed from './components/PopularDiscussionsFeed/PopularDiscussionsFeed'
-import FollowedDiscussionsFeed from './components/FollowedDiscussionsFeed/Index'
 import TrendingSpaces from './components/TrendingSpaces/TrendingSpaces'
+import FollowedSpacesFeed from '../../../../../../CommonComponents/InfiniteLoaders/SharedFeeds/FollowedSpacesFeed/Index'
+import FollowedDiscussionsFeed from '../../../../../../CommonComponents/InfiniteLoaders/SharedFeeds/FollowedDiscussionsFeed/Index'
 
 function FeedTabs() {
   return (

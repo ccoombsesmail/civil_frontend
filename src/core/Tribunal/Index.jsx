@@ -2,12 +2,14 @@
 /* eslint-disable no-nested-ternary */
 import React, { memo, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+import { Divider } from 'primereact/divider'
 
+import { Message } from 'primereact/message'
+import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace'
 import {
   OuterContainer,
   InnerContainer,
   Header,
-  StyledScalesSvg,
   ReportStatsContainer,
   ReportStatItem,
 } from './Style/index'
@@ -15,7 +17,6 @@ import {
 import TribunalComments from './components/TribunalComments/Index'
 import VotingBox from './components/VotingBox/Index'
 
-import Comment from '../pages/DiscussionsPage/components/Comment/Index'
 import { COMMENT, DISCUSSION, SPACE } from '../../enums/content_type'
 import SpaceItem from '../pages/HomePage/components/Spaces/components/SpaceItem/Index'
 import { useGetReportQuery } from '../../api/services/reports.ts'
@@ -28,6 +29,9 @@ import { BgImage } from '../pages/Style'
 import WhatDoYouThink from './components/WhatDoYouThink/WhatDoYouThink'
 import { useGetDiscussionQuery } from '../../api/services/discussions.ts'
 import { DiscussionItem } from '../pages/DiscussionsPage/components/DiscussionsFeed/components/CardFeedItem/CardFeedItem'
+import Comment from '../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/CommentItem'
+import { Gavel2, CastBallotSvg } from '../../svgs/svgs'
+import ReportedUserDetails from './components/ReportedUserDetails/ReportedUserDetails'
 
 function Tribunal() {
   const { contentId, contentType } = useParams()
@@ -90,6 +94,28 @@ function Tribunal() {
 
   const isContentLoading = isCommentLoading || isDiscussionLoading || isSpaceLoading
 
+  const reportsByCauseNotUnderReviewMap = {
+    cause1: '123',
+    cause2: '2342',
+    cause3: '23423',
+    cause4: '12',
+  }
+
+  const content = (
+    <div className="flex align-items-center">
+      <Gavel2 />
+      <div className="mx-6">
+        Content Is Under Review For The Following Violation(s)
+      </div>
+      <Gavel2 />
+    </div>
+  )
+
+  const reportedUserId = useMemo(
+    () => space?.createdByUserId || discussion?.createdByUserId || comment?.createdByUserId,
+    [space, discussion, comment],
+  )
+
   return (
     <OuterContainer id="tribunal-container">
       <BgImage />
@@ -112,27 +138,73 @@ function Tribunal() {
       <InnerContainer>
         { isContentLoading ? <CircleLoading size="10vw" /> : Content}
       </InnerContainer>
+
+      <ReportedUserDetails reportedUserId={reportedUserId} />
+
+      <ReportStatsContainer>
+        <Message
+          style={{
+            border: '1px solid red',
+            borderWidth: '0 6px 0 6px',
+            color: 'black',
+          }}
+          className="justify-content-center w-full mb-2"
+          severity="error"
+          content={(
+            <div>
+              Report Violation Level –
+              {' '}
+              <b>
+                {reportStats?.reportSeverityLevel}
+              </b>
+            </div>
+          )}
+        />
+        <Message
+          style={{
+            border: '1px solid #696cff',
+            borderWidth: '0 6px 0 6px',
+            color: 'black',
+          }}
+          className="w-full justify-content-center"
+          severity="info"
+          content={content}
+        />
+        <div className="flex justify-content-center">
+
+          {
+          Object.entries(reportStats?.reportsByCauseUnderReviewMap || {}).map(([cause, count]) => (
+            <ReportStatItem>
+              <h2>{cause}</h2>
+              <span>{count || 0}</span>
+            </ReportStatItem>
+          ))
+         }
+        </div>
+        <Inplace className="w-11 flex justify-content-center">
+          <InplaceDisplay>See Other Reports</InplaceDisplay>
+          <InplaceContent>
+            <Divider align="center">
+              <b className="divider-text">Other Reports</b>
+            </Divider>
+            <div className="flex flex-wrap justify-content-center w-full">
+
+              {
+              Object.entries(reportsByCauseNotUnderReviewMap || {}).map(([cause, count]) => (
+                <ReportStatItem className="w-2">
+                  <h2>{cause}</h2>
+                  <span>{count || 0}</span>
+                </ReportStatItem>
+              ))
+              }
+            </div>
+          </InplaceContent>
+        </Inplace>
+      </ReportStatsContainer>
       {isSuccess && (
         <VotingBox contentId={contentId} reportStats={reportStats} isFetching={isFetching} />
       )}
-      {isReportStatsUninitialized ? null : (
-        <ReportStatsContainer>
-          <ReportStatItem>
-            <h2>Toxic Reports</h2>
-            {isSuccess && <span>{reportStats.numToxicReports || 0}</span>}
-          </ReportStatItem>
-          <ReportStatItem>
-            <h2>Personal Attack Reports</h2>
-            {isSuccess && (
-              <span>{reportStats.numPersonalAttackReports || 0}</span>
-            )}
-          </ReportStatItem>
-          <ReportStatItem>
-            <h2>Spam Reports</h2>
-            {isSuccess && <span>{reportStats.numSpamReports || 0}</span>}
-          </ReportStatItem>
-        </ReportStatsContainer>
-      )}
+
       <WhatDoYouThink comment={{ ...comment, isReportedComment: true}} space={space} discussion={discussion} />
       <TribunalComments contentId={contentId} reportStats={reportStats} />
     </OuterContainer>

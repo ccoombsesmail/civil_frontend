@@ -10,14 +10,17 @@ import { DiscussionItem } from '../ContentItems/DiscussionItem/DiscussionItem'
 function UserDiscussionListItem({ index, style }) {
   const currentPage = Math.floor(index / 5)
   const { userId: currentlyViewedProfileUserId } = useParams()
-  const { data, isLoading, isUninitialized } = useGetUserDiscussionsQuery({ userId: currentlyViewedProfileUserId, currentPage})
   const { currentUser } = useGetCurrentUser()
+
+  const userId = currentlyViewedProfileUserId || currentUser.userId
+
+  const { data, isLoading, isUninitialized } = useGetUserDiscussionsQuery({ userId, currentPage})
 
   const contextValue = useMemo(() => ({
     currentPage,
-    currentlyViewedProfileUserId,
+    currentlyViewedProfileUserId: userId,
     updateUserDiscussionsQuery: true,
-  }), [currentPage, currentlyViewedProfileUserId])
+  }), [currentPage, userId])
   let content
   if (isLoading || isUninitialized || !data) {
     content = <CircleLoading size={60} />

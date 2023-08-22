@@ -10,6 +10,7 @@ import TribunalButton from '../components/TribunalButton/Index'
 import { Container, Left, Right } from '../Style/index'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
 import useUpdateCommentLikes from './hooks/useUpdateCommentLikes.ts'
+import { COMMENT } from '../../../../enums/content_type'
 
 function CommentActionToolbar({
   comment,
@@ -46,7 +47,7 @@ function CommentActionToolbar({
         )}
       </Left>
       <Right>
-        { !isOnTribunalPage && <TribunalButton contentId={comment?.id} /> }
+        { !isOnTribunalPage && <TribunalButton contentId={comment?.id} contentType={COMMENT} /> }
         <span>
           {likes || 0}
           {' '}

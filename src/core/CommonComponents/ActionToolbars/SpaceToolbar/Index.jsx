@@ -11,6 +11,7 @@ import TribunalButton from '../components/TribunalButton/Index'
 import { Container, Left, Right } from '../Style/index'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
 import useUpdateSpaceLikes from './hooks/useUpdateSpaceLikes.ts'
+import { SPACE } from '../../../../enums/content_type'
 
 function SpaceActionToolbar({
   hideCommentButton, space,
@@ -33,7 +34,7 @@ function SpaceActionToolbar({
       </Left>
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }
-        {!isOnTribunalPage && <TribunalButton contentId={space?.id} /> }
+        {!isOnTribunalPage && <TribunalButton contentId={space?.id} contentType={SPACE} /> }
       </Right>
     </Container>
   )

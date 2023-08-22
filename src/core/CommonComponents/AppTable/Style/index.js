@@ -6,6 +6,7 @@ export const Table = styled('div')`
   display: grid;
   row-gap: 8px;
   width: 100%;
+  padding-bottom: 200px;
   
 `
 

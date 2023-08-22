@@ -13,7 +13,7 @@ export const VotingContainer = styled('section')`
   border-radius: 0.5em;
   border: 0.5px solid lightgray;
   border-color: rgba(200, 200, 200, 0.25);
-  margin: clamp(30px, 1vw, 100px) 0 clamp(30px, 1vw, 100px) 0;
+  margin: 20px 0;
   width: 95%;
   background-color: var(--m-menu-item-hover);
 
@@ -93,6 +93,10 @@ export const MiddleSection = styled('div')`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
+  path {
+    fill: var(--primary-color);
+  }
 `
 
 export const VotesContainer = styled('div')`

@@ -8,6 +8,13 @@ export const OuterContainer = styled('div')`
   margin: auto;
   width: 80%;
   padding-bottom: 60vh;
+
+  .p-divider-content {
+    background-color: var(--m-menu-item-hover);
+  }
+  .p-divider.p-divider-horizontal:before {
+    border-top: 1px solid black !important;
+  }
   /* background-color: #F2F6FC; */
   background-color: #eee;
   @media only screen and (max-width: 800px) {
@@ -54,7 +61,7 @@ export const InnerContainer = styled('div')`
   display: flex;
   justify-content: center;
   width: 50vw;
-  /* align-items: center; */
+
   @media (max-width: 1200px) {
     width: 80%;
   }
@@ -102,23 +109,28 @@ export const VotingContainer = styled('section')`
 
 export const ReportStatsContainer = styled('ul')`
   display: flex;
+  flex-direction: column;
   background-color: white;
+  align-items: center;
   border-radius: 0.5em;
+  margin: 20px 0;
+
   width: 95%;
   background-color: var(--m-menu-item-hover);
+
 
 
 `
 
 export const ReportStatItem = styled('li')`
-  background-color: var(--m-menu-item-hover);
 
+  transform: ${props => props.small ? 'scale(.5)' : 'scale(1)'};
+  background-color: var(--m-menu-item-hover);
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius: 0.5em;
-  /* background-color: var(--m-secondary-background-color); */
   font-size: clamp(15px, 1vw, 20px);
   padding: 2vw 4vw;
   margin: 2vw 4vw;

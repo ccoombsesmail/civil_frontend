@@ -20,9 +20,8 @@ function InfiniteListLoader({
     const itemHeight = Number.isNaN(item.contentHeight) || !item.contentHeight ? 200 : item.contentHeight
     switch (item?.externalContentData?.linkType) {
       case YouTube:
-        return 850 + itemHeight
+        return 1050 + itemHeight
       case Web:
-        console.log(`Web: ${850 + itemHeight}`)
         return 850 + itemHeight
       case Twitter:
         return 600 + itemHeight

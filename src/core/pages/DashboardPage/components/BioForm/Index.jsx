@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { InputTextarea } from 'primereact/inputtextarea'
 import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import ExpandButton from '../../../../CommonComponents/Buttons/ExpandButton/Index'
 import useOnSubmit from './hooks/useOnSubmit'
@@ -6,7 +7,7 @@ import useOnSubmit from './hooks/useOnSubmit'
 import {
   Container, OuterContainer, HeaderContainer,
   Header, SubHeader, FieldContainer,
-  FieldLabel, Textarea, ButtonContainer,
+  FieldLabel, ButtonContainer,
 } from './Style/Index'
 
 function BioForm() {
@@ -37,13 +38,23 @@ function BioForm() {
             <FieldLabel>
               Bio
             </FieldLabel>
-            <Textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+            <InputTextarea
+              value={bio}
+              rows={4}
+              cols={90}
+              onChange={(e) => setBio(e.target.value)}
+            />
           </FieldContainer>
           <FieldContainer>
             <FieldLabel>
               Experience
             </FieldLabel>
-            <Textarea value={experience} onChange={(e) => setExperience(e.target.value)} />
+            <InputTextarea
+              value={experience}
+              rows={4}
+              cols={90}
+              onChange={(e) => setExperience(e.target.value)}
+            />
           </FieldContainer>
           <ButtonContainer>
             <ExpandButton type="submit">Save Bio Information </ExpandButton>

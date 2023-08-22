@@ -6,7 +6,7 @@ import { useGetUserDiscussionsQuery } from '../../../../../../api/services/discu
 import CardLoader from '../../../../../CommonComponents/CardLoader/CardLoader'
 import InfiniteListLoader from '../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
 import { CardContainer } from '../../../../HomePage/components/HomePageFeeds/Style/index'
-import UserDiscussionListItem from '../../../../../CommonComponents/InfiniteLoaders/ListItems/UserDiscussionListItem.jsx'
+import UserDiscussionListItem from '../../../../../CommonComponents/InfiniteLoaders/ListItems/UserDiscussionListItem'
 
 function UserSpacesFeed({ profileUserId }) {
   const [currentPage, setCurrentPage] = useState(0)

@@ -48,7 +48,6 @@ export const ItemDescription = styled('p')`
   align-items: center;
   justify-content: flex-start;
   flex: 80%;
-  margin: unset !important;
   @media only screen and (max-width: 800px) {
     font-size: 3vw;
   }

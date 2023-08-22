@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect, useCallback } from 'react'
-import { CardContainer } from '../../../../Style'
-import { useGetAllFollowedDiscussionsQuery } from '../../../../../../../../../api/services/discussions.ts'
-import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
-import FollowedDiscussionsListItem from '../../../../../../../../CommonComponents/InfiniteLoaders/ListItems/FollowedDiscussionListItem'
-import InfiniteListLoader from '../../../../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
+import { CardContainer } from '../Style'
+import { useGetAllFollowedDiscussionsQuery } from '../../../../../api/services/discussions.ts'
+import CardLoader from '../../../CardLoader/CardLoader'
+import FollowedDiscussionsListItem from '../../ListItems/FollowedDiscussionListItem'
+import InfiniteListLoader from '../../InfiniteListLoader'
 
 function FollowedDiscussionsFeed() {
   const [currentPage, setCurrentPage] = useState(0)

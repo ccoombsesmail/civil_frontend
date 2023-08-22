@@ -13,7 +13,6 @@ import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
 
 function VotingBox({ contentId, reportStats, isFetching }) {
   const [visible, setVisible] = useState(false)
-  console.log(reportStats)
   const votingTimeUp = (+new Date(reportStats?.reportPeriodEnd) - +new Date()) <= 0
   const hasAlreadyVoted = useMemo(
     () => (reportStats.votedToStrike || reportStats.votedToAcquit),
@@ -76,7 +75,7 @@ function VotingBox({ contentId, reportStats, isFetching }) {
         />
         )}
 
-        { !votingTimeUp && <CastBallotSvg /> }
+        { !votingTimeUp && <CastBallotSvg className="mt-5" /> }
         {(reportStats && !votingTimeUp) && (
         <ExpandButton onClick={() => setVisible(true)}>
           {hasAlreadyVoted ? 'Change Your Vote' : 'Cast Your Vote'}
@@ -85,13 +84,13 @@ function VotingBox({ contentId, reportStats, isFetching }) {
       </MiddleSection>
       <VotesContainer>
         <VotesFor isViolation={isViolation}>
-          Violation Votes
+          Guilty Votes
           <span>
             {reportStats && (reportStats.numVotesToStrike ?? '?')}
           </span>
         </VotesFor>
         <VotesAgainst isPassing={isPassing}>
-          No Violation Votes
+          Not Guilty Votes
           <span>
             {reportStats && (reportStats.numVotesToAcquit ?? '?')}
           </span>

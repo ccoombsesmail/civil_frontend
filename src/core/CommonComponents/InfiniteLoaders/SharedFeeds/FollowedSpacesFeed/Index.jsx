@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect, useCallback } from 'react'
-import { CardContainer } from '../../../../Style'
-import { useGetAllFollowedSpacesQuery } from '../../../../../../../../../api/services/spaces.ts'
-import CardLoader from '../../../../../../../../CommonComponents/CardLoader/CardLoader'
-import InfiniteListLoader from '../../../../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
-import FollowedSpaceListItem from '../../../../../../../../CommonComponents/InfiniteLoaders/ListItems/FollowedSpaceListItem'
+import { useGetAllFollowedSpacesQuery } from '../../../../../api/services/spaces.ts'
+import CardLoader from '../../../CardLoader/CardLoader'
+import InfiniteListLoader from '../../InfiniteListLoader'
+import FollowedSpaceListItem from '../../ListItems/FollowedSpaceListItem'
+import { CardContainer } from '../Style/index'
 
 function FollowedSpacesFeed() {
   const [currentPage, setCurrentPage] = useState(0)

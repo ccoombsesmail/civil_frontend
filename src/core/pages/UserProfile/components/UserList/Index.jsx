@@ -8,8 +8,12 @@ import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 import { Table, ColHeader, ColItem } from '../../../../CommonComponents/AppTable/Style'
 
 function UserList({
-  users, isLoading, isUninitialized, listTitle,
+  listTitle, useQueryHook, profileUserId,
 }) {
+  const { data: users, isLoading, isUninitialized } = useQueryHook(profileUserId, {
+    skip: !profileUserId,
+  })
+
   if (isUninitialized) return null
   if (isLoading) return <CircleLoading size="30vw" />
   return (

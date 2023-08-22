@@ -9,9 +9,7 @@ export const OuterContainer = styled('div')`
 `
 
 export const Container = styled('div')`
-  width: clamp(400px, 60vw, 1000px);
   padding: 3em 2em;
-  /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); */
   box-shadow: rgba(0, 0, 0, 0.16) 0px 24px 48px;
   font-family: "Source Sans Pro", sans-serif;;
   font-size: 1rem;
@@ -22,6 +20,12 @@ export const Container = styled('div')`
   border-radius: 1rem;
   border: 1px solid transparent;
   background-color: white;
+  width: 800px;
+
+  @media only screen and (max-width: 800px) {
+     width: 100%;
+  }
+
   /* width: 840px; */
 `
 

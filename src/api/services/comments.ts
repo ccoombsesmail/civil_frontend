@@ -44,7 +44,7 @@ export const commentsApi = emptySplitApi.injectEndpoints({
       },
     }),
     getUserComments: builder.query<any, any>({
-      query: (userId) => ({ url: `/comments/user/${userId}`, method: "GET" }),
+      query: ({ userId, currentPage }) => ({ url: `/comments/user/${userId}?skip=${currentPage*5}`, method: "GET" }),
       providesTags: (result) =>
         result
           ? [
@@ -124,4 +124,5 @@ export const {
   useUpdateCommentCivilityMutation,
   useGetAllCommentRepliesQuery,
   useLazyGetUserCommentsQuery,
+  useGetUserCommentsQuery
 } = commentsApi;
