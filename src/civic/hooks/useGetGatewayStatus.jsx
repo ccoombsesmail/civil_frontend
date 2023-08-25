@@ -9,7 +9,8 @@ export default () => {
     let btnColor
     let btnIcon
     if (gatewayStatus === 9) {
-      btnColor = 'var(--m-civic-theme-main-color)'
+      // btnColor = 'var(--m-civic-theme-main-color)'
+      btnColor = 'var(--primary-color)'
       btnIcon = <VerifiedSvg />
     } else if (gatewayStatus === 13) {
       btnIcon = <WarningSvg />

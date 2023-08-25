@@ -2,12 +2,14 @@
 import React from 'react'
 import { LongerFade } from './style'
 
-const WithFade = ({ Component, ...rest }) => (
-  <LongerFade appear in>
-    <div>
-      <Component {...rest} />
-    </div>
-  </LongerFade>
-)
+function WithFade({ Component, ...rest }) {
+  return (
+    <LongerFade appear in>
+      <div>
+        <Component {...rest} />
+      </div>
+    </LongerFade>
+  )
+}
 
 export default WithFade

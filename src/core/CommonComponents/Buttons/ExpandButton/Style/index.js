@@ -42,6 +42,7 @@ export const ButtonBackground = styled('div')`
 
 export const StyledButton = styled('button')`
   font-size: clamp(15px, 1.4vw, 25px);
+  cursor: pointer;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -80,7 +81,7 @@ export const StyledButton = styled('button')`
     ${ButtonBackground} {
       transform: scale3d(1, 1, 1);
       border: 1px solid ${(props) => props.backgroundColor || 'black'};
-      box-shadow: 0 0 0 0.2rem #99F6E4;
+      /* box-shadow: 0 0 0 0.2rem var(--highlight-text-color); */
       border: none;
       ::before {
         transition: transform 0.6s cubic-bezier(0.1, 0, 0.3, 1);

@@ -94,13 +94,6 @@ function Tribunal() {
 
   const isContentLoading = isCommentLoading || isDiscussionLoading || isSpaceLoading
 
-  const reportsByCauseNotUnderReviewMap = {
-    cause1: '123',
-    cause2: '2342',
-    cause3: '23423',
-    cause4: '12',
-  }
-
   const content = (
     <div className="flex align-items-center">
       <Gavel2 />
@@ -190,7 +183,7 @@ function Tribunal() {
             <div className="flex flex-wrap justify-content-center w-full">
 
               {
-              Object.entries(reportsByCauseNotUnderReviewMap || {}).map(([cause, count]) => (
+              Object.entries(reportStats?.reportsByCauseNotUnderReviewMap || {}).map(([cause, count]) => (
                 <ReportStatItem className="w-2">
                   <h2>{cause}</h2>
                   <span>{count || 0}</span>

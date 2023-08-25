@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { clusterApiUrl, PublicKey, Connection } from '@solana/web3.js'
 import {
   GatewayProvider, useGateway,
 } from '@civic/solana-gateway-react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import Popover from '../../../core/CommonComponents/PopoverStickOnHover/Index'
 
 import {
   Container, IconContainer, StyledExpandButton, PopoverToolTip,
@@ -16,6 +15,16 @@ import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 
 // Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css'
+import { ThemeIconTooltip2 } from '../../../core/CommonComponents/Tooltip/Index'
+
+function Icon() {
+  return (
+    <img
+      src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg"
+      alt=""
+    />
+  )
+}
 
 const env = {
   gatekeeperNetwork: new PublicKey('ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6'),
@@ -23,38 +32,27 @@ const env = {
   cluster: 'devnet',
 }
 
-function StatusIcon({ placement }) {
-  const [showPopover, setShowPopover] = useState(false)
-  const onClick = () => setShowPopover((prev) => !prev)
+function StatusIcon() {
   const [color, statusMsg] = useGetGatewayStatus()
 
   return (
     <IconContainer color={color}>
-      <Popover
-        trigger={['hover', 'click']}
-        component={(
+      <ThemeIconTooltip2
+        Icon={Icon}
+        tooltipText={(
           <PopoverToolTip>
-            <b>The Pass Proves You Are Not A Bot</b>
+            <b className="text-900">This Pass Proves You Are A NOT a bot</b>
             <br />
-            <span>
+            <span className="text-900">
               {'Status: '}
               {' '}
               <i style={{ color }}>{statusMsg}</i>
             </span>
           </PopoverToolTip>
-      )}
-        placement={placement}
-        onMouseEnter={() => { }}
-        delay={200}
-        showPopover={showPopover}
-        setShowPopover={setShowPopover}
-      >
-        <img
-          onClick={onClick}
-          src="https://civic.me/static/media/bot_icon.f8d363e6d1ab7990da7126f8fa6a67ab.svg"
-          alt=""
-        />
-      </Popover>
+            )}
+        grow="true"
+        targetId="captcha-icon-panel"
+      />
 
     </IconContainer>
   )

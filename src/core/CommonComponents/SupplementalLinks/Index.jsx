@@ -1,25 +1,20 @@
-/* eslint-disable no-useless-escape */
 import React from 'react'
-import { Tooltip, OverlayTrigger } from 'react-bootstrap'
-
+import { Tooltip } from 'primereact/tooltip'
 import { Container, Link } from './Style'
 
 const domainExtractor = new RegExp(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im)
 
 function TooltipComponent({ idx, linkText, link }) {
+  const targetId = `tooltip-target-${idx}`
   return (
-    <OverlayTrigger
-      placement="right"
-      overlay={(
-        <Tooltip>
-          <strong>{link}</strong>
-        </Tooltip>
-      )}
-    >
-      <Link key={String(idx)} href={link} target="_blank">
+    <>
+      <Tooltip target={`.${targetId}`} position="top">
+        <strong>{link}</strong>
+      </Tooltip>
+      <Link key={String(idx)} href={link} target="_blank" className={targetId}>
         {linkText}
       </Link>
-    </OverlayTrigger>
+    </>
   )
 }
 
@@ -28,7 +23,6 @@ function SupplementalLinks({ links }) {
     <Container>
       {links?.map((link, idx) => (
         <TooltipComponent key={String(idx)} linkText={link} idx={idx} link={link} />
-
       ))}
     </Container>
   )

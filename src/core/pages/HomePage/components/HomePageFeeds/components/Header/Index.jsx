@@ -19,7 +19,7 @@ function Header({ user }) {
         </Dialog>
       </LexicalComposer>
 
-      <UserIcon width="4vw" iconSrc={user?.iconSrc} username={user?.username} userId={user?.userId} />
+      <UserIcon size="4vw" iconSrc={user?.iconSrc} username={user?.username} userId={user?.userId} />
       <FlexDiv>
         <p className="text-focus-in">
           Hey
@@ -30,7 +30,7 @@ function Header({ user }) {
         </p>
         <ExpandButton
           type="button"
-          bgColor="var(--m-primary-btn-color)"
+          bgColor="var(--primary-color)"
           onClick={() => setVisible(true)}
           width="100%"
         >

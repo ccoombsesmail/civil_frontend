@@ -185,10 +185,14 @@ export const GetVerifiedContainer = styled('div')`
   transition: all .5s;
   color: rgba(255,96,65, 1);
   box-shadow: var(--box-shadow-inset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   cursor: pointer; 
   :hover {
     background-color: rgba(255,96,65, 1);
+    background-color: var(--primary-color);
     color: white;
   }
   svg:nth-child(3) {

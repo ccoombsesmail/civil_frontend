@@ -12,7 +12,7 @@ function DiscussionsItem({
       <Row onClick={goToCommentThread} gridTemplateCols="1fr 2fr 1fr" height="10vh">
         <RowItem>
           {' '}
-          <UserIcon src={createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/profile_icon_2.png'} alt="" />
+          <UserIcon size="3vw" src={createdByIconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/profile_images/profile_icon_2.png'} alt="" />
           {' '}
           {`${longUsernameDisplay(createdByUsername)}`}
         </RowItem>

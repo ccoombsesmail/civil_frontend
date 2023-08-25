@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components'
-import { Button } from 'react-bootstrap'
+import { Button } from 'primereact/button'
 
 export const LightButton = styled(Button)`
   display: flex;
@@ -26,11 +26,31 @@ export const LightButton = styled(Button)`
   }
 `
 
-export const TooltipContent = styled('div')`
-  font-size: .6vw;
+export const TooltipHeader = styled('div')`
+    border: 1px solid rgba(200,200,200,0.25);
+    min-width: 15vw;
+    background-color: white;
+    box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    font-size: clamp(10px, 1vw, 20px);
+    padding: .8vw 1.8vw;
+    font-weight: bold;
+    width: clamp(160px, 18vw, 340px);
+    color: var(--primary-color);
+`
 
-  @media only screen and (max-width: 600px) {
-    font-size: 3vw;
-  }
-  
+export const TooltipContent = styled('div')`
+    border: 1px solid rgba(200,200,200,0.25);
+    min-width: 15vw;
+    background-color: white;
+    box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    font-size: clamp(10px, 0.8vw, 20px);
+    padding: .8vw 1.8vw;
+    font-weight: bold;
+    width: clamp(160px, 18vw, 340px);
+    color: black;
+
 `

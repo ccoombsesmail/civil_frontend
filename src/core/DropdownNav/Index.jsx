@@ -63,7 +63,7 @@ export function DropdownMenu({ open, setOpen }) {
     <DropdownMenuContainer open={open}>
       { loggedInViaDIDOrCivic && (
       <UserInfoSection>
-        <UserIcon width="50px" userId={currentUser?.id} />
+        <UserIcon size="50px" userId={currentUser?.id} />
         <Greeting>
           Hello,
           {' '}

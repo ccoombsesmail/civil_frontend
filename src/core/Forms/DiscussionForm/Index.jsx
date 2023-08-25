@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 import { Formik } from 'formik'
-import { Collapse, Fade } from 'react-bootstrap'
+import { Inplace, InplaceDisplay, InplaceContent } from 'primereact/inplace'
 
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { useLocation } from 'react-router-dom'
@@ -130,14 +130,11 @@ function CreateDiscussionForm({ closeModal }) {
             >
               <DownArrowCircleSvg />
             </Arrow>
-            <Fade in={!open}>
-              <div>
-                References
-              </div>
-            </Fade>
+
             <InputsContainer>
-              <Collapse in={open}>
-                <div style={{ whiteSpace: 'nowrap', width: '100%' }}>
+              <Inplace>
+                <InplaceDisplay>References</InplaceDisplay>
+                <InplaceContent style={{ whiteSpace: 'nowrap', width: '100%' }}>
                   <FlexDiv direction="column">
                     <div className="mb-5">
                       <Overlay
@@ -173,8 +170,8 @@ function CreateDiscussionForm({ closeModal }) {
                     />
                   </FlexDiv>
 
-                </div>
-              </Collapse>
+                </InplaceContent>
+              </Inplace>
             </InputsContainer>
             <Footer>
               <Button

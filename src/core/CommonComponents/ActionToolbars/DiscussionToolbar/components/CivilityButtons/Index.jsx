@@ -1,19 +1,8 @@
 import React, { memo } from 'react'
-import { OverlayTrigger, Popover } from 'react-bootstrap'
 import RangeSlider from '../../../../Form/RangeSlider/Index'
 import PopoverStickOnHover from '../../../../PopoverStickOnHover/Index'
-import IconButton from '../../../../IconButton/Index'
-import { LightButton } from '../../../../Tooltip/Style/index'
 
 function CivilityButton() {
-  const popover = (
-    <Popover id="popover">
-      <Popover.Body>
-        <RangeSlider />
-      </Popover.Body>
-    </Popover>
-  )
-
   return (
     <PopoverStickOnHover
       component={<RangeSlider />}

@@ -9,7 +9,7 @@ import {
 import { calculateTimeLeft } from '../../../../generic/time/calculateTimeLeft'
 
 function Timer({ reportStats, refetch }) {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(reportStats.reportPeriodEnd).timeLeft)
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(reportStats?.reportPeriodEnd).timeLeft)
   useEffect(() => {
     const timer = setInterval(() => {
       const { timeLeft: calculatedTimeLeft, reportPeriodEnded } = calculateTimeLeft(reportStats.reportPeriodEnd)

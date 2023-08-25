@@ -66,7 +66,7 @@ export const RowItem = styled('div')`
   justify-content: center;
   align-items: ${(props) => props.alignItems || 'center'};
   letter-spacing: .1vw;    
-  font-size: clamp(12px, 1vw, 25px);
+  font-size: clamp(12px, .8vw, 25px);
 
 
 

@@ -100,6 +100,7 @@ function CivicTabContent() {
   useReplaceDisconnectButtonEffect('get-started-container')
   return (
     <Container>
+      <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/civic-logo-orange.png" className="w-2 h-2 my-7" />
       <AlreadyKnowContainer id="auth-container">
         <h1>Already Know What You Are Doing?</h1>
         <ArrowRightSvg />

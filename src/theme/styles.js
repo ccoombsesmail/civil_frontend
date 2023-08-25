@@ -95,7 +95,7 @@ const GlobalStyle = createGlobalStyle`
 
 .wallet-adapter-button-trigger {
     background-color: #512da8;
-    background-image: linear-gradient(to bottom,var(--m-primary-background-color),#14B8A6) !important;
+    background-image: linear-gradient(to bottom,var(--primary-color), var(--primary-color)) !important;
 
 }
 
@@ -392,7 +392,7 @@ a {
   text-decoration: none;
 }
 
-ol, ul, h1, h2, h3 {
+ol, ul, h1, h2, h3, h4, h5 {
   margin: 0;
   padding: 0;
 }
@@ -571,6 +571,12 @@ blockquote {
 
   }
 
+  .p-popover {
+    border: 1px solid rgba(200,200,200,0.25);
+    box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
+    border-radius: 1rem;
+  }
+
   .p-tabview-panels {
     display: flex;
     justify-content: center;
@@ -685,7 +691,7 @@ blockquote {
     background-image: linear-gradient(to right,var(--m-primary-background-color),#83af9b);
     /* box-shadow: #3c4fe0 0 3px 7px inset; */
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
-    background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+    background-image: radial-gradient(100% 100% at 100% 0, var(--primary-color) 0, var(--primary-color) 100%);
     transition: all 5s;
     :hover {
       box-shadow: #3c4fe0 0 3px 7px inset;

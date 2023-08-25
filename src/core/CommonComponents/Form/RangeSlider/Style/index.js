@@ -9,6 +9,7 @@ export const Container = styled('div')`
   width: clamp(200px, 10vw, 300px);
   display: flex;
   align-items: center;
+  flex-direction: column;
 `
 
 export const Message = styled('div')`
@@ -49,6 +50,11 @@ export const Range = styled('div')`
     left: 50%;
     transform: translate(-50%, 0);
     border-radius: 6px;
+    background: ${({ sliderValue }) => {
+    if (sliderValue < 0) return 'var(--m-danger-color)'
+    if (sliderValue >= 0) return 'var(--primary-color)'
+    return 'var(--primary-color)'
+  }};
   }
   .range-value span:before {
     content: "";
@@ -62,6 +68,7 @@ export const Range = styled('div')`
     left: 50%;
     margin-left: -5px;
     margin-top: -1px;
+    
   }
 
   input[type="range"] {
@@ -78,11 +85,9 @@ export const Range = styled('div')`
     cursor: pointer;
     animate: 0.2s;
     background: ${({ sliderValue }) => {
-    if (sliderValue === -1 || sliderValue === -2) return 'var(--m-danger-color)'
-    if (sliderValue === -3) return 'red'
-    if (sliderValue === 1 || sliderValue === 2) return 'var(--m-primary-btn-color)'
-    if (sliderValue === 3) return 'green'
-    return 'var(--clerk-primary)'
+    if (sliderValue < 0) return 'var(--m-danger-color)'
+    if (sliderValue >= 0) return 'var(--primary-color)'
+    return 'var(--primary-color)'
   }};
     border-radius: 25px;
   }
@@ -95,14 +100,17 @@ export const Range = styled('div')`
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -8px;
+    background: ${({ sliderValue }) => {
+    if (sliderValue < 0) return 'var(--m-danger-color)'
+    if (sliderValue >= 0) return 'var(--primary-color)'
+    return 'var(--primary-color)'
+  }};
   }
   input[type="range"]:focus::-webkit-slider-runnable-track {
     background: ${({ sliderValue }) => {
-    if (sliderValue === -1 || sliderValue === -2) return 'var(--m-danger-color)'
-    if (sliderValue === -3) return 'red'
-    if (sliderValue === 1 || sliderValue === 2) return 'var(--m-primary-btn-color)'
-    if (sliderValue === 3) return 'green'
-    return 'var(--clerk-primary)'
+    if (sliderValue < 0) return 'var(--m-danger-color)'
+    if (sliderValue >= 0) return 'var(--primary-color)'
+    return 'var(--primary-color)'
   }};
   }
 `

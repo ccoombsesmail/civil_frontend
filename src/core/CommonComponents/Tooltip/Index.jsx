@@ -1,47 +1,90 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react'
-import { OverlayTrigger, Popover } from 'react-bootstrap'
+import React, { useRef } from 'react'
+import { Tooltip } from 'primereact/tooltip'
+import { ConfirmPopup } from 'primereact/confirmpopup'
 import { InfoIconSvg } from '../../../svgs/svgs'
-import { LightButton, TooltipContent } from './Style/index'
+import { LightButton, TooltipContent, TooltipHeader } from './Style/index'
 
-const TooltipPopover = React.forwardRef(({
-  onClick, tooltipHeader, tooltipText, ...rest
-}, ref) => (
-  <Popover ref={ref} id="popover" {...rest}>
-    <Popover.Header as="h3">{tooltipHeader}</Popover.Header>
-    <Popover.Body>
-      <TooltipContent>
-        <span role="link" onClick={onClick}>{tooltipText}</span>
-      </TooltipContent>
-    </Popover.Body>
-  </Popover>
-))
-
-function ThemeTooltip({
-  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false,
+export function ThemeIconTooltipSticky({
+  Component, visible, Icon, setVisible, bgColor, grow = false, targetId, comment,
 }) {
-  const popover = (
-    <TooltipPopover
-      onClick={onClick}
-      tooltipText={tooltipText}
-      tooltipHeader={tooltipHeader}
-    />
-  )
+  const buttonEl = useRef(null)
+
   return (
-    <OverlayTrigger
-      placement="top"
-      delay={{ show: 450, hide: 0 }}
-      overlay={popover}
-    >
-      <LightButton variant="light" bgcolor={bgColor} grow={grow}>
-        {
-          Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
-        }
+    <>
+      <ConfirmPopup
+        target={buttonEl.current}
+        visible={visible}
+        onHide={() => setVisible(false)}
+        message={Component}
+        footer={<div className="pb-7" />}
+      />
+      <LightButton bgcolor={bgColor} grow={grow} className={targetId} ref={buttonEl} onClick={() => setVisible(true)}>
+        <Icon comment={comment} />
       </LightButton>
-    </OverlayTrigger>
+    </>
   )
 }
 
-export default ThemeTooltip
+function ThemeIconTooltip({
+  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false, targetId
+}) {
+  return (
+    <>
+      <Tooltip
+        pt={{
+          text: {
+            className: 'bg-white max-w-15rem p-0 border-round-2xl',
+          },
+          root: {
+            className: 'border-round-2xl bg-white',
+          },
+        }}
+        target={`.${targetId}`}
+        event="both"
+        position="top"
+      >
+        <TooltipHeader className="font-bold surface-ground">{tooltipHeader}</TooltipHeader>
+        <TooltipContent>
+          {tooltipText}
+        </TooltipContent>
+      </Tooltip>
+      <LightButton bgcolor={bgColor} grow={grow} className={targetId} onClick={onClick}>
+        {
+        Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
+      }
+      </LightButton>
+    </>
+  )
+}
+
+export function ThemeIconTooltip2({
+  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false, targetId,
+}) {
+  return (
+    <>
+      <Tooltip
+        pt={{
+          text: {
+            className: 'bg-white max-w-15rem p-0 border-round-2xl',
+          },
+          root: {
+            className: 'border-round-2xl bg-none ml-2 ',
+          },
+        }}
+        target={`.${targetId}`}
+        event="both"
+        position="right"
+      >
+        {tooltipText}
+      </Tooltip>
+      <div className={`${targetId} flex align-items-center`}>
+        {
+        Icon ? <Icon onClick={onClick} bgcolor={bgColor} grow={grow} className={targetId} /> : <InfoIconSvg size={22} onClick={onClick} />
+        }
+
+      </div>
+    </>
+  )
+}
+
+export default ThemeIconTooltip

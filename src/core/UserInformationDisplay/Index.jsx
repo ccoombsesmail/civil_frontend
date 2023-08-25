@@ -84,7 +84,7 @@ function UserInformationDisplay({ setIsOpen, isOpen }) {
                 <Link to="/authenticate/civic-verify">
                   <GetVerifiedContainer>
                     <CivicArrow />
-                    <span>
+                    <span className='text-md'>
                       Get Verified
                     </span>
                     <CivicArrow />

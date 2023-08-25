@@ -40,7 +40,7 @@ function SearchResultItem({ result, wordEntered, clearInput }) {
   return (
     <SearchItem onClick={linkToOnClick}>
       <FlexDiv>
-        <UserIcon width="3vw" iconSrc={user.iconSrc} userId={user.userId} />
+        <UserIcon size="3vw" iconSrc={user.iconSrc} userId={user.userId} />
         <UsernameAndTag userTag={user.tag} userId={user.userId} usernameDisplay={user.username} />
 
       </FlexDiv>

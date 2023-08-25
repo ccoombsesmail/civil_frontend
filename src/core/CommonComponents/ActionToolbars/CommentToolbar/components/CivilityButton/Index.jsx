@@ -1,40 +1,38 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useState } from 'react'
 import RangeSlider from '../../../../Form/RangeSlider/Index'
-import PopoverStickOnHover from '../../../../PopoverStickOnHover/Index'
 import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
+import { ThemeIconTooltipSticky } from '../../../../Tooltip/Index'
 
-function CivilityButton({ comment, disabled }) {
-  const [showPopover, setShowPopover] = useState(false)
-  const onClick = () => setShowPopover((prev) => !prev)
+function Icon({ comment }) {
+  if (!comment || comment.civility === 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />
+  if (comment.civility > 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
+  return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
+}
+
+function CivilityButton({ comment }) {
   const updateCommentCivility = useUpdateCommentCivility(comment)
-  const Icon = useMemo(() => {
-    if (!comment || comment.civility === 0) return <img onClick={onClick} alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />
-    if (comment.civility > 0) return <img onClick={onClick} alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
-    return <img alt="" onClick={onClick} src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
-  }, [comment])
+  const [visible, setVisible] = useState(false)
+
   return (
-    <PopoverStickOnHover
-      trigger={['hover', 'click']}
-      component={(
+    <ThemeIconTooltipSticky
+      targetId={`civility-btn-${comment.id}`}
+      tooltipHeader="Captcha Verified"
+      grow="true"
+      Component={(
         <RangeSlider
           civility={comment.civility}
           updateCommentCivility={updateCommentCivility}
-          setShowPopover={setShowPopover}
+          setVisible={setVisible}
         />
     )}
       placement="top"
-      onMouseEnter={() => { }}
-      delay={200}
-      showPopover={showPopover}
-      setShowPopover={setShowPopover}
-    >
-      {
-        Icon
-      }
-    </PopoverStickOnHover>
-
+      visible={visible}
+      setVisible={setVisible}
+      Icon={Icon}
+      comment={comment}
+    />
   )
 }
 

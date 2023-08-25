@@ -11,21 +11,11 @@ export const SignInContainer = styled('div')`
   padding: 1.5vw;
   height: 100vh;
   overflow-y: scroll;
-
   background-color: white;
   
   width: 50vw;
 
-  .cl-signIn-start {
-    width: 40vw;
-  }
 
-  .tab-content {
-    padding: 4vw 1vw 2vw 1vw;
-    
-    display: flex;
-    justify-content: center;
-  }
   @media only screen and (max-width: 1600px) {
     width: 65vw;
   }
@@ -47,17 +37,6 @@ export const SignInContainer = styled('div')`
 
 `
 
-export const IconNavButton = styled('a')`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: filter 300ms;
-
-  :hover {
-    filter: brightness(.9);
-  }
-
-`
 export const DIDSignInContainer = styled('div')` 
   margin-top: 5vh !important;
 `

@@ -11,10 +11,10 @@ import TribunalCommentTabContent from './components/TribunalCommentTabContent/Tr
 function TribunalComments({ contentId, reportStats }) {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const headerTemplate = useCallback((options, badgeValue, severity) => (
+  const headerTemplate = useCallback((options, badgeValue, severity, color) => (
     <button type="button" onClick={options.onClick} className={options.className}>
       {options.titleElement}
-      <Badge value={badgeValue} className="ml-3" severity={severity} />
+      <Badge value={badgeValue} className="ml-3" severity={severity} style={{ backgroundColor: color || ''}}  />
     </button>
   ), [reportStats])
 
@@ -27,7 +27,7 @@ function TribunalComments({ contentId, reportStats }) {
       header: 'Reporters', commentType: Reporter, numComments: reportStats.numReporterComments,
     },
     {
-      header: Jury, commentType: Jury, numComments: reportStats.numJuryComments,
+      header: Jury, commentType: Jury, numComments: reportStats.numJuryComments, color: 'var(--highlight-text-color)',
     },
     { header: General, commentType: General, numComments: reportStats.numGeneralComments },
   ] : []), [reportStats])
@@ -36,7 +36,7 @@ function TribunalComments({ contentId, reportStats }) {
     <Container>
       <TabView className="w-full" activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
         {tabs.map((tab, index) => (
-          <TabPanel key={tab + String(index)} header={tab.header} headerTemplate={(options) => headerTemplate(options, tab.numComments, tab.severity)}>
+          <TabPanel key={tab + String(index)} header={tab.header} headerTemplate={(options) => headerTemplate(options, tab.numComments, tab.severity, tab.color)}>
             <TribunalCommentTabContent contentId={contentId} commentType={tab.commentType} setActiveIndex={setActiveIndex} />
           </TabPanel>
         ))}

@@ -29,7 +29,7 @@ function GridItem({ space }) {
   const subTitle = (
     <>
       <div className="flex w-full relative mb-4">
-        <UserIcon userId={createdByUserId} iconSrc={createdByIconSrc} width="3vw" />
+        <UserIcon userId={createdByUserId} iconSrc={createdByIconSrc} size="3vw" />
         <div>
           <div className="flex flex-column align-items-start w-full ml-2">
             <h4 className="text-sm text-500">{formattedUsername}</h4>

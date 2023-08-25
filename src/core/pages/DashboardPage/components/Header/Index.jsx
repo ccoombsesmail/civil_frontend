@@ -22,7 +22,7 @@ function Header() {
         <div className="flex">
           <div className="relative mb-5">
             <EditIcon onClick={() => setVisible(true)} />
-            <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} onClick={() => setVisible(true)} alt="" />
+            <UserIcon size="3vw" src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} onClick={() => setVisible(true)} alt="" />
           </div>
           <h1>{longUsernameDisplay(user?.username)}</h1>
 

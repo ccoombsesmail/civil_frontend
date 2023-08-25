@@ -1,7 +1,6 @@
-import { Fade } from 'react-bootstrap'
 import styled from 'styled-components'
 
-export const LongerFade = styled(Fade)` 
+export const LongerFade = styled('div')` 
   transition: all 1s !important;
   width: 50vw;
   display: flex;

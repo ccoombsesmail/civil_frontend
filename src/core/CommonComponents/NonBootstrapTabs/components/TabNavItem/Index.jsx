@@ -3,22 +3,20 @@
 import React from 'react'
 import { TabNavContentCount, TabNavInput, TabNavLabel } from '../../Style'
 
-const TabNavItem = ({
-  id, title, activeTab, setActiveTab, contentCount, onClick
-}) => {
+function TabNavItem({
+  id, title, activeTab, setActiveTab, contentCount,
+}) {
   const handleClick = () => {
-    onClick()
     setActiveTab(id)
   }
-  
+
   const handleChange = (event) => {
     setActiveTab(event.target.value)
   }
 
-
   return (
     <>
-      <TabNavInput type="radio" id={`radio-${id}`} tabNum={Number(id)} checked={activeTab === id} onChange={handleChange}/>
+      <TabNavInput type="radio" id={`radio-${id}`} tabNum={Number(id)} checked={activeTab === id} onChange={handleChange} />
       <TabNavLabel htmlFor={`radio-${id}`} onClick={handleClick} className={activeTab === id ? 'active' : ''}>
         { title }
         { contentCount ? (

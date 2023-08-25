@@ -15,8 +15,18 @@ import { VerifiedSvg, WarningSvg } from '../../../svgs/svgs'
 import Popover from '../../../core/CommonComponents/PopoverStickOnHover/Index'
 import useGetGatewayStatus from '../../hooks/useGetGatewayStatus'
 import { isValid as isTokenValid } from '../../../generic/time/isCivicTokenValid.ts'
+import ThemeIconTooltip, { ThemeIconTooltip2 } from '../../../core/CommonComponents/Tooltip/Index'
 
 require('@solana/wallet-adapter-react-ui/styles.css')
+
+function Icon() {
+  return (
+    <img
+      src="https://civic.me/static/media/uniqueness.c7a0f0195d44b27436f30aee36620cae.svg"
+      alt=""
+    />
+  )
+}
 
 const env = {
   gatekeeperNetwork: new PublicKey('uniqobk8oGh4XBLMqM68K8M2zNu3CdYX7q5go7whQiv'),
@@ -32,11 +42,11 @@ function RequestGatewayToken() {
   return (
     <Container>
       <IconContainer color={color}>
-        <Popover
-          trigger={['hover', 'click']}
-          component={(
+        <ThemeIconTooltip
+          Icon={Icon}
+          tooltipText={(
             <PopoverToolTip>
-              <b>The Pass Proves You Are A Unique User</b>
+              <b>ThIs Pass Proves You Are A NOT a bot</b>
               <br />
               <span>
                 {'Status: '}
@@ -44,20 +54,10 @@ function RequestGatewayToken() {
                 <i style={{ color }}>{statusMsg}</i>
               </span>
             </PopoverToolTip>
-          )}
-          placement="right"
-          onMouseEnter={() => {}}
-          delay={200}
-          showPopover={showPopover}
-          setShowPopover={setShowPopover}
-        >
-          <img
-            onClick={onClick}
-            src="https://civic.me/static/media/uniqueness.c7a0f0195d44b27436f30aee36620cae.svg"
-            alt=""
-          />
-        </Popover>
-
+            )}
+          grow="true"
+          targetId="unique-icon-panel"
+        />
       </IconContainer>
 
       <b>⟶</b>
@@ -87,7 +87,8 @@ export function UniquenessStatus() {
     let btnIcon
     let msg
     if (isValid) {
-      btnColor = 'var(--m-civic-theme-main-color)'
+      // btnColor = 'var(--m-civic-theme-main-color)'
+      btnColor = 'var(--primary-color)'
       btnIcon = <VerifiedSvg />
       msg = 'Active'
     } else {
@@ -116,31 +117,22 @@ export function UniquenessStatus() {
   return (
     <Container>
       <IconContainer color={color}>
-        <Popover
-          trigger={['hover', 'click']}
-          component={(
+        <ThemeIconTooltip2
+          Icon={Icon}
+          tooltipText={(
             <PopoverToolTip>
-              <b>The Pass Proves You Are A Unique User</b>
+              <b className="text-900">The Pass Proves You Are A Unique User</b>
               <br />
-              <span>
+              <span className="text-900">
                 {'Status: '}
                 {' '}
                 <i style={{ color }}>{statusMsg}</i>
               </span>
             </PopoverToolTip>
-          )}
-          placement="right"
-          onMouseEnter={() => {}}
-          delay={200}
-          showPopover={showPopover}
-          setShowPopover={setShowPopover}
-        >
-          <img
-            onClick={onClick}
-            src="https://civic.me/static/media/uniqueness.c7a0f0195d44b27436f30aee36620cae.svg"
-            alt=""
-          />
-        </Popover>
+            )}
+          grow="true"
+          targetId="unique-icon-panel"
+        />
 
       </IconContainer>
 

@@ -4,6 +4,7 @@ export const BorderContainer = styled('div')`
   border: 1px solid gray;
   border-top: none;
   z-index: 9999;
+  width: 100%;
   background-color: white;
   min-height: calc(100vh - var(--nav-size));
   /* width: 50vw; */

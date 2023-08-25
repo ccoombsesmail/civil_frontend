@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const BorderContainer = styled('div')`
   border: 1px solid gray;
   border-top: none;
+  width: 100%;
   z-index: 9999;
   background-color: white;
   min-height: calc(100vh - var(--nav-size));
@@ -46,6 +47,7 @@ export const Container = styled('div')`
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 `
 
 export const Header = styled('header')` 
