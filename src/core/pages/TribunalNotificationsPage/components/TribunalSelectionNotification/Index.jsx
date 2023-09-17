@@ -4,7 +4,6 @@ import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../../generic/string/dateFormatter'
 
 import { TribunalSelection } from '../../../../../enums/notification_types'
-import { Gavel2 } from '../../../../../svgs/svgs'
 import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 import UsernameAndTag from '../../../../CommonComponents/UsernameAndTag/Index'
 import { ProfileIcon } from '../../../NotificationsPage/components/Style'
@@ -14,8 +13,8 @@ function TribunalSelectionNotification({ notification }) {
     createdAt, id, contentType, reportedContentId,
   } = notification
   return (
-    <tbody>
-      <Row gridTemplateCols="1fr 1fr 3fr 1fr">
+    <div>
+      <Row gridTemplateCols="1fr 4fr .1fr">
         <RowItem>
           <ProfileIcon src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />
           <UsernameAndTag
@@ -24,16 +23,13 @@ function TribunalSelectionNotification({ notification }) {
             userTag="Civil"
           />
         </RowItem>
-        <RowItem>
-          <Gavel2 size="5vh" />
-        </RowItem>
-        <RowItem>
+        <RowItem className="ml-3" alignItems="flex-start">
 
           <h3>
-            You have been selected for Jury Duty regarding
+            You have been selected for Jury Duty regarding this
             {' '}
             <Link to={`/tribunal/${contentType}/${reportedContentId}`}>
-              Comment!
+              { contentType[0].toUpperCase() + contentType.slice(1).toLowerCase()}
             </Link>
           </h3>
         </RowItem>
@@ -45,7 +41,7 @@ function TribunalSelectionNotification({ notification }) {
           />
         </RowItem>
       </Row>
-    </tbody>
+    </div>
   )
 }
 

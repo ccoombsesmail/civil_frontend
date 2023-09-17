@@ -100,7 +100,7 @@ function UserInformationDisplay({ setIsOpen, isOpen }) {
                   width="45%"
                   height="2.5vw"
                   type="button"
-                  bgColor="var(--m-primary-btn-color)"
+                  bgColor="var(--primary-color)"
                   onClick={goToAuthPage}
                 >
                   Sign Up
@@ -109,7 +109,7 @@ function UserInformationDisplay({ setIsOpen, isOpen }) {
                   width="45%"
                   height="2.5vw"
                   type="button"
-                  bgColor="var(--m-primary-btn-color)"
+                  bgColor="var(--primary-color)"
                   onClick={goToAuthPage}
                 >
                   Sign In

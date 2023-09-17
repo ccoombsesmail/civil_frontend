@@ -1,17 +1,13 @@
 import React, { memo, useMemo } from 'react'
 import { useGetAllCommentRepliesQuery } from '../../../../../api/services/comments.ts'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
-import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
 import LineWithOverlayText from '../LineWithTextOverlay/Index'
 import CommentItem from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/CommentItem'
 import { ParentCommentContext } from '../../../../CommonComponents/InfiniteLoaders/ContentItems/CommentItem/ParentCommentContext.tsx'
 
 function ParentComment({ spaceId, commentId }) {
-  const { currentUser } = useGetCurrentUser()
-  const { data: commentData, isLoading, isUninitialized } = useGetAllCommentRepliesQuery(commentId, {
-    skip: currentUser === undefined,
-  })
+  const { data: commentData, isLoading, isUninitialized } = useGetAllCommentRepliesQuery(commentId)
 
   const contextValue = useMemo(() => ({
     commentId,

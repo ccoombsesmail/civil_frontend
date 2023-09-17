@@ -15,7 +15,7 @@ export const MenuTimeContainer = styled('div')`
 
 export const Time = styled('span')`
   color: gray;
-  font-size: 1vw;
+  font-size: clamp(12px, 1vw, 18px);
   padding: 0 10px;
 `
 export const MenuIconContainer = styled('div')` 
@@ -47,7 +47,7 @@ export const ActionMenu = styled('ul')`
   position: absolute;
   transform: translate(-55%, 55%) ;
   display: ${(props) => (props.isOpen ? 'block' : 'none')} ;
-  width: 12vw;
+  width: clamp(200px, 12vw, 500px);
   background-color: white;
   box-shadow: 0px 10px 20px rgb(60 60 60 / 10%);
   border-radius:  .5em;
@@ -73,7 +73,7 @@ export const ActionMenuItem = styled('li')`
 
   span {
     font-weight: 500;
-    font-size: .65vw !important;
+    font-size: clamp(12px .65vw, 18px)
   }
 
 `

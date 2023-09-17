@@ -15,21 +15,18 @@ import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
 
 function CommentThread() {
   const { commentId, spaceId } = useParams()
-  const { currentUser } = useGetCurrentUser()
 
   const {
     data: comments,
     isLoading: isCommentsLoading,
     isUninitialized: isCommentsUninitialized,
-  } = useGetAllCommentRepliesQuery(commentId, { skip: !currentUser })
+  } = useGetAllCommentRepliesQuery(commentId)
 
   const {
     data: space,
     isLoading: isSpaceLoading,
     isUninitialized: isSpaceUninitialized,
-  } = useGetSpaceQuery(spaceId, {
-    skip: !currentUser,
-  })
+  } = useGetSpaceQuery(spaceId)
 
   const {
     POSITIVE: positiveComments,

@@ -1,25 +1,28 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { MenuTime } from '../MenuTime/Index'
 import { getTimeSince } from '../../../../../generic/string/dateFormatter'
 import UsernameAndTag from '../../../../CommonComponents/UsernameAndTag/Index'
 import { ProfileIcon } from '../Style'
 
-import { SpaceLike } from '../../../../../enums/notification_types'
 import { LikeClickedSvg } from '../../../../../svgs/svgs'
 import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 import { Row, RowItem } from '../../../../CommonComponents/AppTable/Style'
 
-function SpaceLikeNotification({ notification }) {
-  console.log(notification)
-
+function LikeNotification({ notification, contentType, eventType }) {
   const {
     givingUserId, givingUserUsername, givingUserIconSrc,
-    givingUserTag, spaceId,
+    givingUserTag, spaceId, discussionId,
   } = notification
+
   const handleClick = (e) => {
     e.stopPropagation()
   }
+
+  const to = useMemo(() => {
+    if (discussionId) return `/home/spaces/${spaceId}/discussions/${discussionId}`
+    return `/home/spaces/${spaceId}/discussions`
+  }, [spaceId, discussionId])
   return (
     <tbody>
       <Row gridTemplateCols="1fr 1fr 3fr 1fr">
@@ -43,8 +46,8 @@ function SpaceLikeNotification({ notification }) {
             {' '}
             Liked Your
             {' '}
-            <Link onClick={handleClick} to={`/home/spaces/${spaceId}/discussions`}>
-              Space!
+            <Link onClick={handleClick} to={to}>
+              {`${contentType}!`}
             </Link>
             {' '}
             😊
@@ -54,7 +57,7 @@ function SpaceLikeNotification({ notification }) {
           <MenuTime
             time={getTimeSince(notification.createdAt)}
             id={notification.id}
-            eventType={SpaceLike}
+            eventType={eventType}
           />
         </RowItem>
       </Row>
@@ -62,4 +65,4 @@ function SpaceLikeNotification({ notification }) {
   )
 }
 
-export default SpaceLikeNotification
+export default LikeNotification

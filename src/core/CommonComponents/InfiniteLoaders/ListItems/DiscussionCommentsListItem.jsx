@@ -1,5 +1,4 @@
 import React, { memo, useContext, useMemo } from 'react'
-import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import { useGetAllCommentsQuery } from '../../../../api/services/comments.ts'
 import ErrorBoundary from '../../ErrorBoundry/Index'
 import CommentItem from '../ContentItems/CommentItem/CommentItem'
@@ -8,8 +7,6 @@ import { CommentListItemContext } from '../utils/CommentListItemContext.ts'
 
 function DiscussionCommentsListItem({ index, style }) {
   const currentPage = Math.floor(index / 5)
-  const { currentUser } = useGetCurrentUser()
-
   const {
     spaceId,
     isReplies,
@@ -18,9 +15,7 @@ function DiscussionCommentsListItem({ index, style }) {
     discussionId,
   } = useContext(CommentListItemContext)
 
-  const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllCommentsQuery({discussionId, currentPage}, {
-    skip: !currentUser,
-  })
+  const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetAllCommentsQuery({discussionId, currentPage})
   let content
   if (isLoadingCurrent || isUninitialized || !data) {
     content = <div>Loading...</div>

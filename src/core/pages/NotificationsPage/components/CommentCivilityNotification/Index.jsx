@@ -32,9 +32,9 @@ function CommentCivilityNotifcation({ notification }) {
         <RowItem>
           {
           notification.new < 0 ? (
-            <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
+            <img style={{width: '24px'}} alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
           ) : (
-            <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
+            <img style={{width: '24px'}} alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
           )
         }
         </RowItem>

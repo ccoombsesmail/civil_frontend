@@ -14,9 +14,7 @@ function PopularDiscussionsFeed() {
 
   const {
     data: currentDiscussions, isLoading: isLoadingCurrent, isFetching: isFetchingCurrent, isUninitialized: isCurrentUninitialized,
-  } = useGetPopularDiscussionsQuery(currentPage, {
-    skip: !currentUser,
-  })
+  } = useGetPopularDiscussionsQuery(currentPage)
 
   useEffect(() => {
     if (currentDiscussions) {

@@ -5,8 +5,10 @@ import PopularDiscussionsFeed from './components/PopularDiscussionsFeed/PopularD
 import TrendingSpaces from './components/TrendingSpaces/TrendingSpaces'
 import FollowedSpacesFeed from '../../../../../../CommonComponents/InfiniteLoaders/SharedFeeds/FollowedSpacesFeed/Index'
 import FollowedDiscussionsFeed from '../../../../../../CommonComponents/InfiniteLoaders/SharedFeeds/FollowedDiscussionsFeed/Index'
+import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 
 function FeedTabs() {
+  const { currentUser } = useGetCurrentUser()
   return (
     <TabView
       className="w-full"
@@ -39,27 +41,33 @@ function FeedTabs() {
       >
         <TrendingSpaces />
       </TabPanel>
-      <TabPanel
-        header="Followed Spaces"
-        pt={{
-          content: {
-            className: 'w-full',
-          },
-        }}
-      >
-        <FollowedSpacesFeed />
-      </TabPanel>
+      {currentUser
+        ? (
+          <TabPanel
+            header="Followed Spaces"
+            pt={{
+              content: {
+                className: 'w-full',
+              },
+            }}
+          >
+            <FollowedSpacesFeed />
+          </TabPanel>
+        ) : null }
+      {currentUser ? (
 
-      <TabPanel
-        header="Followed Discussions"
-        pt={{
-          content: {
-            className: 'w-full',
-          },
-        }}
-      >
-        <FollowedDiscussionsFeed />
-      </TabPanel>
+        <TabPanel
+          header="Followed Discussions"
+          pt={{
+            content: {
+              className: 'w-full',
+            },
+          }}
+        >
+          <FollowedDiscussionsFeed />
+        </TabPanel>
+      ) : null }
+
     </TabView>
   )
 }

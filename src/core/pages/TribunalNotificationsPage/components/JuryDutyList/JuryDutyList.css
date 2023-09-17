@@ -1,0 +1,6 @@
+.duty_list_item_container:hover .p-divider-content {
+  background-color: var(--surface-100) !important;
+  background: red;
+
+}
+

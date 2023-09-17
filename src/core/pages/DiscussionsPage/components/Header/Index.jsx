@@ -36,11 +36,11 @@ function Header({ isOpen, setIsOpen }) {
 
   const { currentUser } = useGetCurrentUser()
   const { data: space, isLoading: isSpaceLoading, isUninitialized: isSpaceUninitialized } = useGetSpaceQuery(spaceId, {
-    skip: !currentUser || !spaceId,
+    skip: !spaceId,
   })
 
   const { data: discussion, isDiscussionLoading, isDiscussionUninitialized } = useGetDiscussionQuery(discussionId, {
-    skip: !currentUser || !discussionId,
+    skip: !discussionId,
   })
 
   const commonProps = useMemo(() => ({

@@ -18,9 +18,7 @@ function UserCommentsListItem({ index, style }) {
     profileUserId,
   } = useContext(CommentListItemContext)
 
-  const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetUserCommentsQuery({userId: profileUserId, currentPage}, {
-    skip: !currentUser,
-  })
+  const { data, isLoading: isLoadingCurrent, isUninitialized } = useGetUserCommentsQuery({userId: profileUserId, currentPage})
   let content
   if (isLoadingCurrent || isUninitialized || !data) {
     content = <div>Loading...</div>

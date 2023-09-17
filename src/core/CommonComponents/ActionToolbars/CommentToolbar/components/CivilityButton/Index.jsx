@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { memo, useState } from 'react'
+import React, { memo, useCallback, useContext, useState } from 'react'
 import RangeSlider from '../../../../Form/RangeSlider/Index'
 import useUpdateCommentCivility from './hooks/useUpdateCommentCivility'
 import { ThemeIconTooltipSticky } from '../../../../Tooltip/Index'
+import { LoginFormVisibleStateContext } from '../../../../../../LoginFormVisibleStateContext'
+import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 
 function Icon({ comment }) {
   if (!comment || comment.civility === 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />
@@ -14,6 +16,13 @@ function Icon({ comment }) {
 function CivilityButton({ comment }) {
   const updateCommentCivility = useUpdateCommentCivility(comment)
   const [visible, setVisible] = useState(false)
+  const { currentUser } = useGetCurrentUser()
+
+  const { setLoginFormVisible } = useContext(LoginFormVisibleStateContext)
+  const setTooltipVisible = useCallback(() => {
+    if (currentUser) setVisible(true)
+    else setLoginFormVisible(true)
+  }, [currentUser])
 
   return (
     <ThemeIconTooltipSticky
@@ -29,7 +38,7 @@ function CivilityButton({ comment }) {
     )}
       placement="top"
       visible={visible}
-      setVisible={setVisible}
+      setVisible={setTooltipVisible}
       Icon={Icon}
       comment={comment}
     />

@@ -15,20 +15,17 @@ export const ColHeader = styled('div')`
   grid-template-columns: ${(props) => props.gridTemplateCols || '3fr 1.9fr 1fr'};
   align-items: center;
   padding: 10px 30px 10px 10px;
-  background-color: var(--bg-accent);
+  background-color: var(--highlight-text-color);
   border-radius: .5vw;
+  width: 100%;
 
 `
 
 export const ColItem = styled('div')`
   color: white;
   font-weight: bold;
-  letter-spacing: .1vw;
   font-size: clamp(12px, 1vw, 25px);
   text-align: center;
-  /* @media only screen and (max-width: 600px) {
-    font-size: 2vw;
-  } */
 
 `
 
@@ -36,11 +33,10 @@ export const Row = styled('div')`
     display: grid;
     grid-template-columns: ${(props) => props.gridTemplateCols || '3fr 2fr 1fr'};
     align-items: center;
-    padding: 5px 20px;
+    padding: 5px 10px;
     margin: 3px;
 
     height: ${(props) => props.height || '15vh'};
-    /* overflow: hidden; */
     border-radius: .5vw;
     box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
     cursor: pointer;
@@ -51,6 +47,7 @@ export const Row = styled('div')`
       /* transform: scale(1); */
       box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);
     }
+
   
   
 `
@@ -65,17 +62,7 @@ export const RowItem = styled('div')`
   flex-direction: column;
   justify-content: center;
   align-items: ${(props) => props.alignItems || 'center'};
-  letter-spacing: .1vw;    
   font-size: clamp(12px, .8vw, 25px);
 
 
-
-  img {
-    width: 2vw;
-    height: 2vw;
-    @media only screen and (max-width: 600px) {
-      width: 4vw;
-      height: 4vw;
-    }
-  }
 `

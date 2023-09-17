@@ -18,6 +18,7 @@ export default (userId) => {
 
   useEffect(() => {
     const getGatwayTokens = async () => {
+      console.log(userId)
       const gatewayTokenCaptcha = await findGatewayToken(connection, new PublicKey(userId), captchaNetworkKey)
       const gatewayTokenUniqueness = await findGatewayToken(connection, new PublicKey(userId), uniquenessNetworkKey)
 

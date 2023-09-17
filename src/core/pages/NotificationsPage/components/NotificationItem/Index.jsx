@@ -1,29 +1,32 @@
 import React from 'react'
 // import { useNavigate } from 'react-router-dom'
 import {
-  NewFollower, CommentCivilityGiven, CommentLike, SpaceLike,
+  NewFollower, CommentCivilityGiven, CommentLike, SpaceLike, DiscussionLike,
 } from '../../../../../enums/notification_types'
 import FollowNotifcation from '../FollowNotification/Index'
 import CommentCivilityNotifcation from '../CommentCivilityNotification/Index'
 import CommentLikeNotification from '../LikeNotification/Index'
-import SpaceLikeNotification from '../SpaceLikeNotification/Index'
-import { ErrorMessage } from '../../../../../api/util/ErrorMessage'
+import LikeNotification from '../SpaceLikeNotification/Index'
 
 function NotificationItem({ notification }) {
   let error = false
-  let ItemComponent
-  switch (notification.eventType) {
+  let component = null
+  const { eventType } = notification
+  switch (eventType) {
     case NewFollower:
-      ItemComponent = FollowNotifcation
+      component = <FollowNotifcation notification={notification}/>
       break
     case CommentCivilityGiven:
-      ItemComponent = CommentCivilityNotifcation
+      component = <CommentCivilityNotifcation notification={notification} />
       break
     case CommentLike:
-      ItemComponent = CommentLikeNotification
+      component = <CommentLikeNotification notification={notification} />
       break
     case SpaceLike:
-      ItemComponent = SpaceLikeNotification
+      component = <LikeNotification notification={notification} contentType="Space" eventType={eventType} />
+      break
+    case DiscussionLike:
+      component = <LikeNotification notification={notification} contentType="Discussion" eventType={eventType} />
       break
     default:
       error = true
@@ -31,9 +34,7 @@ function NotificationItem({ notification }) {
   }
 
   if (error) return null
-  return (
-    <ItemComponent notification={notification} />
-  )
+  return component
 }
 
 export default NotificationItem

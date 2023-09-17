@@ -1,5 +1,5 @@
 import React, {
-  memo, useMemo, useState,
+  memo, useContext, useMemo, useState, useCallback,
 } from 'react'
 import { Dialog } from 'primereact/dialog'
 import { Message } from 'primereact/message'
@@ -10,9 +10,19 @@ import {
   VotingContainer, VotesAgainst, VotesFor, MiddleSection, VotesContainer,
 } from './Style'
 import ExpandButton from '../../../CommonComponents/Buttons/ExpandButton/Index'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
+import { LoginFormVisibleStateContext } from '../../../../LoginFormVisibleStateContext'
 
 function VotingBox({ contentId, reportStats, isFetching }) {
   const [visible, setVisible] = useState(false)
+  const { currentUser } = useGetCurrentUser()
+  const { setLoginFormVisible } = useContext(LoginFormVisibleStateContext)
+
+  const handleClick = useCallback(() => {
+    if (currentUser) setVisible(true)
+    else setLoginFormVisible(true)
+  }, [])
+
   const votingTimeUp = (+new Date(reportStats?.reportPeriodEnd) - +new Date()) <= 0
   const hasAlreadyVoted = useMemo(
     () => (reportStats.votedToStrike || reportStats.votedToAcquit),
@@ -77,7 +87,7 @@ function VotingBox({ contentId, reportStats, isFetching }) {
 
         { !votingTimeUp && <CastBallotSvg className="mt-5" /> }
         {(reportStats && !votingTimeUp) && (
-        <ExpandButton onClick={() => setVisible(true)}>
+        <ExpandButton onClick={handleClick}>
           {hasAlreadyVoted ? 'Change Your Vote' : 'Cast Your Vote'}
         </ExpandButton>
         )}

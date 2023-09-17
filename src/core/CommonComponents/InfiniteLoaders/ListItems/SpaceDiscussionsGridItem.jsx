@@ -10,7 +10,7 @@ import { Button } from 'primereact/button'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 import CardLoader from '../../CardLoader/CardLoader'
 import { truncateAtIndex } from '../../../../generic/string/truncateAtIndex'
-import useGoToUserProfile from '../../../hooks/routing/useGoToUserProfile'
+import useGoToUserProfileHook from '../../../hooks/routing/useGoToUserProfile'
 import { longUsernameDisplay } from '../../../../generic/string/longUsernameDisplay'
 import UserIcon from '../../UserIcon/Index'
 import useGoToCommentThread from '../../../hooks/routing/useGoToCommentThread'
@@ -29,7 +29,7 @@ function DiscussionGridItem({ discussion }) {
     createdByUserId, createdByUsername, createdByTag, title, createdByIconSrc,
   } = discussion
 
-  const goToUserProfile = useGoToUserProfile(createdByUserId)
+  const goToUserProfile = useGoToUserProfileHook(createdByUserId)
   const goToDiscussion = useGoToCommentThread(discussion.spaceId, discussion.id)
   const formattedUsername = longUsernameDisplay(createdByUsername)
   const formattedTag = longUsernameDisplay(createdByTag)
@@ -92,21 +92,17 @@ function DiscussionGridItem({ discussion }) {
       // Fetch meta tags from the website or use thumbImgUrl for
         headerContent = <OgImg className="grid-item-header" url={externalContentUrl} />
         break
-        // Add more cases as needed
       default:
         headerContent = null
     }
   } else if (discussion.userUploadedImageUrl) {
     headerContent = <img className="grid-item-header" src={discussion.userUploadedImageUrl} alt="Uploaded image" />
   } else if (discussion.userUploadedVodUrl) {
-  // Display the uploaded video. You can use a video player library or the native HTML5 video element
     headerContent = <video className="grid-item-header" src={discussion.userUploadedVodUrl} controls />
   } else {
     headerContent = (
       <div>
         <b>General Discussion</b>
-        {/* {' '}
-        {spaceTitle} */}
       </div>
     )
   }

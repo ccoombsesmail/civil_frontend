@@ -37,13 +37,13 @@ function UserProfile() {
   const {
     data: user, isLoading, isUninitialized, isFetching,
   } = useGetUserQuery(profileUserId, {
-    skip: !currentUser || !profileUserId,
+    skip: !profileUserId,
   })
 
-  if (isCurrentUserUninitialized || isUninitialized) return null
-  if (isCurrentUserLoading || isLoading) return <CircleLoading size="20vw" />
+  if (isUninitialized) return null
+  if (isLoading) return <CircleLoading size="20vw" />
 
-  const isCurrentUserProfile = profileUserId === currentUser.userId
+  const isCurrentUserProfile = profileUserId === currentUser?.userId
 
   return (
     <Container>
@@ -73,7 +73,7 @@ function UserProfile() {
             </div>
             <Bio>{user?.bio}</Bio>
           </FlexDiv>
-          { isCurrentUserProfile ? null : <FollowButton isUserLoading={isLoading} isUserFetching={isFetching} user={user} profileUserId={profileUserId} /> }
+          { isCurrentUserProfile || !currentUser ? null : <FollowButton isUserLoading={isLoading} isUserFetching={isFetching} user={user} profileUserId={profileUserId} /> }
           <FullWidthDiv />
         </TabsIconContainer>
 

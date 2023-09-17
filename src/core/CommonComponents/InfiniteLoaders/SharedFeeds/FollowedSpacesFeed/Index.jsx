@@ -5,14 +5,18 @@ import CardLoader from '../../../CardLoader/CardLoader'
 import InfiniteListLoader from '../../InfiniteListLoader'
 import FollowedSpaceListItem from '../../ListItems/FollowedSpaceListItem'
 import { CardContainer } from '../Style/index'
+import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 
 function FollowedSpacesFeed() {
   const [currentPage, setCurrentPage] = useState(0)
   const [allData, setAllData] = useState([])
+  const { currentUser } = useGetCurrentUser()
   const
     {
       data: followedSpaces, isLoading: isLoadingFollowedSpaces, isUninitialized, isFetching,
-    } = useGetAllFollowedSpacesQuery(currentPage)
+    } = useGetAllFollowedSpacesQuery(currentPage, {
+      skip: !currentUser,
+    })
 
   useEffect(() => {
     if (followedSpaces) {

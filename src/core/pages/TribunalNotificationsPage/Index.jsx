@@ -1,27 +1,23 @@
 import React, { useState } from 'react'
 import { Button } from 'primereact/button'
+import { TabView, TabPanel } from 'primereact/tabview'
 
-import { useGetAllNotificationsQueryState } from '../../../api/services/notifications.ts'
-import { CircleLoading } from '../../../svgs/spinners/CircleLoading'
-import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
   Middle, Left, Right, DiscussionsGrid,
 } from '../Style'
-import NotificationItem from './components/NotificationItem/Index'
 import {
-  BorderContainer, NotificationList, Container, Header, GridContainer,
+  BorderContainer, Container, GridContainer,
 } from './Style'
-import { Table, ColHeader, ColItem } from '../../CommonComponents/AppTable/Style'
+import JurtDutyList from './components/JuryDutyList/JuryDutyList'
+import NotificationList from './components/NotificationList/NotificationList'
 
 function TribunalNotifications() {
-  const { currentUser } = useGetCurrentUser()
-  const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser?.userId)
-  const { tribunalNotifications } = notifications || {}
   const [isOpen, setIsOpen] = useState(true)
+
   return (
     <GridContainer isOpen={isOpen}>
-      <DiscussionsGrid isOpen={isOpen}>
+      <DiscussionsGrid isOpen={isOpen} gridLayout="1fr 2fr 1.5fr">
         <Left>
           { isOpen ? <UserInformationDisplay isOpen={isOpen} /> : null }
         </Left>
@@ -36,34 +32,24 @@ function TribunalNotifications() {
                 onClick={() => setIsOpen(!isOpen)}
                 className="absolute left-0 top-0 -translate-x-100 focus:shadow-none border-noround-right"
               />
-              <Header>
-                <p>
-                  Recent Notifications
-                </p>
-              </Header>
-              <Table>
-                <thead>
-                  <ColHeader gridTemplateCols="1fr 1fr 3fr 1fr">
-                    <ColItem> From</ColItem>
-                    <ColItem> Action</ColItem>
-                    <ColItem> Description </ColItem>
-                    <ColItem>  </ColItem>
-                  </ColHeader>
-                </thead>
-                { isUninitialized ? null : (
-                  <NotificationList>
-                    {isLoading ? <CircleLoading /> : tribunalNotifications.map((notification) => (
-                      <NotificationItem key={notification.id} notification={notification} />
-                    ))}
-                  </NotificationList>
-                )}
-              </Table>
+              <NotificationList className="hidden lg:block xl:block" />
+
+              <TabView className="block lg:hidden xl:hidden">
+                <TabPanel header="Tribunal Notifications">
+                  <NotificationList />
+
+                </TabPanel>
+                <TabPanel header="Jury Duty">
+                  <JurtDutyList />
+                </TabPanel>
+
+              </TabView>
 
             </BorderContainer>
           </Container>
         </Middle>
-        <Right>
-          <span>.</span>
+        <Right className="hidden lg:flex xl:flex">
+          <JurtDutyList />
         </Right>
       </DiscussionsGrid>
     </GridContainer>

@@ -14,9 +14,7 @@ function TrendingSpaces() {
 
   const {
     data: currentSpaces, isLoading: isLoadingCurrent, isFetching: isFetchingCurrent, isUninitialized: isCurrentUninitialized,
-  } = useGetAllSpacesQuery(currentPage, {
-    skip: !currentUser,
-  })
+  } = useGetAllSpacesQuery(currentPage)
 
   const [elementRef, width] = useElementWidth()
 

@@ -52,7 +52,7 @@ export const DiscussionsGrid = styled('div')`
   display: grid;
   width: 100%;
   transition: all 1s;
-  grid-template-columns: ${(props) => (props.isOpen ? '1fr 2fr 1fr' : '.1fr 3fr 1fr')};
+  grid-template-columns: ${(props) => (props.isOpen ? props.gridLayout || '1fr 2fr 1fr' : '.1fr 3fr 1fr')};
   @media (max-width: 1250px) {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -79,7 +79,4 @@ export const Right = styled('div')`
   flex-direction: column;
   align-items: flex-end;
   height: 100%;
-  @media (max-width: 1250px) {
-    width: 100%;
-  }
 `

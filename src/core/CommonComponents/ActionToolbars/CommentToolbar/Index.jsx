@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useCallback, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import UpVoteButton from '../components/UpVoteButton/Index'
@@ -11,6 +11,8 @@ import { Container, Left, Right } from '../Style/index'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
 import useUpdateCommentLikes from './hooks/useUpdateCommentLikes.ts'
 import { COMMENT } from '../../../../enums/content_type'
+import { LoginFormVisibleStateContext } from '../../../../LoginFormVisibleStateContext'
+import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 
 function CommentActionToolbar({
   comment,
@@ -20,16 +22,29 @@ function CommentActionToolbar({
     spaceId, discussionId, contentId, ...params
   } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
+  const { currentUser } = useGetCurrentUser()
 
   const {handleUpdateLikes: updateCommentLikesUpvote, isLoading: isUpvoteLoading} = useUpdateCommentLikes(comment, 'upvote', isOnTribunalPage)
   const {handleUpdateLikes: updateCommentLikesDownvote, isLoading: isDownvoteLoading} = useUpdateCommentLikes(comment, 'downvote', isOnTribunalPage)
+
+  const { setLoginFormVisible } = useContext(LoginFormVisibleStateContext)
+  const handleUpvoteClick = useCallback(() => {
+    if (currentUser) updateCommentLikesUpvote()
+    else setLoginFormVisible(true)
+  }, [updateCommentLikesUpvote])
+
+  const handleDownvoteClick = useCallback(() => {
+    if (currentUser) updateCommentLikesUpvote()
+    else setLoginFormVisible(true)
+  }, [updateCommentLikesDownvote])
+
   return (
     <Container>
       <Left>
         <UpVoteButton
           content={comment}
           disabled={(isOnTribunalPage && contentId === comment?.id) || isUpvoteLoading}
-          updateLikes={updateCommentLikesUpvote}
+          updateLikes={handleUpvoteClick}
         />
         <span>
           {likes || 0}
@@ -37,7 +52,7 @@ function CommentActionToolbar({
         <DownVoteButton
           content={comment}
           disabled={(isOnTribunalPage && contentId === comment?.id) || isDownvoteLoading}
-          updateLikes={updateCommentLikesDownvote}
+          updateLikes={handleDownvoteClick}
         />
         { params['*'] && <CommentButton comment={comment} />}
         { (isOnTribunalPage && contentId === comment?.id) ? null : (

@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom'
 
 interface DetectCurrentPageValue {
   isOnTribunalPage: boolean;
-  isOnDiscussionsPage: boolean
+  isOnDiscussionsPage: boolean,
+  isOnHomePage: boolean
 }
 
 export default (): DetectCurrentPageValue => {
@@ -11,5 +12,6 @@ export default (): DetectCurrentPageValue => {
   return useMemo<DetectCurrentPageValue>(() => ({
     isOnTribunalPage: pathname.includes('tribunal'),
     isOnDiscussionsPage: pathname.includes('discussion'),
+    isOnHomePage: pathname === '/home/spaces'
   }), [pathname])
 }

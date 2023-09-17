@@ -45,7 +45,7 @@ function UserInfoHeader({
               ? `User ${longUsernameDisplay(username)} Was Captcha Verfied At The Time This Content Was Created. It Is Very Unlikely This Content Was Created By A Bot`
               : 'User Was Not CAPTCHA Verfied At The Time of Creating This Content, Meaning There Is A Chance A Bot Created This Content'}
             grow="true"
-            targetId="robot-icon"
+            targetId={`robot-icon-${Math.floor(Math.random() * 1000)}`}
           />
           <ThemeIconTooltip
             onClick={e => e.stopPropagation()}
@@ -56,7 +56,7 @@ function UserInfoHeader({
               ? `User ${longUsernameDisplay(username)} Is A Verified Unique User`
               : 'User Was NOT A Verified Unique User At The Time of Creating This Content'}
             grow="true"
-            targetId="unique-icon"
+            targetId={`unique-icon-${Math.floor(Math.random() * 1000)}`}
           />
         </BadgeContainer>
 

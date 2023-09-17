@@ -27,7 +27,7 @@ function DiscussionThread() {
   } = useGetAllCommentsQuery(
     { discussionId, currentPage },
     {
-      skip: !currentUser || !discussionId,
+      skip: !discussionId,
     },
   )
 

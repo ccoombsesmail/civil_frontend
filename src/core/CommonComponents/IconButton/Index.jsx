@@ -8,7 +8,7 @@ function IconButton({
 }) {
   const onClickHandler = useCallback((e) => {
     e.stopPropagation()
-    onClick()
+    onClick(e)
   }, [onClick])
 
   return (

@@ -69,7 +69,7 @@ export const discussionsApi = emptySplitApi.injectEndpoints({
           : [{ type: "Discussion", id: "LIST" }],
     }),
     getDiscussion: builder.query<any, any>({
-      query: (discussionId) => ({ url: `/discussions/get-one/${discussionId}`, method: 'GET' }),
+      query: (discussionId) => ({ url: `/discussions/${discussionId}`, method: 'GET' }),
       // providesTags: (result) => [{ type: 'Spaces', id: 'LIST' }],
     }),
     getGeneralDiscussionId: builder.query<any, any>({

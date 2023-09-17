@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Tooltip } from 'primereact/tooltip'
 import { ConfirmPopup } from 'primereact/confirmpopup'
 import { InfoIconSvg } from '../../../svgs/svgs'
@@ -18,7 +18,7 @@ export function ThemeIconTooltipSticky({
         message={Component}
         footer={<div className="pb-7" />}
       />
-      <LightButton bgcolor={bgColor} grow={grow} className={targetId} ref={buttonEl} onClick={() => setVisible(true)}>
+      <LightButton bgcolor={bgColor} grow={grow} className={targetId} ref={buttonEl} onClick={setVisible}>
         <Icon comment={comment} />
       </LightButton>
     </>
@@ -26,7 +26,7 @@ export function ThemeIconTooltipSticky({
 }
 
 function ThemeIconTooltip({
-  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false, targetId
+  tooltipText, tooltipHeader, Icon, onClick, bgColor, grow = false, targetId,
 }) {
   return (
     <>

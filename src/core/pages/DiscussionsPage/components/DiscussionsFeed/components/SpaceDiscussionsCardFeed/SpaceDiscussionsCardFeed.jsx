@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetAllSpaceDiscussionsQuery } from '../../../../../../../api/services/discussions.ts'
-import useGetCurrentUser from '../../../../../../App/hooks/useGetCurrentUser'
 import CardLoader from '../../../../../../CommonComponents/CardLoader/CardLoader'
 import InfiniteListLoader from '../../../../../../CommonComponents/InfiniteLoaders/InfiniteListLoader'
 import SpaceDiscussionListItem from '../../../../../../CommonComponents/InfiniteLoaders/ListItems/SpaceDiscussionListItem'
@@ -10,13 +9,12 @@ import SpaceDiscussionListItem from '../../../../../../CommonComponents/Infinite
 function SpaceDiscussionsCardFeed() {
   const [currentPage, setCurrentPage] = useState(0)
   const [allData, setAllData] = useState([])
-  const { currentUser } = useGetCurrentUser()
   const { spaceId } = useParams()
 
   const {
     data: currentSpaces, isLoading: isLoadingCurrent, isFetching: isFetchingCurrent, isUninitialized: isCurrentUninitialized,
   } = useGetAllSpaceDiscussionsQuery({ spaceId, currentPage}, {
-    skip: !currentUser || !spaceId,
+    skip: !spaceId,
   })
 
   useEffect(() => {

@@ -37,7 +37,7 @@ export const Item = styled('li')`
   border-radius: .5em;
   /* background-color: var(--m-secondary-background-color); */
   font-size: 1vw;
-  padding: 0.75rem 1.25rem;
+  padding: 0 1.25rem;
   /* margin: 1vw 0; */
   @media only screen and (max-width: 600px) {
       font-size: 3.7vw;

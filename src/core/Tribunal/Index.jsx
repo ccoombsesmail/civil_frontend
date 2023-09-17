@@ -42,7 +42,7 @@ function Tribunal() {
     isUninitialized: isSpaceUninitialized,
     isSuccess: spaceLoaded,
   } = useGetSpaceQuery(contentId, {
-    skip: !contentId || !currentUser || contentType !== SPACE,
+    skip: !contentId || contentType !== SPACE,
   })
 
   const {
@@ -51,7 +51,7 @@ function Tribunal() {
     isUninitialized: isDiscussionUninitialized,
     isSuccess: discussionLoaded,
   } = useGetDiscussionQuery(contentId, {
-    skip: !contentId || !currentUser || contentType !== DISCUSSION,
+    skip: !contentId || contentType !== DISCUSSION,
   })
 
   const {
@@ -60,7 +60,7 @@ function Tribunal() {
     isUninitialized: isCommentUninitialized,
     isSuccess: commentLoaded,
   } = useGetCommentQuery(contentId, {
-    skip: !contentId || !currentUser || contentType !== COMMENT,
+    skip: !contentId || contentType !== COMMENT,
   })
 
   const {
@@ -70,7 +70,7 @@ function Tribunal() {
     isSuccess,
     isFetching,
     refetch,
-  } = useGetReportQuery(contentId, { skip: !contentId || !currentUser })
+  } = useGetReportQuery(contentId, { skip: !contentId })
 
   const Content = useMemo(() => {
     if (spaceLoaded) {

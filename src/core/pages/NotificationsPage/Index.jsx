@@ -7,7 +7,7 @@ import useGetCurrentUser from '../../App/hooks/useGetCurrentUser'
 import { Table, ColHeader, ColItem } from '../../CommonComponents/AppTable/Style'
 import UserInformationDisplay from '../../UserInformationDisplay/Index'
 import {
-  Middle, Left, Right, HomePageGrid, DiscussionsGrid,
+  Middle, Left, Right, DiscussionsGrid,
 } from '../Style'
 import NotificationItem from './components/NotificationItem/Index'
 import {
@@ -19,7 +19,7 @@ function Notifications() {
   const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser?.userId, { skip: !currentUser })
   const { userNotifications } = notifications || {}
   const [isOpen, setIsOpen] = useState(true)
-
+  console.log(userNotifications)
   return (
     <GridContainer isOpen={isOpen}>
       <DiscussionsGrid isOpen={isOpen}>

@@ -7,7 +7,6 @@ import { CommentSvg } from '../../../../../../svgs/svgs'
 import CreateCommentForm from '../../../../../Forms/CommentForm/Index'
 import useGetSpaceCommentState from './hooks/useGetSpaceCommentState'
 import { initialConfig } from '../../../../Lexical/App.tsx'
-import { CircleLoading } from '../../../../../../svgs/spinners/CircleLoading'
 
 function CommentButton({ space }) {
   const [visible, setVisible] = useState(false)
@@ -28,7 +27,7 @@ function CommentButton({ space }) {
           />
         </Dialog>
       </LexicalComposer>
-      { spaceCommentFormState ? <IconButton icon={<CommentSvg />} onClick={() => setVisible(true)} /> : <CircleLoading size={5} /> }
+      { spaceCommentFormState ? <IconButton icon={<CommentSvg />} onClick={() => setVisible(true)} /> : null }
 
     </>
   )

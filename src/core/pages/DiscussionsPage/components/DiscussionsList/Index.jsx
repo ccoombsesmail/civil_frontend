@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { Dialog } from 'primereact/dialog'
@@ -15,6 +15,7 @@ import useGetCurrentUser from '../../../../App/hooks/useGetCurrentUser'
 import CreateDiscussionForm from '../../../../Forms/DiscussionForm/Index'
 import { initialConfig } from '../../../../CommonComponents/Lexical/App.tsx'
 import ExpandButton from '../../../../CommonComponents/Buttons/ExpandButton/Index'
+import { LoginFormVisibleStateContext } from '../../../../../LoginFormVisibleStateContext'
 
 function DiscussionsList() {
   const { spaceId } = useParams()
@@ -22,16 +23,20 @@ function DiscussionsList() {
   const { data: space, isUninitialized } = useGetSpaceQuery(spaceId, {
     skip: !spaceId,
   })
+  const { setLoginFormVisible } = useContext(LoginFormVisibleStateContext)
 
-  const {data: generalDiscussionId } = useGetGeneralDiscussionIdQuery(spaceId, {
-    skip: !currentUser,
-  })
+  const {data: generalDiscussionId } = useGetGeneralDiscussionIdQuery(spaceId)
 
   const goToDiscussion = useGoToDiscussion(generalDiscussionId?.id)
 
   const spaceTitle = isUninitialized ? null : space?.title
 
   const [visible, setVisible] = useState(false)
+
+  const handleStartDiscussionBtnClick = useCallback(() => {
+    if (currentUser) setVisible(true)
+    else setLoginFormVisible(true)
+  }, [currentUser])
 
   return (
     <Container>
@@ -50,7 +55,7 @@ function DiscussionsList() {
           or Start Your Own...
         </h1>
         <div style={{ display: 'flex', margin: '2em 0' }}>
-          <ExpandButton type="button" onClick={() => setVisible(true)}>
+          <ExpandButton type="button" onClick={handleStartDiscussionBtnClick}>
             Start A Discussion +
           </ExpandButton>
           <ExpandButton type="button" onClick={goToDiscussion}>

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const BorderContainer = styled('div')`
-  border: 1px solid gray;
+  border: 1px solid rgba(200,200,200,0.25);
   border-top: none;
   z-index: 9999;
   width: 100%;
@@ -41,7 +41,6 @@ export const GridContainer = styled('div')`
   }
 `
 
-
 export const Container = styled('div')`
   position: relative;
   display: flex;
@@ -52,11 +51,13 @@ export const Container = styled('div')`
 
 export const Header = styled('header')` 
   width: 100%;
-  border-bottom: 1px solid gray;
+  background: #f8f9fa;
+  border: 1px solid rgba(200,200,200,0.25);
   padding: 2vw 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 128px;
 
   p {
     margin: 0 1vw;
