@@ -1,7 +1,6 @@
 FROM node:16.18.0
 
 # ENV NODE_ENV=production
-ENV REACT_APP_CLERK_FRONTEND_API=clerk.genuine.leech-38.lcl.dev
 
 EXPOSE 8080
 
@@ -22,7 +21,7 @@ COPY . .
 
 # COPY . .
 
-RUN npm run build-vite
+RUN npm run build-prod
 
 
 
