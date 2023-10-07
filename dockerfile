@@ -1,16 +1,14 @@
-FROM node:16.18.0
+FROM --platform=linux/amd64 node:16.18.1
 
-# ENV NODE_ENV=production
+ENV NODE_ENV=production
 
 EXPOSE 8080
 
 WORKDIR /
-ENV NODE_OPTIONS=--max-old-space-size=4096
+# ENV NODE_OPTIONS=--max-old-space-size=4096
 
-RUN npm i -g vite
-
-# COPY ["package.json", "vite.config.ts", "./"]
 COPY . .
+
 
 # RUN npm config set strict-ssl false
 
@@ -18,10 +16,6 @@ COPY . .
 # RUN yarn config set "strict-ssl" false -g
 # RUN yarn install --production=false
 
-
-# COPY . .
-
-RUN npm run build-prod
 
 
 

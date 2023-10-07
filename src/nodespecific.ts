@@ -1,5 +1,3 @@
-// import { Buffer } from 'buffer'
-// import Process from 'process'
+import { Buffer } from 'buffer'
 
-// globalThis.process = Process
-// globalThis.Buffer = Buffer
+globalThis.Buffer = Buffer

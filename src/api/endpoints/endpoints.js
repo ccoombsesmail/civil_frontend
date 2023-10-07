@@ -9,7 +9,7 @@ export const NOTIFICATIONS_SERVICE = `http://${window.location.hostname}:8093/no
 
 export const ENDPOINTS = {
   production: {
-    BACKEND: `http://${window.location.hostname}/api/v1`,
+    BACKEND: `https://backend.staging.civil-beta.civil-beta.xyz/api/v1`,
     UPLOAD_SERVICE: `http://${window.location.hostname}/multi-api/v1`,
     NOTIFICATIONS_SERVICE: `http://${window.location.hostname}/notifications-api/v1`,
     NOTIFICATIONS_SERVICE_WS: `http://${window.location.hostname}`,

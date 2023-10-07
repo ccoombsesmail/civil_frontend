@@ -19,6 +19,7 @@ import {
   GlowWalletAdapter,
   PhantomWalletAdapter,
   TorusWalletAdapter,
+  UnsafeBurnerWalletAdapter
 } from '@solana/wallet-adapter-wallets'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { Dialog } from 'primereact/dialog'
@@ -63,11 +64,12 @@ function App() {
   const wallets = useMemo(
     () => [
       new TorusWalletAdapter(),
-      new PhantomWalletAdapter(),
-      new GlowWalletAdapter(),
+      // new GlowWalletAdapter(),
+      // new UnsafeBurnerWalletAdapter()
     ],
     [network],
   )
+  console.log(wallets)
   const dontShowBgImage = pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate')
   return (
     <ConnectionProvider endpoint={endpoint}>
