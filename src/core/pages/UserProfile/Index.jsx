@@ -50,7 +50,7 @@ function UserProfile() {
       <Banner src="https://cdn.discordapp.com/attachments/1048453486456619088/1065232803744202812/C00mbsie_create_a_background_image_of_a_field_with_a_19th_centu_74420bf5-1e90-44e6-9064-b5c6c5574098.png" alt="" />
       <HeaderContainer>
         <TabsIconContainer>
-          <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} size="3vw" />
+          <UserIcon src={user?.iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'} />
           <FlexDiv>
             <div className="flex-column">
               <UsernameAndTag

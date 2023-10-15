@@ -109,7 +109,6 @@ export const onRemoveSpaceFollowQueryStarted = async (
   } else if (updateFocusedSpaceQuery) {
     patchResult = dispatch(
       spacesApi.util.updateQueryData("getSpace", id, (draft) => {
-        console.log(current(draft));
         draft.isFollowing = false;
       })
     );

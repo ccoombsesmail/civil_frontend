@@ -38,8 +38,6 @@ export const onAddDiscussionFollowQueryStarted = async (
 
   let patchResult;
   if (updateFollowedDiscussionsQuery) {
-    console.log(updateFollowedDiscussionsQuery)
-    console.log(currentPage)
     patchResult = dispatch(
       discussionsApi.util.updateQueryData(
         "getAllFollowedDiscussions",
@@ -135,8 +133,6 @@ export const onRemoveDiscussionFollowQueryStarted = async (
 ): Promise<void> => {
 let patchResult;
 if (updateFollowedDiscussionsQuery) {
-  console.log(updateFollowedDiscussionsQuery)
-  console.log(currentPage)
   patchResult = dispatch(
     discussionsApi.util.updateQueryData(
       "getAllFollowedDiscussions",

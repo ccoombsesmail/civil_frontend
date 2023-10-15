@@ -15,12 +15,6 @@ import {
 } from '@solana/wallet-adapter-react'
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { clusterApiUrl } from '@solana/web3.js'
-import {
-  GlowWalletAdapter,
-  PhantomWalletAdapter,
-  TorusWalletAdapter,
-  UnsafeBurnerWalletAdapter
-} from '@solana/wallet-adapter-wallets'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { Dialog } from 'primereact/dialog'
 import GlobalStyle from '../../theme/styles'
@@ -33,6 +27,8 @@ import LoadingPage from '../CommonComponents/LoadingPage/Index'
 import { UserContext } from './UserContext/Index'
 import { BgImage } from '../pages/Style'
 import ErrorBoundary from '../CommonComponents/ErrorBoundry/Index'
+import WelcomeModal from '../WelcomeModal/WelcomeModal'
+
 import LoginForm from '../Forms/LoginForm/LoginForm'
 import { LoginFormVisibleStateContext } from '../../LoginFormVisibleStateContext'
 
@@ -45,6 +41,8 @@ const UserProfile = React.lazy(() => import('../pages/UserProfile/Index'))
 const AuthFlow = React.lazy(() => import('../AuthFlow/Index'))
 
 const MainContent = React.lazy(() => import('../MainContent/Index'))
+const CreateTagModal = React.lazy(() => import('../Forms/CreateTagForm/Index'))
+
 
 const elitpicIn = cssTransition({
   enter: 'slide-in-elliptic-top-fwd',
@@ -63,23 +61,23 @@ function App() {
   const endpoint = useMemo(() => clusterApiUrl(network, false), [network])
   const wallets = useMemo(
     () => [
-      new TorusWalletAdapter(),
-      // new GlowWalletAdapter(),
       // new UnsafeBurnerWalletAdapter()
     ],
     [network],
   )
-  console.log(wallets)
+
+
   const dontShowBgImage = pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate')
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider
         wallets={wallets}
-        autoConnect={false}
+        autoConnect={true}
       >
         <WalletModalProvider>
           <GlobalStyle />
           <Wrapper id="main-container">
+            <WelcomeModal />
             <LoadingSpinner />
             <LoadingBridgeWithSpinner>
               {({ userId }) => (
@@ -148,7 +146,7 @@ function App() {
                           limit={2}
                         />
                       </ErrorBoundary>
-
+                    <CreateTagModal />
                     </MainContainer>
                   </LoginFormVisibleStateContext.Provider>
 

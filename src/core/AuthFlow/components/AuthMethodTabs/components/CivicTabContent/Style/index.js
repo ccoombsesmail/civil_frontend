@@ -117,9 +117,9 @@ export const Container = styled('section')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  svg {
+  /* svg {
     margin: 2em 0;
-  }
+  } */
   h2 {
     font-size: 25px;
     margin-bottom: 20px;

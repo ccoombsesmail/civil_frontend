@@ -28,9 +28,8 @@ export const ListItem = styled('li')`
 
 export const UserIcon = styled('img')`
   border-radius: 50%;
-  width: 4vw;
-  height: 4vw;
-
+  height: 4rem;
+  width: 4rem;
 `
 
 export const FlexDiv = styled('div')` 

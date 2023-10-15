@@ -134,7 +134,6 @@ export class PollNode extends DecoratorNode<JSX.Element> {
     const index = options.findIndex(opt => opt.id == option.id);
     options[index] = clonedOption;
     self.__options = options;
-    console.log(self.__options)
   }
 
   toggleVote(option: Option): void {

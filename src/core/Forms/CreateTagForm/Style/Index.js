@@ -5,6 +5,10 @@ export const FormContainer = styled(Form)`
   margin-top: 0;
   border-radius: .5em;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 `
 

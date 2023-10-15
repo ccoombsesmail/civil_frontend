@@ -11,7 +11,7 @@ function FeedTabs() {
   const { currentUser } = useGetCurrentUser()
   return (
     <TabView
-      className="w-full"
+      className="w-full pb-8"
       pt={{
         panelContainer: {
           className: 'p-0',

@@ -38,7 +38,6 @@ export async function onUpdateDiscussionLikesQueryStarted(
         (draft) => {
           const index = draft.findIndex((t) => t.id === id);
           if (index !== -1) {
-            console.log(current(draft[index]));
             draft[index].likeState = newLikeState;
             draft[index].likes += updateLikeValue;
           }
@@ -53,7 +52,6 @@ export async function onUpdateDiscussionLikesQueryStarted(
         (draft) => {
           const index = draft.findIndex((t) => t.id === id);
           if (index !== -1) {
-            console.log(current(draft[index]));
             draft[index].likeState = newLikeState;
             draft[index].likes += updateLikeValue;
           }

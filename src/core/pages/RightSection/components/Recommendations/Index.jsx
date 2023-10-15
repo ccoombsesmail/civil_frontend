@@ -22,7 +22,6 @@ function Recommendations() {
   const { data: similarDiscussions } = useGetSimilarDiscussionsQuery(discussionId, {
     skip: !discussionId,
   })
-  console.log(similarDiscussions)
   const opposingRecs = useSelector((s) => s.recommendations.opposingRecs)
   return (
     <TabView

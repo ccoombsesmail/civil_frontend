@@ -52,7 +52,6 @@ export async function onUpdateSpacesLikesQueryStarted(
         "getUserSpaces",
         { userId: currentlyViewedProfileUserId, currentPage },
         (draft) => {
-          console.log({ userId: currentlyViewedProfileUserId, currentPage })
           const newDraft = createDraft(draft);
           const index = newDraft.findIndex((t) => t.id === id);
           if (index !== -1) {

@@ -14,6 +14,7 @@ import useUpdateDiscussionLikes from './hooks/useUpdateDiscussionLikes.ts'
 import { DISCUSSION } from '../../../../enums/content_type'
 import { LoginFormVisibleStateContext } from '../../../../LoginFormVisibleStateContext'
 import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
+import TippingButton from '../components/TippingButton/TippingButton'
 
 function DiscussionActionToolbar({
   discussion, updateGetDiscussionQuery,
@@ -49,6 +50,7 @@ function DiscussionActionToolbar({
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }
         {!isOnTribunalPage && <TribunalButton contentId={discussion?.id} contentType={DISCUSSION} /> }
+        <TippingButton receiverPublicKey={discussion.createdByUserId} />
       </Right>
     </Container>
   )

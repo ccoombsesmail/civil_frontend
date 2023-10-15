@@ -1,4 +1,7 @@
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { Button } from 'primereact/button';
+import { Message } from 'primereact/message';
+
 import React, { useState } from 'react'
 import useReplaceDisconnectButtonEffect from '../../../../../../civic/hooks/useReplaceDisconnectButtonEffect'
 import {
@@ -95,7 +98,8 @@ function BlockQuote({ quote, themeColor }) {
 
 function CivicTabContent() {
   const [key, setKey] = useState(0)
-
+  const isPhantomInstalled = window.phantom?.solana?.isPhantom
+  const extensionInstalled = isPhantomInstalled;
   useReplaceDisconnectButtonEffect('auth-container')
   useReplaceDisconnectButtonEffect('get-started-container')
   return (
@@ -104,9 +108,40 @@ function CivicTabContent() {
       <AlreadyKnowContainer id="auth-container">
         <h1>Already Know What You Are Doing?</h1>
         <ArrowRightSvg />
-        <WalletMultiButton />
+        { extensionInstalled ? <WalletMultiButton /> :  <Button 
+        className='wallet-adapter-button w-3' 
+        style={{backgroundColor: '#AB9FF2'}} 
+        label="Phantom" 
+        icon={<img className='w-3 hidden lg:block' src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/Phantom-Icon_App_60x60.png' />} 
+        onClick={() => window.open("https://phantom.app/download", "_blank")}
+
+        /> }
       </AlreadyKnowContainer>
       <Line />
+      { extensionInstalled ? null : (
+      <>
+      <h1>You'll Need To Install An Extension (Phantom) First</h1>
+      
+      <Message className='h-1' severity="info" text="Please Refresh The Page After Installation" />
+      <LongDownArrow />
+      <div className="card flex justify-content-center w-5">
+          <Button
+            className='wallet-adapter-button w-5'
+            style={{ backgroundColor: '#AB9FF2' }}
+            label="Phantom"
+            icon={<img className='w-3 hidden lg:block' src='https://civil-dev.s3.us-west-1.amazonaws.com/assets/Phantom-Icon_App_60x60.png' />}
+            onClick={() => window.open("https://phantom.app/download", "_blank")} />
+          {/* <Button
+            className='wallet-adapter-button w-5 mx-2'
+            style={{ backgroundColor: '#A12ED3' }}
+            label="Glow"
+            icon={<img className='w-3 hidden lg:block' src='https://glow.app/landing/app-icons/barney.png' />}
+            onClick={() => window.open("https://glow.app", "_blank")} /> */}
+        </div>
+        <Line />
+        </>
+      )}
+
       <h1>Start Here</h1>
       <LongDownArrow />
       <Title>

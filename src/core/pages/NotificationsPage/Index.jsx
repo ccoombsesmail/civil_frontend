@@ -19,7 +19,6 @@ function Notifications() {
   const { data: notifications, isLoading, isUninitialized } = useGetAllNotificationsQueryState(currentUser?.userId, { skip: !currentUser })
   const { userNotifications } = notifications || {}
   const [isOpen, setIsOpen] = useState(true)
-  console.log(userNotifications)
   return (
     <GridContainer isOpen={isOpen}>
       <DiscussionsGrid isOpen={isOpen}>

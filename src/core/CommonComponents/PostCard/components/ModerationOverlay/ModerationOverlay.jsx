@@ -37,7 +37,7 @@ function UnderReviewOverlay({
         <i className="pi pi-shield block" style={{ fontSize: '2.5rem' }} />
         <div className="flex align-items-center">
           <WarningSvg />
-          <Button label="Click To See Content At Your Own Risk!" text raise onClick={onClick} />
+          <Button label="Click To See Content At Your Own Risk!" text raised onClick={onClick} />
           <WarningSvg />
         </div>
         <i className="pi pi-shield block" style={{ fontSize: '2.5rem' }} />

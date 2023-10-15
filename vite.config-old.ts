@@ -2,12 +2,12 @@ import { defineConfig, loadEnv } from 'vite'
 import path from 'path'
 import inject from '@rollup/plugin-inject'
 // import * as stdLibBrowser from 'node-stdlib-browser'
-import nodePolyfills from 'rollup-plugin-polyfill-node'
+// import nodePolyfills from 'rollup-plugin-polyfill-node'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 import { NodeGlobalsPolyfillPlugin,  } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import fs from 'fs';
-import babel from '@rollup/plugin-babel';
+
 
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
@@ -69,7 +69,7 @@ export default defineConfig(({ mode }) => {
         ],
         define: {
           this: 'window',
-          // global: '{}'
+          global: '{}'
         },
       },
     },
@@ -93,6 +93,7 @@ export default defineConfig(({ mode }) => {
     publicDir: './public',
     plugins: [
       viteCommonjs(),
+      nodePolyfills(),
       // eslint(),
       svgLoader(),
       createHtmlPlugin({}),

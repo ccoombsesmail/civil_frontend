@@ -7,6 +7,7 @@ import DownVoteButton from '../components/DownVoteButton/Index'
 import CommentButton from './components/CommentButton/Index'
 import OpposingViewsButton from './components/OpposingViewsButton/Index'
 import TribunalButton from '../components/TribunalButton/Index'
+import TippingButton from '../components/TippingButton/TippingButton'
 
 import { Container, Left, Right } from '../Style/index'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
@@ -49,6 +50,8 @@ function SpaceActionToolbar({
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }
         {!isOnTribunalPage && <TribunalButton contentId={space?.id} contentType={SPACE} /> }
+        <TippingButton receiverPublicKey={space.createdByUserId} />
+
       </Right>
     </Container>
   )

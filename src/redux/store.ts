@@ -56,7 +56,7 @@ const store = configureStore({
     emptyMiscServiceSplitApi.middleware,
     emptyWebScraperServiceSplitApi.middleware,
     searchApi.middleware,
-    logger
+    // logger
   ]),
 })
 

@@ -35,7 +35,6 @@ export function WatchButtonDiscussion({ discussion }) {
   const { currentUser } = useGetCurrentUser()
   const { setLoginFormVisible } = useContext(LoginFormVisibleStateContext)
   const { onFollowBtnClick } = useAddRemoveDiscussionFollow(discussion)
-  console.log(discussion)
   const onClick = useCallback((e) => {
     e.stopPropagation()
     if (currentUser) onFollowBtnClick(e)

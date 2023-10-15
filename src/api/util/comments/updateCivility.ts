@@ -42,14 +42,6 @@ export default async function onUpdateCivilityQueryStarted(
         "getAllCommentReplies",
         focusedCommentId,
         (draft) => {
-          console.log(isReplies)
-          console.log(rootId)
-          console.log(rootOfCommentReplyThreadId)
-          console.log(parentId)
-          console.log(id)
-          console.log(commentId)
-          console.log(focusedCommentId)
-
           const newDraft = createDraft(draft);
           const rootComment = newDraft.replies.find(
             (c) => c.data.id === rootOfCommentReplyThreadId

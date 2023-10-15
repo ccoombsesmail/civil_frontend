@@ -6,6 +6,7 @@ export default () => {
   const [trigger, result] = useLazyCheckIfTagExistsQuery()
   const checkIfTagExistsOnKeyPress = useCallback(async (e, setFieldError) => {
     await trigger(e.target.value)
+    console.log(result)
     const { tagExists } = result.data
     if (!e.target.value) setIsValid(null)
     else setIsValid(!tagExists)

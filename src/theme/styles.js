@@ -630,11 +630,11 @@ blockquote {
   }
   .p-button.p-button-icon-only {
 
-    @media screen and (max-width: 576px) {
+    /* @media screen and (max-width: 576px) {
       width: 2.2rem;
-      height: 2.2rem !important;
+      height: 2.2rem;
   
-    }
+    } */
   }
 
   .grid-container {
@@ -643,6 +643,14 @@ blockquote {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* This will create a responsive grid */
     gap: 16px; /* Space between the cards */
     padding: 16px;
+}
+
+.welcome-list-icon {
+  transition: all 1.4s;
+  z-index: 999999999999;
+  :hover {
+    transform: scale(5);
+  }
 }
 
   .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {

@@ -19,7 +19,7 @@ export default () => {
 
   useEffect(() => {
     const handleStorageChange = async () => {
-      if (prevSignInMethod.current === null && signInMethod === CIVIC_USER && !isUpsertLoading) {
+     
         wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
         const { publicKey } = wallet
         await upsertDidUser({
@@ -30,13 +30,15 @@ export default () => {
         await trigger(publicKey?.toBase58())
         setUserId(publicKey?.toBase58())
         prevSignInMethod.current = signInMethod
-      }
+
     }
 
     const setupUser = async () => {
       switch (signInMethod) {
         case CIVIC_USER: {
-          wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
+          // wallet.select(localStorage.getItem('walletName')?.replace(/\\/g, '').replace(/"/g, ''))
+          console.log("HERE")
+          wallet.select("Phantom")
           await wallet.connect()
           const { publicKey } = wallet
           if (publicKey && !isUpsertLoading && !isUserLoading && isUninitialized && prevSignInMethod.current !== null) {
@@ -51,7 +53,9 @@ export default () => {
           break
       }
     }
-    handleStorageChange()
+    if (prevSignInMethod.current === null && signInMethod === CIVIC_USER && !isUpsertLoading) {
+      handleStorageChange()
+    }
     setupUser()
   }, [wallet, prevSignInMethod, signInMethod, isUpsertLoading, isUserLoading])
 

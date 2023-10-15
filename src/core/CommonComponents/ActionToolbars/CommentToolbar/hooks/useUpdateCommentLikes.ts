@@ -10,7 +10,6 @@ import { ParentCommentContext, ParentCommentContextValue } from "../../../Infini
 
 
 export default (content: Comment,  action: 'upvote' | 'downvote', isTribunalComment) => {
-  console.log(content)
   const { id, createdByUserId, likeState, rootId, parentId, discussionId, reportedContentId } = content || {};
   const { currentPage, rootOfCommentReplyThreadId, isReplies, isFocusedComment, focusedCommentId, commentType } = useContext<ParentCommentContextValue>(ParentCommentContext) || {};
   

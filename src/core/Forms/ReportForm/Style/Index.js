@@ -41,7 +41,7 @@ export const Item = styled('li')`
   /* margin: 1vw 0; */
   @media only screen and (max-width: 600px) {
       font-size: 3.7vw;
-      width: 90%;
+      width: 100%;
     }
 `
 

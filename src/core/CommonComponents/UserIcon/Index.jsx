@@ -10,10 +10,6 @@ function UserIcon({ size, iconSrc, userId }) {
       src={iconSrc || 'https://civil-dev.s3.us-west-1.amazonaws.com/assets/profile_icon_2.png'}
       onClick={goToUserProfile}
       alt=""
-      style={{
-        width: size,
-        height: size,
-      }}
     />
   )
 }

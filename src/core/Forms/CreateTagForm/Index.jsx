@@ -21,6 +21,7 @@ function CreateTagModal() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
+    console.log(currentUser)
     if (currentUser && !currentUser.tag) {
       setVisible(true)
     }

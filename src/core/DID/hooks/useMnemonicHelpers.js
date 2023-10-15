@@ -33,7 +33,5 @@ export const useGenerateAndStoreMnemonic = () => useCallback(async () => {
 
 export const useValidateMnemonic = () => useCallback((userEnteredMnemonic) => {
   const prevGeneratedMnemonic = localStorage.getItem('original')
-  console.log(userEnteredMnemonic)
-  console.log(prevGeneratedMnemonic)
   return userEnteredMnemonic === prevGeneratedMnemonic
 }, [])

@@ -47,7 +47,6 @@ export function DropDownItem({
   const {registerItem, onClose } = dropDownContext;
 
   const handleOnClick = useCallback((e) => {
-    console.log("ere")
     onClick(e)
     onClose()
   }, [onClose, onClick])

@@ -6,6 +6,7 @@ import DownVoteButton from '../components/DownVoteButton/Index'
 import CommentButton from './components/CommentButton/Index'
 import CivilityButton from './components/CivilityButton/Index'
 import TribunalButton from '../components/TribunalButton/Index'
+import TippingButton from '../components/TippingButton/TippingButton'
 
 import { Container, Left, Right } from '../Style/index'
 import useDetectCurrentPage from '../../../hooks/routing/useDetectCurrentPage.ts'
@@ -68,6 +69,7 @@ function CommentActionToolbar({
           {' '}
           likes
         </span>
+        <TippingButton receiverPublicKey={comment.createdByUserId} />
       </Right>
     </Container>
   )

@@ -7,7 +7,6 @@ import { useGetAllTribunalCommentsQuery } from '../../../../../../api/services/t
 
 function TribunalCommentTabContent({ contentId, commentType }) {
   const { data: comments } = useGetAllTribunalCommentsQuery({ contentId, commentType})
-  console.log(comments)
   return (
     <ColumnContainer>
       <CommentColumn reportedContentId={contentId} comments={comments || []} commentSentiment={commentType} color="white" commentType={commentType} />

@@ -7,7 +7,7 @@ import ExpandButton from '../../../../../../CommonComponents/Buttons/ExpandButto
 import { initialConfig } from '../../../../../../CommonComponents/Lexical/App.tsx'
 import { LoginFormVisibleStateContext } from '../../../../../../../LoginFormVisibleStateContext'
 
-const CreateSpaceForm = React.lazy(() => import('../../../../../../Forms/SpaceForm/Index'))
+import CreateSpaceForm from '../../../../../../Forms/SpaceForm/Index'
 
 function Header({ user }) {
   const [spaceFormVisible, setSpaceFormVisible] = useState(false)

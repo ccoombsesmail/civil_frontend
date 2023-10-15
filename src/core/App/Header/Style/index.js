@@ -16,11 +16,7 @@ export const StyledHeader = styled('header')`
   
 `
 export const CivilIcon = styled('img')`
-    height: 3.5vw;
     border-radius: 50%;
-  @media only screen and (max-width: 600px) {
-    height: 8vw;  
-  }
   
 `
 
@@ -39,7 +35,7 @@ export const ButtonsContainer = styled('div')`
   }
 
   img {
-    height: var(--nav-size);
+    height: calc(var(--nav-size) - 15px);
     width: auto;
 
   }

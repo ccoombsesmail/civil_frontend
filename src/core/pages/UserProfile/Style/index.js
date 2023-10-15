@@ -108,8 +108,8 @@ export const Experience = styled('p')`
 `
 
 export const UserIcon = styled('img')`  
-  height: 4vw;
-  width: 4vw;
+  height: 4rem;
+  width: 4rem;
   border-radius: 50%;
   transform: translate(0, -50%);
   z-index: 2;

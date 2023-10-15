@@ -4,7 +4,7 @@ export const Search = styled('div')`
   --search-bar-height: 38px;
   z-index: 9999999999999;
   position: relative;
-  max-width: 450px;
+  max-width: 550px;
   flex: 50%;
   @media only screen and (max-width: 800px) {
     flex: 70%;
@@ -24,6 +24,10 @@ export const Search = styled('div')`
 
   input:focus {
     outline: none;
+  }
+
+  @media only screen and (max-width: 500px) {
+    display: none;
   }
 
 

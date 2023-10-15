@@ -83,7 +83,6 @@ export default function Dropzone({ uploadUserIcon, setImageData, closeModal }) {
     formData.append('image', fileObject)
 
     const [fileType, fileFormat] = fileObject.type.split('/')
-    console.log(fileObject)
     setImageData({
       imgFileForm: formData, 
       fileType,

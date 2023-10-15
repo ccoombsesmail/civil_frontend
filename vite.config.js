@@ -9,18 +9,14 @@
  */
 import { visualizer } from 'rollup-plugin-visualizer'
 import viteCompression from 'vite-plugin-compression'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path, { resolve } from 'path'
-import fs from 'fs'
-import { replaceCodePlugin } from 'vite-plugin-replace'
 import babel from '@rollup/plugin-babel'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import { dependencies } from './package.json'
 
 export default defineConfig({
   root: 'src',
@@ -44,6 +40,7 @@ export default defineConfig({
   },
   plugins: [
     viteCompression({}),
+    nodePolyfills(),
     visualizer(),
     viteCommonjs(),
     createHtmlPlugin({}),

@@ -72,11 +72,10 @@ function Header() {
     <StyledHeader>
       <ButtonsContainer>
         <Button
-          hideTextMobile
           text
           icon={<CivilIcon alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" />}
           onClick={() => navigate('/home/spaces')}
-          className="w-8rem p-0 border-none focus:shadow-none hover:bg-white"
+          className="w-4rem p-0 border-none focus:shadow-none hover:bg-white"
         />
       </ButtonsContainer>
       <SearchBar />

@@ -29,7 +29,11 @@ function TribunalButton({ contentId, contentType }) {
 
   return (
     <Container onClick={(e) => e.stopPropagation()}>
-      <Dialog header="Report Content" visible={visible} onHide={() => setVisible(false)}>
+      <Dialog pt={{
+        content: {
+          className: 'p-0'
+        }
+      }} header="Report Content" visible={visible} onHide={() => setVisible(false)}>
         <ReportForm closeModal={() => setVisible(false)} contentId={contentId} contentType={contentType} />
       </Dialog>
       <Menu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>

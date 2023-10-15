@@ -139,7 +139,6 @@ function PollOptionComponent({
             const value = target.value;
             const selectionStart = target.selectionStart;
             const selectionEnd = target.selectionEnd;
-            console.log(value)
             withPollNode(
               (node) => {
                 node.setOptionText(option, value);
