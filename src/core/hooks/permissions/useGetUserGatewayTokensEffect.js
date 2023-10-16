@@ -22,8 +22,8 @@ export default (userId) => {
       const gatewayTokenUniqueness = await findGatewayToken(connection, new PublicKey(userId), uniquenessNetworkKey)
 
       setPasses({
-        CAPTCHA_PASS_ACTIVE: gatewayTokenCaptcha.state === 'ACTIVE',
-        UNQIUENESS_PASS_ACTIVE: gatewayTokenUniqueness.state === 'ACTIVE',
+        CAPTCHA_PASS_ACTIVE: gatewayTokenCaptcha?.state === 'ACTIVE',
+        UNQIUENESS_PASS_ACTIVE: gatewayTokenUniqueness?.state === 'ACTIVE',
 
       })
     }

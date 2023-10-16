@@ -5,7 +5,7 @@ export const Container = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 9999;
+  z-index: 1000;
   height: 100%;
 `
 
@@ -17,7 +17,7 @@ export const BorderContainer = styled('div')`
   flex-direction: column;
   border: 1px solid rgba(200,200,200,0.25);
   border-top: none;
-  z-index: 9999;
+  z-index: 1000;
   background-color: white;
   box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);
   border-radius: 1rem;

@@ -4,6 +4,7 @@ import useFollowClickHandler from '../../hooks/useFollowClickHandler'
 
 import { FollowButtonContainer, FollowBtn } from './Style'
 import { CircleLoading } from '../../../../../svgs/spinners/CircleLoading'
+import { longUsernameDisplay } from '../../../../../generic/string/longUsernameDisplay'
 
 function FollowButton({
   profileUserId, user, isUserLoading, isUserFetching,
@@ -21,7 +22,7 @@ function FollowButton({
                    Unfollow
                    {' '}
                    {' '}
-                   {user.username}
+                   {longUsernameDisplay(user.username)}
                  </b>
                </>
              ) : (
@@ -32,7 +33,7 @@ function FollowButton({
                    Follow
                    {' '}
                    {' '}
-                   {user.username}
+                   {longUsernameDisplay(user.username)}
                  </b>
                </>
              )

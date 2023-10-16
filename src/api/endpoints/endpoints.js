@@ -12,7 +12,7 @@ export const ENDPOINTS = {
     BACKEND: `https://backend.staging.civil-beta.civil-beta.xyz/api/v1`,
     UPLOAD_SERVICE: `https://misc.staging.civil-beta.civil-beta.xyz/multi-api/v1`,
     NOTIFICATIONS_SERVICE: `https://notifications.staging.civil-beta.civil-beta.xyz/notifications-api/v1`,
-    NOTIFICATIONS_SERVICE_WS: `https://notifications.staging.civil-beta.civil-beta.xyz/notifications`,
+    NOTIFICATIONS_SERVICE_WS: `https://notifications.staging.civil-beta.civil-beta.xyz`,
     WEB_SCRAPER_SERVICE: `https://web-scraper.staging.civil-beta.civil-beta.xyz/web-scraper-api/v1`,
 
   },

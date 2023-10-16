@@ -17,6 +17,11 @@ export const InnerContainer = styled('div')`
   flex-direction: column;
   align-items: center;
   padding-bottom: 20vh;
+
+  @media only screen and (max-width: 800px) {
+    width:  100vw;
+  }
+
  
 
 `

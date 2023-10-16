@@ -33,7 +33,22 @@ function ListTree() {
     
   return (
     <div className="card mt-2">
-        <Timeline value={events} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} />
+      {
+         window.innerWidth <= 800 ? (
+          <> 
+            {events.map((item) => {
+              const marker = customizedMarker(item)
+              const content = customizedContent(item)
+              return <div key={item.status} className='flex flex-column align-items-center gap-3'>
+              {marker}
+              {content}
+              </div>
+              })}
+          </>
+
+         ) : <Timeline value={events} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} />
+      }
+        
     </div>
   )
 }
@@ -63,25 +78,30 @@ function WelcomeModal() {
 
   const headerTempalte = (
     <div className='w-10 m-auto flex justify-content-between align-items-center'>
-      <img className='w-4rem h-4rem mx-3' src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
-      <h1>
+      <img className='w-4rem h-4rem mx-3 hidden lg:block' src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
+      <h1 className='text-base md:text-lg lg:text-lg'>
         Welcome to <b className='text-primary underline mx-1'>Civil</b> - The Digital Agora!
       </h1>
-      <img className='w-4rem h-4rem mx-3' src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
+      <img className='w-4rem h-4rem mx-3 hidden lg:block' src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/olive2.png" alt="" />
 
     </div>
   )
 
   return (
     <Dialog 
-    className='w-7'
+    className='w-full lg:w-7'
     header={headerTempalte} 
     footer={footerTemplate}
+    pt={{
+      content: {
+        className: 'px-0'
+      }
+    }}
     visible={visible} onHide={() => setVisible(false)}>
-      <div>
-      <Message className='w-full my-1' severity='info' text="This is an Alpha version, and as such, it likely contains bugs and/or other issues" />
-      <Message className='w-full my-1' security='info' text="Features and functionalities are subject to change as we continue to develop and improve the platform" />
-      <Message className='w-full my-1' security='info' text="Your feedback during this phase is invaluable. Please share your thoughts, suggestions, and experiences to help us enhance Civil" />
+      <div className='w-full'>
+      <Message icon className='w-full my-1' pt={{text: { className: 'text-sm md:text-base text-left'}}} severity='info' text="This is an Alpha version, and as such, it likely contains bugs and/or other issues" />
+      <Message icon className='w-full my-1' security='info' pt={{text: { className: 'text-sm md:text-base'}}}  text="Features and functionalities are subject to change as we continue to develop and improve the platform" />
+      <Message icon className='w-full my-1' security='info' pt={{text: { className: 'text-sm md:text-base'}}}  text="Your feedback during this phase is invaluable. Please share your thoughts, suggestions, and experiences to help us enhance Civil" />
 
       </div>
 

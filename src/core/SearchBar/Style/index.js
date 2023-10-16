@@ -7,7 +7,9 @@ export const Search = styled('div')`
   max-width: 550px;
   flex: 50%;
   @media only screen and (max-width: 800px) {
-    flex: 70%;
+    flex: 100%;
+    width: 100%;
+    background-color: white;
   }
   input {
     border: 1px solid lightgray;
@@ -26,9 +28,9 @@ export const Search = styled('div')`
     outline: none;
   }
 
-  @media only screen and (max-width: 500px) {
+  /* @media only screen and (max-width: 500px) {
     display: none;
-  }
+  } */
 
 
 
@@ -55,7 +57,6 @@ export const SearchTypeBox = styled('div')`
   height: var(--search-bar-height);
 
   span {
-    background-color: gray;
     border: var(--thin-border);
     padding: 0 5px;
     cursor: pointer;
@@ -64,15 +65,30 @@ export const SearchTypeBox = styled('div')`
     align-items: center;
   }
 
+ 
+
   span:first-child {
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    background-color: ${(props) => (props.filterType === 'Content' ? '#eee' : 'white')};
+    background-color: ${(props) => (props.filterType === 'Content' ? 'white' : 'white')};
+    path {
+      fill: ${(props) => (props.filterType === 'Content' ? 'var(--primary-color)' : 'black')};
+    }
+      @media only screen and (max-width: 500px) {
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+      }
+
   }
 
   span:last-child {
-    background-color: ${(props) => (props.filterType === 'People' ? '#eee' : 'white')};
+    background-color: ${(props) => (props.filterType === 'People' ? 'white' : 'white')};
     border-right: none;
+    path {
+      fill: ${(props) => (props.filterType === 'People' ? 'var(--primary-color)' : 'black')};
+      stroke: ${(props) => (props.filterType === 'People' ? 'var(--primary-color)' : 'black')};
+
+    }
   }
 
 

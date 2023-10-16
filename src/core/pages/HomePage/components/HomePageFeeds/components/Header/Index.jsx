@@ -21,7 +21,11 @@ function Header({ user }) {
   return (
     <HeaderContainer>
       <LexicalComposer initialConfig={initialConfig}>
-        <Dialog header="Create Space" visible={spaceFormVisible} onHide={() => setSpaceFormVisible(false)}>
+        <Dialog pt={{
+          content: {
+            className: 'p-0 lg:p-1 w-full'
+          }
+        }} header="Create Space" visible={spaceFormVisible} onHide={() => setSpaceFormVisible(false)}>
           <CreateSpaceForm closeModal={() => setSpaceFormVisible(false)} />
         </Dialog>
       </LexicalComposer>

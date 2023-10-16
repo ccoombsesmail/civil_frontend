@@ -6,16 +6,17 @@ import {
   ActionMenuItem,
 } from '../Style/index'
 import useFollowClickHandler from '../../../pages/UserProfile/hooks/useFollowClickHandler'
+import { longUsernameDisplay } from '../../../../generic/string/longUsernameDisplay'
 
 function FollowsItemSet({ userId, username }) {
-  const followClickHandler = useFollowClickHandler(userId, true)
+  const { onFollowBtnClick } = useFollowClickHandler(userId, true)
   return (
-    <ActionMenuItem onClick={followClickHandler}>
+    <ActionMenuItem onClick={onFollowBtnClick}>
       <RemoveFriendSvg />
       <span>
         Unfollow
         {' '}
-        {username}
+        {longUsernameDisplay(username)}
       </span>
     </ActionMenuItem>
   )

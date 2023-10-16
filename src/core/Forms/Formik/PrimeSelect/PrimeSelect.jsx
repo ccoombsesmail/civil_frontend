@@ -19,7 +19,7 @@ function PrimeSelect(props) {
     <Message severity="error" text={formik.errors[name]} className="w-full" />
   ) : <small className="p-error">&nbsp;</small>)
   return (
-    <div className="w-5">
+    <div className="w-full lg:w-5">
       <Dropdown
         filter
         showClear

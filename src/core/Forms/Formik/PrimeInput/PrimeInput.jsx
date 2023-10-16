@@ -35,7 +35,7 @@ function Input(props) {
   ) : <small className="p-error">&nbsp;</small>)
 
   return (
-    <div className="flex flex-column justify-content-center align-items-center w-5 mt-2 mb-2">
+    <div className="flex flex-column justify-content-center align-items-center w-full lg:w-5 mt-2 mb-2">
       <Field
         setFieldError={setFieldError}
         onKeyDown={onKeyDown}

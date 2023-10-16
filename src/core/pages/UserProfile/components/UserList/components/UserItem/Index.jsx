@@ -7,9 +7,10 @@ import ItemMenu from '../../../../../../CommonComponents/ItemMenu/Index'
 import { truncateAtIndex } from '../../../../../../../generic/string/truncateAtIndex'
 import useGoToUserProfile from '../../../../../../hooks/routing/useGoToUserProfile'
 import { DEFAULT_PROFILE_IMAGE } from '../../../../../../../theme/constants'
+import { userJoinedDate } from '../../../../../../../generic/time/userJoinedDate'
 
 function UserItem({
-  userId, iconSrc, username, userTag, bio,
+  userId, iconSrc, username, tag, bio, time
 }) {
   const goToUserProfile = useGoToUserProfile(userId)
   return (
@@ -20,17 +21,17 @@ function UserItem({
           <UsernameAndTag
             userId={userId}
             usernameDisplay={username}
-            userTag={userTag}
+            userTag={tag}
           />
         </RowItem>
 
         <RowItem>
-          {`${truncateAtIndex(bio, 80)}...`}
+          {`${truncateAtIndex(bio || '', 80)}...`}
         </RowItem>
         <RowItem alignItems="flex-end">
           <ItemMenu
             menuType="Follows"
-            time="4d"
+            time={userJoinedDate(time)}
             userId={userId}
             username={username}
           />

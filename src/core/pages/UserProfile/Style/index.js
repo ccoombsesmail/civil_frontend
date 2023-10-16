@@ -118,16 +118,11 @@ export const UserIcon = styled('img')`
 
 export const Bio = styled('p')` 
   color: black;
-  font-size: .7vw;
+  font-size: 1rem;
   margin: 0 0 0 1vw;
   padding-left: 1vw;
   border-left: 1px solid gray;
 
-  @media (max-width: 700px) {
-   
-    font-size: 2vw;
-
-  }
 
 `
 

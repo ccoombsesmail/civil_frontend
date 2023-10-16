@@ -170,7 +170,7 @@ export default function Dropzone({ uploadUserIcon, setImageData, closeModal }) {
   const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' }
 
   return (
-    <div className="flex align-items-center flex-column">
+    <div className="flex align-items-center flex-column w-full lg:w-10">
       <Toast ref={toast} />
 
       <Tooltip

@@ -1,0 +1,19 @@
+.custom-tab-menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 99999999999999;
+}
+
+.active-footer-index path {
+  fill: var(--primary-color) !important;
+  stroke: white;
+}
+
+.active-footer-index svg {
+  fill: var(--primary-color);
+}
+
+.transparent-toolbar {
+  opacity: .4;
+}

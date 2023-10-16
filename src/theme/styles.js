@@ -628,14 +628,17 @@ blockquote {
   .p-blockui-container {
     width: 100%;
   }
-  .p-button.p-button-icon-only {
 
-    /* @media screen and (max-width: 576px) {
-      width: 2.2rem;
-      height: 2.2rem;
-  
-    } */
-  }
+  [data-testid="IFRAME"] {
+    min-height: 640px;
+    @media screen and (max-width: 1250px) {
+      margin-top: 400px;
+    }
+}
+
+.highest-z-index {
+  z-index: 999999999999;
+}
 
   .grid-container {
     width: 100%;

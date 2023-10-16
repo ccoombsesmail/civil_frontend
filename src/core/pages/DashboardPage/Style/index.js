@@ -34,6 +34,10 @@ export const CivicPassesContainer = styled('div')`
   padding: 20px;
   border-radius: .4vw;
   min-width: 400px;
+
+  svg {
+    margin-right: 1rem !important;
+  }
   iframe {
     min-height: 640px;
   }
@@ -63,6 +67,13 @@ export const Container = styled('div')`
   align-items: center;
   background-color: #eee;
   /* margin: 4vw; */
+
+  @media only screen and (max-width: 800px) {
+    .tab-panel-user-profile-information {
+        margin-left: 150px;
+    }  
+  }
+
 
   .cl-card {
     width: 60vw;

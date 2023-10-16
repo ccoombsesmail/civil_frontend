@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import { UserButton, SignedOut, SignedIn } from '@clerk/clerk-react'
 
@@ -14,8 +14,9 @@ import { useGetAllNotificationsQuery } from '../../../api/services/notifications
 import useGetCurrentUser from '../hooks/useGetCurrentUser'
 import MobileMenu from './components/MobileMenu/Index'
 import SearchBar from '../../SearchBar/Index'
+import TribunalTutorialModal from '../../TutorialModals/TribunalTutorialModal/TribunalTutorialModal'
 
-function NavButtons() {
+function NavButtons({ setVisible }) {
   const navigate = useNavigate()
   const { currentUser } = useGetCurrentUser()
   const { data } = useGetAllNotificationsQuery(currentUser?.userId, {
@@ -45,6 +46,8 @@ function NavButtons() {
         Icon={Gavel2}
         text="Tribunal"
         tribunal
+        showOverlay
+        setVisible={setVisible}
         onClick={() => navigate('/home/notifications-tribunal')}
       />
     </>
@@ -54,6 +57,8 @@ function NavButtons() {
 
 function Header() {
   const navigate = useNavigate()
+  const [visible, setVisible] = useState(false)
+
   const {
     signedInViaCivic,
   } = useSessionType()
@@ -80,13 +85,14 @@ function Header() {
       </ButtonsContainer>
       <SearchBar />
       <NavContainer>
-        { signedInViaCivic ? <NavButtons /> : null }
+        { signedInViaCivic ? <NavButtons setVisible={setVisible} /> : null }
         <Divider />
         <NavDropdownToggle>
           <DropdownMenu />
         </NavDropdownToggle>
       </NavContainer>
-      { screenWidth < 1250 ? (
+      {/* { screenWidth < 1250 ? null
+      (
         <MobileContainer>
           <WalletPassesContainer>
             <Divider />
@@ -94,8 +100,9 @@ function Header() {
 
           <MobileMenu numUnreadUserNotifications={numUnreadUserNotifications} numUnreadTribunalNotifications={numUnreadTribunalNotifications} />
         </MobileContainer>
-      ) : null}
-
+      ) 
+      : null} */}
+    <TribunalTutorialModal visible={visible} setVisible={setVisible} />
     </StyledHeader>
   )
 }

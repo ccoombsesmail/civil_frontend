@@ -27,7 +27,7 @@ function UserList({
       </thead>
       {
         users?.length !== 0 ? users.map((user) => (
-          <UserItem {...user} time={getTimeSince(user.createdAt)} />
+          <UserItem key={user.userId} {...user} time={user.createdAt} />
         )) : <h1>Nothing here...</h1>
       }
     </Table>

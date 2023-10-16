@@ -27,10 +27,12 @@ import LoadingPage from '../CommonComponents/LoadingPage/Index'
 import { UserContext } from './UserContext/Index'
 import { BgImage } from '../pages/Style'
 import ErrorBoundary from '../CommonComponents/ErrorBoundry/Index'
-import WelcomeModal from '../WelcomeModal/WelcomeModal'
+import WelcomeModal from '../TutorialModals/WelcomeModal/WelcomeModal'
 
 import LoginForm from '../Forms/LoginForm/LoginForm'
 import { LoginFormVisibleStateContext } from '../../LoginFormVisibleStateContext'
+import Footer from './Footer/Footer'
+import SearchBar from '../SearchBar/Index'
 
 const Dashboard = React.lazy(() => import('../pages/DashboardPage/Index'))
 
@@ -66,6 +68,7 @@ function App() {
     [network],
   )
 
+  const screenWidth = window.screen.width
 
   const dontShowBgImage = pathname.includes('user') || pathname.includes('dashboard') || pathname.includes('authenticate')
   return (
@@ -83,7 +86,7 @@ function App() {
               {({ userId }) => (
                 <UserContext.Provider value={userId}>
                   <LoginFormVisibleStateContext.Provider value={loginStateProviderValue}>
-                    <Header />
+                    { screenWidth < 1250 ?   <><SearchBar /> <Footer /> </> : <Header /> }
                     <Dialog header="You Must Be Logged In To Do That" visible={loginFormVisible} onHide={() => setLoginFormVisible(false)}>
                       <LoginForm closeModal={() => setLoginFormVisible(false)} />
                     </Dialog>
@@ -146,6 +149,7 @@ function App() {
                           limit={2}
                         />
                       </ErrorBoundary>
+                    
                     <CreateTagModal />
                     </MainContainer>
                   </LoginFormVisibleStateContext.Provider>
