@@ -32,7 +32,7 @@ export default (
 
   const [updateLikes, { isLoading }] = useUpdateDiscussionLikesMutation();
   const { isOnDiscussionsPage } = useDetectCurrentPage();
-
+  console.log(isLoading)
   let newLikeState;
   if (action === "upvote") {
     newLikeState = likeState === LikedState ? NeutralState : LikedState;

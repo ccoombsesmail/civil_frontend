@@ -571,6 +571,10 @@ blockquote {
 
   }
 
+  .p-tooltip-no-bg {
+    background: transparent !important;
+  }
+
   .p-popover {
     border: 1px solid rgba(200,200,200,0.25);
     box-shadow: 0 15px 10px 0 rgb(81 82 81 / 32%);

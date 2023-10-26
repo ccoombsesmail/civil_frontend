@@ -15,15 +15,15 @@ function TribunalButton({ contentId, contentType }) {
   const { currentUser } = useGetCurrentUser()
   const { setLoginFormVisible } = useContext(LoginFormVisibleStateContext)
 
-  const onCourtClick = useCallback(() => {
-    setVisible(true)
-    setIsOpen(false)
-  }, [])
+  // const onCourtClick = useCallback(() => {
+  //   setVisible(true)
+  //   setIsOpen(false)
+  // }, [])
 
   const onScalesClick = useCallback((e) => {
     e.stopPropagation()
     if (currentUser) {
-      setIsOpen((prev) => !prev)
+      setVisible((prev) => !prev)
     } else setLoginFormVisible(true)
   }, [currentUser])
 
@@ -36,14 +36,14 @@ function TribunalButton({ contentId, contentType }) {
       }} header="Report Content" visible={visible} onHide={() => setVisible(false)}>
         <ReportForm closeModal={() => setVisible(false)} contentId={contentId} contentType={contentType} />
       </Dialog>
-      <Menu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
+      {/* <Menu isOpen={isOpen} onClick={(e) => e.stopPropagation()}>
         <Item onClick={onCourtClick}>
           <CommunityCourtSvg />
           <span>
             Report Content To Jury
           </span>
         </Item>
-      </Menu>
+      </Menu> */}
       <ScalesSvg onClick={onScalesClick} />
     </Container>
   )

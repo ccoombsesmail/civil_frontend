@@ -8,6 +8,7 @@ import { CommentSvg } from '../../../../../../svgs/svgs'
 import CreateCommentForm from '../../../../../Forms/CommentForm/Index'
 import useGetCommentState from './hooks/useGetCommentState'
 import { initialConfig } from '../../../../Lexical/App.tsx'
+import { Button } from 'primereact/button'
 
 function CommentButton({ comment }) {
   const { contentId, spaceId, commentId } = useParams()
@@ -25,7 +26,7 @@ function CommentButton({ comment }) {
           />
         </Dialog>
       </LexicalComposer>
-      <IconButton icon={<CommentSvg />} onClick={() => setVisible(true)} />
+      <CommentSvg onClick={() => setVisible(true)} />
 
     </>
   )

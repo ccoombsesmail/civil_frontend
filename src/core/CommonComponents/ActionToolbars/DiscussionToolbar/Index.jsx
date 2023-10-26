@@ -30,12 +30,12 @@ function DiscussionActionToolbar({
   const handleUpvoteClick = useCallback(() => {
     if (currentUser) updateDiscussionLikesUpvote()
     else setLoginFormVisible(true)
-  }, [updateDiscussionLikesUpvote])
+  }, [updateDiscussionLikesUpvote, currentUser])
 
   const handleDownvoteClick = useCallback(() => {
     if (currentUser) updateDiscussionLikesDownvote()
     else setLoginFormVisible(true)
-  }, [updateDiscussionLikesDownvote])
+  }, [updateDiscussionLikesDownvote, currentUser])
   return (
     <Container>
       <Left>

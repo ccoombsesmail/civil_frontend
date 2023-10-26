@@ -25,13 +25,7 @@ function CommentButton({ discussion }) {
 
         </Dialog>
       </LexicalComposer>
-      <IconButton
-        icon={<CommentSvg />}
-        onClick={(e) => {
-          e.stopPropagation()
-          setVisible(true)
-        }}
-      />
+      <CommentSvg onClick={() => setVisible(true)} />
     </>
   )
 }

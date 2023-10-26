@@ -10,16 +10,14 @@ function CommentHeader({
 }) {
   const navigate = useNavigate()
   const {
-    createdByIconSrc, createdByUsername, createdByUserId, createdByUserTag, createdAt,
+    createdAt, createdByUserData
   } = commentData
   return (
     <UserInfoHeader
       onClick={() => navigate(`/home/spaces/${spaceId}/discussions/${commentData.discussionId}/comments/${commentData.id}`)}
       time={getTimeSince(createdAt)}
-      username={longUsernameDisplay(createdByUsername)}
-      userId={createdByUserId}
-      iconSrc={createdByIconSrc}
-      userTag={createdByUserTag}
+      userData={createdByUserData}
+   
     />
   )
 }

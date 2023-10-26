@@ -19,8 +19,10 @@ import { getTimeSince } from '../../../../../../../../../generic/string/dateForm
 
 function GridItem({ space }) {
   const {
-    createdByUserId, createdByUsername, createdByTag, title, createdByIconSrc, userUploadedImageUrl,
+    createdByUserData, title, userUploadedImageUrl,
   } = space
+
+  const { createdByUserId, createdByUsername, createdByTag,createdByIconSrc } = createdByUserData
   const goToUserProfile = useGoToUserProfile(createdByUserId)
   const goToDiscussion = useGoToDiscussions(space.id)
   const formattedUsername = longUsernameDisplay(createdByUsername)

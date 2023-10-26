@@ -29,6 +29,7 @@ export default (content, user, contentType, currentPageSpace) => {
   } = useContext(ParentCommentContext) || {}
 
   const { updateFollowedSpacesQuery } = useContext(SpaceItemContext) || {}
+  console.log(content)
 
   const [updateTribunalCommentLikes] = useUpdateTribunalCommentLikesMutation()
   const [updateLikes] = useUpdateSpaceLikesMutation()
@@ -38,7 +39,7 @@ export default (content, user, contentType, currentPageSpace) => {
     const likeData = {
       id: content?.id,
       commentId,
-      createdByUserId: content.createdByUserId,
+      createdByUserId: content.createdByUserData.createdByUserId,
       updateLikeValue: calculateLikeValueToAdd(
         content.likeState,
         content.likeState === LikedState ? NeutralState : LikedState,

@@ -1,27 +1,36 @@
 import React, { useEffect, useRef } from 'react'
-import { Tooltip } from 'primereact/tooltip'
 import { ConfirmPopup } from 'primereact/confirmpopup'
 import { InfoIconSvg } from '../../../svgs/svgs'
 import { LightButton, TooltipContent, TooltipHeader } from './Style/index'
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { Tooltip } from 'primereact/tooltip';
+import { Button } from 'primereact/button';
 
 export function ThemeIconTooltipSticky({
-  Component, visible, Icon, setVisible, bgColor, grow = false, targetId, comment,
+  Component, Icon, targetId, comment, userId, iconSrc, button
 }) {
   const buttonEl = useRef(null)
+  const op = useRef(null);
 
   return (
     <>
-      <ConfirmPopup
-        target={buttonEl.current}
-        visible={visible}
-        onHide={() => setVisible(false)}
-        message={Component}
-        footer={<div className="pb-7" />}
-      />
-      <LightButton bgcolor={bgColor} grow={grow} className={targetId} ref={buttonEl} onClick={setVisible}>
-        <Icon comment={comment} />
-      </LightButton>
+      {button ? <Button rounded text icon={<Icon comment={comment} userId={userId} iconSrc={iconSrc} />} className={`${targetId} w-4rem p-0 m-0 h-auto`}  />
+        : <Icon comment={comment} userId={userId} iconSrc={iconSrc} size="3vw" className={targetId}  />
+      }
+      <Tooltip pt={{
+        text: {
+            className: 'text-primary p-0 p-tooltip-no-bg shadow-none z-10 -ml-3 lg:ml-0'
+          },
+          arrow: {
+            className: "hidden 2xl:block"
+          }
+        }} 
+        target={`.${targetId}`} autoHide={false} position='bottom'>
+
+        {Component}
+      </Tooltip>
     </>
+
   )
 }
 
@@ -50,8 +59,8 @@ function ThemeIconTooltip({
       </Tooltip>
       <LightButton bgcolor={bgColor} grow={grow} className={targetId} onClick={onClick}>
         {
-        Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
-      }
+          Icon ? <Icon onClick={onClick} /> : <InfoIconSvg size={22} onClick={onClick} />
+        }
       </LightButton>
     </>
   )
@@ -79,7 +88,7 @@ export function ThemeIconTooltip2({
       </Tooltip>
       <div className={`${targetId} flex align-items-center`}>
         {
-        Icon ? <Icon onClick={onClick} bgcolor={bgColor} grow={grow} className={targetId} /> : <InfoIconSvg size={22} onClick={onClick} />
+          Icon ? <Icon onClick={onClick} bgcolor={bgColor} grow={grow} className={targetId} /> : <InfoIconSvg size={22} onClick={onClick} />
         }
 
       </div>

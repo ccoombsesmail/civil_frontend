@@ -139,7 +139,7 @@ function ReportForm({ contentId, contentType, closeModal }) {
               model={items}
               pt={{
                 root: {
-                  className: 'w-full',
+                  className: 'w-full  border-none',
                 },
                 wrapper: {
                   className: 'w-full',

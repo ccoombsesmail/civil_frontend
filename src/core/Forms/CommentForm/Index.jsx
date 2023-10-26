@@ -47,7 +47,7 @@ function CreateCommentForm({ closeModal, commentFormState, title }) {
   }, [])
 
   const {
-    lexicalRawContent, createdByIconSrc, createdByUsername, time, createdByTag,
+    lexicalRawContent, time, createdByUserData,
   } = commentFormState
 
   const handleSubmit = useHandleSubmit(commentFormState, richTextEditorData, closeModal)
@@ -82,9 +82,7 @@ function CreateCommentForm({ closeModal, commentFormState, title }) {
         {({ isSubmitting }) => (
           <FormContainer>
             <UserInfoHeader
-              iconSrc={createdByIconSrc}
-              username={createdByUsername}
-              userTag={createdByTag}
+              userData={createdByUserData}
               time={getTimeSince(time)}
             />
 

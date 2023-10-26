@@ -7,7 +7,7 @@ import { ParentCommentContext } from '../../../../../InfiniteLoaders/ContentItem
 
 export default (comment) => {
   const {
-    id, createdByUserId, rootId, parentId, discussionId,
+    id, createdByUserData, rootId, parentId, discussionId,
   } = comment || {}
 
   const {
@@ -27,9 +27,9 @@ export default (comment) => {
       discussionId,
       parentId,
       rootId,
-      createdByUserId,
+      createdByUserId: createdByUserData.createdByUserId,
       givingUserId: currentUser.id,
-      receivingUserId: comment.createdByUserId,
+      receivingUserId: createdByUserData.createdByUserId,
       value: Number(e.currentTarget.value),
       isFocusedComment,
       isReplies,

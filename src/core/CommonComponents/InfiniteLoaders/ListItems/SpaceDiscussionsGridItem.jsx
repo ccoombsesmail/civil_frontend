@@ -26,8 +26,9 @@ import OgImg from '../../LinkMetaData/OgImg'
 
 function DiscussionGridItem({ discussion }) {
   const {
-    createdByUserId, createdByUsername, createdByTag, title, createdByIconSrc,
+    title, createdByUserData,
   } = discussion
+  const { createdByUserId, createdByUsername, createdByTag,createdByIconSrc } = createdByUserData
 
   const goToUserProfile = useGoToUserProfileHook(createdByUserId)
   const goToDiscussion = useGoToCommentThread(discussion.spaceId, discussion.id)

@@ -15,7 +15,7 @@ function UsernameAndTag({
   return (
     <Container>
       <h2>{formattedUsername}</h2>
-      <h3 onClick={goToUserProfile} onKeyPress={goToUserProfile}>
+      <h3 onClick={goToUserProfile} onKeyPress={goToUserProfile} className='-mt-1 lg:-mt-1 xl:-mt-2 2xl:-mt-3'>
         {`@${formattedTag || formattedUsername}`}
       </h3>
     </Container>

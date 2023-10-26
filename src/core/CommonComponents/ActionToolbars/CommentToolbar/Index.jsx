@@ -18,7 +18,7 @@ import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 function CommentActionToolbar({
   comment,
 }) {
-  const { likes } = comment
+  const { likes, createdByUserData } = comment
   const {
     spaceId, discussionId, contentId, ...params
   } = useParams()
@@ -35,7 +35,7 @@ function CommentActionToolbar({
   }, [updateCommentLikesUpvote])
 
   const handleDownvoteClick = useCallback(() => {
-    if (currentUser) updateCommentLikesUpvote()
+    if (currentUser) updateCommentLikesDownvote()
     else setLoginFormVisible(true)
   }, [updateCommentLikesDownvote])
 
@@ -63,13 +63,16 @@ function CommentActionToolbar({
         )}
       </Left>
       <Right>
-        { !isOnTribunalPage && <TribunalButton contentId={comment?.id} contentType={COMMENT} /> }
-        <span>
+        {/* <span>
           {likes || 0}
           {' '}
           likes
-        </span>
-        <TippingButton receiverPublicKey={comment.createdByUserId} />
+        </span> */}
+        <div className='flex'>
+          <TippingButton receiverPublicKey={createdByUserData.createdByUserId} />
+          { !isOnTribunalPage && <TribunalButton contentId={comment?.id} contentType={COMMENT} /> }
+
+        </div>
       </Right>
     </Container>
   )

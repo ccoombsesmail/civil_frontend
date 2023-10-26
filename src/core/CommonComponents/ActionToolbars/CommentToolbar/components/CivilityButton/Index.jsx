@@ -7,10 +7,10 @@ import { ThemeIconTooltipSticky } from '../../../../Tooltip/Index'
 import { LoginFormVisibleStateContext } from '../../../../../../LoginFormVisibleStateContext'
 import useGetCurrentUser from '../../../../../App/hooks/useGetCurrentUser'
 
-function Icon({ comment }) {
-  if (!comment || comment.civility === 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />
-  if (comment.civility > 0) return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
-  return <img alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
+function Icon({ comment, className }) {
+  if (!comment || comment.civility === 0) return <img className={className} alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake.png" />
+  if (comment.civility > 0) return <img className={className} alt="" src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/handshake-clicked.png" />
+  return <img alt="" className={className} src="https://civil-dev.s3.us-west-1.amazonaws.com/assets/no-handshake-clicked.png" />
 }
 
 function CivilityButton({ comment }) {
@@ -27,8 +27,6 @@ function CivilityButton({ comment }) {
   return (
     <ThemeIconTooltipSticky
       targetId={`civility-btn-${comment.id}`}
-      tooltipHeader="Captcha Verified"
-      grow="true"
       Component={(
         <RangeSlider
           civility={comment.civility}

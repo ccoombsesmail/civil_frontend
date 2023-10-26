@@ -21,17 +21,9 @@ import { CivicArrow } from '../../svgs/svgs'
 function UserInformationDisplay({ setIsOpen, isOpen }) {
   const { currentUser } = useGetCurrentUser()
   const {
-    // signedInViaClerk,
-    // signedInViaDID,
     signedInViaCivic,
   } = useSessionType()
 
-  // const [isSignedIn, authMethod] = useMemo(() => {
-  //   // if (signedInViaClerk) return [true, 'Authenticated With Clerk']
-  //   if (signedInViaDID) return [true, 'Authenticated With Elastos DID']
-  //   if (signedInViaCivic) return [true, 'Auth Method ⟶ Civic DID']
-  //   return [false, '']
-  // }, [signedInViaDID, signedInViaCivic]) // signedInViaClerk
 
   const goToAuthPage = useGoToAuthPage()
   useReplaceDisconnectButtonEffect('user-panel')

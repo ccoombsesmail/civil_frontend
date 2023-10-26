@@ -27,7 +27,7 @@ function CommentButton({ space }) {
           />
         </Dialog>
       </LexicalComposer>
-      { spaceCommentFormState ? <IconButton icon={<CommentSvg />} onClick={() => setVisible(true)} /> : null }
+      { spaceCommentFormState ? <CommentSvg onClick={() => setVisible(true)} />  : null }
 
     </>
   )

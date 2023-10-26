@@ -25,6 +25,7 @@ import CommentHeader from './components/CommentHeader/CommentHeader'
 import useDetectCurrentPage from '../../../../hooks/routing/useDetectCurrentPage.ts'
 import useInitLexicalConfig from '../../../../hooks/lexical/useInitLexicalConfig'
 import ModerationOverlay from '../../../PostCard/components/ModerationOverlay/ModerationOverlay'
+import { Button } from 'primereact/button'
 
 const COLORS = ['#e6eef9', '#d6dee9', '#c6cee8', '#b6bee8', '#a6aee7', '#969ee7', '#868ee6', '#767ee6', '#666ee5', '#565ee5']
 
@@ -33,6 +34,7 @@ function CommentItem({
 }) {
   if (!commentData) return null
   const [blocked, setBlocked] = useState(commentData.reportStatus === 'UNDER_REVIEW' || commentData.reportStatus === 'MARKED' || commentData.reportStatus === 'REMOVED')
+  const buttonRef = useRef(null);
 
   const { isOnTribunalPage } = useDetectCurrentPage()
   const repliesRef = useRef({
@@ -97,9 +99,12 @@ function CommentItem({
           { replies.length !== 0
           && (
           <ExpandButton>
-            <IconButton
+            <Button
+              ref={buttonRef}
+              text
               icon={expandIcon}
               onClick={() => {
+                buttonRef.current.blur();
                 if (isReplies || isOnTribunalPage) {
                   setLocalToggle(!localToggle)
                   return
@@ -116,7 +121,7 @@ function CommentItem({
               }}
             >
               Replies
-            </IconButton>
+            </Button>
           </ExpandButton>
           )}
         </Body>

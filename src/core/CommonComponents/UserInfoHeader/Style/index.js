@@ -28,7 +28,7 @@ export const Left = styled('div')`
   flex-basis: 65%;
   display: flex;
   align-items: flex-start;
-  margin-left: 1em;
+  margin-left: 0em;
   background-color: white;
   height: 100%;
   padding-top: 10px;

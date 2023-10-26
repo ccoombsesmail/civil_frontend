@@ -31,11 +31,6 @@ function PostCard({
   const {
     id,
     createdAt,
-    createdByIconSrc,
-    createdByUsername,
-    createdByUserId,
-    createdByTag,
-    spaceCreatorIsDidUser,
     userVerificationType,
     reportStatus,
     title,
@@ -46,6 +41,7 @@ function PostCard({
     discussionCount,
     commentCount,
     likeState,
+    createdByUserData
   } = space || discussion || {}
   const [shouldBlur, setShouldBlur] = useState(reportStatus === UNDER_REVIEW || reportStatus === REMOVED || reportStatus === MARKED)
   const goToSpace = useGoToSpace(spaceId)
@@ -118,7 +114,7 @@ function PostCard({
     <Card
       onClick={onContainerClick}
       title={titleTemplate}
-      className="relative sm:w-full md:w-full border-noround-top"
+      className="relative w-full border-noround-top"
       pt={{
         body: {
           className: `${reportStatus === 'REMOVED' ? 'pb-4 px-0' : 'p-0'}`,
@@ -126,12 +122,8 @@ function PostCard({
       }}
       header={(
         <UserInfoHeader
-          iconSrc={createdByIconSrc}
           time={getTimeSince(createdAt)}
-          username={createdByUsername}
-          userId={createdByUserId}
-          userTag={createdByTag}
-          spaceCreatorIsDidUser={spaceCreatorIsDidUser}
+          userData={createdByUserData}
           userVerificationType={userVerificationType}
           space={space}
           discussion={discussion}

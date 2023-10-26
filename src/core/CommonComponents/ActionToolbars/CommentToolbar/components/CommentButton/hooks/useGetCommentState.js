@@ -49,7 +49,7 @@ export default (commentData, contentId, spaceId, commentId) => {
     skip: !contentId || !currentUser || !isOnTribunalPage || !commentType,
   })
 
-  const { createdByUsername, createdByIconSrc, createdAt } = commentData || {}
+  const { createdByUserData, createdAt } = commentData || {}
   return useMemo(() => {
     const rootComment = comments?.find((c) => c.data.id === rootId)
 
@@ -80,9 +80,8 @@ export default (commentData, contentId, spaceId, commentId) => {
       contentId: commentData.discussionId || contentId,
       discussionId: commentData.discussionId,
       spaceId: spaceId || contentId,
-      createdByIconSrc,
       username: currentUser?.username,
-      createdByUsername,
+      createdByUserData,
       time: createdAt,
       lexicalRawContent: commentContent,
       parentId: commentData.id || null,

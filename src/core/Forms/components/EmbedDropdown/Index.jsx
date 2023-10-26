@@ -109,6 +109,40 @@ const ExternalLinkConfig = {
   },
 }
 
+const IPFSConfig = {
+  contentName: 'IPFS Video',
+  exampleUrl: 'https://ipfs.io/ipfs/{your-video-content-hash}',
+  parseUrl: (url, setLinkMetadata) => {
+    // Extract the IPFS hash from the URL
+    const match = /https:\/\/ipfs\.io\/ipfs\/([a-zA-Z0-9]+)/.exec(url);
+
+    if (match != null) {
+      setLinkMetadata({
+        embedId: match[1],
+        url,
+      });
+      return {
+        id: match[1],
+        url,
+      };
+    }
+
+    return null;
+  },
+  insertNode: (result) => {
+    // Render an iframe for the IPFS video
+    ReactDOMClient.createRoot(document.getElementById('insert-embed-node')).render(
+      <iframe
+        src={`https://ipfs.io/ipfs/${result.id}`}
+        title="IPFS video"
+        width="560"
+        height="315"
+        allowFullScreen
+      />
+    );
+  },
+};
+
 function EmbedDropdown({ setLinkMetadata }) {
   const [urlValue, setUrlValue] = useState('')
   const [visible, setVisible] = useState(false)
@@ -116,6 +150,14 @@ function EmbedDropdown({ setLinkMetadata }) {
   const popupBtnRef = useRef(null)
 
   const items = [
+    {
+      label: 'IPFS (InterPlanetary File System)',
+      icon: 'pi pi-globe',
+      command: () => {
+        setVisible(true)
+        setConfig(IPFSConfig)
+      },
+    },
     {
       label: 'YouTube Video',
       icon: 'pi pi-youtube',

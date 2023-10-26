@@ -1,11 +1,19 @@
 import { LikeAction } from "../enums/enums";
 
+export interface CreatedByUserData {
+  reatedByUsername: string;
+  createdByUserId: string;
+  createdByTag: string | null;
+  civilityPoints: number;
+  createdByIconSrc: string;
+  createdByExperience: string | null;
+  numFollowers: number
+
+}
+
 export interface Comment {
   id: string;
   editorState: string;
-  createdByUsername: string;
-  createdByUserId: string;
-  createdByTag: string | null;
   sentiment: string;
   discussionId: string;
   parentId: string | null;
@@ -15,10 +23,9 @@ export interface Comment {
   likeState: LikeAction;
   civility: number;
   source: string | null;
-  createdByIconSrc: string;
-  createdByExperience: string | null;
   reportStatus: string;
   toxicityStatus: string | null;
   reportedContentId: string 
-  commentType: string
+  commentType: string,
+  createdByUserData: CreatedByUserData
 }

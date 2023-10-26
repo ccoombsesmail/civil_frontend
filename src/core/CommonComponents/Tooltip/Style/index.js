@@ -9,8 +9,8 @@ export const LightButton = styled(Button)`
   border-radius: 50%;
   border: none;
   background-color: ${({ bgcolor }) => bgcolor || 'transparent'};
-  width: 25px;
-  height: 25px;
+  /* width: 25px;
+  height: 25px; */
   padding: 3px;
   transition: all .4s;
   :hover {
