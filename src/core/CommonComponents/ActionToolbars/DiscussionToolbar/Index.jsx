@@ -19,7 +19,7 @@ import TippingButton from '../components/TippingButton/TippingButton'
 function DiscussionActionToolbar({
   discussion, updateGetDiscussionQuery,
 }) {
-  const { likes } = discussion
+  const { likes, createdByUserData } = discussion
   const { spaceId, discussionId } = useParams()
   const { isOnTribunalPage, isOnHomePage} = useDetectCurrentPage()
   const { currentUser } = useGetCurrentUser()
@@ -50,7 +50,7 @@ function DiscussionActionToolbar({
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }
         {!isOnTribunalPage && <TribunalButton contentId={discussion?.id} contentType={DISCUSSION} /> }
-        <TippingButton receiverPublicKey={discussion.createdByUserId} />
+        <TippingButton receiverPublicKey={createdByUserData.createdByUserId} />
       </Right>
     </Container>
   )

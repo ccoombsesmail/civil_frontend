@@ -19,7 +19,7 @@ import useGetCurrentUser from '../../../App/hooks/useGetCurrentUser'
 function SpaceActionToolbar({
   hideCommentButton, space,
 }) {
-  const { likes } = space
+  const { likes, createdByUserData } = space
   const { spaceId, discussionId } = useParams()
   const { isOnTribunalPage } = useDetectCurrentPage()
   const { currentUser } = useGetCurrentUser()
@@ -50,7 +50,7 @@ function SpaceActionToolbar({
       <Right>
         {!isOnTribunalPage && <OpposingViewsButton spaceId={spaceId} discussionId={discussionId} /> }
         {!isOnTribunalPage && <TribunalButton contentId={space?.id} contentType={SPACE} /> }
-        <TippingButton receiverPublicKey={space.createdByUserId} />
+        <TippingButton receiverPublicKey={createdByUserData.createdByUserId} />
 
       </Right>
     </Container>
